@@ -1,0 +1,54 @@
+#  Template maven-build
+
+#  This template allows you to test and build your Java project with Maven.
+#  The workflow allows running tests, code checkstyle and security scans on the default branch.
+
+# Prerequisites: pom.xml and appropriate project structure should exist in the repository.
+
+image: maven:3.6.3
+
+pipelines:
+  default:
+      - step:    
+          runs-on:
+            - 'self.hosted'
+            - 'linux'      
+          name: Build and Test
+#          caches:
+#            - maven
+          clone:
+            depth: full    # SonarCloud scanner needs the full history to assign issues properly              
+          script:
+            - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
+      - step:
+          runs-on:
+            - 'self.hosted'
+            - 'linux'      
+          name: Chekstyle
+#          caches:
+#            - maven
+          clone:
+            depth: full    # SonarCloud scanner needs the full history to assign issues properly  
+          script:
+            - mvn checkstyle:checkstyle      
+          after-script:  # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
+            - pipe: atlassian/checkstyle-report:0.3.0
+      - step:
+          runs-on:
+            - 'self.hosted'
+            - 'linux'      
+          name: Gitinspector
+#          caches:
+#            - maven
+          clone:
+            depth: full    
+          services: 
+            - docker
+          script:
+            - docker version
+            - pwd      
+            - ls -al
+            - docker run --rm -v /opt/atlassian/pipelines/agent/build:/repo felix/gitinspector:0.4.4 --format=html --grading > gitinspector.html
+          artifacts:
+            - gitinspector.html
+            
