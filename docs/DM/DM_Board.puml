@@ -11,15 +11,44 @@ package "<<aggregate>> Board" {
     entity Board
 
     class Title
-    class Duration
-    class Type
+    entity Column
+    entity Row
+    entity BoardEvent
+}
+
+package "<<aggregate>> User" {
+    entity User
+}
+
+entity User <<entity>> <<root>> {
 }
 
 Board --> "1" Title : is identified by
+Board --* "*" Column : has a collection of
+Board --* "*" Row : has a collection of
 
 entity Board <<entity>> <<root>> {
 }
 
+entity Column <<entity>> {
+  - id
+}
+
+entity BoardEvent <<entity>> {
+  - id
+}
+
+Column --> "1" Title : is identified by
+
+entity Row <<entity>> {
+  - id
+}
+
+Row --> "1" Title : is identified by
+
 class Title <<(V,#FF8B40) value object>> {}
+
+Board -> "*" BoardEvent : produces
+Board --> "1" User : is owned by
 
 @enduml
