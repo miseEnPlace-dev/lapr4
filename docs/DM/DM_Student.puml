@@ -1,0 +1,40 @@
+@startuml DM-STUDENT
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+    entity User
+}
+
+entity User <<entity>> <<root>> {
+    - isActive
+}
+
+package "<<aggregate>> Student" {
+    entity Student
+
+    class BirthDate
+    class TaxPayerNumber
+    class MechanographicNumber
+}
+
+entity Student <<entity>> <<root>> {
+  -id
+}
+
+class BirthDate <<(V,#FF8B40) value object>> {}
+class TaxPayerNumber <<(V,#FF8B40) value object>> {}
+class MechanographicNumber <<(V,#FF8B40) value object>> {}
+
+Student --> "1" BirthDate : characterized by
+Student --> "1" TaxPayerNumber : characterized by
+Student --> "1" MechanographicNumber : identified by
+
+Student --> "1" User : is a
+
+@enduml

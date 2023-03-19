@@ -1,0 +1,46 @@
+@startuml DM-COURSE
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Event" {
+    entity Event
+
+    class Time
+    class Duration
+    class Type
+}
+
+entity Event <<entity>> <<root>> {
+}
+
+class Time <<(V,#FF8B40) value object>> {}
+class Duration <<(V,#FF8B40) value object>> {}
+class Type <<(V,#FF8B40) value object>> {}
+
+Event --> "1" Time : is charecterized by
+Event --> "1" Duration : has
+Event --> "1" Type : is charecterized by
+
+package "<<aggregate>> Meeting" {
+    entity Meeting
+}
+
+entity Meeting <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Class" {
+    entity Class
+}
+
+entity Class <<entity>> <<root>> {
+  -id
+}
+
+Class --> "1" Event : is a
+Meeting --> "1" Event : is a

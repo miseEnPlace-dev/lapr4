@@ -1,0 +1,66 @@
+@startuml DM-USER
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+    entity User
+    class Password
+    class Email
+    class FullName
+    class ShortName
+    class Role
+}
+
+entity User <<entity>> <<root>> {
+    - isActive
+}
+
+entity User
+
+class Password <<(V,#FF8B40) value object>> {}
+class Role <<(V,#FF8B40) value object>> {}
+class FullName <<(V,#FF8B40) value object>> {}
+class ShortName <<(V,#FF8B40) value object>> {}
+class Email <<(V,#FF8B40) value object>> {}
+
+User --> "1" Password : associated with a
+User --> "1" FullName : characterized by
+User --> "1" ShortName : characterized by
+User --> "1" Email : identified by
+User -> "1..*" Role : plays a
+
+package "<<aggregate>> Teacher" {
+    entity Teacher
+}
+
+
+entity Teacher <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Student" {
+    entity Student
+}
+
+entity Student <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Manager" {
+    entity Manager
+}
+
+entity Manager <<entity>> <<root>> {
+  -id
+}
+
+Teacher --> "1" User : is a
+Student --> "1" User : is a
+Manager --> "1" User : is a
+
+@enduml

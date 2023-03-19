@@ -1,0 +1,28 @@
+@startuml DM-COURSE
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Course" {
+    entity Course
+
+    class Title
+    class State
+}
+
+entity Course <<entity>> <<root>> {
+    - code
+}
+
+class Title <<(V,#FF8B40) value object>> {}
+class State <<(V,#FF8B40) value object>> {}
+
+
+Course --> "1" Title : is titled
+Course --> "1" State : is in
+
+@enduml
