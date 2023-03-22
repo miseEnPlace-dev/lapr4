@@ -18,11 +18,20 @@ entity Course <<entity>> <<root>> {
     - code
 }
 
+package "<<aggregate>> Student" {
+    entity Student
+}
+
+entity Student <<entity>> <<root>> {
+  -id
+}
+
 class Title <<(V,#FF8B40) value object>> {}
 class State <<(V,#FF8B40) value object>> {}
 
-
 Course --> "1" Title : is titled
 Course --> "1" State : is in
+
+Course -> "0..*" Student : has students enroled
 
 @enduml

@@ -1,4 +1,4 @@
-@startuml DM-COURSE
+@startuml DM-BOARD
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -14,27 +14,34 @@ package "<<aggregate>> Board" {
     entity Column
     entity Row
     entity BoardEvent
+
+    class Archived
+}
+
+package "<<aggregate>> PostIt" {
+    entity PostIt
 }
 
 package "<<aggregate>> User" {
     entity User
 }
 
+entity PostIt <<entity>> <<root>> {
+
+}
+
 entity User <<entity>> <<root>> {
 }
 
 Board --> "1" Title : is identified by
-Board --* "*" Column : has a collection of
-Board --* "*" Row : has a collection of
+Board --* "1..*" Column : has a collection of
+Board --* "1..*" Row : has a collection of
+
 
 entity Board <<entity>> <<root>> {
 }
 
 entity Column <<entity>> {
-  - id
-}
-
-entity BoardEvent <<entity>> {
   - id
 }
 
@@ -47,8 +54,21 @@ entity Row <<entity>> {
 Row --> "1" Title : is identified by
 
 class Title <<(V,#FF8B40) value object>> {}
+class Archived <<(V,#FF8B40) value object>> {
+  - archivedAt
+}
 
-Board -> "*" BoardEvent : produces
+Board -* "0..*" BoardEvent : contains
 Board --> "1" User : is owned by
+Board --> "0..*" PostIt : has a collection of
+Board --> "0..1" Archived : is
+
+Archived --> "1" User : is produced by
+
+PostIt ---> "1" User : is owned by
+PostIt ---> "1" Column : has
+PostIt ---> "1" Row : has
+
+BoardEvent --> "1" User : is produced by
 
 @enduml

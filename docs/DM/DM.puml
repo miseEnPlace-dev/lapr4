@@ -1,4 +1,4 @@
-@startuml DM-USER
+@startuml DM
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -9,27 +9,11 @@ skinparam ArrowColor #222222
 
 package "<<aggregate>> User" {
     entity User
-    class Password
-    class Email
-    class FullName
-    class ShortName
 }
 
 entity User <<entity>> <<root>> {
     - isActive
 }
-
-entity User
-
-class Password <<(V,#FF8B40) value object>> {}
-class FullName <<(V,#FF8B40) value object>> {}
-class ShortName <<(V,#FF8B40) value object>> {}
-class Email <<(V,#FF8B40) value object>> {}
-
-User --> "1" Password : associated with a
-User --> "1" FullName : characterized by
-User --> "1" ShortName : characterized by
-User --> "1" Email : identified by
 
 package "<<aggregate>> Teacher" {
     entity Teacher
@@ -56,8 +40,39 @@ entity Manager <<entity>> <<root>> {
   -id
 }
 
+package "<<aggregate>> Course" {
+    entity Course
+}
+
+entity Course <<entity>> <<root>> {
+    - code
+}
+
+package "<<aggregate>> Board" {
+    entity Board
+}
+
+entity Board <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Exam" {
+    entity Exam
+}
+
+entity Exam <<entity>> <<root>> {
+}
+
 Teacher --|> "1" User 
 Student --|> "1" User 
-Manager --|> "1" User 
+Manager --|> "1" User
+
+Course -> "0..*" Student : has students enroled
+Course ...> "1..*" Teacher : has teachers
+Course --> "1" Teacher : has a responsible
+
+Board --> "1" User : has an owner
+
+Exam --> "1..*" Student : is taken by
+Exam -> "1" Course : is for
 
 @enduml

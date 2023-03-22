@@ -1,4 +1,4 @@
-@startuml DM-COURSE
+@startuml DM-EVENTS
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -42,5 +42,5 @@ entity Class <<entity>> <<root>> {
   -id
 }
 
-Class --> "1" Event : is a
-Meeting --> "1" Event : is a
+Class --|> Event 
+Meeting --|> Event
