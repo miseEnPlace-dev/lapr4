@@ -1,0 +1,31 @@
+@startuml DM-POSTIT
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> PostIt" {
+    entity PostIt
+
+    class Title
+
+    class Coordinates
+}
+
+entity PostIt <<entity>> <<root>>{ 
+    -id 
+}
+
+class Title <<(V,#FF8B40) value object>> {}
+
+
+class Coordinates <<(V,#FF8B40) value object>> {
+    -rowNumber
+    -columnNumber    
+}
+
+PostIt -* "1" Title : has a
+PostIt --> "1" Coordinates : has 
