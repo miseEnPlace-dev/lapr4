@@ -1,0 +1,51 @@
+@startuml DM-EXAM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Exam" {
+    entity Exam
+
+    entity Question
+    class QuestionNumber
+    class QuestionBody
+
+    class Matching
+    class MultipleChoice
+    class ShortAnswer
+    class Numerical
+    class MissingWords
+    class TrueFalse
+}
+
+entity Exam <<entity>> <<root>> {}
+
+entity Question <<entity>> {}
+
+class QuestionNumber <<(V,#FF8B40) value object>> {}
+class QuestionBody <<(V,#FF8B40) value object>> {}
+
+class Matching <<(V, #FF8B40) value object>> {}
+class MultipleChoice <<(V, #FF8B40) value object>> {}
+class ShortAnswer <<(V, #FF8B40) value object>> {}
+class Numerical <<(V, #FF8B40) value object>> {}
+class MissingWords <<(V, #FF8B40) value object>> {}
+class TrueFalse <<(V, #FF8B40) value object>> {}
+
+Question *- QuestionNumber
+Question *- QuestionBody
+
+Question <|-- Matching
+Question <|-- MultipleChoice
+Question <|-- ShortAnswer
+Question <|-- Numerical
+Question <|-- MissingWords
+Question <|-- TrueFalse
+
+Exam --* "1..*" Question
+
+@enduml

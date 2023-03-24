@@ -75,7 +75,7 @@ No
 
 > Difference between meeting and class
 
-Classes -> Regular and pre defined participants
+Classes -> Regular and pre-defined participants
 Meetings -> There is a concept of "invite", can be created by any user
 
 ## [Question 17](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21994)
@@ -92,9 +92,9 @@ In the case of Meetings they should not be created if the participants are not a
 
 ## [Question 18](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21997)
 
-> Teacher acronym formating rules? Should it be unique?
+> Teacher acronym formatting rules? Should it be unique?
 
-"I think a sequence of capitalised words should be used for the teacher acronym. Maybe the length could be a configuration setting of the application.
+"I think a sequence of capitalized words should be used for the teacher acronym. Maybe the length could be a configuration setting of the application.
 
 I think it would be wise to enforce that acronyms be unique."
 
@@ -102,5 +102,27 @@ I think it would be wise to enforce that acronyms be unique."
 
 > "In regards to the exam, what do you mean by feedback and grading? Is it necessary to save the answers of the users showing and comparing them with the correct answer? Furthermore is it necessary to save the answer of the question?"
 
-The ideia is to have feedback and grading similarly to what is available for tests in the moodle platform. How you may achieve this is not up to me to decide.
+The idea is to have feedback and grading similarly to what is available for tests in the moodle platform. How you may achieve this is not up to me to decide.
+
+## [Question 21](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21971)
+
+> Course code verifications?
+
+"Course code should be unique and there are not restrictions on the format of the code."
+
+## [Question 22](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22041)
+
+> Where should a notification regarding the update of a board post appear? In the user app, the shared board app or both?
+
+"it should be in the Shared Board App."
+
+## [Question 23](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22064)
+
+> Can any user of the system invite any other user? For example, can a student invite another student who is in a different course, or can a manager can create a meeting with any group of teachers.
+
+"When in the document specification the term "User" is used it usually means "any user" of the system. Therefore, any user of the system can schedule a meeting and be a participant in a meeting."
+
+----
+
+*Updated at: 24/03/2021 16:48*
 

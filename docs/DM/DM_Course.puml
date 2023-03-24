@@ -26,11 +26,21 @@ entity Student <<entity>> <<root>> {
   -id
 }
 
+package "<<aggregate>> Exam" {
+    entity Exam
+}
+
+entity Exam <<entity>> <<root>> {
+  -id
+}
+
 class Title <<(V,#FF8B40) value object>> {}
 class State <<(V,#FF8B40) value object>> {}
 
 Course --> "1" Title : is titled
 Course --> "1" State : is in
+
+Exam -> "1" Course : is for
 
 Course -> "0..*" Student : has students enroled
 
