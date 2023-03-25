@@ -122,7 +122,19 @@ The idea is to have feedback and grading similarly to what is available for test
 
 "When in the document specification the term "User" is used it usually means "any user" of the system. Therefore, any user of the system can schedule a meeting and be a participant in a meeting."
 
+## [Question 24](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22080)
+
+> When a user does not respond to a meeting invitation, should his status be changed to "not responded" or "rejected"?
+
+"The status of someone that did not answer should be "no answer" or "unknown""
+
+## [Question 25](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22101)
+
+> What is a "Course" and what is a "Class"?
+
+"A course is a small duration course, almost equivalent to a UC (and not a degree course). A class is a regular class, that is associated to a course."
+
 ----
 
-*Updated at: 24/03/2021 16:48*
+*Updated at: 25/03/2021 19:50*
 
