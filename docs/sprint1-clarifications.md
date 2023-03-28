@@ -18,7 +18,7 @@ This document is a collection of clarifications for the first sprint. The doubts
 
 > UI in console?
 
-In general, what is expected is a Java Console Application 
+In general, what is expected is a Java Console Application
 
 ## [Question 4](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21835)
 
@@ -84,10 +84,10 @@ Meetings -> There is a concept of "invite", can be created by any user
 
 Regarding classes:
 FRC09 - Schedule of Class A teacher schedule a class (always a recurring class, happens every week). System must check if the Teacher is available for the class period
- 
+
 Regarding Meetings:
 FRM01 - Schedule a Meeting A user schedules a meeting. The system must check if all participants are available and send invitations to participants.
- 
+
 In the case of Meetings they should not be created if the participants are not available
 
 ## [Question 18](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21997)
@@ -134,7 +134,12 @@ The idea is to have feedback and grading similarly to what is available for test
 
 "A course is a small duration course, almost equivalent to a UC (and not a degree course). A class is a regular class, that is associated to a course."
 
-----
+## [Question 26](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22120)
 
-*Updated at: 25/03/2021 19:50*
+> Should it be possible to have a column with no title and no identifier in a board?
 
+"In order for user to post content into a cell they must identify the cell. Therefore, I think at least, it should be possible to identify the cell by the number of its column and the number of its row. If the cells have titles, these titles can be used to identify the cells. However, it should always be possible to identify a cell by the column number and row number."
+
+---
+
+_Updated at: 25/03/2021 19:50:58,201_
