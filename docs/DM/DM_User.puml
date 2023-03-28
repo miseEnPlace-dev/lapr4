@@ -33,6 +33,7 @@ User --> "1" Email : identified by
 
 package "<<aggregate>> Teacher" {
     entity Teacher
+    class Acronym
 }
 
 
@@ -42,7 +43,9 @@ entity Teacher <<entity>> <<root>> {
 
 package "<<aggregate>> Student" {
     entity Student
+    class MecanographicNumber
 }
+
 
 entity Student <<entity>> <<root>> {
   -id
@@ -55,6 +58,13 @@ package "<<aggregate>> Manager" {
 entity Manager <<entity>> <<root>> {
   -id
 }
+
+class Acronym <<(V,#FF8B40) value object>> {}
+class MecanographicNumber <<(V,#FF8B40) value object>> {}
+
+Student --> "1" MecanographicNumber : identified by
+' Sprint 1 clarifications - question 18: "I think it would be wise to enforce that acronyms be unique" -> identified by
+Teacher --> "1" Acronym : identified by
 
 Teacher --|> "1" User 
 Student --|> "1" User 
