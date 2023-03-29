@@ -62,6 +62,38 @@ package "<<aggregate>> Exam" {
 entity Exam <<entity>> <<root>> {
 }
 
+package "<<aggregate>> PostIt" {
+    entity PostIt
+}
+
+entity PostIt <<entity>> <<root>> {
+    -id
+}
+
+package "<<aggregate>> Event" {
+    entity Event
+}
+
+entity Event <<entity>> <<root>> {
+    -id
+}
+
+package "<<aggregate>> Meetings" {
+    entity Meetings
+}
+
+entity Meetings <<entity>> <<root>> {
+    -id
+}
+
+package "<<aggregate>> Class" {
+    entity Class
+}
+
+entity Class <<entity>> <<root>> {
+    -id
+}
+
 Teacher --|> "1" User 
 Student --|> "1" User 
 Manager --|> "1" User
@@ -71,8 +103,12 @@ Course ...> "1..*" Teacher : has teachers
 Course --> "1" Teacher : has a responsible
 
 Board --> "1" User : has an owner
+PostIt <-- "0..*" Board: has
 
 Exam --> "1..*" Student : is taken by
 Exam -> "1" Course : is for
+
+Class --|> "1" Event
+Meetings --|> "1" Event
 
 @enduml
