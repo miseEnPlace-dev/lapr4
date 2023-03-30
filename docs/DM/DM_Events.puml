@@ -12,19 +12,19 @@ package "<<aggregate>> Event" {
 
     class Time
     class Duration
-    class Type
+    ' class Type
 }
 
-entity Event <<entity>> <<root>> {
+entity Event <<(A,#adb9d1)>> <<root>> {
 }
 
 class Time <<(V,#FF8B40) value object>> {}
 class Duration <<(V,#FF8B40) value object>> {}
-class Type <<(V,#FF8B40) value object>> {}
+' class Type <<(V,#FF8B40) value object>> {}
 
 Event --> "1" Time : is charecterized by
 Event --> "1" Duration : has
-Event --> "1" Type : is charecterized by
+' Event --> "1" Type : is charecterized by
 
 package "<<aggregate>> Meeting" {
     entity Meeting
