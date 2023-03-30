@@ -94,6 +94,14 @@ entity Class <<entity>> <<root>> {
     -id
 }
 
+package "<<aggregate>> Answer" {
+    entity Answer
+}
+
+entity Answer <<entity>> <<root>> {
+    -id
+}
+
 Teacher --|> "1" User 
 Student --|> "1" User 
 Manager --|> "1" User
@@ -107,8 +115,12 @@ PostIt <-- "0..*" Board: has
 
 Exam --> "1..*" Student : is taken by
 Exam -> "1" Course : is for
+Exam --> "0..*" Answer : has answers
 
 Class --|> "1" Event
 Meetings --|> "1" Event
+
+Student --> "0..*" Event: participate
+Student --> "0..*" Answer : has answers
 
 @enduml
