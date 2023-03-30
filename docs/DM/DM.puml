@@ -122,9 +122,9 @@ Exam --> "0..*" Answer : has
 Class --|> "1" Event
 Meetings --|> "1" Event
 
-Section --> "1..*" Question : has
+Section --* "1..*" Question : has
 
-Exam --> "1..*" Section : has
+Exam --* "1..*" Section : has
 
 Student --> "0..*" Event: participate
 Student --> "0..*" Answer : has

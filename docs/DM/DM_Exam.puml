@@ -9,6 +9,7 @@ skinparam ArrowColor #222222
 
 package "<<aggregate>> Exam" {
     entity Exam
+    entity Section
 
     entity Question
     class QuestionNumber
@@ -22,7 +23,23 @@ package "<<aggregate>> Exam" {
     class TrueFalse
 }
 
+package "<<aggregate>> Student" {
+    entity Student
+}
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Answer" {
+    entity Answer
+}
+
+entity Answer <<entity>> <<root>> {
+}
+
 entity Exam <<entity>> <<root>> {}
+
+entity Section <<entity>> {}
 
 entity Question <<entity>> {}
 
@@ -46,6 +63,13 @@ Question <|-- Numerical
 Question <|-- MissingWords
 Question <|-- TrueFalse
 
-Exam --* "1..*" Question
+Exam --* "1..*" Section
+Section --* "1..*" Question
+
+Question --> "*" Answer : has
+
+Student --> "*" Answer : produces
+
+Student --> "*" Exam : does
 
 @enduml
