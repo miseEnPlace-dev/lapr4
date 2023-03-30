@@ -57,6 +57,8 @@ entity Board <<entity>> <<root>> {
 
 package "<<aggregate>> Exam" {
     entity Exam
+    entity Section
+    entity Question
 }
 
 entity Exam <<entity>> <<root>> {
@@ -111,16 +113,20 @@ Course ...> "1..*" Teacher : has teachers
 Course --> "1" Teacher : has a responsible
 
 Board --> "1" User : has an owner
-PostIt <-- "0..*" Board: has
+PostIt --> "1" Board: belongs to
 
 Exam --> "1..*" Student : is taken by
 Exam -> "1" Course : is for
-Exam --> "0..*" Answer : has answers
+Exam --> "0..*" Answer : has
 
 Class --|> "1" Event
 Meetings --|> "1" Event
 
+Section --> "1..*" Question : has
+
+Exam --> "1..*" Section : has
+
 Student --> "0..*" Event: participate
-Student --> "0..*" Answer : has answers
+Student --> "0..*" Answer : has
 
 @enduml

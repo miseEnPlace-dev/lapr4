@@ -24,7 +24,6 @@ class Type <<(V,#FF8B40) value object>> {}
 
 Event --> "1" Time : is charecterized by
 Event --> "1" Duration : has
-Event --> "1" Type : is charecterized by
 
 package "<<aggregate>> Meeting" {
     entity Meeting
