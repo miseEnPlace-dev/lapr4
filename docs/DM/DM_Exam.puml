@@ -53,8 +53,8 @@ class Numerical <<(V, #FF8B40) value object>> {}
 class MissingWords <<(V, #FF8B40) value object>> {}
 class TrueFalse <<(V, #FF8B40) value object>> {}
 
-Question *- QuestionNumber
-Question *- QuestionBody
+Question -* QuestionNumber
+Question -* QuestionBody
 
 Question <|-- Matching
 Question <|-- MultipleChoice
@@ -63,10 +63,9 @@ Question <|-- Numerical
 Question <|-- MissingWords
 Question <|-- TrueFalse
 
-Exam --* "1..*" Section
-Section --* "1..*" Question
+Exam *-- "1..*" Section
+Section *-- "1..*" Question
 
-Question --> "*" Answer : has
 
 Student --> "*" Answer : produces
 

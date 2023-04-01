@@ -109,7 +109,7 @@ Student --|> "1" User
 Manager --|> "1" User
 
 Course -> "0..*" Student : has students enroled
-Course ...> "1..*" Teacher : has teachers
+Course ---> "1..*" Teacher : has teachers
 Course --> "1" Teacher : has a responsible
 
 Board --> "1" User : has an owner
