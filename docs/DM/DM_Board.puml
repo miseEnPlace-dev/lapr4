@@ -27,7 +27,6 @@ package "<<aggregate>> User" {
 }
 
 entity PostIt <<entity>> <<root>> {
-
 }
 
 entity User <<entity>> <<root>> {
@@ -36,7 +35,6 @@ entity User <<entity>> <<root>> {
 Board --> "1" Title : is identified by
 Board --* "1..*" Column : has a collection of
 Board --* "1..*" Row : has a collection of
-
 
 entity Board <<entity>> <<root>> {
 }
