@@ -4,13 +4,14 @@
 
 The members of the group:
 
-| Student Nr. | Name            |
-| ----------- | --------------- |
-| **1211299** | André Barros    |
-| **1211277** | Carlos Lopes    |
+| Student Nr. | Name           |
+|-------------|----------------|
+| **1211299** | André Barros   |
+| **1211277** | Carlos Lopes   |
 | **1211285** | Ricardo Moreira |
-| **1211289** | Tomás Lopes     |
-| **1211288** | Tomás Russo     |
+| **1211289** | Tomás Lopes    |
+| **1211288** | Tomás Russo    |
+| **1211350** | Gonçalo Lima   |
 
 ## 2. Task Assignment
 

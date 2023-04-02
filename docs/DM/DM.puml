@@ -129,4 +129,8 @@ Exam --* "1..*" Section : has
 Student --> "0..*" Event: participate
 Student --> "0..*" Answer : has
 
+User --> "0..*" Meetings: creates
+Course --> "1" Manager: managed by
+Teacher ---> "0..*" Class: schedules
+
 @enduml
