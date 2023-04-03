@@ -140,6 +140,114 @@ The idea is to have feedback and grading similarly to what is available for test
 
 "In order for user to post content into a cell they must identify the cell. Therefore, I think at least, it should be possible to identify the cell by the number of its column and the number of its row. If the cells have titles, these titles can be used to identify the cells. However, it should always be possible to identify a cell by the column number and row number."
 
+## [Question 27](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22133)
+
+> Is the name of each actor either the full name or the short name?
+
+"Both. A short name is is like a given name, the short name someone chooses to be called."
+
+## [Question 28](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22171)
+
+> Can a user own more than one board?
+
+"Yes"
+
+## [Question 29](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22187)
+
+> If a student misses a exam, his grade should be 0 or what?
+
+"Should be N/A. You should not notify anyone about the absence of a student."
+
+## [Question 30](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22188)
+
+> All questions should accept a feedback?
+
+"Yes"
+
+## [Question 31](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22007)
+
+> Can a teacher be in charge of more than one course?
+
+"Yes"
+
+## [Question 32](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22202)
+
+> Can a cell have more than one post?
+
+"No"
+
+## [Question 33](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22209)
+
+> Can an exam be scheduled for more than one day?
+
+"An exam has a open date and a close date."
+
+## [Question 34](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22213)
+
+> Rules for teacher's acronyms?
+
+"Should be unique. Formed by a sequence of capitalized letters. The maximum length of the acronym should be a configuration setting of the application. Follow this rule (setting) for similar problems."
+
+## [Question 35](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22227)
+
+> FRE06 says "The system displays the grades of a class". Did you mean course instead of class?
+
+"Yes. In some contexts "class" can also be translated to "turma", or all the students in a "class"."
+
+## [Question 36](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22228)
+
+> Should students sign up for exams?
+
+"No. Exams should be available to all students of the course."
+
+## [Question 37](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22229)
+
+> Should someone be able to see the logs of a board?
+
+"If a user as read access to the board he can view the history. Logs are important for FRB06 and FRB07."
+
+## [Question 38](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22255)
+
+> What information should be stored in the logs?
+
+"All relevant informations so that FRB06 and FRB07 can be implemented, i.e., all the information that is needed for a possible "restore operation" in the future."
+
+## [Question 39](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22261)
+
+> Deploy in this sprint? Rules for deployment?
+
+"Algumas user stories deste sprint são relativamente vagas e dependem do vosso planeamento. Por exemplo, que aplicações (das previstas no capitulo 4 terão, de facto, já alguma "versão" para instalarem?).
+ 
+De qualquer das formas, a ideia é preparem o "deployment" em função dos objetivos de cada sprint. Do ponto de vista do cliente, seria interessante terem já uma versão "executável" (embora sem funcionalidades) das app Admin, Teacher e Student (e respectiva base de dados).
+ 
+Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de deployment, que estão identificados no critério de avaliação "Implantação/Deployment (10%)"."
+
+_(meti tudo pq achei importante)_
+
+## [Question 40](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22262)
+
+> Can the user choose a limit date for weekly classes? Or only at the end of the semester?
+
+"There is no mention to any of that. Not even to a date of end of the course. If you choose to add this information, you are dumb. The course ends when the manager closes it."
+
+## [Question 41](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22278)
+
+> Do courses have a final grade?
+
+"No. You only need to list the grade of exams."
+
+## [Question 42](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22281)
+
+> Should we track the changes that a manager does [to a course]?
+
+"That is a good practice, but there is no requirement for that. There are other roles and requirements that need that (for instance, users and boards or users and meetings)."
+
+## [Question 43](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22286)
+
+> After an exame being created, can it be edited?
+
+"No. FRE01 could be very complex, with many steps prone to user errors. As a final step, you should consider a "publish" operation that marks the end of the creation process."
+
 ---
 
-_Updated at: 25/03/2021 19:50:58,201_
+_Updated at: 03/04/2023 16:56_
