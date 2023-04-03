@@ -13,7 +13,6 @@ package "<<aggregate>> Board" {
     class Title
     entity Column
     entity Row
-    entity BoardEvent
 
     class Archived
 }
@@ -52,21 +51,17 @@ entity Row <<entity>> {
 Row --> "1" Title : is identified by
 
 class Title <<(V,#FF8B40) value object>> {}
+
 class Archived <<(V,#FF8B40) value object>> {
   - archivedAt
 }
 
-Board *- "0..*" BoardEvent : contains
 Board --> "1" User : is owned by
-Board --> "0..*" PostIt : has a collection of
 Board --> "0..1" Archived : is
 
 Archived --> "1" User : is produced by
 
 PostIt ---> "1" User : is owned by
-PostIt ---> "1" Column : has
-PostIt ---> "1" Row : has
-
-BoardEvent --> "1" User : is produced by
+PostIt ---> "1" Board : belongs to
 
 @enduml

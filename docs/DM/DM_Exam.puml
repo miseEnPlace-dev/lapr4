@@ -14,6 +14,9 @@ package "<<aggregate>> Exam" {
     entity Question
     class QuestionNumber
     class QuestionBody
+    class SectionName
+
+    entity Answer
 
     class Matching
     class MultipleChoice
@@ -30,8 +33,11 @@ package "<<aggregate>> Student" {
 entity Student <<entity>> <<root>> {
 }
 
-package "<<aggregate>> Answer" {
-    entity Answer
+package "<<aggregate>> Course" {
+    entity Course
+}
+
+entity Course <<entity>> <<root>> {
 }
 
 entity Answer <<entity>> <<root>> {
@@ -46,6 +52,8 @@ entity Question <<entity>> {}
 class QuestionNumber <<(V,#FF8B40) value object>> {}
 class QuestionBody <<(V,#FF8B40) value object>> {}
 
+class SectionName <<(V,#FF8B40) value object>> {}
+
 class Matching <<(V, #FF8B40) value object>> {}
 class MultipleChoice <<(V, #FF8B40) value object>> {}
 class ShortAnswer <<(V, #FF8B40) value object>> {}
@@ -53,22 +61,24 @@ class Numerical <<(V, #FF8B40) value object>> {}
 class MissingWords <<(V, #FF8B40) value object>> {}
 class TrueFalse <<(V, #FF8B40) value object>> {}
 
-Question -* QuestionNumber
-Question -* QuestionBody
+Question *- QuestionNumber
+Question *-- QuestionBody
 
-Question <|-- Matching
-Question <|-- MultipleChoice
-Question <|-- ShortAnswer
-Question <|-- Numerical
-Question <|-- MissingWords
-Question <|-- TrueFalse
+Question <|--- Matching
+Question <|--- MultipleChoice
+Question <|--- ShortAnswer
+Question <|--- Numerical
+Question <|--- MissingWords
+Question <|--- TrueFalse
 
 Exam *-- "1..*" Section
+Exam --> "1" Course : is from
+
 Section *-- "1..*" Question
+Section *-- SectionName
 
+Student --> "*" Exam : takes
 
-Student --> "*" Answer : produces
-
-Student --> "*" Exam : does
+Answer --> "1" Exam : is for
 
 @enduml

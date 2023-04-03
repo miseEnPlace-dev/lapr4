@@ -14,16 +14,15 @@ package "<<aggregate>> Course" {
     class State
 }
 
+package "<<aggregate>> Enrolment" {
+    entity Enrolment
+}
+
 entity Course <<entity>> <<root>> {
     - code
 }
 
-package "<<aggregate>> Student" {
-    entity Student
-}
-
-entity Student <<entity>> <<root>> {
-  -id
+entity Enrolment <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Exam" {
@@ -34,14 +33,15 @@ entity Exam <<entity>> <<root>> {
   -id
 }
 
+note left of State : Open\nOngoing\nClosed
+
 class Title <<(V,#FF8B40) value object>> {}
 class State <<(V,#FF8B40) value object>> {}
 
 Course --> "1" Title : is titled
 Course --> "1" State : is in
+Enrolment --> "1" Course : is for
 
-Exam -> "1" Course : is for
-
-Course -> "0..*" Student : has students enroled
+Exam --> "1" Course : is for
 
 @enduml

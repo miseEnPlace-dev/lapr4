@@ -15,12 +15,11 @@ entity User <<entity>> <<root>> {
     - isActive
 }
 
-package "<<aggregate>> Course" {
-    entity Course
+package "<<aggregate>> Enrolment" {
+    entity Enrolment
 }
 
-entity Course <<entity>> <<root>> {
-    - code
+entity Enrolment <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Student" {
@@ -43,8 +42,8 @@ Student --> "1" BirthDate : characterized by
 Student --> "1" TaxPayerNumber : characterized by
 Student --> "1" MechanographicNumber : identified by
 
-Student --> "1" User : is a
+Student -|> User
 
-Course -> "0..*" Student : has students enroled
+Student --> "0..*" Enrolment : produces
 
 @enduml

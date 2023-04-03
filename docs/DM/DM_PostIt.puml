@@ -1,4 +1,4 @@
-@startuml DM-POSTIT
+@startuml DM-POST-IT
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -21,13 +21,12 @@ entity PostIt <<entity>> <<root>>{
 
 class Title <<(V,#FF8B40) value object>> {}
 
-
 class Coordinates <<(V,#FF8B40) value object>> {
     -rowNumber
     -columnNumber    
 }
 
-PostIt -* "1" Title : has a
+PostIt *- Title : has
 PostIt --> "1" Coordinates : has
 
 @enduml
