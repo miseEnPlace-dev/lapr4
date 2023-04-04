@@ -40,7 +40,7 @@ package "<<aggregate>> Course" {
 entity Course <<entity>> <<root>> {
 }
 
-entity Answer <<entity>> <<root>> {
+entity Answer <<entity>>{
 }
 
 entity Exam <<entity>> <<root>> {}
