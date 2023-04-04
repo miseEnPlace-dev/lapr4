@@ -59,8 +59,6 @@ class Archived <<(V,#FF8B40) value object>> {
 Board --> "1" User : is owned by
 Board --> "0..1" Archived : is
 
-Archived --> "1" User : is produced by
-
 PostIt ---> "1" User : is owned by
 PostIt ---> "1" Board : belongs to
 
