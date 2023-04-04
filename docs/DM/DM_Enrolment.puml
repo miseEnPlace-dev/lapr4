@@ -9,7 +9,7 @@ skinparam ArrowColor #222222
 
 package "<<aggregate>> Enrolment" {
     entity Enrolment
-
+    
     class State
 }
 
