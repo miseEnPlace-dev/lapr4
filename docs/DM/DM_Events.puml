@@ -42,7 +42,46 @@ entity Class <<entity>> <<root>> {
   -id
 }
 
+package "<<aggregate>> ExtraordinaryClass" {
+    entity ExtraordinaryClass
+}
+
+entity ExtraordinaryClass <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Course" {
+    entity Course
+}
+
+entity Course <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Teacher" {
+    entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Student" {
+    entity Student
+}
+
+entity Student <<entity>> <<root>> {
+  -id
+}
+
 Class --|> Event 
 Meeting --|> Event
+
+Meeting --> "1" Course : is related to
+Teacher --> "0..*" Meeting : scheduled by
+Teacher --> "1..*" Student : invites
+
+ExtraordinaryClass --|> Event
+ExtraordinaryClass --> "1" Teacher : scheduled by
 
 @enduml

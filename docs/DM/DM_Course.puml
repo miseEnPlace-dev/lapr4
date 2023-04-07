@@ -33,6 +33,14 @@ entity Exam <<entity>> <<root>> {
   -id
 }
 
+package "<<aggregate>> Teacher" {
+    entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+    -id
+}
+
 note left of State : Open\nOngoing\nClosed
 
 class Title <<(V,#FF8B40) value object>> {}
@@ -40,6 +48,9 @@ class State <<(V,#FF8B40) value object>> {}
 
 Course --> "1" Title : is titled
 Course --> "1" State : is in
+Course ---> "1..*" Teacher : has
+Course --> "1" Teacher : has a responsible
+
 Enrolment --> "1" Course : is for
 
 Exam --> "1" Course : is for
