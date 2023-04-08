@@ -3,6 +3,7 @@
 In order to keep things consistent over the development of the project these are the rules every member should follow:
 
 - For every feature/US a new branch must be created.
+- For almost every feature/US a Pull Request must be made & reviewed.
 - In the end of each sprint create a branch named snap/sprint-X.
 
 > Note: Some actions don't require a branch, like updating the README.md file.
@@ -43,6 +44,10 @@ branchName ✖️
 - refactor: changes to the code organization
 - test: new tests were added/changed
 - chore: minor code changes that does not impact functionality (Ex. removing/adding blank lines)
+
+## Pull Requests
+
+To ensure code quality and that all team members are in sync every feature/US that is relevant must have a Pull Request that must be reviewed by the team. Only after the approval from the development team the branch can be merged to the main branch.
 
 ## Useful commands
 
