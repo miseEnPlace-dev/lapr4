@@ -77,14 +77,6 @@ entity PostIt <<entity>> <<root>> {
     -id
 }
 
-package "<<aggregate>> Event" {
-    entity Event
-}
-
-entity Event <<entity>> <<root>> {
-    -id
-}
-
 package "<<aggregate>> Meeting" {
     entity Meeting
 }
@@ -98,6 +90,22 @@ package "<<aggregate>> Class" {
 }
 
 entity Class <<entity>> <<root>> {
+    -id
+}
+
+package "<<aggregate>> Invite" {
+    entity Invite
+}
+
+entity Invite <<entity>> <<root>> {
+    -id
+}
+
+package "<<aggregate>> ExtraordinaryClass" {
+    entity ExtraordinaryClass
+}
+
+entity ExtraordinaryClass <<entity>> <<root>> {
     -id
 }
 
@@ -119,20 +127,30 @@ Course --> "1" Teacher : has a responsible
 Enrolment --> "1" Student : has
 Enrolment --> "1" Course : is for
 
-Board --> "1" User : has an owner
+Board ---> "1" User : is owned by
+
+PostIt --> "1" User : is changed by
 PostIt --> "1" Board: belongs to
 
 Exam --> "1..*" Student : is taken by
 Exam -> "1" Course : is for
+Exam --> "1" Teacher : is created by
+
+Invite --> "1" User : invites
+Invite --> "1" Meeting : is related to
+
+Class ---> "1" Course : is related to
+Class ---> "1" Teacher : scheduled by
+User --> "0..*" Meeting : scheduled by
+
+Invite --> "1" User : invites
+Invite --> "1" Meeting : is related to
+
+ExtraordinaryClass --> "1" Teacher : scheduled by
+ExtraordinaryClass --> "1..*" Student : has
+ExtraordinaryClass --> "1" Course : is related to 
+
+Answer --> "1" Student : belongs to
 Answer --> "1" Exam : is for
-
-Class --|> "1" Event
-Meeting -|> "1" Event
-
-Student --> "0..*" Event: participate
-Student --> "0..*" Answer : has
-
-Meeting --> "1" User: has an owner
-Teacher ---> "0..*" Class: schedules
 
 @enduml

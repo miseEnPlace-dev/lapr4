@@ -7,36 +7,19 @@ hide empty methods
 skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
-package "<<aggregate>> Event" {
-    entity Event
-
-    class Time
-    class Duration
-    ' class Type
-}
-
-entity Event <<(A,#adb9d1)>> <<root>> {
-}
-
-class Time <<(V,#FF8B40) value object>> {}
-class Duration <<(V,#FF8B40) value object>> {}
-' class Type <<(V,#FF8B40) value object>> {}
-
-Event --> "1" Time : is characterized by
-Event --> "1" Duration : has
-' Event --> "1" Type : is characterized by
-
-package "<<aggregate>> Meeting" {
-    entity Meeting
-}
-
-entity Meeting <<entity>> <<root>> {
-  -id
-}
-
 package "<<aggregate>> Class" {
     entity Class
+    
+    class SpecialClass
+    class Duration
+    class DayInWeek
+    class Time
 }
+
+class SpecialClass <<(V,#FF8B40) value object>> {}
+class Time <<(V,#FF8B40) value object>> {}
+class Duration <<(V,#FF8B40) value object>> {}
+class DayInWeek <<(V,#FF8B40) value object>> {}
 
 entity Class <<entity>> <<root>> {
   -id
@@ -44,7 +27,13 @@ entity Class <<entity>> <<root>> {
 
 package "<<aggregate>> ExtraordinaryClass" {
     entity ExtraordinaryClass
+
+    class Time‎ 
+    class Duration‎
 }
+
+class Time‎ <<(V,#FF8B40) value object>> {}
+class Duration‎ <<(V,#FF8B40) value object>> {}
 
 entity ExtraordinaryClass <<entity>> <<root>> {
   -id
@@ -74,14 +63,19 @@ entity Student <<entity>> <<root>> {
   -id
 }
 
-Class --|> Event 
-Meeting --|> Event
+Class --> "1" Course : is related to
+Class ----> "1" Teacher : scheduled by
 
-Meeting --> "1" Course : is related to
-Teacher --> "0..*" Meeting : scheduled by
-Teacher --> "1..*" Student : invites
-
-ExtraordinaryClass --|> Event
 ExtraordinaryClass --> "1" Teacher : scheduled by
+ExtraordinaryClass --> "1..*" Student : has
+ExtraordinaryClass --> "1" Course : is related to 
+
+Class --> "0..*" SpecialClass : has
+Class --> "1" DayInWeek : has
+Class --> "1" Duration : has
+SpecialClass --> "1" Time : has
+
+ExtraordinaryClass --> "1" "Time‎" : has 
+ExtraordinaryClass --> "1" "Duration‎" : has
 
 @enduml

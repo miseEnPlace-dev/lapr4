@@ -217,12 +217,10 @@ The idea is to have feedback and grading similarly to what is available for test
 > Deploy in this sprint? Rules for deployment?
 
 "Algumas user stories deste sprint são relativamente vagas e dependem do vosso planeamento. Por exemplo, que aplicações (das previstas no capitulo 4 terão, de facto, já alguma "versão" para instalarem?).
- 
-De qualquer das formas, a ideia é preparem o "deployment" em função dos objetivos de cada sprint. Do ponto de vista do cliente, seria interessante terem já uma versão "executável" (embora sem funcionalidades) das app Admin, Teacher e Student (e respectiva base de dados).
- 
-Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de deployment, que estão identificados no critério de avaliação "Implantação/Deployment (10%)"."
 
-_(meti tudo pq achei importante)_
+De qualquer das formas, a ideia é preparem o "deployment" em função dos objetivos de cada sprint. Do ponto de vista do cliente, seria interessante terem já uma versão "executável" (embora sem funcionalidades) das app Admin, Teacher e Student (e respectiva base de dados).
+
+Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de deployment, que estão identificados no critério de avaliação "Implantação/Deployment (10%)"."
 
 ## [Question 40](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22262)
 

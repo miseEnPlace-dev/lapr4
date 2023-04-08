@@ -59,6 +59,30 @@ entity Manager <<entity>> <<root>> {
   -id
 }
 
+package "<<aggregate>> Board" {
+    entity Board
+}
+
+entity Board <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> Meeting" {
+    entity Meeting
+}
+
+entity Meeting <<entity>> <<root>> {
+  -id
+}
+
+package "<<aggregate>> PostIt" {
+    entity PostIt
+}
+
+entity PostIt <<entity>> <<root>> {
+  -id
+}
+
 class Acronym <<(V,#FF8B40) value object>> {}
 class MecanographicNumber <<(V,#FF8B40) value object>> {}
 
@@ -68,6 +92,12 @@ Teacher --> "1" Acronym : identified by
 
 Teacher --|> "1" User 
 Student --|> "1" User 
-Manager --|> "1" User 
+Manager --|> "1" User
+
+Board ---> "1" User : has an owner
+
+PostIt --> "1" User : is changed by
+
+Meeting --> "1" User : scheduled by
 
 @enduml

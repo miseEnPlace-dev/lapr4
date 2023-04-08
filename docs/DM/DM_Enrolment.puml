@@ -16,6 +16,7 @@ package "<<aggregate>> Enrolment" {
 
 entity Enrolment <<entity>> <<root>> {
   - createdAt
+  - updatedAt
 }
 
 package "<<aggregate>> Student" {

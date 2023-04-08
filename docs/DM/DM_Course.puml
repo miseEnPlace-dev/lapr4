@@ -11,7 +11,8 @@ package "<<aggregate>> Course" {
     entity Course
 
     class Title
-    class State
+    class EnrolmentState
+    class CourseState
 }
 
 package "<<aggregate>> Enrolment" {
@@ -20,6 +21,7 @@ package "<<aggregate>> Enrolment" {
 
 entity Course <<entity>> <<root>> {
     - code
+    - createdAt
 }
 
 entity Enrolment <<entity>> <<root>> {
@@ -41,18 +43,31 @@ entity Teacher <<entity>> <<root>> {
     -id
 }
 
-note left of State : Open\nOngoing\nClosed
+package "<<aggregate>> Class" {
+    entity Class
+}
+
+entity Class <<entity>> <<root>> {
+    -id
+}
+
+note left of EnrolmentState : Open\nClosed
+note bottom of CourseState : Open\nClosed
 
 class Title <<(V,#FF8B40) value object>> {}
-class State <<(V,#FF8B40) value object>> {}
+class EnrolmentState <<(V,#FF8B40) value object>> {}
+class CourseState <<(V,#FF8B40) value object>> {}
 
 Course --> "1" Title : is titled
-Course --> "1" State : is in
+Course --> "1" EnrolmentState : is in
 Course ---> "1..*" Teacher : has
 Course --> "1" Teacher : has a responsible
+Course --> "1" CourseState : is in
 
 Enrolment --> "1" Course : is for
 
 Exam --> "1" Course : is for
+
+Class ---> "1" Course : is related to
 
 @enduml

@@ -16,8 +16,6 @@ package "<<aggregate>> Exam" {
     class QuestionBody
     class SectionName
 
-    entity Answer
-
     class Matching
     class MultipleChoice
     class ShortAnswer
@@ -40,10 +38,23 @@ package "<<aggregate>> Course" {
 entity Course <<entity>> <<root>> {
 }
 
-entity Answer <<entity>>{
+package "<<aggregate>> Answer" {
+    entity Answer
 }
 
-entity Exam <<entity>> <<root>> {}
+entity Answer <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Teacher" {
+    entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+entity Exam <<entity>> <<root>> {
+    - date
+}
 
 entity Section <<entity>> {}
 
@@ -73,11 +84,12 @@ Question <|--- TrueFalse
 
 Exam *-- "1..*" Section
 Exam --> "1" Course : is from
+Exam --> "1" Teacher : is created by
 
 Section *-- "1..*" Question
 Section *-- SectionName
 
-Student --> "*" Exam : takes
+Answer --> "1" Student : belongs to
 
 Answer --> "1" Exam : is for
 

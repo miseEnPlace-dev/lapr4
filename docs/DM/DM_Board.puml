@@ -15,6 +15,10 @@ package "<<aggregate>> Board" {
     entity Row
 
     class Archived
+
+    class UserPermission
+
+    class PermissionType
 }
 
 package "<<aggregate>> PostIt" {
@@ -31,10 +35,6 @@ entity PostIt <<entity>> <<root>> {
 entity User <<entity>> <<root>> {
 }
 
-Board --> "1" Title : is identified by
-Board *-- "1..*" Column : has a collection of
-Board *-- "1..*" Row : has a collection of
-
 entity Board <<entity>> <<root>> {
 }
 
@@ -42,13 +42,9 @@ entity Column <<entity>> {
   - id
 }
 
-Column --> "1" Title : is identified by
-
 entity Row <<entity>> {
   - id
 }
-
-Row --> "1" Title : is identified by
 
 class Title <<(V,#FF8B40) value object>> {}
 
@@ -56,10 +52,33 @@ class Archived <<(V,#FF8B40) value object>> {
   - archivedAt
 }
 
+class UserPermission <<(V,#FF8B40) value object>> {
+}
+
+class PermissionType <<(V,#FF8B40) value object>> {
+}
+
+note bottom of PermissionType
+    READ
+    WRITE
+end note
+
+Board --> "1" Title : is identified by
+Board *-- "1..*" Column : has a collection of
+Board *-- "1..*" Row : has a collection of
+Board *-- "0..*" UserPermission : has a collection of
+
+UserPermission --> "1" PermissionType : has
+UserPermission --> "1" User : belongs to
+
+Row --> "1" Title : is identified by
+
+Column --> "1" Title : is identified by
+
 Board --> "1" User : is owned by
 Board --> "0..1" Archived : is
 
-PostIt ---> "1" User : is owned by
+PostIt ---> "1" User : is changed by
 PostIt ---> "1" Board : belongs to
 
 @enduml
