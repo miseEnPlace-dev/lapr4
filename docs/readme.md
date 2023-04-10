@@ -4,28 +4,28 @@
 
 The members of the group:
 
-| Student Nr. | Name           |
-|-------------|----------------|
-| **1211299** | André Barros   |
-| **1211277** | Carlos Lopes   |
+| Student Nr. | Name            |
+| ----------- | --------------- |
+| **1211299** | André Barros    |
+| **1211277** | Carlos Lopes    |
 | **1211285** | Ricardo Moreira |
-| **1211289** | Tomás Lopes    |
-| **1211288** | Tomás Russo    |
-| **1211350** | Gonçalo Lima   |
+| **1211289** | Tomás Lopes     |
+| **1211288** | Tomás Russo     |
+| **1211350** | Gonçalo Lima    |
 
 ## 2. Task Assignment
 
 The assignment of tasks (requirements/user stories/use cases) during the project.
 
-| Student Nr.                  | Sprint A                     | Sprint B                     | Sprint C                     |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| [1170000](1170000/readme.md) | [US G002](us_g002/readme.md) | [US 1001](us_1001/readme.md) | [US 3004](us_3004/readme.md) |
-|                              |                              |                              |                              |
-|                              |                              |                              |                              |
-|                              |                              |                              |                              |
-|                              |                              |                              |                              |
-|                              |                              |                              |                              |
-|                              |                              |                              |                              |
+| Student Nr.   | Sprint A                        | Sprint B | Sprint C |
+| ------------- | ------------------------------- | -------- | -------- |
+| All           | [US G001](user-stories/g001.md) |          |          |
+| (Student no.) | [US G002](user-stories/g002.md) |          |          |
+| (Student no.) | [US G003](user-stories/g003.md) |          |          |
+| (Student no.) | [US G004](user-stories/g004.md) |          |          |
+| (Student no.) | [US G005](user-stories/g005.md) |          |          |
+| (Student no.) | [US G006](user-stories/g006.md) |          |          |
+|               |                                 |          |          |
 
 ## Client Communication
 
