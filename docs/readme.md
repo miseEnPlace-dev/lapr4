@@ -17,16 +17,20 @@ The members of the group:
 
 The assignment of tasks (requirements/user stories/use cases) during the project.
 
-| Student Nr.   | Sprint A                        | Sprint B | Sprint C |
-| ------------- | ------------------------------- | -------- | -------- |
-| All           | [US G001](user-stories/g001.md) |          |          |
-| (Student no.) | [US G002](user-stories/g002.md) |          |          |
-| (Student no.) | [US G003](user-stories/g003.md) |          |          |
-| (Student no.) | [US G004](user-stories/g004.md) |          |          |
-| (Student no.) | [US G005](user-stories/g005.md) |          |          |
-| (Student no.) | [US G006](user-stories/g006.md) |          |          |
-|               |                                 |          |          |
+| Student Nr.   | Sprint A                        | Sprint B                        | Sprint C                        |
+| ------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| All           | [US G001](user-stories/g001.md) | [US G001](user-stories/g001.md) | [US G001](user-stories/g001.md) |
+| (Student no.) | [US G002](user-stories/g002.md) |                                 |                                 |
+|               | [US G003](user-stories/g003.md) |                                 |                                 |
+|               | [US G004](user-stories/g004.md) |                                 |                                 |
+|               | [US G005](user-stories/g005.md) |                                 |                                 |
+|               | [US G006](user-stories/g006.md) |                                 |                                 |
+|               |                                 |                                 |                                 |
 
 ## Client Communication
 
 ### [Sprint 1](sprint1-clarifications.md)
+
+## Board
+
+### [Trello Board](https://trello.com/b/Hh1yaRy5/lapr4)

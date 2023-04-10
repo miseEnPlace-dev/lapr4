@@ -1,5 +1,7 @@
+# Glossary
+
 | Designation   |                                                                                                                                               |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Answer**    | A response or solution to a question, problem, or situation.                                                                                  |
 | **Board**     | A digital implementation of a post-it board that allows users to collaborate, share information, and organize content.                        |
 | **Course**    | A series of lessons or lectures on a particular subject.                                                                                      |
