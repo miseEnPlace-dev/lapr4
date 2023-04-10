@@ -27,10 +27,10 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 |               | [US G006](user-stories/g006.md) |                                 |                                 |
 |               |                                 |                                 |                                 |
 
-## Client Communication
+## 3. Client Communication
 
-### [Sprint 1](sprint1-clarifications.md)
+### [Sprint A](sprint-A-clarifications.md)
 
-## Board
+## 4. Board
 
 ### [Trello Board](https://trello.com/b/Hh1yaRy5/lapr4)
