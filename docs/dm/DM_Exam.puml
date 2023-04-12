@@ -8,20 +8,24 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> Exam" {
-    entity Exam
-    entity Section
+  entity Exam
 
-    entity Question
-    class QuestionNumber
-    class QuestionBody
-    class SectionName
+  entity Section
 
-    class Matching
-    class MultipleChoice
-    class ShortAnswer
-    class Numerical
-    class MissingWords
-    class TrueFalse
+  class Header
+  class FeedbackType
+  class GradeType
+  class Description
+
+  class Time
+
+  class State
+
+  class SectionName
+}
+
+package "<<agregate>> Question" {
+  entity Question
 }
 
 package "<<aggregate>> Student" {
@@ -53,44 +57,57 @@ entity Teacher <<entity>> <<root>> {
 }
 
 entity Exam <<entity>> <<root>> {
-    - date
 }
 
 entity Section <<entity>> {}
 
-entity Question <<entity>> {}
-
-class QuestionNumber <<(V,#FF8B40) value object>> {}
-class QuestionBody <<(V,#FF8B40) value object>> {}
-
 class SectionName <<(V,#FF8B40) value object>> {}
+class State <<(V,#FF8B40) value object>> {}
 
-class Matching <<(V, #FF8B40) value object>> {}
-class MultipleChoice <<(V, #FF8B40) value object>> {}
-class ShortAnswer <<(V, #FF8B40) value object>> {}
-class Numerical <<(V, #FF8B40) value object>> {}
-class MissingWords <<(V, #FF8B40) value object>> {}
-class TrueFalse <<(V, #FF8B40) value object>> {}
+class Header <<(V,#FF8B40) value object>> {}
+class FeedbackType <<(V,#FF8B40) value object>> {}
+class GradeType <<(V,#FF8B40) value object>> {}
+class Description <<(V,#FF8B40) value object>> {}
+class Time <<(V,#FF8B40) value object>> {}
 
-Question *- QuestionNumber
-Question *-- QuestionBody
+entity Question <<entity>> <<root>> {}
 
-Question <|--- Matching
-Question <|--- MultipleChoice
-Question <|--- ShortAnswer
-Question <|--- Numerical
-Question <|--- MissingWords
-Question <|--- TrueFalse
+Exam --> "0..1" Time : start time
+Exam --> "0..1" Time : end time
+
+Exam --> "1" State : is in
+
+note bottom of State
+  DRAFT
+  PUBLISHED
+end note
 
 Exam *-- "1..*" Section
-Exam --> "1" Course : is from
-Exam --> "1" Teacher : is created by
+Exam ---> "1" Course : is from
+Exam ---> "1" Teacher : is created by
 
-Section *-- "1..*" Question
+Exam *- "1" Header
+Header *--- "1" FeedbackType
+Header *--- "1" GradeType
+Header *-- "1" Description
+
+note bottom of FeedbackType
+  NONE
+  ON_SUBMITION
+  AFTER_CLOSING
+end note
+
+note bottom of GradeType
+  NONE
+  ON_SUBMITION
+  AFTER_CLOSING
+end note
+
+Section ---> "1..*" Question
 Section *-- SectionName
 
 Answer --> "1" Student : belongs to
 
-Answer --> "1" Exam : is for
+Answer ---> "1" Exam : is for
 
 @enduml

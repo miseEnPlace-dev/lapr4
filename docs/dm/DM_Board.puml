@@ -8,25 +8,25 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> Board" {
-    entity Board
+  entity Board
 
-    class Title
-    entity Column
-    entity Row
+  class Title
+  entity Column
+  entity Row
 
-    class Archived
+  class Archived
 
-    class UserPermission
+  class UserPermission
 
-    class PermissionType
+  class PermissionType
 }
 
 package "<<aggregate>> PostIt" {
-    entity PostIt
+  entity PostIt
 }
 
 package "<<aggregate>> User" {
-    entity User
+  entity User
 }
 
 entity PostIt <<entity>> <<root>> {
@@ -36,6 +36,7 @@ entity User <<entity>> <<root>> {
 }
 
 entity Board <<entity>> <<root>> {
+  - id
 }
 
 entity Column <<entity>> {
@@ -59,11 +60,11 @@ class PermissionType <<(V,#FF8B40) value object>> {
 }
 
 note bottom of PermissionType
-    READ
-    WRITE
+  READ
+  WRITE
 end note
 
-Board --> "1" Title : is identified by
+Board --> "1" Title : is characterized by
 Board *-- "1..*" Column : has a collection of
 Board *-- "1..*" Row : has a collection of
 Board *-- "0..*" UserPermission : has a collection of

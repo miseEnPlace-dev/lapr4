@@ -8,15 +8,15 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> User" {
-    entity User
-    class Password
-    class Email
-    class FullName
-    class ShortName
+  entity User
+  class Password
+  class Email
+  class FullName
+  class ShortName
 }
 
 entity User <<entity>> <<root>> {
-    - isActive
+  - isActive
 }
 
 entity User
@@ -32,55 +32,55 @@ User --> "1" ShortName : characterized by
 User --> "1" Email : identified by
 
 package "<<aggregate>> Teacher" {
-    entity Teacher
-    class Acronym
+  entity Teacher
+  class Acronym
 }
 
 
 entity Teacher <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Student" {
-    entity Student
-    class MecanographicNumber
+  entity Student
+  class MecanographicNumber
 }
 
 
 entity Student <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Manager" {
-    entity Manager
+  entity Manager
 }
 
 entity Manager <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Board" {
-    entity Board
+  entity Board
 }
 
 entity Board <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Meeting" {
-    entity Meeting
+  entity Meeting
 }
 
 entity Meeting <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> PostIt" {
-    entity PostIt
+  entity PostIt
 }
 
 entity PostIt <<entity>> <<root>> {
-  -id
+  - id
 }
 
 class Acronym <<(V,#FF8B40) value object>> {}
@@ -90,8 +90,8 @@ Student --> "1" MecanographicNumber : identified by
 ' Sprint 1 clarifications - question 18: "I think it would be wise to enforce that acronyms be unique" -> identified by
 Teacher --> "1" Acronym : identified by
 
-Teacher --|> "1" User 
-Student --|> "1" User 
+Teacher --|> "1" User
+Student --|> "1" User
 Manager --|> "1" User
 
 Board ---> "1" User : has an owner

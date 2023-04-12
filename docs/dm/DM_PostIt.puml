@@ -8,54 +8,45 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> PostIt" {
-    entity PostIt
+  entity PostIt
 
-    class Title
+  class Title
 
-    class Coordinates
-
-    class State
+  class State
 }
 
-entity PostIt <<entity>> <<root>>{ 
-    -id 
-    - updatedAt
-    - createdAt
+entity PostIt <<entity>> <<root>>{
+  - id
+  - createdAt
 }
 
 class Title <<(V,#FF8B40) value object>> {}
-
-class Coordinates <<(V,#FF8B40) value object>> {
-    -rowNumber
-    -columnNumber    
-}
 
 class State <<(V,#FF8B40) value object>> {
 }
 
 note left of State
-    ACTIVE
-    DELETED
+  ACTIVE
+  DELETED
 end note
 
 package "<<aggregate>> User" {
-    entity User
+  entity User
 }
 
-entity User <<entity>> <<root>>{ 
-    -id
+entity User <<entity>> <<root>>{
+  -id
 }
 
 package "<<aggregate>> Board" {
-    entity Board
+  entity Board
 }
 
-entity Board <<entity>> <<root>>{ 
-    -id
+entity Board <<entity>> <<root>>{
+  -id
 }
 
-PostIt *- Title : has
-PostIt --> "1" Coordinates : has
+PostIt *- Title
 PostIt --> "1" State : has
 
 PostIt ---> "1" User : is changed by

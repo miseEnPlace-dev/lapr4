@@ -8,27 +8,27 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> Course" {
-    entity Course
+  entity Course
 
-    class Title
-    class EnrolmentState
-    class CourseState
+  class Title
+  class EnrolmentState
+  class CourseState
 }
 
 package "<<aggregate>> Enrolment" {
-    entity Enrolment
+  entity Enrolment
 }
 
 entity Course <<entity>> <<root>> {
-    - code
-    - createdAt
+  - code
+  - createdAt
 }
 
 entity Enrolment <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Exam" {
-    entity Exam
+  entity Exam
 }
 
 entity Exam <<entity>> <<root>> {
@@ -36,19 +36,19 @@ entity Exam <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Teacher" {
-    entity Teacher
+  entity Teacher
 }
 
 entity Teacher <<entity>> <<root>> {
-    -id
+  -id
 }
 
 package "<<aggregate>> Class" {
-    entity Class
+  entity Class
 }
 
 entity Class <<entity>> <<root>> {
-    -id
+  -id
 }
 
 note left of EnrolmentState : Open\nClosed

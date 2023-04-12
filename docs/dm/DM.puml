@@ -8,117 +8,130 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> User" {
-    entity User
+  entity User
 }
 
 entity User <<entity>> <<root>> {
-    - isActive
+  - isActive
 }
 
 package "<<aggregate>> Teacher" {
-    entity Teacher
+  entity Teacher
 }
 
-
 entity Teacher <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Student" {
-    entity Student
+  entity Student
 }
 
 entity Student <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Manager" {
-    entity Manager
+  entity Manager
 }
 
 entity Manager <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Course" {
-    entity Course
+  entity Course
 }
 
 entity Course <<entity>> <<root>> {
-    - code
+  - code
 }
 
 package "<<aggregate>> Board" {
-    entity Board
+  entity Board
 }
 
 entity Board <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Enrolment" {
-    entity Enrolment
+  entity Enrolment
 }
 
 entity Enrolment <<entity>> <<root>> {
 }
 
-package "<<aggregate>> Exam" {
-    entity Exam
-}
-
-entity Exam <<entity>> <<root>> {
-}
-
 package "<<aggregate>> PostIt" {
-    entity PostIt
+  entity PostIt
 }
 
 entity PostIt <<entity>> <<root>> {
-    -id
+  - id
 }
 
 package "<<aggregate>> Meeting" {
-    entity Meeting
+  entity Meeting
 }
 
 entity Meeting <<entity>> <<root>> {
-    -id
+  - id
 }
 
 package "<<aggregate>> Class" {
-    entity Class
+  entity Class
 }
 
 entity Class <<entity>> <<root>> {
-    -id
+  - id
 }
 
 package "<<aggregate>> Invite" {
-    entity Invite
+  entity Invite
 }
 
 entity Invite <<entity>> <<root>> {
-    -id
+  - id
 }
 
 package "<<aggregate>> ExtraordinaryClass" {
-    entity ExtraordinaryClass
+  entity ExtraordinaryClass
 }
 
 entity ExtraordinaryClass <<entity>> <<root>> {
-    -id
+  - id
 }
 
-package "<<aggregate>> Answer" {
-    entity Answer
+package "<<agregate>> Answer" {
+  entity Answer
+  entity AnswerToQuestion
 }
+
+package "<<agregate>> Question" {
+  entity Question
+}
+
+entity Answer <<entity>> <<root>> {}
+entity AnswerToQuestion <<entity>> {}
+
+Answer *-- "1..*" AnswerToQuestion
+
+package "<<agregate>> Exam" {
+  entity Exam
+  entity Section
+}
+
+entity Exam <<entity>> <<root>> {}
+entity Section <<entity>> {}
+
+Exam *-- "1..*" Section
+Section --> "1..*" Question : has
 
 entity Answer <<entity>> <<root>> {
-    -id
+  - id
 }
 
-Teacher -|> User 
-Student --|> User 
+Teacher -|> User
+Student --|> User
 Manager --|> User
 
 Course ---> "1..*" Teacher : has teachers
@@ -132,7 +145,6 @@ Board ---> "1" User : is owned by
 PostIt --> "1" User : is changed by
 PostIt --> "1" Board: belongs to
 
-Exam --> "1..*" Student : is taken by
 Exam -> "1" Course : is for
 Exam --> "1" Teacher : is created by
 
@@ -143,12 +155,9 @@ Class ---> "1" Course : is related to
 Class ---> "1" Teacher : scheduled by
 User --> "0..*" Meeting : scheduled by
 
-Invite --> "1" User : invites
-Invite --> "1" Meeting : is related to
-
 ExtraordinaryClass --> "1" Teacher : scheduled by
 ExtraordinaryClass --> "1..*" Student : has
-ExtraordinaryClass --> "1" Course : is related to 
+ExtraordinaryClass --> "1" Course : is related to
 
 Answer --> "1" Student : belongs to
 Answer --> "1" Exam : is for

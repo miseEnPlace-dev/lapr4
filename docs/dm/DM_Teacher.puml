@@ -12,26 +12,26 @@ package "<<aggregate>> User" {
 }
 
 entity User <<entity>> <<root>> {
-    - isActive
+  - isActive
 }
 
 package "<<aggregate>> Course" {
-    entity Course
+  entity Course
 }
 
 entity Course <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Teacher" {
-    entity Teacher
+  entity Teacher
 
-    class BirthDate
-    class TaxPayerNumber
-    class Achronym
+  class BirthDate
+  class TaxPayerNumber
+  class Achronym
 }
 
 entity Teacher <<entity>> <<root>> {
-  -id
+  - id
 }
 
 class BirthDate <<(V,#FF8B40) value object>> {}

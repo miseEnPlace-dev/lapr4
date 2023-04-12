@@ -8,12 +8,12 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> Class" {
-    entity Class
-    
-    class SpecialClass
-    class Duration
-    class DayInWeek
-    class Time
+  entity Class
+
+  class SpecialClass
+  class Duration
+  class DayInWeek
+  class Time
 }
 
 class SpecialClass <<(V,#FF8B40) value object>> {}
@@ -26,10 +26,10 @@ entity Class <<entity>> <<root>> {
 }
 
 package "<<aggregate>> ExtraordinaryClass" {
-    entity ExtraordinaryClass
+  entity ExtraordinaryClass
 
-    class Time‎ 
-    class Duration‎
+  class Time‎
+  class Duration‎
 }
 
 class Time‎ <<(V,#FF8B40) value object>> {}
@@ -48,7 +48,7 @@ entity Course <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Teacher" {
-    entity Teacher
+  entity Teacher
 }
 
 entity Teacher <<entity>> <<root>> {
@@ -68,14 +68,14 @@ Class ----> "1" Teacher : scheduled by
 
 ExtraordinaryClass --> "1" Teacher : scheduled by
 ExtraordinaryClass --> "1..*" Student : has
-ExtraordinaryClass --> "1" Course : is related to 
+ExtraordinaryClass --> "1" Course : is related to
 
 Class --> "0..*" SpecialClass : has
 Class --> "1" DayInWeek : has
 Class --> "1" Duration : has
 SpecialClass --> "1" Time : has
 
-ExtraordinaryClass --> "1" "Time‎" : has 
+ExtraordinaryClass --> "1" "Time‎" : has
 ExtraordinaryClass --> "1" "Duration‎" : has
 
 @enduml

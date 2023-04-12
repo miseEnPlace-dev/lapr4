@@ -1,0 +1,78 @@
+@startuml DM-EXAM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+
+package "<<agregate>> Question" {
+  abstract Question
+
+  class QuestionBody
+  class CorrectAnswer
+
+  abstract Question
+  entity Matching
+  entity MultipleChoice
+  entity ShortAnswer
+  entity Numerical
+  entity MissingWords
+  entity TrueFalse
+
+  class QuestionType
+}
+
+package "<<agregate>> Answer" {
+  entity Answer
+  entity AnswerToQuestion
+}
+
+entity Answer <<entity>> <<root>> {}
+entity AnswerToQuestion <<entity>> {}
+
+Answer *-- "1..*" AnswerToQuestion
+
+package "<<agregate>> Exam" {
+  entity Exam
+  entity Section
+}
+
+entity Exam <<entity>> <<root>> {}
+entity Section <<entity>> {}
+
+Exam *-- "1..*" Section
+Section --> "1..*" Question
+
+class QuestionBody <<(V,#FF8B40) value object>> {}
+class CorrectAnswer <<(V,#FF8B40) value object>> {}
+class QuestionType <<(V,#FF8B40) value object>> {}
+
+note left of QuestionType
+  REGULAR
+  FORMATIVE
+end note
+
+Question *- QuestionBody
+Question *-- CorrectAnswer
+Question --> "1" QuestionType :has
+
+Question <|--- Matching
+Question <|--- MultipleChoice
+Question <|--- ShortAnswer
+Question <|--- Numerical
+Question <|--- MissingWords
+Question <|--- TrueFalse
+
+entity Matching <<entity>> {}
+entity MultipleChoice <<entity>> {}
+entity ShortAnswer <<entity>> {}
+entity Numerical <<entity>> {}
+entity MissingWords <<entity>> {}
+entity TrueFalse <<entity>> {}
+
+AnswerToQuestion --> "1" Question : is for
+
+@enduml

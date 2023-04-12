@@ -8,11 +8,11 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> Meeting" {
-    entity Meeting
+  entity Meeting
 
-    class Canceled
-    class Time <<(V,#FF8B40) value object>> {}
-    class Duration <<(V,#FF8B40) value object>> {}
+  class Canceled
+  class Time <<(V,#FF8B40) value object>> {}
+  class Duration <<(V,#FF8B40) value object>> {}
 }
 
 class Canceled <<(V,#FF8B40) value object>> {
@@ -20,13 +20,13 @@ class Canceled <<(V,#FF8B40) value object>> {
 }
 
 entity Meeting <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> Invite" {
   entity Invite
 
-  class Status 
+  class Status
 }
 
 class Status <<(V,#FF8B40) value object>> {}
@@ -38,15 +38,15 @@ note left of Status
 end note
 
 entity Invite <<entity>> <<root>> {
-  -id
+  - id
 }
 
 package "<<aggregate>> User" {
-    entity User
+  entity User
 }
 
 entity User <<entity>> <<root>> {
-  -id
+  - id
 }
 
 Invite --> "1" User : invites
