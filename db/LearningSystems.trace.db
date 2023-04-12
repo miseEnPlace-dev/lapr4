@@ -1,0 +1,9 @@
+2023-04-11 18:19:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop table if exists [*]User CASCADE "; expected "identifier"; SQL statement:
+drop table if exists User CASCADE  [42001-214]
+2023-04-11 18:19:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]User (idz integer not null, emailz varchar(255), fullNamez varchar(255), passwordz varchar(255), shortNamez varchar(255), primary key (idz))"; expected "identifier"; SQL statement:
+create table User (idz integer not null, emailz varchar(255), fullNamez varchar(255), passwordz varchar(255), shortNamez varchar(255), primary key (idz)) [42001-214]
+2023-04-11 18:19:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "insert into [*]User (emailz, fullNamez, passwordz, shortNamez, idz) values (?, ?, ?, ?, ?)"; expected "identifier"; SQL statement:
+insert into User (emailz, fullNamez, passwordz, shortNamez, idz) values (?, ?, ?, ?, ?) [42001-214]
