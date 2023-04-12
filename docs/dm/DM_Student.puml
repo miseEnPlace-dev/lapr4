@@ -22,6 +22,13 @@ package "<<aggregate>> Enrolment" {
 entity Enrolment <<entity>> <<root>> {
 }
 
+package "<<aggregate>> Answer" {
+  entity Answer
+}
+
+entity Answer <<entity>> <<root>> {
+}
+
 package "<<aggregate>> Student" {
   entity Student
 
@@ -45,5 +52,7 @@ Student --> "1" MechanographicNumber : identified by
 Student -|> User
 
 Student --> "0..*" Enrolment : produces
+
+Answer --> "1" Student : belongs to
 
 @enduml
