@@ -32,7 +32,6 @@ package "<<aggregate>> Exam" {
 }
 
 entity Exam <<entity>> <<root>> {
-  -id
 }
 
 package "<<aggregate>> Teacher" {
@@ -40,7 +39,6 @@ package "<<aggregate>> Teacher" {
 }
 
 entity Teacher <<entity>> <<root>> {
-  -id
 }
 
 package "<<aggregate>> Class" {
@@ -48,7 +46,6 @@ package "<<aggregate>> Class" {
 }
 
 entity Class <<entity>> <<root>> {
-  -id
 }
 
 note left of EnrolmentState : Open\nClosed

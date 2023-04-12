@@ -36,7 +36,6 @@ entity User <<entity>> <<root>> {
 }
 
 entity Board <<entity>> <<root>> {
-  - id
 }
 
 entity Column <<entity>> {

@@ -16,7 +16,6 @@ package "<<aggregate>> PostIt" {
 }
 
 entity PostIt <<entity>> <<root>>{
-  - id
   - createdAt
 }
 
@@ -35,7 +34,6 @@ package "<<aggregate>> Board" {
 }
 
 entity Board <<entity>> <<root>>{
-  -id
 }
 
 PostIt *- Title

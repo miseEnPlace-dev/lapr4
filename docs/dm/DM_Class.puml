@@ -22,7 +22,6 @@ class Duration <<(V,#FF8B40) value object>> {}
 class DayInWeek <<(V,#FF8B40) value object>> {}
 
 entity Class <<entity>> <<root>> {
-  -id
 }
 
 package "<<aggregate>> ExtraordinaryClass" {
@@ -36,7 +35,6 @@ class Time‎ <<(V,#FF8B40) value object>> {}
 class Duration‎ <<(V,#FF8B40) value object>> {}
 
 entity ExtraordinaryClass <<entity>> <<root>> {
-  -id
 }
 
 package "<<aggregate>> Course" {
@@ -44,7 +42,6 @@ package "<<aggregate>> Course" {
 }
 
 entity Course <<entity>> <<root>> {
-  -id
 }
 
 package "<<aggregate>> Teacher" {
@@ -52,7 +49,6 @@ package "<<aggregate>> Teacher" {
 }
 
 entity Teacher <<entity>> <<root>> {
-  -id
 }
 
 package "<<aggregate>> Student" {
@@ -60,7 +56,6 @@ package "<<aggregate>> Student" {
 }
 
 entity Student <<entity>> <<root>> {
-  -id
 }
 
 Class --> "1" Course : is related to

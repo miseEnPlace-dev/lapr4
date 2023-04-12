@@ -38,7 +38,6 @@ package "<<aggregate>> Teacher" {
 
 
 entity Teacher <<entity>> <<root>> {
-  - id
 }
 
 package "<<aggregate>> Student" {
@@ -48,7 +47,6 @@ package "<<aggregate>> Student" {
 
 
 entity Student <<entity>> <<root>> {
-  - id
 }
 
 package "<<aggregate>> Manager" {
@@ -56,7 +54,6 @@ package "<<aggregate>> Manager" {
 }
 
 entity Manager <<entity>> <<root>> {
-  - id
 }
 
 package "<<aggregate>> Board" {
@@ -64,7 +61,6 @@ package "<<aggregate>> Board" {
 }
 
 entity Board <<entity>> <<root>> {
-  - id
 }
 
 package "<<aggregate>> Meeting" {

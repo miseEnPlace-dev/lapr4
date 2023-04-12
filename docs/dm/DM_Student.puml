@@ -38,7 +38,6 @@ package "<<aggregate>> Student" {
 }
 
 entity Student <<entity>> <<root>> {
-  - id
 }
 
 class BirthDate <<(V,#FF8B40) value object>> {}

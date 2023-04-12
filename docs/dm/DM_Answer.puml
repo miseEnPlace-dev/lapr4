@@ -36,7 +36,7 @@ package "<<aggregate>> Answer" {
 }
 
 entity Answer <<entity>> <<root>> {
-  - id
+
 }
 
 class Grade <<(V,#FF8B40) value object>> {}

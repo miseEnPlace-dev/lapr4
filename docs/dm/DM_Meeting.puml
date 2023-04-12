@@ -20,7 +20,7 @@ class Canceled <<(V,#FF8B40) value object>> {
 }
 
 entity Meeting <<entity>> <<root>> {
-  - id
+
 }
 
 package "<<aggregate>> Invite" {
@@ -38,7 +38,7 @@ note left of Status
 end note
 
 entity Invite <<entity>> <<root>> {
-  - id
+
 }
 
 package "<<aggregate>> User" {
@@ -46,7 +46,7 @@ package "<<aggregate>> User" {
 }
 
 entity User <<entity>> <<root>> {
-  - id
+
 }
 
 Invite --> "1" User : invites
