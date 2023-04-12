@@ -6,22 +6,22 @@ import isep.repository.IUserRepoJpa;
 import isep.repository.UserRepoJpa;
 
 public class RegisterUserController {
-    IUserRepoJpa repo;
+  IUserRepoJpa repo;
 
-    public RegisterUserController() {
-        this.repo = new UserRepoJpa();
-    }
+  public RegisterUserController() {
+    this.repo = new UserRepoJpa();
+  }
 
-    public SystemUser addUser(String email, String fullName, String shortName, String password) {
-        SystemUser user = new SystemUser(email, fullName, shortName, password);
-        return repo.add(user);
-    }
+  public SystemUser addUser(String email, String fullName, String shortName, String password) {
+    SystemUser user = new SystemUser(email, fullName, shortName, password);
+    return repo.add(user);
+  }
 
-    public List<SystemUser> listUsers() {
-        return repo.findAll();
-    }
+  public List<SystemUser> listUsers() {
+    return repo.findAll();
+  }
 
-    public SystemUser findUser(Long id) {
-        return repo.findById(id);
-    }
+  public SystemUser findUser(Long id) {
+    return repo.findById(id);
+  }
 }

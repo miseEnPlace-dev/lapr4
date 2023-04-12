@@ -10,87 +10,87 @@ import java.util.List;
 import isep.util.Console;
 
 public class AuthUI implements Runnable {
-    // private AuthController ctrl;
+  // private AuthController ctrl;
 
-    public AuthUI() {
-        // ctrl = new AuthController();
+  public AuthUI() {
+    // ctrl = new AuthController();
+  }
+
+  public void run() {
+    boolean success = doLogin();
+
+    if (!success) {
+      System.out.println("Login failed.");
+      this.logout();
+      return;
     }
 
-    public void run() {
-        boolean success = doLogin();
+    // SystemRole role = this.ctrl.getUserRole();
 
-        if (!success) {
-            System.out.println("Login failed.");
-            this.logout();
-            return;
-        }
-
-        // SystemRole role = this.ctrl.getUserRole();
-
-        // if (role == null) {
-        // System.out.println("User has not any role assigned.");
-        // this.logout();
-        // return;
-        // }
-
-        // List<MenuItem> rolesUI = getMenuItemForRoles();
-        // this.redirectToRoleUI(rolesUI, role);
-
-        // this.logout();
-    }
-
-    // private void redirectToRoleUI(List<MenuItem> rolesUI, SystemRole role) {
-    // boolean found = false;
-    // Iterator<MenuItem> it = rolesUI.iterator();
-
-    // while (it.hasNext() && !found) {
-    // MenuItem item = it.next();
-    // found = item.hasDescription(role.toString());
-    // if (found)
-    // item.run();
+    // if (role == null) {
+    // System.out.println("User has not any role assigned.");
+    // this.logout();
+    // return;
     // }
 
-    // if (!found)
-    // System.out.println("There is no UI for users with role '" + role.toString() + "'");
-    // }
+    // List<MenuItem> rolesUI = getMenuItemForRoles();
+    // this.redirectToRoleUI(rolesUI, role);
 
-    private List<MenuItem> getMenuItemForRoles() {
-        List<MenuItem> rolesUI = new ArrayList<>();
+    // this.logout();
+  }
 
-        // rolesUI.add(new MenuItem(SystemRole.AGRICULTURAL_MANAGER.toString(),
-        // new AgriculturalManagerUI()));
-        // rolesUI.add(new MenuItem(SystemRole.DRIVER.toString(), new DriverUI()));
-        // rolesUI.add(new MenuItem(SystemRole.CLIENT.toString(), new ClientUI()));
-        // rolesUI.add(new MenuItem(SystemRole.DISTRIBUTION_MANAGER.toString(),
-        // new DistributionManagerUI()));
+  // private void redirectToRoleUI(List<MenuItem> rolesUI, SystemRole role) {
+  // boolean found = false;
+  // Iterator<MenuItem> it = rolesUI.iterator();
 
-        return rolesUI;
-    }
+  // while (it.hasNext() && !found) {
+  // MenuItem item = it.next();
+  // found = item.hasDescription(role.toString());
+  // if (found)
+  // item.run();
+  // }
 
-    private boolean doLogin() {
-        System.out.println("\nLogin:");
+  // if (!found)
+  // System.out.println("There is no UI for users with role '" + role.toString() + "'");
+  // }
 
-        // int maxAttempts = Constants.MAX_OF_PASSWORD_TRIES;
-        int maxAttempts = 1;
-        boolean success = false;
+  private List<MenuItem> getMenuItemForRoles() {
+    List<MenuItem> rolesUI = new ArrayList<>();
 
-        do {
-            maxAttempts--;
-            String id = Console.readLineFromConsole("Enter UserId/Email: ");
-            String pwd = Console.readLineFromConsole("Enter Password: ");
+    // rolesUI.add(new MenuItem(SystemRole.AGRICULTURAL_MANAGER.toString(),
+    // new AgriculturalManagerUI()));
+    // rolesUI.add(new MenuItem(SystemRole.DRIVER.toString(), new DriverUI()));
+    // rolesUI.add(new MenuItem(SystemRole.CLIENT.toString(), new ClientUI()));
+    // rolesUI.add(new MenuItem(SystemRole.DISTRIBUTION_MANAGER.toString(),
+    // new DistributionManagerUI()));
 
-            // success = ctrl.doLogin(id, pwd);
-            if (!success) {
-                System.out.println("\nInvalid UserId and/or Password. \n You have  " + maxAttempts
-                        + " more attempt(s).");
-            }
+    return rolesUI;
+  }
 
-        } while (!success && maxAttempts > 0);
+  private boolean doLogin() {
+    System.out.println("\nLogin:");
 
-        return success;
-    }
+    // int maxAttempts = Constants.MAX_OF_PASSWORD_TRIES;
+    int maxAttempts = 1;
+    boolean success = false;
 
-    private void logout() {
-        // ctrl.doLogout();
-    }
+    do {
+      maxAttempts--;
+      String id = Console.readLineFromConsole("Enter UserId/Email: ");
+      String pwd = Console.readLineFromConsole("Enter Password: ");
+
+      // success = ctrl.doLogin(id, pwd);
+      if (!success) {
+        System.out.println(
+            "\nInvalid UserId and/or Password. \n You have  " + maxAttempts + " more attempt(s).");
+      }
+
+    } while (!success && maxAttempts > 0);
+
+    return success;
+  }
+
+  private void logout() {
+    // ctrl.doLogout();
+  }
 }
