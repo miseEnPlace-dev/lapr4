@@ -12,7 +12,6 @@ package "<<aggregate>> Exam" {
 
   entity Section
 
-  class Header
   class FeedbackType
   class GradeType
   class Description
@@ -29,28 +28,28 @@ package "<<agregate>> Question" {
 }
 
 package "<<aggregate>> Student" {
-    entity Student
+  entity Student
 }
 
 entity Student <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Course" {
-    entity Course
+  entity Course
 }
 
 entity Course <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Answer" {
-    entity Answer
+  entity Answer
 }
 
 entity Answer <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Teacher" {
-    entity Teacher
+  entity Teacher
 }
 
 entity Teacher <<entity>> <<root>> {
@@ -64,7 +63,6 @@ entity Section <<entity>> {}
 class SectionName <<(V,#FF8B40) value object>> {}
 class State <<(V,#FF8B40) value object>> {}
 
-class Header <<(V,#FF8B40) value object>> {}
 class FeedbackType <<(V,#FF8B40) value object>> {}
 class GradeType <<(V,#FF8B40) value object>> {}
 class Description <<(V,#FF8B40) value object>> {}
@@ -75,7 +73,7 @@ entity Question <<entity>> <<root>> {}
 Exam --> "0..1" Time : start time
 Exam --> "0..1" Time : end time
 
-Exam --> "1" State : is in
+Exam ---> "1" State : is in
 
 note bottom of State
   DRAFT
@@ -86,10 +84,9 @@ Exam *-- "1..*" Section
 Exam ---> "1" Course : is from
 Exam ---> "1" Teacher : is created by
 
-Exam *- "1" Header
-Header *--- "1" FeedbackType
-Header *--- "1" GradeType
-Header *-- "1" Description
+Exam *--- "1" FeedbackType
+Exam *--- "1" GradeType
+Exam *-- "1" Description
 
 note bottom of FeedbackType
   NONE
@@ -106,7 +103,7 @@ end note
 Section ---> "1..*" Question
 Section *-- SectionName
 
-Answer --> "1" Student : belongs to
+Student --> "0..*" Answer : has
 
 Answer ---> "1" Exam : is for
 

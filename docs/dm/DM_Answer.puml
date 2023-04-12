@@ -32,7 +32,7 @@ package "<<aggregate>> Answer" {
   class Feedback
 
   entity AnswerToQuestion
-  class Text
+  class ExamAnswer
 }
 
 entity Answer <<entity>> <<root>> {
@@ -41,18 +41,18 @@ entity Answer <<entity>> <<root>> {
 
 class Grade <<(V,#FF8B40) value object>> {}
 class Feedback <<(V,#FF8B40) value object>> {}
-class Text <<(V,#FF8B40) value object>> {}
+class ExamAnswer <<(V,#FF8B40) value object>> {}
 
 entity Exam <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
-Answer --> "1" Student : belongs to
+Student --> "0..*" Answer : has
 Answer --> "1" Exam : is for
 Answer --> "0..1" Grade : has
 Answer --> "0..1" Feedback : has
 
 AnswerToQuestion --> "1" Question : is for
-AnswerToQuestion *-- "1" Text
+AnswerToQuestion *-- "1" ExamAnswer
 
 Answer *-- "1..*" AnswerToQuestion
 

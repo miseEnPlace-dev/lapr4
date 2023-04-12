@@ -75,14 +75,6 @@ entity Meeting <<entity>> <<root>> {
   - id
 }
 
-package "<<aggregate>> PostIt" {
-  entity PostIt
-}
-
-entity PostIt <<entity>> <<root>> {
-  - id
-}
-
 class Acronym <<(V,#FF8B40) value object>> {}
 class MecanographicNumber <<(V,#FF8B40) value object>> {}
 
@@ -95,8 +87,6 @@ Student --|> "1" User
 Manager --|> "1" User
 
 Board ---> "1" User : has an owner
-
-PostIt --> "1" User : is changed by
 
 Meeting --> "1" User : scheduled by
 

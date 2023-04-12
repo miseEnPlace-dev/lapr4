@@ -110,6 +110,7 @@ package "<<agregate>> Question" {
   entity Question
 }
 
+entity Question <<entity>> <<root>> {}
 entity Answer <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
@@ -122,6 +123,20 @@ package "<<agregate>> Exam" {
 
 entity Exam <<entity>> <<root>> {}
 entity Section <<entity>> {}
+
+package "<<aggregate>> BoardHistory" {
+  entity BoardHistory
+
+  entity PostItEvent
+}
+
+entity BoardHistory <<entity>> <<root>> {
+  - id
+}
+
+entity PostItEvent <<entity>> {
+  - id
+}
 
 Exam *-- "1..*" Section
 Section --> "1..*" Question : has
@@ -142,8 +157,8 @@ Enrolment --> "1" Course : is for
 
 Board ---> "1" User : is owned by
 
-PostIt --> "1" User : is changed by
 PostIt --> "1" Board: belongs to
+
 
 Exam -> "1" Course : is for
 Exam --> "1" Teacher : is created by
