@@ -4,9 +4,9 @@ In order to keep things consistent over the development of the project these are
 
 - For every feature/US a new branch must be created.
 - For almost every feature/US a Pull Request must be made & reviewed.
-- In the end of each sprint create a branch named snap/sprint-X.
+- In the end of each sprint create a branch/tag named snap/sprint-X.
 
-> Note: Some actions don't require a branch, like updating the README.md file.
+> 💡 Note: Some actions don't require a branch, like updating the README.md file.
 
 ## Conventions
 
@@ -15,6 +15,8 @@ Branch names & commit messages:
 ### Commits
 
 purpose(specification[optional]): descriptive message
+
+> 💡 Note: You may want to link the issue number in the commit message. Example: `feat: added vaccine scheduling system #123`
 
 #### Example
 
@@ -26,7 +28,7 @@ purpose(specification[optional]): descriptive message
 
 purpose/objective
 
-> Note: When naming branches use dash case.
+> 💡 Note: When naming branches use dash case.
 
 branch-name ✔️
 branchName ✖️
