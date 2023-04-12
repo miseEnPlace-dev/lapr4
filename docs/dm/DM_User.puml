@@ -68,7 +68,6 @@ package "<<aggregate>> Meeting" {
 }
 
 entity Meeting <<entity>> <<root>> {
-  - id
 }
 
 class Acronym <<(V,#FF8B40) value object>> {}
