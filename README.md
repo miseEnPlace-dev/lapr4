@@ -37,15 +37,25 @@ The system will be developed in Java and will be based on the Spring Framework. 
 
 ## 3. How to Build
 
-_To Do_
+To build the project execute the script:
+
+`./build.sh`
 
 ## 4. How to Execute Tests
 
-_To Do_
+To execute the tests execute following command:
+
+`mvn test`
+
+To view the coverage report execute the script:
+
+`./coverage-report.sh`
 
 ## 5. How to Run
 
-_To Do_
+To run the project execute the script:
+
+`./run.sh`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
