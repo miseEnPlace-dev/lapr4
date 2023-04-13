@@ -39,7 +39,8 @@ The system will be developed in Java and will be based on the Spring Framework. 
 
 To build the project execute the script:
 
-`./build.sh`
+- On Linux/MacOS: `./build.sh`
+- On Windows: `build.bat`
 
 ## 4. How to Execute Tests
 
@@ -49,13 +50,15 @@ To execute the tests execute following command:
 
 To view the coverage report execute the script:
 
-`./coverage-report.sh`
+- On Linux/MacOS: `./coverage-report.sh`
+- On Windows: `coverage-report.bat`
 
 ## 5. How to Run
 
 To run the project execute the script:
 
-`./run.sh`
+- On Linux/MacOS: `./run.sh`
+- On Windows: `run.bat`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
