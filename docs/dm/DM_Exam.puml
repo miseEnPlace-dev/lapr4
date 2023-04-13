@@ -16,6 +16,9 @@ package "<<aggregate>> Exam" {
   class GradeType
   class Description
 
+  entity SectionQuestion
+  class Score
+
   class Time
 
   class State
@@ -29,6 +32,9 @@ package "<<agregate>> Question" {
 
 package "<<aggregate>> Student" {
   entity Student
+}
+
+entity SectionQuestion <<entity>> {
 }
 
 entity Student <<entity>> <<root>> {
@@ -67,6 +73,7 @@ class FeedbackType <<(V,#FF8B40) value object>> {}
 class GradeType <<(V,#FF8B40) value object>> {}
 class Description <<(V,#FF8B40) value object>> {}
 class Time <<(V,#FF8B40) value object>> {}
+class Score <<(V,#FF8B40) value object>> {}
 
 entity Question <<entity>> <<root>> {}
 
@@ -100,7 +107,10 @@ note bottom of GradeType
   AFTER_CLOSING
 end note
 
-Section ---> "1..*" Question
+Section *-- "1..*" SectionQuestion
+SectionQuestion --> "1" Question : corresponds to
+SectionQuestion -> "1" Score : has
+
 Section *-- SectionName
 
 Student --> "0..*" Answer : has
