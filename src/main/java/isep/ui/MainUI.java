@@ -7,7 +7,8 @@ import java.util.List;
 import isep.util.Console;
 
 public class MainUI {
-  public MainUI() {}
+  public MainUI() {
+  }
 
   public void run() throws IOException {
     List<MenuItem> options = new ArrayList<MenuItem>();

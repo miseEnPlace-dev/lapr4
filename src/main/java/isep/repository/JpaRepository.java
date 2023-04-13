@@ -3,6 +3,7 @@ package isep.repository;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -11,10 +12,10 @@ import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 /**
- * An utility abstract class for implementing JPA repositories. based on JpaRepository by Paulo
- * Gandra de Sousa
+ * An utility abstract class for implementing JPA repositories. based on
+ * JpaRepository by Paulo Gandra de Sousa
  *
- * @param <T> the entity type that we want to build a repository for
+ * @param <T>  the entity type that we want to build a repository for
  * @param <ID> the key type of the entity
  */
 public abstract class JpaRepository<T, ID extends Serializable> {
@@ -81,14 +82,14 @@ public abstract class JpaRepository<T, ID extends Serializable> {
    */
   // @SuppressWarnings("unchecked")
   public List<T> findAll() {
-    Query query =
-        entityManager().createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e");
+    Query query = entityManager().createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e");
     List<T> list = query.getResultList();
     return list;
   }
 
   /**
-   * derived classes should implement this method to return the name of the persistence unit
+   * derived classes should implement this method to return the name of the
+   * persistence unit
    *
    * @return the name of the persistence unit
    */

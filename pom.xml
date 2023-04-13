@@ -12,8 +12,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>18</maven.compiler.source>
-    <maven.compiler.target>18</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.mainClass>isep.App</maven.compiler.mainClass>
     <junit.version>5.9.1</junit.version>
     <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>

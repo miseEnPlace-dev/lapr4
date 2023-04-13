@@ -1,12 +1,14 @@
 package isep.repository;
 
-import isep.domain.model.SystemUser;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import isep.domain.model.SystemUser;
 
 public class UserRepoJpa implements IUserRepoJpa {
   private EntityManager getEntityManager() {

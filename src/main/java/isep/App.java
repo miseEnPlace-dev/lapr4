@@ -1,7 +1,9 @@
 package isep;
 
 import java.sql.SQLException;
+
 import org.h2.tools.Server;
+
 import isep.ui.MainUI;
 
 public class App {

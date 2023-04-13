@@ -1,8 +1,8 @@
 package isep.ui;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 // import isep.auth.AuthController;
 // import isep.shared.Constants;
 // import isep.shared.SystemRole;
@@ -51,7 +51,8 @@ public class AuthUI implements Runnable {
   // }
 
   // if (!found)
-  // System.out.println("There is no UI for users with role '" + role.toString() + "'");
+  // System.out.println("There is no UI for users with role '" + role.toString() +
+  // "'");
   // }
 
   private List<MenuItem> getMenuItemForRoles() {

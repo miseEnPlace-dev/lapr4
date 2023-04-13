@@ -9,18 +9,19 @@ import javax.persistence.Id;
 public class SystemUser {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int idz;
-  private String emailz;
-  private String fullNamez;
-  private String shortNamez;
-  private String passwordz;
+  private int id;
+  private String email;
+  private String fullName;
+  private String shortName;
+  private String password;
 
-  protected SystemUser() {}
+  protected SystemUser() {
+  }
 
   public SystemUser(String email, String fullName, String shortName, String password) {
-    this.emailz = email;
-    this.fullNamez = fullName;
-    this.shortNamez = shortName;
-    this.passwordz = password;
+    this.email = email;
+    this.fullName = fullName;
+    this.shortName = shortName;
+    this.password = password;
   }
 }

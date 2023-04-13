@@ -1,7 +1,8 @@
 package isep.repository;
 
-import isep.domain.model.SystemUser;
 import java.util.List;
+
+import isep.domain.model.SystemUser;
 
 public interface IUserRepoJpa {
   /**

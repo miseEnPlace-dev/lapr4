@@ -25,4 +25,3 @@ public class RegisterUserUI implements Runnable {
       System.out.println("ardeu");
   }
 }
-
