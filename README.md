@@ -15,21 +15,21 @@
 
 ## 1. Description of the Project
 
-In the 4th semester of the Computer Engineering Degree in Instituto Superior de Engenharia do Porto (ISEP), a teaching process was adopted based on the development of a single project (Integrative Project) that enhances the integration and application of knowledge and skills from all the courses taught this semester: Application Engineering (EAPLI), Languages and Programming (LPROG), Computer Networks (RCOMP), Computer Systems (SCOMP) & Laboratory and Project IV (LAPR4).
+In the 4th semester of the Informatics Engineering Degree at Instituto Superior de Engenharia do Porto (ISEP), a teaching process was adopted based on the development of a single project (Integrative Project) that enhances the integration and application of knowledge and skills from all the courses taught in this semester: Engineering of Applications (EAPLI), Languages and Programming (LPROG), Computer Networks (RCOMP), Computer Systems (SCOMP) & Laboratory and Project IV (LAPR4).
 
-The project consists of the design and development of a platform for remote learning, called eCourse. This platform will support the activities of the major actors of a course, mainly teachers, students and managers.
+The project consists on the design and development of a platform for remote learning, called eCourse. This platform supports the activities of the major actors of a course, mainly teachers, students and managers.
 
 ### Main Functionalities
 
 The main functionalities of the platform are:
 
-- **Users**: The platform will allow the creation of users with different roles (student, teacher & manager).
-- **Course Management**: The platform will allow, among several functionalities, the creation of courses, enrollments of students in courses, course teachers, bulk enrollment of students, respond to enlistments, schedule of classes, etc.
-- **Exams**: Among several other functionalities, the platform will allow the creation of exams, listing of grades, etc.
-- **Shared Boards**: The platform will have the possibility to create boards, share them, create post-its, view history, etc.
-- **Meetings**: The platform will allow the creation of meetings, the scheduling of meetings, invitations, etc.
+- **Users**: The platform allows the creation of users with different roles (student, teacher & manager).
+- **Course Management**: The platform allows, among several functionalities, the creation of courses, enrolments of students in courses, course teachers, bulk enrolment of students, respond to enlistments, schedule of classes, etc.
+- **Exams**: Among several other functionalities, the platform allows the creation of exams, listing of grades, etc.
+- **Shared Boards**: The platform has the possibility to create boards, share them, create post-its, view history, etc.
+- **Meetings**: The platform allows the creation of meetings, the scheduling of meetings, invitations, etc.
 
-The system will be developed in Java and will be based on the Spring Framework. GitHub will be used to source code management and CI (continuous integration). Exams will use a custom language made with the ANTLR tool. The solution will be deployed using several network nodes (database & the shared board server). The system will be developed in a distributed way, using the Scrum methodology.
+The system is developed in Java and it's based on the Spring Framework. GitHub is used to manage the source code and for CI (continuous integration). Exams use a custom language made with the ANTLR tool. The solution can be deployed using several network nodes (database & the shared board server). The system was developed in a distributed way, using the Scrum methodology.
 
 ## 2. Planning and Technical Documentation
 
@@ -44,7 +44,7 @@ To build the project execute the script:
 
 ## 4. How to Execute Tests
 
-To execute the tests execute following command:
+To execute the tests execute the following command:
 
 `mvn test`
 
@@ -66,6 +66,6 @@ _To Do_
 
 ## 7. How to Generate PlantUML Diagrams
 
-To generate plantuml diagrams for documentation execute the script (for the moment, only for Linux/Unix/MacOS):
+To generate PlantUML diagrams for documentation execute the script (for the moment, only for Linux/Unix/MacOS):
 
 `./generate-plantuml-diagrams.sh`
