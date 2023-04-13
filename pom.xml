@@ -27,6 +27,7 @@
     <jacoco.unit-tests.limit.branch-ratio>0%</jacoco.unit-tests.limit.branch-ratio>
     <jacoco.unit-tests.limit.class-complexity>50</jacoco.unit-tests.limit.class-complexity>
     <jacoco.unit-tests.limit.method-complexity>5</jacoco.unit-tests.limit.method-complexity>
+    <eapli.framework.version>v21.2.0-RELEASE</eapli.framework.version>
   </properties>
 
   <dependencies>
@@ -57,7 +58,33 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Eapli framework -->
+    <dependency>
+      <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+      <artifactId>eapli.framework.core</artifactId>
+      <version>${eapli.framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+      <artifactId>eapli.framework.infrastructure.authz</artifactId>
+      <version>${eapli.framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+      <artifactId>eapli.framework.infrastructure.pubsub</artifactId>
+      <version>${eapli.framework.version}</version>
+    </dependency>
   </dependencies>
+
+  <repositories>
+		<repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
   <build>
     <plugins>
@@ -104,13 +131,13 @@
           <skip>${skipTests}</skip>
         </configuration>
         <executions>
-          <!-- <execution>
-        <id>checkstyle</id>
-        <phase>validate</phase>
-        <goals>
-          <goal>check</goal>
-        </goals>
-      </execution> -->
+    <!-- <execution>
+            <id>checkstyle</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution> -->
         </executions>
       </plugin>
 

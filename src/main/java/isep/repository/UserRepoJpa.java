@@ -25,9 +25,9 @@ public class UserRepoJpa implements IUserRepoJpa {
    */
   @Override
   public SystemUser add(SystemUser user) {
-    if (user == null) {
+    if (user == null)
       throw new IllegalArgumentException();
-    }
+
     EntityManager em = getEntityManager();
     EntityTransaction tx = em.getTransaction();
     tx.begin();
