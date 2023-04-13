@@ -32,3 +32,6 @@ dependency-reduced-pom.xml
 README.html
 
 docs/dm/out
+
+# Output directory
+out/
