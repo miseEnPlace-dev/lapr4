@@ -1,6 +1,6 @@
 # Sprint 1 Clarifications
 
-This document is a collection of clarifications for the first sprint. The doubts are sintetized for easier reading.
+This document is a collection of clarifications for the first sprint. The doubts are synthesized for easier reading.
 
 ## [Question 1](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21834)
 
@@ -12,20 +12,20 @@ This document is a collection of clarifications for the first sprint. The doubts
 
 > As for the exam, is the title written in the exam the same as its unique title to identify?
 
-"The title should be unique" ... "Maybe it could be used to identify the exam."
+"The title should be unique. Maybe it could be used to identify the exam."
 
 ## [Question 3](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21837)
 
 > UI in console?
 
-In general, what is expected is a Java Console Application
+"In general, what is expected is a Java Console Application"
 
 ## [Question 4](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21835)
 
 > Course id is unique and generated or inputed? Course title and name are the same?
 
-"Unique code inputted by the administrator, e.g., "JAVA-1, that is used to identify it"
-"It has a name (name and title may refer to the same property of courses, and I would say that there is no need for it to be unique)"
+"Unique code inputted by the administrator, e.g., "JAVA-1, that is used to identify it.
+It has a name (name and title may refer to the same property of courses, and I would say that there is no need for it to be unique)"
 
 ## [Question 7](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
 
@@ -37,58 +37,58 @@ In general, what is expected is a Java Console Application
 
 > Can one student be enrolled in different courses?
 
-Yes
+"Yes"
 
 ## [Question 9](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21899)
 
 > Does the system need to support other roles and question types?
 
-Regarding user roles, the solution should support the ones necessary to cover all the actual functional requirements.
+"Regarding user roles, the solution should support the ones necessary to cover all the actual functional requirements.
 
-Regarding question types, only the referenced in the specification are required.
+Regarding question types, only the referenced in the specification are required."
 
 ## [Question 10](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21945)
 
 > Can the owner of a board set custom permissions for each user?
 
-Yes
+"Yes"
 
 ## [Question 11](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21972)
 
 > Tax payer number format verifications?
 
-For the project with should focus on supporting the Portuguese tax payer number. You may consider single person tax payer (no need to support companies).
+"For the project with should focus on supporting the Portuguese tax payer number. You may consider single person tax payer (no need to support companies)."
 
 ## [Question 14](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21986)
 
 > Can the same question be used in different exams? Or are the questions made for a specific exam?
 
-There is no "database" of questions (no identity)
+"There is no "database" of questions (no identity)"
 
 ## [Question 15](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21987)
 
 > Can a user have multiple roles?
 
-No
+"No"
 
 ## [Question 16](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21988)
 
 > Difference between meeting and class
 
-Classes -> Regular and pre-defined participants
-Meetings -> There is a concept of "invite", can be created by any user
+"Classes -> Regular and pre-defined participants
+Meetings -> There is a concept of "invite", can be created by any user"
 
 ## [Question 17](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21994)
 
 > Can a meeting and class overlap?
 
-Regarding classes:
+"Regarding classes:
 FRC09 - Schedule of Class A teacher schedule a class (always a recurring class, happens every week). System must check if the Teacher is available for the class period
 
 Regarding Meetings:
 FRM01 - Schedule a Meeting A user schedules a meeting. The system must check if all participants are available and send invitations to participants.
 
-In the case of Meetings they should not be created if the participants are not available
+In the case of Meetings they should not be created if the participants are not available."
 
 ## [Question 18](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21997)
 
@@ -102,7 +102,7 @@ I think it would be wise to enforce that acronyms be unique."
 
 > "In regards to the exam, what do you mean by feedback and grading? Is it necessary to save the answers of the users showing and comparing them with the correct answer? Furthermore is it necessary to save the answer of the question?"
 
-The idea is to have feedback and grading similarly to what is available for tests in the moodle platform. How you may achieve this is not up to me to decide.
+"The idea is to have feedback and grading similarly to what is available for tests in the moodle platform. How you may achieve this is not up to me to decide."
 
 ## [Question 21](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21971)
 
@@ -246,6 +246,15 @@ Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de dep
 
 "No. FRE01 could be very complex, with many steps prone to user errors. As a final step, you should consider a "publish" operation that marks the end of the creation process."
 
+## [Question 44](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22324)
+
+> Is there any difference between a teacher and a teacher in charge? Do they have the same permissions regarding classes?
+
+"No, there is no difference. In the app, they have the same permissions. You only need to register the teacher in charge for each course."
+
 ---
 
-_Updated at: 03/04/2023 16:56_
+_Last question: "Teacher in charge and normal class teacher responsibilities", by Joao Leitao._
+
+_Last updated at 13/04/2023 14:44_
+
