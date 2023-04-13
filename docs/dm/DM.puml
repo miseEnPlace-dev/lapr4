@@ -101,8 +101,8 @@ entity ExtraordinaryClass <<entity>> <<root>> {
 
 }
 
-package "<<agregate>> Answer" {
-  entity Answer
+package "<<agregate>> ExamAnswer" {
+  entity ExamAnswer
   entity AnswerToQuestion
 }
 
@@ -111,10 +111,10 @@ package "<<agregate>> Question" {
 }
 
 entity Question <<entity>> <<root>> {}
-entity Answer <<entity>> <<root>> {}
+entity ExamAnswer <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
-Answer *-- "1..*" AnswerToQuestion
+ExamAnswer *-- "1..*" AnswerToQuestion
 
 package "<<agregate>> Exam" {
   entity Exam
@@ -141,7 +141,7 @@ entity PostItEvent <<entity>> {
 Exam *-- "1..*" Section
 Section --> "1..*" Question : has
 
-entity Answer <<entity>> <<root>> {
+entity ExamAnswer <<entity>> <<root>> {
 
 }
 
@@ -174,7 +174,7 @@ ExtraordinaryClass --> "1" Teacher : scheduled by
 ExtraordinaryClass --> "1..*" Student : has
 ExtraordinaryClass --> "1" Course : is related to
 
-Answer --> "1" Student : belongs to
-Answer --> "1" Exam : is for
+ExamAnswer --> "1" Student : belongs to
+ExamAnswer --> "1" Exam : is for
 
 @enduml

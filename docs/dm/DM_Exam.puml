@@ -12,18 +12,32 @@ package "<<aggregate>> Exam" {
 
   entity Section
 
-  class FeedbackType
-  class GradeType
   class Description
 
   entity SectionQuestion
   class Score
 
-  class Time
-
   class State
 
   class SectionName
+}
+
+package "<<aggregate>> FormativeExam" {
+  entity FormativeExam
+}
+
+entity FormativeExam <<entity>> <<root>> {
+}
+
+package "<<aggregate>> EvaluationExam" {
+  entity EvaluationExam
+
+  class Time
+  class FeedbackType
+  class GradeType
+}
+
+entity EvaluationExam <<entity>> <<root>> {
 }
 
 package "<<agregate>> Question" {
@@ -77,8 +91,11 @@ class Score <<(V,#FF8B40) value object>> {}
 
 entity Question <<entity>> <<root>> {}
 
-Exam --> "0..1" Time : start time
-Exam --> "0..1" Time : end time
+Exam <|- EvaluationExam
+Exam <|-- FormativeExam
+
+EvaluationExam --> "0..1" Time : start time
+EvaluationExam --> "0..1" Time : end time
 
 Exam ---> "1" State : is in
 
@@ -91,8 +108,8 @@ Exam *-- "1..*" Section
 Exam ---> "1" Course : is from
 Exam ---> "1" Teacher : is created by
 
-Exam *--- "1" FeedbackType
-Exam *--- "1" GradeType
+EvaluationExam *--- "1" FeedbackType
+EvaluationExam *--- "1" GradeType
 Exam *-- "1" Description
 
 note bottom of FeedbackType

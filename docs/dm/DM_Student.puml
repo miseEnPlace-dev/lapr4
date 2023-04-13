@@ -52,6 +52,6 @@ Student -|> User
 
 Student --> "0..*" Enrolment : produces
 
-Answer --> "1" Student : belongs to
+Student --> "0..*" Answer : has
 
 @enduml

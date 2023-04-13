@@ -25,30 +25,30 @@ package "<<aggregate>> Question" {
 entity Question <<entity>> <<root>> {
 }
 
-package "<<aggregate>> Answer" {
-  entity Answer
+package "<<aggregate>> ExamAnswer" {
+  entity ExamAnswer
 
   class Grade
 
   entity AnswerToQuestion
-  class ExamAnswer
+  class Answer
 }
 
-entity Answer <<entity>> <<root>> {}
+entity ExamAnswer <<entity>> <<root>> {}
 
 class Grade <<(V,#FF8B40) value object>> {}
-class ExamAnswer <<(V,#FF8B40) value object>> {}
+class Answer <<(V,#FF8B40) value object>> {}
 
 entity Exam <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
-Student --> "0..*" Answer : has
-Answer --> "1" Exam : is for
-Answer --> "0..1" Grade : has
+Student --> "0..*"ExamAnswer : has
+ExamAnswer --> "1" Exam : is for
+ExamAnswer --> "0..1" Grade : has
 
 AnswerToQuestion --> "1" Question : is for
-AnswerToQuestion *-- "1" ExamAnswer
+AnswerToQuestion *-- "1" Answer
 
-Answer *-- "1..*" AnswerToQuestion
+ExamAnswer *-- "1..*" AnswerToQuestion
 
 @enduml
