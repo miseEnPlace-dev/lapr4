@@ -114,7 +114,6 @@ entity Question <<entity>> <<root>> {}
 entity ExamAnswer <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
-ExamAnswer *-- "1..*" AnswerToQuestion
 
 package "<<agregate>> Exam" {
   entity Exam
@@ -124,30 +123,30 @@ package "<<agregate>> Exam" {
 entity Exam <<entity>> <<root>> {}
 entity Section <<entity>> {}
 
-package "<<aggregate>> BoardHistory" {
-  entity BoardHistory
-
-  entity PostItEvent
-}
-
-entity BoardHistory <<entity>> <<root>> {
-
-}
-
-entity PostItEvent <<entity>> {
-
-}
-
-Exam *-- "1..*" Section
-Section --> "1..*" Question : has
-
 entity ExamAnswer <<entity>> <<root>> {
 
 }
 
+package "<<aggregate>> FormativeExam" {
+  entity FormativeExam
+}
+
+entity FormativeExam <<entity>> <<root>> {
+}
+
+package "<<aggregate>> EvaluationExam" {
+  entity EvaluationExam
+}
+
+entity EvaluationExam <<entity>> <<root>> {
+}
+
+
 Teacher -|> User
 Student --|> User
 Manager --|> User
+
+User --> "0..*" Meeting : scheduled by
 
 Course ---> "1..*" Teacher : has teachers
 Course --> "1" Teacher : has a responsible
@@ -155,26 +154,36 @@ Course --> "1" Teacher : has a responsible
 Enrolment --> "1" Student : has
 Enrolment --> "1" Course : is for
 
-Board ---> "1" User : is owned by
+Board ---> "1" User : has an owner
 
 PostIt --> "1" Board: belongs to
+PostIt --> "0..1" PostIt : previous
 
-
-Exam -> "1" Course : is for
+Exam ---> "1" Course : is from
 Exam --> "1" Teacher : is created by
+Exam *-- "1..*" Section
+Exam <|- EvaluationExam
+Exam <|-- FormativeExam
+
+Section --> "1..*" Question : has
+
+ExamAnswer --> "1" Exam : is for
+ExamAnswer *-- "1..*" AnswerToQuestion
+AnswerToQuestion --> "1" Question : is for
 
 Invite --> "1" User : invites
 Invite --> "1" Meeting : is related to
 
 Class ---> "1" Course : is related to
 Class ---> "1" Teacher : scheduled by
-User --> "0..*" Meeting : scheduled by
 
 ExtraordinaryClass --> "1" Teacher : scheduled by
 ExtraordinaryClass --> "1..*" Student : has
 ExtraordinaryClass --> "1" Course : is related to
 
-ExamAnswer --> "1" Student : belongs to
-ExamAnswer --> "1" Exam : is for
+Student --> "0..*" ExamAnswer : has
+Student --> "0..*" Enrolment : produces
+
+Meeting --> "1" User : scheduled by
 
 @enduml

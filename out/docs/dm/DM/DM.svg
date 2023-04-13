@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1036px" preserveAspectRatio="none" style="width:1893px;height:1036px;background:#FFFFFF;" version="1.1" viewBox="0 0 1893 1036" width="1893px" zoomAndPan="magnify"><defs/><g><!--MD5=[597c9b6a35d8038d4b40fd8870ba90aa]
+cluster <<aggregate>> User--><g id="cluster_&lt;&lt;aggregate&gt;&gt; User"><path d="M1536.5,707 L1708.5,707 A3.75,3.75 0 0 1 1711,709.5 L1718,729.2969 L1718.5,729.2969 A2.5,2.5 0 0 1 1721,731.7969 L1721,853.5 A2.5,2.5 0 0 1 1718.5,856 L1536.5,856 A2.5,2.5 0 0 1 1534,853.5 L1534,709.5 A2.5,2.5 0 0 1 1536.5,707 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1534" x2="1718" y1="729.2969" y2="729.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="171" x="1538" y="721.9951">&lt;&lt;aggregate&gt;&gt; User</text></g><!--MD5=[a83252410681a5ed1f47a8e4d10c71f1]
+cluster <<aggregate>> Teacher--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Teacher"><path d="M805.5,719.5 L1005.5,719.5 A3.75,3.75 0 0 1 1008,722 L1015,741.7969 L1015.5,741.7969 A2.5,2.5 0 0 1 1018,744.2969 L1018,841 A2.5,2.5 0 0 1 1015.5,843.5 L805.5,843.5 A2.5,2.5 0 0 1 803,841 L803,722 A2.5,2.5 0 0 1 805.5,719.5 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="803" x2="1015" y1="741.7969" y2="741.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="199" x="807" y="734.4951">&lt;&lt;aggregate&gt;&gt; Teacher</text></g><!--MD5=[b7bf1eec9a4925954e684954daad3e83]
+cluster <<aggregate>> Student--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Student"><path d="M479.5,348.5 L676.5,348.5 A3.75,3.75 0 0 1 679,351 L686,370.7969 L686.5,370.7969 A2.5,2.5 0 0 1 689,373.2969 L689,470 A2.5,2.5 0 0 1 686.5,472.5 L479.5,472.5 A2.5,2.5 0 0 1 477,470 L477,351 A2.5,2.5 0 0 1 479.5,348.5 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="477" x2="686" y1="370.7969" y2="370.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="196" x="481" y="363.4951">&lt;&lt;aggregate&gt;&gt; Student</text></g><!--MD5=[10fd006fb483152218b3ecdedec963c1]
+cluster <<aggregate>> Manager--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Manager"><path d="M1190.5,534 L1393.5,534 A3.75,3.75 0 0 1 1396,536.5 L1403,556.2969 L1403.5,556.2969 A2.5,2.5 0 0 1 1406,558.7969 L1406,655.5 A2.5,2.5 0 0 1 1403.5,658 L1190.5,658 A2.5,2.5 0 0 1 1188,655.5 L1188,536.5 A2.5,2.5 0 0 1 1190.5,534 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1188" x2="1403" y1="556.2969" y2="556.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="202" x="1192" y="548.9951">&lt;&lt;aggregate&gt;&gt; Manager</text></g><!--MD5=[58b45488df0a3248650bf631dc2ea132]
+cluster <<aggregate>> Course--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Course"><path d="M768.5,336 L960.5,336 A3.75,3.75 0 0 1 963,338.5 L970,358.2969 L970.5,358.2969 A2.5,2.5 0 0 1 973,360.7969 L973,482.5 A2.5,2.5 0 0 1 970.5,485 L768.5,485 A2.5,2.5 0 0 1 766,482.5 L766,338.5 A2.5,2.5 0 0 1 768.5,336 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="766" x2="970" y1="358.2969" y2="358.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="191" x="770" y="350.9951">&lt;&lt;aggregate&gt;&gt; Course</text></g><!--MD5=[8f9545635c96278f6464f1f75fb05986]
+cluster <<aggregate>> Board--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Board"><path d="M1692.5,348.5 L1873.5,348.5 A3.75,3.75 0 0 1 1876,351 L1883,370.7969 L1883.5,370.7969 A2.5,2.5 0 0 1 1886,373.2969 L1886,470 A2.5,2.5 0 0 1 1883.5,472.5 L1692.5,472.5 A2.5,2.5 0 0 1 1690,470 L1690,351 A2.5,2.5 0 0 1 1692.5,348.5 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1690" x2="1883" y1="370.7969" y2="370.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="180" x="1694" y="363.4951">&lt;&lt;aggregate&gt;&gt; Board</text></g><!--MD5=[cccea978d3d5421602d819067d26b6b1]
+cluster <<aggregate>> Enrolment--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Enrolment"><path d="M801.5,163 L1016.5,163 A3.75,3.75 0 0 1 1019,165.5 L1026,185.2969 L1026.5,185.2969 A2.5,2.5 0 0 1 1029,187.7969 L1029,284.5 A2.5,2.5 0 0 1 1026.5,287 L801.5,287 A2.5,2.5 0 0 1 799,284.5 L799,165.5 A2.5,2.5 0 0 1 801.5,163 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="799" x2="1026" y1="185.2969" y2="185.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="214" x="803" y="177.9951">&lt;&lt;aggregate&gt;&gt; Enrolment</text></g><!--MD5=[fd3cdda75c3d0de4c885e04e9061848b]
+cluster <<aggregate>> PostIt--><g id="cluster_&lt;&lt;aggregate&gt;&gt; PostIt"><path d="M1650.5,163 L1830.5,163 A3.75,3.75 0 0 1 1833,165.5 L1840,185.2969 L1840.5,185.2969 A2.5,2.5 0 0 1 1843,187.7969 L1843,284.5 A2.5,2.5 0 0 1 1840.5,287 L1650.5,287 A2.5,2.5 0 0 1 1648,284.5 L1648,165.5 A2.5,2.5 0 0 1 1650.5,163 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1648" x2="1840" y1="185.2969" y2="185.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="179" x="1652" y="177.9951">&lt;&lt;aggregate&gt;&gt; PostIt</text></g><!--MD5=[edde2cde88c7910514dcd6871a142e26]
+cluster <<aggregate>> Meeting--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Meeting"><path d="M1386.5,905 L1584.5,905 A3.75,3.75 0 0 1 1587,907.5 L1594,927.2969 L1594.5,927.2969 A2.5,2.5 0 0 1 1597,929.7969 L1597,1026.5 A2.5,2.5 0 0 1 1594.5,1029 L1386.5,1029 A2.5,2.5 0 0 1 1384,1026.5 L1384,907.5 A2.5,2.5 0 0 1 1386.5,905 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1384" x2="1594" y1="927.2969" y2="927.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="197" x="1388" y="919.9951">&lt;&lt;aggregate&gt;&gt; Meeting</text></g><!--MD5=[5773af9f734473082c5892f0a86e9112]
+cluster <<aggregate>> Class--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Class"><path d="M1051.5,6 L1228.5,6 A3.75,3.75 0 0 1 1231,8.5 L1238,28.2969 L1238.5,28.2969 A2.5,2.5 0 0 1 1241,30.7969 L1241,127.5 A2.5,2.5 0 0 1 1238.5,130 L1051.5,130 A2.5,2.5 0 0 1 1049,127.5 L1049,8.5 A2.5,2.5 0 0 1 1051.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1049" x2="1238" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="176" x="1053" y="20.9951">&lt;&lt;aggregate&gt;&gt; Class</text></g><!--MD5=[6ac28bcdcbdc1e47216bb181a59777d9]
+cluster <<aggregate>> Invite--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Invite"><path d="M1432.5,534 L1610.5,534 A3.75,3.75 0 0 1 1613,536.5 L1620,556.2969 L1620.5,556.2969 A2.5,2.5 0 0 1 1623,558.7969 L1623,655.5 A2.5,2.5 0 0 1 1620.5,658 L1432.5,658 A2.5,2.5 0 0 1 1430,655.5 L1430,536.5 A2.5,2.5 0 0 1 1432.5,534 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1430" x2="1620" y1="556.2969" y2="556.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="177" x="1434" y="548.9951">&lt;&lt;aggregate&gt;&gt; Invite</text></g><!--MD5=[07b6c462b4cc7627a92e62d67d168e36]
+cluster <<aggregate>> ExtraordinaryClass--><g id="cluster_&lt;&lt;aggregate&gt;&gt; ExtraordinaryClass"><path d="M479.5,163 L762.5,163 A3.75,3.75 0 0 1 765,165.5 L772,185.2969 L772.5,185.2969 A2.5,2.5 0 0 1 775,187.7969 L775,284.5 A2.5,2.5 0 0 1 772.5,287 L479.5,287 A2.5,2.5 0 0 1 477,284.5 L477,165.5 A2.5,2.5 0 0 1 479.5,163 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="477" x2="772" y1="185.2969" y2="185.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="282" x="481" y="177.9951">&lt;&lt;aggregate&gt;&gt; ExtraordinaryClass</text></g><!--MD5=[fe3ff3a67ca8af0e61e5b9e15d1dc2f3]
+cluster <<agregate>> ExamAnswer--><g id="cluster_&lt;&lt;agregate&gt;&gt; ExamAnswer"><path d="M213.5,163 L440.5,163 A3.75,3.75 0 0 1 443,165.5 L450,185.2969 L450.5,185.2969 A2.5,2.5 0 0 1 453,187.7969 L453,463 A2.5,2.5 0 0 1 450.5,465.5 L213.5,465.5 A2.5,2.5 0 0 1 211,463 L211,165.5 A2.5,2.5 0 0 1 213.5,163 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="211" x2="450" y1="185.2969" y2="185.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="226" x="215" y="177.9951">&lt;&lt;agregate&gt;&gt; ExamAnswer</text></g><!--MD5=[69a108c23b32959481c7d81be55bc9d1]
+cluster <<agregate>> Question--><g id="cluster_&lt;&lt;agregate&gt;&gt; Question"><path d="M38.5,719.5 L234.5,719.5 A3.75,3.75 0 0 1 237,722 L244,741.7969 L244.5,741.7969 A2.5,2.5 0 0 1 247,744.2969 L247,841 A2.5,2.5 0 0 1 244.5,843.5 L38.5,843.5 A2.5,2.5 0 0 1 36,841 L36,722 A2.5,2.5 0 0 1 38.5,719.5 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="36" x2="244" y1="741.7969" y2="741.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="195" x="40" y="734.4951">&lt;&lt;agregate&gt;&gt; Question</text></g><!--MD5=[ec4e3715bfb217ea5a76401479718255]
+cluster <<agregate>> Exam--><g id="cluster_&lt;&lt;agregate&gt;&gt; Exam"><path d="M8.5,348.5 L174.5,348.5 A3.75,3.75 0 0 1 177,351 L184,370.7969 L184.5,370.7969 A2.5,2.5 0 0 1 187,373.2969 L187,648.5 A2.5,2.5 0 0 1 184.5,651 L8.5,651 A2.5,2.5 0 0 1 6,648.5 L6,351 A2.5,2.5 0 0 1 8.5,348.5 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="184" y1="370.7969" y2="370.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="165" x="10" y="363.4951">&lt;&lt;agregate&gt;&gt; Exam</text></g><!--MD5=[e437c6a15929b2458b26719b10472e27]
+cluster <<aggregate>> BoardHistory--><g id="cluster_&lt;&lt;aggregate&gt;&gt; BoardHistory"><path d="M1441.5,6 L1678.5,6 A3.75,3.75 0 0 1 1681,8.5 L1688,28.2969 L1733.5,28.2969 A2.5,2.5 0 0 1 1736,30.7969 L1736,127.5 A2.5,2.5 0 0 1 1733.5,130 L1441.5,130 A2.5,2.5 0 0 1 1439,127.5 L1439,8.5 A2.5,2.5 0 0 1 1441.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1439" x2="1688" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="236" x="1443" y="20.9951">&lt;&lt;aggregate&gt;&gt; BoardHistory</text></g><!--MD5=[3fd616f346a44cd59a91eb10b19e157c]
+class User--><g id="elem_User"><rect codeLine="13" fill="#F5F5DC" height="78.5313" id="User" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="1551" y="761"/><ellipse cx="1566" cy="788.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1570.1094,794.1172 L1562.3906,794.1172 L1562.3906,781.7266 L1570.1094,781.7266 L1570.1094,783.8828 L1564.8438,783.8828 L1564.8438,786.5547 L1569.6094,786.5547 L1569.6094,788.7109 L1564.8438,788.7109 L1564.8438,791.9609 L1570.1094,791.9609 L1570.1094,794.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1578" y="777.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1583" y="791.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="1587" y="806.9326">User</text><line style="stroke:#181818;stroke-width:0.5;" x1="1552" x2="1628" y1="815.2344" y2="815.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="1557" y="832.2295">-isActive</text></g><!--MD5=[61a83f88cb8b7d3a80bc8c481f3736bf]
+class Teacher--><g id="elem_Teacher"><rect codeLine="21" fill="#F5F5DC" height="54.2344" id="Teacher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="89" x="865.5" y="773.5"/><ellipse cx="880.5" cy="800.6172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M884.6094,806.6172 L876.8906,806.6172 L876.8906,794.2266 L884.6094,794.2266 L884.6094,796.3828 L879.3438,796.3828 L879.3438,799.0547 L884.1094,799.0547 L884.1094,801.2109 L879.3438,801.2109 L879.3438,804.4609 L884.6094,804.4609 L884.6094,806.6172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="898" y="789.6387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="903" y="803.6074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="894.5" y="819.4326">Teacher</text></g><!--MD5=[d6181cb537bdc20c0a3007a98a56832d]
+class Student--><g id="elem_Student"><rect codeLine="29" fill="#F5F5DC" height="54.2344" id="Student" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="87" x="582.5" y="402.5"/><ellipse cx="597.5" cy="429.6172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M601.6094,435.6172 L593.8906,435.6172 L593.8906,423.2266 L601.6094,423.2266 L601.6094,425.3828 L596.3438,425.3828 L596.3438,428.0547 L601.1094,428.0547 L601.1094,430.2109 L596.3438,430.2109 L596.3438,433.4609 L601.6094,433.4609 L601.6094,435.6172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="614" y="418.6387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="619" y="432.6074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="611.5" y="448.4326">Student</text></g><!--MD5=[b24ed8d4ae84bae9290d9aab401637c7]
+class Manager--><g id="elem_Manager"><rect codeLine="37" fill="#F5F5DC" height="54.2344" id="Manager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="1298" y="588"/><ellipse cx="1313" cy="615.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1317.1094,621.1172 L1309.3906,621.1172 L1309.3906,608.7266 L1317.1094,608.7266 L1317.1094,610.8828 L1311.8438,610.8828 L1311.8438,613.5547 L1316.6094,613.5547 L1316.6094,615.7109 L1311.8438,615.7109 L1311.8438,618.9609 L1317.1094,618.9609 L1317.1094,621.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1332" y="604.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1337" y="618.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="1327" y="633.9326">Manager</text></g><!--MD5=[4066b0363c5a91ff3b6e03e0428953a9]
+class Course--><g id="elem_Course"><rect codeLine="45" fill="#F5F5DC" height="78.5313" id="Course" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="791" y="390"/><ellipse cx="806" cy="417.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M810.1094,423.1172 L802.3906,423.1172 L802.3906,410.7266 L810.1094,410.7266 L810.1094,412.8828 L804.8438,412.8828 L804.8438,415.5547 L809.6094,415.5547 L809.6094,417.7109 L804.8438,417.7109 L804.8438,420.9609 L810.1094,420.9609 L810.1094,423.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="820" y="406.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="825" y="420.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="820" y="435.9326">Course</text><line style="stroke:#181818;stroke-width:0.5;" x1="792" x2="872" y1="444.2344" y2="444.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="797" y="461.2295">-code</text></g><!--MD5=[9563755d011c5cec7ec66dc53565a59e]
+class Board--><g id="elem_Board"><rect codeLine="53" fill="#F5F5DC" height="54.2344" id="Board" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="1706" y="402.5"/><ellipse cx="1721" cy="429.6172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1725.1094,435.6172 L1717.3906,435.6172 L1717.3906,423.2266 L1725.1094,423.2266 L1725.1094,425.3828 L1719.8438,425.3828 L1719.8438,428.0547 L1724.6094,428.0547 L1724.6094,430.2109 L1719.8438,430.2109 L1719.8438,433.4609 L1725.1094,433.4609 L1725.1094,435.6172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1733" y="418.6387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1738" y="432.6074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="1737.5" y="448.4326">Board</text></g><!--MD5=[4e6a8d3ca4bd1c5f5bbec9ff1e19f3b4]
+class Enrolment--><g id="elem_Enrolment"><rect codeLine="60" fill="#F5F5DC" height="54.2344" id="Enrolment" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="103" x="877.5" y="217"/><ellipse cx="892.5" cy="244.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M896.6094,250.1172 L888.8906,250.1172 L888.8906,237.7266 L896.6094,237.7266 L896.6094,239.8828 L891.3438,239.8828 L891.3438,242.5547 L896.1094,242.5547 L896.1094,244.7109 L891.3438,244.7109 L891.3438,247.9609 L896.6094,247.9609 L896.6094,250.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="917" y="233.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="922" y="247.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="906.5" y="262.9326">Enrolment</text></g><!--MD5=[458552462bbdcbc92793825846cc11c0]
+class PostIt--><g id="elem_PostIt"><rect codeLine="67" fill="#F5F5DC" height="54.2344" id="PostIt" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="1706" y="217"/><ellipse cx="1721" cy="244.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1725.1094,250.1172 L1717.3906,250.1172 L1717.3906,237.7266 L1725.1094,237.7266 L1725.1094,239.8828 L1719.8438,239.8828 L1719.8438,242.5547 L1724.6094,242.5547 L1724.6094,244.7109 L1719.8438,244.7109 L1719.8438,247.9609 L1725.1094,247.9609 L1725.1094,250.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1733" y="233.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1738" y="247.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="1738.5" y="262.9326">PostIt</text></g><!--MD5=[a78031611904abe1e5cbb3fd0b6ea028]
+class Meeting--><g id="elem_Meeting"><rect codeLine="75" fill="#F5F5DC" height="54.2344" id="Meeting" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="88" x="1446" y="959"/><ellipse cx="1461" cy="986.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1465.1094,992.1172 L1457.3906,992.1172 L1457.3906,979.7266 L1465.1094,979.7266 L1465.1094,981.8828 L1459.8438,981.8828 L1459.8438,984.5547 L1464.6094,984.5547 L1464.6094,986.7109 L1459.8438,986.7109 L1459.8438,989.9609 L1465.1094,989.9609 L1465.1094,992.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1478" y="975.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1483" y="989.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="1475" y="1004.9326">Meeting</text></g><!--MD5=[41e1c6cf192918703501b24b2053926c]
+class Class--><g id="elem_Class"><rect codeLine="83" fill="#F5F5DC" height="54.2344" id="Class" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="1106" y="60"/><ellipse cx="1121" cy="87.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1125.1094,93.1172 L1117.3906,93.1172 L1117.3906,80.7266 L1125.1094,80.7266 L1125.1094,82.8828 L1119.8438,82.8828 L1119.8438,85.5547 L1124.6094,85.5547 L1124.6094,87.7109 L1119.8438,87.7109 L1119.8438,90.9609 L1125.1094,90.9609 L1125.1094,93.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1133" y="76.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1138" y="90.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37" x="1139.5" y="105.9326">Class</text></g><!--MD5=[e195e885e5bdec0a16cdb8566f41a079]
+class Invite--><g id="elem_Invite"><rect codeLine="91" fill="#F5F5DC" height="54.2344" id="Invite" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="1499" y="588"/><ellipse cx="1514" cy="615.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1518.1094,621.1172 L1510.3906,621.1172 L1510.3906,608.7266 L1518.1094,608.7266 L1518.1094,610.8828 L1512.8438,610.8828 L1512.8438,613.5547 L1517.6094,613.5547 L1517.6094,615.7109 L1512.8438,615.7109 L1512.8438,618.9609 L1518.1094,618.9609 L1518.1094,621.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1526" y="604.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1531" y="618.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="1533" y="633.9326">Invite</text></g><!--MD5=[3d94e7e0003c8844ca1c1ff031a3be26]
+class ExtraordinaryClass--><g id="elem_ExtraordinaryClass"><rect codeLine="99" fill="#F5F5DC" height="54.2344" id="ExtraordinaryClass" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158" x="601" y="217"/><ellipse cx="616" cy="244.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M620.1094,250.1172 L612.3906,250.1172 L612.3906,237.7266 L620.1094,237.7266 L620.1094,239.8828 L614.8438,239.8828 L614.8438,242.5547 L619.6094,242.5547 L619.6094,244.7109 L614.8438,244.7109 L614.8438,247.9609 L620.1094,247.9609 L620.1094,250.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="668" y="233.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="673" y="247.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="630" y="262.9326">ExtraordinaryClass</text></g><!--MD5=[304f7e4417f900eca77f286fb4a0aa2e]
+class ExamAnswer--><g id="elem_ExamAnswer"><rect codeLine="143" fill="#F5F5DC" height="54.2344" id="ExamAnswer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="120" x="272" y="217"/><ellipse cx="287" cy="244.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M291.1094,250.1172 L283.3906,250.1172 L283.3906,237.7266 L291.1094,237.7266 L291.1094,239.8828 L285.8438,239.8828 L285.8438,242.5547 L290.6094,242.5547 L290.6094,244.7109 L285.8438,244.7109 L285.8438,247.9609 L291.1094,247.9609 L291.1094,250.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="320" y="233.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="325" y="247.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="301" y="262.9326">ExamAnswer</text></g><!--MD5=[8dd70b712fdf3b42674e2a6f3ab61877]
+class AnswerToQuestion--><g id="elem_AnswerToQuestion"><rect codeLine="114" fill="#F5F5DC" height="40.2656" id="AnswerToQuestion" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="164" x="250" y="409.5"/><ellipse cx="265" cy="429.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M269.1094,435.6328 L261.3906,435.6328 L261.3906,423.2422 L269.1094,423.2422 L269.1094,425.3984 L263.8438,425.3984 L263.8438,428.0703 L268.6094,428.0703 L268.6094,430.2266 L263.8438,430.2266 L263.8438,433.4766 L269.1094,433.4766 L269.1094,435.6328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="320" y="425.6387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="279" y="441.4639">AnswerToQuestion</text></g><!--MD5=[fc7123defb831ecdd44b2d9bcef6cceb]
+class Question--><g id="elem_Question"><rect codeLine="112" fill="#F5F5DC" height="54.2344" id="Question" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="95" x="81.5" y="773.5"/><ellipse cx="96.5" cy="800.6172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M100.6094,806.6172 L92.8906,806.6172 L92.8906,794.2266 L100.6094,794.2266 L100.6094,796.3828 L95.3438,796.3828 L95.3438,799.0547 L100.1094,799.0547 L100.1094,801.2109 L95.3438,801.2109 L95.3438,804.4609 L100.6094,804.4609 L100.6094,806.6172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="117" y="789.6387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="122" y="803.6074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63" x="110.5" y="819.4326">Question</text></g><!--MD5=[4ec975f1641a34b3290014bf4027a644]
+class Exam--><g id="elem_Exam"><rect codeLine="123" fill="#F5F5DC" height="54.2344" id="Exam" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="93" y="402.5"/><ellipse cx="108" cy="429.6172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M112.1094,435.6172 L104.3906,435.6172 L104.3906,423.2266 L112.1094,423.2266 L112.1094,425.3828 L106.8438,425.3828 L106.8438,428.0547 L111.6094,428.0547 L111.6094,430.2109 L106.8438,430.2109 L106.8438,433.4609 L112.1094,433.4609 L112.1094,435.6172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="120" y="418.6387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="125" y="432.6074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37" x="126.5" y="448.4326">Exam</text></g><!--MD5=[09a53695e98d4f26e7a054522080af08]
+class Section--><g id="elem_Section"><rect codeLine="124" fill="#F5F5DC" height="40.2656" id="Section" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="84" x="87" y="595"/><ellipse cx="102" cy="615.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M106.1094,621.1328 L98.3906,621.1328 L98.3906,608.7422 L106.1094,608.7422 L106.1094,610.8984 L100.8438,610.8984 L100.8438,613.5703 L105.6094,613.5703 L105.6094,615.7266 L100.8438,615.7266 L100.8438,618.9766 L106.1094,618.9766 L106.1094,621.1328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="117" y="611.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="116" y="626.9639">Section</text></g><!--MD5=[610977722ed2b289077234f78e670007]
+class BoardHistory--><g id="elem_BoardHistory"><rect codeLine="132" fill="#F5F5DC" height="54.2344" id="BoardHistory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="120" x="1600" y="60"/><ellipse cx="1615" cy="87.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1619.1094,93.1172 L1611.3906,93.1172 L1611.3906,80.7266 L1619.1094,80.7266 L1619.1094,82.8828 L1613.8438,82.8828 L1613.8438,85.5547 L1618.6094,85.5547 L1618.6094,87.7109 L1613.8438,87.7109 L1613.8438,90.9609 L1619.1094,90.9609 L1619.1094,93.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1648" y="76.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="1653" y="90.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="1629" y="105.9326">BoardHistory</text></g><!--MD5=[fc3f930b116bae439ee49103eb649e7e]
+class PostItEvent--><g id="elem_PostItEvent"><rect codeLine="136" fill="#F5F5DC" height="40.2656" id="PostItEvent" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="110" x="1455" y="67"/><ellipse cx="1470" cy="87.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1474.1094,93.1328 L1466.3906,93.1328 L1466.3906,80.7422 L1474.1094,80.7422 L1474.1094,82.8984 L1468.8438,82.8984 L1468.8438,85.5703 L1473.6094,85.5703 L1473.6094,87.7266 L1468.8438,87.7266 L1468.8438,90.9766 L1474.1094,90.9766 L1474.1094,93.1328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="1498" y="83.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="1484" y="98.9639">PostItEvent</text></g><!--MD5=[d09f604885427aec6b8dfbfa12a4c4a6]
+reverse link ExamAnswer to AnswerToQuestion--><g id="link_ExamAnswer_AnswerToQuestion"><path codeLine="116" d="M332,284.3 C332,322.77 332,379.78 332,409.27 " fill="none" id="ExamAnswer-backto-AnswerToQuestion" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="332,271.29,328,277.29,332,283.29,336,277.29,332,271.29" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="305.7656" y="398.5192">1..*</text></g><!--MD5=[75726a3b9f7814c11f9cf7c54742158a]
+reverse link Exam to Section--><g id="link_Exam_Section"><path codeLine="140" d="M131.36,469.8 C130.73,508.27 129.8,565.28 129.31,594.77 " fill="none" id="Exam-backto-Section" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="131.57,456.79,127.4717,462.7233,131.3722,468.7884,135.4706,462.8551,131.57,456.79" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="103.1628" y="584.0192">1..*</text></g><!--MD5=[87fa8ff7d398728728a611d860795352]
+link Section to Question--><g id="link_Section_Question"><path codeLine="141" d="M129,635.29 C129,666.86 129,729.87 129,768 " fill="none" id="Section-to-Question" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="129,773.43,133,764.43,129,768.43,125,764.43,129,773.43" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="130" y="687.0669">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="103.3406" y="762.4908">1..*</text></g><!--MD5=[0a356a4e09bd4fc4087bf5e4e9dbf72c]
+link Teacher to User--><g id="link_Teacher_User"><path codeLine="147" d="M954.72,785.19 C1075.25,744.96 1404.58,642.03 1506.5,682.5 C1533.45,693.2 1553.08,718.28 1566.51,742.58 " fill="none" id="Teacher-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="none" points="1572.92,739.74,1575.59,760.76,1560.39,746,1572.92,739.74" style="stroke:#222222;stroke-width:1.0;"/></g><!--MD5=[e7e4384c2e5b49218c5cd97f5ff6bc06]
+link Student to User--><g id="link_Student_User"><path codeLine="148" d="M669.62,453.68 C698.62,467.85 738.03,484.78 775,493 C863.8,512.74 1526.76,463.66 1593,526 C1650.41,580.03 1632.09,679.02 1612.13,741.92 " fill="none" id="Student-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="none" points="1618.72,744.28,1605.68,760.98,1605.46,739.79,1618.72,744.28" style="stroke:#222222;stroke-width:1.0;"/></g><!--MD5=[6eb6e197a729f6ec2412743e0bdbca1d]
+link Manager to User--><g id="link_Manager_User"><path codeLine="149" d="M1390.13,629.32 C1429.07,642.31 1484.62,665.09 1524,699 C1538.44,711.44 1550.98,727.79 1561.13,743.68 " fill="none" id="Manager-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="none" points="1567.15,740.09,1571.37,760.86,1555.12,747.26,1567.15,740.09" style="stroke:#222222;stroke-width:1.0;"/></g><!--MD5=[879e79d9b9300cd2bae6192b9cbae86c]
+link Course to Teacher--><g id="link_Course_Teacher"><path codeLine="151" d="M833.47,469.37 C835.94,516.49 842.4,598.04 859,666 C867.84,702.19 883.85,741.85 895.59,768.47 " fill="none" id="Course-to-Teacher" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="897.73,773.28,897.7243,763.4311,895.6967,768.7121,890.4157,766.6845,897.73,773.28" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="860" y="619.5669">has teachers</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="869.2332" y="762.3062">1..*</text></g><!--MD5=[879e79d9b9300cd2bae6192b9cbae86c]
+link Course to Teacher--><g id="link_Course_Teacher"><path codeLine="152" d="M873.13,451.74 C899.89,468.06 932.58,493.33 948,526 C986.34,607.22 948.21,716.04 925,768.56 " fill="none" id="Course-to-Teacher-1" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="922.95,773.16,930.2739,766.5751,924.99,768.5951,922.97,763.3112,922.95,773.16" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="112" x="966" y="619.5669">has a responsible</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="916.9078" y="762.5945">1</text></g><!--MD5=[64659cc257bb39ca653c8f3b2e1ffafe]
+link Enrolment to Student--><g id="link_Enrolment_Student"><path codeLine="154" d="M906.64,271.04 C890.5,287.97 867.18,308.9 842,320 C814.56,332.1 803.11,317.54 775,328 C731.38,344.23 688,375.66 659.4,399.08 " fill="none" id="Enrolment-to-Student" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="655.29,402.47,664.7764,399.8228,659.1451,399.286,659.682,393.6546,655.29,402.47" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="870" y="316.0669">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="653.1383" y="391.5401">1</text></g><!--MD5=[2407b6a47dd8f6959b7268359cd29a55]
+link Enrolment to Course--><g id="link_Enrolment_Course"><path codeLine="155" d="M931.67,271.23 C932.19,286.05 931.16,304.63 925,320 C914.62,345.91 895.41,370 877.12,388.87 " fill="none" id="Enrolment-to-Course" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="873.48,392.57,882.6362,388.9418,876.9796,388.9989,876.9225,383.3424,873.48,392.57" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="31" x="931" y="316.0669">is for</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="881.0126" y="382.328">1</text></g><!--MD5=[f5a5fb38a491afdb60656b0cb210e8f1]
+link Board to User--><g id="link_Board_User"><path codeLine="157" d="M1742.87,456.67 C1738.06,505.26 1723.41,611.67 1683,691 C1670.33,715.87 1650.84,739.83 1632.96,758.89 " fill="none" id="Board-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="1629.41,762.63,1638.5064,758.8544,1632.8515,759.0029,1632.703,753.348,1629.41,762.63" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="1734" y="619.5669">is owned by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1636.8711" y="751.9506">1</text></g><!--MD5=[bccab53c458f39b9d05cb29ebb056088]
+link PostIt to Board--><g id="link_PostIt_Board"><path codeLine="159" d="M1745,271.29 C1745,304.54 1745,361.72 1745,397.19 " fill="none" id="PostIt-to-Board" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="1745,402.26,1749,393.26,1745,397.26,1741,393.26,1745,402.26" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="1746" y="316.0669">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1736.075" y="391.2815">1</text></g><!--MD5=[7f1d0bf7102f85089487bdb0fa0969e2]
+link Exam to Course--><g id="link_Exam_Course"><path codeLine="162" d="M150.11,402.21 C168.09,377.81 198.12,343.71 234,329 C286.95,307.3 697.23,304.61 749,329 C774.05,340.8 794.11,364.27 808.23,385.57 " fill="none" id="Exam-to-Course" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="810.98,389.8,809.4161,380.0761,808.2495,385.6114,802.7143,384.4449,810.98,389.8" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="31" x="545.5" y="316.0669">is for</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="798.6797" y="378.8061">1</text></g><!--MD5=[52004f01a179e763815172e17c0d286c]
+link Exam to Teacher--><g id="link_Exam_Teacher"><path codeLine="163" d="M171.07,455.98 C189.8,467.79 212.73,481.68 234,493 C461.83,614.22 746.91,733.36 860.23,779.48 " fill="none" id="Exam-to-Teacher" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="865.17,781.49,858.3444,774.39,860.5395,779.6035,855.326,781.7987,865.17,781.49" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="590" y="619.5669">is created by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="849.3877" y="774.3238">1</text></g><!--MD5=[381a135cffedaaf8cb3560fce50cff6e]
+link Invite to User--><g id="link_Invite_User"><path codeLine="165" d="M1545.45,642.29 C1553.83,671.86 1567.57,720.34 1577.58,755.66 " fill="none" id="Invite-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="1579.03,760.77,1580.4113,751.0185,1577.6602,755.9613,1572.7173,753.2102,1579.03,760.77" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="41" x="1558" y="687.0669">invites</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1568.5506" y="750.0642">1</text></g><!--MD5=[a45cf541f0bcb71e833e357988698c80]
+link Invite to Meeting--><g id="link_Invite_Meeting"><path codeLine="166" d="M1501.84,642.08 C1484.78,656.66 1466.19,676.44 1457,699 C1421.51,786.18 1456.09,899.86 1476.86,953.88 " fill="none" id="Invite-to-Meeting" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="1478.7,958.6,1479.1602,948.7619,1476.885,953.9411,1471.7059,951.6659,1478.7,958.6" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="1458" y="805.0669">is related to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1467.3531" y="948.0214">1</text></g><!--MD5=[a51ef028bf88045e25b63ffa2f831718]
+link Class to Course--><g id="link_Class_Course"><path codeLine="168" d="M1130.47,114.18 C1103.79,160.41 1043.09,257.5 971,320 C940.58,346.38 904.72,374.29 877.05,395.2 " fill="none" id="Class-to-Course" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="873.03,398.23,882.6262,396.0135,877.0248,395.2231,877.8152,389.6218,873.03,398.23" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="1106" y="248.5669">is related to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="881.051" y="406.1164">1</text></g><!--MD5=[7fa12ff05b71e6827bd9de6cb2af066e]
+link Class to Teacher--><g id="link_Class_Teacher"><path codeLine="169" d="M1167.33,114.21 C1175.87,125.9 1184.61,140.33 1189,155 C1206.82,214.61 1197.32,233.34 1189,295 C1166.13,464.47 1183.06,524.52 1087,666 C1054.69,713.58 999.8,751.1 959.69,774.09 " fill="none" id="Class-to-Teacher" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="954.87,776.82,964.6705,775.8451,959.2156,774.347,960.7137,768.8921,954.87,776.82" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="1185" y="434.0669">scheduled by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="962.3532" y="769.1047">1</text></g><!--MD5=[a7f2536356ea0e746aa343948fb860cc]
+link User to Meeting--><g id="link_User_Meeting"><path codeLine="170" d="M1568.79,840.42 C1550.27,874.41 1523.74,923.08 1506.7,954.36 " fill="none" id="User-to-Meeting" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="1504.25,958.85,1512.0794,952.8751,1506.6503,954.4638,1505.0615,949.0346,1504.25,958.85" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="1549" y="885.0669">scheduled by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="1481.8859" y="947.8923">0..*</text></g><!--MD5=[7b155e9d0a87c7271cefeaee965cd6ba]
+link ExtraordinaryClass to Teacher--><g id="link_ExtraordinaryClass_Teacher"><path codeLine="172" d="M687.57,271.19 C690.35,281.12 693.44,292.55 696,303 C719.23,397.92 706.34,427.02 742,518 C769.93,589.25 790.78,600.29 830,666 C851.08,701.31 875.37,741.82 891.6,768.87 " fill="none" id="ExtraordinaryClass-to-Teacher" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="894.34,773.42,893.1395,763.6446,891.7675,769.1325,886.2796,767.7605,894.34,773.42" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="743" y="514.0669">scheduled by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="891.6436" y="762.4785">1</text></g><!--MD5=[81f5fb179379282cf90eb27519737252]
+link ExtraordinaryClass to Student--><g id="link_ExtraordinaryClass_Student"><path codeLine="173" d="M672.26,271.29 C662.48,304.54 645.65,361.72 635.21,397.19 " fill="none" id="ExtraordinaryClass-to-Student" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="633.72,402.26,640.1067,394.7626,635.137,397.465,632.4347,392.4954,633.72,402.26" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="664" y="316.0669">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="609.8459" y="391.2815">1..*</text></g><!--MD5=[34ad2a576fb1f384766114c35329a23f]
+link ExtraordinaryClass to Course--><g id="link_ExtraordinaryClass_Course"><path codeLine="174" d="M710.18,271.02 C720.69,280.65 732.28,291.92 742,303 C764.82,329 787.5,360.67 804.39,385.7 " fill="none" id="ExtraordinaryClass-to-Course" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="807.26,389.97,805.5344,380.2735,804.4602,385.8274,798.9063,384.7532,807.26,389.97" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="757" y="316.0669">is related to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="803.6953" y="379.0053">1</text></g><!--MD5=[b49f125da165b88764b2b28941a80fc5]
+link ExamAnswer to Student--><g id="link_ExamAnswer_Student"><path codeLine="176" d="M373.81,271.1 C428.35,305.14 523.46,364.5 579.99,399.79 " fill="none" id="ExamAnswer-to-Student" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="584.33,402.49,578.8057,394.3364,580.086,399.8464,574.5759,401.1268,584.33,402.49" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="446" y="316.0669">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="566.3397" y="391.9967">1</text></g><!--MD5=[0e2da47aa86a4fb1aae475f07c5191b9]
+link ExamAnswer to Exam--><g id="link_ExamAnswer_Exam"><path codeLine="177" d="M299.7,271.32 C280.33,287.35 255.4,308.45 234,328 C208.78,351.05 181.23,378.32 161.14,398.63 " fill="none" id="ExamAnswer-to-Exam" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="157.47,402.34,166.6408,398.7488,160.984,398.7831,160.9498,393.1264,157.47,402.34" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="31" x="262" y="316.0669">is for</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="154.4349" y="391.38">1</text></g><!--MD5=[5119b72e618712b0ef396d24e60fafc1]
+@startuml DM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+  entity User
+}
+
+entity User <<entity>> <<root>> {
+  - isActive
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+}
+
+entity Student <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Manager" {
+  entity Manager
+}
+
+entity Manager <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Course" {
+  entity Course
+}
+
+entity Course <<entity>> <<root>> {
+  - code
+}
+
+package "<<aggregate>> Board" {
+  entity Board
+}
+
+entity Board <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Enrolment" {
+  entity Enrolment
+}
+
+entity Enrolment <<entity>> <<root>> {
+}
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+}
+
+entity PostIt <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Meeting" {
+  entity Meeting
+}
+
+entity Meeting <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Class" {
+  entity Class
+}
+
+entity Class <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Invite" {
+  entity Invite
+}
+
+entity Invite <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> ExtraordinaryClass" {
+  entity ExtraordinaryClass
+}
+
+entity ExtraordinaryClass <<entity>> <<root>> {
+
+}
+
+package "<<agregate>> ExamAnswer" {
+  entity ExamAnswer
+  entity AnswerToQuestion
+}
+
+package "<<agregate>> Question" {
+  entity Question
+}
+
+entity Question <<entity>> <<root>> {}
+entity ExamAnswer <<entity>> <<root>> {}
+entity AnswerToQuestion <<entity>> {}
+
+ExamAnswer *- - "1..*" AnswerToQuestion
+
+package "<<agregate>> Exam" {
+  entity Exam
+  entity Section
+}
+
+entity Exam <<entity>> <<root>> {}
+entity Section <<entity>> {}
+
+package "<<aggregate>> BoardHistory" {
+  entity BoardHistory
+
+  entity PostItEvent
+}
+
+entity BoardHistory <<entity>> <<root>> {
+
+}
+
+entity PostItEvent <<entity>> {
+
+}
+
+Exam *- - "1..*" Section
+Section - -> "1..*" Question : has
+
+entity ExamAnswer <<entity>> <<root>> {
+
+}
+
+Teacher -|> User
+Student - -|> User
+Manager - -|> User
+
+Course - - -> "1..*" Teacher : has teachers
+Course - -> "1" Teacher : has a responsible
+
+Enrolment - -> "1" Student : has
+Enrolment - -> "1" Course : is for
+
+Board - - -> "1" User : is owned by
+
+PostIt - -> "1" Board: belongs to
+
+
+Exam -> "1" Course : is for
+Exam - -> "1" Teacher : is created by
+
+Invite - -> "1" User : invites
+Invite - -> "1" Meeting : is related to
+
+Class - - -> "1" Course : is related to
+Class - - -> "1" Teacher : scheduled by
+User - -> "0..*" Meeting : scheduled by
+
+ExtraordinaryClass - -> "1" Teacher : scheduled by
+ExtraordinaryClass - -> "1..*" Student : has
+ExtraordinaryClass - -> "1" Course : is related to
+
+ExamAnswer - -> "1" Student : belongs to
+ExamAnswer - -> "1" Exam : is for
+
+@enduml
+
+@startuml DM
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+  entity User
+}
+
+entity User <<entity>> <<root>> {
+  - isActive
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+}
+
+entity Student <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Manager" {
+  entity Manager
+}
+
+entity Manager <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Course" {
+  entity Course
+}
+
+entity Course <<entity>> <<root>> {
+  - code
+}
+
+package "<<aggregate>> Board" {
+  entity Board
+}
+
+entity Board <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Enrolment" {
+  entity Enrolment
+}
+
+entity Enrolment <<entity>> <<root>> {
+}
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+}
+
+entity PostIt <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Meeting" {
+  entity Meeting
+}
+
+entity Meeting <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Class" {
+  entity Class
+}
+
+entity Class <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> Invite" {
+  entity Invite
+}
+
+entity Invite <<entity>> <<root>> {
+
+}
+
+package "<<aggregate>> ExtraordinaryClass" {
+  entity ExtraordinaryClass
+}
+
+entity ExtraordinaryClass <<entity>> <<root>> {
+
+}
+
+package "<<agregate>> ExamAnswer" {
+  entity ExamAnswer
+  entity AnswerToQuestion
+}
+
+package "<<agregate>> Question" {
+  entity Question
+}
+
+entity Question <<entity>> <<root>> {}
+entity ExamAnswer <<entity>> <<root>> {}
+entity AnswerToQuestion <<entity>> {}
+
+ExamAnswer *- - "1..*" AnswerToQuestion
+
+package "<<agregate>> Exam" {
+  entity Exam
+  entity Section
+}
+
+entity Exam <<entity>> <<root>> {}
+entity Section <<entity>> {}
+
+package "<<aggregate>> BoardHistory" {
+  entity BoardHistory
+
+  entity PostItEvent
+}
+
+entity BoardHistory <<entity>> <<root>> {
+
+}
+
+entity PostItEvent <<entity>> {
+
+}
+
+Exam *- - "1..*" Section
+Section - -> "1..*" Question : has
+
+entity ExamAnswer <<entity>> <<root>> {
+
+}
+
+Teacher -|> User
+Student - -|> User
+Manager - -|> User
+
+Course - - -> "1..*" Teacher : has teachers
+Course - -> "1" Teacher : has a responsible
+
+Enrolment - -> "1" Student : has
+Enrolment - -> "1" Course : is for
+
+Board - - -> "1" User : is owned by
+
+PostIt - -> "1" Board: belongs to
+
+
+Exam -> "1" Course : is for
+Exam - -> "1" Teacher : is created by
+
+Invite - -> "1" User : invites
+Invite - -> "1" Meeting : is related to
+
+Class - - -> "1" Course : is related to
+Class - - -> "1" Teacher : scheduled by
+User - -> "0..*" Meeting : scheduled by
+
+ExtraordinaryClass - -> "1" Teacher : scheduled by
+ExtraordinaryClass - -> "1..*" Student : has
+ExtraordinaryClass - -> "1" Course : is related to
+
+ExamAnswer - -> "1" Student : belongs to
+ExamAnswer - -> "1" Exam : is for
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

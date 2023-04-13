@@ -63,7 +63,7 @@ Course --> "1" CourseState : is in
 
 Enrolment --> "1" Course : is for
 
-Exam --> "1" Course : is for
+Exam ---> "1" Course : is from
 
 Class ---> "1" Course : is related to
 
