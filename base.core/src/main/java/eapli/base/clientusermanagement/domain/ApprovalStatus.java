@@ -25,5 +25,5 @@ package eapli.base.clientusermanagement.domain;
  * @author Jorge Santos ajs@isep.ipp.pt
  */
 public enum ApprovalStatus {
-    PENDING, ACCEPTED, REFUSED;
+  PENDING, ACCEPTED, REFUSED;
 }

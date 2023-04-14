@@ -44,28 +44,28 @@ import eapli.framework.infrastructure.pubsub.impl.inprocess.service.InProcessPub
  */
 @UseCaseController
 /* package */ class AddUserOnSignupAcceptedController {
-	private final UserRepository userRepository = PersistenceContext.repositories().users();
-	private final EventPublisher dispatcher = InProcessPubSub.publisher();
+  private final UserRepository userRepository = PersistenceContext.repositories().users();
+  private final EventPublisher dispatcher = InProcessPubSub.publisher();
 
-	/**
-	 *
-	 * @param theSignupRequest
-	 * @return
-	 * @throws ConcurrencyException
-	 * @throws IntegrityViolationException
-	 */
-	public SystemUser addUser(final SignupAcceptedEvent theSignupRequest) {
+  /**
+   *
+   * @param theSignupRequest
+   * @return
+   * @throws ConcurrencyException
+   * @throws IntegrityViolationException
+   */
+  public SystemUser addUser(final SignupAcceptedEvent theSignupRequest) {
 
-		final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
-		userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
-				.withName(theSignupRequest.name()).withEmail(theSignupRequest.email()).withRoles(BaseRoles.CLIENT_USER);
-		final SystemUser newUser = userRepository.save(userBuilder.build());
+    final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
+    userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
+        .withName(theSignupRequest.name()).withEmail(theSignupRequest.email()).withRoles(BaseRoles.CLIENT_USER);
+    final SystemUser newUser = userRepository.save(userBuilder.build());
 
-		// notify interested parties
-		final DomainEvent event = new NewUserRegisteredFromSignupEvent(theSignupRequest.mecanographicNumber(),
-				newUser.username());
-		dispatcher.publish(event);
+    // notify interested parties
+    final DomainEvent event = new NewUserRegisteredFromSignupEvent(theSignupRequest.mecanographicNumber(),
+        newUser.username());
+    dispatcher.publish(event);
 
-		return newUser;
-	}
+    return newUser;
+  }
 }

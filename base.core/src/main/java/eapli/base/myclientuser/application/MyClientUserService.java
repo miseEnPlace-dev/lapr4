@@ -37,22 +37,22 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
  */
 public class MyClientUserService {
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
-    private final ClientUserRepository repo = PersistenceContext.repositories().clientUsers();
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  private final ClientUserRepository repo = PersistenceContext.repositories().clientUsers();
 
-    public ClientUser me() {
-        final UserSession s = authz.session().orElseThrow(IllegalStateException::new);
-        final SystemUser myUser = s.authenticatedUser();
-        // TODO cache the client user object
-        final Optional<ClientUser> me = repo.findByUsername(myUser.identity());
-        return me.orElseThrow(IllegalStateException::new);
-    }
+  public ClientUser me() {
+    final UserSession s = authz.session().orElseThrow(IllegalStateException::new);
+    final SystemUser myUser = s.authenticatedUser();
+    // TODO cache the client user object
+    final Optional<ClientUser> me = repo.findByUsername(myUser.identity());
+    return me.orElseThrow(IllegalStateException::new);
+  }
 
-    public ClientUser myUser() {
-        authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.CLIENT_USER);
-        final UserSession s = authz.session().orElseThrow(IllegalStateException::new);
-        final SystemUser me = s.authenticatedUser();
-        return repo.findByUsername(me.identity()).orElseThrow(IllegalStateException::new);
-    }
+  public ClientUser myUser() {
+    authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.CLIENT_USER);
+    final UserSession s = authz.session().orElseThrow(IllegalStateException::new);
+    final SystemUser me = s.authenticatedUser();
+    return repo.findByUsername(me.identity()).orElseThrow(IllegalStateException::new);
+  }
 
 }

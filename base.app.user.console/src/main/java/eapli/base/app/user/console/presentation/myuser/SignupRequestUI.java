@@ -35,33 +35,33 @@ import eapli.framework.presentation.console.AbstractUI;
  */
 @SuppressWarnings("squid:S106")
 public class SignupRequestUI extends AbstractUI {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignupRequestUI.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SignupRequestUI.class);
 
-    private final SignupController theController = new SignupController();
+  private final SignupController theController = new SignupController();
 
-    @Override
-    protected boolean doShow() {
-        final UserDataWidget userData = new UserDataWidget();
+  @Override
+  protected boolean doShow() {
+    final UserDataWidget userData = new UserDataWidget();
 
-        userData.show();
+    userData.show();
 
-        final String mecanographicNumber = Console.readLine("Mecanographic Number");
+    final String mecanographicNumber = Console.readLine("Mecanographic Number");
 
-        try {
-            this.theController.signup(userData.username(), userData.password(),
-                    userData.firstName(), userData.lastName(), userData.email(),
-                    mecanographicNumber);
-        } catch (final IntegrityViolationException | ConcurrencyException e) {
-            LOGGER.error("Error performing the operation", e);
-            System.out.println(
-                    "Unfortunatelly there was an unexpected error in the application. Please try again and if the problem persists, contact your system admnistrator.");
-        }
-
-        return true;
+    try {
+      this.theController.signup(userData.username(), userData.password(),
+          userData.firstName(), userData.lastName(), userData.email(),
+          mecanographicNumber);
+    } catch (final IntegrityViolationException | ConcurrencyException e) {
+      LOGGER.error("Error performing the operation", e);
+      System.out.println(
+          "Unfortunatelly there was an unexpected error in the application. Please try again and if the problem persists, contact your system admnistrator.");
     }
 
-    @Override
-    public String headline() {
-        return "Sign Up";
-    }
+    return true;
+  }
+
+  @Override
+  public String headline() {
+    return "Sign Up";
+  }
 }

@@ -39,23 +39,21 @@ import java.util.Optional;
  */
 public class ClientUserService {
 
-    private final AuthorizationService authz =
-            AuthzRegistry.authorizationService();
-    private final ClientUserRepository repo =
-            PersistenceContext.repositories().clientUsers();
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  private final ClientUserRepository repo = PersistenceContext.repositories().clientUsers();
 
-    public Optional<ClientUser> findClientUserByMecNumber(
-            final String mecNumber) {
-        authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER,
-                BaseRoles.ADMIN,
-                BaseRoles.CASHIER);
-        return repo.ofIdentity(MecanographicNumber.valueOf(mecNumber));
-    }
+  public Optional<ClientUser> findClientUserByMecNumber(
+      final String mecNumber) {
+    authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER,
+        BaseRoles.ADMIN,
+        BaseRoles.CASHIER);
+    return repo.ofIdentity(MecanographicNumber.valueOf(mecNumber));
+  }
 
-    public Optional<ClientUser> findClientUserByUsername(
-            final Username user) {
-        authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER,
-                BaseRoles.ADMIN);
-        return repo.findByUsername(user);
-    }
+  public Optional<ClientUser> findClientUserByUsername(
+      final Username user) {
+    authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER,
+        BaseRoles.ADMIN);
+    return repo.findByUsername(user);
+  }
 }

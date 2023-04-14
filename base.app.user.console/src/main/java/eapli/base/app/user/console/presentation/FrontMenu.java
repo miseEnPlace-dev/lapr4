@@ -39,38 +39,38 @@ import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
  */
 public class FrontMenu extends AbstractUI {
 
-    private static final int EXIT_OPTION = 0;
+  private static final int EXIT_OPTION = 0;
 
-    private static final int LOGIN_OPTION = 1;
-    private static final int SIGNUP_OPTION = 2;
+  private static final int LOGIN_OPTION = 1;
+  private static final int SIGNUP_OPTION = 2;
 
-    @Override
-    public boolean show() {
-        drawFormTitle();
-        return doShow();
-    }
+  @Override
+  public boolean show() {
+    drawFormTitle();
+    return doShow();
+  }
 
-    /**
-     * @return true if the user selected the exit option
-     */
-    @Override
-    public boolean doShow() {
-        final Menu menu = new Menu();
-        menu.addItem(LOGIN_OPTION, "Login", new ChainedAction(new LoginUI(
-                BaseRoles.CLIENT_USER)::show, () -> {
-            new MainMenu().mainLoop();
-            return true;
+  /**
+   * @return true if the user selected the exit option
+   */
+  @Override
+  public boolean doShow() {
+    final Menu menu = new Menu();
+    menu.addItem(LOGIN_OPTION, "Login", new ChainedAction(new LoginUI(
+        BaseRoles.CLIENT_USER)::show, () -> {
+          new MainMenu().mainLoop();
+          return true;
         }));
-        //TODO: instead of leaving the app, return to the main menu again
-        menu.addItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction());
-        menu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
+    // TODO: instead of leaving the app, return to the main menu again
+    menu.addItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction());
+    menu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
-        final MenuRenderer renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-        return renderer.render();
-    }
+    final MenuRenderer renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    return renderer.render();
+  }
 
-    @Override
-    public String headline() {
-        return "Base";
-    }
+  @Override
+  public String headline() {
+    return "Base";
+  }
 }

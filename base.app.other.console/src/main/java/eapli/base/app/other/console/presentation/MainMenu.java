@@ -45,83 +45,83 @@ import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
  */
 public class MainMenu extends AbstractUI {
 
-    private static final String SEPARATOR_LABEL = "--------------";
+  private static final String SEPARATOR_LABEL = "--------------";
 
-    private static final int EXIT_OPTION = 0;
+  private static final int EXIT_OPTION = 0;
 
-    // MAIN MENU
-    private static final int MY_USER_OPTION = 1;
-    private static final int SALES_OPTION = 7;
+  // MAIN MENU
+  private static final int MY_USER_OPTION = 1;
+  private static final int SALES_OPTION = 7;
 
-    private static final int RECHARGE_USER_CARD_OPTION = 1;
+  private static final int RECHARGE_USER_CARD_OPTION = 1;
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
-    private final Menu menu;
-    private final MenuRenderer renderer;
+  private final Menu menu;
+  private final MenuRenderer renderer;
 
-    public MainMenu() {
-        menu = buildMainMenu();
-        renderer = getRenderer(menu);
+  public MainMenu() {
+    menu = buildMainMenu();
+    renderer = getRenderer(menu);
+  }
+
+  private MenuRenderer getRenderer(final Menu menu) {
+    final MenuRenderer theRenderer;
+    if (Application.settings().isMenuLayoutHorizontal()) {
+      theRenderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    } else {
+      theRenderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    }
+    return theRenderer;
+  }
+
+  @Override
+  public boolean doShow() {
+    return renderer.render();
+  }
+
+  @Override
+  public boolean show() {
+    drawFormTitle();
+    return doShow();
+  }
+
+  @Override
+  public String headline() {
+
+    return authz.session().map(s -> "Base [ @" + s.authenticatedUser().identity() + " ]")
+        .orElse("Base [ ==Anonymous== ]");
+  }
+
+  private Menu buildMainMenu() {
+    final Menu mainMenu = new Menu();
+
+    final Menu myUserMenu = new MyUserMenu(BaseRoles.CASHIER);
+    mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
+
+    if (!Application.settings().isMenuLayoutHorizontal()) {
+      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
     }
 
-    private MenuRenderer getRenderer(final Menu menu) {
-        final MenuRenderer theRenderer;
-        if (Application.settings().isMenuLayoutHorizontal()) {
-            theRenderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-        } else {
-            theRenderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-        }
-        return theRenderer;
+    if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.CASHIER)) {
+      final Menu cashierMenu = buildCashierMenu();
+      mainMenu.addSubMenu(SALES_OPTION, cashierMenu);
     }
 
-    @Override
-    public boolean doShow() {
-        return renderer.render();
+    if (!Application.settings().isMenuLayoutHorizontal()) {
+      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
     }
 
-    @Override
-    public boolean show() {
-        drawFormTitle();
-        return doShow();
-    }
+    mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
-    @Override
-    public String headline() {
+    return mainMenu;
+  }
 
-        return authz.session().map(s -> "Base [ @" + s.authenticatedUser().identity() + " ]")
-                .orElse("Base [ ==Anonymous== ]");
-    }
+  private Menu buildCashierMenu() {
+    final Menu cashierMenu = new Menu("Sales  >");
 
-    private Menu buildMainMenu() {
-        final Menu mainMenu = new Menu();
+    cashierMenu.addItem(EXIT_OPTION, "Return", Actions.SUCCESS);
 
-        final Menu myUserMenu = new MyUserMenu(BaseRoles.CASHIER);
-        mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
-        if (!Application.settings().isMenuLayoutHorizontal()) {
-            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-        }
-
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.CASHIER)) {
-            final Menu cashierMenu = buildCashierMenu();
-            mainMenu.addSubMenu(SALES_OPTION, cashierMenu);
-        }
-
-        if (!Application.settings().isMenuLayoutHorizontal()) {
-            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-        }
-
-        mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
-
-        return mainMenu;
-    }
-
-    private Menu buildCashierMenu() {
-        final Menu cashierMenu = new Menu("Sales  >");
-
-        cashierMenu.addItem(EXIT_OPTION, "Return", Actions.SUCCESS);
-
-        return cashierMenu;
-    }
+    return cashierMenu;
+  }
 }

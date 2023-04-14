@@ -49,55 +49,55 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 @Entity
 public class ClientUser implements AggregateRoot<MecanographicNumber> {
 
-    @Version
-    private Long version;
+  @Version
+  private Long version;
 
-    @EmbeddedId
-    private MecanographicNumber mecanographicNumber;
+  @EmbeddedId
+  private MecanographicNumber mecanographicNumber;
 
-    /**
-     * cascade = CascadeType.NONE as the systemUser is part of another aggregate
-     */
-    @OneToOne()
-    private SystemUser systemUser;
+  /**
+   * cascade = CascadeType.NONE as the systemUser is part of another aggregate
+   */
+  @OneToOne()
+  private SystemUser systemUser;
 
-    public ClientUser(final SystemUser user, final MecanographicNumber mecanographicNumber) {
-        if (mecanographicNumber == null || user == null) {
-            throw new IllegalArgumentException();
-        }
-        this.systemUser = user;
-        this.mecanographicNumber = mecanographicNumber;
+  public ClientUser(final SystemUser user, final MecanographicNumber mecanographicNumber) {
+    if (mecanographicNumber == null || user == null) {
+      throw new IllegalArgumentException();
     }
+    this.systemUser = user;
+    this.mecanographicNumber = mecanographicNumber;
+  }
 
-    protected ClientUser() {
-        // for ORM only
-    }
+  protected ClientUser() {
+    // for ORM only
+  }
 
-    public SystemUser user() {
-        return this.systemUser;
-    }
+  public SystemUser user() {
+    return this.systemUser;
+  }
 
-    @Override
-    public boolean equals(final Object o) {
-        return DomainEntities.areEqual(this, o);
-    }
+  @Override
+  public boolean equals(final Object o) {
+    return DomainEntities.areEqual(this, o);
+  }
 
-    @Override
-    public int hashCode() {
-        return DomainEntities.hashCode(this);
-    }
+  @Override
+  public int hashCode() {
+    return DomainEntities.hashCode(this);
+  }
 
-    @Override
-    public boolean sameAs(final Object other) {
-        return DomainEntities.areEqual(this, other);
-    }
+  @Override
+  public boolean sameAs(final Object other) {
+    return DomainEntities.areEqual(this, other);
+  }
 
-    public MecanographicNumber mecanographicNumber() {
-        return identity();
-    }
+  public MecanographicNumber mecanographicNumber() {
+    return identity();
+  }
 
-    @Override
-    public MecanographicNumber identity() {
-        return this.mecanographicNumber;
-    }
+  @Override
+  public MecanographicNumber identity() {
+    return this.mecanographicNumber;
+  }
 }

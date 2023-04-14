@@ -32,20 +32,20 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
 class JpaSignupRequestRepository extends JpaAutoTxRepository<SignupRequest, Username, Username>
-        implements SignupRequestRepository {
+    implements SignupRequestRepository {
 
-    public JpaSignupRequestRepository(final TransactionalContext autoTx) {
-        super(autoTx, "username");
-    }
+  public JpaSignupRequestRepository(final TransactionalContext autoTx) {
+    super(autoTx, "username");
+  }
 
-    public JpaSignupRequestRepository(final String puname) {
-        super(puname, Application.settings().getExtendedPersistenceProperties(), "username");
-    }
+  public JpaSignupRequestRepository(final String puname) {
+    super(puname, Application.settings().getExtendedPersistenceProperties(), "username");
+  }
 
-    @Override
-    public Iterable<SignupRequest> pendingSignupRequests() {
-        return match(
-                "e.approvalStatus=eapli.base.clientusermanagement.domain"
-                        + ".ApprovalStatus.PENDING");
-    }
+  @Override
+  public Iterable<SignupRequest> pendingSignupRequests() {
+    return match(
+        "e.approvalStatus=eapli.base.clientusermanagement.domain"
+            + ".ApprovalStatus.PENDING");
+  }
 }

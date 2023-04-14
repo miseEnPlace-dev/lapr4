@@ -34,35 +34,35 @@ import eapli.framework.visitor.Visitor;
  */
 @SuppressWarnings({ "squid:S106" })
 public class ListUsersUI extends AbstractListUI<SystemUser> {
-    private ListUsersController theController = new ListUsersController();
+  private ListUsersController theController = new ListUsersController();
 
-    @Override
-    public String headline() {
-        return "List Users";
-    }
+  @Override
+  public String headline() {
+    return "List Users";
+  }
 
-    @Override
-    protected String emptyMessage() {
-        return "No data.";
-    }
+  @Override
+  protected String emptyMessage() {
+    return "No data.";
+  }
 
-    @Override
-    protected Iterable<SystemUser> elements() {
-        return theController.allUsers();
-    }
+  @Override
+  protected Iterable<SystemUser> elements() {
+    return theController.allUsers();
+  }
 
-    @Override
-    protected Visitor<SystemUser> elementPrinter() {
-        return new SystemUserPrinter();
-    }
+  @Override
+  protected Visitor<SystemUser> elementPrinter() {
+    return new SystemUserPrinter();
+  }
 
-    @Override
-    protected String elementName() {
-        return "User";
-    }
+  @Override
+  protected String elementName() {
+    return "User";
+  }
 
-    @Override
-    protected String listHeader() {
-        return String.format("#  %-10s%-30s%-30s", "USERNAME", "F. NAME", "L. NAME");
-    }
+  @Override
+  protected String listHeader() {
+    return String.format("#  %-10s%-30s%-30s", "USERNAME", "F. NAME", "L. NAME");
+  }
 }

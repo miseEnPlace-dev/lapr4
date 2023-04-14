@@ -38,60 +38,58 @@ import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
  */
 class MainMenu extends ClientUserBaseUI {
 
-    private static final String SEPARATOR_LABEL = "--------------";
+  private static final String SEPARATOR_LABEL = "--------------";
 
-    private static final String RETURN = "Return ";
+  private static final String RETURN = "Return ";
 
-    private static final String NOT_IMPLEMENTED_YET = "Not implemented yet";
+  private static final String NOT_IMPLEMENTED_YET = "Not implemented yet";
 
-    private static final int EXIT_OPTION = 0;
+  private static final int EXIT_OPTION = 0;
 
-    // MAIN MENU
-    private static final int MY_USER_OPTION = 1;
-    private static final int BOOKINGS_OPTION = 2;
-    private static final int ACCOUNT_OPTION = 3;
-    private static final int SETTINGS_OPTION = 4;
+  // MAIN MENU
+  private static final int MY_USER_OPTION = 1;
+  private static final int BOOKINGS_OPTION = 2;
+  private static final int ACCOUNT_OPTION = 3;
+  private static final int SETTINGS_OPTION = 4;
 
-    // BOOKINGS MENU
-    private static final int BOOK_A_MEAL_OPTION = 2;
-    private static final int LIST_MY_BOOKINGS_OPTION = 3;
+  // BOOKINGS MENU
+  private static final int BOOK_A_MEAL_OPTION = 2;
+  private static final int LIST_MY_BOOKINGS_OPTION = 3;
 
-    // ACCOUNT MENU
-    private static final int LIST_MOVEMENTS_OPTION = 1;
+  // ACCOUNT MENU
+  private static final int LIST_MOVEMENTS_OPTION = 1;
 
-    // SETTINGS
-    private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
+  // SETTINGS
+  private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
 
-    private final AuthorizationService authz =
-            AuthzRegistry.authorizationService();
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
-    @Override
-    public boolean show() {
-        drawFormTitle();
-        return doShow();
-    }
+  @Override
+  public boolean show() {
+    drawFormTitle();
+    return doShow();
+  }
 
-    /**
-     * @return true if the user selected the exit option
-     */
-    @Override
-    public boolean doShow() {
-        final Menu menu = buildMainMenu();
-        final MenuRenderer renderer =
-                new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-        return renderer.render();
-    }
+  /**
+   * @return true if the user selected the exit option
+   */
+  @Override
+  public boolean doShow() {
+    final Menu menu = buildMainMenu();
+    final MenuRenderer renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    return renderer.render();
+  }
 
-    private Menu buildMainMenu() {
-        final Menu mainMenu = new Menu();
+  private Menu buildMainMenu() {
+    final Menu mainMenu = new Menu();
 
-        final Menu myUserMenu = new MyUserMenu();
-        mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
+    final Menu myUserMenu = new MyUserMenu();
+    mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
-        mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+    mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
-        mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
+    mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
-        return mainMenu;
-    }
+    return mainMenu;
+  }
 }

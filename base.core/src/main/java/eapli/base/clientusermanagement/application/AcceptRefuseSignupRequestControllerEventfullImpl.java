@@ -53,59 +53,59 @@ import eapli.framework.validations.Preconditions;
 @UseCaseController
 public class AcceptRefuseSignupRequestControllerEventfullImpl implements AcceptRefuseSignupRequestController {
 
-	private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories().signupRequests();
-	private final AuthorizationService authorizationService = AuthzRegistry.authorizationService();
-	private final EventPublisher dispatcher = InProcessPubSub.publisher();
+  private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories().signupRequests();
+  private final AuthorizationService authorizationService = AuthzRegistry.authorizationService();
+  private final EventPublisher dispatcher = InProcessPubSub.publisher();
 
-	@Override
-	@SuppressWarnings("squid:S1226")
-	public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest) {
-		authorizationService.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER, BaseRoles.ADMIN);
+  @Override
+  @SuppressWarnings("squid:S1226")
+  public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest) {
+    authorizationService.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER, BaseRoles.ADMIN);
 
-		Preconditions.nonNull(theSignupRequest);
+    Preconditions.nonNull(theSignupRequest);
 
-		theSignupRequest = markSignupRequestAsAccepted(theSignupRequest);
-		return theSignupRequest;
-	}
+    theSignupRequest = markSignupRequestAsAccepted(theSignupRequest);
+    return theSignupRequest;
+  }
 
-	/**
-	 * modify Signup Request to accepted
-	 *
-	 * @param theSignupRequest
-	 * @return
-	 * @throws ConcurrencyException
-	 * @throws IntegrityViolationException
-	 */
-	@SuppressWarnings("squid:S1226")
-	private SignupRequest markSignupRequestAsAccepted(SignupRequest theSignupRequest) {
-		// do just what is needed in the scope of this use case
-		theSignupRequest.accept();
-		theSignupRequest = signupRequestsRepository.save(theSignupRequest);
+  /**
+   * modify Signup Request to accepted
+   *
+   * @param theSignupRequest
+   * @return
+   * @throws ConcurrencyException
+   * @throws IntegrityViolationException
+   */
+  @SuppressWarnings("squid:S1226")
+  private SignupRequest markSignupRequestAsAccepted(SignupRequest theSignupRequest) {
+    // do just what is needed in the scope of this use case
+    theSignupRequest.accept();
+    theSignupRequest = signupRequestsRepository.save(theSignupRequest);
 
-		// notify interested parties (if any)
-		final DomainEvent event = new SignupAcceptedEvent(theSignupRequest);
-		dispatcher.publish(event);
+    // notify interested parties (if any)
+    final DomainEvent event = new SignupAcceptedEvent(theSignupRequest);
+    dispatcher.publish(event);
 
-		return theSignupRequest;
-	}
+    return theSignupRequest;
+  }
 
-	@Override
-	@Transactional
-	public SignupRequest refuseSignupRequest(final SignupRequest theSignupRequest) {
-		authorizationService.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER, BaseRoles.ADMIN);
+  @Override
+  @Transactional
+  public SignupRequest refuseSignupRequest(final SignupRequest theSignupRequest) {
+    authorizationService.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER, BaseRoles.ADMIN);
 
-		Preconditions.nonNull(theSignupRequest);
+    Preconditions.nonNull(theSignupRequest);
 
-		theSignupRequest.refuse();
-		return signupRequestsRepository.save(theSignupRequest);
-	}
+    theSignupRequest.refuse();
+    return signupRequestsRepository.save(theSignupRequest);
+  }
 
-	/**
-	 *
-	 * @return
-	 */
-	@Override
-	public Iterable<SignupRequest> listPendingSignupRequests() {
-		return signupRequestsRepository.pendingSignupRequests();
-	}
+  /**
+   *
+   * @return
+   */
+  @Override
+  public Iterable<SignupRequest> listPendingSignupRequests() {
+    return signupRequestsRepository.pendingSignupRequests();
+  }
 }

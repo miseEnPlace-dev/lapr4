@@ -46,52 +46,52 @@ import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
  */
 public class AddUserUI extends AbstractUI {
 
-    private final AddUserController theController = new AddUserController();
+  private final AddUserController theController = new AddUserController();
 
-    @Override
-    protected boolean doShow() {
-        // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
-        // UtenteApp
-        final String username = Console.readLine("Username");
-        final String password = Console.readLine("Password");
-        final String firstName = Console.readLine("First Name");
-        final String lastName = Console.readLine("Last Name");
-        final String email = Console.readLine("E-Mail");
+  @Override
+  protected boolean doShow() {
+    // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
+    // UtenteApp
+    final String username = Console.readLine("Username");
+    final String password = Console.readLine("Password");
+    final String firstName = Console.readLine("First Name");
+    final String lastName = Console.readLine("Last Name");
+    final String email = Console.readLine("E-Mail");
 
-        final Set<Role> roleTypes = new HashSet<>();
-        boolean show;
-        do {
-            show = showRoles(roleTypes);
-        } while (!show);
+    final Set<Role> roleTypes = new HashSet<>();
+    boolean show;
+    do {
+      show = showRoles(roleTypes);
+    } while (!show);
 
-        try {
-            this.theController.addUser(username, password, firstName, lastName, email, roleTypes);
-        } catch (final IntegrityViolationException | ConcurrencyException e) {
-            System.out.println("That username is already in use.");
-        }
-
-        return false;
+    try {
+      this.theController.addUser(username, password, firstName, lastName, email, roleTypes);
+    } catch (final IntegrityViolationException | ConcurrencyException e) {
+      System.out.println("That username is already in use.");
     }
 
-    private boolean showRoles(final Set<Role> roleTypes) {
-        // TODO we could also use the "widget" classes from the framework...
-        final Menu rolesMenu = buildRolesMenu(roleTypes);
-        final MenuRenderer renderer = new VerticalMenuRenderer(rolesMenu, MenuItemRenderer.DEFAULT);
-        return renderer.render();
-    }
+    return false;
+  }
 
-    private Menu buildRolesMenu(final Set<Role> roleTypes) {
-        final Menu rolesMenu = new Menu();
-        int counter = 0;
-        rolesMenu.addItem(MenuItem.of(counter++, "No Role", Actions.SUCCESS));
-        for (final Role roleType : theController.getRoleTypes()) {
-            rolesMenu.addItem(MenuItem.of(counter++, roleType.toString(), () -> roleTypes.add(roleType)));
-        }
-        return rolesMenu;
-    }
+  private boolean showRoles(final Set<Role> roleTypes) {
+    // TODO we could also use the "widget" classes from the framework...
+    final Menu rolesMenu = buildRolesMenu(roleTypes);
+    final MenuRenderer renderer = new VerticalMenuRenderer(rolesMenu, MenuItemRenderer.DEFAULT);
+    return renderer.render();
+  }
 
-    @Override
-    public String headline() {
-        return "Add User";
+  private Menu buildRolesMenu(final Set<Role> roleTypes) {
+    final Menu rolesMenu = new Menu();
+    int counter = 0;
+    rolesMenu.addItem(MenuItem.of(counter++, "No Role", Actions.SUCCESS));
+    for (final Role roleType : theController.getRoleTypes()) {
+      rolesMenu.addItem(MenuItem.of(counter++, roleType.toString(), () -> roleTypes.add(roleType)));
     }
+    return rolesMenu;
+  }
+
+  @Override
+  public String headline() {
+    return "Add User";
+  }
 }

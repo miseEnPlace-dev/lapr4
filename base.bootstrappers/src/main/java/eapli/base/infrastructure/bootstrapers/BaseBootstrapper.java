@@ -49,67 +49,67 @@ import eapli.framework.validations.Invariants;
  */
 @SuppressWarnings("squid:S106")
 public class BaseBootstrapper implements Action {
-	private static final Logger LOGGER = LoggerFactory.getLogger(BaseBootstrapper.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BaseBootstrapper.class);
 
-	private static final String POWERUSER_A1 = "poweruserA1";
-	private static final String POWERUSER = "poweruser";
+  private static final String POWERUSER_A1 = "poweruserA1";
+  private static final String POWERUSER = "poweruser";
 
-	private final AuthorizationService authz = AuthzRegistry.authorizationService();
-	private final AuthenticationService authenticationService = AuthzRegistry.authenticationService();
-	private final UserRepository userRepository = PersistenceContext.repositories().users();
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  private final AuthenticationService authenticationService = AuthzRegistry.authenticationService();
+  private final UserRepository userRepository = PersistenceContext.repositories().users();
 
-	@Override
-	public boolean execute() {
-		// declare bootstrap actions
-		final Action[] actions = { new MasterUsersBootstrapper(), };
+  @Override
+  public boolean execute() {
+    // declare bootstrap actions
+    final Action[] actions = { new MasterUsersBootstrapper(), };
 
-		registerPowerUser();
-		authenticateForBootstrapping();
+    registerPowerUser();
+    authenticateForBootstrapping();
 
-		// execute all bootstrapping
-		boolean ret = true;
-		for (final Action boot : actions) {
-			System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
-			ret &= boot.execute();
-		}
-		return ret;
-	}
+    // execute all bootstrapping
+    boolean ret = true;
+    for (final Action boot : actions) {
+      System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
+      ret &= boot.execute();
+    }
+    return ret;
+  }
 
-	/**
-	 * register a power user directly in the persistence layer as we need to
-	 * circumvent authorisations in the Application Layer
-	 */
-	private boolean registerPowerUser() {
-		final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
-		userBuilder.withUsername(POWERUSER).withPassword(POWERUSER_A1).withName("joe", "power")
-				.withEmail("joe@email.org").withRoles(BaseRoles.POWER_USER);
-		final SystemUser newUser = userBuilder.build();
+  /**
+   * register a power user directly in the persistence layer as we need to
+   * circumvent authorisations in the Application Layer
+   */
+  private boolean registerPowerUser() {
+    final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
+    userBuilder.withUsername(POWERUSER).withPassword(POWERUSER_A1).withName("joe", "power")
+        .withEmail("joe@email.org").withRoles(BaseRoles.POWER_USER);
+    final SystemUser newUser = userBuilder.build();
 
-		SystemUser poweruser;
-		try {
-			poweruser = userRepository.save(newUser);
-			assert poweruser != null;
-			return true;
-		} catch (ConcurrencyException | IntegrityViolationException e) {
-			// ignoring exception. assuming it is just a primary key violation
-			// due to the tentative of inserting a duplicated user
-			LOGGER.warn("Assuming {} already exists (activate trace log for details)", newUser.username());
-			LOGGER.trace("Assuming existing record", e);
-			return false;
-		}
-	}
+    SystemUser poweruser;
+    try {
+      poweruser = userRepository.save(newUser);
+      assert poweruser != null;
+      return true;
+    } catch (ConcurrencyException | IntegrityViolationException e) {
+      // ignoring exception. assuming it is just a primary key violation
+      // due to the tentative of inserting a duplicated user
+      LOGGER.warn("Assuming {} already exists (activate trace log for details)", newUser.username());
+      LOGGER.trace("Assuming existing record", e);
+      return false;
+    }
+  }
 
-	/**
-	 * authenticate a super user to be able to register new users
-	 *
-	 */
-	protected void authenticateForBootstrapping() {
-		authenticationService.authenticate(POWERUSER, POWERUSER_A1);
-		Invariants.ensure(authz.hasSession());
-	}
+  /**
+   * authenticate a super user to be able to register new users
+   *
+   */
+  protected void authenticateForBootstrapping() {
+    authenticationService.authenticate(POWERUSER, POWERUSER_A1);
+    Invariants.ensure(authz.hasSession());
+  }
 
-	private String nameOfEntity(final Action boot) {
-		final String name = boot.getClass().getSimpleName();
-		return Strings.left(name, name.length() - "Bootstrapper".length());
-	}
+  private String nameOfEntity(final Action boot) {
+    final String name = boot.getClass().getSimpleName();
+    return Strings.left(name, name.length() - "Bootstrapper".length());
+  }
 }

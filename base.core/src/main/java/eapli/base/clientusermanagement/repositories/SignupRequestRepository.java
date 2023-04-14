@@ -30,5 +30,5 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
  */
 public interface SignupRequestRepository extends DomainRepository<Username, SignupRequest> {
 
-    Iterable<SignupRequest> pendingSignupRequests();
+  Iterable<SignupRequest> pendingSignupRequests();
 }

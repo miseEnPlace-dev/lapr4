@@ -30,14 +30,14 @@ import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainR
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
 public class InMemorySignupRequestRepository extends
-        InMemoryDomainRepository<SignupRequest, Username> implements SignupRequestRepository {
+    InMemoryDomainRepository<SignupRequest, Username> implements SignupRequestRepository {
 
-    static {
-        InMemoryInitializer.init();
-    }
+  static {
+    InMemoryInitializer.init();
+  }
 
-    @Override
-    public Iterable<SignupRequest> pendingSignupRequests() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  @Override
+  public Iterable<SignupRequest> pendingSignupRequests() {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 }

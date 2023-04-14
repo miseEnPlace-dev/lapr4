@@ -32,21 +32,21 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
  */
 public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Action {
 
-    @Override
-    public boolean execute() {
-        registerAdmin("admin", TestDataConstants.PASSWORD1, "Jane", "Doe Admin",
-                "jane.doe@email.local");
-        return true;
-    }
+  @Override
+  public boolean execute() {
+    registerAdmin("admin", TestDataConstants.PASSWORD1, "Jane", "Doe Admin",
+        "jane.doe@email.local");
+    return true;
+  }
 
-    /**
-     *
-     */
-    private void registerAdmin(final String username, final String password, final String firstName,
-            final String lastName, final String email) {
-        final Set<Role> roles = new HashSet<>();
-        roles.add(BaseRoles.ADMIN);
+  /**
+   *
+   */
+  private void registerAdmin(final String username, final String password, final String firstName,
+      final String lastName, final String email) {
+    final Set<Role> roles = new HashSet<>();
+    roles.add(BaseRoles.ADMIN);
 
-        registerUser(username, password, firstName, lastName, email, roles);
-    }
+    registerUser(username, password, firstName, lastName, email, roles);
+  }
 }

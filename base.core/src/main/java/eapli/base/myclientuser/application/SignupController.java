@@ -40,25 +40,25 @@ import eapli.framework.time.util.CurrentTimeCalendars;
 @UseCaseController
 public class SignupController {
 
-	private final SignupRequestRepository signupRequestRepository = PersistenceContext.repositories().signupRequests();
+  private final SignupRequestRepository signupRequestRepository = PersistenceContext.repositories().signupRequests();
 
-	public SignupRequest signup(final String username, final String password, final String firstName,
-			final String lastName, final String email, String mecanographicNumber, final Calendar createdOn) {
+  public SignupRequest signup(final String username, final String password, final String firstName,
+      final String lastName, final String email, String mecanographicNumber, final Calendar createdOn) {
 
-		// there is no need for authorisation check in this method as even
-		// unauthenticated users may request a signup
+    // there is no need for authorisation check in this method as even
+    // unauthenticated users may request a signup
 
-		final SignupRequestBuilder signupRequestBuilder = UserBuilderHelper.signupBuilder();
-		signupRequestBuilder.withUsername(username).withPassword(password).withName(firstName, lastName)
-				.withEmail(email).createdOn(createdOn).withMecanographicNumber(mecanographicNumber);
+    final SignupRequestBuilder signupRequestBuilder = UserBuilderHelper.signupBuilder();
+    signupRequestBuilder.withUsername(username).withPassword(password).withName(firstName, lastName)
+        .withEmail(email).createdOn(createdOn).withMecanographicNumber(mecanographicNumber);
 
-		final SignupRequest newSignupRequest = signupRequestBuilder.build();
-		return this.signupRequestRepository.save(newSignupRequest);
-	}
+    final SignupRequest newSignupRequest = signupRequestBuilder.build();
+    return this.signupRequestRepository.save(newSignupRequest);
+  }
 
-	public SignupRequest signup(final String username, final String password, final String firstName,
-			final String lastName, final String email, String mecanographicNumber) {
+  public SignupRequest signup(final String username, final String password, final String firstName,
+      final String lastName, final String email, String mecanographicNumber) {
 
-		return signup(username, password, firstName, lastName, email, mecanographicNumber, CurrentTimeCalendars.now());
-	}
+    return signup(username, password, firstName, lastName, email, mecanographicNumber, CurrentTimeCalendars.now());
+  }
 }

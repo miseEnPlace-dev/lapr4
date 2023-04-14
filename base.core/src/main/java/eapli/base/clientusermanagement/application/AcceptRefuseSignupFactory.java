@@ -31,14 +31,14 @@ package eapli.base.clientusermanagement.application;
  *
  */
 public final class AcceptRefuseSignupFactory {
-    private AcceptRefuseSignupFactory() {
-        // ensure utility
-    }
+  private AcceptRefuseSignupFactory() {
+    // ensure utility
+  }
 
-    public static AcceptRefuseSignupRequestController build() {
-        // decide and try
+  public static AcceptRefuseSignupRequestController build() {
+    // decide and try
 
-        // return new AcceptRefuseSignupRequestControllerTxImpl();
-        return new AcceptRefuseSignupRequestControllerEventfullImpl();
-    }
+    // return new AcceptRefuseSignupRequestControllerTxImpl();
+    return new AcceptRefuseSignupRequestControllerEventfullImpl();
+  }
 }

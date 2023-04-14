@@ -34,41 +34,41 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
  */
 public class JpaRepositoryFactory implements RepositoryFactory {
 
-	@Override
-	public UserRepository users(final TransactionalContext autoTx) {
-		return new JpaAutoTxUserRepository(autoTx);
-	}
+  @Override
+  public UserRepository users(final TransactionalContext autoTx) {
+    return new JpaAutoTxUserRepository(autoTx);
+  }
 
-	@Override
-	public UserRepository users() {
-		return new JpaAutoTxUserRepository(Application.settings().getPersistenceUnitName(),
-				Application.settings().getExtendedPersistenceProperties());
-	}
+  @Override
+  public UserRepository users() {
+    return new JpaAutoTxUserRepository(Application.settings().getPersistenceUnitName(),
+        Application.settings().getExtendedPersistenceProperties());
+  }
 
-	@Override
-	public JpaClientUserRepository clientUsers(final TransactionalContext autoTx) {
-		return new JpaClientUserRepository(autoTx);
-	}
+  @Override
+  public JpaClientUserRepository clientUsers(final TransactionalContext autoTx) {
+    return new JpaClientUserRepository(autoTx);
+  }
 
-	@Override
-	public JpaClientUserRepository clientUsers() {
-		return new JpaClientUserRepository(Application.settings().getPersistenceUnitName());
-	}
+  @Override
+  public JpaClientUserRepository clientUsers() {
+    return new JpaClientUserRepository(Application.settings().getPersistenceUnitName());
+  }
 
-	@Override
-	public SignupRequestRepository signupRequests(final TransactionalContext autoTx) {
-		return new JpaSignupRequestRepository(autoTx);
-	}
+  @Override
+  public SignupRequestRepository signupRequests(final TransactionalContext autoTx) {
+    return new JpaSignupRequestRepository(autoTx);
+  }
 
-	@Override
-	public SignupRequestRepository signupRequests() {
-		return new JpaSignupRequestRepository(Application.settings().getPersistenceUnitName());
-	}
+  @Override
+  public SignupRequestRepository signupRequests() {
+    return new JpaSignupRequestRepository(Application.settings().getPersistenceUnitName());
+  }
 
-	@Override
-	public TransactionalContext newTransactionalContext() {
-		return JpaAutoTxRepository.buildTransactionalContext(Application.settings().getPersistenceUnitName(),
-				Application.settings().getExtendedPersistenceProperties());
-	}
+  @Override
+  public TransactionalContext newTransactionalContext() {
+    return JpaAutoTxRepository.buildTransactionalContext(Application.settings().getPersistenceUnitName(),
+        Application.settings().getExtendedPersistenceProperties());
+  }
 
 }

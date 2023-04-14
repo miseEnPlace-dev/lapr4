@@ -57,9 +57,9 @@ import eapli.base.clientusermanagement.domain.SignupRequest;
  */
 public interface AcceptRefuseSignupRequestController {
 
-    SignupRequest acceptSignupRequest(SignupRequest theSignupRequest);
+  SignupRequest acceptSignupRequest(SignupRequest theSignupRequest);
 
-    SignupRequest refuseSignupRequest(SignupRequest theSignupRequest);
+  SignupRequest refuseSignupRequest(SignupRequest theSignupRequest);
 
-    Iterable<SignupRequest> listPendingSignupRequests();
+  Iterable<SignupRequest> listPendingSignupRequests();
 }

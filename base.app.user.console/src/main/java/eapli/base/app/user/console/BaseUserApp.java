@@ -34,38 +34,37 @@ import eapli.framework.infrastructure.pubsub.EventDispatcher;
 @SuppressWarnings("squid:S106")
 public final class BaseUserApp extends BaseApplication {
 
-	/**
-	 * Empty constructor is private to avoid instantiation of this class.
-	 */
-	private BaseUserApp() {
-	}
+  /**
+   * Empty constructor is private to avoid instantiation of this class.
+   */
+  private BaseUserApp() {
+  }
 
-	public static void main(final String[] args) {
+  public static void main(final String[] args) {
+    AuthzRegistry.configure(PersistenceContext.repositories().users(), new BasePasswordPolicy(),
+        new PlainTextEncoder());
 
-		AuthzRegistry.configure(PersistenceContext.repositories().users(), new BasePasswordPolicy(),
-				new PlainTextEncoder());
+    new BaseUserApp().run(args);
+  }
 
-		new BaseUserApp().run(args);
-	}
+  @Override
+  protected void doMain(String[] args) {
+    new FrontMenu().show();
 
-	@Override
-	protected void doMain(String[] args) {
-		new FrontMenu().show();
+  }
 
-	}
+  @Override
+  protected String appTitle() {
+    return "Base User App";
+  }
 
-	@Override
-	protected String appTitle() {
-		return "Base User App";
-	}
+  @Override
+  protected String appGoodbye() {
+    return "Bye, bye";
+  }
 
-	@Override
-	protected String appGoodbye() {
-		return "Bye, bye";
-	}
-
-	@Override
-	protected void doSetupEventHandlers(EventDispatcher dispatcher) {
-		// NOP
-	}
+  @Override
+  protected void doSetupEventHandlers(EventDispatcher dispatcher) {
+    // NOP
+  }
 }

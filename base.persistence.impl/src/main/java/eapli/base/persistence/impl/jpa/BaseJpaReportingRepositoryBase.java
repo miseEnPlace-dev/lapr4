@@ -33,12 +33,12 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaTransactionalCont
  */
 /* package */ class BaseJpaReportingRepositoryBase extends JpaTransactionalContext {
 
-    BaseJpaReportingRepositoryBase() {
-        super(Application.settings().getPersistenceUnitName(),
-                Application.settings().getExtendedPersistenceProperties());
-    }
+  BaseJpaReportingRepositoryBase() {
+    super(Application.settings().getPersistenceUnitName(),
+        Application.settings().getExtendedPersistenceProperties());
+  }
 
-    BaseJpaReportingRepositoryBase(final String persistenceUnitName) {
-        super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties());
-    }
+  BaseJpaReportingRepositoryBase(final String persistenceUnitName) {
+    super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties());
+  }
 }

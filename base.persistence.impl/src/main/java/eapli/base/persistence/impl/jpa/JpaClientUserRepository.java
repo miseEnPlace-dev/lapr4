@@ -37,34 +37,34 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
 class JpaClientUserRepository
-        extends JpaAutoTxRepository<ClientUser, MecanographicNumber, MecanographicNumber>
-        implements ClientUserRepository {
+    extends JpaAutoTxRepository<ClientUser, MecanographicNumber, MecanographicNumber>
+    implements ClientUserRepository {
 
-    public JpaClientUserRepository(final TransactionalContext autoTx) {
-        super(autoTx, "mecanographicNumber");
-    }
+  public JpaClientUserRepository(final TransactionalContext autoTx) {
+    super(autoTx, "mecanographicNumber");
+  }
 
-    public JpaClientUserRepository(final String puname) {
-        super(puname, Application.settings().getExtendedPersistenceProperties(),
-                "mecanographicNumber");
-    }
+  public JpaClientUserRepository(final String puname) {
+    super(puname, Application.settings().getExtendedPersistenceProperties(),
+        "mecanographicNumber");
+  }
 
-    @Override
-    public Optional<ClientUser> findByUsername(final Username name) {
-        final Map<String, Object> params = new HashMap<>();
-        params.put("name", name);
-        return matchOne("e.systemUser.username=:name", params);
-    }
+  @Override
+  public Optional<ClientUser> findByUsername(final Username name) {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("name", name);
+    return matchOne("e.systemUser.username=:name", params);
+  }
 
-    @Override
-    public Optional<ClientUser> findByMecanographicNumber(final MecanographicNumber number) {
-        final Map<String, Object> params = new HashMap<>();
-        params.put("number", number);
-        return matchOne("e.mecanographicNumber=:number", params);
-    }
+  @Override
+  public Optional<ClientUser> findByMecanographicNumber(final MecanographicNumber number) {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("number", number);
+    return matchOne("e.mecanographicNumber=:number", params);
+  }
 
-    @Override
-    public Iterable<ClientUser> findAllActive() {
-        return match("e.systemUser.active = true");
-    }
+  @Override
+  public Iterable<ClientUser> findAllActive() {
+    return match("e.systemUser.active = true");
+  }
 }

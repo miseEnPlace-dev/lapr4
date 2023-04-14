@@ -32,20 +32,20 @@ import eapli.framework.infrastructure.pubsub.EventHandler;
  *
  */
 public class SignupAcceptedWatchDog implements EventHandler {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SignupAcceptedWatchDog.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SignupAcceptedWatchDog.class);
 
-	@Override
-	public void onEvent(final DomainEvent domainevent) {
-		assert domainevent instanceof SignupAcceptedEvent;
+  @Override
+  public void onEvent(final DomainEvent domainevent) {
+    assert domainevent instanceof SignupAcceptedEvent;
 
-		final SignupAcceptedEvent event = (SignupAcceptedEvent) domainevent;
+    final SignupAcceptedEvent event = (SignupAcceptedEvent) domainevent;
 
-		final AddUserOnSignupAcceptedController controller = new AddUserOnSignupAcceptedController();
-		try {
-			controller.addUser(event);
-		} catch (final IntegrityViolationException e) {
-			// TODO provably should send some warning email...
-			LOGGER.error("Unable to register new user on signup event", e);
-		}
-	}
+    final AddUserOnSignupAcceptedController controller = new AddUserOnSignupAcceptedController();
+    try {
+      controller.addUser(event);
+    } catch (final IntegrityViolationException e) {
+      // TODO provably should send some warning email...
+      LOGGER.error("Unable to register new user on signup event", e);
+    }
+  }
 }

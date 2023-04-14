@@ -57,103 +57,103 @@ import eapli.framework.validations.Preconditions;
 @Entity
 public class SignupRequest implements AggregateRoot<Username> {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Version
-    private Long version;
+  @Version
+  private Long version;
 
-    @EmbeddedId
-    private Username username;
-    private Password password;
-    private Name name;
-    private EmailAddress email;
+  @EmbeddedId
+  private Username username;
+  private Password password;
+  private Name name;
+  private EmailAddress email;
 
-    private MecanographicNumber mecanographicNumber;
+  private MecanographicNumber mecanographicNumber;
 
-    @Enumerated(EnumType.STRING)
-    private ApprovalStatus approvalStatus;
-    @Temporal(TemporalType.DATE)
-    private Calendar createdOn;
+  @Enumerated(EnumType.STRING)
+  private ApprovalStatus approvalStatus;
+  @Temporal(TemporalType.DATE)
+  private Calendar createdOn;
 
-    /* package */ SignupRequest(final Username username, final Password password, final Name name,
-            final EmailAddress email, final MecanographicNumber mecanographicNumber,
-            final Calendar createdOn) {
-        Preconditions.noneNull(username, password, name, email, mecanographicNumber);
+  /* package */ SignupRequest(final Username username, final Password password, final Name name,
+      final EmailAddress email, final MecanographicNumber mecanographicNumber,
+      final Calendar createdOn) {
+    Preconditions.noneNull(username, password, name, email, mecanographicNumber);
 
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.mecanographicNumber = mecanographicNumber;
-        // by default
-        approvalStatus = ApprovalStatus.PENDING;
-        this.createdOn = createdOn;
+    this.username = username;
+    this.password = password;
+    this.name = name;
+    this.email = email;
+    this.mecanographicNumber = mecanographicNumber;
+    // by default
+    approvalStatus = ApprovalStatus.PENDING;
+    this.createdOn = createdOn;
+  }
+
+  protected SignupRequest() {
+    // for ORM only
+  }
+
+  public void accept() {
+    approvalStatus = ApprovalStatus.ACCEPTED;
+  }
+
+  public void refuse() {
+    approvalStatus = ApprovalStatus.REFUSED;
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    return DomainEntities.areEqual(this, o);
+  }
+
+  @Override
+  public int hashCode() {
+    return DomainEntities.hashCode(this);
+  }
+
+  @Override
+  public boolean sameAs(final Object other) {
+    if (!(other instanceof SignupRequest)) {
+      return false;
     }
 
-    protected SignupRequest() {
-        // for ORM only
+    final SignupRequest that = (SignupRequest) other;
+    if (this == that) {
+      return true;
     }
 
-    public void accept() {
-        approvalStatus = ApprovalStatus.ACCEPTED;
-    }
+    return username.equals(that.username) && password.equals(that.password)
+        && name.equals(that.name) && email.equals(that.email)
+        && mecanographicNumber.equals(that.mecanographicNumber);
+  }
 
-    public void refuse() {
-        approvalStatus = ApprovalStatus.REFUSED;
-    }
+  public MecanographicNumber mecanographicNumber() {
+    return mecanographicNumber;
+  }
 
-    @Override
-    public boolean equals(final Object o) {
-        return DomainEntities.areEqual(this, o);
-    }
+  @Override
+  public Username identity() {
+    return username;
+  }
 
-    @Override
-    public int hashCode() {
-        return DomainEntities.hashCode(this);
-    }
+  public Username username() {
+    return username;
+  }
 
-    @Override
-    public boolean sameAs(final Object other) {
-        if (!(other instanceof SignupRequest)) {
-            return false;
-        }
+  public Name name() {
+    return name;
+  }
 
-        final SignupRequest that = (SignupRequest) other;
-        if (this == that) {
-            return true;
-        }
+  public boolean isPending() {
+    return approvalStatus == ApprovalStatus.PENDING;
+  }
 
-        return username.equals(that.username) && password.equals(that.password)
-                && name.equals(that.name) && email.equals(that.email)
-                && mecanographicNumber.equals(that.mecanographicNumber);
-    }
+  public EmailAddress email() {
+    return email;
+  }
 
-    public MecanographicNumber mecanographicNumber() {
-        return mecanographicNumber;
-    }
-
-    @Override
-    public Username identity() {
-        return username;
-    }
-
-    public Username username() {
-        return username;
-    }
-
-    public Name name() {
-        return name;
-    }
-
-    public boolean isPending() {
-        return approvalStatus == ApprovalStatus.PENDING;
-    }
-
-    public EmailAddress email() {
-        return email;
-    }
-
-    public Password password() {
-        return password;
-    }
+  public Password password() {
+    return password;
+  }
 }

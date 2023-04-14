@@ -31,19 +31,19 @@ import eapli.framework.presentation.console.AbstractUI;
 @SuppressWarnings("squid:S106")
 public abstract class ClientUserBaseUI extends AbstractUI {
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
-    @Override
-    public String headline() {
+  @Override
+  public String headline() {
 
-        return authz.session().map(s -> "Base [ @" + s.authenticatedUser().identity() + " ] ")
-                .orElse("Base [ ==Anonymous== ]");
-    }
+    return authz.session().map(s -> "Base [ @" + s.authenticatedUser().identity() + " ] ")
+        .orElse("Base [ ==Anonymous== ]");
+  }
 
-    @Override
-    protected void drawFormTitle(final String title) {
-        final String titleBorder = BORDER.substring(0, 2) + " " + title;
-        System.out.println(titleBorder);
-        drawFormBorder();
-    }
+  @Override
+  protected void drawFormTitle(final String title) {
+    final String titleBorder = BORDER.substring(0, 2) + " " + title;
+    System.out.println(titleBorder);
+    drawFormBorder();
+  }
 }

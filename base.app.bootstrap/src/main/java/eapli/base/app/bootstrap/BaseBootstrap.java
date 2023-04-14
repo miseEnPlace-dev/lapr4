@@ -41,63 +41,63 @@ import eapli.framework.util.ArrayPredicates;
  */
 @SuppressWarnings("squid:S106")
 public final class BaseBootstrap extends BaseApplication {
-	/**
-	 * avoid instantiation of this class.
-	 */
-	private BaseBootstrap() {
-	}
+  /**
+   * avoid instantiation of this class.
+   */
+  private BaseBootstrap() {
+  }
 
-	private boolean isToBootstrapDemoData;
-	private boolean isToRunSampleE2E;
+  private boolean isToBootstrapDemoData;
+  private boolean isToRunSampleE2E;
 
-	public static void main(final String[] args) {
+  public static void main(final String[] args) {
 
-		AuthzRegistry.configure(PersistenceContext.repositories().users(), new BasePasswordPolicy(),
-				new PlainTextEncoder());
+    AuthzRegistry.configure(PersistenceContext.repositories().users(), new BasePasswordPolicy(),
+        new PlainTextEncoder());
 
-		new BaseBootstrap().run(args);
-	}
+    new BaseBootstrap().run(args);
+  }
 
-	@Override
-	protected void doMain(final String[] args) {
-		handleArgs(args);
+  @Override
+  protected void doMain(final String[] args) {
+    handleArgs(args);
 
-		System.out.println("\n\n------- MASTER DATA -------");
-		new BaseBootstrapper().execute();
+    System.out.println("\n\n------- MASTER DATA -------");
+    new BaseBootstrapper().execute();
 
-		if (isToBootstrapDemoData) {
-			System.out.println("\n\n------- DEMO DATA -------");
-			new BaseDemoBootstrapper().execute();
-		}
-		if (isToRunSampleE2E) {
-			System.out.println("\n\n------- BASIC SCENARIO -------");
-			new BaseDemoSmokeTester().execute();
-		}
-	}
+    if (isToBootstrapDemoData) {
+      System.out.println("\n\n------- DEMO DATA -------");
+      new BaseDemoBootstrapper().execute();
+    }
+    if (isToRunSampleE2E) {
+      System.out.println("\n\n------- BASIC SCENARIO -------");
+      new BaseDemoSmokeTester().execute();
+    }
+  }
 
-	private void handleArgs(final String[] args) {
-		isToRunSampleE2E = ArrayPredicates.contains(args, "-smoke:basic");
-		if (isToRunSampleE2E) {
-			isToBootstrapDemoData = true;
-		} else {
-			isToBootstrapDemoData = ArrayPredicates.contains(args, "-bootstrap:demo");
-		}
-	}
+  private void handleArgs(final String[] args) {
+    isToRunSampleE2E = ArrayPredicates.contains(args, "-smoke:basic");
+    if (isToRunSampleE2E) {
+      isToBootstrapDemoData = true;
+    } else {
+      isToBootstrapDemoData = ArrayPredicates.contains(args, "-bootstrap:demo");
+    }
+  }
 
-	@Override
-	protected String appTitle() {
-		return "Bootstrapping Base data ";
-	}
+  @Override
+  protected String appTitle() {
+    return "Bootstrapping Base data ";
+  }
 
-	@Override
-	protected String appGoodbye() {
-		return "Bootstrap data done.";
-	}
+  @Override
+  protected String appGoodbye() {
+    return "Bootstrap data done.";
+  }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void doSetupEventHandlers(final EventDispatcher dispatcher) {
-		dispatcher.subscribe(new NewUserRegisteredFromSignupWatchDog(), NewUserRegisteredFromSignupEvent.class);
-		dispatcher.subscribe(new SignupAcceptedWatchDog(), SignupAcceptedEvent.class);
-	}
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void doSetupEventHandlers(final EventDispatcher dispatcher) {
+    dispatcher.subscribe(new NewUserRegisteredFromSignupWatchDog(), NewUserRegisteredFromSignupEvent.class);
+    dispatcher.subscribe(new SignupAcceptedWatchDog(), SignupAcceptedEvent.class);
+  }
 }

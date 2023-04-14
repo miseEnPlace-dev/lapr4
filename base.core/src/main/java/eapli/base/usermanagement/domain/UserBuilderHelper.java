@@ -35,15 +35,15 @@ import eapli.framework.util.Utility;
  */
 @Utility
 public class UserBuilderHelper {
-    private UserBuilderHelper() {
-        // ensure utility
-    }
+  private UserBuilderHelper() {
+    // ensure utility
+  }
 
-    public static SystemUserBuilder builder() {
-        return new SystemUserBuilder(new BasePasswordPolicy(), new PlainTextEncoder());
-    }
+  public static SystemUserBuilder builder() {
+    return new SystemUserBuilder(new BasePasswordPolicy(), new PlainTextEncoder());
+  }
 
-    public static SignupRequestBuilder signupBuilder() {
-        return new SignupRequestBuilder(new BasePasswordPolicy(), new PlainTextEncoder());
-    }
+  public static SignupRequestBuilder signupBuilder() {
+    return new SignupRequestBuilder(new BasePasswordPolicy(), new PlainTextEncoder());
+  }
 }

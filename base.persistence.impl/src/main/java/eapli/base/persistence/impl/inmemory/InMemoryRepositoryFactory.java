@@ -34,46 +34,46 @@ import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryU
  */
 public class InMemoryRepositoryFactory implements RepositoryFactory {
 
-	static {
-		// only needed because of the in memory persistence
-		new BaseBootstrapper().execute();
-	}
+  static {
+    // only needed because of the in memory persistence
+    new BaseBootstrapper().execute();
+  }
 
-	@Override
-	public UserRepository users(final TransactionalContext tx) {
-		return new InMemoryUserRepository();
-	}
+  @Override
+  public UserRepository users(final TransactionalContext tx) {
+    return new InMemoryUserRepository();
+  }
 
-	@Override
-	public UserRepository users() {
-		return users(null);
-	}
+  @Override
+  public UserRepository users() {
+    return users(null);
+  }
 
-	@Override
-	public ClientUserRepository clientUsers(final TransactionalContext tx) {
+  @Override
+  public ClientUserRepository clientUsers(final TransactionalContext tx) {
 
-		return new InMemoryClientUserRepository();
-	}
+    return new InMemoryClientUserRepository();
+  }
 
-	@Override
-	public ClientUserRepository clientUsers() {
-		return clientUsers(null);
-	}
+  @Override
+  public ClientUserRepository clientUsers() {
+    return clientUsers(null);
+  }
 
-	@Override
-	public SignupRequestRepository signupRequests() {
-		return signupRequests(null);
-	}
+  @Override
+  public SignupRequestRepository signupRequests() {
+    return signupRequests(null);
+  }
 
-	@Override
-	public SignupRequestRepository signupRequests(final TransactionalContext tx) {
-		return new InMemorySignupRequestRepository();
-	}
+  @Override
+  public SignupRequestRepository signupRequests(final TransactionalContext tx) {
+    return new InMemorySignupRequestRepository();
+  }
 
-	@Override
-	public TransactionalContext newTransactionalContext() {
-		// in memory does not support transactions...
-		return null;
-	}
+  @Override
+  public TransactionalContext newTransactionalContext() {
+    // in memory does not support transactions...
+    return null;
+  }
 
 }
