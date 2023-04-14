@@ -35,3 +35,9 @@ docs/dm/out
 
 # Output directory
 out/
+
+# Database
+db/*
+
+# App properties
+application.properties
