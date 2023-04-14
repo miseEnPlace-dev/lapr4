@@ -6,7 +6,7 @@ import isep.infrastructure.persistence.PersistenceContext;
 import isep.model.user.BasePasswordPolicy;
 import isep.ui.MainUI;
 
-public class MainApp {
+public class MainUserApp {
   public static void main(String[] args) {
     AuthzRegistry.configure(PersistenceContext.repositories().users(),
         new BasePasswordPolicy(), new PlainTextEncoder());

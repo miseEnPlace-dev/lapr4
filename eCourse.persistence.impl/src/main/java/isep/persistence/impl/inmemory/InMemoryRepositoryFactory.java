@@ -20,13 +20,11 @@
  */
 package isep.persistence.impl.inmemory;
 
-import isep.infrastructure.persistence.RepositoryFactory;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryUserRepository;
-import eapli.framework.infrastructure.pubsub.impl.simplepersistent.repositories.EventConsumptionRepository;
-import eapli.framework.infrastructure.pubsub.impl.simplepersistent.repositories.EventRecordRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryTransactionalContext;
+import isep.infrastructure.persistence.RepositoryFactory;
 
 public class InMemoryRepositoryFactory implements RepositoryFactory {
   @Override

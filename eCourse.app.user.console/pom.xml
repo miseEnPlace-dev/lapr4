@@ -19,6 +19,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencies>
@@ -32,6 +33,13 @@
     <dependency>
       <groupId>isep</groupId>
       <artifactId>eCourse.infrastructure.application</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>isep</groupId>
+      <artifactId>eCourse.persistence.impl</artifactId>
       <version>1.0</version>
       <scope>compile</scope>
     </dependency>
