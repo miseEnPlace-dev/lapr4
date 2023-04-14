@@ -42,6 +42,12 @@ package "<<agregate>> Exam" {
   entity Section
 }
 
+package "<<agregate>> Course" {
+  entity Course
+}
+
+entity Course <<entity>> <<root>> {}
+
 entity Exam <<entity>> <<root>> {}
 entity Section <<entity>> {}
 
@@ -68,6 +74,8 @@ Question <|--- ShortAnswer
 Question <|--- Numerical
 Question <|--- MissingWords
 Question <|--- TrueFalse
+
+Question --> "1" Course : has
 
 entity Matching <<entity>> {}
 entity MultipleChoice <<entity>> {}

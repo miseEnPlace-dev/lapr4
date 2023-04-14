@@ -186,4 +186,6 @@ Student --> "0..*" Enrolment : produces
 
 Meeting --> "1" User : scheduled by
 
+Question --> "1" Course : has
+
 @enduml

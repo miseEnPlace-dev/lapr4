@@ -61,11 +61,11 @@ package "<<aggregate>> Course" {
 entity Course <<entity>> <<root>> {
 }
 
-package "<<aggregate>> Answer" {
-  entity Answer
+package "<<aggregate>> ExamAnswer" {
+  entity ExamAnswer
 }
 
-entity Answer <<entity>> <<root>> {
+entity ExamAnswer <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Teacher" {
@@ -130,8 +130,8 @@ SectionQuestion -> "1" Score : has
 
 Section *-- SectionName
 
-Student --> "0..*" Answer : has
+Student --> "0..*" ExamAnswer : has
 
-Answer ---> "1" Exam : is for
+ExamAnswer ---> "1" Exam : is for
 
 @enduml
