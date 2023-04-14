@@ -34,7 +34,7 @@ README.html
 docs/dm/out
 
 # Output directory
-out/
+out/*
 
 # Database
 db/*
