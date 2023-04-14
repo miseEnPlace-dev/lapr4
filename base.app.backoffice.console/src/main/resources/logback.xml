@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="3 seconds">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>logFile.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				logFile.%d{yyyy-MM-dd_HH-mm}.log.zip
+			</FileNamePattern>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{HH:mm:ss,SSS} [%thread] %-5level %logger{32} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOG everything at INFO level -->
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!-- specific LOG level -->
+	<logger name="eapli.framework" level="debug" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="eapli.base" level="info" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<Logger name="org.hibernate" level="WARN">
+		<appender-ref ref="STDOUT" />
+	</Logger>
+	<Logger name="org.hibernate.SQL" level="error">
+		<appender-ref ref="STDOUT" />
+	</Logger>
+	<Logger name="org.hibernate.type" level="error">
+		<appender-ref ref="STDOUT" />
+	</Logger>
+	<Logger name="org.hibernate.util.DTDEntityResolver" level="error">
+		<appender-ref ref="STDOUT" />
+	</Logger>
+</configuration>

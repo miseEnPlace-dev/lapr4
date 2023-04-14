@@ -1,3 +1,0 @@
-persistence.persistenceUnit=THE PERSISTENCE UNIT NAME
-persistence.repositoryFactory= THE REPOSITORY FACTORY CLASS
-ui.menu.layout=horizontal|vertical
