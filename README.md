@@ -29,7 +29,7 @@ The main functionalities of the platform are:
 - **Shared Boards**: The platform has the possibility to create boards, share them, create post-its, view history, etc.
 - **Meetings**: The platform allows the creation of meetings, the scheduling of meetings, invitations, etc.
 
-The system is developed in Java and it's based on the Spring Framework. GitHub is used to manage the source code and for CI (continuous integration). Exams use a custom language made with the ANTLR tool. The solution can be deployed using several network nodes (database & the shared board server). The system was developed in a distributed way, using the Scrum methodology.
+The system is developed in Java and it's based on the EAPLI Framework provided by the course's teachers. GitHub is used to manage the source code and for CI (continuous integration). Exams use a custom language made with the ANTLR tool. The solution can be deployed using several network nodes (database & the shared board server). The system was developed in a distributed way, using the Scrum methodology.
 
 ## 2. Planning and Technical Documentation
 
@@ -48,12 +48,9 @@ To execute the tests execute the following command:
 
 `mvn test`
 
-To view the coverage report execute the script:
-
-- On Linux/MacOS: `./coverage-report.sh`
-- On Windows: `coverage-report.bat`
-
 ## 5. How to Run
+
+<!-- ! needs update -->
 
 To run the project execute the script:
 
