@@ -1,7 +1,6 @@
 package eapli.ecourse.clientusermanagement.domain.events;
 
 import eapli.ecourse.clientusermanagement.domain.MecanographicNumber;
-import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.events.DomainEventBase;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
@@ -9,7 +8,7 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
  * @author Paulo Gandra de Sousa
  *
  */
-public class NewUserRegisteredFromSignupEvent extends DomainEventBase implements DomainEvent {
+public class NewUserRegisteredFromSignupEvent extends DomainEventBase {
 
   private static final long serialVersionUID = 1L;
 

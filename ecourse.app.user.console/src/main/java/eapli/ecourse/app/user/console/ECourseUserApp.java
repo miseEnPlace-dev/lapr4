@@ -47,7 +47,7 @@ public final class ECourseUserApp extends ECourseBaseApplication {
         new PlainTextEncoder());
   }
 
-  @SuppressWarnings("unchecked")
+  // @SuppressWarnings("unchecked")
   @Override
   protected void doSetupEventHandlers(final EventDispatcher dispatcher) {
     // typically there wouldn't be this watch dog here as this would be handled by a

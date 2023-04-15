@@ -1,9 +1,5 @@
 package eapli.ecourse.infrastructure.bootstrapers;
 
-import java.util.Calendar;
-
-import eapli.framework.time.util.Calendars;
-
 /**
  * @author Paulo Gandra de Sousa 13/04/2020
  */

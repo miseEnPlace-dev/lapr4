@@ -1,11 +1,11 @@
-package eapli.ecourse.usermanagement.domain;
+package eapli.ecourse.clientusermanagement.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-
+import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy.PasswordStrength;
 
 /**

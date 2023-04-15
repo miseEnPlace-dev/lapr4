@@ -1,16 +1,10 @@
 package eapli.ecourse.app.user.console.presentation;
 
-import java.util.Optional;
-
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
-import eapli.framework.infrastructure.authz.application.AuthorizationService;
-import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.infrastructure.authz.application.UserSession;
 import eapli.framework.presentation.console.ExitWithMessageAction;
-import eapli.framework.presentation.console.ListUI;
 import eapli.framework.presentation.console.ShowMessageAction;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
@@ -39,7 +33,7 @@ class MainMenu extends ClientUserBaseUI {
   // SETTINGS
   private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
 
-  private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  // private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
   @Override
   public boolean show() {
