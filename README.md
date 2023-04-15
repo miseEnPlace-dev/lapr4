@@ -37,31 +37,48 @@ The system is developed in Java and it's based on the EAPLI Framework provided b
 
 ## 3. How to Build
 
-Make sure Maven is installed and on the PATH.
+Before building, make sure of the following:
 
-The java source is Java 1.8+ so any JDK 1.8 or later will work. However, in order to generate the javadoc and UML diagrams the JDK version must be _strictly 1.8_.
+- Ensure that Maven is installed and defined in the PATH environment variable.
 
-If using an Oracle database, you will need to change your maven settings for downloading the Oracle drivers. see <https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc#settings> for more information.
+- Check if you have a JDK installed. If not, you can download it from <https://www.oracle.com/java/technologies/javase-downloads.html>. The Java version used in the project is Java 1.8+, meaning that you can use any JDK version 1.8 or later. However, in order to generate the Javadoc and UML diagrams, the JDK version must be **strictly** 1.8. Confirm that the JAVA_HOME environment variable is set to the JDK installation directory.
 
-To build the project execute the following script:
+- If using an Oracle database, you will need to change your Maven settings for downloading the Oracle drivers. Please see <https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc#settings> for more information.
 
+To build the project, you need to set all six properties files, located under all app's `src/main/resources` folders. Copy the `application.example.properties` file and rename it to `application.properties`. You can change the default values if you want, but it's not necessary.
+
+Then, execute the following script:
 - On Linux/MacOS: `./rebuild-all.sh`
 - On Windows: `rebuild-all.bat`
 
 ## 4. How to Execute Tests
 
-To execute the tests execute the following command:
+To execute the tests, just execute the following command:
 
 `mvn test`
 
 ## 5. How to Run
 
-Make sure a JRE is installed and on the PATH
+Before running the project, you need to build the project. Follow the instructions described in section _3 - How to Build_.
 
-To run the project execute the following script:
+After building, you need to start the H2 database. For that, execute the following script:
 
-- On Linux/MacOS: `./run-user.sh` or `./run-backoffice.sh`
-- On Windows: `run.bat` or `run-backoffice.bat`
+- On Linux/MacOS: `./h2.sh`
+- On Windows: `h2.bat`
+
+In order to have the needed data for executing the app, you need to run the bootstrap script. For that, execute the following script:
+
+- On Linux/MacOS: `./run-bootstrap.sh`
+- On Windows: `run-bootstrap.bat`
+
+You are now ready to run the app. Execute the script of the app you want to run:
+
+- For the User app, execute the following script:
+    - On Linux/MacOS: `./run-user.sh`
+    - On Windows: `run-user.bat`
+- For the Backoffice app, execute the following script:
+    - On Linux/MacOS: `./run-backoffice.sh`
+    - On Windows: `run-backoffice.bat`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
