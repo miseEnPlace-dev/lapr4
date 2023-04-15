@@ -1,6 +1,6 @@
 package eapli.ecourse.usermanagement.domain;
 
-import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
+import eapli.ecourse.infrastructure.authz.SimplePasswordHashEncoder;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 import eapli.framework.util.Utility;
 
@@ -15,6 +15,6 @@ public class UserBuilderHelper {
   }
 
   public static SystemUserBuilder builder() {
-    return new SystemUserBuilder(new ClientPasswordPolicy(), new PlainTextEncoder());
+    return new SystemUserBuilder(new ClientPasswordPolicy(), new SimplePasswordHashEncoder());
   }
 }

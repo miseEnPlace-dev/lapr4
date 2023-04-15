@@ -2,10 +2,10 @@ package eapli.ecourse.app.user.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.app.user.console.presentation.FrontMenu;
+import eapli.ecourse.infrastructure.authz.SimplePasswordHashEncoder;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 
 /**
@@ -19,7 +19,8 @@ public final class ECourseUserApp extends ECourseBaseApplication {
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
-  private ECourseUserApp() {}
+  private ECourseUserApp() {
+  }
 
   public static void main(final String[] args) {
 
@@ -44,7 +45,7 @@ public final class ECourseUserApp extends ECourseBaseApplication {
   @Override
   protected void configureAuthz() {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
-        new PlainTextEncoder());
+        new SimplePasswordHashEncoder());
   }
 
   // @SuppressWarnings("unchecked")

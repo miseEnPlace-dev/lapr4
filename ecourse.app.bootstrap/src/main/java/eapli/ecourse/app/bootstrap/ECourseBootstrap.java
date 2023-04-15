@@ -4,6 +4,7 @@ import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.clientusermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
 import eapli.ecourse.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.ecourse.clientusermanagement.domain.events.SignupAcceptedEvent;
+import eapli.ecourse.infrastructure.authz.SimplePasswordHashEncoder;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.bootstrapers.demo.ECourseDemoBootstrapper;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -11,7 +12,6 @@ import eapli.ecourse.infrastructure.smoketests.ECourseDemoSmokeTester;
 import eapli.ecourse.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 import eapli.framework.io.util.Console;
 import eapli.framework.util.ArrayPredicates;
@@ -29,7 +29,8 @@ public final class ECourseBootstrap extends ECourseBaseApplication {
   /**
    * avoid instantiation of this class.
    */
-  private ECourseBootstrap() {}
+  private ECourseBootstrap() {
+  }
 
   public static void main(final String[] args) {
 
@@ -81,7 +82,7 @@ public final class ECourseBootstrap extends ECourseBaseApplication {
   @Override
   protected void configureAuthz() {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
-        new PlainTextEncoder());
+        new SimplePasswordHashEncoder());
   }
 
   @SuppressWarnings("unchecked")
