@@ -2,11 +2,12 @@ package eapli.ecourse.app.common.console;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import eapli.ecourse.Application;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 import eapli.framework.infrastructure.pubsub.PubSubRegistry;
 import eapli.framework.infrastructure.pubsub.impl.inprocess.service.InProcessPubSub;
+// import org.h2.tools.Server;
+// import java.sql.SQLException;
 
 /**
  * A base class for all console applications. This is an example of the Template Method GoF design
@@ -23,6 +24,8 @@ public abstract class ECourseBaseApplication {
    * @param args the command line arguments
    */
   public void run(final String[] args) {
+    // startDatabase();
+
     configure();
 
     printHeader();
@@ -105,4 +108,8 @@ public abstract class ECourseBaseApplication {
   }
 
   protected abstract void doSetupEventHandlers(EventDispatcher dispatcher);
+
+  // private static void startDatabase() throws SQLException {
+  // new Server().runTool("-tcp", "-web", "-ifNotExists");
+  // }
 }
