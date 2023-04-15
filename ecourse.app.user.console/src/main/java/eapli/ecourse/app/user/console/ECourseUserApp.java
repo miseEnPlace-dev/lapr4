@@ -2,7 +2,7 @@ package eapli.ecourse.app.user.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.app.user.console.presentation.FrontMenu;
-import eapli.ecourse.infrastructure.authz.SimplePasswordHashEncoder;
+import eapli.ecourse.infrastructure.authz.PasswordHashEncoder;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -45,7 +45,7 @@ public final class ECourseUserApp extends ECourseBaseApplication {
   @Override
   protected void configureAuthz() {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
-        new SimplePasswordHashEncoder());
+        new PasswordHashEncoder());
   }
 
   // @SuppressWarnings("unchecked")

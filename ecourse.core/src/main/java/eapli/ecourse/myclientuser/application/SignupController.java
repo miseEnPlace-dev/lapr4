@@ -5,7 +5,7 @@ import java.util.Calendar;
 import eapli.ecourse.clientusermanagement.domain.SignupRequest;
 import eapli.ecourse.clientusermanagement.domain.SignupRequestBuilder;
 import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
-import eapli.ecourse.infrastructure.authz.SimplePasswordHashEncoder;
+import eapli.ecourse.infrastructure.authz.PasswordHashEncoder;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.application.UseCaseController;
@@ -29,7 +29,7 @@ public class SignupController {
     // unauthenticated users may request a signup
 
     final SignupRequestBuilder signupRequestBuilder = new SignupRequestBuilder(new ClientPasswordPolicy(),
-        new SimplePasswordHashEncoder());
+        new PasswordHashEncoder());
 
     signupRequestBuilder.withUsername(username).withPassword(password).withName(firstName, lastName)
         .withEmail(email).createdOn(createdOn).withMecanographicNumber(mecanographicNumber);
