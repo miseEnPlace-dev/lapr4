@@ -1,0 +1,43 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "ECourseBootstrap",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.bootstrap.ECourseBootstrap",
+      "projectName": "app.bootstrap",
+      "args": ["-bootstrap:demo"]
+    },
+    {
+      "type": "java",
+      "name": "ECourseUserApp",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.user.console.ECourseUserApp",
+      "projectName": "app.user.console"
+    },
+    {
+      "type": "java",
+      "name": "ECourseBackoffice",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.backoffice.console.ECourseBackoffice",
+      "projectName": "app.backoffice.console"
+    },
+    {
+      "type": "java",
+      "name": "OtherApp",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.other.console.OtherApp",
+      "projectName": "app.other.console"
+    },
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    }
+  ]
+}
