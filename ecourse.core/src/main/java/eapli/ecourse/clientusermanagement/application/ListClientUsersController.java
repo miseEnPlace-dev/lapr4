@@ -1,7 +1,7 @@
 package eapli.ecourse.clientusermanagement.application;
 
 import eapli.ecourse.clientusermanagement.domain.ClientUser;
-import eapli.ecourse.clientusermanagement.repositories.ClientserRepository;
+import eapli.ecourse.clientusermanagement.repositories.ClientUserRepository;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;

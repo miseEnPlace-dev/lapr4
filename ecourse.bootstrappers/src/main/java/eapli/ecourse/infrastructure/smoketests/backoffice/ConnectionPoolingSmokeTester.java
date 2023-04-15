@@ -5,11 +5,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.infrastructure.bootstrapers.TestDataConstants;
-import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+// import eapli.ecourse.infrastructure.bootstrapers.TestDataConstants;
+// import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.actions.TimedActions;
-import eapli.framework.util.Collections;
+// import eapli.framework.util.Collections;
 
 /**
  * Simulate a lot of concurrent users fetching data and check how the connection pooling handles it.
@@ -26,21 +26,21 @@ public class ConnectionPoolingSmokeTester implements Action {
    * @param repo
    * @param prefix
    */
-  private static void doSmokeTest(final BookingRepository repo, final String prefix) {
-    LOGGER.info("{} Thread {} requesting data using instance {}", prefix,
-        Thread.currentThread().getName(), repo);
-    // try {
-    // // find something
-    // TimedActions.delay(500);
-    // final var a = repo.findAll();
-    // LOGGER.debug("{} Thread {} got data: {} / {}", prefix, Thread.currentThread().getName(),
-    // Collections.sizeOf(r), Collections.sizeOf(a));
-    // COUNT_OF_SUCESSFUL.incrementAndGet();
-    // } catch (final Exception e) {
-    // LOGGER.error("Possibly the connection pool is exausted...", e);
-    // COUNT_OF_ERRORS.incrementAndGet();
-    // }
-  }
+  // private static void doSmokeTest(final BookingRepository repo, final String prefix) {
+  // LOGGER.info("{} Thread {} requesting data using instance {}", prefix,
+  // Thread.currentThread().getName(), repo);
+  // try {
+  // // find something
+  // TimedActions.delay(500);
+  // final var a = repo.findAll();
+  // LOGGER.debug("{} Thread {} got data: {} / {}", prefix, Thread.currentThread().getName(),
+  // Collections.sizeOf(r), Collections.sizeOf(a));
+  // COUNT_OF_SUCESSFUL.incrementAndGet();
+  // } catch (final Exception e) {
+  // LOGGER.error("Possibly the connection pool is exausted...", e);
+  // COUNT_OF_ERRORS.incrementAndGet();
+  // }
+  // }
 
   /**
    * All variables are declared locally in the run method. so when the run method ends, there is

@@ -23,8 +23,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
   @Override
   public UserRepository users() {
-    return new JpaAutoTxUserRepository(Application.settings().getPersistenceUnitName(),
-        Application.settings().getExtendedPersistenceProperties());
+    return new JpaAutoTxUserRepository(Application.settings().persistenceUnitName(),
+        Application.settings().extendedPersistenceProperties());
   }
 
   @Override
@@ -34,7 +34,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
   @Override
   public JpaClientUserRepository clientUsers() {
-    return new JpaClientUserRepository(Application.settings().getPersistenceUnitName());
+    return new JpaClientUserRepository(Application.settings().persistenceUnitName());
   }
 
   @Override
@@ -44,14 +44,13 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
   @Override
   public SignupRequestRepository signupRequests() {
-    return new JpaSignupRequestRepository(Application.settings().getPersistenceUnitName());
+    return new JpaSignupRequestRepository(Application.settings().persistenceUnitName());
   }
 
   @Override
   public TransactionalContext newTransactionalContext() {
     return JpaAutoTxRepository.buildTransactionalContext(
-        Application.settings().getPersistenceUnitName(),
-        Application.settings().getExtendedPersistenceProperties());
+        Application.settings().persistenceUnitName(),
+        Application.settings().extendedPersistenceProperties());
   }
-
 }

@@ -1,8 +1,8 @@
 package eapli.ecourse.persistence.impl.jpa;
 
 import eapli.ecourse.Application;
-import eapli.ecourse.cafeteriausermanagement.domain.SignupRequest;
-import eapli.ecourse.cafeteriausermanagement.repositories.SignupRequestRepository;
+import eapli.ecourse.clientusermanagement.domain.SignupRequest;
+import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -19,7 +19,7 @@ class JpaSignupRequestRepository extends JpaAutoTxRepository<SignupRequest, User
   }
 
   public JpaSignupRequestRepository(final String puname) {
-    super(puname, Application.settings().getExtendedPersistenceProperties(), "username");
+    super(puname, Application.settings().extendedPersistenceProperties(), "username");
   }
 
   @Override

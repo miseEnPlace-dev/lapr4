@@ -20,7 +20,8 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 public class MyClientUserService {
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
-  private final ClientUserRepository repo = PersistenceContext.repositories().clientUsers();
+  private final ClientUserRepository clientUsersRepo =
+      PersistenceContext.repositories().clientUsers();
 
   public ClientUser me() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.CLIENT_USER);

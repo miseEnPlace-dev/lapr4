@@ -1,11 +1,8 @@
 package eapli.ecourse.app.other.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
-import eapli.ecourse.app.common.console.presentation.authz.LoginAction;
-import eapli.ecourse.app.other.console.presentation.MainMenu;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.usermanagement.domain.BasePasswordPolicy;
-import eapli.ecourse.usermanagement.domain.BaseRoles;
+import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
@@ -53,5 +50,11 @@ public final class OtherApp extends ECourseBaseApplication {
   @Override
   protected void doSetupEventHandlers(EventDispatcher dispatcher) {
     // TODO setup event handlers for your app
+  }
+
+  @Override
+  protected void configureAuthz() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'configureAuthz'");
   }
 }

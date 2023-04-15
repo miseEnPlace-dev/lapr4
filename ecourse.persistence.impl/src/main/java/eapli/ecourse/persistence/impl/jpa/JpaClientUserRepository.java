@@ -25,7 +25,7 @@ class JpaClientUserRepository
   }
 
   public JpaClientUserRepository(final String puname) {
-    super(puname, Application.settings().getExtendedPersistenceProperties(), "mecanographicNumber");
+    super(puname, Application.settings().extendedPersistenceProperties(), "mecanographicNumber");
   }
 
   @Override

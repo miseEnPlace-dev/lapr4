@@ -17,7 +17,7 @@ import eapli.ecourse.clientusermanagement.domain.SignupRequest;
  * now this class will have more than one reason to change.
  * <p>
  * <p/>
- * The other approach uses events {@link AcceptRefuseSignupRequestControllerEventfullImpl} and
+ * The other approach uses events {@link AcceptRefuseSignupRequestControllerEventfulImpl} and
  * decouples the different steps of the process. This makes the system more flexible if there is the
  * need to change the actual process, enforces the SRP, but increases the complexity, e.g., there is
  * the need to have an event bus, there is no global status, if something fails in the middle of the

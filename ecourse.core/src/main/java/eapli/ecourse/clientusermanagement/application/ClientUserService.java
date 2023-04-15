@@ -1,5 +1,7 @@
 package eapli.ecourse.clientusermanagement.application;
 
+import java.util.Optional;
+
 import eapli.ecourse.clientusermanagement.domain.ClientUser;
 import eapli.ecourse.clientusermanagement.domain.MecanographicNumber;
 import eapli.ecourse.clientusermanagement.repositories.ClientUserRepository;

@@ -2,9 +2,7 @@ package eapli.ecourse.app.user.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.app.user.console.presentation.FrontMenu;
-import eapli.ecourse.clientusermanagement.application.eventhandlers.MealBookedWatchDog;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.mealbooking.domain.BookedEvent;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;

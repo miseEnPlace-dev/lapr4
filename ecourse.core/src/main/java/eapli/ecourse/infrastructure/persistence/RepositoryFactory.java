@@ -1,7 +1,6 @@
 package eapli.ecourse.infrastructure.persistence;
 
 import eapli.ecourse.clientusermanagement.repositories.ClientUserRepository;
-import eapli.ecourse.clientusermanagement.repositories.CardMovementRepository;
 import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;

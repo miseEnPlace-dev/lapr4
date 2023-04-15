@@ -14,12 +14,12 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaTransactionalRepo
 /* package */ class CourseJpaRepositoryBase<T, K, I> extends JpaTransactionalRepository<T, K, I> {
 
   CourseJpaRepositoryBase(final String persistenceUnitName, final String identityFieldName) {
-    super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties(),
+    super(persistenceUnitName, Application.settings().extendedPersistenceProperties(),
         identityFieldName);
   }
 
   CourseJpaRepositoryBase(final String identityFieldName) {
-    super(Application.settings().getPersistenceUnitName(),
-        Application.settings().getExtendedPersistenceProperties(), identityFieldName);
+    super(Application.settings().persistenceUnitName(),
+        Application.settings().extendedPersistenceProperties(), identityFieldName);
   }
 }

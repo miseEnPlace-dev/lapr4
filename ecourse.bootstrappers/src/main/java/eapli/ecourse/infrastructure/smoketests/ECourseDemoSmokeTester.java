@@ -15,7 +15,7 @@ import eapli.framework.actions.ChainedAction;
  * @author Paulo Gandra de Sousa
  */
 @SuppressWarnings({"squid:S1126", "java:S106"})
-public class ECafeteriaDemoSmokeTester implements Action {
+public class ECourseDemoSmokeTester implements Action {
 
   @Override
   public boolean execute() {

@@ -34,11 +34,11 @@
   <logger name="eapli.framework" level="debug" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
-  <logger name="eapli.ecafeteria" level="info" additivity="false">
+  <logger name="eapli.ecourse" level="info" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
 
-  <logger name="eapli.ecafeteria.infrastructure.smoketests.backoffice.ConnectionPoolingSmokeTester"
+  <logger name="eapli.ecourse.infrastructure.smoketests.backoffice.ConnectionPoolingSmokeTester"
     level="ERROR" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>

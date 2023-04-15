@@ -37,7 +37,7 @@ public class ECourseBootstrapper implements Action {
   @Override
   public boolean execute() {
     // declare bootstrap actions
-    final Action[] actions = {new MasterUsersBootstrapper(), new AllergenBootstrapper()};
+    final Action[] actions = {new MasterUsersBootstrapper()};
 
     registerPowerUser(userRepository);
     authenticateForBootstrapping();
