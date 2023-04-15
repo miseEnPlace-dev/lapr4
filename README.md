@@ -61,11 +61,12 @@ To execute the tests, just execute the following command:
 
 Before running the project, you need to build the project. Follow the instructions described in section _3 - How to Build_.
 
-After building, start the H2 database. For that, execute the following script:
+After building, start the H2 database. For that, **open a new terminal** and execute the following script:
 
 - On Linux/MacOS: `./h2.sh`
 - On Windows: `h2.bat`
 
+Leave this terminal open and running. Go back to the terminal where you executed the build script and continue with the next steps.
 In order to have the needed data for executing the app, you need to run the bootstrap script. For that, execute the following script:
 
 - On Linux/MacOS: `./run-bootstrap.sh`
