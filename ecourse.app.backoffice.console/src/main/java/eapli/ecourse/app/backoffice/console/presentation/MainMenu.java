@@ -1,11 +1,11 @@
 package eapli.ecourse.app.backoffice.console.presentation;
 
-import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.Application;
 import eapli.ecourse.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecourse.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecourse.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecourse.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
+import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -94,11 +94,13 @@ public class MainMenu extends AbstractUI {
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
-    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
+    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER,
+    // ClientRoles.MANAGER)) {
     // final Menu managerMenu = buildManagerMenu();
     // // mainMenu.addSubMenu(..., kitchenMenu);
     // }
-    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
+    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER,
+    // ClientRoles.MANAGER)) {
     // }
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
