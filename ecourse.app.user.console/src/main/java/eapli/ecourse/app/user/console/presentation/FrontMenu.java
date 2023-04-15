@@ -9,6 +9,7 @@ import eapli.framework.actions.menu.Menu;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
+import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
 /**
@@ -32,17 +33,21 @@ public class FrontMenu extends AbstractUI {
    */
   @Override
   public boolean doShow() {
-    final var menu = new Menu();
+    final Menu menu = new Menu();
     menu.addItem(LOGIN_OPTION, "Login", new ChainedAction(
         new LoginUI(new AuthenticationCredentialHandler(), ClientRoles.CLIENT_USER)::show, () -> {
           new MainMenu().mainLoop();
           return true;
         }));
     // TODO: instead of leaving the app, return to the main menu again
-    menu.addItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction());
+    menu.addItem(SIGNUP_OPTION, "Sign up", new ChainedAction(
+        new SignupRequestAction(), () -> {
+          new FrontMenu().mainLoop();
+          return true;
+        }));
     menu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
-    final var renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    final MenuRenderer renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
     return renderer.render();
   }
 
