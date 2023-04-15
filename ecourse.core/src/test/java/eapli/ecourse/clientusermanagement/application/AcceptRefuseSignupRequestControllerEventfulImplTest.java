@@ -42,10 +42,9 @@ class AcceptRefuseSignupRequestControllerEventfulImplTest {
 
   @Test
   void ensureSignupRequestIsAcceptedAndSignupEventIsPublished() {
-    final SignupRequest req =
-        new SignupRequestBuilder(new NilPasswordPolicy(), new PlainTextEncoder())
-            .withData("user", "pass", "a@b.com", "1234567").withName("Mary", "Smith")
-            .createdOn(CurrentTimeCalendars.now()).build();
+    final SignupRequest req = new SignupRequestBuilder(new NilPasswordPolicy(), new PlainTextEncoder())
+        .withData("user", "pass", "a@b.com", "1234567").withName("Mary", "Smith")
+        .createdOn(CurrentTimeCalendars.now()).build();
 
     when(signupRequestsRepository.save(req)).thenReturn(req);
 

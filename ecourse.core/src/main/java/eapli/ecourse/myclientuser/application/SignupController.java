@@ -5,10 +5,10 @@ import java.util.Calendar;
 import eapli.ecourse.clientusermanagement.domain.SignupRequest;
 import eapli.ecourse.clientusermanagement.domain.SignupRequestBuilder;
 import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.ecourse.infrastructure.authz.SimplePasswordHashEncoder;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.application.UseCaseController;
-import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.time.util.CurrentTimeCalendars;
 
 /**
@@ -19,18 +19,17 @@ import eapli.framework.time.util.CurrentTimeCalendars;
 @UseCaseController
 public class SignupController {
 
-  private final SignupRequestRepository signupRequestRepository =
-      PersistenceContext.repositories().signupRequests();
+  private final SignupRequestRepository signupRequestRepository = PersistenceContext.repositories().signupRequests();
 
   public SignupRequest signup(final String username, final String password, final String firstName,
       final String lastName, final String email, final String mecanographicNumber,
       final Calendar createdOn) {
 
-    // there is no need for authorisation check in this method as even
+    // there is no need for authorization check in this method as even
     // unauthenticated users may request a signup
 
-    final SignupRequestBuilder signupRequestBuilder =
-        new SignupRequestBuilder(new ClientPasswordPolicy(), new PlainTextEncoder());
+    final SignupRequestBuilder signupRequestBuilder = new SignupRequestBuilder(new ClientPasswordPolicy(),
+        new SimplePasswordHashEncoder());
 
     signupRequestBuilder.withUsername(username).withPassword(password).withName(firstName, lastName)
         .withEmail(email).createdOn(createdOn).withMecanographicNumber(mecanographicNumber);
