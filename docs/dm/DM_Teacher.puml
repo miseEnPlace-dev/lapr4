@@ -44,6 +44,6 @@ Teacher --> "1" Achronym : characterized by
 Teacher -|> User
 
 Course --> "1" Teacher : has a responsible
-Course ---> "1..*" Teacher : is taught by
+Course ---> "1..*" Teacher : has
 
 @enduml

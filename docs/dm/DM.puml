@@ -49,6 +49,22 @@ entity Course <<entity>> <<root>> {
 
 package "<<aggregate>> Board" {
   entity Board
+
+  entity Column
+  entity Row
+  entity UserPermission
+
+}
+
+entity Column <<entity>> {
+  -number
+}
+
+entity Row <<entity>> {
+  -number
+}
+
+entity UserPermission <<entity>> {
 }
 
 entity Board <<entity>> <<root>> {
@@ -118,10 +134,12 @@ entity AnswerToQuestion <<entity>> {}
 package "<<agregate>> Exam" {
   entity Exam
   entity Section
+  entity SectionQuestion
 }
 
 entity Exam <<entity>> <<root>> {}
 entity Section <<entity>> {}
+entity SectionQuestion <<entity>> {}
 
 entity ExamAnswer <<entity>> <<root>> {
 
@@ -146,15 +164,15 @@ Teacher -|> User
 Student --|> User
 Manager --|> User
 
-User --> "0..*" Meeting : scheduled by
-
-Course ---> "1..*" Teacher : has teachers
+Course ---> "1..*" Teacher : has
 Course --> "1" Teacher : has a responsible
 
-Enrolment --> "1" Student : has
 Enrolment --> "1" Course : is for
 
 Board ---> "1" User : has an owner
+Board *-- "1..*" Column : has a collection of
+Board *-- "1..*" Row : has a collection of
+Board *-- "0..*" UserPermission : has a collection of
 
 PostIt --> "1" Board: belongs to
 PostIt --> "0..1" PostIt : previous
@@ -164,6 +182,9 @@ Exam --> "1" Teacher : is created by
 Exam *-- "1..*" Section
 Exam <|- EvaluationExam
 Exam <|-- FormativeExam
+
+Section *-- "1..*" SectionQuestion
+SectionQuestion --> "1" Question : corresponds to
 
 Section --> "1..*" Question : has
 
