@@ -43,9 +43,9 @@ Before building, make sure of the following:
 
 - Check if you have a JDK installed. If not, you can download it from <https://www.oracle.com/java/technologies/javase-downloads.html>. The Java version used in the project is Java 1.8+, meaning that you can use any JDK version 1.8 or later. However, in order to generate the Javadoc and UML diagrams, the JDK version must be **strictly** 1.8. Confirm that the JAVA_HOME environment variable is set to the JDK installation directory.
 
-- If using an Oracle database, you will need to change your Maven settings for downloading the Oracle drivers. Please see <https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc#settings> for more information.
+- If you are using an Oracle database, you will need to change your Maven settings for downloading the Oracle drivers. Please see <https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc#settings> for more information.
 
-To build the project, you need to set all six properties files, located under all app's `src/main/resources` folders. Copy the `application.example.properties` file and rename it to `application.properties`. You can change the default values if you want, but it's not necessary.
+To build the project, you first need to set all six properties files, located under all app's `src/main/resources` folders. Copy the `application.example.properties` file and rename it to `application.properties`. You can change the default values if you want, but it's not necessary.
 
 Then, execute the following script:
 - On Linux/MacOS: `./rebuild-all.sh`
@@ -61,7 +61,7 @@ To execute the tests, just execute the following command:
 
 Before running the project, you need to build the project. Follow the instructions described in section _3 - How to Build_.
 
-After building, you need to start the H2 database. For that, execute the following script:
+After building, start the H2 database. For that, execute the following script:
 
 - On Linux/MacOS: `./h2.sh`
 - On Windows: `h2.bat`
@@ -71,7 +71,7 @@ In order to have the needed data for executing the app, you need to run the boot
 - On Linux/MacOS: `./run-bootstrap.sh`
 - On Windows: `run-bootstrap.bat`
 
-You are now ready to run the app. Execute the script of the app you want to run:
+You are now ready to run the app. Simply execute the script of the app you want to run:
 
 - For the User app, execute the following script:
     - On Linux/MacOS: `./run-user.sh`
@@ -86,6 +86,6 @@ _To Do_
 
 ## 7. How to Generate PlantUML Diagrams
 
-To generate PlantUML diagrams for documentation execute the script (for the moment, only for Linux/Unix/MacOS):
+To generate PlantUML diagrams for documentation execute the script (for the moment, available only for Linux/Unix/MacOS):
 
 `./generate-plantuml-diagrams.sh`
