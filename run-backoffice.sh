@@ -2,7 +2,8 @@
 
 #REM set the class path,
 #REM assumes the build was executed with maven copy-dependencies
-export BASE_CP=base.app.backoffice.console/target/base.app.backoffice.console-1.4.0-SNAPSHOT.jar:base.app.backoffice.console/target/dependency/*;
+export ECOURSE_CP=ecourse.app.backoffice.console/target/app.backoffice.console-1.0.0.jar:ecourse.app.backoffice.console/target/dependency/*;
 
 #REM call the java VM, e.g,
-java -cp $BASE_CP eapli.base.app.backoffice.console.BaseBackoffice
+java -cp $ECOURSE_CP eapli.ecourse.app.backoffice.console.ECourseBackoffice
+

@@ -1,95 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>eapli</groupId>
-    <artifactId>base</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>eapli</groupId>
+  <artifactId>ecourse</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
 
-    <properties>
-		<eapli.framework.core.version>v21.2.0-RELEASE</eapli.framework.core.version>
-		<eapli.framework.authz.version>v21.2.0-RELEASE</eapli.framework.authz.version>
-		<eapli.framework.pubsub.version>v21.2.0-RELEASE</eapli.framework.pubsub.version>
-        
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <java.version>11</java.version>
-    </properties>
+  <properties>
+    <eapli.framework.core.version>v21.2.0-RELEASE</eapli.framework.core.version>
+    <eapli.framework.authz.version>v21.2.0-RELEASE</eapli.framework.authz.version>
+    <eapli.framework.pubsub.version>v21.2.0-RELEASE</eapli.framework.pubsub.version>
 
-    <modules>
-        <module>base.app.backoffice.console</module>
-        <module>base.app.user.console</module>
-        <module>base.app.other.console</module>
-        <module>base.app.common.console</module>
-        <module>base.app.bootstrap</module>
-        <module>base.bootstrappers</module>
-        <module>base.core</module>
-        <module>base.persistence.impl</module>
-    </modules>
+    <eapli.framework.core.version-snapshot>21.2.0</eapli.framework.core.version-snapshot>
+    <eapli.framework.authz.version-snapshot>19.1.4</eapli.framework.authz.version-snapshot>
+    <eapli.framework.pubsub.version-snapshot>20.1.4</eapli.framework.pubsub.version-snapshot>
 
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <java.version>11</java.version>
+
+    <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
+    <sonar.exclusions>src/main/java/**/*/package-info.java</sonar.exclusions>
+  </properties>
+
+  <modules>
+    <module>ecourse.app.backoffice.console</module>
+    <module>ecourse.app.user.console</module>
+    <module>ecourse.app.other.console</module>
+    <module>ecourse.app.common.console</module>
+    <module>ecourse.app.bootstrap</module>
+    <module>ecourse.bootstrappers</module>
+    <module>ecourse.infrastructure.application</module>
+    <module>ecourse.core</module>
+    <module>ecourse.persistence.impl</module>
+  </modules>
+
+  <dependencies>
+    <!-- EAPLI Framework -->
+    <dependency>
+      <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+      <artifactId>eapli.framework.core</artifactId>
+      <version>${eapli.framework.core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+      <artifactId>eapli.framework.infrastructure.authz</artifactId>
+      <version>${eapli.framework.authz.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+      <artifactId>eapli.framework.infrastructure.pubsub</artifactId>
+      <version>${eapli.framework.pubsub.version}</version>
+    </dependency>
+
+    <!-- keep junit4 for now -->
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.9.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- support junit5 -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.9.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- H2 Database Driver -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.1.214</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
+    <!-- Project Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.24</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
     <dependencies>
-		<dependency>
-			<groupId>org.bitbucket.pag_isep.eapliframework</groupId>
-			<artifactId>eapli.framework.core</artifactId>
-			<version>${eapli.framework.core.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bitbucket.pag_isep.eapliframework</groupId>
-			<artifactId>eapli.framework.infrastructure.authz</artifactId>
-			<version>${eapli.framework.authz.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bitbucket.pag_isep.eapliframework</groupId>
-			<artifactId>eapli.framework.infrastructure.pubsub</artifactId>
-			<version>${eapli.framework.pubsub.version}</version>
-		</dependency>
-		
-		<!-- keep junit4 for now -->
-		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<version>5.8.2</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- support junit5 -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.8.2</version>
-			<scope>test</scope>
-		</dependency>
-		
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
-            <scope>runtime</scope>
-        </dependency>	
-        <dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.1</version>
-		</dependency>
+      <!-- Necessary to avoid drop-and-create failure with latest spring boot version -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.6.7.Final</version>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency><!--Necessary to avoid drop-and-create failure with latest spring boot version-->
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>5.4.14.Final</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
 
-    <repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-    </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>11</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.24</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok-maven-plugin</artifactId>
+        <version>1.18.20.0</version>
+        <executions>
+          <execution>
+            <id>delombok</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>delombok</goal>
+            </goals>
+            <configuration>
+              <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+              <outputDirectory>${project.build.directory}/delombok</outputDirectory>
+              <addOutputDirectory>false</addOutputDirectory>
+              <formatPreferences>
+                <javaLangAsFQN>skip</javaLangAsFQN>
+              </formatPreferences>
+              <verbose>false</verbose>
+            </configuration>
+          </execution>
+          <!-- This is for delomboking also your tests sources.
+        <execution>
+          <id>test-delombok</id>
+						<phase>generate-test-sources</phase>
+            <goals>
+              <goal>testDelombok</goal>
+            </goals>
+						<configuration>
+              <verbose>false</verbose>
+            </configuration>
+          </execution>
+        -->
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <generateBackupPoms>false</generateBackupPoms>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <!-- UML Taglet JDK 8 -->
+          <!-- <source>1.8</source> <javadocVersion>1.8.0</javadocVersion>
+        <taglet>org.jdrupes.taglets.plantUml.Taglet</taglet>
+        <tagletArtifact> <groupId>org.jdrupes.taglets</groupId> <artifactId>plantuml-taglet</artifactId>
+        <version>1.0.5</version> </tagletArtifact> -->
+
+          <!-- UML DocLet JDK 9+ -->
+          <doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
+          <docletArtifact>
+            <groupId>nl.talsmasoftware</groupId>
+            <artifactId>umldoclet</artifactId>
+            <version>2.0.12</version>
+          </docletArtifact>
+
+          <!-- params -->
+          <show>private</show>
+          <doclint>none</doclint>
+          <additionalOptions>
+            <additionalOption>-Xdoclint:none</additionalOption>
+            <!-- Specify each diagram option here as an additionOption tag. -->
+          </additionalOptions>
+          <additionalJOption>-Xdoclint:none</additionalJOption>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

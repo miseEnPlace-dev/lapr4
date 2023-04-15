@@ -37,10 +37,16 @@ The system is developed in Java and it's based on the EAPLI Framework provided b
 
 ## 3. How to Build
 
-To build the project execute the script:
+Make sure Maven is installed and on the PATH.
 
-- On Linux/MacOS: `./build.sh`
-- On Windows: `build.bat`
+The java source is Java 1.8+ so any JDK 1.8 or later will work. However, in order to generate the javadoc and UML diagrams the JDK version must be _strictly 1.8_.
+
+If using an Oracle database, you will need to change your maven settings for downloading the Oracle drivers. see <https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc#settings> for more information.
+
+To build the project execute the following script:
+
+- On Linux/MacOS: `./rebuild-all.sh`
+- On Windows: `rebuild-all.bat`
 
 ## 4. How to Execute Tests
 
@@ -50,12 +56,12 @@ To execute the tests execute the following command:
 
 ## 5. How to Run
 
-<!-- ! needs update -->
+Make sure a JRE is installed and on the PATH
 
-To run the project execute the script:
+To run the project execute the following script:
 
-- On Linux/MacOS: `./run.sh`
-- On Windows: `run.bat`
+- On Linux/MacOS: `./run-user.sh` or `./run-backoffice.sh`
+- On Windows: `run.bat` or `run-backoffice.bat`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 

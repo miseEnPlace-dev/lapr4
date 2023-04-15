@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>eapli</groupId>
+    <artifactId>ecourse</artifactId>
+    <relativePath>../</relativePath>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>eapli.ecourse</groupId>
+  <artifactId>app.common.console</artifactId>
+  <packaging>jar</packaging>
+  <name>ecourse.app.common.console</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <slf4jVersion>1.7.20</slf4jVersion>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>eapli.ecourse</groupId>
+      <artifactId>infrastructure.application</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+  </dependencies>
+</project>

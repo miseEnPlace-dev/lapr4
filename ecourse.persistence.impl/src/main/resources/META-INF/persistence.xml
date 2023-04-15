@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+  <persistence-unit name="eapli.eCoursePU"> <!-- transaction-type="RESOURCE_LOCAL" -->
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+    <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
+    <class>eapli.ecourse.clientusermanagement.domain.ClientUser</class>
+    <class>eapli.ecourse.clientusermanagement.domain.SignupRequest</class>
+
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecourse" />
+      <!--
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/ecourse;MV_STORE=FALSE;AUTO_SERVER=true;" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/ecourse;MV_STORE=FALSE;" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:ecourse" />
+      -->
+
+      <property name="javax.persistence.jdbc.user" value="sa" />
+      <property name="javax.persistence.jdbc.password" value="" />
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+
+      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+
+      <!-- <property name = "hibernate.show_sql" value = "true" /> -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+
+      <!-- Hibernate C3PO Connection Pooling -->
+      <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+      <property name="hibernate.c3p0.min_size" value="5" />
+      <property name="hibernate.c3p0.max_size" value="20" />
+      <property name="hibernate.c3p0.timeout" value="300" />
+      <property name="hibernate.c3p0.max_statements" value="50" />
+      <property name="hibernate.c3p0.idle_test_period" value="120" />
+    </properties>
+  </persistence-unit>
+
+  <!-- SQL Server -->
+  <persistence-unit name="eapli.eCoursePU_">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+    <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
+    <class>eapli.ecourse.clientusermanagement.domain.ClientUser</class>
+    <class>eapli.ecourse.clientusermanagement.domain.SignupRequest</class>
+
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://multilogus.dynns.com:1503;database=ecourse" />
+      <property name="javax.persistence.jdbc.user" value="anc" />
+      <property name="javax.persistence.jdbc.password" value="ancisep" />
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
+
+      <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+      <property name="hibernate.show_sql" value="true" />
+      <property name="eclipselink.logging.level.sql" value="FINE" />
+      <property name="eclipselink.logging.parameters" value="true" />
+
+      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+
+      <!-- <property name = "hibernate.show_sql" value = "true" /> -->
+
+      <!-- Hibernate C3PO Connection Pooling -->
+      <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+      <property name="hibernate.c3p0.min_size" value="5" />
+      <property name="hibernate.c3p0.max_size" value="20" />
+      <property name="hibernate.c3p0.timeout" value="300" />
+      <property name="hibernate.c3p0.max_statements" value="50" />
+      <property name="hibernate.c3p0.idle_test_period" value="120" />
+    </properties>
+  </persistence-unit>
+</persistence>
