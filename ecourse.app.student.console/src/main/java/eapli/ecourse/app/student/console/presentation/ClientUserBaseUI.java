@@ -1,4 +1,4 @@
-package eapli.ecourse.app.user.console.presentation;
+package eapli.ecourse.app.student.console.presentation;
 
 import eapli.ecourse.myclientuser.application.MyClientUserService;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;

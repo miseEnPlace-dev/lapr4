@@ -1,7 +1,7 @@
-package eapli.ecourse.app.user.console;
+package eapli.ecourse.app.student.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
-import eapli.ecourse.app.user.console.presentation.FrontMenu;
+import eapli.ecourse.app.student.console.presentation.FrontMenu;
 import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
@@ -9,21 +9,20 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 
 /**
- * eCourse User Application.
+ * eCourse Student Application.
  *
  * @author Paulo Gandra Sousa
  */
 @SuppressWarnings("squid:S106")
-public final class ECourseUserApp extends ECourseBaseApplication {
+public final class ECourseStudentApp extends ECourseBaseApplication {
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
-  private ECourseUserApp() {
-  }
+  private ECourseStudentApp() {}
 
   public static void main(final String[] args) {
 
-    new ECourseUserApp().run(args);
+    new ECourseStudentApp().run(args);
   }
 
   @Override

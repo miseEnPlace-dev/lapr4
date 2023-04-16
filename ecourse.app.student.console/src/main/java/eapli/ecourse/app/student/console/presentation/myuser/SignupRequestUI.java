@@ -1,4 +1,4 @@
-package eapli.ecourse.app.user.console.presentation.myuser;
+package eapli.ecourse.app.student.console.presentation.myuser;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

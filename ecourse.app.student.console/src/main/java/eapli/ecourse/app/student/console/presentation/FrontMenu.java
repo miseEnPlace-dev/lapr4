@@ -1,7 +1,7 @@
-package eapli.ecourse.app.user.console.presentation;
+package eapli.ecourse.app.student.console.presentation;
 
 import eapli.ecourse.app.common.console.presentation.authz.LoginUI;
-import eapli.ecourse.app.user.console.presentation.myuser.SignupRequestAction;
+import eapli.ecourse.app.student.console.presentation.myuser.SignupRequestAction;
 import eapli.ecourse.infrastructure.authz.AuthenticationCredentialHandler;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.ChainedAction;

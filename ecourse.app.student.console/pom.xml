@@ -12,10 +12,10 @@
   </parent>
 
   <groupId>eapli.ecourse</groupId>
-  <artifactId>app.user.console</artifactId>
+  <artifactId>app.student.console</artifactId>
   <packaging>jar</packaging>
 
-  <name>ecourse.app.user.console</name>
+  <name>ecourse.app.student.console</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -49,7 +49,7 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>app.user.console</artifactId>
+      <artifactId>app.student.console</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>

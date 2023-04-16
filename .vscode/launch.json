@@ -14,10 +14,17 @@
     },
     {
       "type": "java",
-      "name": "ECourseUserApp",
+      "name": "ECourseStudentApp",
       "request": "launch",
-      "mainClass": "eapli.ecourse.app.user.console.ECourseUserApp",
-      "projectName": "app.user.console"
+      "mainClass": "eapli.ecourse.app.student.console.ECourseStudentApp",
+      "projectName": "app.student.console"
+    },
+    {
+      "type": "java",
+      "name": "ECourseTeacherApp",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.teacher.console.ECourseTeacherApp",
+      "projectName": "app.teacher.console"
     },
     {
       "type": "java",

@@ -1,4 +1,4 @@
-package eapli.ecourse.app.user.console.presentation;
+package eapli.ecourse.app.student.console.presentation;
 
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.framework.actions.Actions;
