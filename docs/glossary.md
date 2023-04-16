@@ -18,6 +18,7 @@
 | **Duration**                | The time interval between the start and end of an event.                                                                                         |
 | **Email**                   | The email address of a user.                                                                                                                     |
 | **Enrolment**               | The act of registering or signing up for a course, done by a student.                                                                            |
+| **Enrolment Limits**        | The minimum and maximum number of students that a course may have                                                                                |
 | **Event**                   | It can be a meeting or a class, which is scheduled for a specific time and place.                                                                |
 | **Exam**                    | An evaluation created by teachers and taken by student's to test their knowledge of a particular subject.                                        |
 | **Extraordinary Class**     | A one occurrence only extra class scheduled and led by teachers where a specific group of participants gather to learn a particular subject.     |
