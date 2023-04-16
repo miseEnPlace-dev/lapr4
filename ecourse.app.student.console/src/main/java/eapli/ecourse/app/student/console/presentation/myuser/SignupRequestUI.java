@@ -32,7 +32,7 @@ public class SignupRequestUI extends AbstractUI {
     } catch (final IntegrityViolationException | ConcurrencyException e) {
       LOGGER.error("Error performing the operation", e);
       System.out.println(
-          "Unfortunatelly there was an unexpected error in the application. Please try again and if the problem persists, contact your system admnistrator.");
+          "Unfortunately there was an unexpected error in the application. Please try again and if the problem persists, contact your system administrator.");
       return true;
     }
 
