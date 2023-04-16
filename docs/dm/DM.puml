@@ -49,22 +49,6 @@ entity Course <<entity>> <<root>> {
 
 package "<<aggregate>> Board" {
   entity Board
-
-  entity Column
-  entity Row
-  entity UserPermission
-
-}
-
-entity Column <<entity>> {
-  -number
-}
-
-entity Row <<entity>> {
-  -number
-}
-
-entity UserPermission <<entity>> {
 }
 
 entity Board <<entity>> <<root>> {
@@ -168,11 +152,9 @@ Course ---> "1..*" Teacher : has
 Course --> "1" Teacher : has a responsible
 
 Enrolment --> "1" Course : is for
+Enrolment --> "1" Student : has
 
 Board ---> "1" User : has an owner
-Board *-- "1..*" Column : has a collection of
-Board *-- "1..*" Row : has a collection of
-Board *-- "0..*" UserPermission : has a collection of
 
 PostIt --> "1" Board: belongs to
 PostIt --> "0..1" PostIt : previous
@@ -203,7 +185,6 @@ ExtraordinaryClass --> "1..*" Student : has
 ExtraordinaryClass --> "1" Course : is related to
 
 Student --> "0..*" ExamAnswer : has
-Student --> "0..*" Enrolment : produces
 
 Meeting --> "1" User : scheduled by
 
