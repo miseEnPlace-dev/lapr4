@@ -13,7 +13,15 @@ The members of the group:
 | **1211289** | Tomás Lopes     |
 | **1211288** | Tomás Russo     |
 
-## 2. Task Assignment
+## 2. Project Management
+
+| Sprint | Start (week) | End (week) | Scrum Master |
+| ------ | ------------ | ---------- | ------------ |
+| A      | 1            | 7          | Tomás Lopes  |
+| B      | 8            | 11         | ---          |
+| C      | 12           | 15         | ---          |
+
+## 3. Task Assignment
 
 The assignment of tasks (requirements/user stories/use cases) during the project.
 
@@ -40,22 +48,14 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 | ----------- | ---- |
 | ----        | ---  |
 
-## 3. Team Rules
+## 4. Team Rules
 
 ### [Team Rules](team-rules.md)
 
-## 4. Client Communication
+## 5. Client Communication
 
 ### [Sprint A](client-clarifications/sprint-a.md)
 
-## 5. Trello Board
+## 6. Trello Board
 
 ### [Trello Board](https://trello.com/b/Hh1yaRy5/lapr4)
-
-## 6. Project Management
-
-| Sprint | Start (week) | End (week) | Scrum Master |
-| ------ | ------------ | ---------- | ------------ |
-| A      | 1            | 7          | Tomás Lopes  |
-| B      | 8            | 11         | ---          |
-| C      | 12           | 15         | ---          |
