@@ -27,7 +27,7 @@ package "<<aggregate>> Teacher" {
 
   class BirthDate
   class TaxPayerNumber
-  class Achronym
+  class Acronym
 }
 
 entity Teacher <<entity>> <<root>> {
@@ -35,11 +35,11 @@ entity Teacher <<entity>> <<root>> {
 
 class BirthDate <<(V,#FF8B40) value object>> {}
 class TaxPayerNumber <<(V,#FF8B40) value object>> {}
-class Achronym <<(V,#FF8B40) value object>> {}
+class Acronym <<(V,#FF8B40) value object>> {}
 
 Teacher --> "1" BirthDate : characterized by
 Teacher --> "1" TaxPayerNumber : characterized by
-Teacher --> "1" Achronym : characterized by
+Teacher --> "1" Acronym : characterized by
 
 Teacher -|> User
 

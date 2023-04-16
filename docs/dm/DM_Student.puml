@@ -34,7 +34,7 @@ package "<<aggregate>> Student" {
 
   class BirthDate
   class TaxPayerNumber
-  class MechanographicNumber
+  class MecanographicNumber
 }
 
 entity Student <<entity>> <<root>> {
@@ -42,11 +42,11 @@ entity Student <<entity>> <<root>> {
 
 class BirthDate <<(V,#FF8B40) value object>> {}
 class TaxPayerNumber <<(V,#FF8B40) value object>> {}
-class MechanographicNumber <<(V,#FF8B40) value object>> {}
+class MecanographicNumber <<(V,#FF8B40) value object>> {}
 
 Student --> "1" BirthDate : characterized by
 Student --> "1" TaxPayerNumber : characterized by
-Student --> "1" MechanographicNumber : identified by
+Student --> "1" MecanographicNumber : identified by
 
 Student -|> User
 
