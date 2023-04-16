@@ -78,6 +78,12 @@ You are now ready to run the app. Simply execute the script of the app you want 
 - For the Backoffice app, execute the following script:
   - On Linux/MacOS: `./run-backoffice.sh`
   - On Windows: `run-backoffice.bat`
+- For the teacher app, execute the following script:
+  - On Linux/MacOS: `./run-teacher.sh`
+  - On Windows: `run-teacher.bat`
+- For the manager app, execute the following script:
+  - On Linux/MacOS: `./run-manager.sh`
+  - On Windows: `run-manager.bat`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
