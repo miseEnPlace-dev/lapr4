@@ -12,7 +12,7 @@ on:
   schedule:
     - cron: "10 4 * * *"
   workflow_dispatch:
-    input:
+    inputs:
       branch:
         description: "Branch to build"
         required: true
