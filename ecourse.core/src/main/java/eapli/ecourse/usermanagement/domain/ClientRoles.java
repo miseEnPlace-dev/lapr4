@@ -7,33 +7,24 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
  *
  */
 public final class ClientRoles {
-  /**
-   * poweruser
-   */
+  // Power User (technical role)
   public static final Role POWER_USER = Role.valueOf("POWER_USER");
-  /**
-   * Student
-   */
-  public static final Role CLIENT_USER = Role.valueOf("CLIENT_USER");
-  /**
-   * Administrator
-   */
-  public static final Role ADMIN = Role.valueOf("ADMIN");
-  /**
-   *
-   */
+
+  // Administrator
   public static final Role MANAGER = Role.valueOf("MANAGER");
-  /**
-   *
-   */
+
+  // Teacher
   public static final Role TEACHER = Role.valueOf("TEACHER");
 
+  // Student
+  public static final Role STUDENT = Role.valueOf("STUDENT");
+
   /**
-   * get available role types for adding new users
+   * Get available role types for collaborators.
    *
    * @return
    */
   public static Role[] nonUserValues() {
-    return new Role[] { ADMIN, MANAGER, TEACHER };
+    return new Role[] {MANAGER, TEACHER};
   }
 }

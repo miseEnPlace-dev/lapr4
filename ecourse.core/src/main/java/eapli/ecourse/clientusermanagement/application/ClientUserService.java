@@ -22,13 +22,12 @@ public class ClientUserService {
   private final ClientUserRepository repo = PersistenceContext.repositories().clientUsers();
 
   public Optional<ClientUser> findClientUserByMecNumber(final String mecNumber) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.ADMIN,
-        ClientRoles.MANAGER);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
     return repo.ofIdentity(MecanographicNumber.valueOf(mecNumber));
   }
 
   public Optional<ClientUser> findClientUserByUsername(final Username user) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.ADMIN);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
     return repo.findByUsername(user);
   }
 }

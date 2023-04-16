@@ -38,7 +38,7 @@ import eapli.framework.infrastructure.pubsub.PubSubRegistry;
     final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
     userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
         .withName(theSignupRequest.name()).withEmail(theSignupRequest.email())
-        .withRoles(ClientRoles.CLIENT_USER);
+        .withRoles(ClientRoles.STUDENT);
     final SystemUser newUser = userRepository.save(userBuilder.build());
 
     // notify interested parties

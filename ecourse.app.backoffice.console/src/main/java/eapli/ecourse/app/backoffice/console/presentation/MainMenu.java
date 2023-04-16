@@ -88,7 +88,7 @@ public class MainMenu extends AbstractUI {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
     }
 
-    if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.ADMIN)) {
+    if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
       final Menu usersMenu = buildUsersMenu();
       mainMenu.addSubMenu(USERS_OPTION, usersMenu);
       final Menu settingsMenu = buildAdminSettingsMenu();

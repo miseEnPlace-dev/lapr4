@@ -32,7 +32,7 @@ public class AddUserController {
 
   public SystemUser addUser(final String username, final String password, final String firstName,
       final String lastName, final String email, final Set<Role> roles, final Calendar createdOn) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.ADMIN);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
     return userSvc.registerNewUser(username, password, firstName, lastName, email, roles,
         createdOn);

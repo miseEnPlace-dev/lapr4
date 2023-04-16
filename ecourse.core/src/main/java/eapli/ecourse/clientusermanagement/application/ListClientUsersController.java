@@ -17,7 +17,7 @@ public class ListClientUsersController {
   private final ClientUserRepository repo = PersistenceContext.repositories().clientUsers();
 
   public Iterable<ClientUser> activeClientUsers() {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.ADMIN);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
     return this.repo.findAllActive();
   }

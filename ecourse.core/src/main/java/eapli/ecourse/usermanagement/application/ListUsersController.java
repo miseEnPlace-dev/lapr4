@@ -21,7 +21,7 @@ public class ListUsersController {
   private final UserManagementService userSvc = AuthzRegistry.userService();
 
   public Iterable<SystemUser> allUsers() {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.ADMIN);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
     return userSvc.allUsers();
   }

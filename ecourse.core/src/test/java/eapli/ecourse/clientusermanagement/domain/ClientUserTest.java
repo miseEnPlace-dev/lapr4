@@ -32,7 +32,7 @@ class ClientUserTest {
   }
 
   private SystemUser getNewDummyUser() {
-    return dummyUser("dummy", ClientRoles.ADMIN);
+    return dummyUser("dummy", ClientRoles.MANAGER);
   }
 
   @Test
@@ -52,7 +52,7 @@ class ClientUserTest {
   @Test
   void ensureClientUserEqualsFailsForDifferenteMecanographicNumber() throws Exception {
     final Set<Role> roles = new HashSet<>();
-    roles.add(ClientRoles.ADMIN);
+    roles.add(ClientRoles.MANAGER);
 
     final ClientUser aClientUser = new ClientUserBuilder()
         .withMecanographicNumber(aMecanographicNumber).withSystemUser(getNewDummyUser()).build();
@@ -76,7 +76,7 @@ class ClientUserTest {
   @Test
   void ensureClientUserEqualsFailsForDifferenteObjectTypes() throws Exception {
     final Set<Role> roles = new HashSet<>();
-    roles.add(ClientRoles.ADMIN);
+    roles.add(ClientRoles.MANAGER);
 
     final ClientUser aClientUser = new ClientUserBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
@@ -98,7 +98,7 @@ class ClientUserTest {
   @Test
   void enslientserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
     final Set<Role> roles = new HashSet<>();
-    roles.add(ClientRoles.ADMIN);
+    roles.add(ClientRoles.MANAGER);
     final ClientUser aClientUser = new ClientUserBuilder()
         .withMecanographicNumber(aMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
