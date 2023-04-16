@@ -12,9 +12,9 @@ public final class ClientRoles {
    */
   public static final Role POWER_USER = Role.valueOf("POWER_USER");
   /**
-   * Utente
+   * Student
    */
-  public static final Role CLIENT_USER = Role.valueOf("CLIENT_USER");
+  public static final Role STUDENT = Role.valueOf("STUDENT");
   /**
    * Administrator
    */
@@ -34,10 +34,6 @@ public final class ClientRoles {
    * @return
    */
   public static Role[] nonUserValues() {
-    return new Role[] {ADMIN, MANAGER, TEACHER};
-  }
-
-  public boolean isCollaborator(final Role role) {
-    return role != CLIENT_USER;
+    return new Role[] { ADMIN, MANAGER, TEACHER, STUDENT };
   }
 }

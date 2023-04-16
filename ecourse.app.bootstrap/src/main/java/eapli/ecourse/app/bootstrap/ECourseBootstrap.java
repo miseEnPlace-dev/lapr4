@@ -4,7 +4,7 @@ import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.clientusermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
 import eapli.ecourse.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.ecourse.clientusermanagement.domain.events.SignupAcceptedEvent;
-import eapli.ecourse.infrastructure.authz.PasswordHashEncoder;
+import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.bootstrapers.demo.ECourseDemoBootstrapper;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -82,7 +82,7 @@ public final class ECourseBootstrap extends ECourseBaseApplication {
   @Override
   protected void configureAuthz() {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
-        new PasswordHashEncoder());
+        PasswordEncoderContext.passwordHash());
   }
 
   @SuppressWarnings("unchecked")

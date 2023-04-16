@@ -1,45 +1,44 @@
-package eapli.ecourse.app.other.console;
+package eapli.ecourse.app.manager.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
+import eapli.ecourse.app.common.console.presentation.authz.LoginAction;
+import eapli.ecourse.app.manager.console.presentation.MainMenu;
+import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
+import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 
-/**
- *
- * @author Paulo Gandra Sousa
- */
 @SuppressWarnings("squid:S106")
-public final class OtherApp extends ECourseBaseApplication {
+public final class ECourseManagerApp extends ECourseBaseApplication {
 
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
-  private OtherApp() {}
+  private ECourseManagerApp() {
+  }
 
   public static void main(final String[] args) {
     System.out.println();
 
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
-        new PlainTextEncoder());
+        PasswordEncoderContext.passwordHash());
 
-    new OtherApp().run(args);
+    new ECourseManagerApp().run(args);
   }
 
   @Override
   protected void doMain(String[] args) {
-    // login and go to main menu
-    // if (new LoginAction(ClientRoles.MANAGER).execute()) {
-    // final MainMenu menu = new MainMenu();
-    // menu.mainLoop();
-    // }
+    if (new LoginAction(ClientRoles.MANAGER).execute()) {
+      final MainMenu menu = new MainMenu();
+      menu.mainLoop();
+    }
   }
 
   @Override
   protected String appTitle() {
-    return "Base POS";
+    return "Manager App";
   }
 
   @Override

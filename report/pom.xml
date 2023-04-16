@@ -39,7 +39,12 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>app.other.console</artifactId>
+      <artifactId>app.teacher.console</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eapli.ecourse</groupId>
+      <artifactId>app.manager.console</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>

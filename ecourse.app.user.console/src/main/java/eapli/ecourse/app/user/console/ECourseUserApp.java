@@ -2,7 +2,7 @@ package eapli.ecourse.app.user.console;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.app.user.console.presentation.FrontMenu;
-import eapli.ecourse.infrastructure.authz.PasswordHashEncoder;
+import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -15,7 +15,6 @@ import eapli.framework.infrastructure.pubsub.EventDispatcher;
  */
 @SuppressWarnings("squid:S106")
 public final class ECourseUserApp extends ECourseBaseApplication {
-
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
@@ -45,7 +44,7 @@ public final class ECourseUserApp extends ECourseBaseApplication {
   @Override
   protected void configureAuthz() {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
-        new PasswordHashEncoder());
+        PasswordEncoderContext.passwordHash());
   }
 
   // @SuppressWarnings("unchecked")

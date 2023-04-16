@@ -1,7 +1,7 @@
-package eapli.ecourse.app.other.console.presentation;
+package eapli.ecourse.app.teacher.console.presentation;
 
-import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.Application;
+import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;

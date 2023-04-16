@@ -18,13 +18,17 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 /**
- * The transactional controller for the use case "accept/refuse a signup request".
+ * The transactional controller for the use case "accept/refuse a signup
+ * request".
  * <p>
- * following the guideline that a controller should only change one Aggregate, we shouldn't be
- * changing all these entities here, but should instead use asynchronous events. However in this
+ * following the guideline that a controller should only change one Aggregate,
+ * we shouldn't be
+ * changing all these entities here, but should instead use asynchronous events.
+ * However in this
  * case we will take advantage of TransactionalContext
  *
- * @todo handle the scenario where in the meantime the username is already used by some other user
+ * @todo handle the scenario where in the meantime the username is already used
+ *       by some other user
  *
  * @author AJS on 08/04/2016.
  */
@@ -35,12 +39,10 @@ public class AcceptRefuseSignupRequestControllerTxImpl
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
   private final UserManagementService userService = AuthzRegistry.userService();
 
-  private final TransactionalContext txCtx =
-      PersistenceContext.repositories().newTransactionalContext();
-  private final ClientUserRepository clientUserRepository =
-      PersistenceContext.repositories().clientUsers(txCtx);
-  private final SignupRequestRepository signupRequestsRepository =
-      PersistenceContext.repositories().signupRequests(txCtx);
+  private final TransactionalContext txCtx = PersistenceContext.repositories().newTransactionalContext();
+  private final ClientUserRepository clientUserRepository = PersistenceContext.repositories().clientUsers(txCtx);
+  private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories()
+      .signupRequests(txCtx);
 
   /*
    * (non-Javadoc)
@@ -60,7 +62,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl
     // explicitly begin a transaction
     txCtx.beginTransaction();
 
-    final SystemUser newUser = createSystemUserForClientUser(theSignupRequest);
+    final SystemUser newUser = createSystemUserForStudent(theSignupRequest);
     createClientUser(theSignupRequest, newUser);
     theSignupRequest = acceptTheSignupRequest(theSignupRequest);
 
@@ -85,9 +87,9 @@ public class AcceptRefuseSignupRequestControllerTxImpl
   //
   // add system user
   //
-  private SystemUser createSystemUserForClientUser(final SignupRequest theSignupRequest) {
+  private SystemUser createSystemUserForStudent(final SignupRequest theSignupRequest) {
     final Set<Role> roles = new HashSet<>();
-    roles.add(ClientRoles.CLIENT_USER);
+    roles.add(ClientRoles.STUDENT);
     return userService.registerUser(theSignupRequest.username(), theSignupRequest.password(),
         theSignupRequest.name(), theSignupRequest.email(), roles);
   }
