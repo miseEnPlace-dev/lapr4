@@ -29,12 +29,6 @@ This was a known bug that was fixed.
 
 **Task 03** - Implement password hashing
 
-The base program used a PlainTextEncoder that was not secure.
-We implemented 2 different encoders.
-[SimplePasswordEncoder](../../../ecourse.infrastructure.application/src/main/java/eapli/ecourse/infrastructure/authz/SimplePasswordHashEncoder.java) and [PasswordHashEncoder](../../../ecourse.infrastructure.application/src/main/java/eapli/ecourse/infrastructure/authz/PasswordHashEncoder.java).
-
-The simple one is used for testing purposes and all of the downsides are listed in the class file.
-
 **Task 04** - Sign up validations crash the application
 
 This was a known bug that was fixed.
@@ -43,7 +37,7 @@ This was a known bug that was fixed.
 
 The framework already had a base implementation of the authentication and authorization system, so we did not implement it from scratch. There is a central component called `AuthenticationService`, which provides the authenticate method to verify a user identity. This service depends on other components such as the `AuthorizationService` which handles the user session, and the `PasswordPolicy`, which is responsible for checking if the password is according to the rules defined by the system.
 
-The `SystemUser` entity is a user in the system.
+The `SystemUser` entity represents a user in the system.
 
 The `Role` value object represents the user's role in the system, which determines its permissions.
 To encode/decode passwords, the `AuthenticationService` relies on a `PasswordEncoder`.
@@ -115,7 +109,7 @@ The rest of the implementation was already done in the base project so we did no
 
 ## Implementation
 
-We created the class `PasswordEncoderContext` to provide a way to change the encoder used in the application at any time using a simple configuration file.
+We implemented the class `PasswordEncoderContext` to provide a way to change the encoder used in the application at any time using a simple configuration file.
 
 We can get the current encoder using the `passwordHash()` method.
 
