@@ -42,6 +42,7 @@
     <module>ecourse.infrastructure.application</module>
     <module>ecourse.core</module>
     <module>ecourse.persistence.impl</module>
+    <module>report</module>
   </modules>
 
   <dependencies>
