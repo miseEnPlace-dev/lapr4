@@ -54,6 +54,6 @@
 | **Tax Payer Number**        | The tax payer number of a user.                                                                                                                  |
 | **Teacher**                 | A person who teaches a course, scheduling and managing classes, meetings and exams.                                                              |
 | **Time**                    | Represents a specific time of the day, with a precision of minutes.                                                                              |
-| **True or False**           | A question type that requires the student to choose between true or false.                                                                       |
+| **True or False**           | A question type that requires the student to choose between true or false options.                                                               |
 | **User**                    | Any person who interacts with the software, including students, teachers and managers.                                                           |
 | **User Permission (Board)** | The permission that a user has in a board, which determines what actions they can perform. It can be read, write, or both.                       |
