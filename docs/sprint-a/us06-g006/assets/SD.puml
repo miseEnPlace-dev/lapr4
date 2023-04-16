@@ -1,3 +1,31 @@
 @startuml SD
 
+class SystemUserBuilder {}
+entity SystemUser <<(E,#8dc8f6) entity>> <<root>> {}
+class RoleSet {}
+class Username <<(V,#FF8B40) value object>> <<id>> {}
+class Password <<(V,#FF8B40) value object>> {}
+class Name <<(V,#FF8B40) value object>> {}
+entity RoleAssignment <<(E,#8dc8f6) entity>> {}
+class Role <<(V,#FF8B40) value object>> {}
+class PasswordEncoder <<service>> {}
+class PasswordPolicy <<service>> {}
+interface Set <RoleAssignment> {}
+
+SystemUserBuilder ..> SystemUser
+
+SystemUser --> RoleSet
+SystemUser --> Username
+SystemUser --> Password
+SystemUser --> Name
+
+Password ..> PasswordEncoder
+Password ..> PasswordPolicy
+
+RoleSet ..|> Set
+
+Set ..> RoleAssignment
+
+RoleAssignment --> Role
+
 @enduml

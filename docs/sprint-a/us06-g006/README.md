@@ -35,6 +35,10 @@ The simple one is used for testing purposes and all of the downsides are listed 
 
 ## Design
 
+The framework already had a base implementation of the authentication and authorization system.
+
+The following diagram shows the inner implementation of the auth system.
+
 ### Sequence diagram (simplified)
 
 ![Sequence diagram](assets/out/SD.svg)
