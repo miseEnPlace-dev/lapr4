@@ -1,9 +1,6 @@
-<p>
-<a href="https://classroom.github.com/online_ide?assignment_repo_id=10490917&assignment_repo_type=AssignmentRepo"><img src="https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg"></a>
-<a href="https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-22-23-19/actions/workflows/maven.yml"><img src="https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-22-23-19/actions/workflows/maven.yml/badge.svg"></a>
-</p>
+# Project eCourse ![CI](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-22-23-19/actions/workflows/maven.yml/badge.svg)
 
-# Project eCourse
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10490917&assignment_repo_type=AssignmentRepo)
 
 ```
         ,-----.
@@ -48,6 +45,7 @@ Before building, make sure of the following:
 To build the project, you first need to set all six properties files, located under all app's `src/main/resources` folders. Copy the `application.example.properties` file and rename it to `application.properties`. You can change the default values if you want, but it's not necessary.
 
 Then, execute the following script:
+
 - On Linux/MacOS: `./rebuild-all.sh`
 - On Windows: `rebuild-all.bat`
 
@@ -59,9 +57,9 @@ To execute the tests, just execute the following command:
 
 ## 5. How to Run
 
-Before running the project, you need to build the project. Follow the instructions described in section _3 - How to Build_.
+> ️️️️⚠️ Before running the project, you need to build the project. Follow the instructions described in section [3 - How to Build](#3-how-to-build).
 
-After building, start the H2 database. For that, **open a new terminal** and execute the following script:
+First, start the H2 database. For that, **open a new terminal** and execute the following script:
 
 - On Linux/MacOS: `./h2.sh`
 - On Windows: `h2.bat`
@@ -75,15 +73,15 @@ In order to have the needed data for executing the app, you need to run the boot
 You are now ready to run the app. Simply execute the script of the app you want to run:
 
 - For the User app, execute the following script:
-    - On Linux/MacOS: `./run-user.sh`
-    - On Windows: `run-user.bat`
+  - On Linux/MacOS: `./run-user.sh`
+  - On Windows: `run-user.bat`
 - For the Backoffice app, execute the following script:
-    - On Linux/MacOS: `./run-backoffice.sh`
-    - On Windows: `run-backoffice.bat`
+  - On Linux/MacOS: `./run-backoffice.sh`
+  - On Windows: `run-backoffice.bat`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
-_To Do_
+📝 _To Do_
 
 ## 7. How to Generate PlantUML Diagrams
 

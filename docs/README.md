@@ -53,4 +53,4 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 
 ## 5. Board
 
-### [Trello Board](https://trello.com/b/Hh1yaRy5/lapr4)
+### [Board](https://github.com/orgs/Departamento-de-Engenharia-Informatica/projects/38)

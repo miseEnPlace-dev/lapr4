@@ -38,3 +38,5 @@ db/*
 application.properties
 
 target/*
+
+*.log
