@@ -35,6 +35,10 @@ We implemented 2 different encoders.
 
 The simple one is used for testing purposes and all of the downsides are listed in the class file.
 
+**Task 04** - Sign up validations crash the application
+
+This was a known bug that was fixed.
+
 ## Design
 
 The framework already had a base implementation of the authentication and authorization system, so we did not implement this system. There is a central component called `AuthenticationService`, which provides the authenticate method to verify a user identity. This service depends on other components, such as the `AuthorizationService`, which handles the user session, and the `PasswordPolicy`, which is responsible for checking if the password is according to the rules.
@@ -105,8 +109,23 @@ The rest of the implementation was already done in the base project so we did no
 
 ## Implementation
 
-Write about the useful details of the implementation of the user story.
+We created the class `PasswordEncoderContext` to provide a way to change the encoder used in the application at any time using a simple configuration file.
+
+We can get the current encoder using the `passwordHash()` method.
+
+```java
+PasswordEncoder passwordEncoder = PasswordEncoderContext.passwordHash();
+```
+
+Then, when setting up the application auth service:
+
+```java
+AuthzRegistry.configure(usersRepo, passwordPolicy, passwordEncoder);
+```
 
 ## Observations
 
-N/a
+We also solved some known issues with the base application as mentioned before like:
+
+- The sign up functionality that would cause the application to exit after registering a new user
+- The sign up functionality that whenever a constraint was violated, the application would exit.
