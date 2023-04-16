@@ -41,11 +41,17 @@ This was a known bug that was fixed.
 
 ## Design
 
-The framework already had a base implementation of the authentication and authorization system, so we did not implement this system. There is a central component called `AuthenticationService`, which provides the authenticate method to verify a user identity. This service depends on other components, such as the `AuthorizationService`, which handles the user session, and the `PasswordPolicy`, which is responsible for checking if the password is according to the rules.
+The framework already had a base implementation of the authentication and authorization system, so we did not implement it from scratch. There is a central component called `AuthenticationService`, which provides the authenticate method to verify a user identity. This service depends on other components such as the `AuthorizationService` which handles the user session, and the `PasswordPolicy`, which is responsible for checking if the password is according to the rules defined by the system.
+
 The `SystemUser` entity is a user in the system.
+
 The `Role` value object represents the user's role in the system, which determines its permissions.
 To encode/decode passwords, the `AuthenticationService` relies on a `PasswordEncoder`.
-We decided to implement another encoder because the one used in the base project was not secure, since it saves the passwords in clear text. The new implementation uses hashing with salt to encode the passwords. The other encoder will be used for testing purposes.
+
+The base implementation used a simple `PlainTextEncoder` that was not secure, so we decided to implement another 2 encoders:
+
+- [SimplePasswordEncoder](../../../ecourse.infrastructure.application/src/main/java/eapli/ecourse/infrastructure/authz/SimplePasswordHashEncoder.java) - This encoder is used for testing purposes and all of the downsides are listed in the class file.
+- [PasswordHashEncoder](../../../ecourse.infrastructure.application/src/main/java/eapli/ecourse/infrastructure/authz/PasswordHashEncoder.java) - This encoder is used in the application and is more secure.
 
 ### Applied patterns
 
