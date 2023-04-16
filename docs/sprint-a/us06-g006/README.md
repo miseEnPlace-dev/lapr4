@@ -19,6 +19,8 @@
 
 ## Analysis
 
+There was already a base implementation of the authentication and authorization system in the framework.
+
 ### Related Tasks
 
 **Task 02** - Make sign up go back to main menu instead of existing the app bug
@@ -35,26 +37,17 @@ The simple one is used for testing purposes and all of the downsides are listed 
 
 ## Design
 
-The framework already had a base implementation of the authentication and authorization system.
-
-### SystemUser Model
-
-The following diagram shows the SystemUser model used by the framework, including the new encoder implemented with this user story.
-
-![Sequence diagram](assets/out/DM_SystemUser.svg)
-
-### Authentication and Authorization
-
-The following diagram shows the authentication and authorization system used by the framework, including the new encoder implemented with this user story.
-
-![Sequence diagram](assets/out/DM_Auth.svg)
+The framework already had a base implementation of the authentication and authorization system, so we did not implement this system. There is a central component called `AuthenticationService`, which provides the authenticate method to verify a user identity. This service depends on other components, such as the `AuthorizationService`, which handles the user session, and the `PasswordPolicy`, which is responsible for checking if the password is according to the rules.
+The `SystemUser` entity is a user in the system.
+The `Role` value object represents the user's role in the system, which determines its permissions.
+To encode/decode passwords, the `AuthenticationService` relies on a `PasswordEncoder`.
+We decided to implement another encoder because the one used in the base project was not secure, since it saves the passwords in clear text. The new implementation uses hashing with salt to encode the passwords. The other encoder will be used for testing purposes.
 
 ### Applied patterns
 
 #### Factory (GOF - Creational)
 
-The factory pattern will be used to create the encoders.
-This was not implemented in this user story, but will be used in the future. This way we can easily change the encoder used in the application at any time using a simple configuration file.
+The factory pattern is used to create the encoders. This way we can easily change the encoder used in the application at any time using a simple configuration file.
 
 ### Tests
 
