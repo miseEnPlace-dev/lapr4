@@ -35,7 +35,7 @@ public class FrontMenu extends AbstractUI {
   public boolean doShow() {
     final Menu menu = new Menu();
     menu.addItem(LOGIN_OPTION, "Login", new ChainedAction(
-        new LoginUI(new AuthenticationCredentialHandler(), ClientRoles.STUDENT)::show, () -> {
+        new LoginUI(new AuthenticationCredentialHandler(), ClientRoles.CLIENT_USER)::show, () -> {
           new MainMenu().mainLoop();
           return true;
         }));

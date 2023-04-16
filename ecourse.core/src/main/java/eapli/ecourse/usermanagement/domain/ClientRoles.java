@@ -14,7 +14,7 @@ public final class ClientRoles {
   /**
    * Student
    */
-  public static final Role STUDENT = Role.valueOf("STUDENT");
+  public static final Role CLIENT_USER = Role.valueOf("CLIENT_USER");
   /**
    * Administrator
    */
@@ -34,6 +34,6 @@ public final class ClientRoles {
    * @return
    */
   public static Role[] nonUserValues() {
-    return new Role[] { ADMIN, MANAGER, TEACHER, STUDENT };
+    return new Role[] { ADMIN, MANAGER, TEACHER };
   }
 }

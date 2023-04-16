@@ -23,7 +23,7 @@ public class MyClientUserService {
   private final ClientUserRepository clientUsersRepo = PersistenceContext.repositories().clientUsers();
 
   public ClientUser me() {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.CLIENT_USER);
 
     // TODO cache the client user object
     final Optional<ClientUser> me = clientUsersRepo.findByUsername(myUser().identity());

@@ -53,7 +53,7 @@ public final class ECourseManagerApp extends ECourseBaseApplication {
 
   @Override
   protected void configureAuthz() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'configureAuthz'");
+    AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
+        PasswordEncoderContext.passwordHash());
   }
 }
