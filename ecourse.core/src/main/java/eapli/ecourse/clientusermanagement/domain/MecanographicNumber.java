@@ -12,17 +12,15 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 @EqualsAndHashCode
 public class MecanographicNumber implements ValueObject, Comparable<MecanographicNumber> {
-
   private static final long serialVersionUID = 1L;
 
   private String number;
 
   protected MecanographicNumber(final String mecanographicNumber) {
-    if (StringPredicates.isNullOrEmpty(mecanographicNumber)) {
+    if (StringPredicates.isNullOrEmpty(mecanographicNumber))
       throw new IllegalArgumentException("Mecanographic Number should neither be null nor empty");
-    }
-    // TODO validate invariants, i.e., mecanographic number regular
-    // expression
+
+    // TODO validate invariants, i.e., mecanographic number regular expression
     this.number = mecanographicNumber;
   }
 

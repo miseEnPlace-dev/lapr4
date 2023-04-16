@@ -26,11 +26,15 @@ public class SignupRequestUI extends AbstractUI {
     try {
       this.theController.signup(userData.username(), userData.password(), userData.firstName(),
           userData.lastName(), userData.email(), userData.mecanographicNumber());
+    } catch (final IllegalArgumentException e) {
+      System.out.println("Error creating the account: " + e.getMessage() + ". Please try again.\n");
     } catch (final IntegrityViolationException | ConcurrencyException e) {
       LOGGER.error("Error performing the operation", e);
       System.out.println(
           "Unfortunatelly there was an unexpected error in the application. Please try again and if the problem persists, contact your system admnistrator.");
     }
+
+    System.out.println("Account created. Please wait for the administrator to activate your account.\n");
 
     return true;
   }

@@ -39,7 +39,6 @@ public class FrontMenu extends AbstractUI {
           new MainMenu().mainLoop();
           return true;
         }));
-    // TODO: instead of leaving the app, return to the main menu again
     menu.addItem(SIGNUP_OPTION, "Sign up", new ChainedAction(
         new SignupRequestAction(), () -> {
           new FrontMenu().mainLoop();

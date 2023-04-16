@@ -15,7 +15,8 @@ import eapli.framework.time.util.CurrentTimeCalendars;
 /**
  * A factory for Signup Requests.
  * <p>
- * This class demonstrates the use of the factory (DDD) pattern using a fluent interface. it acts as
+ * This class demonstrates the use of the factory (DDD) pattern using a fluent
+ * interface. it acts as
  * a Builder (GoF).
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
@@ -55,7 +56,7 @@ public class SignupRequestBuilder implements DomainFactory<SignupRequest> {
 
   public SignupRequestBuilder withPassword(final String rawPassword) {
     password = Password.encodedAndValid(rawPassword, policy, encoder)
-        .orElseThrow(IllegalArgumentException::new);
+        .orElseThrow(() -> new IllegalArgumentException("The password does not meet the policy"));
     return this;
   }
 
