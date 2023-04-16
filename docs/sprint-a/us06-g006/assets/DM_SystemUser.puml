@@ -1,4 +1,4 @@
-@startuml SD
+@startuml DM_SystemUser
 
 class SystemUserBuilder {}
 entity SystemUser <<(E,#8dc8f6) entity>> <<root>> {}
@@ -8,9 +8,12 @@ class Password <<(V,#FF8B40) value object>> {}
 class Name <<(V,#FF8B40) value object>> {}
 entity RoleAssignment <<(E,#8dc8f6) entity>> {}
 class Role <<(V,#FF8B40) value object>> {}
-class PasswordEncoder <<service>> {}
 class PasswordPolicy <<service>> {}
 interface Set <RoleAssignment> {}
+
+class SimplePasswordEncoder <<service>> {}
+class PasswordHashEncoder <<service>> {}
+interface PasswordEncoder {}
 
 SystemUserBuilder ..> SystemUser
 
@@ -21,6 +24,9 @@ SystemUser --> Name
 
 Password ..> PasswordEncoder
 Password ..> PasswordPolicy
+
+PasswordEncoder <|-- SimplePasswordEncoder
+PasswordEncoder <|-- PasswordHashEncoder
 
 RoleSet ..|> Set
 

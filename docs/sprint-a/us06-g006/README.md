@@ -37,11 +37,17 @@ The simple one is used for testing purposes and all of the downsides are listed 
 
 The framework already had a base implementation of the authentication and authorization system.
 
-The following diagram shows the inner implementation of the auth system.
+### SystemUser Model
 
-### Sequence diagram (simplified)
+The following diagram shows the SystemUser model used by the framework, including the new encoder implemented with this user story.
 
-![Sequence diagram](assets/out/SD.svg)
+![Sequence diagram](assets/out/DM_SystemUser.svg)
+
+### Authentication and Authorization
+
+The following diagram shows the authentication and authorization system used by the framework, including the new encoder implemented with this user story.
+
+![Sequence diagram](assets/out/DM_Auth.svg)
 
 ### Applied patterns
 
