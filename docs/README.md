@@ -51,6 +51,6 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 
 ### [Sprint A](sprint-A-clarifications.md)
 
-## 5. Board
+## 5. Trello Board
 
-### [Board](https://github.com/orgs/Departamento-de-Engenharia-Informatica/projects/38)
+### [Trello Board](https://trello.com/b/Hh1yaRy5/lapr4)
