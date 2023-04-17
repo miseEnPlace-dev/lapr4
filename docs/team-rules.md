@@ -4,25 +4,27 @@ In order to keep things consistent over the development of the project these are
 
 - For every feature/US a new branch must be created.
 - For almost every feature/US a Pull Request must be made & reviewed.
-- In the end of each sprint create a branch/tag named snap/sprint-X.
+- In the end of each sprint create a new release on github named `sprint-X`.
+- Foreach task an issue must be created.
 
 > 💡 Note: Some actions don't require a branch, like updating the README.md file.
 
 ## Conventions
 
-Branch names & commit messages:
-
 ### Commits
 
-purpose(specification[optional]): descriptive message
+purpose(specification[optional]): descriptive message (#issue-number[optional])
 
-> 💡 Note: You may want to link the issue number in the commit message. Example: `feat: added vaccine scheduling system #123`
+> 💡 Note: You may want to link the issue number in the commit message. Example: `feat: added vaccine scheduling system (#123)`.
+
+> 💡 Note: If the commit closes an issue you can use the keyword `closes` or `fixes` followed by the issue number. Example: `fix(meetings): fixed meeting creation bug (closes #15)`
 
 #### Example
 
 - feat: added vaccine scheduling system
 - docs(readme): added new us07 specifications
-- feat(ui): added new button to patient screen
+- feat(ui): added new button to patient screen (#15)
+- fix(meetings): fixed meeting creation bug (closes #15)
 
 ### Branches
 
@@ -37,6 +39,24 @@ branchName ✖️
 
 - feat/scheduling-system
 - fix/bug-123
+
+### Issues
+
+The issues can be named in a more informal way but it must be clear what the issue is about.
+
+#### Example
+
+- Add vaccine scheduling system
+- Fix bug on meeting creation
+
+### Pull Requests
+
+The pull request must have a title and a description. The title must follow the same convention as the commits. The description must have a link to the issue that is being solved.
+
+#### Example
+
+- Title: Feature/added vaccine scheduling system
+- Description: This PR adds the vaccine scheduling system. Closes #123
 
 ## Example of purposes
 
