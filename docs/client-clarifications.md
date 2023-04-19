@@ -252,9 +252,33 @@ Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de dep
 
 "No, there is no difference. In the app, they have the same permissions. You only need to register the teacher in charge for each course."
 
+## [Question 45](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22434)
+
+> How are classes scheduled? Initial date and end date?
+
+"No. Start date and duration."
+
+## [Question 46](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22495)
+
+> In G1006, what are the available courses for each role?
+
+"Teachers: courses that they are in charge of; Students: courses that they are enrolled in, and courses that have opened enrolment status; Managers: all courses."
+
+## [Question 47](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22498)
+
+> In US1009, What are the criteria for a student to be enrolled in a course?
+
+"This is not a system requirement. You should only register the decision of the manager."
+
+## [Question 48](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22504)
+
+> CSV files? Are you going to give us a template?
+
+"No."
+
 ---
 
-_Last question: "Teacher in charge and normal class teacher responsibilities", by Joao Leitao._
+_Last question: "Students csv file", by Nicolas Goncalves._
 
 _Last updated at 13/04/2023 14:44_
 
