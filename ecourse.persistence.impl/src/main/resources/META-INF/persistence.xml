@@ -7,8 +7,8 @@
     <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
-    <class>eapli.ecourse.clientusermanagement.domain.ClientUser</class>
-    <class>eapli.ecourse.clientusermanagement.domain.SignupRequest</class>
+    <class>eapli.ecourse.studentmanagement.domain.ClientUser</class>
+    <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecourse" />
@@ -45,8 +45,8 @@
     <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
-    <class>eapli.ecourse.clientusermanagement.domain.ClientUser</class>
-    <class>eapli.ecourse.clientusermanagement.domain.SignupRequest</class>
+    <class>eapli.ecourse.studentmanagement.domain.ClientUser</class>
+    <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
 
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

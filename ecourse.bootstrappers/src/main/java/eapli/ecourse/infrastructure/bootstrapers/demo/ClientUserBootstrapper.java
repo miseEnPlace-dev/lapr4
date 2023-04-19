@@ -3,13 +3,13 @@ package eapli.ecourse.infrastructure.bootstrapers.demo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.clientusermanagement.application.AcceptRefuseSignupFactory;
-import eapli.ecourse.clientusermanagement.application.AcceptRefuseSignupRequestController;
-import eapli.ecourse.clientusermanagement.application.AcceptRefuseSignupRequestControllerEventfulImpl;
-import eapli.ecourse.clientusermanagement.application.AcceptRefuseSignupRequestControllerTxImpl;
-import eapli.ecourse.clientusermanagement.domain.SignupRequest;
 import eapli.ecourse.infrastructure.bootstrapers.TestDataConstants;
 import eapli.ecourse.myclientuser.application.SignupController;
+import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupFactory;
+import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupRequestController;
+import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupRequestControllerEventfulImpl;
+import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupRequestControllerTxImpl;
+import eapli.ecourse.studentmanagement.domain.SignupRequest;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
@@ -17,11 +17,14 @@ import eapli.framework.domain.repositories.IntegrityViolationException;
 /**
  * Bootstrapper that demonstrates how a Client User can be added to the system.
  * <p>
- * If application property {@code UseEventfulControllers} is set to {@code false}, than the
- * {@link AcceptRefuseSignupRequestController} uses an fully transactional (eventless) controller
+ * If application property {@code UseEventfulControllers} is set to
+ * {@code false}, than the
+ * {@link AcceptRefuseSignupRequestController} uses an fully transactional
+ * (eventless) controller
  * {@link AcceptRefuseSignupRequestControllerTxImpl}.
  * <p>
- * If application property {@code UseEventfulControllers} is set to {@code true}, than the
+ * If application property {@code UseEventfulControllers} is set to
+ * {@code true}, than the
  * {@link AcceptRefuseSignupRequestController} uses an eventful controller
  * {@link AcceptRefuseSignupRequestControllerEventfulImpl}.
  *
@@ -31,8 +34,7 @@ public class ClientUserBootstrapper implements Action {
   private static final Logger LOGGER = LogManager.getLogger(ClientUserBootstrapper.class);
 
   private final SignupController signupController = new SignupController();
-  private final AcceptRefuseSignupRequestController acceptController =
-      AcceptRefuseSignupFactory.build();
+  private final AcceptRefuseSignupRequestController acceptController = AcceptRefuseSignupFactory.build();
 
   @Override
   public boolean execute() {

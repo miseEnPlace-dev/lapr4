@@ -2,11 +2,11 @@ package eapli.ecourse.myclientuser.application;
 
 import java.util.Calendar;
 
-import eapli.ecourse.clientusermanagement.domain.SignupRequest;
-import eapli.ecourse.clientusermanagement.domain.SignupRequestBuilder;
-import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.studentmanagement.domain.SignupRequest;
+import eapli.ecourse.studentmanagement.domain.SignupRequestBuilder;
+import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.time.util.CurrentTimeCalendars;
@@ -18,7 +18,6 @@ import eapli.framework.time.util.CurrentTimeCalendars;
  */
 @UseCaseController
 public class SignupController {
-
   private final SignupRequestRepository signupRequestRepository = PersistenceContext.repositories().signupRequests();
 
   public SignupRequest signup(final String username, final String password, final String firstName,

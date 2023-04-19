@@ -3,9 +3,9 @@ package eapli.ecourse.app.backoffice.console.presentation.clientuser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.clientusermanagement.application.AcceptRefuseSignupFactory;
-import eapli.ecourse.clientusermanagement.application.AcceptRefuseSignupRequestController;
-import eapli.ecourse.clientusermanagement.domain.SignupRequest;
+import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupFactory;
+import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupRequestController;
+import eapli.ecourse.studentmanagement.domain.SignupRequest;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
@@ -20,8 +20,7 @@ import eapli.framework.presentation.console.SelectWidget;
 public class AcceptRefuseSignupRequestUI extends AbstractUI {
   private static final Logger LOGGER = LogManager.getLogger(AcceptRefuseSignupRequestUI.class);
 
-  private final AcceptRefuseSignupRequestController theController =
-      AcceptRefuseSignupFactory.build();
+  private final AcceptRefuseSignupRequestController theController = AcceptRefuseSignupFactory.build();
 
   @Override
   protected boolean doShow() {

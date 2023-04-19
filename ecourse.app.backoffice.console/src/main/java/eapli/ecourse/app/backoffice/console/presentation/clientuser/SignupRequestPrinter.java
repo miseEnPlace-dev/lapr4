@@ -1,6 +1,6 @@
 package eapli.ecourse.app.backoffice.console.presentation.clientuser;
 
-import eapli.ecourse.clientusermanagement.domain.SignupRequest;
+import eapli.ecourse.studentmanagement.domain.SignupRequest;
 import eapli.framework.visitor.Visitor;
 
 /**

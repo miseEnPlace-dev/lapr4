@@ -1,9 +1,9 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import eapli.ecourse.clientusermanagement.repositories.ClientUserRepository;
-import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
+import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
+import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryUserRepository;
@@ -30,13 +30,13 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public ClientUserRepository clientUsers(final TransactionalContext tx) {
-    return new InMemoryClientUserRepository();
+  public StudentRepository students(final TransactionalContext tx) {
+    return new InMemoryStudentRepository();
   }
 
   @Override
-  public ClientUserRepository clientUsers() {
-    return clientUsers(null);
+  public StudentRepository students() {
+    return students(null);
   }
 
   @Override

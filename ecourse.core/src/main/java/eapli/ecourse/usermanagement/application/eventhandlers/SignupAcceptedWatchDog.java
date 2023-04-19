@@ -3,7 +3,7 @@ package eapli.ecourse.usermanagement.application.eventhandlers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.clientusermanagement.domain.events.SignupAcceptedEvent;
+import eapli.ecourse.studentmanagement.domain.events.SignupAcceptedEvent;
 import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.pubsub.EventHandler;
@@ -12,10 +12,12 @@ import eapli.framework.validations.Preconditions;
 /**
  * Event handler for {@link SignupAcceptedEvent}.
  *
- * Every time a {@link SignupAcceptedEvent} is published, this class will be listening for its
+ * Every time a {@link SignupAcceptedEvent} is published, this class will be
+ * listening for its
  * occurrence.
  *
- * In this case, for {@link SignupAcceptedWatchDog to be able to subscribe for these events, this
+ * In this case, for {@link SignupAcceptedWatchDog to be able to subscribe for
+ * these events, this
  * class must be setup beforehand. }
  *
  * @author Paulo Gandra de Sousa

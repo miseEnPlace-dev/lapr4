@@ -1,14 +1,15 @@
 package eapli.ecourse.infrastructure.persistence;
 
-import eapli.ecourse.clientusermanagement.repositories.ClientUserRepository;
-import eapli.ecourse.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
+import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
 /**
  * The interface for the repository factory of eCourse.
  * <p>
- * This is the Abstract Factory in the Abstract Factory (GoF) pattern. Each of the return types is
+ * This is the Abstract Factory in the Abstract Factory (GoF) pattern. Each of
+ * the return types is
  * an Abstract Product.
  * </p>
  *
@@ -37,20 +38,19 @@ public interface RepositoryFactory {
    */
   UserRepository users();
 
-
   /**
    * @param autoTx the transactional context to enroll
    *
    * @return
    */
-  ClientUserRepository clientUsers(TransactionalContext autoTx);
+  StudentRepository students(TransactionalContext autoTx);
 
   /**
    * repository will be created in auto transaction mode
    *
    * @return
    */
-  ClientUserRepository clientUsers();
+  StudentRepository students();
 
   /**
    * @param autoTx the transactional context to enroll

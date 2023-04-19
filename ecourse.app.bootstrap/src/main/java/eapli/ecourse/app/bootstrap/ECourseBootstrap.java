@@ -1,14 +1,14 @@
 package eapli.ecourse.app.bootstrap;
 
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
-import eapli.ecourse.clientusermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
-import eapli.ecourse.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
-import eapli.ecourse.clientusermanagement.domain.events.SignupAcceptedEvent;
 import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.bootstrapers.demo.ECourseDemoBootstrapper;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.infrastructure.smoketests.ECourseDemoSmokeTester;
+import eapli.ecourse.studentmanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
+import eapli.ecourse.studentmanagement.domain.events.NewUserRegisteredFromSignupEvent;
+import eapli.ecourse.studentmanagement.domain.events.SignupAcceptedEvent;
 import eapli.ecourse.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;

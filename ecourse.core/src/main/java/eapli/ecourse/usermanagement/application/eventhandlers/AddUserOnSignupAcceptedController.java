@@ -1,8 +1,8 @@
 package eapli.ecourse.usermanagement.application.eventhandlers;
 
-import eapli.ecourse.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
-import eapli.ecourse.clientusermanagement.domain.events.SignupAcceptedEvent;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.studentmanagement.domain.events.NewUserRegisteredFromSignupEvent;
+import eapli.ecourse.studentmanagement.domain.events.SignupAcceptedEvent;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.ecourse.usermanagement.domain.UserBuilderHelper;
 import eapli.framework.application.UseCaseController;

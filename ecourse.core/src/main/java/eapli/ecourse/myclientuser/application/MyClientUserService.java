@@ -2,9 +2,9 @@ package eapli.ecourse.myclientuser.application;
 
 import java.util.Optional;
 
-import eapli.ecourse.clientusermanagement.domain.ClientUser;
-import eapli.ecourse.clientusermanagement.repositories.ClientUserRepository;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.ApplicationService;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -20,14 +20,13 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 public class MyClientUserService {
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
-  private final ClientUserRepository clientUsersRepo =
-      PersistenceContext.repositories().clientUsers();
+  private final StudentRepository clientUsersRepo = PersistenceContext.repositories().students();
 
-  public ClientUser me() {
+  public Student me() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT);
 
     // TODO cache the client user object
-    final Optional<ClientUser> me = clientUsersRepo.findByUsername(myUser().identity());
+    final Optional<Student> me = clientUsersRepo.findByUsername(myUser().identity());
 
     return me.orElseThrow(IllegalStateException::new);
   }
