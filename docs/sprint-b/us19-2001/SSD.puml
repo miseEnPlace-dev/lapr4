@@ -1,0 +1,14 @@
+@startuml US2001_SSD
+autonumber
+
+actor "Teacher" as teacher
+participant ":System" as system
+
+activate teacher
+
+teacher -> system : Asks to create an exam
+system -> teacher : Lists all available courses and asks to select one
+teacher -> system : Selects a course
+system -> teacher : Asks the file path where the exam is defined
+teacher -> system : Enters the file path
+system -> teacher : Informs operation success
