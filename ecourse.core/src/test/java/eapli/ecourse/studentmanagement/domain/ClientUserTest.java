@@ -37,10 +37,10 @@ class ClientUserTest {
   @Test
   void ensureClientUserEqualsPassesForTheSameMecanographicNumber() throws Exception {
 
-    final Student aClientUser = new ClientUserBuilder().withMecanographicNumber("DUMMY")
+    final Student aClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
-    final Student anotherClientUser = new ClientUserBuilder().withMecanographicNumber("DUMMY")
+    final Student anotherClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
     final boolean expected = aClientUser.equals(anotherClientUser);
@@ -53,10 +53,10 @@ class ClientUserTest {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
-    final Student aClientUser = new ClientUserBuilder()
+    final Student aClientUser = new StudentBuilder()
         .withMecanographicNumber(aMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
-    final Student anotherClientUser = new ClientUserBuilder().withMecanographicNumber(anotherMecanographicNumber)
+    final Student anotherClientUser = new StudentBuilder().withMecanographicNumber(anotherMecanographicNumber)
         .withSystemUser(getNewDummyUser()).build();
 
     final boolean expected = aClientUser.equals(anotherClientUser);
@@ -76,7 +76,7 @@ class ClientUserTest {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
-    final Student aClientUser = new ClientUserBuilder().withMecanographicNumber("DUMMY")
+    final Student aClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
     @SuppressWarnings("unlikely-arg-type")
@@ -87,7 +87,7 @@ class ClientUserTest {
 
   @Test
   void ensureClientUserIsTheSameAsItsInstance() throws Exception {
-    final Student aClientUser = new ClientUserBuilder().withMecanographicNumber("DUMMY")
+    final Student aClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
     assertTrue(aClientUser.sameAs(aClientUser));
@@ -97,10 +97,10 @@ class ClientUserTest {
   void enslientserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
-    final Student aClientUser = new ClientUserBuilder()
+    final Student aClientUser = new StudentBuilder()
         .withMecanographicNumber(aMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
-    final Student anotherClientUser = new ClientUserBuilder().withMecanographicNumber(anotherMecanographicNumber)
+    final Student anotherClientUser = new StudentBuilder().withMecanographicNumber(anotherMecanographicNumber)
         .withSystemUser(getNewDummyUser()).build();
 
     assertFalse(aClientUser.sameAs(anotherClientUser));
