@@ -6,9 +6,6 @@ import eapli.framework.domain.model.ValueObject;
 import eapli.framework.strings.util.StringPredicates;
 import lombok.EqualsAndHashCode;
 
-/**
- * @author Jorge Santos ajs@isep.ipp.pt
- */
 @Embeddable
 @EqualsAndHashCode
 public class CourseCode implements ValueObject, Comparable<CourseCode> {
@@ -27,8 +24,8 @@ public class CourseCode implements ValueObject, Comparable<CourseCode> {
     // for ORM
   }
 
-  public static CourseCode valueOf(final String mecanographicNumber) {
-    return new CourseCode(mecanographicNumber);
+  public static CourseCode valueOf(final String courseCode) {
+    return new CourseCode(courseCode);
   }
 
   @Override
