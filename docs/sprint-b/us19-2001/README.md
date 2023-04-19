@@ -38,8 +38,8 @@
 
 ### Output
 
-- Success or error messages
+- Success or error messages (from parser)
 
 ## Exam Structure
 
-The exam structure is defined with a specific language, defined in the context of LPROG. 
+The exam structure is defined with a specific language, defined in the context of LPROG.
