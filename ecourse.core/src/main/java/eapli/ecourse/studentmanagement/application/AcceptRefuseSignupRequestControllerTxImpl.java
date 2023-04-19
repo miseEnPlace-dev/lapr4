@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.studentmanagement.domain.ClientUserBuilder;
 import eapli.ecourse.studentmanagement.domain.SignupRequest;
+import eapli.ecourse.studentmanagement.domain.StudentBuilder;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -78,7 +78,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl
   }
 
   private void createClientUser(final SignupRequest theSignupRequest, final SystemUser newUser) {
-    final var clientUserBuilder = new ClientUserBuilder();
+    final var clientUserBuilder = new StudentBuilder();
     clientUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
         .withSystemUser(newUser);
     clientUserRepository.save(clientUserBuilder.build());

@@ -3,8 +3,8 @@ package eapli.ecourse.studentmanagement.application.eventhandlers;
 import java.util.Optional;
 
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.studentmanagement.domain.ClientUserBuilder;
 import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.domain.StudentBuilder;
 import eapli.ecourse.studentmanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.framework.functional.Functions;
@@ -26,7 +26,7 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
   }
 
   private Student createClientUser(final NewUserRegisteredFromSignupEvent event, SystemUser u) {
-    final var clientUser = new ClientUserBuilder()
+    final var clientUser = new StudentBuilder()
         .withMecanographicNumber(event.mecanographicNumber()).withSystemUser(u).build();
     return clientUserRepository.save(clientUser);
   }

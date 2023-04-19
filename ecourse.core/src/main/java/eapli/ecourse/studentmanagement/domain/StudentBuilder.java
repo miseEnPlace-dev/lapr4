@@ -12,22 +12,22 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
-public class ClientUserBuilder implements DomainFactory<Student> {
+public class StudentBuilder implements DomainFactory<Student> {
 
   private SystemUser systemUser;
   private MecanographicNumber mecanographicNumber;
 
-  public ClientUserBuilder withSystemUser(final SystemUser systemUser) {
+  public StudentBuilder withSystemUser(final SystemUser systemUser) {
     this.systemUser = systemUser;
     return this;
   }
 
-  public ClientUserBuilder withMecanographicNumber(final MecanographicNumber mecanographicNumber) {
+  public StudentBuilder withMecanographicNumber(final MecanographicNumber mecanographicNumber) {
     this.mecanographicNumber = mecanographicNumber;
     return this;
   }
 
-  public ClientUserBuilder withMecanographicNumber(final String mecanographicNumber) {
+  public StudentBuilder withMecanographicNumber(final String mecanographicNumber) {
     this.mecanographicNumber = new MecanographicNumber(mecanographicNumber);
     return this;
   }
