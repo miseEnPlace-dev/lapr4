@@ -19,7 +19,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 /**
  * @author Nuno Bettencourt [NMB] on 03/04/16.
  */
-class ClientUserTest {
+class StudentTest {
 
   private final String aMecanographicNumber = "abc";
   private final String anotherMecanographicNumber = "xyz";

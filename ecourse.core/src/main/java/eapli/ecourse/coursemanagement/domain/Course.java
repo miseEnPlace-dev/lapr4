@@ -1,5 +1,7 @@
 package eapli.ecourse.coursemanagement.domain;
 
+import java.util.Calendar;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
@@ -15,7 +17,14 @@ public class Course implements AggregateRoot<CourseCode> {
   private Long version;
 
   @EmbeddedId
-  private CourseCode courseCode;
+  private CourseCode code;
+
+  private CourseTitle title;
+  private CourseDescription description;
+  private EnrolmentLimits enrolmentLimits;
+  private boolean isOpen;
+  private boolean isAcceptingEnrolments;
+  private Calendar createdAt;
 
   @Override
   public boolean equals(final Object o) {
@@ -32,12 +41,36 @@ public class Course implements AggregateRoot<CourseCode> {
     return DomainEntities.areEqual(this, other);
   }
 
-  public CourseCode mecanographicNumber() {
+  public CourseCode code() {
     return identity();
+  }
+
+  public CourseTitle title() {
+    return this.title;
+  }
+
+  public CourseDescription description() {
+    return this.description;
+  }
+
+  public boolean isOpen() {
+    return this.isOpen;
+  }
+
+  public boolean isAcceptingEnrolments() {
+    return this.isAcceptingEnrolments;
+  }
+
+  public Calendar createdAt() {
+    return this.createdAt;
+  }
+
+  public EnrolmentLimits enrolmentLimits() {
+    return this.enrolmentLimits;
   }
 
   @Override
   public CourseCode identity() {
-    return this.courseCode;
+    return this.code;
   }
 }
