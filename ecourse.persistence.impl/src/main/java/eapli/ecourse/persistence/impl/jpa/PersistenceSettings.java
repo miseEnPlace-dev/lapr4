@@ -8,5 +8,6 @@ class PersistenceSettings {
 
   public static final String PERSISTENCE_UNIT_NAME = "eapli.eCoursePU";
 
-  private PersistenceSettings() {}
+  private PersistenceSettings() {
+  }
 }

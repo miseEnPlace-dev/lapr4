@@ -13,7 +13,7 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
 public interface StudentRepository extends DomainRepository<MecanographicNumber, Student> {
 
   /**
-   * Returns the client user (utente) whose username is given.
+   * Returns the student whose username is given.
    *
    * @param name the username to search for
    * @return
@@ -21,7 +21,7 @@ public interface StudentRepository extends DomainRepository<MecanographicNumber,
   Optional<Student> findByUsername(Username name);
 
   /**
-   * Returns the client user (utente) with the given mecanographic number.
+   * Returns the student with the given mecanographic number.
    *
    * @param number
    * @return

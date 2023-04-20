@@ -4,7 +4,8 @@ import eapli.ecourse.Application;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaTransactionalRepository;
 
 /**
- * A base class for all transactional repositories to use the same persistence unit.
+ * A base class for all transactional repositories to use the same persistence
+ * unit.
  *
  * @param <T>
  * @param <K>
