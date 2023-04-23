@@ -16,7 +16,7 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
  * @author mcn
  */
 @ApplicationService
-public class ClientUserService {
+public class StudentService {
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
   private final StudentRepository repo = PersistenceContext.repositories().students();
