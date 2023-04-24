@@ -276,9 +276,15 @@ Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de dep
 
 "No."
 
+## [Question 49](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22565)
+
+> Manager has Birth Date and Tax Payer Number?
+
+"Not relevant, but can be stored if you want."
+
 ---
 
-_Last question: "Students csv file", by Nicolas Goncalves._
+_Last question: "US1004-As Manager, I want to open and close courses", by GOUVEIA._
 
-_Last updated at 13/04/2023 14:44_
+_Last updated at 24/04/2023 09:56_
 
