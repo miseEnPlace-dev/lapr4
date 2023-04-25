@@ -2,12 +2,21 @@ package eapli.ecourse.enrolmentmanagement.domain;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.validations.Preconditions;
 
 @Entity
 public class Enrolment implements AggregateRoot<EnrolmentID> {
@@ -16,15 +25,47 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   @Version
   private Long version;
 
+  @Column(nullable = false, updatable = false)
   private Calendar createdAt;
+
+  @Column(nullable = false)
   private Calendar updatedAt;
+
+  @Column(nullable = false)
   private EnrolmentState state;
 
   @EmbeddedId
   private EnrolmentID id;
 
+  /**
+   * cascade = CascadeType.NONE as the dishType is part of another aggregate
+   */
+  @XmlElement
+  @JsonProperty
+  @OneToOne(optional = false, cascade = CascadeType.ALL)
+  private Student student;
+
+  /**
+   * cascade = CascadeType.NONE as the dishType is part of another aggregate
+   */
+  @XmlElement
+  @JsonProperty
+  @OneToOne(optional = false, cascade = CascadeType.ALL)
+  private Course course;
+
   protected Enrolment() {
     // for ORM
+  }
+
+  public Enrolment(final EnrolmentID id, final Student student, final Course course) {
+    Preconditions.noneNull(student, course);
+
+    this.student = student;
+    this.course = course;
+    this.state = EnrolmentState.PENDING;
+    this.id = id;
+    this.createdAt = Calendar.getInstance();
+    this.updatedAt = Calendar.getInstance();
   }
 
   @Override
@@ -39,7 +80,15 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
 
   @Override
   public boolean sameAs(final Object other) {
-    return DomainEntities.areEqual(this, other);
+    if (!(other instanceof Enrolment))
+      return false;
+
+    final Enrolment that = (Enrolment) other;
+    if (this == that)
+      return true;
+
+    return this.identity().equals(that.identity()) && this.student.equals(that.student)
+        && this.course.equals(that.course);
   }
 
   @Override
@@ -61,5 +110,13 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
 
   public EnrolmentState state() {
     return this.state;
+  }
+
+  public Student student() {
+    return this.student;
+  }
+
+  public Course course() {
+    return this.course;
   }
 }

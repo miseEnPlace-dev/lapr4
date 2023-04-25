@@ -1,9 +1,11 @@
 package eapli.ecourse.enrolmentmanagement.domain;
 
+import java.util.UUID;
+
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.strings.util.StringPredicates;
+import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -13,19 +15,23 @@ public class EnrolmentID implements ValueObject, Comparable<EnrolmentID> {
 
   private String enrolmentId;
 
-  protected EnrolmentID(final String enrolmentId) {
-    if (StringPredicates.isNullOrEmpty(enrolmentId))
-      throw new IllegalArgumentException("Enrolment ID should neither be null nor empty");
+  private EnrolmentID(final String enrolmentId) {
+    Preconditions.nonEmpty(enrolmentId);
 
-    this.enrolmentId = enrolmentId;
+    this.enrolmentId = UUID.fromString(enrolmentId).toString();
   }
 
   protected EnrolmentID() {
     // for ORM
+    this.enrolmentId = null;
   }
 
   public static EnrolmentID valueOf(final String enrolmentId) {
     return new EnrolmentID(enrolmentId);
+  }
+
+  public static EnrolmentID newID() {
+    return valueOf(UUID.randomUUID().toString());
   }
 
   @Override

@@ -1,9 +1,11 @@
 package eapli.ecourse.coursemanagement.domain;
 
+import java.util.UUID;
+
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.strings.util.StringPredicates;
+import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -14,18 +16,22 @@ public class CourseCode implements ValueObject, Comparable<CourseCode> {
   private String code;
 
   protected CourseCode(final String courseCode) {
-    if (StringPredicates.isNullOrEmpty(courseCode))
-      throw new IllegalArgumentException("Course Code should neither be null nor empty");
+    Preconditions.nonEmpty(courseCode);
 
     this.code = courseCode;
   }
 
   protected CourseCode() {
     // for ORM
+    this.code = null;
   }
 
   public static CourseCode valueOf(final String courseCode) {
     return new CourseCode(courseCode);
+  }
+
+  public static CourseCode newID() {
+    return valueOf(UUID.randomUUID().toString());
   }
 
   @Override
