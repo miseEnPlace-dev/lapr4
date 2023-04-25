@@ -38,9 +38,12 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 
 ### Sprint B
 
-| Student Nr. | Task |
-| ----------- | ---- |
-| ----        | ---  |
+| Student Nr. | Task                                          |
+| ----------- | --------------------------------------------- |
+| 1211289     | [US 09 [1003]](sprint-b/us09-1003/README.md)] |
+| 1211289     | [US 14 [1008]](sprint-b/us14-1008/README.md)] |
+| 1211289     | [US 20 [2007]](sprint-b/us20-2007/README.md)] |
+| All         | [US 28 [5001]](sprint-b/us28-5001/README.md)] |
 
 ### Sprint C
 
