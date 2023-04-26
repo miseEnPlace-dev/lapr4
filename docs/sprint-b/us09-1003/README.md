@@ -29,17 +29,26 @@
 
 ## 1.2. Client Clarifications
 
-> [**Question**](): xxx
+> [**Question**: A course can open if the limits are exceeded or not? Who can setup the limits? Are the limits mandatory?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
 >
-> **Answer**: xxx
+> **Answer**: "Managers should be able to specify the limits. In my opinion the system should notify the manager if a course is out of the enrolment limits (before this course is changed to "in progress"). But, in the end, it is up to the manager to follow/enforce or not, the limits."
+
+> [**Question**: Can one student be enrolled in different courses?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21922)
+>
+> **Answer**: "Yes"
+
+> [**Question**: In US1009, What are the criteria for a student to be enrolled in a course?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22498)
+>
+> **Answer**: "This is not a system requirement. You should only register the decision of the manager."]
 
 ## 1.3. Functional Requirements
 
 > **FRC02** Open/Close Enrollments in Course - Only managers are able to execute this functionality.
+> **FRC07** - Request Enrollment in Course The student requests to be enrolled in a course
 
 ## 1.4. Acceptance Criteria
 
-> **AC.1**: xxx
+- N/a
 
 ---
 
@@ -47,14 +56,17 @@
 
 ### 2.1. Main success scenario
 
-1. Warehouse Employee requires the configuration of an AGV available in the Warehouse.
-2. The System asks for information related to the AGV
-3. Warehouse Employee enters the information.
-4. The System reports the success of the operation.
+1. Manager asks to list all the courses and their states
+2. The System lists all the non finished courses
+3. Manager selects the desired course
+4. The system asks the manager to select the desired action
+5. Manager selects the desired action
+6. The system reports the success of the operation
 
 ### 2.2. Conditions
 
-The registration information of the new category is persisted/saved in the system.
+- The manager must be authenticated and authorized to perform the operation.
+- The course must be in a state that allows the operation to be performed.
 
 ### 2.3. System Sequence Diagram
 
