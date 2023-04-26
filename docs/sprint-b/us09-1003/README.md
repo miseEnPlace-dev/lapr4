@@ -11,11 +11,21 @@
 
 ## 1. Requirements
 
-### As Manager, I want to open and close enrollments in courses.
+### "As Manager, I want to open and close enrollments in courses"
 
 ## 1.1. Client Specifications
 
-- xxx
+- "The Admin app is used by managers to manage courses, users and enrollment of students."
+
+- "Managers [...] manage all the users of the system as well as [...] students enrollment."
+
+- "Courses may have a minimum and a maximum number of enrolled students."
+
+- "Students enroll in courses"
+
+- "The usual workflow related to the course can be illustrated as follows:
+  event create (-> state close) -> event open (->state open) -> event open enrollments (-> state
+  enroll) -> event close enrollments (-> state in progress) -> event close (-> state closed"
 
 ## 1.2. Client Clarifications
 

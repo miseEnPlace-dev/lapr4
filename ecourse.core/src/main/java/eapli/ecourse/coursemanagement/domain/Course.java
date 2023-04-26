@@ -31,10 +31,7 @@ public class Course implements AggregateRoot<CourseCode> {
   private EnrolmentLimits enrolmentLimits;
 
   @Column(nullable = false)
-  private boolean isOpen;
-
-  @Column(nullable = false)
-  private boolean isAcceptingEnrolments;
+  private CourseState courseState;
 
   @Column(nullable = false)
   private Calendar createdAt;
@@ -44,15 +41,14 @@ public class Course implements AggregateRoot<CourseCode> {
   }
 
   public Course(final CourseCode code, final CourseTitle title, final CourseDescription description,
-      final EnrolmentLimits enrolmentLimits, final Boolean isOpen, final Boolean isAcceptingEnrolments) {
-    Preconditions.noneNull(code, title, description, enrolmentLimits, isOpen, isAcceptingEnrolments);
+      final EnrolmentLimits enrolmentLimits, final CourseState courseState) {
+    Preconditions.noneNull(code, title, description, enrolmentLimits, courseState);
 
     this.code = code;
     this.title = title;
     this.description = description;
     this.enrolmentLimits = enrolmentLimits;
-    this.isOpen = isOpen;
-    this.isAcceptingEnrolments = isAcceptingEnrolments;
+    this.courseState = courseState;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -64,8 +60,7 @@ public class Course implements AggregateRoot<CourseCode> {
     this.title = title;
     this.description = description;
     this.enrolmentLimits = enrolmentLimits;
-    this.isOpen = false;
-    this.isAcceptingEnrolments = false;
+    this.courseState = CourseState.CLOSED;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -91,8 +86,7 @@ public class Course implements AggregateRoot<CourseCode> {
 
     return code().equals(that.code()) && title().equals(that.title())
         && description().equals(that.description()) && enrolmentLimits().equals(that.enrolmentLimits())
-        && isOpen() == that.isOpen() && isAcceptingEnrolments() == that.isAcceptingEnrolments()
-        && createdAt().equals(that.createdAt());
+        && state().equals(that.state()) && createdAt().equals(that.createdAt());
   }
 
   public CourseCode code() {
@@ -107,12 +101,8 @@ public class Course implements AggregateRoot<CourseCode> {
     return this.description;
   }
 
-  public boolean isOpen() {
-    return this.isOpen;
-  }
-
-  public boolean isAcceptingEnrolments() {
-    return this.isAcceptingEnrolments;
+  public CourseState state() {
+    return this.courseState;
   }
 
   public Calendar createdAt() {
