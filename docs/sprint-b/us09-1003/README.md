@@ -48,25 +48,25 @@ The registration information of the new category is persisted/saved in the syste
 
 ### 2.3. System Sequence Diagram
 
-![US1003_SSD](US1003_SSD.svg)
+![US1003_SSD](out/US1003_SSD.svg)
 
 ### 2.4. Sequence Diagram (Simplified)
 
-![US1003_SD](US1003_SD.svg)
+![US1003_SD](out/US1003_SD.svg)
 
 ### 2.5. Partial Domain Model
 
-![US1003_DM](US1003_DM.svg)
+![US1003_DM](out/US1003_DM.svg)
 
 ## 3. Design
 
 ### 3.1. Functionality Realization
 
-![US1003_SD](US1003_SD.svg)
+![US1003_SD](out/US1003_SD.svg)
 
 ### 3.2. Class Diagram
 
-![US1003_CD](US1003_CD.svg)
+![US1003_CD](out/US1003_CD.svg)
 
 ### 3.3. Applied Patterns
 
