@@ -1,0 +1,27 @@
+@startuml US1002_CD
+skinparam ClassAttributeFontSize 0
+
+class Course {
+  - code : number
+  - title : string
+  - description : string
+  - enrolmentLimits : number
+  - isOpen : boolean
+  - isAcceptingEnrolments : boolean
+  - createdAt : string
+  ---
+  +sameAs()
+  +title()
+  +code()
+  +description()
+  +isOpen()
+  +isAcceptingEnrolments()
+  +createdAt()
+  +enrolmentLimits()
+
+
+}
+
+class Teacher {}
+
+@enduml

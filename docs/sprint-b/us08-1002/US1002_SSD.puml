@@ -1,0 +1,29 @@
+@startuml US1002_SSD
+
+autonumber
+
+actor Manager as "Manager"
+
+activate Manager
+
+Manager -> ":System" : Asks the system to create a new Course
+activate ":System"
+
+":System" --> Manager : requests data (title, code, edition, description, enrollment_limits, teacher)
+deactivate ":System"
+
+Manager -> ":System" : types request data
+activate ":System"
+
+":System" --> Manager : shows all data and requests confirmation
+deactivate ":System"
+
+Manager -> ":System" : confirms the data
+activate ":System"
+
+":System" --> Manager : informs operation success
+deactivate ":System"
+
+deactivate Manager
+
+@enduml
