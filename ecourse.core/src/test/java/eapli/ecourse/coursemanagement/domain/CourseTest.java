@@ -12,55 +12,41 @@ public class CourseTest {
   @Test
   public void ensureCourseHasCode() {
     assertThrows(IllegalArgumentException.class, () -> new Course(null, CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), true, true));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasTitle() {
     assertThrows(IllegalArgumentException.class, () -> new Course(CourseCode.valueOf("1234"), null,
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), true, true));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasDescription() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            null, EnrolmentLimits.valueOf(10, 20), true, true));
+            null, EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasEnrolmentLimits() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), null, true, true));
+            CourseDescription.valueOf("dummy"), null, CourseState.CLOSED));
   }
 
   @Test
-  public void ensureCourseHasIsOpen() {
+  public void ensureCourseHasCourseState() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), null, true));
+            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), null));
   }
 
   @Test
-  public void ensureCourseHasIsAcceptingEnrolments() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), true, null));
-  }
-
-  @Test
-  public void ensureCourseHasDefaultIsOpen() {
+  public void ensureCourseHasDefaultCourseState() {
     final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
-    assertFalse(course.isOpen());
-  }
-
-  @Test
-  public void ensureCourseHasDefaultIsAcceptingEnrolments() {
-    final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
-    assertFalse(course.isAcceptingEnrolments());
+    assertTrue(course.state().equals(CourseState.CLOSED));
   }
 
   @Test

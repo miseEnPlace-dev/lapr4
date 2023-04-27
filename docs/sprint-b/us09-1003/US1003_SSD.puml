@@ -1,0 +1,26 @@
+@startuml US1003_SSD
+autonumber
+
+actor "Manager" as M
+participant "System" as SYS
+
+activate M
+
+M -> SYS : asks to list all the courses and their states
+activate SYS
+SYS -> M : lists all the non finished courses
+deactivate SYS
+
+M -> SYS : selects the desired course
+activate SYS
+SYS -> M : asks the manager to select the desired action
+deactivate SYS
+
+M -> SYS : selects the desired action
+activate SYS
+SYS -> M : system reports the success of the operation
+deactivate SYS
+
+deactivate M
+
+@enduml

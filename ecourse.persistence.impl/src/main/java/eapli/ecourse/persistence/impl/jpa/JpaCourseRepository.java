@@ -7,6 +7,7 @@ import java.util.Optional;
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
+import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -32,11 +33,11 @@ class JpaCourseRepository
 
   @Override
   public Iterable<Course> coursesOpenedForEnrollment() {
-    return match("e.isAcceptingEnrolments = true");
+    return match("e.isAcceptingEnrolments = :state", "state", CourseState.ENROLL);
   }
 
   @Override
   public Iterable<Course> openCourses() {
-    return match("e.isOpen = true");
+    return match("e.state = :state", "state", CourseState.OPEN);
   }
 }
