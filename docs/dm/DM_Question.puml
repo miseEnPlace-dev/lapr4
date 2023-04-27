@@ -26,20 +26,21 @@ package "<<agregate>> Question" {
   class Feedback
 }
 
-package "<<agregate>> Answer" {
-  entity Answer
+package "<<agregate>> ExamAnswer" {
+  entity ExamAnswer
   entity AnswerToQuestion
 }
 
 abstract Question <<entity>> <<root>> {}
-entity Answer <<entity>> <<root>> {}
+entity ExamAnswer <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
-Answer *-- "1..*" AnswerToQuestion
+ExamAnswer *-- "1..*" AnswerToQuestion
 
 package "<<agregate>> Exam" {
   entity Exam
   entity Section
+  entity SectionQuestion
 }
 
 package "<<agregate>> Course" {
@@ -50,6 +51,7 @@ entity Course <<entity>> <<root>> {}
 
 entity Exam <<entity>> <<root>> {}
 entity Section <<entity>> {}
+entity SectionQuestion <<entity>> {}
 
 Exam *-- "1..*" Section
 Section --> "1..*" Question
@@ -84,7 +86,8 @@ entity Numerical <<entity>> {}
 entity MissingWords <<entity>> {}
 entity TrueFalse <<entity>> {}
 
-AnswerToQuestion --> "1" Question : is for
+AnswerToQuestion --> "1" Exam : is for
 Question --> "0..*" Feedback
+Section *-- "1..*" SectionQuestion
 
 @enduml
