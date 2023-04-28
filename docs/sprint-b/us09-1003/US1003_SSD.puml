@@ -8,17 +8,17 @@ activate M
 
 M -> SYS : asks to list all the courses and their states
 activate SYS
-SYS -> M : lists all the non finished courses
+SYS --> M : lists all the non finished courses & current state
 deactivate SYS
 
 M -> SYS : selects the desired course
 activate SYS
-SYS -> M : asks the manager to select the desired action
+SYS --> M : asks to confirm action
 deactivate SYS
 
-M -> SYS : selects the desired action
+M -> SYS : confirms action
 activate SYS
-SYS -> M : system reports the success of the operation
+SYS --> M : reports the success of the toggTogglele operation
 deactivate SYS
 
 deactivate M

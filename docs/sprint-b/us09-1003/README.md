@@ -63,20 +63,24 @@
 5. Manager selects the desired action
 6. The system reports the success of the operation
 
-### 2.2. Conditions
+### 2.2. Course State Diagram
+
+![US1003_STATE](out/US1003_STATE.svg)
+
+### 2.3. Conditions
 
 - The manager must be authenticated and authorized to perform the operation.
 - The course must be in a state that allows the operation to be performed.
 
-### 2.3. System Sequence Diagram
+### 2.4. System Sequence Diagram
 
 ![US1003_SSD](out/US1003_SSD.svg)
 
-### 2.4. Sequence Diagram (Simplified)
+### 2.5. Sequence Diagram (Simplified)
 
 ![US1003_SD](out/US1003_SD.svg)
 
-### 2.5. Partial Domain Model
+### 2.6. Partial Domain Model
 
 ![US1003_DM](out/US1003_DM.svg)
 
@@ -123,4 +127,4 @@
 
 ## 6. Observations
 
-N/a
+- The history of the states of a course is not relevant.

@@ -1,0 +1,12 @@
+@startuml US1003_STATE
+
+[*] --> CLOSED : create
+
+CLOSED --> OPEN : open
+OPEN --> ENROLL : open enrollments
+ENROLL -> OPEN : close enrollments
+ENROLL --> IN_PROGRESS : start
+IN_PROGRESS --> ENROLL : open enrollments
+IN_PROGRESS --> [*] : close
+
+@enduml
