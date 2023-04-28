@@ -1,0 +1,52 @@
+@startuml US1003_SSD
+autonumber
+
+actor "Manager" as M
+participant "ManageEnrolmentsUI" as UI <<presentation>>
+participant "ManageEnrolmentController" as CTRL <<application>>
+participant "Course" as C <<domain>>
+
+database CourseRepository as REP <<repository>>
+
+activate M
+
+M -> UI : asks to list all the courses and their states
+activate UI
+
+UI -> CTRL : new
+UI -> CTRL : listNotClosedCourses()
+activate CTRL
+CTRL -> REP : notFinishedCourses()
+activate REP
+REP --> CTRL : courses
+deactivate REP
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> M : lists all the non finished courses
+deactivate UI
+
+M -> UI : selects the desired course
+activate UI
+UI -> UI : selectedCourse = get(index)
+UI --> M : asks to confirm action
+deactivate UI
+
+M -> UI : confirms the action
+activate UI
+UI->CTRL : toggle(selectedCourse)
+activate CTRL
+CTRL -> C : toggleEnrolmentStatus()
+activate C
+deactivate C
+CTRL -> REP : save(selectedCourse)
+activate REP
+deactivate REP
+CTRL --> UI : newCourse
+deactivate CTRL
+UI--> M : reports the success of the toggle operation
+deactivate UI
+
+deactivate M
+
+@enduml
