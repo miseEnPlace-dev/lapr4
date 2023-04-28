@@ -9,11 +9,15 @@
 
 ---
 
-## 1. Requirements
+## 1. Context
+
+This is the first time this task is assigned to be developed. This is a new functionality that is needed to know the state of the course relative to its enrollments.
+
+## 2. Requirements
 
 ### "As Manager, I want to open and close enrollments in courses"
 
-## 1.1. Client Specifications
+## 2.1. Client Specifications
 
 - "The Admin app is used by managers to manage courses, users and enrollment of students."
 
@@ -27,7 +31,7 @@
   event create (-> state close) -> event open (->state open) -> event open enrollments (-> state
   enroll) -> event close enrollments (-> state in progress) -> event close (-> state closed"
 
-## 1.2. Client Clarifications
+## 2.2. Client Clarifications
 
 > [**Question**: A course can open if the limits are exceeded or not? Who can setup the limits? Are the limits mandatory?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
 >
@@ -41,20 +45,20 @@
 >
 > **Answer**: "This is not a system requirement. You should only register the decision of the manager."]
 
-## 1.3. Functional Requirements
+## 2.3. Functional Requirements
 
 > **FRC02** Open/Close Enrollments in Course - Only managers are able to execute this functionality.
 > **FRC07** - Request Enrollment in Course The student requests to be enrolled in a course
 
-## 1.4. Acceptance Criteria
+## 2.4. Acceptance Criteria
 
 - N/a
 
 ---
 
-## 2. Analysis
+## 3. Analysis
 
-### 2.1. Main success scenario
+### 3.1. Main success scenario
 
 1. Manager asks to list all the courses and their states
 2. The System lists all the non finished courses
@@ -63,42 +67,42 @@
 5. Manager selects the desired action
 6. The system reports the success of the operation
 
-### 2.2. Course State Diagram
+### 3.2. Course State Diagram
 
 ![US1003_STATE](out/US1003_STATE.svg)
 
-### 2.3. Conditions
+### 3.3. Conditions
 
 - The manager must be authenticated and authorized to perform the operation.
 - The course must be in a state that allows the operation to be performed.
 
-### 2.4. System Sequence Diagram
+### 3.4. System Sequence Diagram
 
 ![US1003_SSD](out/US1003_SSD.svg)
 
-### 2.5. Sequence Diagram (Simplified)
+### 3.5. Sequence Diagram (Simplified)
 
 ![US1003_SD](out/US1003_SD.svg)
 
-### 2.6. Partial Domain Model
+### 3.6. Partial Domain Model
 
 ![US1003_DM](out/US1003_DM.svg)
 
-## 3. Design
+## 4. Design
 
-### 3.1. Functionality Realization
+### 4.1. Functionality Realization
 
 ![US1003_SD](out/US1003_SD.svg)
 
-### 3.2. Class Diagram
+### 4.2. Class Diagram
 
 ![US1003_CD](out/US1003_CD.svg)
 
-### 3.3. Applied Patterns
+### 4.3. Applied Patterns
 
 - xxx
 
-### 3.4. Tests
+### 4.4. Tests
 
 **Test 1:** xxx
 
@@ -109,9 +113,9 @@
   }
 ```
 
-## 4. Implementation
+## 5. Implementation
 
-### 4.1. Controller
+### 5.1. Controller
 
 - Relevant implementation details
 
@@ -121,10 +125,10 @@
   }
 ```
 
-## 5. Integration & Demonstration
+## 6. Integration & Demonstration
 
 ![US1003_DEMO](US1003_DEMO.png)
 
-## 6. Observations
+## 7. Observations
 
 - The history of the states of a course is not relevant.
