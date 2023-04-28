@@ -1,4 +1,4 @@
-# User Story 1002 - Create Courses
+# User Story 1003 - Create Courses
 
 |             |             |
 | ----------- | ----------- |
@@ -9,75 +9,84 @@
 
 ---
 
-## 1. Requirements
+## 1. Context
 
-### As Manager, I want to create courses.
+This is the first time this task is assigned to be developed. This is a new functionality that is needed to create courses.
 
-## 1.1. Client Specifications
+## 2. Requirements
 
-- xxx
+### "As Manager, I want create courses"
 
-## 1.2. Client Clarifications
+## 2.1. Client Specifications
 
-> [**Question**](): xxx
+-
+
+## 2.2. Client Clarifications
+
+> [**Question**: Course id is unique and generated o\*r inputed? Course title and name are the same?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21835)
 >
-> **Answer**: xxx
+> **Answer**: "Unique code inputted by the administrator, e.g., "JAVA-1, that is used to identify it. It has a name (name and title may refer to the same property of courses, and I would say that there is no need for it to be unique)"
 
-## 1.3. Functional Requirements
+> [**Question**:A course can open if the limits are exceeded or not? Who can setup the limits? Are the limits mandatory?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
+>
+> **Answer**:"Managers should be able to specify the limits. In my opinion the system should notify the manager if a course is out of the enrolment limits (before this course is changed to "in progress"). But, in the end, it is up to the manager to follow/enforce or not, the limits."
 
-> **FRC02** Open/Close Enrollments in Course - Only managers are able to execute this functionality.
+> [**Question**: Course code verifications?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21971)
+>
+> **Answer**:"Course code should be unique and there are not restrictions on the format of the code."
 
-## 1.4. Acceptance Criteria
+## 2.3. Functional Requirements
 
-> **AC.1**: Different editions of a course are to be considered different courses (e.g., Intro-Math-Sem01, Intro-Math-Sem02).
+> **FRC01** - Create Course Different editions of a course are to be considered different courses (e.g., Intro-Math-Sem01, Intro-Math-Sem02). Only managers are able to execute this functionality
 
-> **AC.2**: Only managers are able to execute this functionality.
+## 2.4. Acceptance Criteria
 
-> **AC.3**: The course code must be unique.
-
-> **AC.4**: The course code must be composed of the course acronym, the course edition and the course semester (e.g., Intro-Math-Sem01).
+- N/a
 
 ---
 
-## 2. Analysis
+## 3. Analysis
 
-### 2.1. Main success scenario
+### 3.1. Main success scenario
 
-1. Course was created successfully and is available for the Manager to open/close enrollments.
+1. Manager asks to create a new course
+2. The System asks the manager to introduce the data needed to create a course
+3. Manager types the requested data
+4. The system shows the manager the data typed and asks for confirmation
+5. Manager confirms the data
+6. The system reports the success of the operation
 
-2. Course has enrollments limits
+### 3.2. Conditions
 
-### 2.2. Conditions
+- The manager must be authenticated and authorized to perform the operation.
 
-The registration information of the new category is persisted/saved in the system.
-
-### 2.3. System Sequence Diagram
+### 3.3. System Sequence Diagram
 
 ![US1002_SSD](out/US1002_SSD.svg)
 
-### 2.4. Sequence Diagram (Simplified)
+### 3.4. Sequence Diagram (Simplified)
 
 ![US1002_SD](out/US1002_SD.svg)
 
-### 2.5. Partial Domain Model
+### 3.5. Partial Domain Model
 
 ![US1002_DM](out/US1002_DM.svg)
 
-## 3. Design
+## 4. Design
 
-### 3.1. Functionality Realization
+### 4.1. Functionality Realization
 
 ![US1002_SD](out/US1002_SD.svg)
 
-### 3.2. Class Diagram
+### 4.2. Class Diagram
 
 ![US1002_CD](out/US1002_CD.svg)
 
-### 3.3. Applied Patterns
+### 4.3. Applied Patterns
 
 - xxx
 
-### 3.4. Tests
+### 4.4. Tests
 
 **Test 1:** xxx
 
@@ -88,9 +97,9 @@ The registration information of the new category is persisted/saved in the syste
   }
 ```
 
-## 4. Implementation
+## 5. Implementation
 
-### 4.1. Controller
+### 5.1. Controller
 
 - Relevant implementation details
 
@@ -100,10 +109,10 @@ The registration information of the new category is persisted/saved in the syste
   }
 ```
 
-## 5. Integration & Demonstration
+## 6. Integration & Demonstration
 
 ![US1002_DEMO](US1002_DEMO.png)
 
-## 6. Observations
+## 7. Observations
 
-N/a
+- The history of the states of a course is not relevant.
