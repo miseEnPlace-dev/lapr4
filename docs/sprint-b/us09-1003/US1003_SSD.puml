@@ -18,7 +18,7 @@ deactivate SYS
 
 M -> SYS : confirms action
 activate SYS
-SYS --> M : reports the success of the toggTogglele operation
+SYS --> M : reports the success of the toggle operation
 deactivate SYS
 
 deactivate M

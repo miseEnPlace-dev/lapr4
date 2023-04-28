@@ -28,14 +28,23 @@ deactivate UI
 
 M -> UI : selects the desired course
 activate UI
-UI -> UI : get(index)
-activate
-UI --> M : asks the manager to select the desired action (open/close enrollments)
+UI -> UI : selectedCourse = get(index)
+UI --> M : asks to confirm action
 deactivate UI
 
-M -> UI : selects the desired action
+M -> UI : confirms the action
 activate UI
-UI --> M : reports the success of the operation
+UI->CTRL : toggle(selectedCourse)
+activate CTRL
+CTRL -> C : toggleEnrolmentStatus()
+activate C
+deactivate C
+CTRL -> REP : save(selectedCourse)
+activate REP
+deactivate REP
+CTRL --> UI : newCourse
+deactivate CTRL
+UI--> M : reports the success of the toggle operation
 deactivate UI
 
 deactivate M
