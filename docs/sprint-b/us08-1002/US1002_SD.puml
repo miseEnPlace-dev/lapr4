@@ -1,0 +1,66 @@
+@startuml US1002_SD
+autonumber
+
+actor "Manager" as M
+participant "CreateCourseUI" as UI <<presentation>>
+participant "CreateCourseController" as CTRL <<application>>
+participant "Course" as C <<domain>>
+
+database CourseRepository as REPC <<repository>>
+database TeacherRepository as REPT <<repository>>
+
+activate M
+
+M -> UI : asks to create a new Course
+activate UI
+
+UI --> M : requests data (title, code, edition, description, enrollment_limits, teacher)
+deactivate UI
+
+M -> UI : types request data
+activate UI
+
+UI -> CTRL : newCourse()
+activate CTRL
+
+CTRL -> REPC : newCourse()
+activate REPC
+
+REPC -> REPC : checkDuplicates(course)
+activate REPC
+deactivate REPC
+deactivate REPC
+deactivate CTRL
+
+UI --> M : shows all data and asks for confirmation
+deactivate UI
+
+M -> UI : confirms the data
+activate UI
+
+UI->CTRL : saveCourse()
+activate CTRL
+
+CTRL -> REPT : getTeacherSelected()
+activate REPT
+deactivate REPT
+
+CTRL -> C : saveCourse()
+activate C
+
+C-> C : checkErrors()
+activate C
+deactivate C
+deactivate C
+
+CTRL -> REPC : saveCourse()
+activate REPC
+deactivate REPC
+
+deactivate CTRL
+UI--> M : informs operation success
+deactivate UI
+
+deactivate M
+
+@enduml
