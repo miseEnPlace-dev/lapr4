@@ -97,7 +97,7 @@ assetTrue(true);
 
 ## 5. Integration & Demonstration
 
-![US1003_DEMO](US1004_DEMO.png)
+![US1004_DEMO](US1004_DEMO.png)
 
 ## 6. Observations
 

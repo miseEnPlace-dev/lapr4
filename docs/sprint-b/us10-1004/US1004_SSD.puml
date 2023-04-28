@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor "Manager" as manager
+participant ":System" as system
+autonumber
+
+manager -> system : request to open/close a course
+
+system -> manager : lists all available courses and asks to select one
+
+manager -> system: selects one
+
+system -> manager: informs operation success
+
+@enduml
