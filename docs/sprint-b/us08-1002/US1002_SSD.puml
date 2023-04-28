@@ -6,10 +6,10 @@ actor Manager as "Manager"
 
 activate Manager
 
-Manager -> ":System" : Asks the system to create a new Course
+Manager -> ":System" : asks the system to create a new Course
 activate ":System"
 
-":System" --> Manager : requests data (title, code, edition, description, enrollment_limits, teacher)
+":System" --> Manager : requests data (title, code, edition, description, enrollment_limits, teachers)
 deactivate ":System"
 
 Manager -> ":System" : types request data

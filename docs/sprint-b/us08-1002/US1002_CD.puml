@@ -1,13 +1,6 @@
 @startuml US1002_CD
-skinparam ClassAttributeFontSize 0
 
 class Course {
-  - code : number
-  - title : string
-  - description : string
-  - enrolmentLimits : number
-  - isOpen : boolean
-  - isAcceptingEnrolments : boolean
   - createdAt : string
   ---
   +sameAs()
@@ -19,9 +12,46 @@ class Course {
   +createdAt()
   +enrolmentLimits()
 
+}
+
+class CourseCode {
+  - code : string
+}
+
+class CourseDescription {
+  - description : string
+}
+
+class CourseTitle {
+  - title : string
+}
+
+enum CourseState {
+  CLOSED
+  OPEN
+  ENROLL
+  IN_PROGRESS
+  FINISHED
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+
+class Teacher {
 
 }
 
-class Teacher {}
+CourseCode --o Course
+CourseTitle --o Course
+CourseDescription --o Course
+CourseState --> Course
+CourseEnrolmentState --> Course
+
+Course --> "1" Teacher : has a responsible
+Course ---> "1..*" Teacher : has
+
 
 @enduml
