@@ -1,0 +1,55 @@
+@startuml US1004_DM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Course" {
+  entity Course
+
+  class Title
+  class EnrolmentState
+  class CourseState
+
+  class EnrolmentLimits
+  class Description
+}
+
+class Description <<(V,#FF8B40) value object>> {}
+class EnrolmentLimits <<(V,#FF8B40) value object>> {
+  - min
+  - max
+}
+
+entity Course <<entity>> <<root>> {
+  - code
+  - createdAt
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+
+note left of EnrolmentState : OPEN\nCLOSED
+note bottom of CourseState : OPEN\nCLOSED
+
+class Title <<(V,#FF8B40) value object>> {}
+class EnrolmentState <<(V,#FF8B40) value object>> {}
+class CourseState <<(V,#FF8B40) value object>> {}
+
+Course --> "1" Title : is titled
+Course --> "1" EnrolmentState : is in
+Course ---> "1..*" Teacher : has
+Course --> "1" Teacher : has a responsible
+Course --> "1" CourseState : is in
+Course --> "1" Description : has
+Course --> "1" EnrolmentLimits : has
+
+@enduml
