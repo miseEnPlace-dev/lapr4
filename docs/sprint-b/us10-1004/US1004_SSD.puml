@@ -4,6 +4,7 @@ actor "Manager" as manager
 participant ":System" as system
 autonumber
 
+
 manager -> system: requests to open/close a course
 
 system -> manager: lists all available courses and all their status and asks to select one
