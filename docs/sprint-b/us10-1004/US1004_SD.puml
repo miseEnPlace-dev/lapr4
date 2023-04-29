@@ -1,11 +1,72 @@
-@startuml
-'https://plantuml.com/sequence-diagram
-
+@startuml US1004_SD
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor "Manager" as M
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+participant "SetCourseStatusUI" as UI <<presentation>>
+participant "SetCourseStatusController" as CTRL <<application>>
+participant "Course" as C <<domain>>
+
+database CourseRepository as REPO <<repository>>
+
+
+activate M
+
+M -> UI: requests to open/close a course
+
+activate UI
+
+UI -> CTRL**: new
+UI -> CTRL: listCourses()
+
+activate CTRL
+
+CTRL -> REPO: courses = findAll()
+
+activate REPO
+
+deactivate REPO
+deactivate CTRL
+
+UI -> M: lists all the courses and their status and asks to select one
+
+deactivate UI
+
+M -> UI: selects the desired course
+
+activate UI
+
+UI -> CTRL: selectCourse(index)
+
+activate CTRL
+
+CTRL -> CTRL: course = get(index)
+UI -> M: asks to confirm the change of the course status
+
+deactivate CTRL
+deactivate UI
+
+M -> UI: confirms operation
+
+activate UI
+
+UI -> CTRL: toggleCourseStatus()
+
+activate CTRL
+
+CTRL -> C: toggleCourseStatus()
+
+activate C
+
+deactivate C
+
+CTRL -> REPO: save(course)
+
+activate REPO
+
+deactivate REPO
+deactivate CTRL
+
+UI -> M: informs operation success
+
 @enduml
