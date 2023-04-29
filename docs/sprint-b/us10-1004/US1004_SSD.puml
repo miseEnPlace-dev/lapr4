@@ -4,11 +4,15 @@ actor "Manager" as manager
 participant ":System" as system
 autonumber
 
-manager -> system : request to open/close a course
+manager -> system: requests to open/close a course
 
-system -> manager : lists all available courses and asks to select one
+system -> manager: lists all available courses and all their status and asks to select one
 
 manager -> system: selects one
+
+system -> manager: asks to confirm the change of the course status
+
+manager -> system: confirms operation
 
 system -> manager: informs operation success
 
