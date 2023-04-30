@@ -1,0 +1,14 @@
+@startuml US1007_SSD
+autonumber
+
+actor "Manager" as manager
+participant ":System" as system
+
+activate manager
+
+manager -> system : Asks to enroll students in bulk to a course
+system -> manager : Lists all available courses and asks to select one
+manager -> system : Selects a course
+system -> manager : Asks the file path where the students are listed
+manager -> system : Enters the file path
+system -> manager : Informs operation success
