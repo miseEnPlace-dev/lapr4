@@ -1,0 +1,20 @@
+@startuml US1004_SSD
+'https://plantuml.com/sequence-diagram
+actor "Manager" as manager
+participant ":System" as system
+autonumber
+
+
+manager -> system: requests to open/close a course
+
+system -> manager: lists all available courses and all their status and asks to select one
+
+manager -> system: selects one
+
+system -> manager: asks to confirm the change of the course status
+
+manager -> system: confirms operation
+
+system -> manager: informs operation success
+
+@enduml

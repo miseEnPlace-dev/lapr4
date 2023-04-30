@@ -1,0 +1,57 @@
+@startuml US1002_CD
+
+class Course {
+  - createdAt : string
+  ---
+  +sameAs()
+  +title()
+  +code()
+  +description()
+  +isOpen()
+  +isAcceptingEnrolments()
+  +createdAt()
+  +enrolmentLimits()
+
+}
+
+class CourseCode {
+  - code : string
+}
+
+class CourseDescription {
+  - description : string
+}
+
+class CourseTitle {
+  - title : string
+}
+
+enum CourseState {
+  CLOSED
+  OPEN
+  ENROLL
+  IN_PROGRESS
+  FINISHED
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+
+class Teacher {
+
+}
+
+CourseCode --o Course
+CourseTitle --o Course
+CourseDescription --o Course
+CourseState --> Course
+CourseEnrolmentState --> Course
+
+Course --> "1" Teacher : has a responsible
+Course ---> "1..*" Teacher : has
+
+
+@enduml

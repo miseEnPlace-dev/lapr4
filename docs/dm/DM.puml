@@ -152,7 +152,7 @@ Course ---> "1..*" Teacher : has
 Course --> "1" Teacher : has a responsible
 
 Enrolment --> "1" Course : is for
-Enrolment --> "1" Student : has
+Student --> "0..*" Enrolment : produces
 
 Board ---> "1" User : has an owner
 

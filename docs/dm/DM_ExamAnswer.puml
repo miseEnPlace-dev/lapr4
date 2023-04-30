@@ -44,7 +44,7 @@ entity AnswerToQuestion <<entity>> {}
 
 Student --> "0..*"ExamAnswer : has
 ExamAnswer --> "1" Exam : is for
-ExamAnswer --> "0..1" Grade : has
+AnswerToQuestion --> "0..1" Grade : has
 
 AnswerToQuestion --> "1" Question : is for
 AnswerToQuestion *-- "1" Answer

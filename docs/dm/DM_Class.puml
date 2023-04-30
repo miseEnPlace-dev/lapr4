@@ -10,13 +10,14 @@ skinparam ArrowColor #222222
 package "<<aggregate>> Class" {
   entity Class
 
-  class SpecialClass
+  entity SpecialClass
   class Duration
   class DayInWeek
   class Time
 }
 
-class SpecialClass <<(V,#FF8B40) value object>> {}
+entity SpecialClass <<entity>> {}
+
 class Time <<(V,#FF8B40) value object>> {}
 class Duration <<(V,#FF8B40) value object>> {}
 class DayInWeek <<(V,#FF8B40) value object>> {}
@@ -60,6 +61,7 @@ entity Student <<entity>> <<root>> {
 
 Class --> "1" Course : is related to
 Class ----> "1" Teacher : scheduled by
+Class ----> "1" Time : has
 
 ExtraordinaryClass --> "1" Teacher : scheduled by
 ExtraordinaryClass --> "1..*" Student : has

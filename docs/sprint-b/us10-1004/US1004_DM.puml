@@ -1,4 +1,4 @@
-@startuml DM-COURSE
+@startuml US1004_DM
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -11,12 +11,11 @@ package "<<aggregate>> Course" {
   entity Course
 
   class Title
+  class EnrolmentState
   class CourseState
 
   class EnrolmentLimits
   class Description
-
-  class Code
 }
 
 class Description <<(V,#FF8B40) value object>> {}
@@ -25,22 +24,9 @@ class EnrolmentLimits <<(V,#FF8B40) value object>> {
   - max
 }
 
-package "<<aggregate>> Enrolment" {
-  entity Enrolment
-}
-
 entity Course <<entity>> <<root>> {
+  - code
   - createdAt
-}
-
-entity Enrolment <<entity>> <<root>> {
-}
-
-package "<<aggregate>> Exam" {
-  entity Exam
-}
-
-entity Exam <<entity>> <<root>> {
 }
 
 package "<<aggregate>> Teacher" {
@@ -50,31 +36,20 @@ package "<<aggregate>> Teacher" {
 entity Teacher <<entity>> <<root>> {
 }
 
-package "<<aggregate>> Class" {
-  entity Class
-}
 
-entity Class <<entity>> <<root>> {
-}
-
-note bottom of CourseState : CLOSED\nOPEN\nENROLL\nIN_PROGRESS\nFINISHED
+note left of EnrolmentState : OPEN\nCLOSED
+note bottom of CourseState : OPEN\nCLOSED
 
 class Title <<(V,#FF8B40) value object>> {}
+class EnrolmentState <<(V,#FF8B40) value object>> {}
 class CourseState <<(V,#FF8B40) value object>> {}
-class Code <<(V,#FF8B40) value object>> {}
 
 Course --> "1" Title : is titled
+Course --> "1" EnrolmentState : is in
 Course ---> "1..*" Teacher : has
 Course --> "1" Teacher : has a responsible
 Course --> "1" CourseState : is in
 Course --> "1" Description : has
 Course --> "1" EnrolmentLimits : has
-Course --> "1" Code : is identified by
-
-Enrolment --> "1" Course : is for
-
-Exam ---> "1" Course : is from
-
-Class ---> "1" Course : is related to
 
 @enduml

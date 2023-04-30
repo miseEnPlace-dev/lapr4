@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+skinparam usecase {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+    ArrowColor DarkBlue
+    FontStyle Bold
+}
+
+:Manager: as Manager
+:Student: as Student
+:User: as User
+:Teacher: as Teacher
+:Project Manager: as ProjectManager
+
+left to right direction
+
+rectangle "Courses" as courses {
+  usecase "As a manager, I want to create courses" as createCourses
+  usecase "As User, I want to list all the courses that are available to me" as listCourses
+  usecase "As Manager, I want to open and close enrollments in courses" as manageEnrollments
+  usecase "As Manager, I want to open and close courses" as manageCourseStatus
+  usecase "As Manager, I want to set the teachers of a course" as setTeachers
+  usecase "As Manager, I want to enroll students in bulk by importing their data using a csv file" as enrollStudents
+  usecase "As Student, I want to request my enrollment in a course" as requestEnrollment
+  usecase "As Manager, I want to approve or reject students applications to courses" as approveRejectStudents
+  usecase "As Teacher, I want to schedule a class" as scheduleClass
+  usecase "As Teacher, I want to schedule an extraordinary class" as scheduleExtraordinaryClass
+  usecase "As Teacher, I want to update the schedule of a class" as updateClassSchedule
+}
+
+rectangle "Exams" as exams {
+  usecase "As Teacher, I want to create/update an exam" as createExams
+  usecase "As Teacher I want to add/update exam questions to a repository of exam questions to be used in automatic formative exams" as addUpdateExamQuestions
+  usecase "As Teacher, I want to create/update automatic formative exams" as createUpdateFormativeExam
+  usecase "As Student, I want to view a list of my future exams" as viewFutureExams
+  usecase "As Teacher, I want to view a list of all exams in a course" as viewCourseExams
+}
+
+rectangle "Users" as users {
+  usecase "As Manager, I want to be able to register, disable/enable, and list users of the system (Teachers and Students, as well as Managers)" as manageUsers
+}
+
+rectangle "Shared Boards" as sharedBoards {
+  usecase "As User, I want to create a board" as createBoard
+  usecase "As Project Manager, I want the team to prepare the communication infrastructure for the Shared Boards and the deployment of the solution" as prepareCommunicationSharedBoards
+  usecase "As Project Manager, I want the team to "explore" the synchronization problems related to the synchronization of shared boards and design a conceptual solution based on practical evidence." as sharedBoardsSynchronization
+}
+
+rectangle "Meetings" as meetings {
+  usecase "As User, I want to schedule a meeting" as scheduleMeeting
+}
+
+
+Manager --> (manageUsers)
+Manager --> (createCourses)
+Manager --> (manageEnrollments)
+Manager --> (manageCourseStatus)
+Manager --> (setTeachers)
+Manager --> (enrollStudents)
+Manager --> (approveRejectStudents)
+Teacher --> (createExams)
+Teacher --> (addUpdateExamQuestions)
+Teacher --> (scheduleClass)
+Teacher --> (scheduleExtraordinaryClass)
+Teacher --> (updateClassSchedule)
+Teacher --> (createUpdateFormativeExam)
+Teacher --> (viewCourseExams)
+Student --> (viewFutureExams)
+Student --> (requestEnrollment)
+User --> (listCourses)
+User --> (createBoard)
+User --> (scheduleMeeting)
+ProjectManager --> (prepareCommunicationSharedBoards)
+ProjectManager -----> (sharedBoardsSynchronization)
+
+@enduml
