@@ -34,7 +34,7 @@ deactivate UI
 
 M -> UI : confirms the action
 activate UI
-UI->CTRL : toggle(selectedCourse)
+UI->CTRL : toggleEnrolmentState(selectedCourse)
 activate CTRL
 CTRL -> C : toggleEnrolmentStatus()
 activate C

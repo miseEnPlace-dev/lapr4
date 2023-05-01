@@ -4,12 +4,27 @@ class RepositoryFactory {
   + RepositoryFactory()
 }
 
-class CourseRepository {
+interface CourseRepository {
+  + save(course)
+}
+
+class InMemoryCourseRepository {
+  + save(course)
+}
+
+class JpaCourseRepository {
   + save(course)
 }
 
 class PersistenceContext {
   - repositories()
+}
+
+class ManageCourseEnrolmentStateUI {}
+
+class ManageCourseEnrolmentStateController {
+  + listNotClosedCourses()
+  + toggleEnrolmentState(course)
 }
 
 class Course {
@@ -34,6 +49,9 @@ ManageCourseEnrolmentStateController ..> PersistenceContext
 ManageCourseEnrolmentStateController ..> Course
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
 
 Course --> CourseState
 
