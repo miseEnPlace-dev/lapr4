@@ -7,44 +7,56 @@ hide empty methods
 skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
-package "<<aggregate>> Enrolment" {
-  entity Enrolment
-
-  class State
-}
-
-
-entity Enrolment <<entity>> <<root>> {
-  - createdAt
-  - updatedAt
-}
-
-package "<<aggregate>> Student" {
-  entity Student
-}
-
-
-entity Student <<entity>> <<root>> {
-}
-
 package "<<aggregate>> Course" {
   entity Course
+
+  class Title
+  class CourseState
+
+  class EnrolmentLimits
+  class Description
+
+  class Code
 }
 
+class Description <<(V,#FF8B40) value object>> {}
+class EnrolmentLimits <<(V,#FF8B40) value object>> {
+  - min
+  - max
+}
+
+package "<<aggregate>> Enrolment" {
+  entity Enrolment
+}
 
 entity Course <<entity>> <<root>> {
+  - createdAt
 }
 
-class State <<(V,#FF8B40) value object>> {}
-note left of State
-  PENDING
-  ACCEPTED
-  REJECTED
-end note
+entity Enrolment <<entity>> <<root>> {
+}
 
-Enrolment --> "1" State : has
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
 
-Enrolment --> "1" Student : has
-Enrolment -> "1" Course : is for
+entity Teacher <<entity>> <<root>> {
+}
+
+note bottom of CourseState : CLOSED\nOPEN\nENROLL\nIN_PROGRESS\nFINISHED
+
+class Title <<(V,#FF8B40) value object>> {}
+class CourseState <<(V,#FF8B40) value object>> {}
+class Code <<(V,#FF8B40) value object>> {}
+
+Course --> "1" Title : is titled
+Course ---> "1..*" Teacher : has
+Course --> "1" Teacher : has a responsible
+Course --> "1" CourseState : is in
+Course --> "1" Description : has
+Course --> "1" EnrolmentLimits : has
+Course --> "1" Code : is identified by
+
+Enrolment --> "1" Course : is for
 
 @enduml

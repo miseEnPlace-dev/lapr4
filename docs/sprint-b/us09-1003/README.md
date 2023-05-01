@@ -61,7 +61,7 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 3.1. Main success scenario
 
 1. Manager asks to list all the courses and their states
-2. The System lists all the non finished courses
+2. The System lists all the non-finished courses
 3. Manager selects the desired course
 4. The system asks the manager to select the desired action
 5. Manager selects the desired action
@@ -80,11 +80,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US1003_SSD](out/US1003_SSD.svg)
 
-### 3.5. Sequence Diagram (Simplified)
-
-![US1003_SD](out/US1003_SD.svg)
-
-### 3.6. Partial Domain Model
+### 3.5. Partial Domain Model
 
 ![US1003_DM](out/US1003_DM.svg)
 
