@@ -1,0 +1,40 @@
+@startuml US1003_CD
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+class CourseRepository {
+  + save(course)
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - createdAt
+}
+
+enum CourseState {
+  CLOSED
+  OPEN
+  ENROLL
+  IN_PROGRESS
+  FINISHED
+}
+
+ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
+ManageCourseEnrolmentStateController ..> PersistenceContext
+ManageCourseEnrolmentStateController ..> Course
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+
+Course --> CourseState
+
+@enduml
