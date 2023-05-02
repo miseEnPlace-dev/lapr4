@@ -100,12 +100,28 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.4. Tests
 
-**Test 1:** xxx
+_Note: This are some simplified versions of the tests for readability purposes._
+
+**Test 1:** Ensure the course is in the correct state after the operation
 
 ```java
   @Test
-  private void test1() {
-    assetTrue(true);
+  private void ensureCourseIsInCorrectStateAfterToggle() {
+    assertEquals(CourseState.OPEN, course.getState());
+    course.toggleEnrollments();
+    assertEquals(CourseState.ENROLL, course.getState());
+  }
+```
+
+**Test 2:** Ensure that double toggle does not change the state (the state is reversible)
+
+```java
+  @Test
+  private void ensureDoubleToggleDoesNotChangeState() {
+    assertEquals(CourseState.OPEN, course.getState());
+    course.toggleEnrollments();
+    course.toggleEnrollments();
+    assertEquals(CourseState.OPEN, course.getState());
   }
 ```
 
