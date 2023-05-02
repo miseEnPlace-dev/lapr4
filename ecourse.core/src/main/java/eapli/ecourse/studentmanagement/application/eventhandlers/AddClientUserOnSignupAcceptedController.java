@@ -20,19 +20,19 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
   private final UserRepository repo = PersistenceContext.repositories().users();
   private final StudentRepository clientUserRepository = PersistenceContext.repositories().students();
 
-  public Student addClientUser(final NewUserRegisteredFromSignupEvent event) {
-    final Optional<SystemUser> newUser = findUser(event);
-    return newUser.map(u -> createClientUser(event, u)).orElseThrow(IllegalStateException::new);
+  public Student addStudent(final NewUserRegisteredFromSignupEvent event) {
+    final Optional<SystemUser> newUser = findStudent(event);
+    return newUser.map(u -> createStudent(event, u)).orElseThrow(IllegalStateException::new);
   }
 
-  private Student createClientUser(final NewUserRegisteredFromSignupEvent event, SystemUser u) {
-    final var clientUser = new StudentBuilder()
+  private Student createStudent(final NewUserRegisteredFromSignupEvent event, SystemUser u) {
+    final var student = new StudentBuilder()
         .withMecanographicNumber(event.mecanographicNumber()).withSystemUser(u).build();
-    return clientUserRepository.save(clientUser);
+    return clientUserRepository.save(student);
   }
 
   @SuppressWarnings("squid:S1488")
-  private Optional<SystemUser> findUser(final NewUserRegisteredFromSignupEvent event) {
+  private Optional<SystemUser> findStudent(final NewUserRegisteredFromSignupEvent event) {
     // since we are using events, the actual user may not yet be
     // created, so lets give it a time and wait
     final Optional<SystemUser> newUser = Functions.retry(() -> repo.ofIdentity(event.username()), 500, 30);

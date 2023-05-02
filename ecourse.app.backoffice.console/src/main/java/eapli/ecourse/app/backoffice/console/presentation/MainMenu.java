@@ -94,14 +94,6 @@ public class MainMenu extends AbstractUI {
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
-    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER,
-    // ClientRoles.MANAGER)) {
-    // final Menu managerMenu = buildManagerMenu();
-    // // mainMenu.addSubMenu(..., kitchenMenu);
-    // }
-    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER,
-    // ClientRoles.MANAGER)) {
-    // }
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));

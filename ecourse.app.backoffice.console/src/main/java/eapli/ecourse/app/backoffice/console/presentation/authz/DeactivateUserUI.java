@@ -23,7 +23,7 @@ public class DeactivateUserUI extends AbstractUI {
     if (!iterable.iterator().hasNext()) {
       System.out.println("There is no registered User");
     } else {
-      var cont = 1;
+      int cont = 1;
       System.out.println("SELECT User to deactivate\n");
       // TODO use select widget, see, ChangeDishTypeUI
       System.out.printf("%-6s%-10s%-30s%-30s%n", "Nº:", "Username", "Firstname", "Lastname");
