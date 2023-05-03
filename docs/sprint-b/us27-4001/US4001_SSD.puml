@@ -1,0 +1,27 @@
+@startuml US4001_SSD
+autonumber
+
+actor User as "User"
+actor System as "System"
+
+activate User
+
+User -> System : Asks to schedule a meeting
+activate System
+
+System --> User : requests the data needed to schedule a meeting
+deactivate System
+
+User -> System : types the requested data
+activate System
+
+System --> User : shows the user the data types and asks for confirmation
+deactivate System
+
+User -> System : confirms the data
+activate System
+
+System --> User : shows the user the available time slots
+deactivate System
+
+@enduml
