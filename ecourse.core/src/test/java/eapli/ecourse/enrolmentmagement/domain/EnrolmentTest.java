@@ -10,6 +10,7 @@ import org.junit.Test;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.domain.CourseDescription;
+import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
@@ -33,8 +34,8 @@ public class EnrolmentTest {
   }
 
   public static Course dummyCourse(final CourseCode code, final CourseTitle title, final CourseDescription description,
-      final EnrolmentLimits enrolmentLimits, final CourseState courseState) {
-    return new Course(code, title, description, enrolmentLimits, courseState);
+      final EnrolmentLimits enrolmentLimits, final CourseState courseState, final CourseEnrolmentState enrolmentState) {
+    return new Course(code, title, description, enrolmentLimits, courseState, enrolmentState);
   }
 
   public static Student dummyStudent(final SystemUser user, final MecanographicNumber mecanographicNumber) {
@@ -47,7 +48,7 @@ public class EnrolmentTest {
 
   private Course getNewDummyCourse() {
     return dummyCourse(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"), CourseDescription.valueOf("dummy"),
-        EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED);
+        EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED, CourseEnrolmentState.CLOSED);
   }
 
   private Student getNewDummyStudent() {
@@ -119,7 +120,7 @@ public class EnrolmentTest {
     final EnrolmentID id = EnrolmentID.newID();
     final Course c = dummyCourse(CourseCode.valueOf("4321"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"),
-        EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED);
+        EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED, CourseEnrolmentState.CLOSED);
 
     final Enrolment enrolment1 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(id, getNewDummyStudent(), c);

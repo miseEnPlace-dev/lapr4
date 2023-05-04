@@ -34,6 +34,9 @@ public class Course implements AggregateRoot<CourseCode> {
   private CourseState courseState;
 
   @Column(nullable = false)
+  private CourseEnrolmentState enrolmentState;
+
+  @Column(nullable = false)
   private Calendar createdAt;
 
   protected Course() {
@@ -41,14 +44,15 @@ public class Course implements AggregateRoot<CourseCode> {
   }
 
   public Course(final CourseCode code, final CourseTitle title, final CourseDescription description,
-      final EnrolmentLimits enrolmentLimits, final CourseState courseState) {
-    Preconditions.noneNull(code, title, description, enrolmentLimits, courseState);
+      final EnrolmentLimits enrolmentLimits, final CourseState courseState, final CourseEnrolmentState enrolmentState) {
+    Preconditions.noneNull(code, title, description, enrolmentLimits, courseState, enrolmentState);
 
     this.code = code;
     this.title = title;
     this.description = description;
     this.enrolmentLimits = enrolmentLimits;
     this.courseState = courseState;
+    this.enrolmentState = enrolmentState;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -61,6 +65,7 @@ public class Course implements AggregateRoot<CourseCode> {
     this.description = description;
     this.enrolmentLimits = enrolmentLimits;
     this.courseState = CourseState.CLOSED;
+    this.enrolmentState = CourseEnrolmentState.CLOSED;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -103,6 +108,10 @@ public class Course implements AggregateRoot<CourseCode> {
 
   public CourseState state() {
     return this.courseState;
+  }
+
+  public CourseEnrolmentState enrolmentState() {
+    return this.enrolmentState;
   }
 
   public Calendar createdAt() {

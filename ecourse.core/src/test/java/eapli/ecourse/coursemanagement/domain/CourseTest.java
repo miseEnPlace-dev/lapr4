@@ -12,34 +12,43 @@ public class CourseTest {
   @Test
   public void ensureCourseHasCode() {
     assertThrows(IllegalArgumentException.class, () -> new Course(null, CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED,
+        CourseEnrolmentState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasTitle() {
     assertThrows(IllegalArgumentException.class, () -> new Course(CourseCode.valueOf("1234"), null,
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED,
+        CourseEnrolmentState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasDescription() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            null, EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED));
+            null, EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED, CourseEnrolmentState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasEnrolmentLimits() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), null, CourseState.CLOSED));
+            CourseDescription.valueOf("dummy"), null, CourseState.CLOSED, CourseEnrolmentState.CLOSED));
   }
 
   @Test
   public void ensureCourseHasCourseState() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), null));
+            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), null, CourseEnrolmentState.CLOSED));
+  }
+
+  @Test
+  public void ensureCourseHasEnrolmentState() {
+    assertThrows(IllegalArgumentException.class,
+        () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED, null));
   }
 
   @Test
@@ -47,6 +56,13 @@ public class CourseTest {
     final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
     assertTrue(course.state().equals(CourseState.CLOSED));
+  }
+
+  @Test
+  public void ensureCourseHasDefaultEnrolmentState() {
+    final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+    assertTrue(course.enrolmentState().equals(CourseEnrolmentState.CLOSED));
   }
 
   @Test

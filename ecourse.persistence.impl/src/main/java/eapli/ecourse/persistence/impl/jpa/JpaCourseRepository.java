@@ -7,6 +7,7 @@ import java.util.Optional;
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
+import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -33,11 +34,16 @@ class JpaCourseRepository
 
   @Override
   public Iterable<Course> coursesOpenedForEnrollment() {
-    return match("e.isAcceptingEnrolments = :state", "state", CourseState.ENROLL);
+    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState", CourseEnrolmentState.OPEN);
   }
 
   @Override
   public Iterable<Course> openCourses() {
     return match("e.state = :state", "state", CourseState.OPEN);
+  }
+
+  @Override
+  public Iterable<Course> notFinishedCourses() {
+    return match("e.state <> :state", "state", CourseState.FINISHED);
   }
 }
