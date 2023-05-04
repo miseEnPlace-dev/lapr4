@@ -37,8 +37,8 @@ entity Teacher <<entity>> <<root>> {
 }
 
 
-note left of EnrolmentState : OPEN\nCLOSED
-note bottom of CourseState : OPEN\nCLOSED
+note bottom of CourseState : CLOSED\nOPEN\nIN_PROGRESS\nFINISHED
+note bottom of EnrolmentState : CLOSED\nOPEN
 
 class Title <<(V,#FF8B40) value object>> {}
 class EnrolmentState <<(V,#FF8B40) value object>> {}

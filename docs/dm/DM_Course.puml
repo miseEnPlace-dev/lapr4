@@ -12,6 +12,7 @@ package "<<aggregate>> Course" {
 
   class Title
   class CourseState
+  class EnrolmentState
 
   class EnrolmentLimits
   class Description
@@ -57,16 +58,19 @@ package "<<aggregate>> Class" {
 entity Class <<entity>> <<root>> {
 }
 
-note bottom of CourseState : CLOSED\nOPEN\nENROLL\nIN_PROGRESS\nFINISHED
+note bottom of CourseState : CLOSED\nOPEN\nIN_PROGRESS\nFINISHED
+note bottom of EnrolmentState : CLOSED\nOPEN
 
 class Title <<(V,#FF8B40) value object>> {}
 class CourseState <<(V,#FF8B40) value object>> {}
+class EnrolmentState <<(V,#FF8B40) value object>> {}
 class Code <<(V,#FF8B40) value object>> {}
 
 Course --> "1" Title : is titled
 Course ---> "1..*" Teacher : has
 Course --> "1" Teacher : has a responsible
 Course --> "1" CourseState : is in
+Course --> "1" EnrolmentState : is in
 Course --> "1" Description : has
 Course --> "1" EnrolmentLimits : has
 Course --> "1" Code : is identified by

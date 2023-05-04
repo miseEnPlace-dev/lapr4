@@ -1,0 +1,10 @@
+@startuml US1004_STATE
+
+[*] --> CLOSED : create
+
+CLOSED --> OPEN : open
+OPEN --> CLOSED : close
+OPEN --> IN_PROGRESS : start
+IN_PROGRESS --> [*] : finish
+
+@enduml

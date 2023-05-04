@@ -48,7 +48,7 @@ This is the first time this task is assigned to be developed. This is a new func
 ## 2.3. Functional Requirements
 
 > **FRC02** Open/Close Enrollments in Course - Only managers are able to execute this functionality.
-> **FRC07** - Request Enrollment in Course The student requests to be enrolled in a course
+> **FRC07** - Request Enrollment in Course - The student requests to be enrolled in a course
 
 ## 2.4. Acceptance Criteria
 
