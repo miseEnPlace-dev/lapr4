@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
@@ -16,7 +17,6 @@ import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentID;
-import eapli.ecourse.enrolmentmanagement.domain.EnrolmentState;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -48,7 +48,8 @@ public class EnrolmentTest {
 
   private Course getNewDummyCourse() {
     return dummyCourse(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"), CourseDescription.valueOf("dummy"),
-        EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED, CourseEnrolmentState.CLOSED);
+        EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
+        new CourseEnrolmentState(CourseEnrolmentState.State.CLOSED));
   }
 
   private Student getNewDummyStudent() {
@@ -73,7 +74,7 @@ public class EnrolmentTest {
   @Test
   public void ensureDefaultStateIsPending() {
     final Enrolment enrolment = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
-    assertEquals(enrolment.state(), EnrolmentState.PENDING);
+    assertTrue(enrolment.state().isPending());
   }
 
   @Test
@@ -120,7 +121,8 @@ public class EnrolmentTest {
     final EnrolmentID id = EnrolmentID.newID();
     final Course c = dummyCourse(CourseCode.valueOf("4321"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"),
-        EnrolmentLimits.valueOf(10, 20), CourseState.CLOSED, CourseEnrolmentState.CLOSED);
+        EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
+        new CourseEnrolmentState(CourseEnrolmentState.State.CLOSED));
 
     final Enrolment enrolment1 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(id, getNewDummyStudent(), c);

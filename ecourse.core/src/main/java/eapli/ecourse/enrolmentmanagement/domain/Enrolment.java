@@ -62,7 +62,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
 
     this.student = student;
     this.course = course;
-    this.state = EnrolmentState.PENDING;
+    this.state = new EnrolmentState();
     this.id = id;
     this.createdAt = Calendar.getInstance();
     this.updatedAt = Calendar.getInstance();

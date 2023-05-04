@@ -64,8 +64,8 @@ public class Course implements AggregateRoot<CourseCode> {
     this.title = title;
     this.description = description;
     this.enrolmentLimits = enrolmentLimits;
-    this.courseState = CourseState.CLOSED;
-    this.enrolmentState = CourseEnrolmentState.CLOSED;
+    this.courseState = new CourseState();
+    this.enrolmentState = new CourseEnrolmentState();
     this.createdAt = Calendar.getInstance();
   }
 
@@ -91,7 +91,8 @@ public class Course implements AggregateRoot<CourseCode> {
 
     return code().equals(that.code()) && title().equals(that.title())
         && description().equals(that.description()) && enrolmentLimits().equals(that.enrolmentLimits())
-        && state().equals(that.state()) && createdAt().equals(that.createdAt());
+        && state().equals(that.state()) && enrolmentState.equals(that.enrolmentState())
+        && createdAt().equals(that.createdAt());
   }
 
   public CourseCode code() {
