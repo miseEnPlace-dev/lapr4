@@ -58,29 +58,16 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 3. Analysis
 
-### 3.1. Main success scenario
-
-1. Manager asks to list all the courses and their states
-2. The System lists all the non-finished courses
-3. Manager selects the desired course
-4. The system asks the manager to select the desired action
-5. Manager selects the desired action
-6. The system reports the success of the operation
-
-### 3.2. Course State Diagram
-
-![US1003_STATE](out/US1003_STATE.svg)
-
-### 3.3. Conditions
+### 3.1. Conditions
 
 - The manager must be authenticated and authorized to perform the operation.
 - The course must be in a state that allows the operation to be performed.
 
-### 3.4. System Sequence Diagram
+### 3.2. System Sequence Diagram
 
 ![US1003_SSD](out/US1003_SSD.svg)
 
-### 3.5. Partial Domain Model
+### 3.3. Partial Domain Model
 
 ![US1003_DM](out/US1003_DM.svg)
 
@@ -107,9 +94,9 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   @Test
   private void ensureCourseIsInCorrectStateAfterToggle() {
-    assertEquals(CourseState.OPEN, course.getState());
-    course.toggleEnrollments();
-    assertEquals(CourseState.ENROLL, course.getState());
+    assertEquals(CourseEnrolmentState.CLOSED, course.getEnrolmentState());
+    course.toggleEnrollmentState();
+    assertEquals(CourseEnrolmentState.OPEN, course.getEnrolmentState());
   }
 ```
 
@@ -118,10 +105,10 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   @Test
   private void ensureDoubleToggleDoesNotChangeState() {
-    assertEquals(CourseState.OPEN, course.getState());
-    course.toggleEnrollments();
-    course.toggleEnrollments();
-    assertEquals(CourseState.OPEN, course.getState());
+    assertEquals(CourseEnrolmentState.CLOSED, course.getEnrolmentState());
+    course.toggleEnrollmentState();
+    course.toggleEnrollmentState();
+    assertEquals(CourseEnrolmentState.CLOSED, course.getEnrolmentState());
   }
 ```
 

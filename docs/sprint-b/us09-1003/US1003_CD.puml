@@ -33,15 +33,22 @@ class Course {
   - description
   - enrolmentLimits
   - courseState
+  - courseEnrolmentState
   - createdAt
+
+  + toggleEnrolmentState()
 }
 
 enum CourseState {
   CLOSED
   OPEN
-  ENROLL
   IN_PROGRESS
   FINISHED
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
 }
 
 ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
@@ -54,5 +61,6 @@ CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository
 
 Course --> CourseState
+Course --> CourseEnrolmentState
 
 @enduml
