@@ -94,9 +94,11 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   @Test
   private void ensureCourseIsInCorrectStateAfterToggle() {
-    assertEquals(CourseEnrolmentState.CLOSED, course.getEnrolmentState());
-    course.toggleEnrollmentState();
-    assertEquals(CourseEnrolmentState.OPEN, course.getEnrolmentState());
+    final Course course = getDummyCourse();
+
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isOpen());
   }
 ```
 
@@ -105,10 +107,12 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   @Test
   private void ensureDoubleToggleDoesNotChangeState() {
-    assertEquals(CourseEnrolmentState.CLOSED, course.getEnrolmentState());
-    course.toggleEnrollmentState();
-    course.toggleEnrollmentState();
-    assertEquals(CourseEnrolmentState.CLOSED, course.getEnrolmentState());
+    final Course course = getDummyCourse();
+
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isClosed());
   }
 ```
 

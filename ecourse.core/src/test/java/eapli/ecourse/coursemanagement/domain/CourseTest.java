@@ -9,6 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.Test;
 
 public class CourseTest {
+  private Course getDummyCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
+        new CourseEnrolmentState());
+  }
+
   @Test
   public void ensureCourseHasCode() {
     assertThrows(IllegalArgumentException.class, () -> new Course(null, CourseTitle.valueOf("dummy"),
@@ -108,9 +114,27 @@ public class CourseTest {
 
   @Test
   public void ensureCourseIsEqualToSameInstance() {
-    final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+    final Course course = getDummyCourse();
 
     assertEquals(course, course);
+  }
+
+  @Test
+  public void ensureCourseIsInCorrectStateAfterToggle() {
+    final Course course = getDummyCourse();
+
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isOpen());
+  }
+
+  @Test
+  public void ensureDoubleToggleDoesNotChangeState() {
+    final Course course = getDummyCourse();
+
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isClosed());
   }
 }

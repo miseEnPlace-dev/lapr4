@@ -123,6 +123,13 @@ public class Course implements AggregateRoot<CourseCode> {
     return this.enrolmentLimits;
   }
 
+  public void toggleEnrolmentState() {
+    if (enrolmentState.isClosed())
+      enrolmentState.changeToOpen();
+    else
+      enrolmentState.changeToClosed();
+  }
+
   @Override
   public CourseCode identity() {
     return this.code;
