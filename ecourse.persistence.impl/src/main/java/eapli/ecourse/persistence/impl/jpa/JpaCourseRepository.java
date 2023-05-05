@@ -34,12 +34,12 @@ class JpaCourseRepository
 
   @Override
   public Iterable<Course> coursesOpenedForEnrollment() {
-    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState", CourseEnrolmentState.OPEN);
+    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState", CourseEnrolmentState.State.OPEN);
   }
 
   @Override
   public Iterable<Course> openCourses() {
-    return match("e.state = :state", "state", CourseState.OPEN);
+    return match("e.state = :state", "state", CourseState.State.OPEN);
   }
 
   public Iterable<Course> closedCourses() {
@@ -48,6 +48,6 @@ class JpaCourseRepository
 
   @Override
   public Iterable<Course> notFinishedCourses() {
-    return match("e.state <> :state", "state", CourseState.FINISHED);
+    return match("e.state <> :state", "state", CourseState.State.FINISHED);
   }
 }

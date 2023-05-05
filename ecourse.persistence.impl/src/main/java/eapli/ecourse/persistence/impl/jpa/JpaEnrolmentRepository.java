@@ -34,12 +34,12 @@ public class JpaEnrolmentRepository extends JpaAutoTxRepository<Enrolment, Enrol
   @Override
   public Iterable<Enrolment> findCourseAccepted(final CourseCode courseCode) {
     return match("e.course.code = :courseCode AND e.state = :state", "courseCode", courseCode,
-        "state", EnrolmentState.ACCEPTED);
+        "state", EnrolmentState.State.ACCEPTED);
   }
 
   @Override
   public Iterable<Enrolment> findCourseRejected(final CourseCode courseCode) {
     return match("e.course.code = :courseCode AND e.state = :state", "courseCode", courseCode,
-        "state", EnrolmentState.REJECTED);
+        "state", EnrolmentState.State.REJECTED);
   }
 }
