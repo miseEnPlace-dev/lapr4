@@ -24,6 +24,10 @@ public class InMemoryCourseRepository extends
     return match(e -> e.enrolmentState().isOpen());
   }
 
+  public Iterable<Course> closedCourses() {
+    return match(e -> e.enrolmentState().isClosed());
+  }
+
   @Override
   public Iterable<Course> openCourses() {
     return match(e -> e.state().isOpen());

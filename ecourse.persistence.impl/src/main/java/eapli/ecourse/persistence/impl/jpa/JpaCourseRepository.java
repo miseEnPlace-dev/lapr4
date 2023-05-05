@@ -42,6 +42,10 @@ class JpaCourseRepository
     return match("e.state = :state", "state", CourseState.OPEN);
   }
 
+  public Iterable<Course> closedCourses() {
+    return match("e.state = :state", "state", CourseState.State.CLOSED);
+  }
+
   @Override
   public Iterable<Course> notFinishedCourses() {
     return match("e.state <> :state", "state", CourseState.FINISHED);

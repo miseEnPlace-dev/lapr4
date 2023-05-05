@@ -37,4 +37,11 @@ public interface CourseRepository extends DomainRepository<CourseCode, Course> {
    * @return
    */
   Iterable<Course> notFinishedCourses();
+
+  /**
+   * Returns the courses that are closed
+   *
+   * @return
+   */
+  Iterable<Course> closedCourses();
 }
