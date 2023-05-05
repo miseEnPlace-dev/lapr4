@@ -7,7 +7,7 @@ autonumber
 
 manager -> system: requests to open/close a course
 
-system -> manager: lists all available courses and all their status and asks to select one
+system -> manager: lists all the possible courses to open/close and their states
 
 manager -> system: selects one
 

@@ -17,18 +17,25 @@ M -> UI: requests to open/close a course
 activate UI
 
 UI -> CTRL**: new
+
 UI -> CTRL: listCourses()
 
 activate CTRL
 
-CTRL -> REPO: courses = findAll()
+CTRL -> REPO: openCourses()
 
 activate REPO
-
 deactivate REPO
+
+
+CTRL -> REPO: closedCourses()
+
+activate REPO
+deactivate REPO
+
 deactivate CTRL
 
-UI -> M: lists all the courses and their status and asks to select one
+UI -> M: lists the available courses and their status and asks to select one
 
 deactivate UI
 
@@ -41,7 +48,7 @@ UI -> CTRL: selectCourse(index)
 activate CTRL
 
 CTRL -> CTRL: course = get(index)
-UI -> M: asks to confirm the change of the course status
+UI -> M: asks to confirm the toggle of the course status
 
 deactivate CTRL
 deactivate UI
