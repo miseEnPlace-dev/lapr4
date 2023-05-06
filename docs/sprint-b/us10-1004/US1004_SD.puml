@@ -5,10 +5,10 @@ actor "Manager" as M
 
 participant "SetCourseStatusUI" as UI <<presentation>>
 participant "SetCourseStatusController" as CTRL <<application>>
-participant "Course" as C <<domain>>
+participant "Course" as Course <<domain>>
+participant "CourseState" as CourseState <<domain>>
 
 database CourseRepository as REPO <<repository>>
-
 
 activate M
 
@@ -18,24 +18,29 @@ activate UI
 
 UI -> CTRL**: new
 
-UI -> CTRL: listCourses()
+alt if close course
+  UI -> CTRL: openCourses()
+  activate CTRL
+  CTRL -> REPO: openCourses()
+  activate REPO
+  REPO --> CTRL: courses
+  deactivate REPO
+  CTRL --> UI: courses
+  deactivate CTRL
+else if open course
+  UI -> CTRL: listClosedCourses()
 
-activate CTRL
+  activate CTRL
 
-CTRL -> REPO: openCourses()
+  CTRL -> REPO: openCourses()
+  activate REPO
+  REPO --> CTRL: courses
+  deactivate REPO
+  CTRL --> UI: courses
+  deactivate CTRL
+  end
 
-activate REPO
-deactivate REPO
-
-
-CTRL -> REPO: closedCourses()
-
-activate REPO
-deactivate REPO
-
-deactivate CTRL
-
-UI -> M: lists the available courses and their status and asks to select one
+UI --> M: lists the available courses and their status and asks to select one
 
 deactivate UI
 
@@ -43,37 +48,40 @@ M -> UI: selects the desired course
 
 activate UI
 
-UI -> CTRL: selectCourse(index)
+UI -> UI: course = get(index)
 
-activate CTRL
 
-CTRL -> CTRL: course = get(index)
-UI -> M: asks to confirm the toggle of the course status
+UI --> M: asks to confirm the toggle of the course status
 
-deactivate CTRL
 deactivate UI
 
 M -> UI: confirms operation
 
 activate UI
 
-UI -> CTRL: toggleCourseStatus()
+UI -> CTRL: toggleCourseStatus(course)
 
-activate CTRL
+alt if close course
+  activate CTRL
+  CTRL -> CourseState: changeToClose()
+  activate CourseState
+  deactivate CourseState
 
-CTRL -> C: toggleCourseStatus()
+else if open course
 
-activate C
+  CTRL -> CourseState: changeToOpen()
+  activate CourseState
+  deactivate CourseState
+  end
 
-deactivate C
 
 CTRL -> REPO: save(course)
 
 activate REPO
-
 deactivate REPO
+
 deactivate CTRL
 
-UI -> M: informs operation success
+UI --> M: informs operation success
 
 @enduml
