@@ -45,6 +45,17 @@
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}"
+    },
+    {
+      "name": "ANTLR4 grammar",
+      "type": "antlr-debug",
+      "request": "launch",
+      "input": "${fileDirname}/${fileBasenameNoExtension}.txt",
+      "grammar": "${file}",
+      "actionFile": "",
+      "startRule": "start",
+      "printParseTree": true,
+      "visualParseTree": true
     }
   ]
 }
