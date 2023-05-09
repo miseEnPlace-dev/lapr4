@@ -22,16 +22,16 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 2.1. Client Specifications
 
 - **Question Types**
-  - Matching - A list of sub-questions is provided, along with a list of answers. The respondent must "match" the correct answers with each question.
-  - Multiple Choice - With the Multiple Choice question type you can create single-answer
+  - _Matching_ - A list of sub-questions is provided, along with a list of answers. The respondent must "match" the correct answers with each question.
+  - _Multiple Choice_ - With the Multiple Choice question type you can create single-answer
     and multiple-answer questions and weight individual answers.
-  - Short Answer - In response to a question, the respondent types a word or phrase. There
+  - _Short Answer_ - In response to a question, the respondent types a word or phrase. There
     may be several possible correct answers, with different grades. Answers may or may not
     be sensitive to case
-    Numerical - From the student perspective, a numerical question looks just like a short-answer question. The difference is that numerical answers are allowed to have an accepted error. This allows a continuous range of answers to be set.
-  - Select Missing Words - Students select a missing word or phrase from a dropdown
+  - _Numerical_ - From the student perspective, a numerical question looks just like a short-answer question. The difference is that numerical answers are allowed to have an accepted error. This allows a continuous range of answers to be set.
+  - _Select Missing Words_ - Students select a missing word or phrase from a dropdown
     menu. Items may be grouped and used more than once.
-  - True/False - In response to a question, the respondent selects from two options: True
+  - _True/False_ - In response to a question, the respondent selects from two options: True
     or False
 
 ### 2.2. Client Clarifications
@@ -95,8 +95,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 6. Integration & Demonstration
 
-![US1003_DEMO](US1003_DEMO.png)
+![US2007_DEMO](US2007_DEMO.png)
 
 ## 7. Observations
 
-- The history of the states of a course is not relevant.
+N/a
