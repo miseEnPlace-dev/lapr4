@@ -13,7 +13,7 @@ public class EnrolmentLimits implements ValueObject {
   private Integer min;
   private Integer max;
 
-  protected EnrolmentLimits(final Integer min, final Integer max) {
+  public EnrolmentLimits(final Integer min, final Integer max) {
     if (min < 0)
       throw new IllegalArgumentException("Course minimum limit cannot be negative");
     if (min > max)
@@ -34,5 +34,13 @@ public class EnrolmentLimits implements ValueObject {
   @Override
   public String toString() {
     return String.format("[ min=%d max=%d ]", min, max);
+  }
+
+  public String minLimit() {
+    return min.toString();
+  }
+
+  public String maxLimit() {
+    return max.toString();
   }
 }

@@ -3,37 +3,37 @@ package eapli.ecourse.coursemanagement.domain;
 import eapli.framework.domain.model.ValueObject;
 
 public class CourseEnrolmentState implements ValueObject {
-  public enum State {
+  public enum EnrolmentState {
     OPEN, CLOSED
   }
 
-  private State state;
+  private EnrolmentState state;
 
-  public CourseEnrolmentState(State state) {
+  public CourseEnrolmentState(EnrolmentState state) {
     this.state = state;
   }
 
   public CourseEnrolmentState() {
-    state = State.CLOSED;
+    state = EnrolmentState.CLOSED;
   }
 
   public void changeToOpen() {
-    state = State.OPEN;
+    state = EnrolmentState.OPEN;
   }
 
   public void changeToClosed() {
-    state = State.CLOSED;
+    state = EnrolmentState.CLOSED;
   }
 
   public boolean isOpen() {
-    return state == State.OPEN;
+    return state == EnrolmentState.OPEN;
   }
 
   public boolean isClosed() {
-    return state == State.CLOSED;
+    return state == EnrolmentState.CLOSED;
   }
 
-  public boolean isSameAs(State state) {
+  public boolean isSameAs(EnrolmentState state) {
     return this.state == state;
   }
 

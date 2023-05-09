@@ -15,7 +15,7 @@ public class CourseCode implements ValueObject, Comparable<CourseCode> {
 
   private String code;
 
-  protected CourseCode(final String courseCode) {
+  public CourseCode(final String courseCode) {
     Preconditions.nonEmpty(courseCode);
 
     this.code = courseCode;

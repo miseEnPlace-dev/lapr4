@@ -34,7 +34,8 @@ class JpaCourseRepository
 
   @Override
   public Iterable<Course> coursesOpenedForEnrollment() {
-    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState", CourseEnrolmentState.State.OPEN);
+    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState",
+        CourseEnrolmentState.EnrolmentState.OPEN);
   }
 
   @Override

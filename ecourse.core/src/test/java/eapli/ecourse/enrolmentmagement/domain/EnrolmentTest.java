@@ -49,7 +49,7 @@ public class EnrolmentTest {
   private Course getNewDummyCourse() {
     return dummyCourse(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"), CourseDescription.valueOf("dummy"),
         EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
-        new CourseEnrolmentState(CourseEnrolmentState.State.CLOSED));
+        new CourseEnrolmentState(CourseEnrolmentState.EnrolmentState.CLOSED));
   }
 
   private Student getNewDummyStudent() {
@@ -122,7 +122,7 @@ public class EnrolmentTest {
     final Course c = dummyCourse(CourseCode.valueOf("4321"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"),
         EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
-        new CourseEnrolmentState(CourseEnrolmentState.State.CLOSED));
+        new CourseEnrolmentState(CourseEnrolmentState.EnrolmentState.CLOSED));
 
     final Enrolment enrolment1 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(id, getNewDummyStudent(), c);
