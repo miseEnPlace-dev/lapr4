@@ -44,6 +44,8 @@ Before building, make sure of the following:
 
 To build the project, you first need to set all six properties files, located under all app's `src/main/resources` folders. Copy the `application.example.properties` file and rename it to `application.properties`. You can change the default values if you want, but it's not necessary.
 
+> 💡 You can simply run `./properties.sh` (Linux/MacOS) to automatically create the properties files.
+
 Then, execute the following script:
 
 - On Linux/MacOS: `./rebuild-all.sh`
