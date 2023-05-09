@@ -9,7 +9,7 @@ import eapli.framework.visitor.Visitor;
  *
  * @author losa
  */
-@SuppressWarnings({"squid:S106"})
+@SuppressWarnings({ "squid:S106" })
 public class ListUsersUI extends AbstractListUI<SystemUser> {
   private final ListUsersController theController = new ListUsersController();
 

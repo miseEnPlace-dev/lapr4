@@ -12,6 +12,11 @@ public class CoursesMenu {
 
   private static final String RETURN_LABEL = "Return ";
 
+  /**
+   * UI for managing courses in the application.
+   *
+   * @author Tomás Lopes <1211289>
+   */
   public Menu buildCoursesMenu() {
     final Menu menu = new Menu("Courses >");
 

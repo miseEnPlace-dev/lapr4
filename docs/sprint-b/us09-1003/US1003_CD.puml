@@ -48,10 +48,7 @@ class Course {
   - createdAt
 
   + toggleEnrolmentState()
-}
-
-class CourseMapper {
-  + {static} toDto(course)
+  + toDto()
 }
 
 enum CourseState {
@@ -76,6 +73,10 @@ class CourseDTO {
   - createdAt
 }
 
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
 ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
 ManageCourseEnrolmentStateController ..> PersistenceContext
 ManageCourseEnrolmentStateController --> CourseService
@@ -83,11 +84,10 @@ PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
 
 CourseService ..> Course
-CourseService ..> CourseMapper
 CourseService ..> CourseRepository
 
-CourseMapper ..> Course
-CourseMapper ..> CourseDTO
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
 
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository

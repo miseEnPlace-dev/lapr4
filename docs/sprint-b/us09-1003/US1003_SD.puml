@@ -6,7 +6,6 @@ participant "ManageEnrolmentsUI" as UI <<presentation>>
 participant "ManageEnrolmentController" as CTRL <<application>>
 participant "CourseService" as SRV <<service>>
 participant "Course" as C <<domain>>
-participant "CourseMapper" as MAP <<mapper>>
 participant "CourseDTO" as DTO <<dto>>
 
 database CourseRepository as REP <<repository>>
@@ -31,9 +30,10 @@ REP --> SRV : courses
 deactivate REP
 
 loop for each course
-  SRV -> MAP : toDTO(courses)
-  activate MAP
-  deactivate MAP
+  SRV -> C : toDTO(course)
+  activate C
+  C -> DTO : new
+  deactivate C
 end loop
 
 SRV --> CTRL : courses
@@ -54,15 +54,10 @@ M -> UI : confirms the action
 activate UI
 UI -> CTRL : toggleEnrolmentState(selectedCourse)
 activate CTRL
-CTRL -> SRV : toggleEnrolmentState(course)
-activate SRV
-SRV -> C : toggleEnrolmentState()
+CTRL -> C : course=toggleEnrolmentState()
 activate C
 deactivate C
-deactivate SRV
-CTRL -> SRV : save(course)
-activate SRV
-SRV -> REP : save(selectedCourse)
+CTRL -> REP : save(course)
 activate REP
 deactivate REP
 SRV --> CTRL : newCourse

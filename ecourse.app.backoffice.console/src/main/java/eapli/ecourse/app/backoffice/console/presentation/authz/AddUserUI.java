@@ -22,7 +22,6 @@ import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
  */
 @SuppressWarnings("java:S106")
 public class AddUserUI extends AbstractUI {
-
   private final AddUserController theController = new AddUserController();
 
   @Override

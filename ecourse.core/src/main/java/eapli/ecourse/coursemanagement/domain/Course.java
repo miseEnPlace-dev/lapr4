@@ -7,6 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 
+import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
@@ -121,6 +122,11 @@ public class Course implements AggregateRoot<CourseCode> {
 
   public EnrolmentLimits enrolmentLimits() {
     return this.enrolmentLimits;
+  }
+
+  public CourseDTO toDto() {
+    return new CourseDTO(this.code, this.title, this.description, this.enrolmentLimits, this.courseState,
+        this.enrolmentState, this.createdAt);
   }
 
   public void toggleEnrolmentState() {
