@@ -61,7 +61,7 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 3.1. Conditions
 
 - The manager must be authenticated and authorized to perform the operation.
-- The course must be in a state that allows the operation to be performed.
+- The course must be in a state that allows the operation to be performed. (e.g. a course cannot open enrolments if it is closed)
 
 ### 3.2. System Sequence Diagram
 
@@ -93,8 +93,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```java
   @Test
-  private void ensureCourseIsInCorrectStateAfterToggle() {
-    final Course course = getDummyCourse();
+  public void ensureCourseIsInCorrectStateAfterToggle() {
+    final Course course = getDummyOpenCourse();
 
     assertTrue(course.enrolmentState().isClosed());
     course.toggleEnrolmentState();
@@ -106,13 +106,66 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```java
   @Test
-  private void ensureDoubleToggleDoesNotChangeState() {
-    final Course course = getDummyCourse();
+  public void ensureDoubleToggleDoesNotChangeState() {
+    final Course course = getDummyOpenCourse();
 
     assertTrue(course.enrolmentState().isClosed());
     course.toggleEnrolmentState();
     course.toggleEnrolmentState();
     assertTrue(course.enrolmentState().isClosed());
+  }
+```
+
+**Test 3:** Ensure that is not possible to open enrolments in a closed course
+
+```java
+  @Test
+  public void ensureCannotOpenEnrolmentsInClosedCourse() {
+    final Course course = getDummyClosedCourse();
+
+    assertTrue(course.state().isClosed());
+    assertTrue(course.enrolmentState().isClosed());
+    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
+  }
+```
+
+**Test 4:** Ensure that is not possible to toggle enrolments in a course that is finished
+
+```java
+  @Test
+  public void ensureCannotOpenEnrolmentsInFinishedCourse() {
+    final Course course = getDummyFinishedCourse();
+
+    assertTrue(course.state().isFinished());
+    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
+  }
+```
+
+**Test 5:** Ensure that is possible to toggle enrolments in a course that is in progress
+
+```java
+  @Test
+  public void ensureIsPossibleToToggleEnrolmentsInProgressCourse() {
+    final Course course = getDummyInProgressCourse();
+
+    assertTrue(course.state().isInProgress());
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isOpen());
+  }
+```
+
+**Test 6:** Ensure that is possible to toggle enrolemtns in a course that is open
+
+```java
+  @Test
+  public void ensureIsPossibleToToggleEnrolmentsInOpenCourse() {
+    final Course course = getDummyOpenCourse();
+
+    assertTrue(course.state().isOpen());
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isOpen());
   }
 ```
 
@@ -123,7 +176,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
-  private void sample() {
+  public void sample() {
     return true;
   }
 ```

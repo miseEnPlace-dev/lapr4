@@ -124,6 +124,12 @@ public class Course implements AggregateRoot<CourseCode> {
   }
 
   public void toggleEnrolmentState() {
+    if (courseState.isFinished())
+      throw new IllegalStateException("Cannot toggle enrolment state of a finished course");
+
+    if (courseState.isClosed())
+      throw new IllegalStateException("Cannot toggle enrolment state of a closed course");
+
     if (enrolmentState.isClosed())
       enrolmentState.changeToOpen();
     else

@@ -15,6 +15,30 @@ public class CourseTest {
         new CourseEnrolmentState());
   }
 
+  private Course getDummyOpenCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.OPEN),
+        new CourseEnrolmentState());
+  }
+
+  private Course getDummyClosedCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
+        new CourseEnrolmentState());
+  }
+
+  private Course getDummyInProgressCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20),
+        new CourseState(CourseState.State.IN_PROGRESS), new CourseEnrolmentState());
+  }
+
+  private Course getDummyFinishedCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20),
+        new CourseState(CourseState.State.FINISHED), new CourseEnrolmentState());
+  }
+
   @Test
   public void ensureCourseHasCode() {
     assertThrows(IllegalArgumentException.class, () -> new Course(null, CourseTitle.valueOf("dummy"),
@@ -113,6 +137,21 @@ public class CourseTest {
   }
 
   @Test
+  public void ensureCourseIsNotSameAsWithDifferentClass() {
+    final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+
+    assertFalse(course.sameAs(new Object()));
+  }
+
+  @Test
+  public void ensureCourseIsSameAsWithSameInstance() {
+    final Course course = getDummyCourse();
+
+    assertTrue(course.sameAs(course));
+  }
+
+  @Test
   public void ensureCourseIsEqualToSameInstance() {
     final Course course = getDummyCourse();
 
@@ -121,7 +160,7 @@ public class CourseTest {
 
   @Test
   public void ensureCourseIsInCorrectStateAfterToggle() {
-    final Course course = getDummyCourse();
+    final Course course = getDummyOpenCourse();
 
     assertTrue(course.enrolmentState().isClosed());
     course.toggleEnrolmentState();
@@ -130,11 +169,48 @@ public class CourseTest {
 
   @Test
   public void ensureDoubleToggleDoesNotChangeState() {
-    final Course course = getDummyCourse();
+    final Course course = getDummyOpenCourse();
 
     assertTrue(course.enrolmentState().isClosed());
     course.toggleEnrolmentState();
     course.toggleEnrolmentState();
     assertTrue(course.enrolmentState().isClosed());
+  }
+
+  @Test
+  public void ensureCannotOpenEnrolmentsInClosedCourse() {
+    final Course course = getDummyClosedCourse();
+
+    assertTrue(course.state().isClosed());
+    assertTrue(course.enrolmentState().isClosed());
+    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
+  }
+
+  @Test
+  public void ensureCannotOpenEnrolmentsInFinishedCourse() {
+    final Course course = getDummyFinishedCourse();
+
+    assertTrue(course.state().isFinished());
+    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
+  }
+
+  @Test
+  public void ensureIsPossibleToToggleEnrolmentsInProgressCourse() {
+    final Course course = getDummyInProgressCourse();
+
+    assertTrue(course.state().isInProgress());
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isOpen());
+  }
+
+  @Test
+  public void ensureIsPossibleToToggleEnrolmentsInOpenCourse() {
+    final Course course = getDummyOpenCourse();
+
+    assertTrue(course.state().isOpen());
+    assertTrue(course.enrolmentState().isClosed());
+    course.toggleEnrolmentState();
+    assertTrue(course.enrolmentState().isOpen());
   }
 }
