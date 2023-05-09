@@ -1,4 +1,4 @@
-package eapli.ecourse.myclientuser.application;
+package eapli.ecourse.mystudent.application;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
  * @author Paulo Gandra de Sousa
  */
 @ApplicationService
-public class MyClientUserService {
+public class MyStudentService {
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
   private final StudentRepository clientUsersRepo = PersistenceContext.repositories().students();

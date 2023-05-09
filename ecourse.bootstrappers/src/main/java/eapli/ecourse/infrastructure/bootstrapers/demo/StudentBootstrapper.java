@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.infrastructure.bootstrapers.TestDataConstants;
-import eapli.ecourse.myclientuser.application.SignupController;
+import eapli.ecourse.mystudent.application.SignupController;
 import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupFactory;
 import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupRequestController;
 import eapli.ecourse.studentmanagement.application.AcceptRefuseSignupRequestControllerEventfulImpl;
@@ -30,8 +30,8 @@ import eapli.framework.domain.repositories.IntegrityViolationException;
  *
  * @author Paulo Sousa
  */
-public class ClientUserBootstrapper implements Action {
-  private static final Logger LOGGER = LogManager.getLogger(ClientUserBootstrapper.class);
+public class StudentBootstrapper implements Action {
+  private static final Logger LOGGER = LogManager.getLogger(StudentBootstrapper.class);
 
   private final SignupController signupController = new SignupController();
   private final AcceptRefuseSignupRequestController acceptController = AcceptRefuseSignupFactory.build();

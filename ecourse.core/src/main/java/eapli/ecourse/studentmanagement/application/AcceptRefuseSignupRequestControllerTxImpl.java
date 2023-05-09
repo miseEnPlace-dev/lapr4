@@ -40,16 +40,16 @@ public class AcceptRefuseSignupRequestControllerTxImpl
   private final UserManagementService userService = AuthzRegistry.userService();
 
   private final TransactionalContext txCtx = PersistenceContext.repositories().newTransactionalContext();
-  private final StudentRepository clientUserRepository = PersistenceContext.repositories().students(txCtx);
+  private final StudentRepository studentRepository = PersistenceContext.repositories().students(txCtx);
   private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories()
       .signupRequests(txCtx);
 
   /*
    * (non-Javadoc)
    *
-   * @see eapli.base.clientusermanagement.application.
+   * @see eapli.base.studentmanagement.application.
    * AcceptRefuseSignupRequestController#acceptSignupRequest(eapli.base.
-   * clientusermanagement.domain.SignupRequest)
+   * studentmanagement.domain.SignupRequest)
    */
   @Override
   public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest) {
@@ -63,7 +63,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl
     txCtx.beginTransaction();
 
     final SystemUser newUser = createSystemUserForStudent(theSignupRequest);
-    createClientUser(theSignupRequest, newUser);
+    createStudent(theSignupRequest, newUser);
     theSignupRequest = acceptTheSignupRequest(theSignupRequest);
 
     // explicitly commit the transaction
@@ -77,11 +77,11 @@ public class AcceptRefuseSignupRequestControllerTxImpl
     return this.signupRequestsRepository.save(theSignupRequest);
   }
 
-  private void createClientUser(final SignupRequest theSignupRequest, final SystemUser newUser) {
-    final var clientUserBuilder = new StudentBuilder();
-    clientUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
+  private void createStudent(final SignupRequest theSignupRequest, final SystemUser newUser) {
+    final StudentBuilder studentBuilder = new StudentBuilder();
+    studentBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
         .withSystemUser(newUser);
-    clientUserRepository.save(clientUserBuilder.build());
+    studentRepository.save(studentBuilder.build());
   }
 
   //
@@ -97,9 +97,9 @@ public class AcceptRefuseSignupRequestControllerTxImpl
   /*
    * (non-Javadoc)
    *
-   * @see eapli.ecourse.clientusermanagement.application.
+   * @see eapli.ecourse.studentmanagement.application.
    * AcceptRefuseSignupRequestController#refuseSignupRequest(eapli.ecourse.
-   * clientusermanagement.domain.SignupRequest)
+   * .studentmanagement.domain.SignupRequest)
    */
   @Override
   public SignupRequest refuseSignupRequest(SignupRequest theSignupRequest) {
@@ -124,7 +124,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl
   /*
    * (non-Javadoc)
    *
-   * @see eapli.base.clientusermanagement.application.
+   * @see eapli.base.studentmanagement.application.
    * AcceptRefuseSignupRequestController#listPendingSignupRequests()
    */
   @Override

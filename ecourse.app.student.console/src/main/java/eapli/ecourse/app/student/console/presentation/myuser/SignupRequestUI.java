@@ -3,7 +3,7 @@ package eapli.ecourse.app.student.console.presentation.myuser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.myclientuser.application.SignupController;
+import eapli.ecourse.mystudent.application.SignupController;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;

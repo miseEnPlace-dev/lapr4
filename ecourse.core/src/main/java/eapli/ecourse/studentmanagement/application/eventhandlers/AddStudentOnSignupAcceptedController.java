@@ -15,7 +15,7 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
  *
  * @author Paulo Gandra de Sousa
  */
-/* package */ class AddClientUserOnSignupAcceptedController {
+/* package */ class AddStudentOnSignupAcceptedController {
 
   private final UserRepository repo = PersistenceContext.repositories().users();
   private final StudentRepository clientUserRepository = PersistenceContext.repositories().students();

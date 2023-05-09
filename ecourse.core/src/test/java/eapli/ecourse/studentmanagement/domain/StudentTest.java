@@ -35,74 +35,74 @@ class StudentTest {
   }
 
   @Test
-  void ensureClientUserEqualsPassesForTheSameMecanographicNumber() throws Exception {
+  void ensureStudentEqualsPassesForTheSameMecanographicNumber() throws Exception {
 
-    final Student aClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
+    final Student aStudent = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
-    final Student anotherClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
+    final Student anotherStudent = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
-    final boolean expected = aClientUser.equals(anotherClientUser);
+    final boolean expected = aStudent.equals(anotherStudent);
 
     assertTrue(expected);
   }
 
   @Test
-  void ensureClientUserEqualsFailsForDifferenteMecanographicNumber() throws Exception {
+  void ensureStudentEqualsFailsForDifferenteMecanographicNumber() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
-    final Student aClientUser = new StudentBuilder()
+    final Student aStudent = new StudentBuilder()
         .withMecanographicNumber(aMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
-    final Student anotherClientUser = new StudentBuilder().withMecanographicNumber(anotherMecanographicNumber)
+    final Student anotherStudent = new StudentBuilder().withMecanographicNumber(anotherMecanographicNumber)
         .withSystemUser(getNewDummyUser()).build();
 
-    final boolean expected = aClientUser.equals(anotherClientUser);
+    final boolean expected = aStudent.equals(anotherStudent);
 
     assertFalse(expected);
   }
 
   @Test
-  void ensureClientUserEqualsAreTheSameForTheSameInstance() throws Exception {
-    final Student aClientUser = new Student();
+  void ensureStudentEqualsAreTheSameForTheSameInstance() throws Exception {
+    final Student aStudent = new Student();
 
-    assertEquals(aClientUser, aClientUser);
+    assertEquals(aStudent, aStudent);
   }
 
   @Test
-  void ensureClientUserEqualsFailsForDifferenteObjectTypes() throws Exception {
+  void ensureStudentEqualsFailsForDifferenteObjectTypes() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
-    final Student aClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
+    final Student aStudent = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
     @SuppressWarnings("unlikely-arg-type")
-    final boolean expected = aClientUser.equals(getNewDummyUser());
+    final boolean expected = aStudent.equals(getNewDummyUser());
 
     assertFalse(expected);
   }
 
   @Test
-  void ensureClientUserIsTheSameAsItsInstance() throws Exception {
-    final Student aClientUser = new StudentBuilder().withMecanographicNumber("DUMMY")
+  void ensureStudentIsTheSameAsItsInstance() throws Exception {
+    final Student aStudent = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
-    assertTrue(aClientUser.sameAs(aClientUser));
+    assertTrue(aStudent.sameAs(aStudent));
   }
 
   @Test
   void enslientserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
-    final Student aClientUser = new StudentBuilder()
+    final Student aStudent = new StudentBuilder()
         .withMecanographicNumber(aMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
-    final Student anotherClientUser = new StudentBuilder().withMecanographicNumber(anotherMecanographicNumber)
+    final Student anotherStudent = new StudentBuilder().withMecanographicNumber(anotherMecanographicNumber)
         .withSystemUser(getNewDummyUser()).build();
 
-    assertFalse(aClientUser.sameAs(anotherClientUser));
+    assertFalse(aStudent.sameAs(anotherStudent));
   }
 }

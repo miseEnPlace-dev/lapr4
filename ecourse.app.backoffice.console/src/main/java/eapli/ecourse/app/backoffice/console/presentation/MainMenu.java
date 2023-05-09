@@ -4,7 +4,7 @@ import eapli.ecourse.Application;
 import eapli.ecourse.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecourse.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecourse.app.backoffice.console.presentation.authz.ListUsersAction;
-import eapli.ecourse.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
+import eapli.ecourse.app.backoffice.console.presentation.student.AcceptRefuseSignupRequestAction;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Actions;

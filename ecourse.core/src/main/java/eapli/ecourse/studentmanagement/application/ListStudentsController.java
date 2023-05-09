@@ -11,12 +11,12 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
  *
  * @author losa
  */
-public class ListClientUsersController {
+public class ListStudentsController {
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
   private final StudentRepository repo = PersistenceContext.repositories().students();
 
-  public Iterable<Student> activeClientUsers() {
+  public Iterable<Student> activeStudents() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
     return this.repo.findAllActive();

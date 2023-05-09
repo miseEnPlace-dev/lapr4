@@ -1,4 +1,4 @@
-package eapli.ecourse.myclientuser.application;
+package eapli.ecourse.mystudent.application;
 
 import java.util.Calendar;
 

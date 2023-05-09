@@ -8,7 +8,8 @@ import eapli.framework.strings.util.Strings;
 import eapli.framework.validations.Invariants;
 
 /**
- * eCourse Bootstrapping Demo data. This class bootstraps data for demo purposes. It's main purpose
+ * eCourse Bootstrapping Demo data. This class bootstraps data for demo
+ * purposes. It's main purpose
  * is to avoid entering data in the UI while testing and speedup the process.
  *
  * @author Paulo Gandra de Sousa
@@ -25,7 +26,7 @@ public class ECourseDemoBootstrapper implements Action {
   @Override
   public boolean execute() {
     // declare bootstrap actions
-    final Action[] actions = {new BackofficeUsersBootstrapper(), new ClientUserBootstrapper()};
+    final Action[] actions = { new BackofficeUsersBootstrapper(), new StudentBootstrapper() };
 
     authenticateForBootstrapping();
 
