@@ -1,6 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.classmanagement.repositories.ClassRepository;
+import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
@@ -58,12 +59,21 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
   @Override
   public ClassRepository classes() {
-    return new InMemoryClassRepository();
+    return classes(null);
   }
 
   @Override
   public ClassRepository classes(final TransactionalContext autoTx) {
-    return classes(null);
+    return new InMemoryClassRepository();
   }
 
+  @Override
+  public CourseRepository courses() {
+    return courses(null);
+  }
+
+  @Override
+  public CourseRepository courses(final TransactionalContext autoTx) {
+    return new InMemoryCourseRepository();
+  }
 }
