@@ -1,8 +1,5 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.compile.nullAnalysis.mode": "disabled",
-  "cSpell.words": [
-    "enroll",
-    "mecanographic"
-  ]
+  "cSpell.words": ["enroll", "mecanographic"]
 }
