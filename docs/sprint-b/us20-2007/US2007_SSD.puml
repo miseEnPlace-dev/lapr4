@@ -1,0 +1,16 @@
+@startuml US2007_SSD
+autonumber
+
+actor "Teacher" as TEACHER
+participant ":System" as SYS
+
+activate TEACHER
+
+TEACHER -> SYS : Asks to create a question
+SYS -> TEACHER : Lists all available courses and asks to select one
+TEACHER -> SYS : Selects a course
+SYS -> TEACHER : Asks the file path where the question is defined
+TEACHER -> SYS : Enters the file path
+SYS -> TEACHER : Informs operation success
+
+@enduml

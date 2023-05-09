@@ -168,8 +168,6 @@ Exam <|-- FormativeExam
 Section *-- "1..*" SectionQuestion
 SectionQuestion --> "1" Question : corresponds to
 
-Section --> "1..*" Question : has
-
 ExamAnswer --> "1" Exam : is for
 ExamAnswer *-- "1..*" AnswerToQuestion
 AnswerToQuestion --> "1" Question : is for

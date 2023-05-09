@@ -12,3 +12,5 @@ teacher -> system : Selects a course
 system -> teacher : Asks the file path where the exam is defined
 teacher -> system : Enters the file path
 system -> teacher : Informs operation success
+
+@enduml

@@ -33,15 +33,15 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.2. Client Clarifications
 
-> [**Question**: A course can open if the limits are exceeded or not? Who can setup the limits? Are the limits mandatory?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
+> [**Question:** A course can open if the limits are exceeded or not? Who can setup the limits? Are the limits mandatory?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
 >
 > **Answer**: "Managers should be able to specify the limits. In my opinion the system should notify the manager if a course is out of the enrolment limits (before this course is changed to "in progress"). But, in the end, it is up to the manager to follow/enforce or not, the limits."
 
-> [**Question**: Can one student be enrolled in different courses?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21922)
+> [**Question:** Can one student be enrolled in different courses?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21922)
 >
 > **Answer**: "Yes"
 
-> [**Question**: In US1009, What are the criteria for a student to be enrolled in a course?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22498)
+> [**Question:** In US1009, What are the criteria for a student to be enrolled in a course?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22498)
 >
 > **Answer**: "This is not a system requirement. You should only register the decision of the manager."]
 
@@ -83,7 +83,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- xxx
+- **Factory:** The factory pattern is used in the instantiation of the CourseRepository. This is done to enable the use of a mock repository in the tests and to allow swapping of the repository using a property file.
+- **Dependency Injection:** This is used in the CourseService to inject the CourseRepository. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **State:** The state pattern is used to represent the state of the course. This is done to keep the course enrolment state logic encapsulated in the state class and to reduce coupling.
 
 ### 4.4. Tests
 

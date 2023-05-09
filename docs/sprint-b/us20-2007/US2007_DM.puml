@@ -1,4 +1,4 @@
-@startuml DM-EXAM
+@startuml US2007_DM
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -26,16 +26,7 @@ package "<<agregate>> Question" {
   class Feedback
 }
 
-package "<<agregate>> ExamAnswer" {
-  entity ExamAnswer
-  entity AnswerToQuestion
-}
-
 abstract Question <<entity>> <<root>> {}
-entity ExamAnswer <<entity>> <<root>> {}
-entity AnswerToQuestion <<entity>> {}
-
-ExamAnswer *-- "1..*" AnswerToQuestion
 
 package "<<agregate>> Exam" {
   entity Exam
@@ -54,7 +45,6 @@ entity Section <<entity>> {}
 entity SectionQuestion <<entity>> {}
 
 Exam *-- "1..*" Section
-SectionQuestion --> "1..*" Question
 
 class QuestionBody <<(V,#FF8B40) value object>> {}
 class CorrectAnswer <<(V,#FF8B40) value object>> {}
@@ -86,8 +76,8 @@ entity Numerical <<entity>> {}
 entity MissingWords <<entity>> {}
 entity TrueFalse <<entity>> {}
 
-AnswerToQuestion --> "1" Exam : is for
 Question --> "0..*" Feedback
+SectionQuestion --> "1" Question : corresponds to
 Section *-- "1..*" SectionQuestion
 
 @enduml
