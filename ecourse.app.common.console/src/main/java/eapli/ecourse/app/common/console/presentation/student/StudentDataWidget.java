@@ -1,12 +1,11 @@
-package eapli.ecourse.app.student.console.presentation.myuser;
+package eapli.ecourse.app.common.console.presentation.student;
 
 import eapli.framework.io.util.Console;
 
 /**
  * widget for reading user data Jorge Santos ajs@isp.ipp.pt
  */
-class UserDataWidget {
-
+public class StudentDataWidget {
   private String username;
   private String password;
   private String firstName;

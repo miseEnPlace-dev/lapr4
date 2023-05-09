@@ -3,13 +3,13 @@ package eapli.ecourse.app.backoffice.console.presentation.authz;
 import java.util.HashSet;
 import java.util.Set;
 
+import eapli.ecourse.app.common.console.presentation.student.StudentDataWidget;
 import eapli.ecourse.usermanagement.application.AddUserController;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.authz.domain.model.Role;
-import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
@@ -27,13 +27,8 @@ public class AddUserUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
-    // UtenteApp
-    final String username = Console.readLine("Username");
-    final String password = Console.readLine("Password");
-    final String firstName = Console.readLine("First Name");
-    final String lastName = Console.readLine("Last Name");
-    final String email = Console.readLine("E-Mail");
+    final StudentDataWidget studentData = new StudentDataWidget();
+    studentData.show();
 
     final Set<Role> roleTypes = new HashSet<>();
     boolean show;
@@ -42,7 +37,9 @@ public class AddUserUI extends AbstractUI {
     } while (!show);
 
     try {
-      this.theController.addUser(username, password, firstName, lastName, email, roleTypes);
+      this.theController.addUser(studentData.username(), studentData.password(), studentData.firstName(),
+          studentData.lastName(),
+          studentData.email(), roleTypes);
     } catch (@SuppressWarnings("unused") final IntegrityViolationException e) {
       System.out.println("That username is already in use.");
     }

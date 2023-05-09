@@ -18,7 +18,7 @@ public class CoursesMenu {
     menu.addItem(LIST_COURSES_OPTION, "List All Courses", new ShowMessageAction("Not implemented yet"));
     menu.addItem(TOGGLE_COURSE_STATE_OPTION, "Toggle Course State", new ShowMessageAction("Not implemented yet"));
     menu.addItem(TOGGLE_COURSE_ENROLMENT_STATE_OPTION, "Toggle Course Enrolment State",
-        new ShowMessageAction("Not implemented yet"));
+        new ToggleCourseEnrolmentStateUI()::show);
 
     menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 

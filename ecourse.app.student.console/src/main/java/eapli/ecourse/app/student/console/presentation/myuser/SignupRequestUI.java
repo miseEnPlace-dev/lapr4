@@ -3,6 +3,7 @@ package eapli.ecourse.app.student.console.presentation.myuser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import eapli.ecourse.app.common.console.presentation.student.StudentDataWidget;
 import eapli.ecourse.mystudent.application.SignupController;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
@@ -20,12 +21,12 @@ public class SignupRequestUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final var userData = new UserDataWidget();
-    userData.show();
+    final StudentDataWidget studentData = new StudentDataWidget();
+    studentData.show();
 
     try {
-      this.theController.signup(userData.username(), userData.password(), userData.firstName(),
-          userData.lastName(), userData.email(), userData.mecanographicNumber());
+      this.theController.signup(studentData.username(), studentData.password(), studentData.firstName(),
+          studentData.lastName(), studentData.email(), studentData.mecanographicNumber());
     } catch (final IllegalArgumentException e) {
       System.out.println("Error creating the account: " + e.getMessage() + ". Please try again.\n");
       return true;
