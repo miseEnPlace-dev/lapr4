@@ -20,21 +20,21 @@ public class InMemoryCourseRepository extends
   }
 
   @Override
-  public Iterable<Course> coursesOpenedForEnrollment() {
+  public Iterable<Course> findAllOpenForEnrolment() {
     return match(e -> e.enrolmentState().isOpen());
   }
 
-  public Iterable<Course> closedCourses() {
+  public Iterable<Course> findAllClosed() {
     return match(e -> e.enrolmentState().isClosed());
   }
 
   @Override
-  public Iterable<Course> openCourses() {
+  public Iterable<Course> findAllOpen() {
     return match(e -> e.state().isOpen());
   }
 
   @Override
-  public Iterable<Course> notFinishedCourses() {
+  public Iterable<Course> findAllNotClosed() {
     return match(e -> !e.state().isFinished());
   }
 }
