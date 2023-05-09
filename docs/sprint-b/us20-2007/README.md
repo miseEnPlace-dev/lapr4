@@ -67,11 +67,11 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 3.2. System Sequence Diagram
 
-![US2007_SSD](out/U2007_SSD.svg)
+![US2007_SSD](out/US2007_SSD.svg)
 
 ### 3.3. Partial Domain Model
 
-![US1003_DM](out/US1003_DM.svg)
+![US2007_DM](out/US2007_DM.svg)
 
 ## 4. Design
 
