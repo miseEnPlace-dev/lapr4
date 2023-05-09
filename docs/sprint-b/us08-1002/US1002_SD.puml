@@ -7,14 +7,13 @@ participant "CreateCourseController" as CTRL <<application>>
 participant "Course" as C <<domain>>
 
 database CourseRepository as REPC <<repository>>
-database TeacherRepository as REPT <<repository>>
 
 activate M
 
 M -> UI : asks to create a new Course
 activate UI
 
-UI --> M : requests data (title, code, edition, description, enrollment_limits, teacher)
+UI --> M : requests data (code, title, description, enrollment_limits, (optional) course_state, (optional) course_enrolment_state)
 deactivate UI
 
 M -> UI : types request data
@@ -23,13 +22,13 @@ activate UI
 UI -> CTRL : newCourse()
 activate CTRL
 
-CTRL -> REPC : newCourse()
-activate REPC
+CTRL -> CTRL : checkDuplicates(course)
+activate CTRL
 
-REPC -> REPC : checkDuplicates(course)
+CTRL -> REPC : findByCode(course)
 activate REPC
 deactivate REPC
-deactivate REPC
+deactivate CTRL
 deactivate CTRL
 
 UI --> M : shows all data and asks for confirmation
@@ -40,10 +39,6 @@ activate UI
 
 UI->CTRL : saveCourse()
 activate CTRL
-
-CTRL -> REPT : getTeacherSelected()
-activate REPT
-deactivate REPT
 
 CTRL -> C : saveCourse()
 activate C
