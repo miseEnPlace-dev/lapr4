@@ -46,7 +46,7 @@ deactivate UI
 
 M -> UI : selects the desired course
 activate UI
-UI -> UI : selectedCourse = get(index)
+UI -> UI : selectedCourse = select(courses, index)
 UI --> M : asks to confirm action
 deactivate UI
 
