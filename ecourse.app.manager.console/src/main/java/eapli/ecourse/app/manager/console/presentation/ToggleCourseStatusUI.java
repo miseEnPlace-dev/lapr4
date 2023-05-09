@@ -40,7 +40,7 @@ public class ToggleCourseStatusUI implements Action {
     }
 
     int choice = 0;
-    while(choice < 1 || choice > itr) {
+    while (choice < 1 || choice > itr) {
       choice = Console.readInteger("\nSelect a Course: ");
     }
 

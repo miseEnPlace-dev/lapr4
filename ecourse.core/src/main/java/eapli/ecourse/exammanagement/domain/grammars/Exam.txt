@@ -1,0 +1,15 @@
+@start-exam exame_de_lprog;
+
+@title "Exame Nº1: \"LPROG\"";
+@description "";
+@feedback none;
+@grade on-submit; // Este comentário será ignorado
+
+// Este também!
+@start-section section1;
+@name "Expressões regulares.";
+@description "// Já esta linha não será considerada um comentário, mas sim uma string";
+
+
+
+    @end-section;@end-exam; // As instruções não precisam de estar indentadas.

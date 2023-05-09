@@ -32,23 +32,27 @@ class JpaCourseRepository
     return matchOne("e.courseCode=:code", params);
   }
 
-  @Override
   public Iterable<Course> coursesOpenedForEnrollment() {
     return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState",
         CourseEnrolmentState.EnrolmentState.OPEN);
   }
 
+  public Iterable<Course> findAllOpenForEnrolment() {
+    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState",
+        CourseEnrolmentState.EnrolmentState.OPEN);
+  }
+
   @Override
-  public Iterable<Course> openCourses() {
+  public Iterable<Course> findAllOpen() {
     return match("e.state = :state", "state", CourseState.State.OPEN);
   }
 
-  public Iterable<Course> closedCourses() {
+  public Iterable<Course> findAllClosed() {
     return match("e.state = :state", "state", CourseState.State.CLOSED);
   }
 
   @Override
-  public Iterable<Course> notFinishedCourses() {
+  public Iterable<Course> findAllNotClosed() {
     return match("e.state <> :state", "state", CourseState.State.FINISHED);
   }
 }
