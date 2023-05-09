@@ -1,10 +1,8 @@
 package eapli.ecourse.app.backoffice.console.presentation;
 
 import eapli.ecourse.Application;
-import eapli.ecourse.app.backoffice.console.presentation.authz.AddUserUI;
-import eapli.ecourse.app.backoffice.console.presentation.authz.DeactivateUserAction;
-import eapli.ecourse.app.backoffice.console.presentation.authz.ListUsersAction;
-import eapli.ecourse.app.backoffice.console.presentation.student.AcceptRefuseSignupRequestAction;
+import eapli.ecourse.app.backoffice.console.presentation.courses.CoursesMenu;
+import eapli.ecourse.app.backoffice.console.presentation.users.UsersMenu;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Actions;
@@ -31,20 +29,15 @@ public class MainMenu extends AbstractUI {
 
   private static final int EXIT_OPTION = 0;
 
-  // USERS
-  private static final int ADD_USER_OPTION = 1;
-  private static final int LIST_USERS_OPTION = 2;
-  private static final int DEACTIVATE_USER_OPTION = 3;
-  private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
-
   // SETTINGS
   // private static final int <something> = 1;
 
   // MAIN MENU
   private static final int MY_USER_OPTION = 1;
   private static final int USERS_OPTION = 2;
-  private static final int SETTINGS_OPTION = 3;
-  private static final int SOMETHING_OPTION = 4;
+  private static final int COURSES_OPTION = 3;
+  private static final int SETTINGS_OPTION = 4;
+  private static final int SOMETHING_OPTION = 5;
 
   private static final String SEPARATOR_LABEL = "--------------";
 
@@ -63,11 +56,12 @@ public class MainMenu extends AbstractUI {
   public boolean doShow() {
     final Menu menu = buildMainMenu();
     final MenuRenderer renderer;
-    if (Application.settings().isMenuLayoutHorizontal()) {
+
+    if (Application.settings().isMenuLayoutHorizontal())
       renderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-    } else {
+    else
       renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-    }
+
     return renderer.render();
   }
 
@@ -89,8 +83,10 @@ public class MainMenu extends AbstractUI {
     }
 
     if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
-      final Menu usersMenu = buildUsersMenu();
+      final Menu usersMenu = new UsersMenu().buildUsersMenu();
       mainMenu.addSubMenu(USERS_OPTION, usersMenu);
+      final Menu coursesMenu = new CoursesMenu().buildCoursesMenu();
+      mainMenu.addSubMenu(COURSES_OPTION, coursesMenu);
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
@@ -108,19 +104,6 @@ public class MainMenu extends AbstractUI {
     final Menu menu = new Menu("Settings >");
 
     menu.addItem(SOMETHING_OPTION, "Test", new ShowMessageAction("Not implemented yet"));
-    menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
-    return menu;
-  }
-
-  private Menu buildUsersMenu() {
-    final Menu menu = new Menu("Users >");
-
-    menu.addItem(ADD_USER_OPTION, "Add User", new AddUserUI()::show);
-    menu.addItem(LIST_USERS_OPTION, "List all Users", new ListUsersAction());
-    menu.addItem(DEACTIVATE_USER_OPTION, "Deactivate User", new DeactivateUserAction());
-    menu.addItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
-        new AcceptRefuseSignupRequestAction());
     menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
     return menu;
