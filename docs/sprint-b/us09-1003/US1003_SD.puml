@@ -4,7 +4,9 @@ autonumber
 actor "Manager" as M
 participant "ManageEnrolmentsUI" as UI <<presentation>>
 participant "ManageEnrolmentController" as CTRL <<application>>
+participant "CourseService" as SRV <<service>>
 participant "Course" as C <<domain>>
+participant "CourseDTO" as DTO <<dto>>
 
 database CourseRepository as REP <<repository>>
 
@@ -14,12 +16,28 @@ M -> UI : asks to list all the courses and their states
 activate UI
 
 UI -> CTRL : new
+activate CTRL
+CTRL -> SRV : new(courseRepository)
+deactivate CTRL
+
 UI -> CTRL : listNotClosedCourses()
 activate CTRL
-CTRL -> REP : notFinishedCourses()
+CTRL -> SRV : listNotClosedCourses()
+activate SRV
+SRV -> REP : findAllNotClosed()
 activate REP
-REP --> CTRL : courses
+REP --> SRV : courses
 deactivate REP
+
+loop for each course
+  SRV -> C : toDTO(course)
+  activate C
+  C -> DTO : new
+  deactivate C
+end loop
+
+SRV --> CTRL : courses
+deactivate SRV
 CTRL --> UI : courses
 deactivate CTRL
 
@@ -28,20 +46,22 @@ deactivate UI
 
 M -> UI : selects the desired course
 activate UI
-UI -> UI : selectedCourse = get(index)
+UI -> UI : selectedCourse = select(courses, index)
 UI --> M : asks to confirm action
 deactivate UI
 
 M -> UI : confirms the action
 activate UI
-UI->CTRL : toggleEnrolmentState(selectedCourse)
+UI -> CTRL : toggleEnrolmentState(selectedCourse)
 activate CTRL
-CTRL -> C : toggleEnrolmentStatus()
+CTRL -> C : course=toggleEnrolmentState()
 activate C
 deactivate C
-CTRL -> REP : save(selectedCourse)
+CTRL -> REP : save(course)
 activate REP
 deactivate REP
+SRV --> CTRL : newCourse
+deactivate SRV
 CTRL --> UI : newCourse
 deactivate CTRL
 UI--> M : reports the success of the toggle operation

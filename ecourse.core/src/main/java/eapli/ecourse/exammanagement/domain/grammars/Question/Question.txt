@@ -1,0 +1,102 @@
+@start-question
+  @type numerical; // Este comentário será ignorado
+  @question-body Qual é a área de um círculo com raio 1.2?;
+  // Este também
+  @correct-answer 4.52;
+  @accepted-error 0.01;
+@end-question;
+
+@start-question
+  @type multiple-choice;
+  @question-body Qual é a fórmula para calcular o volume de uma esfera?;
+  @correct-answer A;
+
+  @start-options;
+    @option A = 4πr³;
+    @option B = 4/3πr³;
+    @option C = 4/3πr²;
+    @option D = 4πr²;
+  @end-options;
+@end-question;
+
+@start-question;
+  @type short-answer;
+  @question-body Como descreve a forma de um círculo?;
+  @correct-answers
+    @correct-answer Assim; 0.5;
+    @correct-answer Assado; 0.2;
+    @correct-answer de Outra maneira; 0.1;
+  @end-correct-answers;
+@end-question;
+
+@start-question
+  @type true-false;
+  @question-body O quadrado da hipotenusa é igual à soma dos quadrados dos catetos?;
+  @correct-answer true;
+@end-question;
+
+@start-question
+  @type multiple-choice;
+  @question-body Quais das seguintes opções são números primos?;
+  @correct-answers
+    @correct-answer 2; 0.2;
+    @correct-answer 3; 0.3;
+    @correct-answer 5; 0.5;
+    @correct-answer 7; 0.7;
+  @end-correct-answers;
+  @start-options;
+    @option 2;
+    @option 3;
+    @option 4;
+    @option 5;
+    @option 6;
+    @option 7;
+    @option 8;
+    @option 9;
+  @end-options;
+@end-question;
+
+@start-question
+  @type multiple-choice;
+  @question-body Quais das seguintes opções são números primos?;
+  @correct-answer 2;
+  @start-options;
+    @option 2;
+    @option 4;
+    @option 6;
+    @option 8;
+    @option 9;
+  @end-options;
+@end-question;
+
+@start-question
+  @type matching;
+  @question-body Associe cada figura à sua área;
+  @correct-answers
+    @correct-answer A; Op2;
+    @correct-answer B; Op1;
+    @correct-answer C; Op4;
+    @correct-answer D; Op3;
+  @end-correct-answers;
+
+  @start-options;
+    @option A = 1;
+    @option B = 2;
+    @option C = 3;
+    @option D = 4;
+  @end-options;
+
+  @start-matching;
+    @match Op1 = 1;
+    @match Op2 = 2;
+    @match Op3 = 3;
+    @match Op4 = 4;
+    @match Op5 = 5;
+  @end-matching;
+@end-question;
+
+@start-question
+  @type missing-words
+  @question-body A melhor __ de todas é a __;
+  @correct-answer coisa; pizza;
+@end-question;

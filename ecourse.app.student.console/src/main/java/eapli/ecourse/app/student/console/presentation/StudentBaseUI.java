@@ -1,6 +1,6 @@
 package eapli.ecourse.app.student.console.presentation;
 
-import eapli.ecourse.myclientuser.application.MyClientUserService;
+import eapli.ecourse.mystudent.application.MyStudentService;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
@@ -10,11 +10,11 @@ import eapli.framework.presentation.console.AbstractUI;
  * @author mcn
  */
 @SuppressWarnings("squid:S106")
-public abstract class ClientUserBaseUI extends AbstractUI {
+public abstract class StudentBaseUI extends AbstractUI {
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
-  protected MyClientUserService svc = new MyClientUserService();
+  protected MyStudentService svc = new MyStudentService();
 
   @Override
   public String headline() {

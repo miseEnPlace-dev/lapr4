@@ -13,7 +13,7 @@ public class CourseDescription implements ValueObject, Comparable<CourseDescript
 
   private String description;
 
-  protected CourseDescription(final String courseDescription) {
+  public CourseDescription(final String courseDescription) {
     if (StringPredicates.isNullOrEmpty(courseDescription))
       throw new IllegalArgumentException("Course Description should neither be null nor empty");
 

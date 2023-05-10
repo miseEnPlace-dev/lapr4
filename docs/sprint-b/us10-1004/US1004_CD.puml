@@ -1,0 +1,77 @@
+@startuml US1004_CD
+
+class ToggleCourseStatusUI {
+
+}
+
+class ToggleCourseStatusController {
++ listOpenCourses()
++ listClosedCourses()
++ toggleCourseStatus(course)
+}
+
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface CourseRepository {
+  + save(course)
+  + openCourses()
+  + closedCourses()
+}
+
+class InMemoryCourseRepository {
+  + save(course)
+  + openCourses()
+  + closedCourses()
+}
+
+class JpaCourseRepository {
+  + save(course)
+  + openCourses()
+  + closedCourses()
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+
+enum CourseState {
+  CLOSED
+  OPEN
+  IN_PROGRESS
+  FINISHED
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+
+CourseState --> Course
+CourseEnrolmentState --> Course
+
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+ToggleCourseStatusController ..> PersistenceContext
+ToggleCourseStatusController ..> Course
+ToggleCourseStatusUI ..> ToggleCourseStatusController
+
+
+@enduml

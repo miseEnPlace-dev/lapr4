@@ -22,26 +22,26 @@ public interface CourseRepository extends DomainRepository<CourseCode, Course> {
    *
    * @return
    */
-  Iterable<Course> coursesOpenedForEnrollment();
+  Iterable<Course> findAllOpenForEnrolment();
 
   /**
    * Returns the courses that are open
    *
    * @return
    */
-  Iterable<Course> openCourses();
+  Iterable<Course> findAllOpen();
 
   /**
    * Returns the courses that are not finished
    *
    * @return
    */
-  Iterable<Course> notFinishedCourses();
+  Iterable<Course> findAllNotClosed();
 
   /**
    * Returns the courses that are closed
    *
    * @return
    */
-  Iterable<Course> closedCourses();
+  Iterable<Course> findAllClosed();
 }

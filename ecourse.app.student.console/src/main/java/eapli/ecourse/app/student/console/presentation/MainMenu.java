@@ -12,7 +12,7 @@ import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 /**
  * @author Paulo Gandra Sousa
  */
-class MainMenu extends ClientUserBaseUI {
+class MainMenu extends StudentBaseUI {
 
   private static final String SEPARATOR_LABEL = "--------------";
 
@@ -33,7 +33,8 @@ class MainMenu extends ClientUserBaseUI {
   // SETTINGS
   private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
 
-  // private final AuthorizationService authz = AuthzRegistry.authorizationService();
+  // private final AuthorizationService authz =
+  // AuthzRegistry.authorizationService();
 
   @Override
   public boolean show() {

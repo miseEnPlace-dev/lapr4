@@ -1,9 +1,13 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    {
+      "type": "java",
+      "name": "ECourseManagerApp",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.manager.console.ECourseManagerApp",
+      "projectName": "app.manager.console"
+    },
     {
       "type": "java",
       "name": "ECourseBootstrap",
@@ -45,6 +49,17 @@
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}"
+    },
+    {
+      "name": "ANTLR4 grammar",
+      "type": "antlr-debug",
+      "request": "launch",
+      "input": "${fileDirname}/${fileBasenameNoExtension}.txt",
+      "grammar": "${file}",
+      "actionFile": "",
+      "startRule": "start",
+      "printParseTree": true,
+      "visualParseTree": true
     }
   ]
 }

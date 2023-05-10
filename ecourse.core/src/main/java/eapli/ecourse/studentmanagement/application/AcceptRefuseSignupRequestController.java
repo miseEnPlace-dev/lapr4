@@ -34,7 +34,7 @@ import eapli.ecourse.studentmanagement.domain.SignupRequest;
  * process it is not easy to compensate (rollback) and there is no temporal
  * coupling so the system
  * needs to handle "waiting" for something to happen before proceeding (see
- * {@link AddClientUserOnSignupAcceptedController})
+ * {@link AddStudentOnSignupAcceptedController})
  *
  * @author Paulo Gandra de Sousa
  */

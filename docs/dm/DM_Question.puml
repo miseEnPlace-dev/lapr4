@@ -54,7 +54,7 @@ entity Section <<entity>> {}
 entity SectionQuestion <<entity>> {}
 
 Exam *-- "1..*" Section
-Section --> "1..*" Question
+SectionQuestion --> "1..*" Question
 
 class QuestionBody <<(V,#FF8B40) value object>> {}
 class CorrectAnswer <<(V,#FF8B40) value object>> {}

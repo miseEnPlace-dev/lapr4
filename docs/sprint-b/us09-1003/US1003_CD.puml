@@ -5,19 +5,30 @@ class RepositoryFactory {
 }
 
 interface CourseRepository {
-  + save(course)
+  {abstract} findAllNotClosed()
+  {abstract} save(course)
 }
 
 class InMemoryCourseRepository {
+  + findAllNotClosed()
   + save(course)
 }
 
 class JpaCourseRepository {
+  + findAllNotClosed()
   + save(course)
 }
 
 class PersistenceContext {
   - repositories()
+}
+
+class CourseService {
+  + CourseService(courseRepository)
+
+  + listNotClosedCourses()
+  + toggleEnrolmentState(course)
+  + save(course)
 }
 
 class ManageCourseEnrolmentStateUI {}
@@ -37,6 +48,7 @@ class Course {
   - createdAt
 
   + toggleEnrolmentState()
+  + toDto()
 }
 
 enum CourseState {
@@ -51,11 +63,31 @@ enum CourseEnrolmentState {
   CLOSED
 }
 
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
 ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
 ManageCourseEnrolmentStateController ..> PersistenceContext
-ManageCourseEnrolmentStateController ..> Course
+ManageCourseEnrolmentStateController --> CourseService
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
+
+CourseService ..> Course
+CourseService ..> CourseRepository
+
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
 
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository

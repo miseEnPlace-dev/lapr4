@@ -19,7 +19,7 @@ activate UI
 UI -> CTRL**: new
 
 alt if close course
-  UI -> CTRL: openCourses()
+  UI -> CTRL: listOpenCourses()
   activate CTRL
   CTRL -> REPO: openCourses()
   activate REPO

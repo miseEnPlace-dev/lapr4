@@ -8,7 +8,7 @@ import eapli.framework.visitor.Visitor;
  * @author Paulo Gandra de Sousa
  *
  */
-@SuppressWarnings({"squid:S106"})
+@SuppressWarnings({ "squid:S106" })
 public class SystemUserPrinter implements Visitor<SystemUser> {
 
   @Override

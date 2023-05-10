@@ -1,4 +1,4 @@
-package eapli.ecourse.app.backoffice.console.presentation.clientuser;
+package eapli.ecourse.app.backoffice.console.presentation.student;
 
 import eapli.framework.actions.Action;
 

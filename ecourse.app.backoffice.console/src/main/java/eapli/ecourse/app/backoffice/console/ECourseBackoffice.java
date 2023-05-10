@@ -39,7 +39,6 @@ public final class ECourseBackoffice extends ECourseBaseApplication {
     // login and go to main menu
     final boolean authenticated = new LoginUI(new AuthenticationCredentialHandler()).show();
     if (authenticated) {
-      // go to main menu
       final MainMenu menu = new MainMenu();
       menu.mainLoop();
     }

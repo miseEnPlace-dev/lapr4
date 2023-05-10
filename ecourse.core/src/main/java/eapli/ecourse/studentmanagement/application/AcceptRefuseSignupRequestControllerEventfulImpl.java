@@ -83,8 +83,8 @@ import lombok.RequiredArgsConstructor;
  *           participant
  *           NewUserRegisteredFromSignupEvent participant
  *           NewUserRegisteredFromSignupWatchDog
- *           participant AddClientUserOnSignupAcceptedController participant
- *           ClientUserRepository
+ *           participant AddStudentOnSignupAcceptedController participant
+ *           StudentRepository
  *           group Accept the signup UI ->
  *           AcceptRefuseSignupRequestController:acceptSignupRequest
  *           activate AcceptRefuseSignupRequestController
@@ -111,11 +111,11 @@ import lombok.RequiredArgsConstructor;
  *           NewUserRegisteredFromSignupWatchDog:onEvent activate
  *           NewUserRegisteredFromSignupWatchDog
  *           NewUserRegisteredFromSignupWatchDog ->
- *           AddClientUserOnSignupAcceptedController:addClientUser activate
- *           AddClientUserOnSignupAcceptedController
- *           AddClientUserOnSignupAcceptedController ->
- *           ClientUserRepository:save deactivate
- *           AddClientUserOnSignupAcceptedController deactivate
+ *           AddStudentOnSignupAcceptedController:addStudent activate
+ *           AddStudentOnSignupAcceptedController
+ *           AddStudentOnSignupAcceptedController ->
+ *           StudentRepository:save deactivate
+ *           AddStudentOnSignupAcceptedController deactivate
  *           NewUserRegisteredFromSignupWatchDog end
  *
  * @enduml --> <!--
@@ -160,17 +160,17 @@ import lombok.RequiredArgsConstructor;
  * @startuml seq-create-client-user.svg title Create Client User participant
  *           dispatcher participant
  *           NewUserRegisteredFromSignupWatchDog participant
- *           AddClientUserOnSignupAcceptedController
- *           participant ClientUserRepository group Create Client User
+ *           AddStudentOnSignupAcceptedController
+ *           participant StudentRepository group Create Client User
  *           dispatcher ->
  *           NewUserRegisteredFromSignupWatchDog:onEvent activate
  *           NewUserRegisteredFromSignupWatchDog
  *           NewUserRegisteredFromSignupWatchDog ->
- *           AddClientUserOnSignupAcceptedController:addClientUser activate
- *           AddClientUserOnSignupAcceptedController
- *           AddClientUserOnSignupAcceptedController ->
- *           ClientUserRepository:save deactivate
- *           AddClientUserOnSignupAcceptedController deactivate
+ *           AddStudentOnSignupAcceptedController:addStudent activate
+ *           AddStudentOnSignupAcceptedController
+ *           AddStudentOnSignupAcceptedController ->
+ *           StudentRepository:save deactivate
+ *           AddStudentOnSignupAcceptedController deactivate
  *           NewUserRegisteredFromSignupWatchDog end
  *
  * @enduml -->

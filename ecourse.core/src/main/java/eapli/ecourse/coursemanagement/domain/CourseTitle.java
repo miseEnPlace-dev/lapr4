@@ -13,7 +13,7 @@ public class CourseTitle implements ValueObject, Comparable<CourseTitle> {
 
   private String title;
 
-  protected CourseTitle(final String courseTitle) {
+  public CourseTitle(final String courseTitle) {
     if (StringPredicates.isNullOrEmpty(courseTitle))
       throw new IllegalArgumentException("Course Title should neither be null nor empty");
 
