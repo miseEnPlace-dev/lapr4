@@ -77,8 +77,6 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.1. Grammar
 
-#### 4.1.1. Tokens
-
 We defined some custom tokens to keep the input files simple and readable.
 
 All the files defining questions to be used in exams must follow the following structure:
@@ -100,7 +98,7 @@ To make the understanding easier we will use the following notation:
 - | - or
 - {} - repeatable.
 
-##### 4.1.1.1. Numerical
+#### 4.1.1. Numerical
 
 ```txt
 @start-question
@@ -111,7 +109,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-##### 4.1.1.2. Multiple Choice
+#### 4.1.2. Multiple Choice
 
 ```txt
   @start-question
@@ -125,7 +123,7 @@ To make the understanding easier we will use the following notation:
   @end-question;
 ```
 
-##### 4.1.1.3. Short Answer
+#### 4.1.3. Short Answer
 
 ```txt
 @start-question;
@@ -138,7 +136,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-##### 4.1.1.4. True/False
+#### 4.1.4. True/False
 
 ```txt
 @start-question
@@ -148,7 +146,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-##### 4.1.1.5. Multiple Choice (Multiple Answers)
+#### 4.1.5. Multiple Choice (Multiple Answers)
 
 ```txt
 @start-question
@@ -164,7 +162,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-##### 4.1.1.6. Multiple Choice (Single Answer)
+#### 4.1.6. Multiple Choice (Single Answer)
 
 ```txt
 @start-question
@@ -178,7 +176,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-##### 4.1.1.7. Matching
+#### 4.1.7. Matching
 
 **Note:** We considered that there can be missing matches both in the options and in the matches.
 
@@ -201,7 +199,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-###### 4.1.1.8 Select Missing Words
+##### 4.1.8 Select Missing Words
 
 In this case the question body must have the placeholder for the missing words using '\_\_' (double underscore).
 _E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
@@ -219,6 +217,10 @@ _E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
   @end-options;
 @end-question;
 ```
+
+#### 4.2. Example
+
+You can check a pratical example with all the question types [here](../../../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.txt).
 
 ## 5. Implementation
 
