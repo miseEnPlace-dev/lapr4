@@ -94,3 +94,9 @@
     @match Op5 = 5;
   @end-matching;
 @end-question;
+
+@start-question
+  @type missing-words
+  @question-body A melhor __ de todas é a __;
+  @correct-answer coisa; pizza;
+@end-question;

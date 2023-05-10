@@ -79,7 +79,146 @@ This is the first time this task is assigned to be developed. This is a new func
 
 #### 4.1.1. Tokens
 
-#### 4.1.2. Example
+We defined some custom tokens to keep the input files simple and readable.
+
+All the files defining questions to be used in exams must follow the following structure:
+
+```txt
+@start-question
+  @type numerical|multiple-choice|short-answer|true-false|matching|select-missing-words;
+  @question-body <question-body>
+  @correct-answer <correct-answer>;
+@end-question;
+```
+
+This is the base structure. As there are many question types and each one has its own structure, we will define the structure of each one of them.
+
+To make the understanding easier we will use the following notation:
+
+- [] - optional
+- <> - replace with the value (required)
+- | - or
+- {} - repeatable.
+
+##### 4.1.1.1. Numerical
+
+```txt
+@start-question
+  @type numerical;
+  @question-body <body>;
+  @correct-answer <correct-answer>;
+  @accepted-error <accepted-error>;
+@end-question;
+```
+
+##### 4.1.1.2. Multiple Choice
+
+```txt
+  @start-question
+    @type multiple-choice;
+    @question-body <question-body>;
+    @correct-answer <id>;
+
+    @start-options;
+      {@option <id> = <answer>;}
+    @end-options;
+  @end-question;
+```
+
+##### 4.1.1.3. Short Answer
+
+```txt
+@start-question;
+  @type short-answer;
+  @question-body <question-body>;
+
+  @correct-answers
+    {@correct-answer <answer>; <score>;}
+  @end-correct-answers;
+@end-question;
+```
+
+##### 4.1.1.4. True/False
+
+```txt
+@start-question
+  @type true-false;
+  @question-body <question-body>;
+  @correct-answer true|false;
+@end-question;
+```
+
+##### 4.1.1.5. Multiple Choice (Multiple Answers)
+
+```txt
+@start-question
+  @type multiple-choice;
+  @question-body <question-body>;
+  @correct-answers
+    {@correct-answer <id>; <score>;}
+  @end-correct-answers;
+
+  @start-options;
+    {@option <id>;}
+  @end-options;
+@end-question;
+```
+
+##### 4.1.1.6. Multiple Choice (Single Answer)
+
+```txt
+@start-question
+  @type multiple-choice;
+  @question-body <question-body>;
+  @correct-answer <id>;
+
+  @start-options;
+    {@option <id>;}
+  @end-options;
+@end-question;
+```
+
+##### 4.1.1.7. Matching
+
+**Note:** We considered that there can be missing matches both in the options and in the matches.
+
+```txt
+@start-question
+  @type matching;
+  @question-body <question-body>;
+
+  @correct-answers
+    {@correct-answer <id>; <id-match>;}
+  @end-correct-answers;
+
+  @start-options;
+    {@option <id> = <value>;}
+  @end-options;
+
+  @start-matching;
+    {@match <id-match> = <value>;}
+  @end-matching;
+@end-question;
+```
+
+###### 4.1.1.8 Select Missing Words
+
+In this case the question body must have the placeholder for the missing words using '\_\_' (double underscore).
+_E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
+
+**Note:** The number of correct answers must be equal to the number of placeholders.
+
+```txt
+@start-question
+  @type missing-words
+  @question-body <question-body>;
+  @correct-answer {<answer>;}
+
+  @start-options
+    {@option <value>;}
+  @end-options;
+@end-question;
+```
 
 ## 5. Implementation
 
