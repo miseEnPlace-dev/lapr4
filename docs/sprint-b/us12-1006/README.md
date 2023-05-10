@@ -46,12 +46,7 @@
 
 ### 2.1. Main success scenario
 
-<!-- TODO -->
-
-1. Warehouse Employee requires the configuration of an AGV available in the Warehouse.
-2. The System asks for information related to the AGV
-3. Warehouse Employee enters the information.
-4. The System reports the success of the operation.
+- A list of available courses is displayed to the user.
 
 ### 2.2. Conditions
 
@@ -121,6 +116,4 @@
 
 ## 6. Observations
 
-<!-- TODO -->
-
-N/a
+- N/a.
