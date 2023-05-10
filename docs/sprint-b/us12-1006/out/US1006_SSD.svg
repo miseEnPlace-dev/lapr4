@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="251px" preserveAspectRatio="none" style="width:289px;height:251px;background:#FFFFFF;" version="1.1" viewBox="0 0 289 251" width="289px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="55.412" style="stroke:#181818;stroke-width:1.0;" width="10" x="18.5" y="94.0679"/><rect fill="#FFFFFF" height="31.706" style="stroke:#181818;stroke-width:1.0;" width="10" x="247.5" y="117.7739"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="23" x2="23" y1="84.0679" y2="167.4799"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="252.5" x2="252.5" y1="84.0679" y2="167.4799"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="5" y="79.9659">User</text><ellipse cx="23.5" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M23.5,21.5 L23.5,48.5 M10.5,29.5 L36.5,29.5 M23.5,48.5 L10.5,63.5 M23.5,48.5 L36.5,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="5" y="181.4459">User</text><ellipse cx="23.5" cy="194.0479" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M23.5,202.0479 L23.5,229.0479 M10.5,210.0479 L36.5,210.0479 M23.5,229.0479 L10.5,244.0479 M23.5,229.0479 L36.5,244.0479 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="33.0679" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="62" x="221.5" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="228.5" y="71.9659">System</text><rect fill="#E2E2F0" height="33.0679" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="62" x="221.5" y="166.4799"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="228.5" y="188.4459">System</text><rect fill="#FFFFFF" height="55.412" style="stroke:#181818;stroke-width:1.0;" width="10" x="18.5" y="94.0679"/><rect fill="#FFFFFF" height="31.706" style="stroke:#181818;stroke-width:1.0;" width="10" x="247.5" y="117.7739"/><polygon fill="#181818" points="235.5,113.7739,245.5,117.7739,235.5,121.7739,239.5,117.7739" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="28.5" x2="241.5" y1="117.7739" y2="117.7739"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="35.5" y="111.9649">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="189" x="46.5" y="111.9649">asks to list the available courses</text><polygon fill="#181818" points="34.5,145.4799,24.5,149.4799,34.5,153.4799,30.5,149.4799" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="28.5" x2="251.5" y1="149.4799" y2="149.4799"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="40.5" y="143.6709">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="143" x="51.5" y="143.6709">lists all available courses</text><!--MD5=[5e41ba70bec99d60cafaa8de6ac56abb]
+@startuml US1006_SSD
+autonumber
+
+actor "User" as U
+participant "System" as SYS
+
+activate U
+
+U -> SYS : asks to list the available courses
+activate SYS
+SYS - -> U : lists all available courses
+deactivate SYS
+
+deactivate U
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

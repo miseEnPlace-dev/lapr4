@@ -1,4 +1,4 @@
-@startuml US1003_SSD
+@startuml US1006_SSD
 autonumber
 
 actor "User" as U
@@ -6,9 +6,9 @@ participant "System" as SYS
 
 activate U
 
-U -> SYS : asks to list all the available courses
+U -> SYS : asks to list the available courses
 activate SYS
-SYS --> U : lists all courses with the state enroll
+SYS --> U : lists all available courses
 deactivate SYS
 
 deactivate U
