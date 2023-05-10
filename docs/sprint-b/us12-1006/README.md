@@ -55,9 +55,8 @@
 
 ### 2.2. Conditions
 
-<!-- TODO -->
-
-The registration information of the new category is persisted/saved in the system.
+- The user must be authenticated and authorized to perform the operation.
+- The course must have the state enroll to be listed to the user.
 
 ### 2.3. System Sequence Diagram
 
