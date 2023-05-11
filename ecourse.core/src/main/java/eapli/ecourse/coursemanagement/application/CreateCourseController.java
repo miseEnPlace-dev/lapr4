@@ -9,11 +9,8 @@ import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class CreateCourseController {
 
-  @Autowired
   private CourseRepository courseRepository;
 
   public CreateCourseController() {
@@ -41,7 +38,7 @@ public class CreateCourseController {
       throw new IllegalArgumentException();
     }
 
-    if (courseRepository.findByCode(code) == null) {
+    if (courseRepository.findByCode(code) != null) {
       throw new IllegalStateException("There is already a course with that code.");
     }
 

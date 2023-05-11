@@ -102,12 +102,25 @@ This is the first time this task is assigned to be developed. This is a new func
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** xxx
+**Test 1:** Ensure its possible to create a course.
 
 ```java
   @Test
-  private void test1() {
-    assetTrue(true);
+  private Course ensureIsPossibleToCreateCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
+        new CourseEnrolmentState());
+  }
+```
+
+**Test 2:** xxx
+
+```java
+  @Test
+  private Course getDummyCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
+        new CourseEnrolmentState());
   }
 ```
 
