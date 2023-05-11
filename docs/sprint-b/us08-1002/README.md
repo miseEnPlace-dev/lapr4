@@ -19,7 +19,19 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.1. Client Specifications
 
--
+- A course is characterized by its title and a unique code inputed by the administrator, e.g.,
+  "JAVA-1".
+
+- The usual workflow related to the course can be illustrated as follows:
+  event create (-> state close) -> event open (->state open) -> event open enrollments (-> state enroll) -> event close enrollments (-> state in progress) -> event close (-> state closed)
+
+- Each course should have a unique identifier (automatically generated) and a unique name. A course may be open or closed. A closed course can not have any activity.
+
+- Each course must have a teacher in charge, but may also have other teachers. Courses are not divided into sections (i.e., "turmas").
+
+- A course has also a small textual descriptions of its contents.
+
+- Courses may have a minimum and a maximum number of enrolled students. This may limit the possibility of opening (i.e. starting) courses that do not satisfy the limits.
 
 ## 2.2. Client Clarifications
 
@@ -88,6 +100,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.4. Tests
 
+_Note: This are some simplified versions of the tests for readability purposes._
+
 **Test 1:** xxx
 
 ```java
@@ -115,4 +129,4 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 7. Observations
 
-- The history of the states of a course is not relevant.
+- N/a
