@@ -16,8 +16,7 @@ import eapli.framework.presentation.console.SelectWidget;
 public class ToggleCourseEnrolmentStateUI extends AbstractUI {
   private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
   private final CourseService courseService = new CourseService(courseRepository);
-  private final ToggleCourseEnrolmentStateController ctrl = new ToggleCourseEnrolmentStateController(courseRepository,
-      courseService);
+  private final ToggleCourseEnrolmentStateController ctrl = new ToggleCourseEnrolmentStateController(courseRepository);
 
   @Override
   protected boolean doShow() {
