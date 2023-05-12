@@ -24,6 +24,8 @@ class PersistenceContext {
 }
 
 class CourseService {
+  - courseRepository
+
   + CourseService(courseRepository)
 
   + listNotClosedCourses()
@@ -34,7 +36,10 @@ class CourseService {
 class ManageCourseEnrolmentStateUI {}
 
 class ManageCourseEnrolmentStateController {
-  + ManageCourseEnrolmentStateController(courseRepository, service)
+  - courseRepository
+  - courseService
+
+  + ManageCourseEnrolmentStateController(courseRepository)
 
   + listNotClosedCourses()
   + toggleEnrolmentState(course)

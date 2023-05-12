@@ -7,9 +7,9 @@ public class ToggleCourseEnrolmentStateController {
   private CourseService service;
   private CourseRepository courseRepository;
 
-  public ToggleCourseEnrolmentStateController(CourseRepository courseRepository, CourseService service) {
+  public ToggleCourseEnrolmentStateController(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
-    this.service = service;
+    this.service = new CourseService(courseRepository);
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {
