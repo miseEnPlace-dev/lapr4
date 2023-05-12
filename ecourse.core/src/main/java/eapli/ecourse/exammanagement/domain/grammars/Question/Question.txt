@@ -33,7 +33,7 @@
     @correct-answer 4 0.5;
     @correct-answer 6 0.7;
   @end-correct-answers;
-  @start-options;
+  @start-options
     @option 1 "2" "Feedback";
     @option 2 "3";
     @option 3 "4";
@@ -50,12 +50,12 @@
   @question-body "Quais das seguintes opções são números primos?";
   @correct-answer 2;
 
-  @start-options;
-    @option 2;
-    @option 4;
-    @option 6;
-    @option 8;
-    @option 9;
+  @start-options
+    @option 1 "2";
+    @option 2 "4";
+    @option 3 "6";
+    @option 4 "8";
+    @option 5 "9";
   @end-options;
 @end-question;
 
@@ -65,30 +65,30 @@
   @feedback "General feedback";
 
   @correct-answers
-    @correct-answer A Op2;
-    @correct-answer B Op1;
-    @correct-answer C Op4;
-    @correct-answer D Op3;
+    @correct-answer 1 2;
+    @correct-answer 2 4;
+    @correct-answer 3 5;
+    @correct-answer 4 1;
   @end-correct-answers;
 
-  @start-options;
-    @option A = 1;
-    @option B = 2;
-    @option C = 3;
-    @option D = 4;
+  @start-options
+    @option 1 "1";
+    @option 2 "2";
+    @option 3 "3";
+    @option 4 "4";
   @end-options;
 
-  @start-matching;
-    @match Op1 = 1;
-    @match Op2 = 2;
-    @match Op3 = 3;
-    @match Op4 = 4;
-    @match Op5 = 5;
+  @start-matching
+    @match 1 "1";
+    @match 2 "2";
+    @match 3 "3";
+    @match 4 "4";
+    @match 5 "5";
   @end-matching;
 @end-question;
 
 @start-question
-  @type missing-words
-  @question-body A melhor __ de todas é a __;
+  @type missing-words;
+  @question-body "A melhor __ de todas é a __";
   @correct-answer "coisa" "pizza";
 @end-question;
