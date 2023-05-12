@@ -1,14 +1,15 @@
 package eapli.ecourse.coursemanagement.application;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
-import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 
 public class ToggleCourseEnrolmentStateController {
   private CourseService service;
+  private CourseRepository courseRepository;
 
-  public ToggleCourseEnrolmentStateController() {
-
-    this.service = new CourseService(PersistenceContext.repositories().courses());
+  public ToggleCourseEnrolmentStateController(CourseRepository courseRepository, CourseService service) {
+    this.courseRepository = courseRepository;
+    this.service = service;
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {
