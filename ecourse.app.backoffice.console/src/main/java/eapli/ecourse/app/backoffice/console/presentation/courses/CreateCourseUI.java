@@ -2,18 +2,17 @@ package eapli.ecourse.app.backoffice.console.presentation.courses;
 
 import eapli.ecourse.coursemanagement.application.CreateCourseController;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
-public class CreateCourseUI extends AbstractUI implements Action {
+public class CreateCourseUI extends AbstractUI {
 
   private CreateCourseController ctrl = new CreateCourseController(PersistenceContext.repositories().courses(),
       AuthzRegistry.authorizationService());
 
   @Override
-  public boolean execute() {
+  public boolean doShow() {
     System.out.println("Insert the following information: ");
 
     String code = Console.readLine("Code: ");
@@ -44,12 +43,6 @@ public class CreateCourseUI extends AbstractUI implements Action {
     Console.readLine("Press Enter to continue...");
 
     return true;
-  }
-
-  @Override
-  protected boolean doShow() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'doShow'");
   }
 
   @Override

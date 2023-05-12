@@ -2,17 +2,10 @@ package eapli.ecourse.coursemanagement.application;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseBuilder;
-import eapli.ecourse.coursemanagement.domain.CourseCode;
-import eapli.ecourse.coursemanagement.domain.CourseDescription;
-import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
-import eapli.ecourse.coursemanagement.domain.CourseState;
-import eapli.ecourse.coursemanagement.domain.CourseTitle;
-import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
-import eapli.framework.validations.Preconditions;
 
 @UseCaseController
 public class CreateCourseController {
@@ -33,21 +26,6 @@ public class CreateCourseController {
 
     if (courseRepository.containsOfIdentity(course.code()))
       throw new IllegalStateException("There is already a course with that code.");
-
-    saveCourse(course);
-    return course;
-  }
-
-  public Course createCourse(CourseCode code, CourseTitle title, CourseDescription description, EnrolmentLimits limits,
-      CourseState courseState, CourseEnrolmentState enrolmentState) {
-
-    Preconditions.noneNull(code, title, description, limits, courseState, enrolmentState);
-
-    if (courseRepository.containsOfIdentity(code)) {
-      throw new IllegalStateException("There is already a course with that code.");
-    }
-
-    Course course = new Course(code, title, description, limits, courseState, enrolmentState);
 
     saveCourse(course);
     return course;
