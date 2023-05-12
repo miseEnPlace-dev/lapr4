@@ -9,15 +9,17 @@ import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.coursemanagement.domain.CourseState.State;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState.EnrolmentState;
 import eapli.framework.actions.Action;
 import eapli.framework.io.util.Console;
+import eapli.framework.presentation.console.AbstractUI;
 
 import java.util.Scanner;
 
-public class CreateCourseUI implements Action {
+public class CreateCourseUI extends AbstractUI implements Action {
 
-  private CreateCourseController ctrl = new CreateCourseController();
+  private CreateCourseController ctrl = new CreateCourseController(PersistenceContext.repositories().courses());
 
   @Override
   public boolean execute() {
@@ -68,7 +70,6 @@ public class CreateCourseUI implements Action {
             new CourseState(courseState), new CourseEnrolmentState(enrolmentState));
       }
 
-      printData(course);
       System.out.println("\nCourse successfully created");
     } else {
       System.out.println("Operation Cancelled!");
@@ -128,13 +129,16 @@ public class CreateCourseUI implements Action {
     return courseState;
   }
 
-  private void printData(Course course) {
-    System.out.println("Code: " + course.code());
-    System.out.println("Title: " + course.title());
-    System.out.println("Description: " + course.description());
-    System.out.println("Minimum Enrolment Limit: " + course.enrolmentLimits().minLimit());
-    System.out.println("Maximum Enrolment Limit: " + course.enrolmentLimits().maxLimit());
-    System.out.println("State: " + course.state());
+  @Override
+  protected boolean doShow() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'doShow'");
+  }
+
+  @Override
+  public String headline() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'headline'");
   }
 
 }
