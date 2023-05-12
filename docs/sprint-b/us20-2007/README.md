@@ -149,8 +149,8 @@ To make the understanding easier we will use the following notation:
     {@correct-answer <id> <score>;}
   @end-correct-answers;
 
-  @start-options;
-    {@option <id> ["feedback"];}
+  @start-options
+    {@option <id> "<answer>" ["feedback"];}
   @end-options;
 @end-question;
 ```
@@ -164,7 +164,7 @@ To make the understanding easier we will use the following notation:
   [@feedback <feedback>;]
   @correct-answer <id>;
 
-  @start-options;
+  @start-options
     {@option <id> ["feedback"];}
   @end-options;
 @end-question;
@@ -184,12 +184,12 @@ To make the understanding easier we will use the following notation:
     {@correct-answer <id> <id-match>;}
   @end-correct-answers;
 
-  @start-options;
-    {@option <id> = <value>;}
+  @start-options
+    {@option <id> "<string>";}
   @end-options;
 
-  @start-matching;
-    {@match <id-match> = <value>;}
+  @start-matching
+    {@match <id-match> "<string>";}
   @end-matching;
 @end-question;
 ```
