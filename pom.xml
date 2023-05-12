@@ -36,7 +36,6 @@
     <module>ecourse.app.backoffice.console</module>
     <module>ecourse.app.student.console</module>
     <module>ecourse.app.teacher.console</module>
-    <module>ecourse.app.manager.console</module>
     <module>ecourse.app.common.console</module>
     <module>ecourse.app.bootstrap</module>
     <module>ecourse.bootstrappers</module>

@@ -3,13 +3,6 @@
   "configurations": [
     {
       "type": "java",
-      "name": "ECourseManagerApp",
-      "request": "launch",
-      "mainClass": "eapli.ecourse.app.manager.console.ECourseManagerApp",
-      "projectName": "app.manager.console"
-    },
-    {
-      "type": "java",
       "name": "ECourseBootstrap",
       "request": "launch",
       "mainClass": "eapli.ecourse.app.bootstrap.ECourseBootstrap",
