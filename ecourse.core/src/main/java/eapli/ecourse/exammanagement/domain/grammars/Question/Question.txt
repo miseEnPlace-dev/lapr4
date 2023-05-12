@@ -1,5 +1,5 @@
 @start-question
-  @type numerical; // Este comentário será ignorado
+  @type numerical;
   @question-body "Qual é a área de um círculo com raio 1.2?";
   // Este também
   @correct-answer 4.52;
