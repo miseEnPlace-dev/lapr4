@@ -22,19 +22,26 @@ public class CourseState implements ValueObject {
   }
 
   public void changeToClose() {
-    state = State.CLOSED;
+    changeTo(State.CLOSED);
   }
 
   public void changeToOpen() {
-    state = State.OPEN;
+    changeTo(State.OPEN);
   }
 
   public void changeToInProgress() {
-    state = State.IN_PROGRESS;
+    changeTo(State.IN_PROGRESS);
   }
 
   public void changeToFinished() {
-    state = State.FINISHED;
+    changeTo(State.FINISHED);
+  }
+
+  private void changeTo(State state) {
+    if (this.state == State.FINISHED)
+      throw new IllegalStateException("Cannot toggle state of a finished course");
+
+    this.state = state;
   }
 
   public boolean isClosed() {

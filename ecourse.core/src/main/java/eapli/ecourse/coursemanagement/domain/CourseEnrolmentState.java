@@ -17,12 +17,19 @@ public class CourseEnrolmentState implements ValueObject {
     state = EnrolmentState.CLOSED;
   }
 
-  public void changeToOpen() {
+  private void changeToOpen() {
     state = EnrolmentState.OPEN;
   }
 
-  public void changeToClosed() {
+  private void changeToClosed() {
     state = EnrolmentState.CLOSED;
+  }
+
+  public void toggle() {
+    if (state == EnrolmentState.OPEN)
+      changeToClosed();
+    else
+      changeToOpen();
   }
 
   public boolean isOpen() {

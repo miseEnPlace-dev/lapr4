@@ -135,10 +135,7 @@ public class Course implements AggregateRoot<CourseCode> {
     if (courseState.isClosed())
       throw new IllegalStateException("Cannot toggle enrolment state of a closed course");
 
-    if (enrolmentState.isClosed())
-      enrolmentState.changeToOpen();
-    else
-      enrolmentState.changeToClosed();
+    enrolmentState.toggle();
   }
 
   @Override
