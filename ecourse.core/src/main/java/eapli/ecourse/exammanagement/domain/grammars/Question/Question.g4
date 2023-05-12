@@ -9,7 +9,7 @@ numerical_question:
   'numerical' EOI body feedback? CORRECT_ANSWER REAL_NUMBER EOI ACCEPTED_ERROR REAL_NUMBER EOI;
 
 multiple_choice_question:
-  'multiple-choice' EOI body feedback? START_CORRECT_ANSWERS_SECTION  EOI;
+  'multiple-choice' EOI body feedback? START_CORRECT_ANSWERS_SECTION multiple_choice_correct_answer+ END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION multiple_choice_option+ END_OPTIONS_SECTION EOI;
 
 short_answer_question:
   'short-answer' EOI body feedback? START_CORRECT_ANSWERS_SECTION short_answer_correct_answer+ END_CORRECT_ANSWERS_SECTION EOI;
@@ -30,6 +30,12 @@ feedback: FEEDBACK STRING EOI;
 short_answer_correct_answer:
   CORRECT_ANSWER STRING ' ' REAL_NUMBER EOI;
 
+multiple_choice_correct_answer:
+  CORRECT_ANSWER ' ' ID ' ' STRING ' ' WEIGTH EOI;
+
+multiple_choice_option:
+  ID ' ' STRING ' ' STRING? EOI;
+
 // End of instruction
 EOI: ';';
 
@@ -37,6 +43,10 @@ EOI: ';';
 STRING: '"' ( '\\' [\\"] | ~[\\"])* '"';
 
 REAL_NUMBER: [0-9]+ ('.' [0-9]+)?;
+ID: [0-9];
+
+// number between 0 and 1
+WEIGTH: '0' | '1' | '0.' [0-9]+;
 
 START_QUESTION: '@start-question';
 END_QUESTION: '@end-question';

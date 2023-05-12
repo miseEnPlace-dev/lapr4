@@ -150,7 +150,7 @@ To make the understanding easier we will use the following notation:
   @end-correct-answers;
 
   @start-options;
-    {@option <id> ["feedback"];}
+    {@option <id> "<answer>" ["feedback"];}
   @end-options;
 @end-question;
 ```

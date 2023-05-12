@@ -28,20 +28,20 @@
   @feedback "General feedback";
 
   @correct-answers
-    @correct-answer 2 0.2;
-    @correct-answer 3 0.3;
-    @correct-answer 5 0.5;
-    @correct-answer 7 0.7;
+    @correct-answer 1 0.2;
+    @correct-answer 2 0.3;
+    @correct-answer 4 0.5;
+    @correct-answer 6 0.7;
   @end-correct-answers;
   @start-options;
-    @option 2 "Feedback";
-    @option 3;
-    @option 4;
-    @option 5;
-    @option 6 "More feedback";
-    @option 7;
-    @option 8;
-    @option 9;
+    @option 1 "2" "Feedback";
+    @option 2 "3";
+    @option 3 "4";
+    @option 4 "5";
+    @option 5 "6" "More feedback";
+    @option 6 "7";
+    @option 7 "8";
+    @option 8 "9";
   @end-options;
 @end-question;
 
