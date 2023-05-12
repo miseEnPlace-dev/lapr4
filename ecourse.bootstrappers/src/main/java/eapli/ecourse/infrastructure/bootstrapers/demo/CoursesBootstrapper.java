@@ -17,7 +17,8 @@ public class CoursesBootstrapper implements Action {
   public boolean execute() {
     controller.createCourse("1234", "Matemática", "Matemática simples", 1, 20);
     controller.createCourse("4321", "ESINF", "Estruturas de Informação ", 5, 80);
-    controller.createCourse("1234", "EAPLI", "Engenharia de Aplicações", 10, 200);
+    controller.createCourse("2222", "EAPLI", "Engenharia de Aplicações", 10, 200);
+
     return true;
   }
 }

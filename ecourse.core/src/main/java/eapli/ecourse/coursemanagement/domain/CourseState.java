@@ -1,13 +1,19 @@
 package eapli.ecourse.coursemanagement.domain;
 
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import eapli.framework.domain.model.ValueObject;
+import lombok.EqualsAndHashCode;
 
+@Embeddable
+@EqualsAndHashCode
 public class CourseState implements ValueObject {
+  private static final long serialVersionUID = 1L;
+
   public enum State {
-    CLOSED, OPEN, IN_PROGRESS, FINISHED
+    CLOSED, OPEN, IN_PROGRESS, FINISHED;
   }
 
   @Enumerated(EnumType.STRING)
@@ -62,17 +68,6 @@ public class CourseState implements ValueObject {
 
   public boolean isSameAs(State state) {
     return this.state == state;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof CourseState)) {
-      return false;
-    }
-    CourseState courseState = (CourseState) o;
-    return state == courseState.state;
   }
 
   @Override

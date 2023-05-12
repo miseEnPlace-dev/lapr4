@@ -2,6 +2,7 @@ package eapli.ecourse.coursemanagement.domain;
 
 import java.util.Calendar;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -31,10 +32,10 @@ public class Course implements AggregateRoot<CourseCode> {
   @Column(nullable = false)
   private EnrolmentLimits enrolmentLimits;
 
-  @Column(nullable = false)
+  @AttributeOverride(name = "state", column = @Column(name = "courseState"))
   private CourseState courseState;
 
-  @Column(nullable = false)
+  @AttributeOverride(name = "state", column = @Column(name = "enrolmentState"))
   private CourseEnrolmentState enrolmentState;
 
   @Column(nullable = false)
