@@ -109,21 +109,7 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-#### 4.1.2. Multiple Choice
-
-```txt
-  @start-question
-    @type multiple-choice;
-    @question-body <question-body>;
-    @correct-answer <id>;
-
-    @start-options;
-      {@option <id> = <answer>;}
-    @end-options;
-  @end-question;
-```
-
-#### 4.1.3. Short Answer
+#### 4.1.2. Short Answer
 
 ```txt
 @start-question;
@@ -131,12 +117,12 @@ To make the understanding easier we will use the following notation:
   @question-body <question-body>;
 
   @correct-answers
-    {@correct-answer <answer>; <score>;}
+    {@correct-answer "<answer>" <score>;}
   @end-correct-answers;
 @end-question;
 ```
 
-#### 4.1.4. True/False
+#### 4.1.3. True/False
 
 ```txt
 @start-question
@@ -146,37 +132,40 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-#### 4.1.5. Multiple Choice (Multiple Answers)
+#### 4.1.4. Multiple Choice (Multiple Answers)
 
 ```txt
 @start-question
   @type multiple-choice;
   @question-body <question-body>;
+  [@feedback <feedback>;]
+
   @correct-answers
-    {@correct-answer <id>; <score>;}
+    {@correct-answer <id> <score>;}
   @end-correct-answers;
 
   @start-options;
-    {@option <id>;}
+    {@option <id> ["feedback"];}
   @end-options;
 @end-question;
 ```
 
-#### 4.1.6. Multiple Choice (Single Answer)
+#### 4.1.5. Multiple Choice (Single Answer)
 
 ```txt
 @start-question
   @type multiple-choice;
   @question-body <question-body>;
+  [@feedback <feedback>;]
   @correct-answer <id>;
 
   @start-options;
-    {@option <id>;}
+    {@option <id> ["feedback"];}
   @end-options;
 @end-question;
 ```
 
-#### 4.1.7. Matching
+#### 4.1.6. Matching
 
 **Note:** We considered that there can be missing matches both in the options and in the matches.
 
@@ -184,9 +173,10 @@ To make the understanding easier we will use the following notation:
 @start-question
   @type matching;
   @question-body <question-body>;
+  [@feedback "<feedback>";]
 
   @correct-answers
-    {@correct-answer <id>; <id-match>;}
+    {@correct-answer <id> <id-match>;}
   @end-correct-answers;
 
   @start-options;
@@ -199,10 +189,13 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-##### 4.1.8 Select Missing Words
+##### 4.1.7 Select Missing Words
 
 In this case the question body must have the placeholder for the missing words using '\_\_' (double underscore).
 _E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
+
+In the correct answer section the words must be in the same order as they appear in the question body and must be placed inside double quotes separated by a space.
+_E.g. "restaurante" "bem";_
 
 **Note:** The number of correct answers must be equal to the number of placeholders.
 
@@ -210,7 +203,7 @@ _E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
 @start-question
   @type missing-words
   @question-body <question-body>;
-  @correct-answer {<answer>;}
+  @correct-answer {"<word>" };
 
   @start-options
     {@option <value>;}
