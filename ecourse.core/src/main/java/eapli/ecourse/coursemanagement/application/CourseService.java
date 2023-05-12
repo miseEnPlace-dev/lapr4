@@ -6,7 +6,7 @@ import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 public class CourseService {
   private CourseRepository courseRepository;
 
-  CourseService(CourseRepository courseRepository) {
+  public CourseService(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
   }
 
