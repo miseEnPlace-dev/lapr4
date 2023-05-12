@@ -109,12 +109,14 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
+**Note**: The score must be a real number with a maximum of 2 decimal places between 0 and 1.
+
 #### 4.1.2. Short Answer
 
 ```txt
 @start-question;
   @type short-answer;
-  @question-body <question-body>;
+  @question-body "<question-body>";
 
   @correct-answers
     {@correct-answer "<answer>" <score>;}
@@ -127,17 +129,20 @@ To make the understanding easier we will use the following notation:
 ```txt
 @start-question
   @type true-false;
-  @question-body <question-body>;
+  @question-body "<question-body>";
   @correct-answer true|false;
 @end-question;
 ```
+
+**Note**: The score must be a real number with a maximum of 2 decimal places between 0 and 1.
+**Note 2**: The sum of the scores specified in the `@correct-answers` section must be 1.
 
 #### 4.1.4. Multiple Choice (Multiple Answers)
 
 ```txt
 @start-question
   @type multiple-choice;
-  @question-body <question-body>;
+  @question-body "<question-body>";
   [@feedback <feedback>;]
 
   @correct-answers
@@ -155,7 +160,7 @@ To make the understanding easier we will use the following notation:
 ```txt
 @start-question
   @type multiple-choice;
-  @question-body <question-body>;
+  @question-body "<question-body>";
   [@feedback <feedback>;]
   @correct-answer <id>;
 
@@ -172,7 +177,7 @@ To make the understanding easier we will use the following notation:
 ```txt
 @start-question
   @type matching;
-  @question-body <question-body>;
+  @question-body "<question-body>";
   [@feedback "<feedback>";]
 
   @correct-answers
@@ -202,7 +207,7 @@ _E.g. "restaurante" "bem";_
 ```txt
 @start-question
   @type missing-words
-  @question-body <question-body>;
+  @question-body "<question-body>";
   @correct-answer {"<word>" };
 
   @start-options
