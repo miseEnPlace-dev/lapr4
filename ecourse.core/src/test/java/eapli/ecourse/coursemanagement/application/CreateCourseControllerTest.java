@@ -17,32 +17,43 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
 public class CreateCourseControllerTest {
 
   private CreateCourseController controller;
   private CourseRepository courseRepository;
+  private AuthorizationService authzRegistry;
 
   @BeforeEach
   public void setup() {
+    authzRegistry = mock(AuthorizationService.class);
     courseRepository = mock(CourseRepository.class);
-    controller = new CreateCourseController(courseRepository);
+    controller = new CreateCourseController(courseRepository, authzRegistry);
   }
 
   @Test
   public void ensureItsNotPossibleToCreateCourseWithNullFields() {
 
-    assertThrows(IllegalArgumentException.class, () -> controller.createCourse(null, null, null, null, null, null));
+    assertThrows(IllegalArgumentException.class, () -> controller.createCourse(null, null, null, 0, 0));
   }
 
   @Test
-  public void ensureItsPossibleToCreateCourse() {
-    when(courseRepository.containsOfIdentity(CourseCode.valueOf("1234"))).thenReturn(false);
+  public void ensureItsNotPossibleToCreateCourseWithEmptyFields() {
 
-    Course course = controller.createCourse(CourseCode.valueOf("1234"),
-        CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
-        new CourseEnrolmentState());
+    assertThrows(IllegalArgumentException.class, () -> controller.createCourse("", "", "", 0, 0));
+  }
+
+  @Test
+  public void ensureItsNotPossibleToCreateCourseWithNegativeLimits() {
+
+    assertThrows(IllegalArgumentException.class, () -> controller.createCourse("1234", "dummy", "dummy", -1, -1));
+  }
+
+  @Test
+  public void ensureItsPossibleToCreateCourses() {
+
+    Course course = controller.createCourse("1234", "dummy", "dummy", 10, 20);
 
     assertEquals(CourseCode.valueOf("1234"), course.code());
     assertEquals(CourseTitle.valueOf("dummy"), course.title());
@@ -53,25 +64,11 @@ public class CreateCourseControllerTest {
   }
 
   @Test
-  public void ensureItsPossibleToCreateCourseWithoutStates() {
+  public void ensureCheckDuplicatesWork() {
 
-    Course course = controller.createCourse(CourseCode.valueOf("1234"),
-        CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+      when(courseRepository.containsOfIdentity(CourseCode.valueOf("1234"))).thenReturn(true);
 
-    assertEquals(CourseCode.valueOf("1234"), course.code());
-    assertEquals(CourseTitle.valueOf("dummy"), course.title());
-    assertEquals(CourseDescription.valueOf("dummy"), course.description());
-    assertEquals(EnrolmentLimits.valueOf(10, 20), course.enrolmentLimits());
-  }
-
-  @Test
-  public void ensureCheckDuplicatesWorks() {
-    when(courseRepository.containsOfIdentity(CourseCode.valueOf("1234"))).thenReturn(true);
-
-    assertThrows(IllegalStateException.class, () -> controller.createCourse(CourseCode.valueOf("1234"),
-        CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20)));
+      assertThrows(IllegalStateException.class, () -> controller.createCourse("1234", "dummy", "dummy", 10, 20));
   }
 
 }
