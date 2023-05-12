@@ -20,7 +20,7 @@ class JpaCourseRepository {
 }
 
 class PersistenceContext {
-  - repositories()
+  + repositories()
 }
 
 class CourseService {
@@ -34,6 +34,8 @@ class CourseService {
 class ManageCourseEnrolmentStateUI {}
 
 class ManageCourseEnrolmentStateController {
+  + ManageCourseEnrolmentStateController(courseRepository, service)
+
   + listNotClosedCourses()
   + toggleEnrolmentState(course)
 }
@@ -78,13 +80,13 @@ class CourseDTOParser {
 }
 
 ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
-ManageCourseEnrolmentStateController ..> PersistenceContext
+ManageCourseEnrolmentStateUI ..> PersistenceContext
 ManageCourseEnrolmentStateController --> CourseService
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
 
 CourseService ..> Course
-CourseService ..> CourseRepository
+ManageCourseEnrolmentStateController --> CourseRepository
 
 CourseDTOParser ..> CourseDTO
 CourseDTOParser ..> Course
