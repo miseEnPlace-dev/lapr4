@@ -92,8 +92,7 @@ public class Course implements AggregateRoot<CourseCode> {
 
     return code().equals(that.code()) && title().equals(that.title())
         && description().equals(that.description()) && enrolmentLimits().equals(that.enrolmentLimits())
-        && state().equals(that.state()) && enrolmentState.equals(that.enrolmentState())
-        && createdAt().equals(that.createdAt());
+        && state().equals(that.state()) && enrolmentState().equals(that.enrolmentState());
   }
 
   public CourseCode code() {

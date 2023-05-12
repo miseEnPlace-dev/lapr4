@@ -1,7 +1,10 @@
 package eapli.ecourse.app.backoffice.console.presentation.courses;
 
+import eapli.ecourse.coursemanagement.application.CourseService;
 import eapli.ecourse.coursemanagement.application.ToggleCourseEnrolmentStateController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
@@ -11,7 +14,10 @@ import eapli.framework.presentation.console.SelectWidget;
  * @author Tomás Lopes <1211289>
  */
 public class ToggleCourseEnrolmentStateUI extends AbstractUI {
-  private final ToggleCourseEnrolmentStateController ctrl = new ToggleCourseEnrolmentStateController();
+  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
+  private final CourseService courseService = new CourseService(courseRepository);
+  private final ToggleCourseEnrolmentStateController ctrl = new ToggleCourseEnrolmentStateController(courseRepository,
+      courseService);
 
   @Override
   protected boolean doShow() {
