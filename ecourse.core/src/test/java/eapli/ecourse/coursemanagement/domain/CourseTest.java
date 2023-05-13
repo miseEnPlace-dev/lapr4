@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
+import eapli.ecourse.coursemanagement.dto.CourseDTO;
+
 public class CourseTest {
   private Course getDummyCourse() {
     return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
@@ -212,5 +214,18 @@ public class CourseTest {
     assertTrue(course.enrolmentState().isClosed());
     course.toggleEnrolmentState();
     assertTrue(course.enrolmentState().isOpen());
+  }
+
+  @Test
+  public void ensureIsPossibleToCreateDto() {
+    final Course course = getDummyCourse();
+
+    final CourseDTO dto = course.toDto();
+    assertEquals(course.code(), dto.getCode());
+    assertEquals(course.title(), dto.getTitle());
+    assertEquals(course.description(), dto.getDescription());
+    assertEquals(course.enrolmentLimits(), dto.getEnrolmentLimits());
+    assertEquals(course.state(), dto.getCourseState());
+    assertEquals(course.enrolmentState(), dto.getEnrolmentState());
   }
 }

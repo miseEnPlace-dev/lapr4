@@ -1,5 +1,9 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 
@@ -11,7 +15,14 @@ public class CourseService {
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {
-    // TODO implement
-    return null;
+    final Iterable<Course> types = courseRepository.findAllNotClosed();
+    return convertToDto(types);
+  }
+
+  private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
+    return StreamSupport.stream(courses.spliterator(), true)
+        .map(Course::toDto)
+        .collect(Collectors.toUnmodifiableList());
+
   }
 }

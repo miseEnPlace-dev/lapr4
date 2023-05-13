@@ -37,9 +37,10 @@ class ManageCourseEnrolmentStateUI {}
 
 class ManageCourseEnrolmentStateController {
   - courseRepository
+  - authorizationService
   - courseService
 
-  + ManageCourseEnrolmentStateController(courseRepository)
+  + ManageCourseEnrolmentStateController(courseRepository, authorizationService)
 
   + listNotClosedCourses()
   + toggleEnrolmentState(course)
