@@ -131,6 +131,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitStart(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitStart(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -201,6 +206,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitQuestion(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitQuestion(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -302,6 +312,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitNumerical_question(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitNumerical_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Numerical_questionContext numerical_question() throws RecognitionException {
@@ -390,6 +405,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMultiple_choice_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMultiple_choice_question(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -516,6 +536,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitShort_answer_question(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitShort_answer_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Short_answer_questionContext short_answer_question() throws RecognitionException {
@@ -597,6 +622,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitTrue_false_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitTrue_false_question(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -696,6 +726,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMatching_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMatching_question(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -821,6 +856,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMissing_words_question(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMissing_words_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Missing_words_questionContext missing_words_question() throws RecognitionException {
@@ -879,6 +919,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitBody(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitBody(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final BodyContext body() throws RecognitionException {
@@ -924,6 +969,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitFeedback(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitFeedback(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FeedbackContext feedback() throws RecognitionException {
@@ -967,6 +1017,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitShort_answer_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitShort_answer_correct_answer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1015,6 +1070,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMultiple_choice_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMultiple_choice_correct_answer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1084,6 +1144,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitOption(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitOption(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final OptionContext option() throws RecognitionException {
@@ -1147,6 +1212,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMatch(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMatch(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final MatchContext match() throws RecognitionException {
@@ -1199,6 +1269,11 @@ public class QuestionParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMatching_correct_answer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMatching_correct_answer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Matching_correct_answerContext matching_correct_answer() throws RecognitionException {
@@ -1247,6 +1322,11 @@ public class QuestionParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMissing_words_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMissing_words_correct_answer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

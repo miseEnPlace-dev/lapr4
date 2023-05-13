@@ -7,7 +7,7 @@
     "mode": "external",
     "language": "Java",
     "listeners": true,
-    "visitors": false,
+    "visitors": true,
     "package": "eapli.ecourse.exammanagement.domain.parsers",
     "outputDir": "../../parsers"
   },
