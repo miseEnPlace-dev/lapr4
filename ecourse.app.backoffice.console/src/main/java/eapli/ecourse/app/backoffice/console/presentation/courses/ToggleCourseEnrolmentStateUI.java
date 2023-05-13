@@ -29,12 +29,14 @@ public class ToggleCourseEnrolmentStateUI extends AbstractUI {
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
-    System.out.println("Current course state: " + selected.getEnrolmentState().toString());
 
     try {
-      final CourseDTO newCourse = this.ctrl.toggleEnrolmentState(selected);
+      this.ctrl.toggleEnrolmentState(selected);
+      System.out.println("Course enrolment state toggled successfully\n");
     } catch (IllegalArgumentException e) {
-      System.out.println("There is no course with the given code");
+      System.out.println("There is no course with the given code\n");
+    } catch (IllegalStateException e) {
+      System.out.println("Error: " + e.getMessage() + "\n");
     }
 
     return false;

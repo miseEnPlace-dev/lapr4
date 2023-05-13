@@ -1,4 +1,5 @@
 // Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.g4 by ANTLR 4.9.2
+package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -122,6 +123,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_start; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterStart(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitStart(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitStart(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -185,6 +199,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterQuestion(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitQuestion(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitQuestion(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final QuestionContext question() throws RecognitionException {
@@ -277,6 +304,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_numerical_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterNumerical_question(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitNumerical_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitNumerical_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Numerical_questionContext numerical_question() throws RecognitionException {
@@ -358,6 +398,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_multiple_choice_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMultiple_choice_question(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMultiple_choice_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMultiple_choice_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Multiple_choice_questionContext multiple_choice_question() throws RecognitionException {
@@ -475,6 +528,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_short_answer_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterShort_answer_question(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitShort_answer_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitShort_answer_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Short_answer_questionContext short_answer_question() throws RecognitionException {
@@ -549,6 +615,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_true_false_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterTrue_false_question(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitTrue_false_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitTrue_false_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final True_false_questionContext true_false_question() throws RecognitionException {
@@ -640,6 +719,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_matching_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMatching_question(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMatching_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMatching_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Matching_questionContext matching_question() throws RecognitionException {
@@ -756,6 +848,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_missing_words_question; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMissing_words_question(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMissing_words_question(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMissing_words_question(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Missing_words_questionContext missing_words_question() throws RecognitionException {
@@ -806,6 +911,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_body; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterBody(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitBody(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitBody(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final BodyContext body() throws RecognitionException {
@@ -843,6 +961,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_feedback; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterFeedback(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitFeedback(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitFeedback(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FeedbackContext feedback() throws RecognitionException {
@@ -879,6 +1010,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_short_answer_correct_answer; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterShort_answer_correct_answer(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitShort_answer_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitShort_answer_correct_answer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Short_answer_correct_answerContext short_answer_correct_answer() throws RecognitionException {
@@ -919,6 +1063,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_multiple_choice_correct_answer; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMultiple_choice_correct_answer(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMultiple_choice_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMultiple_choice_correct_answer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Multiple_choice_correct_answerContext multiple_choice_correct_answer() throws RecognitionException {
@@ -979,6 +1136,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_option; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterOption(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitOption(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitOption(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final OptionContext option() throws RecognitionException {
@@ -1034,6 +1204,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_match; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMatch(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMatch(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMatch(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final MatchContext match() throws RecognitionException {
@@ -1078,6 +1261,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_matching_correct_answer; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMatching_correct_answer(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMatching_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMatching_correct_answer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Matching_correct_answerContext matching_correct_answer() throws RecognitionException {
@@ -1119,6 +1315,19 @@ public class QuestionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_missing_words_correct_answer; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).enterMissing_words_correct_answer(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof QuestionListener ) ((QuestionListener)listener).exitMissing_words_correct_answer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof QuestionVisitor ) return ((QuestionVisitor<? extends T>)visitor).visitMissing_words_correct_answer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Missing_words_correct_answerContext missing_words_correct_answer() throws RecognitionException {
