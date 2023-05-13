@@ -12,6 +12,7 @@
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.classmanagement.domain.Class</class>
     <class>eapli.ecourse.enrolmentmanagement.domain.Enrolment</class>
+    <class>eapli.ecourse.questionmanagement.domain.Question</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecourse" />
