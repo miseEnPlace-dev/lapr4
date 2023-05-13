@@ -5,6 +5,7 @@ import eapli.ecourse.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
+import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.jpa.JpaAutoTxUserRepository;
@@ -75,5 +76,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public CourseRepository courses(TransactionalContext autoTx) {
     return new JpaCourseRepository(autoTx);
+  }
+
+  @Override
+  public TeacherRepository teachers() {
+    return new JpaTeacherRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public TeacherRepository teachers(TransactionalContext autoTx) {
+    return new JpaTeacherRepository(autoTx);
   }
 }
