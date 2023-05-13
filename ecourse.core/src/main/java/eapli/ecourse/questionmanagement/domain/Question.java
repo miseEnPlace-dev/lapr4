@@ -5,11 +5,14 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
 import eapli.framework.domain.model.AggregateRoot;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Question implements AggregateRoot<QuestionCode> {
   private static final long serialVersionUID = 1L;
 
@@ -46,14 +49,18 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
     // for ORM
   }
 
+  public QuestionBody body() {
+    return this.body;
+  }
+
+  public QuestionType type() {
+    return this.type;
+  }
+
   @Override
   public QuestionCode identity() {
     return this.code;
   }
 
-  @Override
-  public boolean sameAs(Object other) {
-    // TODO implement this
-    return false;
-  }
+  public abstract boolean sameAs(Object other);
 }
