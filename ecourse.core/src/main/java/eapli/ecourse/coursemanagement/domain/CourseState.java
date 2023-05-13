@@ -43,6 +43,14 @@ public class CourseState implements ValueObject {
     changeTo(State.FINISHED);
   }
 
+  public void toggle() {
+    // TODO add other state transitions
+    if (state == State.CLOSED)
+      changeToOpen();
+    else
+      changeToClose();
+  }
+
   private void changeTo(State state) {
     if (this.state == State.FINISHED)
       throw new IllegalStateException("Cannot toggle state of a finished course");

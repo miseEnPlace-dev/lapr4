@@ -27,8 +27,7 @@ public class CreateCourseController {
     if (courseRepository.containsOfIdentity(course.code()))
       throw new IllegalStateException("There is already a course with that code.");
 
-    saveCourse(course);
-    return course;
+    return saveCourse(course);
   }
 
   private Course saveCourse(Course course) {

@@ -139,6 +139,13 @@ public class Course implements AggregateRoot<CourseCode> {
     enrolmentState.toggle();
   }
 
+  public void toggleState() {
+    if (courseState.isFinished())
+      throw new IllegalStateException("Cannot toggle state of a finished course");
+
+    courseState.toggle();
+  }
+
   @Override
   public CourseCode identity() {
     return this.code;

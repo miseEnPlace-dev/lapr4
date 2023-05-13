@@ -1,16 +1,18 @@
 package eapli.ecourse.app.backoffice.console.presentation.courses;
 
-import eapli.ecourse.coursemanagement.application.ToggleCourseStatusController;
-import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.framework.actions.Action;
-import eapli.framework.io.util.Console;
-
 import java.util.List;
 import java.util.Scanner;
 
+import eapli.ecourse.coursemanagement.application.ToggleCourseStatusController;
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.framework.actions.Action;
+import eapli.framework.io.util.Console;
+
 public class ToggleCourseStatusUI implements Action {
 
-  private ToggleCourseStatusController ctrl = new ToggleCourseStatusController();
+  private ToggleCourseStatusController ctrl = new ToggleCourseStatusController(
+      PersistenceContext.repositories().courses());
 
   @Override
   public boolean execute() {

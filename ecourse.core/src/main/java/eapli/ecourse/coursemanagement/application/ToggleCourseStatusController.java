@@ -1,22 +1,14 @@
 package eapli.ecourse.coursemanagement.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 
 public class ToggleCourseStatusController {
-
-  private final RepositoryFactory repositoryFactory;
-
-  @Autowired
   private CourseRepository courseRepository;
 
-  public ToggleCourseStatusController() {
-    repositoryFactory = PersistenceContext.repositories();
+  public ToggleCourseStatusController(CourseRepository courseRepository) {
+    this.courseRepository = courseRepository;
+
   }
 
   public Iterable<Course> listOpenCourses() {
@@ -28,11 +20,11 @@ public class ToggleCourseStatusController {
   }
 
   public void toggleCourseStatus(Course course) {
-    if (course.state().equals(CourseState.State.CLOSED))
-      course.state().changeToOpen();
-    else {
-      course.state().changeToClose();
-    }
+    if (course == null)
+      throw new IllegalArgumentException("Course cannot be null");
+
+    course.toggleState();
+
     courseRepository.save(course);
   }
 }
