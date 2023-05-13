@@ -6,9 +6,11 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
@@ -40,6 +42,9 @@ public class Course implements AggregateRoot<CourseCode> {
 
   @Column(nullable = false)
   private Calendar createdAt;
+
+  @ManyToOne
+  private Teacher teacher;
 
   protected Course() {
     // for ORM
@@ -144,6 +149,12 @@ public class Course implements AggregateRoot<CourseCode> {
       throw new IllegalStateException("Cannot toggle state of a finished course");
 
     courseState.toggle();
+  }
+
+  public void addResponsibleTeacher(final Teacher teacher) {
+    Preconditions.noneNull(teacher);
+
+    this.teacher = teacher;
   }
 
   @Override

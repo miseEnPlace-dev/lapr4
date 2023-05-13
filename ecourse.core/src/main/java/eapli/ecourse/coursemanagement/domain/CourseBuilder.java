@@ -1,5 +1,8 @@
 package eapli.ecourse.coursemanagement.domain;
 
+import java.util.Set;
+
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
@@ -10,6 +13,8 @@ public class CourseBuilder implements DomainFactory<Course> {
   private CourseTitle title;
   private CourseDescription description;
   private EnrolmentLimits enrolmentLimits;
+  private Teacher teacher;
+  private Set<Teacher> teachers;
 
   public CourseBuilder withCode(String code) {
     this.code = new CourseCode(code);
@@ -48,6 +53,11 @@ public class CourseBuilder implements DomainFactory<Course> {
 
   public CourseBuilder withEnrolmentLimits(EnrolmentLimits enrolmentLimits) {
     this.enrolmentLimits = enrolmentLimits;
+    return this;
+  }
+
+  public CourseBuilder withTeacher(Teacher teacher) {
+    this.teacher = teacher;
     return this;
   }
 

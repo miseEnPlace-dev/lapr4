@@ -6,7 +6,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.dto.TeacherDTO;
-import eapli.ecourse.studentmanagement.domain.TaxPayerNumber;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;

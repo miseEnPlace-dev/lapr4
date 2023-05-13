@@ -2,7 +2,7 @@ package eapli.ecourse.teachermanagement.repositories;
 
 import java.util.Optional;
 
-import eapli.ecourse.studentmanagement.domain.TaxPayerNumber;
+import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.DomainRepository;
 
@@ -12,7 +12,7 @@ import eapli.framework.domain.repositories.DomainRepository;
  */
 public interface TeacherRepository extends DomainRepository<TaxPayerNumber, Teacher> {
   /**
-   * Returns the course with the given code.
+   * Returns the teacher with the given tax payer number.
    *
    * @param taxPayerNumber
    * @return
@@ -22,7 +22,7 @@ public interface TeacherRepository extends DomainRepository<TaxPayerNumber, Teac
   }
 
   /**
-   * Returns the courses that are open
+   * Returns the teachers registered
    *
    * @return
    */

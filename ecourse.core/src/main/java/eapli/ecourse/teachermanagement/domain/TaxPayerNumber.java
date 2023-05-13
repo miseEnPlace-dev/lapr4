@@ -1,4 +1,4 @@
-package eapli.ecourse.studentmanagement.domain;
+package eapli.ecourse.teachermanagement.domain;
 
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.strings.util.StringPredicates;
@@ -35,5 +35,21 @@ public class TaxPayerNumber implements ValueObject, Comparable<TaxPayerNumber> {
   @Override
   public int compareTo(final TaxPayerNumber arg0) {
     return number.compareTo(arg0.number);
+  }
+
+  @Override
+  public int hashCode() {
+    return number.hashCode();
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (obj == null || !(obj instanceof TaxPayerNumber)) {
+      return false;
+    }
+
+    final TaxPayerNumber other = (TaxPayerNumber) obj;
+
+    return this.number.equals(other.number);
   }
 }

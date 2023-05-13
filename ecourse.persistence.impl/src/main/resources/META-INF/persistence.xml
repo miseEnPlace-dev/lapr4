@@ -56,6 +56,7 @@
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.classmanagement.domain.Class</class>
+    <class>eapli.ecourse.teachermanagement.domain.Teacher</class>
     <class>eapli.ecourse.enrolmentmanagement.domain.Enrolment</class>
 
     <properties>
