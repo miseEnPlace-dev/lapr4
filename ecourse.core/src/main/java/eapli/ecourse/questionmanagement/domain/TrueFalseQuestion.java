@@ -7,12 +7,16 @@ import javax.persistence.Entity;
 public class TrueFalseQuestion extends Question {
   private static final long serialVersionUID = 1L;
 
-  @Column
+  @Column(nullable = false)
   private boolean correctAnswer;
 
   public TrueFalseQuestion(final QuestionBody body, QuestionType type, boolean correctAnswer) {
     super(body, type);
     this.correctAnswer = correctAnswer;
+  }
+
+  protected TrueFalseQuestion() {
+    // for ORM only
   }
 
   @Override

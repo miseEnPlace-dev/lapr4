@@ -3,10 +3,26 @@ package eapli.ecourse.questionmanagement.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.MapKeyColumn;
+
+@Entity
 public class MultipleChoiceQuestion extends Question {
   private static final long serialVersionUID = 1L;
 
+  @ElementCollection
+  @CollectionTable(name = "multipleChoiceCorrectAnswer")
+  @MapKeyColumn(name = "multipleChoiceCorrectOptionIdentifier")
+  @Column(name = "weight")
   private Map<Identifier, Double> correctAnswers;
+
+  @ElementCollection
+  @CollectionTable(name = "multipleChoiceOption")
+  @MapKeyColumn(name = "multipleOptionIdentifier")
+  @Column(name = "multipleChoiceOptionValue")
   private Map<Identifier, String> options;
 
   public MultipleChoiceQuestion(final QuestionBody body, QuestionType type) {
@@ -15,8 +31,12 @@ public class MultipleChoiceQuestion extends Question {
     this.options = new HashMap<>();
   }
 
-  public void addCorrectAnswer(final Identifier identifier, final Double correctAnswer) {
-    correctAnswers.put(identifier, correctAnswer);
+  protected MultipleChoiceQuestion() {
+    // for ORM only
+  }
+
+  public void addCorrectAnswer(final Identifier identifier, final Double weight) {
+    correctAnswers.put(identifier, weight);
   }
 
   public void addOption(final Identifier identifier, final String option) {

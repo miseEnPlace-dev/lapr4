@@ -3,22 +3,35 @@ package eapli.ecourse.questionmanagement.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.MapKeyColumn;
 
 @Entity
 public class MatchingQuestion extends Question {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty
-  private Map<Identifier, Identifier> options;
+  @ElementCollection
+  @CollectionTable(name = "matchingCorrectMatch")
+  @MapKeyColumn(name = "matchingCorrectMatchIdentifier")
+  @Column(name = "matchingCorrectOptionIdentifier")
+  private Map<String, String> correctMatches; // option identifier, match identifier
+  // this is a workaround for the fact that JPA does not support maps with
+  // the same key and value type
 
-  @JsonProperty
+  @ElementCollection
+  @CollectionTable(name = "match")
+  @MapKeyColumn(name = "matchIdentifier")
+  @Column(name = "matchValue")
   private Map<Identifier, String> matches;
 
-  @JsonProperty
-  private Map<Identifier, String> correctMatches;
+  @ElementCollection
+  @CollectionTable(name = "matchingOption")
+  @MapKeyColumn(name = "matchingOptionIdentifier")
+  @Column(name = "matchingOptionValue")
+  private Map<Identifier, String> options;
 
   public MatchingQuestion(final QuestionBody body, QuestionType type) {
     super(body, type);
@@ -27,16 +40,20 @@ public class MatchingQuestion extends Question {
     correctMatches = new HashMap<>();
   }
 
-  public void addOption(final Identifier option, final Identifier match) {
-    options.put(option, match);
+  protected MatchingQuestion() {
+    // for ORM only
+  }
+
+  public void addCorrectMatch(final String option, final String match) {
+    correctMatches.put(option, match);
   }
 
   public void addMatch(final Identifier match, final String description) {
     matches.put(match, description);
   }
 
-  public void addCorrectMatch(final Identifier match, final String description) {
-    correctMatches.put(match, description);
+  public void addOption(final Identifier match, final String description) {
+    options.put(match, description);
   }
 
   @Override

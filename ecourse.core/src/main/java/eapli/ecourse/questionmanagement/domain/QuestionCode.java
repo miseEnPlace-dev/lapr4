@@ -23,7 +23,6 @@ public class QuestionCode implements ValueObject, Comparable<QuestionCode> {
 
   protected QuestionCode() {
     // for ORM
-    this.code = null;
   }
 
   public static QuestionCode valueOf(final String questionCode) {

@@ -1,15 +1,26 @@
 package eapli.ecourse.questionmanagement.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class NumericalQuestion extends Question {
   private static final long serialVersionUID = 1L;
 
+  @Column(nullable = false)
   private Double correctAnswer;
+
+  @Column(nullable = false)
   private Double acceptedError;
 
   public NumericalQuestion(final QuestionBody body, QuestionType type, double correctAnswer, double acceptedError) {
     super(body, type);
     this.correctAnswer = correctAnswer;
     this.acceptedError = acceptedError;
+  }
+
+  protected NumericalQuestion() {
+    // for ORM only
   }
 
   public Double correctAnswer() {
