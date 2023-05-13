@@ -4,6 +4,7 @@ import eapli.ecourse.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
+import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
@@ -85,4 +86,13 @@ public interface RepositoryFactory {
   CourseRepository courses();
 
   CourseRepository courses(TransactionalContext autoTx);
+
+  /**
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  TeacherRepository teachers();
+
+  TeacherRepository teachers(TransactionalContext autoTx);
 }
