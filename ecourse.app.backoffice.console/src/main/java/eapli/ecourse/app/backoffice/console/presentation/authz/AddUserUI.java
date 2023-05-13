@@ -3,7 +3,6 @@ package eapli.ecourse.app.backoffice.console.presentation.authz;
 import java.util.HashSet;
 import java.util.Set;
 
-import eapli.ecourse.app.common.console.presentation.student.StudentDataWidget;
 import eapli.ecourse.usermanagement.application.AddUserController;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -26,8 +25,8 @@ public class AddUserUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final StudentDataWidget studentData = new StudentDataWidget();
-    studentData.show();
+    final SystemUserDataWidget userData = new SystemUserDataWidget();
+    userData.show();
 
     final Set<Role> roleTypes = new HashSet<>();
     boolean show;
@@ -36,9 +35,9 @@ public class AddUserUI extends AbstractUI {
     } while (!show);
 
     try {
-      this.theController.addUser(studentData.username(), studentData.password(), studentData.firstName(),
-          studentData.lastName(),
-          studentData.email(), roleTypes);
+      this.theController.addUser(userData.username(), userData.password(), userData.firstName(),
+          userData.lastName(),
+          userData.email(), roleTypes);
     } catch (@SuppressWarnings("unused") final IntegrityViolationException e) {
       System.out.println("That username is already in use.");
     }
