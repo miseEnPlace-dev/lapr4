@@ -40,6 +40,9 @@ public class AddUserUI extends AbstractUI {
           userData.email(), roleTypes);
     } catch (@SuppressWarnings("unused") final IntegrityViolationException e) {
       System.out.println("That username is already in use.");
+    } catch (IllegalArgumentException e) {
+      System.out.println("Error creating the account: " + e.getMessage() + ". Please try again.\n");
+      return true;
     }
 
     return false;
