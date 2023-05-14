@@ -42,7 +42,6 @@ public class QuestionsBootstrapper implements Action {
   }
 
   private void addShortAnswerQuestion() {
-
     ShortAnswerQuestion shortAnswerQuestion = new ShortAnswerQuestion(QuestionBody.valueOf("Qual a melhor coisa?"),
         QuestionType.FORMATIVE);
     shortAnswerQuestion.addCorrectAnswer("coisa", 0.2);

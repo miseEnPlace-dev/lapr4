@@ -32,7 +32,7 @@ public class AddQuestionsController {
   }
 
   public void addQuestionsFromFile(String filename, CourseDTO courseDTO) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
 
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     List<Question> questions = QuestionsMain.parseWithVisitor(filename);
