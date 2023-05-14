@@ -28,65 +28,65 @@ public interface QuestionListener extends ParseTreeListener {
 	 */
 	void exitQuestion(QuestionParser.QuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#numerical_question}.
+	 * Enter a parse tree produced by {@link QuestionParser#numericalQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void enterNumerical_question(QuestionParser.Numerical_questionContext ctx);
+	void enterNumericalQuestion(QuestionParser.NumericalQuestionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#numerical_question}.
+	 * Exit a parse tree produced by {@link QuestionParser#numericalQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void exitNumerical_question(QuestionParser.Numerical_questionContext ctx);
+	void exitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#multiple_choice_question}.
+	 * Enter a parse tree produced by {@link QuestionParser#multipleChoiceQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultiple_choice_question(QuestionParser.Multiple_choice_questionContext ctx);
+	void enterMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#multiple_choice_question}.
+	 * Exit a parse tree produced by {@link QuestionParser#multipleChoiceQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultiple_choice_question(QuestionParser.Multiple_choice_questionContext ctx);
+	void exitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#short_answer_question}.
+	 * Enter a parse tree produced by {@link QuestionParser#shortAnswerQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void enterShort_answer_question(QuestionParser.Short_answer_questionContext ctx);
+	void enterShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#short_answer_question}.
+	 * Exit a parse tree produced by {@link QuestionParser#shortAnswerQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void exitShort_answer_question(QuestionParser.Short_answer_questionContext ctx);
+	void exitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#true_false_question}.
+	 * Enter a parse tree produced by {@link QuestionParser#trueFalseQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void enterTrue_false_question(QuestionParser.True_false_questionContext ctx);
+	void enterTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#true_false_question}.
+	 * Exit a parse tree produced by {@link QuestionParser#trueFalseQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void exitTrue_false_question(QuestionParser.True_false_questionContext ctx);
+	void exitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#matching_question}.
+	 * Enter a parse tree produced by {@link QuestionParser#matchingQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void enterMatching_question(QuestionParser.Matching_questionContext ctx);
+	void enterMatchingQuestion(QuestionParser.MatchingQuestionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#matching_question}.
+	 * Exit a parse tree produced by {@link QuestionParser#matchingQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void exitMatching_question(QuestionParser.Matching_questionContext ctx);
+	void exitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#missing_words_question}.
+	 * Enter a parse tree produced by {@link QuestionParser#missingWordsQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void enterMissing_words_question(QuestionParser.Missing_words_questionContext ctx);
+	void enterMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#missing_words_question}.
+	 * Exit a parse tree produced by {@link QuestionParser#missingWordsQuestion}.
 	 * @param ctx the parse tree
 	 */
-	void exitMissing_words_question(QuestionParser.Missing_words_questionContext ctx);
+	void exitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link QuestionParser#body}.
 	 * @param ctx the parse tree
@@ -108,25 +108,45 @@ public interface QuestionListener extends ParseTreeListener {
 	 */
 	void exitFeedback(QuestionParser.FeedbackContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#short_answer_correct_answer}.
+	 * Enter a parse tree produced by {@link QuestionParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void enterShort_answer_correct_answer(QuestionParser.Short_answer_correct_answerContext ctx);
+	void enterShortAnswerCorrectAnswer(QuestionParser.ShortAnswerCorrectAnswerContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#short_answer_correct_answer}.
+	 * Exit a parse tree produced by {@link QuestionParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void exitShort_answer_correct_answer(QuestionParser.Short_answer_correct_answerContext ctx);
+	void exitShortAnswerCorrectAnswer(QuestionParser.ShortAnswerCorrectAnswerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#multiple_choice_correct_answer}.
+	 * Enter a parse tree produced by {@link QuestionParser#multipleChoiceCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultiple_choice_correct_answer(QuestionParser.Multiple_choice_correct_answerContext ctx);
+	void enterMultipleChoiceCorrectAnswer(QuestionParser.MultipleChoiceCorrectAnswerContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#multiple_choice_correct_answer}.
+	 * Exit a parse tree produced by {@link QuestionParser#multipleChoiceCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultiple_choice_correct_answer(QuestionParser.Multiple_choice_correct_answerContext ctx);
+	void exitMultipleChoiceCorrectAnswer(QuestionParser.MultipleChoiceCorrectAnswerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link QuestionParser#numericalCorrectAnswer}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumericalCorrectAnswer(QuestionParser.NumericalCorrectAnswerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link QuestionParser#numericalCorrectAnswer}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumericalCorrectAnswer(QuestionParser.NumericalCorrectAnswerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link QuestionParser#numericalAcceptedError}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumericalAcceptedError(QuestionParser.NumericalAcceptedErrorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link QuestionParser#numericalAcceptedError}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumericalAcceptedError(QuestionParser.NumericalAcceptedErrorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link QuestionParser#option}.
 	 * @param ctx the parse tree
@@ -148,23 +168,33 @@ public interface QuestionListener extends ParseTreeListener {
 	 */
 	void exitMatch(QuestionParser.MatchContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#matching_correct_answer}.
+	 * Enter a parse tree produced by {@link QuestionParser#matchingCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void enterMatching_correct_answer(QuestionParser.Matching_correct_answerContext ctx);
+	void enterMatchingCorrectAnswer(QuestionParser.MatchingCorrectAnswerContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#matching_correct_answer}.
+	 * Exit a parse tree produced by {@link QuestionParser#matchingCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void exitMatching_correct_answer(QuestionParser.Matching_correct_answerContext ctx);
+	void exitMatchingCorrectAnswer(QuestionParser.MatchingCorrectAnswerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link QuestionParser#missing_words_correct_answer}.
+	 * Enter a parse tree produced by {@link QuestionParser#missingWordsCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void enterMissing_words_correct_answer(QuestionParser.Missing_words_correct_answerContext ctx);
+	void enterMissingWordsCorrectAnswer(QuestionParser.MissingWordsCorrectAnswerContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link QuestionParser#missing_words_correct_answer}.
+	 * Exit a parse tree produced by {@link QuestionParser#missingWordsCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */
-	void exitMissing_words_correct_answer(QuestionParser.Missing_words_correct_answerContext ctx);
+	void exitMissingWordsCorrectAnswer(QuestionParser.MissingWordsCorrectAnswerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link QuestionParser#trueFalseCorrectAnswer}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrueFalseCorrectAnswer(QuestionParser.TrueFalseCorrectAnswerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link QuestionParser#trueFalseCorrectAnswer}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrueFalseCorrectAnswer(QuestionParser.TrueFalseCorrectAnswerContext ctx);
 }

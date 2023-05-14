@@ -23,6 +23,14 @@ public class TrueFalseQuestion extends Question {
     // for ORM only
   }
 
+  public void changeCorrectAnswer(boolean correctAnswer) {
+    this.correctAnswer = correctAnswer;
+  }
+
+  public boolean correctAnswer() {
+    return this.correctAnswer;
+  }
+
   @Override
   public boolean sameAs(Object other) {
     if (!(other instanceof TrueFalseQuestion))

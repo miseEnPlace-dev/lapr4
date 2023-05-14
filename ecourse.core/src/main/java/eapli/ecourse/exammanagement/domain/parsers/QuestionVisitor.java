@@ -23,41 +23,41 @@ public interface QuestionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQuestion(QuestionParser.QuestionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#numerical_question}.
+	 * Visit a parse tree produced by {@link QuestionParser#numericalQuestion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumerical_question(QuestionParser.Numerical_questionContext ctx);
+	T visitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#multiple_choice_question}.
+	 * Visit a parse tree produced by {@link QuestionParser#multipleChoiceQuestion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultiple_choice_question(QuestionParser.Multiple_choice_questionContext ctx);
+	T visitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#short_answer_question}.
+	 * Visit a parse tree produced by {@link QuestionParser#shortAnswerQuestion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitShort_answer_question(QuestionParser.Short_answer_questionContext ctx);
+	T visitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#true_false_question}.
+	 * Visit a parse tree produced by {@link QuestionParser#trueFalseQuestion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTrue_false_question(QuestionParser.True_false_questionContext ctx);
+	T visitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#matching_question}.
+	 * Visit a parse tree produced by {@link QuestionParser#matchingQuestion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMatching_question(QuestionParser.Matching_questionContext ctx);
+	T visitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#missing_words_question}.
+	 * Visit a parse tree produced by {@link QuestionParser#missingWordsQuestion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMissing_words_question(QuestionParser.Missing_words_questionContext ctx);
+	T visitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link QuestionParser#body}.
 	 * @param ctx the parse tree
@@ -71,17 +71,29 @@ public interface QuestionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFeedback(QuestionParser.FeedbackContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#short_answer_correct_answer}.
+	 * Visit a parse tree produced by {@link QuestionParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitShort_answer_correct_answer(QuestionParser.Short_answer_correct_answerContext ctx);
+	T visitShortAnswerCorrectAnswer(QuestionParser.ShortAnswerCorrectAnswerContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#multiple_choice_correct_answer}.
+	 * Visit a parse tree produced by {@link QuestionParser#multipleChoiceCorrectAnswer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultiple_choice_correct_answer(QuestionParser.Multiple_choice_correct_answerContext ctx);
+	T visitMultipleChoiceCorrectAnswer(QuestionParser.MultipleChoiceCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link QuestionParser#numericalCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumericalCorrectAnswer(QuestionParser.NumericalCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link QuestionParser#numericalAcceptedError}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumericalAcceptedError(QuestionParser.NumericalAcceptedErrorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link QuestionParser#option}.
 	 * @param ctx the parse tree
@@ -95,15 +107,21 @@ public interface QuestionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMatch(QuestionParser.MatchContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#matching_correct_answer}.
+	 * Visit a parse tree produced by {@link QuestionParser#matchingCorrectAnswer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMatching_correct_answer(QuestionParser.Matching_correct_answerContext ctx);
+	T visitMatchingCorrectAnswer(QuestionParser.MatchingCorrectAnswerContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link QuestionParser#missing_words_correct_answer}.
+	 * Visit a parse tree produced by {@link QuestionParser#missingWordsCorrectAnswer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMissing_words_correct_answer(QuestionParser.Missing_words_correct_answerContext ctx);
+	T visitMissingWordsCorrectAnswer(QuestionParser.MissingWordsCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link QuestionParser#trueFalseCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrueFalseCorrectAnswer(QuestionParser.TrueFalseCorrectAnswerContext ctx);
 }

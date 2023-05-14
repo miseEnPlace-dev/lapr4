@@ -36,6 +36,14 @@ public class NumericalQuestion extends Question {
     return this.acceptedError;
   }
 
+  public void changeCorrectAnswer(double correctAnswer) {
+    this.correctAnswer = correctAnswer;
+  }
+
+  public void changeAcceptedError(double acceptedError) {
+    this.acceptedError = acceptedError;
+  }
+
   @Override
   public boolean sameAs(Object other) {
     if (!(other instanceof NumericalQuestion))

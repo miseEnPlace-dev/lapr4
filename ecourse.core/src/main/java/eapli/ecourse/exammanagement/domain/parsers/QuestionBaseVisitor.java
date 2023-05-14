@@ -31,42 +31,42 @@ public class QuestionBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNumerical_question(QuestionParser.Numerical_questionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMultiple_choice_question(QuestionParser.Multiple_choice_questionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitShort_answer_question(QuestionParser.Short_answer_questionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTrue_false_question(QuestionParser.True_false_questionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMatching_question(QuestionParser.Matching_questionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMissing_words_question(QuestionParser.Missing_words_questionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -87,14 +87,28 @@ public class QuestionBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitShort_answer_correct_answer(QuestionParser.Short_answer_correct_answerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitShortAnswerCorrectAnswer(QuestionParser.ShortAnswerCorrectAnswerContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMultiple_choice_correct_answer(QuestionParser.Multiple_choice_correct_answerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMultipleChoiceCorrectAnswer(QuestionParser.MultipleChoiceCorrectAnswerContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitNumericalCorrectAnswer(QuestionParser.NumericalCorrectAnswerContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitNumericalAcceptedError(QuestionParser.NumericalAcceptedErrorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -115,12 +129,19 @@ public class QuestionBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMatching_correct_answer(QuestionParser.Matching_correct_answerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMatchingCorrectAnswer(QuestionParser.MatchingCorrectAnswerContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMissing_words_correct_answer(QuestionParser.Missing_words_correct_answerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMissingWordsCorrectAnswer(QuestionParser.MissingWordsCorrectAnswerContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitTrueFalseCorrectAnswer(QuestionParser.TrueFalseCorrectAnswerContext ctx) { return visitChildren(ctx); }
 }
