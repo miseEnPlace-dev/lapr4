@@ -19,6 +19,8 @@ import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentID;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
@@ -34,8 +36,9 @@ public class EnrolmentTest {
   }
 
   public static Course dummyCourse(final CourseCode code, final CourseTitle title, final CourseDescription description,
-      final EnrolmentLimits enrolmentLimits, final CourseState courseState, final CourseEnrolmentState enrolmentState) {
-    return new Course(code, title, description, enrolmentLimits, courseState, enrolmentState);
+      final EnrolmentLimits enrolmentLimits, final CourseState courseState, final CourseEnrolmentState enrolmentState,
+      final Teacher teacher) {
+    return new Course(code, title, description, enrolmentLimits, courseState, enrolmentState, teacher);
   }
 
   public static Student dummyStudent(final SystemUser user, final MecanographicNumber mecanographicNumber) {
@@ -49,7 +52,11 @@ public class EnrolmentTest {
   private Course getNewDummyCourse() {
     return dummyCourse(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"), CourseDescription.valueOf("dummy"),
         EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
-        new CourseEnrolmentState(CourseEnrolmentState.EnrolmentState.CLOSED));
+        new CourseEnrolmentState(CourseEnrolmentState.EnrolmentState.CLOSED), getNewDummyTeacher());
+  }
+
+  private Teacher getNewDummyTeacher() {
+    return new Teacher(getNewDummyUser(), TaxPayerNumber.valueOf("123456789"));
   }
 
   private Student getNewDummyStudent() {
@@ -122,7 +129,7 @@ public class EnrolmentTest {
     final Course c = dummyCourse(CourseCode.valueOf("4321"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"),
         EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
-        new CourseEnrolmentState(CourseEnrolmentState.EnrolmentState.CLOSED));
+        new CourseEnrolmentState(CourseEnrolmentState.EnrolmentState.CLOSED), getNewDummyTeacher());
 
     final Enrolment enrolment1 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(id, getNewDummyStudent(), c);

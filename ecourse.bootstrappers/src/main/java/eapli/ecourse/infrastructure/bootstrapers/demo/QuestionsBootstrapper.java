@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.questionmanagement.application.AddQuestionsController;
 import eapli.ecourse.questionmanagement.domain.Identifier;
@@ -17,14 +17,16 @@ import eapli.ecourse.questionmanagement.domain.QuestionType;
 import eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion;
 import eapli.ecourse.questionmanagement.domain.TrueFalseQuestion;
 import eapli.framework.actions.Action;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 
 public class QuestionsBootstrapper implements Action {
   private static final Logger LOGGER = LogManager.getLogger(StudentBootstrapper.class);
 
   private final AddQuestionsController controller = new AddQuestionsController(
-      PersistenceContext.repositories().questions(), PersistenceContext.repositories().courses());
+      PersistenceContext.repositories().questions(), PersistenceContext.repositories().courses(),
+      AuthzRegistry.authorizationService());
 
-  private Course course = new CourseBootstrapperBase().getDummyCourse();
+  private Course course;
 
   private void addMultipleChoiceQuestion() {
     MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(
@@ -40,6 +42,7 @@ public class QuestionsBootstrapper implements Action {
   }
 
   private void addShortAnswerQuestion() {
+
     ShortAnswerQuestion shortAnswerQuestion = new ShortAnswerQuestion(QuestionBody.valueOf("Qual a melhor coisa?"),
         QuestionType.FORMATIVE);
     shortAnswerQuestion.addCorrectAnswer("coisa", 0.2);
@@ -99,10 +102,12 @@ public class QuestionsBootstrapper implements Action {
 
   @Override
   public boolean execute() {
-    addMultipleChoiceQuestion();
+    course = PersistenceContext.repositories().courses().findByCode(CourseCode.valueOf("1234")).get();
+
     addShortAnswerQuestion();
     addTrueOrFalseQuestion();
     addMissingWordsQuestion();
+    addMultipleChoiceQuestion();
     addMatchingQuestion();
     addNumericalQuestion();
 

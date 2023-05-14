@@ -4,13 +4,14 @@ import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.questionmanagement.application.AddQuestionsController;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class AddQuestionsUI extends AbstractUI {
   AddQuestionsController ctrl = new AddQuestionsController(PersistenceContext.repositories().questions(),
-      PersistenceContext.repositories().courses());
+      PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {

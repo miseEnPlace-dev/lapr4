@@ -65,9 +65,9 @@ public class CourseBuilder implements DomainFactory<Course> {
     if (course != null)
       return course;
 
-    Preconditions.noneNull(code, title, description, enrolmentLimits);
+    Preconditions.noneNull(code, title, description, enrolmentLimits, teacher);
 
-    course = new Course(code, title, description, enrolmentLimits);
+    course = new Course(code, title, description, enrolmentLimits, teacher);
     return course;
   }
 

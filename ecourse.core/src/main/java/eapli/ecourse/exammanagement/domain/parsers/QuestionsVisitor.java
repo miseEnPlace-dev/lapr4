@@ -58,7 +58,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
       if (o.STRING().size() > 1) {
         String feedback = extractString(o.STRING(1).getText());
-        Feedback f = new Feedback(feedback);
+        Feedback f = Feedback.valueOf(feedback);
         q.addFeedback(identifier, f);
       }
 
@@ -128,7 +128,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
       if (o.STRING().size() > 1) {
         String feedback = extractString(o.STRING(1).getText());
-        Feedback f = new Feedback(feedback);
+        Feedback f = Feedback.valueOf(feedback);
         q.addFeedback(identifier, f);
       }
 
@@ -206,7 +206,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   public List<Question> visitFeedback(QuestionParser.FeedbackContext ctx) {
     String feedback = extractString(ctx.STRING().getText());
 
-    Feedback f = new Feedback(feedback);
+    Feedback f = Feedback.valueOf(feedback);
     this.question.changeFeedback(f);
     return null;
   }

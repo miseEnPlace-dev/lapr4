@@ -6,6 +6,7 @@ import java.util.Set;
 import eapli.ecourse.coursemanagement.dto.TeacherDTO;
 import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -24,6 +25,7 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
     SystemUser u = registerUser(username, password, firstName, lastName, email, roles);
 
     final Teacher teacher = new Teacher(u, TaxPayerNumber.valueOf("123456789"));
+    PersistenceContext.repositories().teachers().save(teacher);
 
     return teacher.toDto();
   }

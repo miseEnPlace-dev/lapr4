@@ -19,7 +19,8 @@ import eapli.framework.strings.util.Strings;
 import eapli.framework.validations.Invariants;
 
 /**
- * eCourse Bootstrapping data. This class bootstraps Master/reference data of the application.
+ * eCourse Bootstrapping data. This class bootstraps Master/reference data of
+ * the application.
  *
  * @author Paulo Gandra de Sousa
  */
@@ -37,7 +38,7 @@ public class ECourseBootstrapper implements Action {
   @Override
   public boolean execute() {
     // declare bootstrap actions
-    final Action[] actions = {new MasterUsersBootstrapper()};
+    final Action[] actions = { new MasterUsersBootstrapper() };
 
     registerPowerUser(userRepository);
     authenticateForBootstrapping();
@@ -45,14 +46,15 @@ public class ECourseBootstrapper implements Action {
     // execute all bootstrapping
     var ret = true;
     for (final Action boot : actions) {
-      System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
+      System.out.println("\n -- Bootstrapping " + nameOfEntity(boot) + "... --\n");
       ret &= boot.execute();
     }
     return ret;
   }
 
   /**
-   * Register a power user directly in the persistence layer as we need to circumvent authorizations
+   * Register a power user directly in the persistence layer as we need to
+   * circumvent authorizations
    * in the Application Layer.
    */
   public static boolean registerPowerUser(final UserRepository userRepository) {

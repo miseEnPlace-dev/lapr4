@@ -31,7 +31,7 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   @Enumerated(EnumType.STRING)
   private QuestionType type;
 
-  @Column
+  @Column(nullable = true)
   private Feedback feedback;
 
   @ManyToOne

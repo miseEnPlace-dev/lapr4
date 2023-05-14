@@ -51,7 +51,8 @@ public class Course implements AggregateRoot<CourseCode> {
   }
 
   public Course(final CourseCode code, final CourseTitle title, final CourseDescription description,
-      final EnrolmentLimits enrolmentLimits, final CourseState courseState, final CourseEnrolmentState enrolmentState) {
+      final EnrolmentLimits enrolmentLimits, final CourseState courseState, final CourseEnrolmentState enrolmentState,
+      Teacher teacher) {
     Preconditions.noneNull(code, title, description, enrolmentLimits, courseState, enrolmentState);
 
     this.code = code;
@@ -60,11 +61,12 @@ public class Course implements AggregateRoot<CourseCode> {
     this.enrolmentLimits = enrolmentLimits;
     this.courseState = courseState;
     this.enrolmentState = enrolmentState;
+    this.teacher = teacher;
     this.createdAt = Calendar.getInstance();
   }
 
   public Course(final CourseCode code, final CourseTitle title, final CourseDescription description,
-      final EnrolmentLimits enrolmentLimits) {
+      final EnrolmentLimits enrolmentLimits, Teacher teacher) {
     Preconditions.noneNull(code, title, description, enrolmentLimits);
 
     this.code = code;
@@ -73,6 +75,7 @@ public class Course implements AggregateRoot<CourseCode> {
     this.enrolmentLimits = enrolmentLimits;
     this.courseState = new CourseState();
     this.enrolmentState = new CourseEnrolmentState();
+    this.teacher = teacher;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -98,7 +101,8 @@ public class Course implements AggregateRoot<CourseCode> {
 
     return code().equals(that.code()) && title().equals(that.title())
         && description().equals(that.description()) && enrolmentLimits().equals(that.enrolmentLimits())
-        && state().equals(that.state()) && enrolmentState().equals(that.enrolmentState());
+        && state().equals(that.state()) && enrolmentState().equals(that.enrolmentState())
+        && teacher().equals(that.teacher());
   }
 
   public CourseCode code() {
@@ -127,6 +131,10 @@ public class Course implements AggregateRoot<CourseCode> {
 
   public EnrolmentLimits enrolmentLimits() {
     return this.enrolmentLimits;
+  }
+
+  public Teacher teacher() {
+    return this.teacher;
   }
 
   public CourseDTO toDto() {
