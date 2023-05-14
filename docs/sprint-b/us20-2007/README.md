@@ -227,8 +227,9 @@ You can check a pratical example with all the question types [here](../../../eco
 - Relevant implementation details
 
 ```java
-  public void sample() {
-    return true;
+  public void addQuestionsFromFile(String filename) {
+    List<Question> questions = QuestionsMain.parseWithVisitor(filename);
+    questions.forEach(question -> addQuestion(question));
   }
 ```
 

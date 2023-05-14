@@ -178,8 +178,16 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
-  public void sample() {
-    return true;
+  public CourseDTO toggleEnrolmentState(CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    Optional<Course> c = courseRepository.findByCode(courseDTO.getCode());
+    if (!c.isPresent())
+      throw new IllegalArgumentException("There is no course with the given code");
+
+    c.get().toggleEnrolmentState();
+
+    return courseRepository.save(c.get()).toDto();
   }
 ```
 

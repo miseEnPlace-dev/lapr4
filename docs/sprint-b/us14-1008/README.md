@@ -1,7 +1,5 @@
 # User Story 1008 - Apply to a Course
 
-> As Student, I want to request my enrollment in a course.
-
 |             |             |
 | ----------- | ----------- |
 | ID          | 14          |
@@ -9,10 +7,95 @@
 | Application | 2 - Courses |
 | Priority    | 1           |
 
-## Acceptance Criteria
+---
 
-- N/A.
+## 1. Context
 
-## Requirements
+This is the first time this task is assigned to be developed. This is a new functionality that is needed so the students can apply to courses.
+
+## 2. Requirements
+
+### "As Student, I want to request my enrollment in a course."
+
+## 2.1. Client Specifications
+
+- xxx
+
+## 2.2. Client Clarifications
+
+> [**Question:** Can one student be enrolled in different courses?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21922)
+>
+> **Answer**: "Yes"
+
+## 2.3. Functional Requirements
 
 - **FRC07** Request Enrollment in Course - The student requests to be enrolled in a course.
+
+## Acceptance Criteria
+
+- N/a
+
+---
+
+## 3. Analysis
+
+### 3.1. Conditions
+
+- xxx
+
+### 3.2. System Sequence Diagram
+
+![US1008_SSD](out/US1008_SSD.svg)
+
+### 3.3. Partial Domain Model
+
+![US1008_DM](out/US1008_DM.svg)
+
+## 4. Design
+
+### 4.1. Functionality Realization
+
+![US1008_SD](out/US1008_SD.svg)
+
+### 4.2. Class Diagram
+
+![US1008_CD](out/US1008_CD.svg)
+
+### 4.3. Applied Patterns
+
+- xxx
+
+### 4.4. Tests
+
+_Note: This are some simplified versions of the tests for readability purposes._
+
+**Test 1:** xxx
+
+```java
+  @Test
+  public void xxx() {
+    // Given
+    // When
+    // Then
+  }
+```
+
+## 5. Implementation
+
+### 5.1. Controller
+
+- Relevant implementation details
+
+```java
+   public void sample() {
+    return true;
+  }
+```
+
+## 6. Integration & Demonstration
+
+![US1008_DEMO](US1008_DEMO.png)
+
+## 7. Observations
+
+- xxx
