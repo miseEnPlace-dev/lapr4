@@ -32,7 +32,7 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   private QuestionType type;
 
   @Column(nullable = true)
-  private Feedback feedback;
+  private Feedback generalFeedback;
 
   @ManyToOne
   private Course course;
@@ -41,7 +41,7 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
     this.code = QuestionCode.newID();
     this.body = body;
     this.type = type;
-    this.feedback = generalFeedback;
+    this.generalFeedback = generalFeedback;
     this.course = course;
   }
 
@@ -65,7 +65,7 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   }
 
   public void changeFeedback(Feedback feedback) {
-    this.feedback = feedback;
+    this.generalFeedback = feedback;
   }
 
   public void changeCourse(Course course) {
@@ -81,7 +81,7 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   }
 
   public Feedback feedback() {
-    return this.feedback;
+    return this.generalFeedback;
   }
 
   public Course course() {

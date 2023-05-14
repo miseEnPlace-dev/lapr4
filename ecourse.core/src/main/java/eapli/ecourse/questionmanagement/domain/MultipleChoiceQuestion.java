@@ -29,20 +29,20 @@ public class MultipleChoiceQuestion extends Question {
   @CollectionTable(name = "multipleChoiceOptionFeedback")
   @MapKeyColumn(name = "multipleOptionIdentifier")
   @Column(name = "multipleChoiceFeedbackValue")
-  private Map<Identifier, Feedback> feedback;
+  private Map<Identifier, Feedback> feedbacks;
 
   public MultipleChoiceQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
     this.correctAnswers = new HashMap<>();
     this.options = new HashMap<>();
-    this.feedback = new HashMap<>();
+    this.feedbacks = new HashMap<>();
   }
 
   public MultipleChoiceQuestion(final QuestionType type) {
     super(type);
     this.correctAnswers = new HashMap<>();
     this.options = new HashMap<>();
-    this.feedback = new HashMap<>();
+    this.feedbacks = new HashMap<>();
   }
 
   protected MultipleChoiceQuestion() {
@@ -58,7 +58,7 @@ public class MultipleChoiceQuestion extends Question {
   }
 
   public void addFeedback(final Identifier identifier, final Feedback feedback) {
-    this.feedback.put(identifier, feedback);
+    this.feedbacks.put(identifier, feedback);
   }
 
   public Map<Identifier, Double> correctAnswers() {
@@ -67,6 +67,10 @@ public class MultipleChoiceQuestion extends Question {
 
   public Map<Identifier, String> options() {
     return this.options;
+  }
+
+  public Map<Identifier, Feedback> feedbacks() {
+    return this.feedbacks;
   }
 
   @Override
