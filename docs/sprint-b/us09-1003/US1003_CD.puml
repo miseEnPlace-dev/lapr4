@@ -23,10 +23,10 @@ class PersistenceContext {
   + repositories()
 }
 
-class CourseService {
+class CourseListService {
   - courseRepository
 
-  + CourseService(courseRepository)
+  + CourseListService(courseRepository)
 
   + listNotClosedCourses()
   + toggleEnrolmentState(course)
@@ -38,7 +38,7 @@ class ManageCourseEnrolmentStateUI {}
 class ManageCourseEnrolmentStateController {
   - courseRepository
   - authorizationService
-  - courseService
+  - courseListService
 
   + ManageCourseEnrolmentStateController(courseRepository, authorizationService)
 
@@ -87,11 +87,11 @@ class CourseDTOParser {
 
 ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
 ManageCourseEnrolmentStateUI ..> PersistenceContext
-ManageCourseEnrolmentStateController --> CourseService
+ManageCourseEnrolmentStateController --> CourseListService
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
 
-CourseService ..> Course
+CourseListService ..> Course
 ManageCourseEnrolmentStateController --> CourseRepository
 
 CourseDTOParser ..> CourseDTO

@@ -9,14 +9,14 @@ import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
 public class ToggleCourseEnrolmentStateController {
-  private final CourseService service;
+  private final CourseListService service;
   private final CourseRepository courseRepository;
   private final AuthorizationService authz;
 
   public ToggleCourseEnrolmentStateController(CourseRepository courseRepository, AuthorizationService authz) {
     this.courseRepository = courseRepository;
     this.authz = authz;
-    this.service = new CourseService(courseRepository);
+    this.service = new CourseListService(courseRepository);
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {

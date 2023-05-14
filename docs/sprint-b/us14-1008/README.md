@@ -19,13 +19,17 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.1. Client Specifications
 
-- xxx
+- "Students enroll in courses."
 
 ## 2.2. Client Clarifications
 
 > [**Question:** Can one student be enrolled in different courses?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21922)
 >
 > **Answer**: "Yes"
+
+> [**Question:** In US1009, What are the criteria for a student to be enrolled in a course?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22498)
+>
+> **Answer**: "This is not a system requirement. You should only register the decision of the manager."
 
 ## 2.3. Functional Requirements
 
@@ -41,7 +45,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 3.1. Conditions
 
-- xxx
+- The student must be authenticated
 
 ### 3.2. System Sequence Diagram
 

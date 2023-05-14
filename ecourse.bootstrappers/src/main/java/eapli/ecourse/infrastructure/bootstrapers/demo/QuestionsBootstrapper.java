@@ -3,6 +3,8 @@ package eapli.ecourse.infrastructure.bootstrapers.demo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.questionmanagement.application.AddQuestionsController;
 import eapli.ecourse.questionmanagement.domain.Identifier;
@@ -20,7 +22,9 @@ public class QuestionsBootstrapper implements Action {
   private static final Logger LOGGER = LogManager.getLogger(StudentBootstrapper.class);
 
   private final AddQuestionsController controller = new AddQuestionsController(
-      PersistenceContext.repositories().questions());
+      PersistenceContext.repositories().questions(), PersistenceContext.repositories().courses());
+
+  private Course course = new CourseBootstrapperBase().getDummyCourse();
 
   private void addMultipleChoiceQuestion() {
     MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(
@@ -31,6 +35,7 @@ public class QuestionsBootstrapper implements Action {
     multipleChoiceQuestion.addOption(Identifier.valueOf("123"), "coisa");
     multipleChoiceQuestion.addOption(Identifier.valueOf("456"), "coiso");
     multipleChoiceQuestion.addOption(Identifier.valueOf("789"), "outra coisa");
+    multipleChoiceQuestion.changeCourse(course);
     controller.addQuestion(multipleChoiceQuestion);
   }
 
@@ -39,6 +44,7 @@ public class QuestionsBootstrapper implements Action {
         QuestionType.FORMATIVE);
     shortAnswerQuestion.addCorrectAnswer("coisa", 0.2);
     shortAnswerQuestion.addCorrectAnswer("coiso", 0.4);
+    shortAnswerQuestion.changeCourse(course);
     controller.addQuestion(shortAnswerQuestion);
   }
 
@@ -46,6 +52,7 @@ public class QuestionsBootstrapper implements Action {
     TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion(QuestionBody.valueOf("O céu é azul?"),
         QuestionType.FORMATIVE, true);
 
+    trueFalseQuestion.changeCourse(course);
     controller.addQuestion(trueFalseQuestion);
   }
 
@@ -58,6 +65,7 @@ public class QuestionsBootstrapper implements Action {
     missingWordsQuestion.addOption("verde");
     missingWordsQuestion.addOption("amarelo");
     missingWordsQuestion.addOption("vermelho");
+    missingWordsQuestion.changeCourse(course);
     controller.addQuestion(missingWordsQuestion);
   }
 
@@ -77,6 +85,7 @@ public class QuestionsBootstrapper implements Action {
     matchingQuestion.addOption(Identifier.valueOf("B"), "associação 2");
     matchingQuestion.addOption(Identifier.valueOf("C"), "associação 3");
 
+    matchingQuestion.changeCourse(course);
     controller.addQuestion(matchingQuestion);
   }
 
@@ -84,6 +93,7 @@ public class QuestionsBootstrapper implements Action {
     NumericalQuestion numericalQuestion = new NumericalQuestion(
         QuestionBody.valueOf("Qual o raio de uma circunferência de raio 1.2cm?"),
         QuestionType.FORMATIVE, 1.2, 0.1);
+    numericalQuestion.changeCourse(course);
     controller.addQuestion(numericalQuestion);
   }
 

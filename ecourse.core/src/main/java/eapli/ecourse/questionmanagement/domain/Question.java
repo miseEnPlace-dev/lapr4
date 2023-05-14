@@ -7,8 +7,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.framework.domain.model.AggregateRoot;
 
 @Entity
@@ -30,13 +32,17 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   private QuestionType type;
 
   @Column
-  private Feedback generalFeedback;
+  private Feedback feedback;
 
-  public Question(QuestionBody body, QuestionType type, Feedback generalFeedback) {
+  @ManyToOne
+  private Course course;
+
+  public Question(QuestionBody body, QuestionType type, Feedback generalFeedback, Course course) {
     this.code = QuestionCode.newID();
     this.body = body;
     this.type = type;
-    this.generalFeedback = generalFeedback;
+    this.feedback = generalFeedback;
+    this.course = course;
   }
 
   public Question(QuestionType type) {
@@ -59,7 +65,11 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   }
 
   public void changeFeedback(Feedback feedback) {
-    this.generalFeedback = feedback;
+    this.feedback = feedback;
+  }
+
+  public void changeCourse(Course course) {
+    this.course = course;
   }
 
   public QuestionBody body() {
@@ -68,6 +78,14 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
 
   public QuestionType type() {
     return this.type;
+  }
+
+  public Feedback feedback() {
+    return this.feedback;
+  }
+
+  public Course course() {
+    return this.course;
   }
 
   @Override
