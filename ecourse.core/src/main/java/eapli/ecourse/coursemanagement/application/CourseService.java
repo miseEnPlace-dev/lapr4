@@ -19,6 +19,16 @@ public class CourseService {
     return convertToDto(types);
   }
 
+  public Iterable<CourseDTO> listClosedCourses() {
+    final Iterable<Course> types = courseRepository.findAllClosed();
+    return convertToDto(types);
+  }
+
+  public Iterable<CourseDTO> listOpenCourses() {
+    final Iterable<Course> types = courseRepository.findAllOpen();
+    return convertToDto(types);
+  }
+
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
     return StreamSupport.stream(courses.spliterator(), true)
         .map(Course::toDto)

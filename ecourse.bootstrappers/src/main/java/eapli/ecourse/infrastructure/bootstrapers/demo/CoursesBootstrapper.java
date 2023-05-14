@@ -26,7 +26,7 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
       PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().teachers());
   private final ToggleCourseStatusController toggleCourseStatusCtrl = new ToggleCourseStatusController(
-      PersistenceContext.repositories().courses());
+    PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService());
 
   private TeacherDTO registerDummyTeacher(final String username, final String password, final String firstName,
       final String lastName, final String email) {
@@ -64,7 +64,7 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
       final int max, final TeacherDTO teacher) {
     try {
       Course c = createCourseCtrl.createCourse(acronym, name, description, min, max, teacher);
-      toggleCourseStatusCtrl.toggleCourseStatus(c);
+      toggleCourseStatusCtrl.toggleCourseStatus(c.toDto());
     } catch (final Exception e) {
       LOGGER.warn("Assuming {} already exists (activate trace log for details)", acronym);
       LOGGER.trace("Assuming existing record", e);
