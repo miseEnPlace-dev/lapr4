@@ -7,7 +7,7 @@
 
 // Este também!
 @start-section section1;
-@name "Expressões regulares.";
+@title "Expressões regulares.";
 @description "// Já esta linha não será considerada um comentário, mas sim uma string";
 
 

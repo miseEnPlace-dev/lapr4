@@ -1,4 +1,4 @@
-// Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
+// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,16 +17,16 @@ public class ExamParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		EOI=1, STRING=2, START_EXAM=3, END_EXAM=4, TITLE=5, DESCRIPTION=6, FEEDBACK=7, 
-		GRADE=8, START_SECTION=9, END_SECTION=10, NAME=11, FDB_GRD_TYPE=12, NUMBER=13, 
-		IDENTIFIER=14, WS=15, COMMENT=16;
+		GRADE=8, START_SECTION=9, END_SECTION=10, FDB_GRD_TYPE=11, NUMBER=12, 
+		IDENTIFIER=13, WS=14, COMMENT=15;
 	public static final int
-		RULE_start = 0, RULE_exam = 1, RULE_exam_header = 2, RULE_title = 3, RULE_name = 4, 
-		RULE_description = 5, RULE_feedback = 6, RULE_grade = 7, RULE_sections = 8, 
-		RULE_section = 9, RULE_section_header = 10, RULE_questions = 11;
+		RULE_start = 0, RULE_exam = 1, RULE_exam_header = 2, RULE_title = 3, RULE_description = 4, 
+		RULE_feedback = 5, RULE_grade = 6, RULE_sections = 7, RULE_section = 8, 
+		RULE_section_header = 9, RULE_questions = 10;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "exam", "exam_header", "title", "name", "description", "feedback", 
-			"grade", "sections", "section", "section_header", "questions"
+			"start", "exam", "exam_header", "title", "description", "feedback", "grade", 
+			"sections", "section", "section_header", "questions"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -34,14 +34,14 @@ public class ExamParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "';'", null, "'@start-exam'", "'@end-exam'", "'@title'", "'@description'", 
-			"'@feedback'", "'@grade'", "'@start-section'", "'@end-section'", "'@name'"
+			"'@feedback'", "'@grade'", "'@start-section'", "'@end-section'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "EOI", "STRING", "START_EXAM", "END_EXAM", "TITLE", "DESCRIPTION", 
-			"FEEDBACK", "GRADE", "START_SECTION", "END_SECTION", "NAME", "FDB_GRD_TYPE", 
+			"FEEDBACK", "GRADE", "START_SECTION", "END_SECTION", "FDB_GRD_TYPE", 
 			"NUMBER", "IDENTIFIER", "WS", "COMMENT"
 		};
 	}
@@ -112,7 +112,7 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(24);
+			setState(22);
 			exam();
 			}
 		}
@@ -153,19 +153,19 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(26);
+			setState(24);
 			match(START_EXAM);
-			setState(27);
+			setState(25);
 			match(IDENTIFIER);
-			setState(28);
+			setState(26);
 			match(EOI);
-			setState(29);
+			setState(27);
 			exam_header();
-			setState(30);
+			setState(28);
 			sections();
-			setState(31);
+			setState(29);
 			match(END_EXAM);
-			setState(32);
+			setState(30);
 			match(EOI);
 			}
 		}
@@ -210,29 +210,29 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
+			setState(32);
 			title();
-			setState(35);
+			setState(33);
 			match(EOI);
-			setState(39);
+			setState(37);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DESCRIPTION) {
 				{
-				setState(36);
+				setState(34);
 				description();
-				setState(37);
+				setState(35);
 				match(EOI);
 				}
 			}
 
-			setState(41);
+			setState(39);
 			feedback();
-			setState(42);
+			setState(40);
 			match(EOI);
-			setState(43);
+			setState(41);
 			grade();
-			setState(44);
+			setState(42);
 			match(EOI);
 			}
 		}
@@ -262,41 +262,9 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(46);
+			setState(44);
 			match(TITLE);
-			setState(47);
-			match(STRING);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class NameContext extends ParserRuleContext {
-		public TerminalNode NAME() { return getToken(ExamParser.NAME, 0); }
-		public TerminalNode STRING() { return getToken(ExamParser.STRING, 0); }
-		public NameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_name; }
-	}
-
-	public final NameContext name() throws RecognitionException {
-		NameContext _localctx = new NameContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_name);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(49);
-			match(NAME);
-			setState(50);
+			setState(45);
 			match(STRING);
 			}
 		}
@@ -322,13 +290,13 @@ public class ExamParser extends Parser {
 
 	public final DescriptionContext description() throws RecognitionException {
 		DescriptionContext _localctx = new DescriptionContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_description);
+		enterRule(_localctx, 8, RULE_description);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52);
+			setState(47);
 			match(DESCRIPTION);
-			setState(53);
+			setState(48);
 			match(STRING);
 			}
 		}
@@ -354,13 +322,13 @@ public class ExamParser extends Parser {
 
 	public final FeedbackContext feedback() throws RecognitionException {
 		FeedbackContext _localctx = new FeedbackContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_feedback);
+		enterRule(_localctx, 10, RULE_feedback);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(55);
+			setState(50);
 			match(FEEDBACK);
-			setState(56);
+			setState(51);
 			match(FDB_GRD_TYPE);
 			}
 		}
@@ -386,13 +354,13 @@ public class ExamParser extends Parser {
 
 	public final GradeContext grade() throws RecognitionException {
 		GradeContext _localctx = new GradeContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_grade);
+		enterRule(_localctx, 12, RULE_grade);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(53);
 			match(GRADE);
-			setState(59);
+			setState(54);
 			match(FDB_GRD_TYPE);
 			}
 		}
@@ -422,22 +390,22 @@ public class ExamParser extends Parser {
 
 	public final SectionsContext sections() throws RecognitionException {
 		SectionsContext _localctx = new SectionsContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_sections);
+		enterRule(_localctx, 14, RULE_sections);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62); 
+			setState(57); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(61);
+				setState(56);
 				section();
 				}
 				}
-				setState(64); 
+				setState(59); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==START_SECTION );
@@ -476,23 +444,23 @@ public class ExamParser extends Parser {
 
 	public final SectionContext section() throws RecognitionException {
 		SectionContext _localctx = new SectionContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_section);
+		enterRule(_localctx, 16, RULE_section);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66);
+			setState(61);
 			match(START_SECTION);
-			setState(67);
+			setState(62);
 			match(IDENTIFIER);
-			setState(68);
+			setState(63);
 			match(EOI);
-			setState(69);
+			setState(64);
 			section_header();
-			setState(70);
+			setState(65);
 			questions();
-			setState(71);
+			setState(66);
 			match(END_SECTION);
-			setState(72);
+			setState(67);
 			match(EOI);
 			}
 		}
@@ -508,8 +476,8 @@ public class ExamParser extends Parser {
 	}
 
 	public static class Section_headerContext extends ParserRuleContext {
-		public NameContext name() {
-			return getRuleContext(NameContext.class,0);
+		public TitleContext title() {
+			return getRuleContext(TitleContext.class,0);
 		}
 		public List<TerminalNode> EOI() { return getTokens(ExamParser.EOI); }
 		public TerminalNode EOI(int i) {
@@ -526,23 +494,23 @@ public class ExamParser extends Parser {
 
 	public final Section_headerContext section_header() throws RecognitionException {
 		Section_headerContext _localctx = new Section_headerContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_section_header);
+		enterRule(_localctx, 18, RULE_section_header);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
-			name();
-			setState(75);
+			setState(69);
+			title();
+			setState(70);
 			match(EOI);
-			setState(79);
+			setState(74);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DESCRIPTION) {
 				{
-				setState(76);
+				setState(71);
 				description();
-				setState(77);
+				setState(72);
 				match(EOI);
 				}
 			}
@@ -569,7 +537,7 @@ public class ExamParser extends Parser {
 
 	public final QuestionsContext questions() throws RecognitionException {
 		QuestionsContext _localctx = new QuestionsContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_questions);
+		enterRule(_localctx, 20, RULE_questions);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -587,25 +555,24 @@ public class ExamParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\22V\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21Q\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\4\r\t\r\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4"+
-		"\3\4\5\4*\n\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7"+
-		"\3\b\3\b\3\b\3\t\3\t\3\t\3\n\6\nA\n\n\r\n\16\nB\3\13\3\13\3\13\3\13\3"+
-		"\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\5\fR\n\f\3\r\3\r\3\r\2\2\16\2\4"+
-		"\6\b\n\f\16\20\22\24\26\30\2\2\2L\2\32\3\2\2\2\4\34\3\2\2\2\6$\3\2\2\2"+
-		"\b\60\3\2\2\2\n\63\3\2\2\2\f\66\3\2\2\2\169\3\2\2\2\20<\3\2\2\2\22@\3"+
-		"\2\2\2\24D\3\2\2\2\26L\3\2\2\2\30S\3\2\2\2\32\33\5\4\3\2\33\3\3\2\2\2"+
-		"\34\35\7\5\2\2\35\36\7\20\2\2\36\37\7\3\2\2\37 \5\6\4\2 !\5\22\n\2!\""+
-		"\7\6\2\2\"#\7\3\2\2#\5\3\2\2\2$%\5\b\5\2%)\7\3\2\2&\'\5\f\7\2\'(\7\3\2"+
-		"\2(*\3\2\2\2)&\3\2\2\2)*\3\2\2\2*+\3\2\2\2+,\5\16\b\2,-\7\3\2\2-.\5\20"+
-		"\t\2./\7\3\2\2/\7\3\2\2\2\60\61\7\7\2\2\61\62\7\4\2\2\62\t\3\2\2\2\63"+
-		"\64\7\r\2\2\64\65\7\4\2\2\65\13\3\2\2\2\66\67\7\b\2\2\678\7\4\2\28\r\3"+
-		"\2\2\29:\7\t\2\2:;\7\16\2\2;\17\3\2\2\2<=\7\n\2\2=>\7\16\2\2>\21\3\2\2"+
-		"\2?A\5\24\13\2@?\3\2\2\2AB\3\2\2\2B@\3\2\2\2BC\3\2\2\2C\23\3\2\2\2DE\7"+
-		"\13\2\2EF\7\20\2\2FG\7\3\2\2GH\5\26\f\2HI\5\30\r\2IJ\7\f\2\2JK\7\3\2\2"+
-		"K\25\3\2\2\2LM\5\n\6\2MQ\7\3\2\2NO\5\f\7\2OP\7\3\2\2PR\3\2\2\2QN\3\2\2"+
-		"\2QR\3\2\2\2R\27\3\2\2\2ST\3\2\2\2T\31\3\2\2\2\5)BQ";
+		"\f\t\f\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\5\4"+
+		"(\n\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7\3\b\3\b"+
+		"\3\b\3\t\6\t<\n\t\r\t\16\t=\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13"+
+		"\3\13\3\13\3\13\5\13M\n\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24\26"+
+		"\2\2\2H\2\30\3\2\2\2\4\32\3\2\2\2\6\"\3\2\2\2\b.\3\2\2\2\n\61\3\2\2\2"+
+		"\f\64\3\2\2\2\16\67\3\2\2\2\20;\3\2\2\2\22?\3\2\2\2\24G\3\2\2\2\26N\3"+
+		"\2\2\2\30\31\5\4\3\2\31\3\3\2\2\2\32\33\7\5\2\2\33\34\7\17\2\2\34\35\7"+
+		"\3\2\2\35\36\5\6\4\2\36\37\5\20\t\2\37 \7\6\2\2 !\7\3\2\2!\5\3\2\2\2\""+
+		"#\5\b\5\2#\'\7\3\2\2$%\5\n\6\2%&\7\3\2\2&(\3\2\2\2\'$\3\2\2\2\'(\3\2\2"+
+		"\2()\3\2\2\2)*\5\f\7\2*+\7\3\2\2+,\5\16\b\2,-\7\3\2\2-\7\3\2\2\2./\7\7"+
+		"\2\2/\60\7\4\2\2\60\t\3\2\2\2\61\62\7\b\2\2\62\63\7\4\2\2\63\13\3\2\2"+
+		"\2\64\65\7\t\2\2\65\66\7\r\2\2\66\r\3\2\2\2\678\7\n\2\289\7\r\2\29\17"+
+		"\3\2\2\2:<\5\22\n\2;:\3\2\2\2<=\3\2\2\2=;\3\2\2\2=>\3\2\2\2>\21\3\2\2"+
+		"\2?@\7\13\2\2@A\7\17\2\2AB\7\3\2\2BC\5\24\13\2CD\5\26\f\2DE\7\f\2\2EF"+
+		"\7\3\2\2F\23\3\2\2\2GH\5\b\5\2HL\7\3\2\2IJ\5\n\6\2JK\7\3\2\2KM\3\2\2\2"+
+		"LI\3\2\2\2LM\3\2\2\2M\25\3\2\2\2NO\3\2\2\2O\27\3\2\2\2\5\'=L";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
