@@ -33,8 +33,15 @@ public class MatchingQuestion extends Question {
   @Column(name = "matchingOptionValue")
   private Map<Identifier, String> options;
 
-  public MatchingQuestion(final QuestionBody body, QuestionType type) {
+  public MatchingQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
+    options = new HashMap<>();
+    matches = new HashMap<>();
+    correctMatches = new HashMap<>();
+  }
+
+  public MatchingQuestion(final QuestionType type) {
+    super(type);
     options = new HashMap<>();
     matches = new HashMap<>();
     correctMatches = new HashMap<>();

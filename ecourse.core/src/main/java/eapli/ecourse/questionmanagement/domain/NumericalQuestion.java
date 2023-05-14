@@ -13,10 +13,15 @@ public class NumericalQuestion extends Question {
   @Column(nullable = false)
   private Double acceptedError;
 
-  public NumericalQuestion(final QuestionBody body, QuestionType type, double correctAnswer, double acceptedError) {
+  public NumericalQuestion(final QuestionBody body, final QuestionType type, double correctAnswer,
+      double acceptedError) {
     super(body, type);
     this.correctAnswer = correctAnswer;
     this.acceptedError = acceptedError;
+  }
+
+  public NumericalQuestion(final QuestionType type) {
+    super(type);
   }
 
   protected NumericalQuestion() {

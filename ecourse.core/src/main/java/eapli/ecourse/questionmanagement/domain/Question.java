@@ -39,6 +39,11 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
     this.generalFeedback = generalFeedback;
   }
 
+  public Question(QuestionType type) {
+    this.code = QuestionCode.newID();
+    this.type = type;
+  }
+
   public Question(QuestionBody body, QuestionType type) {
     this.code = QuestionCode.newID();
     this.body = body;
@@ -47,6 +52,14 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
 
   protected Question() {
     // for ORM
+  }
+
+  public void changeBody(QuestionBody body) {
+    this.body = body;
+  }
+
+  public void changeFeedback(Feedback feedback) {
+    this.generalFeedback = feedback;
   }
 
   public QuestionBody body() {

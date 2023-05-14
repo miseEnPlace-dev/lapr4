@@ -25,8 +25,14 @@ public class MultipleChoiceQuestion extends Question {
   @Column(name = "multipleChoiceOptionValue")
   private Map<Identifier, String> options;
 
-  public MultipleChoiceQuestion(final QuestionBody body, QuestionType type) {
+  public MultipleChoiceQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
+    this.correctAnswers = new HashMap<>();
+    this.options = new HashMap<>();
+  }
+
+  public MultipleChoiceQuestion(final QuestionType type) {
+    super(type);
     this.correctAnswers = new HashMap<>();
     this.options = new HashMap<>();
   }
