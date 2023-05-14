@@ -30,7 +30,8 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
   @Override
   public List<Question> visitStart(QuestionParser.StartContext ctx) {
-    return visitChildren(ctx);
+    visitChildren(ctx);
+    return questions;
   }
 
   @Override
@@ -73,6 +74,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
       q.addMatch(identifier, body);
     });
 
+    questions.add(q);
     return questions;
   }
 
