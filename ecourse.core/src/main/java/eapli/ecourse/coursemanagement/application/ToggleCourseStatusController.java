@@ -1,38 +1,42 @@
 package eapli.ecourse.coursemanagement.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.coursemanagement.domain.CourseState;
+import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
+import eapli.ecourse.usermanagement.domain.ClientRoles;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
+
+import java.util.Optional;
 
 public class ToggleCourseStatusController {
+  private final CourseRepository courseRepository;
 
-  private final RepositoryFactory repositoryFactory;
+  private final AuthorizationService authz;
 
-  @Autowired
-  private CourseRepository courseRepository;
+  private final CourseService service;
 
-  public ToggleCourseStatusController() {
-    repositoryFactory = PersistenceContext.repositories();
+  public ToggleCourseStatusController(CourseRepository courseRepository, AuthorizationService authz) {
+    this.courseRepository = courseRepository;
+    this.authz = authz;
+    this.service = new CourseService(courseRepository);
   }
 
-  public Iterable<Course> listOpenCourses() {
-    return courseRepository.findAllOpen();
+  public Iterable<CourseDTO> listOpenCourses() {
+    return service.listOpenCourses();
   }
 
-  public Iterable<Course> listClosedCourses() {
-    return courseRepository.findAllClosed();
+  public Iterable<CourseDTO> listClosedCourses() {
+    return service.listClosedCourses();
   }
 
-  public void toggleCourseStatus(Course course) {
-    if (course.state().equals(CourseState.State.CLOSED))
-      course.state().changeToOpen();
-    else {
-      course.state().changeToClose();
-    }
-    courseRepository.save(course);
+  public void toggleCourseStatus(CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    Optional<Course> course = courseRepository.findByCode(courseDTO.getCode());
+
+    if (course.isEmpty())
+      throw new IllegalArgumentException("There is no Course with the given code");
+
+    course.get().toggleState();
   }
 }

@@ -1,4 +1,5 @@
 // Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
+package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -104,6 +105,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_start; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterStart(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitStart(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitStart(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -145,6 +159,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exam; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterExam(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitExam(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitExam(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExamContext exam() throws RecognitionException {
@@ -201,6 +228,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exam_header; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterExam_header(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitExam_header(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitExam_header(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Exam_headerContext exam_header() throws RecognitionException {
@@ -254,6 +294,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_title; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterTitle(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitTitle(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitTitle(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TitleContext title() throws RecognitionException {
@@ -286,6 +339,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_description; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterDescription(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitDescription(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitDescription(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final DescriptionContext description() throws RecognitionException {
@@ -318,6 +384,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_feedback; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterFeedback(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitFeedback(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitFeedback(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FeedbackContext feedback() throws RecognitionException {
@@ -350,6 +429,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_grade; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterGrade(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitGrade(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitGrade(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final GradeContext grade() throws RecognitionException {
@@ -386,6 +478,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sections; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterSections(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitSections(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitSections(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SectionsContext sections() throws RecognitionException {
@@ -440,6 +545,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_section; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterSection(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitSection(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitSection(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SectionContext section() throws RecognitionException {
@@ -490,6 +608,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_section_header; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterSection_header(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitSection_header(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitSection_header(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Section_headerContext section_header() throws RecognitionException {
@@ -533,6 +664,19 @@ public class ExamParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_questions; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterQuestions(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitQuestions(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitQuestions(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final QuestionsContext questions() throws RecognitionException {

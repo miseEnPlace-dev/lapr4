@@ -43,4 +43,14 @@ public class EnrolmentLimits implements ValueObject {
   public String maxLimit() {
     return max.toString();
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null || getClass() != obj.getClass())
+      return false;
+    EnrolmentLimits other = (EnrolmentLimits) obj;
+    return min == other.min && max == other.max;
+  }
 }

@@ -4,8 +4,10 @@ import eapli.ecourse.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
+import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
+import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryUserRepository;
@@ -75,5 +77,25 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   @Override
   public CourseRepository courses(final TransactionalContext autoTx) {
     return new InMemoryCourseRepository();
+  }
+
+  @Override
+  public TeacherRepository teachers() {
+    return teachers(null);
+  }
+
+  @Override
+  public TeacherRepository teachers(final TransactionalContext autoTx) {
+    return new InMemoryTeacherRepository();
+  }
+
+  @Override
+  public QuestionRepository questions() {
+    return questions(null);
+  }
+
+  @Override
+  public QuestionRepository questions(final TransactionalContext autoTx) {
+    return new InMemoryQuestionRepository();
   }
 }

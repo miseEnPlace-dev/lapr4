@@ -1,13 +1,19 @@
 package eapli.ecourse.coursemanagement.domain;
 
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import eapli.framework.domain.model.ValueObject;
+import lombok.EqualsAndHashCode;
 
+@Embeddable
+@EqualsAndHashCode
 public class CourseState implements ValueObject {
+  private static final long serialVersionUID = 1L;
+
   public enum State {
-    CLOSED, OPEN, IN_PROGRESS, FINISHED
+    CLOSED, OPEN, IN_PROGRESS, FINISHED;
   }
 
   @Enumerated(EnumType.STRING)
@@ -22,19 +28,34 @@ public class CourseState implements ValueObject {
   }
 
   public void changeToClose() {
-    state = State.CLOSED;
+    changeTo(State.CLOSED);
   }
 
   public void changeToOpen() {
-    state = State.OPEN;
+    changeTo(State.OPEN);
   }
 
   public void changeToInProgress() {
-    state = State.IN_PROGRESS;
+    changeTo(State.IN_PROGRESS);
   }
 
   public void changeToFinished() {
-    state = State.FINISHED;
+    changeTo(State.FINISHED);
+  }
+
+  public void toggle() {
+    // TODO add other state transitions
+    if (state == State.CLOSED)
+      changeToOpen();
+    else
+      changeToClose();
+  }
+
+  private void changeTo(State state) {
+    if (this.state == State.FINISHED)
+      throw new IllegalStateException("Cannot toggle state of a finished course");
+
+    this.state = state;
   }
 
   public boolean isClosed() {
@@ -55,17 +76,6 @@ public class CourseState implements ValueObject {
 
   public boolean isSameAs(State state) {
     return this.state == state;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof CourseState)) {
-      return false;
-    }
-    CourseState courseState = (CourseState) o;
-    return state == courseState.state;
   }
 
   @Override

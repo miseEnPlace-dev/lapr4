@@ -2,12 +2,15 @@ package eapli.ecourse.coursemanagement.domain;
 
 import java.util.Calendar;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
@@ -31,14 +34,17 @@ public class Course implements AggregateRoot<CourseCode> {
   @Column(nullable = false)
   private EnrolmentLimits enrolmentLimits;
 
-  @Column(nullable = false)
+  @AttributeOverride(name = "state", column = @Column(name = "courseState"))
   private CourseState courseState;
 
-  @Column(nullable = false)
+  @AttributeOverride(name = "state", column = @Column(name = "enrolmentState"))
   private CourseEnrolmentState enrolmentState;
 
   @Column(nullable = false)
   private Calendar createdAt;
+
+  @ManyToOne
+  private Teacher teacher;
 
   protected Course() {
     // for ORM
@@ -92,8 +98,7 @@ public class Course implements AggregateRoot<CourseCode> {
 
     return code().equals(that.code()) && title().equals(that.title())
         && description().equals(that.description()) && enrolmentLimits().equals(that.enrolmentLimits())
-        && state().equals(that.state()) && enrolmentState.equals(that.enrolmentState())
-        && createdAt().equals(that.createdAt());
+        && state().equals(that.state()) && enrolmentState().equals(that.enrolmentState());
   }
 
   public CourseCode code() {
@@ -136,10 +141,20 @@ public class Course implements AggregateRoot<CourseCode> {
     if (courseState.isClosed())
       throw new IllegalStateException("Cannot toggle enrolment state of a closed course");
 
-    if (enrolmentState.isClosed())
-      enrolmentState.changeToOpen();
-    else
-      enrolmentState.changeToClosed();
+    enrolmentState.toggle();
+  }
+
+  public void toggleState() {
+    if (courseState.isFinished())
+      throw new IllegalStateException("Cannot toggle state of a finished course");
+
+    courseState.toggle();
+  }
+
+  public void addResponsibleTeacher(final Teacher teacher) {
+    Preconditions.noneNull(teacher);
+
+    this.teacher = teacher;
   }
 
   @Override

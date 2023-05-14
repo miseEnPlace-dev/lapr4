@@ -1,9 +1,41 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.compile.nullAnalysis.mode": "disabled",
-  "cSpell.words": [
-    "enroll",
-    "mecanographic"
-  ],
-  "java.debug.settings.onBuildFailureProceed": true
+  "cSpell.words": ["enroll", "mecanographic"],
+  "java.debug.settings.onBuildFailureProceed": true,
+  "antlr4.generation": {
+    "mode": "external",
+    "language": "Java",
+    "listeners": true,
+    "visitors": true,
+    "package": "eapli.ecourse.exammanagement.domain.parsers",
+    "outputDir": "../../parsers"
+  },
+  "antlr4.format": {
+    "alignTrailingComments": true,
+    "allowShortBlocksOnASingleLine": true,
+    "breakBeforeBraces": false,
+    "columnLimit": 100,
+    "continuationIndentWidth": 2,
+    "indentWidth": 2,
+    "keepEmptyLinesAtTheStartOfBlocks": false,
+    "maxEmptyLinesToKeep": 1,
+    "reflowComments": true,
+    "spaceBeforeAssignmentOperators": true,
+    "tabWidth": 2,
+    "useTab": true,
+    "alignColons": "none",
+    "singleLineOverrulesHangingColon": true,
+    "allowShortRulesOnASingleLine": true,
+    "alignSemicolons": "none",
+    "breakBeforeParens": false,
+    "ruleInternalsOnSingleLine": false,
+    "minEmptyLines": 0,
+    "groupedAlignments": true,
+    "alignFirstTokens": true,
+    "alignLexerCommands": true,
+    "alignActions": false,
+    "alignLabels": true,
+    "alignTrailers": true
+  }
 }

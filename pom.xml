@@ -39,9 +39,9 @@
     <module>ecourse.app.common.console</module>
     <module>ecourse.app.bootstrap</module>
     <module>ecourse.bootstrappers</module>
+    <module>ecourse.persistence.impl</module>
     <module>ecourse.infrastructure.application</module>
     <module>ecourse.core</module>
-    <module>ecourse.persistence.impl</module>
     <module>report</module>
   </modules>
 

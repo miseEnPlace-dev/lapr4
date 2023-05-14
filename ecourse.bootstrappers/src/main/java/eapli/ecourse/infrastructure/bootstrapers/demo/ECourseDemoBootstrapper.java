@@ -26,7 +26,8 @@ public class ECourseDemoBootstrapper implements Action {
   @Override
   public boolean execute() {
     // declare bootstrap actions
-    final Action[] actions = { new BackofficeUsersBootstrapper(), new StudentBootstrapper() };
+    final Action[] actions = { new BackofficeUsersBootstrapper(), new StudentBootstrapper(),
+        new CoursesBootstrapper(), new QuestionsBootstrapper() };
 
     authenticateForBootstrapping();
 

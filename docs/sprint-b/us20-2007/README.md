@@ -109,108 +109,106 @@ To make the understanding easier we will use the following notation:
 @end-question;
 ```
 
-#### 4.1.2. Multiple Choice
+**Note**: The score must be a real number with a maximum of 2 decimal places between 0 and 1.
 
-```txt
-  @start-question
-    @type multiple-choice;
-    @question-body <question-body>;
-    @correct-answer <id>;
-
-    @start-options;
-      {@option <id> = <answer>;}
-    @end-options;
-  @end-question;
-```
-
-#### 4.1.3. Short Answer
+#### 4.1.2. Short Answer
 
 ```txt
 @start-question;
   @type short-answer;
-  @question-body <question-body>;
+  @question-body "<question-body>";
 
   @correct-answers
-    {@correct-answer <answer>; <score>;}
+    {@correct-answer "<answer>" <score>;}
   @end-correct-answers;
 @end-question;
 ```
 
-#### 4.1.4. True/False
+#### 4.1.3. True/False
 
 ```txt
 @start-question
   @type true-false;
-  @question-body <question-body>;
+  @question-body "<question-body>";
   @correct-answer true|false;
 @end-question;
 ```
 
-#### 4.1.5. Multiple Choice (Multiple Answers)
+**Note**: The score must be a real number with a maximum of 2 decimal places between 0 and 1.
+**Note 2**: The sum of the scores specified in the `@correct-answers` section must be 1.
+
+#### 4.1.4. Multiple Choice (Multiple Answers)
 
 ```txt
 @start-question
   @type multiple-choice;
-  @question-body <question-body>;
+  @question-body "<question-body>";
+  [@feedback <feedback>;]
+
   @correct-answers
-    {@correct-answer <id>; <score>;}
+    {@correct-answer <id> <score>;}
   @end-correct-answers;
 
-  @start-options;
-    {@option <id>;}
+  @start-options
+    {@option <id> "<answer>" ["feedback"];}
   @end-options;
 @end-question;
 ```
 
-#### 4.1.6. Multiple Choice (Single Answer)
+#### 4.1.5. Multiple Choice (Single Answer)
 
 ```txt
 @start-question
   @type multiple-choice;
-  @question-body <question-body>;
+  @question-body "<question-body>";
+  [@feedback <feedback>;]
   @correct-answer <id>;
 
-  @start-options;
-    {@option <id>;}
+  @start-options
+    {@option <id> ["feedback"];}
   @end-options;
 @end-question;
 ```
 
-#### 4.1.7. Matching
+#### 4.1.6. Matching
 
 **Note:** We considered that there can be missing matches both in the options and in the matches.
 
 ```txt
 @start-question
   @type matching;
-  @question-body <question-body>;
+  @question-body "<question-body>";
+  [@feedback "<feedback>";]
 
   @correct-answers
-    {@correct-answer <id>; <id-match>;}
+    {@correct-answer <id> <id-match>;}
   @end-correct-answers;
 
-  @start-options;
-    {@option <id> = <value>;}
+  @start-options
+    {@option <id> "<string>";}
   @end-options;
 
-  @start-matching;
-    {@match <id-match> = <value>;}
+  @start-matching
+    {@match <id-match> "<string>";}
   @end-matching;
 @end-question;
 ```
 
-##### 4.1.8 Select Missing Words
+##### 4.1.7 Select Missing Words
 
 In this case the question body must have the placeholder for the missing words using '\_\_' (double underscore).
 _E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
+
+In the correct answer section the words must be in the same order as they appear in the question body and must be placed inside double quotes separated by a space.
+_E.g. "restaurante" "bem";_
 
 **Note:** The number of correct answers must be equal to the number of placeholders.
 
 ```txt
 @start-question
   @type missing-words
-  @question-body <question-body>;
-  @correct-answer {<answer>;}
+  @question-body "<question-body>";
+  @correct-answer {"<word>" };
 
   @start-options
     {@option <value>;}

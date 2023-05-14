@@ -84,7 +84,7 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 4.3. Applied Patterns
 
 - **Factory:** The factory pattern is used in the instantiation of the CourseRepository. This is done to enable the use of a mock repository in the tests and to allow swapping of the repository using a property file.
-- **Dependency Injection:** This is used in the CourseService to inject the CourseRepository. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
 - **State:** The state pattern is used to represent the state of the course. This is done to keep the course enrolment state logic encapsulated in the state class and to reduce coupling.
 
 ### 4.4. Tests

@@ -18,41 +18,41 @@ class JpaCourseRepository
     implements CourseRepository {
 
   public JpaCourseRepository(final TransactionalContext autoTx) {
-    super(autoTx, "mecanographicNumber");
+    super(autoTx, "code");
   }
 
   public JpaCourseRepository(final String puname) {
-    super(puname, Application.settings().extendedPersistenceProperties(), "courseCode");
+    super(puname, Application.settings().extendedPersistenceProperties(), "code");
   }
 
   @Override
   public Optional<Course> findByCode(final CourseCode code) {
     final Map<String, Object> params = new HashMap<>();
     params.put("code", code);
-    return matchOne("e.courseCode=:code", params);
+    return matchOne("e.code=:code", params);
   }
 
   public Iterable<Course> coursesOpenedForEnrollment() {
-    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState",
+    return match("e.enrolmentState = :enrolmentState", "enrolmentState",
         CourseEnrolmentState.EnrolmentState.OPEN);
   }
 
   public Iterable<Course> findAllOpenForEnrolment() {
-    return match("e.isAcceptingEnrolments = :enrolmentState", "enrolmentState",
+    return match("e.enrolmentState = :enrolmentState", "enrolmentState",
         CourseEnrolmentState.EnrolmentState.OPEN);
   }
 
   @Override
   public Iterable<Course> findAllOpen() {
-    return match("e.state = :state", "state", CourseState.State.OPEN);
+    return match("e.courseState = :state", "state", new CourseState(CourseState.State.OPEN));
   }
 
   public Iterable<Course> findAllClosed() {
-    return match("e.state = :state", "state", CourseState.State.CLOSED);
+    return match("e.courseState = :state", "state", new CourseState(CourseState.State.CLOSED));
   }
 
   @Override
   public Iterable<Course> findAllNotClosed() {
-    return match("e.state <> :state", "state", CourseState.State.FINISHED);
+    return match("e.courseState <> :state", "state", new CourseState(CourseState.State.FINISHED));
   }
 }

@@ -1,8 +1,9 @@
 package eapli.ecourse.exammanagement.domain;
 
 import javax.persistence.Embeddable;
+
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.strings.util.StringPredicates;
+import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -21,8 +22,7 @@ public class ExamDescription implements ValueObject, Comparable<ExamDescription>
    * @param description description of the exam
    */
   protected ExamDescription(final String description) {
-    if (StringPredicates.isNullOrEmpty(description))
-      throw new IllegalArgumentException("Exam Description should neither be null nor empty");
+    Preconditions.nonEmpty(description, "Exam description should neither be null nor empty.");
 
     if (description.length() > 255)
       throw new IllegalArgumentException("Exam Description should not exceed 255 characters");
@@ -30,10 +30,8 @@ public class ExamDescription implements ValueObject, Comparable<ExamDescription>
     this.description = description;
   }
 
-  /**
-   * Empty constructor for ORM.
-   */
   protected ExamDescription() {
+    // for ORM only
   }
 
   /**

@@ -9,7 +9,8 @@ import eapli.ecourse.Application;
 import eapli.framework.util.Utility;
 
 /**
- * Provides easy access to the persistence layer. Works as a factory of factories.
+ * Provides easy access to the persistence layer. Works as a factory of
+ * factories.
  *
  * @author Paulo Gandra Sousa
  */
@@ -23,7 +24,8 @@ public final class PersistenceContext {
   }
 
   /**
-   * Returns the abstract repository factory configured in the application settings
+   * Returns the abstract repository factory configured in the application
+   * settings
    *
    * @return the repository factory
    */

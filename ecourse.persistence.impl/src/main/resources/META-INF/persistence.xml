@@ -11,12 +11,21 @@
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.classmanagement.domain.Class</class>
+    <class>eapli.ecourse.teachermanagement.domain.Teacher</class>
     <class>eapli.ecourse.enrolmentmanagement.domain.Enrolment</class>
+    <class>eapli.ecourse.questionmanagement.domain.Question</class>
+    <class>eapli.ecourse.questionmanagement.domain.MatchingQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.MissingWordsQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.NumericalQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.TrueFalseQuestion</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecourse" />
       <!--
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/ecourse;MV_STORE=FALSE;AUTO_SERVER=true;" />
+			<property name="javax.persistence.jdbc.url"
+      value="jdbc:h2:~/ecourse;MV_STORE=FALSE;AUTO_SERVER=true;" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/ecourse;MV_STORE=FALSE;" />
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:ecourse" />
       -->
@@ -25,13 +34,15 @@
       <property name="javax.persistence.jdbc.password" value="" />
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 
-      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+      <!-- <property name="javax.persistence.schema-generation.database.action"
+      value="drop-and-create"/> -->
 
       <!-- <property name = "hibernate.show_sql" value = "true" /> -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 
       <!-- Hibernate C3PO Connection Pooling -->
-      <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+      <property name="hibernate.connection.provider_class"
+        value="org.hibernate.connection.C3P0ConnectionProvider" />
       <property name="hibernate.c3p0.min_size" value="5" />
       <property name="hibernate.c3p0.max_size" value="20" />
       <property name="hibernate.c3p0.timeout" value="300" />
@@ -52,11 +63,14 @@
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.classmanagement.domain.Class</class>
+    <class>eapli.ecourse.teachermanagement.domain.Teacher</class>
     <class>eapli.ecourse.enrolmentmanagement.domain.Enrolment</class>
 
     <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://multilogus.dynns.com:1503;database=ecourse" />
+      <property name="javax.persistence.jdbc.driver"
+        value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+      <property name="javax.persistence.jdbc.url"
+        value="jdbc:sqlserver://multilogus.dynns.com:1503;database=ecourse" />
       <property name="javax.persistence.jdbc.user" value="anc" />
       <property name="javax.persistence.jdbc.password" value="ancisep" />
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
@@ -66,12 +80,14 @@
       <property name="eclipselink.logging.level.sql" value="FINE" />
       <property name="eclipselink.logging.parameters" value="true" />
 
-      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+      <!-- <property name="javax.persistence.schema-generation.database.action"
+      value="drop-and-create"/> -->
 
       <!-- <property name = "hibernate.show_sql" value = "true" /> -->
 
       <!-- Hibernate C3PO Connection Pooling -->
-      <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+      <property name="hibernate.connection.provider_class"
+        value="org.hibernate.connection.C3P0ConnectionProvider" />
       <property name="hibernate.c3p0.min_size" value="5" />
       <property name="hibernate.c3p0.max_size" value="20" />
       <property name="hibernate.c3p0.timeout" value="300" />
