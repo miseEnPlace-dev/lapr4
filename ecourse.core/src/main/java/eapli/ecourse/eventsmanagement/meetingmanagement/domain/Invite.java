@@ -2,25 +2,26 @@ package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 @Entity
-public class Invite implements AggregateRoot<MeetingID> {
+public class Invite implements AggregateRoot<InviteID> {
   private static final long serialVersionUID = 1L;
+
+  @Column(nullable = false)
+  private InviteID id;
 
   @Column(nullable = false)
   private InviteStatus status;
 
-  @ManyToOne
+  @Column(nullable = false)
   private Meeting meeting;
 
-  @ManyToOne
-  private User user;
+  @Column(nullable = false)
+  private SystemUser user;
 
   protected Invite() {
     // ORM
@@ -43,7 +44,7 @@ public class Invite implements AggregateRoot<MeetingID> {
     return this.meeting;
   }
 
-  public User user() {
+  public SystemUser user() {
     return this.user;
   }
 
@@ -52,7 +53,7 @@ public class Invite implements AggregateRoot<MeetingID> {
   }
 
   @Override
-  public MeetingID identity() {
+  public InviteID identity() {
     return this.identity();
   }
 
