@@ -1,6 +1,6 @@
 package eapli.ecourse.app.backoffice.console.presentation.course;
 
-import eapli.ecourse.app.backoffice.console.presentation.teacher.TeacherPrinter;
+import eapli.ecourse.app.common.console.presentation.teacher.TeacherPrinter;
 import eapli.ecourse.coursemanagement.application.CreateCourseController;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.teachermanagement.dto.TeacherDTO;
