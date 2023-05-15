@@ -1,5 +1,6 @@
 package eapli.ecourse.app.backoffice.console.presentation.course;
 
+import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.application.ToggleCourseEnrolmentStateController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -27,6 +28,7 @@ public class ToggleCourseEnrolmentStateUI extends AbstractUI {
       return false;
     }
 
+    new CourseHeader().printHeader();
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
