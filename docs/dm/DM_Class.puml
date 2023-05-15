@@ -13,12 +13,12 @@ package "<<aggregate>> Class" {
   entity SpecialClass
   class Duration
   class DayInWeek
-  class Time
+  class Hours
 }
 
 entity SpecialClass <<entity>> {}
 
-class Time <<(V,#FF8B40) value object>> {}
+class Hours <<(V,#FF8B40) value object>> {}
 class Duration <<(V,#FF8B40) value object>> {}
 class DayInWeek <<(V,#FF8B40) value object>> {}
 
@@ -28,11 +28,12 @@ entity Class <<entity>> <<root>> {
 package "<<aggregate>> ExtraordinaryClass" {
   entity ExtraordinaryClass
 
-  class Time‎
+  class Time
   class Duration‎
 }
 
-class Time‎ <<(V,#FF8B40) value object>> {}
+class Hours <<(V,#FF8B40) value object>> {}
+class Time <<(V,#FF8B40) value object>> {}
 class Duration‎ <<(V,#FF8B40) value object>> {}
 
 entity ExtraordinaryClass <<entity>> <<root>> {
@@ -61,7 +62,7 @@ entity Student <<entity>> <<root>> {
 
 Class --> "1" Course : is related to
 Class ----> "1" Teacher : scheduled by
-Class ----> "1" Time : has
+Class ----> "1" Hours : has
 
 ExtraordinaryClass --> "1" Teacher : scheduled by
 ExtraordinaryClass --> "1..*" Student : has
@@ -70,9 +71,9 @@ ExtraordinaryClass --> "1" Course : is related to
 Class --> "0..*" SpecialClass : has
 Class --> "1" DayInWeek : has
 Class --> "1" Duration : has
-SpecialClass --> "1" Time : has
+SpecialClass --> "1" Hours : has
 
-ExtraordinaryClass --> "1" "Time‎" : has
+ExtraordinaryClass --> "1" "Time" : has
 ExtraordinaryClass --> "1" "Duration‎" : has
 
 @enduml

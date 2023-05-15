@@ -1,6 +1,7 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
@@ -10,7 +11,7 @@ import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-public class Meeting implements AggregateRoot<Time> {
+public class Meeting implements AggregateRoot<MeetingID> {
   private static final long serialVersionUID = 1L;
 
   @Column(nullable = false)
@@ -21,6 +22,9 @@ public class Meeting implements AggregateRoot<Time> {
 
   @Column(nullable = false)
   private Time time;
+
+  @EmbeddedId
+  private MeetingID id;
 
   protected Meeting() {
     // for ORM
@@ -66,7 +70,7 @@ public class Meeting implements AggregateRoot<Time> {
   }
 
   @Override
-  public Time identity() {
-    return this.time;
+  public MeetingID identity() {
+    return this.id;
   }
 }
