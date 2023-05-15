@@ -4,6 +4,8 @@ import eapli.ecourse.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecourse.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecourse.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecourse.app.backoffice.console.presentation.student.AcceptRefuseSignupRequestAction;
+import eapli.ecourse.app.backoffice.console.presentation.student.ListStudentsUI;
+import eapli.ecourse.app.backoffice.console.presentation.teacher.ListTeachersUI;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 
@@ -26,14 +28,11 @@ public class UsersMenu {
     final Menu menu = new Menu("Users >");
 
     final Menu listUsersMenu = new Menu("List Users >");
-    /*
-     * listUsersMenu.addItem(LIST_STUDENTS_OPTION, "List Students", new
-     * ListStudentsUI()::show);
-     * listUsersMenu.addItem(LIST_TEACHERS_OPTION, "List Teachers", new
-     * ListTeachersUI()::show);
-     * listUsersMenu.addItem(LIST_MANAGERS_OPTION, "List Managers", new
-     * ListManagersUI()::show);
-     */
+
+    listUsersMenu.addItem(LIST_STUDENTS_OPTION, "List Students", new ListStudentsUI()::show);
+    listUsersMenu.addItem(LIST_TEACHERS_OPTION, "List Teachers", new ListTeachersUI()::show);
+    listUsersMenu.addItem(LIST_MANAGERS_OPTION, "List Managers", new ListManagersUI()::show);
+
     listUsersMenu.addItem(LIST_ALL_OPTION, "List All", new ListUsersAction());
 
     menu.addItem(ADD_USER_OPTION, "Add User", new AddUserUI()::show);

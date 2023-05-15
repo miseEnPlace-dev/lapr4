@@ -21,4 +21,10 @@ public class ListStudentsController {
 
     return this.repo.findAllActive();
   }
+
+  public Iterable<Student> allStudents() {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    return this.repo.findAll();
+  }
 }

@@ -1,7 +1,7 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.compile.nullAnalysis.mode": "disabled",
-  "cSpell.words": ["enroll", "mecanographic"],
+  "cSpell.words": ["enroll", "mecanographic", "visitee"],
   "java.debug.settings.onBuildFailureProceed": true,
   "antlr4.generation": {
     "mode": "external",
