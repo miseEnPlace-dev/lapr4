@@ -287,4 +287,3 @@ Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de dep
 _Last question: "US1004-As Manager, I want to open and close courses", by GOUVEIA._
 
 _Last updated at 24/04/2023 09:56_
-

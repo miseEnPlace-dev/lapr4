@@ -23,7 +23,17 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.2. Client Clarifications
 
-> [**Question**:]
+> [**Question 17**: Can a meeting and class overlap?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21994)
+>
+> **Answer**: Regarding Meetings: FRM01 - Schedule a Meeting A user schedules a meeting. The system must check if all participants are available and send invitations to participants. In the case of Meetings they should not be created if the participants are not available.
+
+> [**Question 23**: Can any user of the system invite any other user? For example, can a student invite another student who is in a different course, or can a manager can create a meeting with any group of teachers.](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22064)
+>
+> **Answer**: "When in the document specification the term "User" is used it usually means "any user" of the system. Therefore, any user of the system can schedule a meeting and be a participant in a meeting."
+
+> [**Question 24**: When a user does not respond to a meeting invitation, should his status be changed to "not responded" or "rejected"?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22080)
+>
+> **Answer**: "The status of someone that did not answer should be "no answer" or "unknown""
 
 ## 2.3 Functional Requirements
 
@@ -103,4 +113,4 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 7. Observations
 
-- The history of the states of a course is not relevant.
+- N/a

@@ -13,11 +13,11 @@ public class Status implements ValueObject {
   private static final long serialVersionUID = 1L;
 
   public enum InviteStatus {
-    PENDING, ACCEPTED, REJECTED
+    PENDING, ACCEPTED, REJECTED, NO_ANSWER
   }
 
   public Status() {
-    state = InviteStatus.PENDING;
+    state = InviteStatus.NO_ANSWER;
   }
 
   @Enumerated(EnumType.STRING)
@@ -41,6 +41,10 @@ public class Status implements ValueObject {
 
   public void changeToRejected() {
     this.state = InviteStatus.REJECTED;
+  }
+
+  public void changeToPending() {
+    this.state = InviteStatus.PENDING;
   }
 
 }
