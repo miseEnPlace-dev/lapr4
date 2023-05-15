@@ -1,4 +1,4 @@
-package eapli.ecourse.extraordinaryclassmanagement.domain;
+package eapli.ecourse.eventsmanagement.domain;
 
 import javax.persistence.Embeddable;
 import eapli.framework.domain.model.ValueObject;

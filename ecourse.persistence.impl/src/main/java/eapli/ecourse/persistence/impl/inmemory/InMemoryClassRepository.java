@@ -1,7 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import eapli.ecourse.classmanagement.domain.Class;
-import eapli.ecourse.classmanagement.repositories.ClassRepository;
+import eapli.ecourse.eventsmanagement.classmanagement.domain.Class;
+import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 public class InMemoryClassRepository extends InMemoryDomainRepository<Class, Long>
@@ -14,6 +14,7 @@ public class InMemoryClassRepository extends InMemoryDomainRepository<Class, Lon
   // @Override
   // public Iterable<Class> findAllActive() {
   // // TODO Auto-generated method stub
-  // throw new UnsupportedOperationException("Unimplemented method 'findAllActive'");
+  // throw new UnsupportedOperationException("Unimplemented method
+  // 'findAllActive'");
   // }
 }

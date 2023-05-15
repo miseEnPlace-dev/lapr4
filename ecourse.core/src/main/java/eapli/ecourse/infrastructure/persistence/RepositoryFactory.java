@@ -1,7 +1,7 @@
 package eapli.ecourse.infrastructure.persistence;
 
-import eapli.ecourse.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;

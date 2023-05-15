@@ -1,7 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import eapli.ecourse.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;

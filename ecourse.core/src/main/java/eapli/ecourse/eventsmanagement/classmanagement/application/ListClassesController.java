@@ -1,7 +1,7 @@
-package eapli.ecourse.classmanagement.application;
+package eapli.ecourse.eventsmanagement.classmanagement.application;
 
-import eapli.ecourse.classmanagement.domain.Class;
-import eapli.ecourse.classmanagement.repositories.ClassRepository;
+import eapli.ecourse.eventsmanagement.classmanagement.domain.Class;
+import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 
 public class ListClassesController {
