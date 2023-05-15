@@ -1,5 +1,6 @@
 package eapli.ecourse.app.teacher.console.presentation.questions;
 
+import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -18,6 +19,8 @@ public class AddQuestionsUI extends AbstractUI {
     String fileName = Console.readLine("Enter the path of the file with the questions:");
 
     final Iterable<CourseDTO> courses = this.ctrl.listAvailableCourses();
+
+    new CourseHeader().printHeader();
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
