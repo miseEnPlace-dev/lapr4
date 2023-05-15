@@ -5,6 +5,9 @@ class ToggleCourseStatusUI {
 }
 
 class ToggleCourseStatusController {
+- courseListService
+- courseRepository
+- authorizationService
 + listOpenCourses()
 + listClosedCourses()
 + toggleCourseStatus(course)
@@ -19,6 +22,7 @@ class Course {
   - courseState
   - courseEnrolmentState
   - createdAt
+  + toDto()
 }
 
 class RepositoryFactory {
@@ -27,20 +31,45 @@ class RepositoryFactory {
 
 interface CourseRepository {
   + save(course)
-  + openCourses()
-  + closedCourses()
+  + findAllOpen()
+  + findAllClosed()
 }
+
+class CourseListService {
+  - courseRepository
+
+  + CourseService(courseRepository)
+
+  + listClosedCourses()
+  + listOpenCourses()
+  + save(course)
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
 
 class InMemoryCourseRepository {
   + save(course)
-  + openCourses()
-  + closedCourses()
+  + findAllOpen()
+  + findAllClosed()
 }
 
 class JpaCourseRepository {
   + save(course)
-  + openCourses()
-  + closedCourses()
+  + findAllOpen()
+  + findAllClosed()
 }
 
 class PersistenceContext {
@@ -60,7 +89,6 @@ enum CourseEnrolmentState {
   CLOSED
 }
 
-
 CourseState --> Course
 CourseEnrolmentState --> Course
 
@@ -73,5 +101,10 @@ ToggleCourseStatusController ..> PersistenceContext
 ToggleCourseStatusController ..> Course
 ToggleCourseStatusUI ..> ToggleCourseStatusController
 
+CourseListService ..> Course
+ToggleCourseStatusController --> CourseListService
+
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
 
 @enduml
