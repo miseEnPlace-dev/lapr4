@@ -67,7 +67,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- xxx
+- **Factory**:
 
 ### 4.4. Tests
 
@@ -78,9 +78,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   @Test
   public void xxx() {
-    // Given
-    // When
-    // Then
   }
 ```
 

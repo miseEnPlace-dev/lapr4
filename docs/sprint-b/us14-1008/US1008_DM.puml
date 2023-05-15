@@ -1,4 +1,4 @@
-@startuml DM-ENROLMENT
+@startuml US1008_DM
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -6,6 +6,25 @@ hide empty attributes
 hide empty methods
 skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
+
+package "<<aggregate>> Enrolment" {
+  entity Enrolment
+}
+
+entity Enrolment <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+
+  class BirthDate
+  class TaxPayerNumber
+  class MecanographicNumber
+}
+
+entity Student <<entity>> <<root>> {
+}
+
 
 package "<<aggregate>> Enrolment" {
   entity Enrolment
@@ -46,5 +65,13 @@ Enrolment --> "1" State : has
 
 Student --> "0..*" Enrolment : has
 Enrolment -> "1" Course : is for
+
+class BirthDate <<(V,#FF8B40) value object>> {}
+class TaxPayerNumber <<(V,#FF8B40) value object>> {}
+class MecanographicNumber <<(V,#FF8B40) value object>> {}
+
+Student --> "1" BirthDate : characterized by
+Student --> "1" TaxPayerNumber : characterized by
+Student --> "1" MecanographicNumber : identified by
 
 @enduml
