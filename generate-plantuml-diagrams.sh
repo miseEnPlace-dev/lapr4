@@ -5,8 +5,13 @@ exportFormat="svg"
 extra="-SdefaultFontSize=20"
 #extra="-SdefaultFontName=Times New Roman -SdefaultFontSize=10"
 out=out
+if [ $1 ]; then
+  baseDir=$1
+else
+  baseDir=docs
+fi
 
-for out_dir in `find docs -name "out" -type d`;
+for out_dir in `find $baseDir -name "$out" -type d`;
 do
   echo "> Removing old output files: $out_dir"
   rm -rf $out_dir
@@ -16,7 +21,7 @@ echo
 echo "> Generating files..."
 echo
 
-for aFile in `find docs -name "*.puml" -type f`;
+for aFile in `find $baseDir -name "*.puml" -type f`;
 do
   #-Smonochrome=$monochrome
   echo "> Processing file: $aFile"
