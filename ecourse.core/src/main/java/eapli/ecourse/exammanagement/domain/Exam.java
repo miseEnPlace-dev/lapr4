@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 
 /**
@@ -27,12 +28,13 @@ public abstract class Exam implements AggregateRoot<Long> {
   @Column(nullable = false)
   private Course course;
 
-  // @Column(nullable = false)
-  // private Teacher teacher;
+  @Column(nullable = false)
+  private Teacher teacher;
 
   @Column(nullable = false)
   private ExamDescription description;
 
   @Column(nullable = false)
   private ExamState state;
+
 }

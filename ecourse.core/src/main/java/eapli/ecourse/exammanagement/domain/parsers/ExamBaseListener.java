@@ -40,13 +40,61 @@ public class ExamBaseListener implements ExamListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExam_header(ExamParser.Exam_headerContext ctx) { }
+	@Override public void enterSections(ExamParser.SectionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExam_header(ExamParser.Exam_headerContext ctx) { }
+	@Override public void exitSections(ExamParser.SectionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSection(ExamParser.SectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSection(ExamParser.SectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterQuestions(ExamParser.QuestionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuestions(ExamParser.QuestionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHeader(ExamParser.HeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHeader(ExamParser.HeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProprieties(ExamParser.ProprietiesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProprieties(ExamParser.ProprietiesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -100,49 +148,61 @@ public class ExamBaseListener implements ExamListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSections(ExamParser.SectionsContext ctx) { }
+	@Override public void enterScore(ExamParser.ScoreContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSections(ExamParser.SectionsContext ctx) { }
+	@Override public void exitScore(ExamParser.ScoreContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSection(ExamParser.SectionContext ctx) { }
+	@Override public void enterStart_exam(ExamParser.Start_examContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSection(ExamParser.SectionContext ctx) { }
+	@Override public void exitStart_exam(ExamParser.Start_examContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSection_header(ExamParser.Section_headerContext ctx) { }
+	@Override public void enterEnd_exam(ExamParser.End_examContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSection_header(ExamParser.Section_headerContext ctx) { }
+	@Override public void exitEnd_exam(ExamParser.End_examContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuestions(ExamParser.QuestionsContext ctx) { }
+	@Override public void enterStart_section(ExamParser.Start_sectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuestions(ExamParser.QuestionsContext ctx) { }
+	@Override public void exitStart_section(ExamParser.Start_sectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEnd_section(ExamParser.End_sectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnd_section(ExamParser.End_sectionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
