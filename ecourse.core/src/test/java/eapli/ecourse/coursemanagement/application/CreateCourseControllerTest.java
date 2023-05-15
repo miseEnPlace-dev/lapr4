@@ -86,7 +86,7 @@ public class CreateCourseControllerTest {
 
       when(courseRepository.containsOfIdentity(CourseCode.valueOf("1234"))).thenReturn(true);
 
-      assertThrows(IllegalStateException.class, () -> controller.createCourse("1234", "dummy", "dummy", 10, 20, getDummyTeacherDTO()));
+      assertThrows(IllegalArgumentException.class, () -> controller.createCourse("1234", "dummy", "dummy", 10, 20, getDummyTeacherDTO()));
   }
 
 }

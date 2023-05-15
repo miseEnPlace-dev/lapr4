@@ -22,9 +22,6 @@ This is the first time this task is assigned to be developed. This is a new func
 - A course is characterized by its title and a unique code inputed by the administrator, e.g.,
   "JAVA-1".
 
-- The usual workflow related to the course can be illustrated as follows:
-  event create (-> state close) -> event open (->state open) -> event open enrollments (-> state enroll) -> event close enrollments (-> state in progress) -> event close (-> state closed)
-
 - Each course should have a unique identifier (automatically generated) and a unique name. A course may be open or closed. A closed course can not have any activity.
 
 - Each course must have a teacher in charge, but may also have other teachers. Courses are not divided into sections (i.e., "turmas").
