@@ -10,13 +10,25 @@ public class TrueFalseQuestion extends Question {
   @Column(nullable = false)
   private boolean correctAnswer;
 
-  public TrueFalseQuestion(final QuestionBody body, QuestionType type, boolean correctAnswer) {
+  public TrueFalseQuestion(final QuestionBody body, final QuestionType type, boolean correctAnswer) {
     super(body, type);
     this.correctAnswer = correctAnswer;
   }
 
+  public TrueFalseQuestion(final QuestionType type) {
+    super(type);
+  }
+
   protected TrueFalseQuestion() {
     // for ORM only
+  }
+
+  public void changeCorrectAnswer(boolean correctAnswer) {
+    this.correctAnswer = correctAnswer;
+  }
+
+  public boolean correctAnswer() {
+    return this.correctAnswer;
   }
 
   @Override

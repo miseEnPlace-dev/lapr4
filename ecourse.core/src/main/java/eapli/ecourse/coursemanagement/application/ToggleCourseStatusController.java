@@ -1,24 +1,24 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
-import java.util.Optional;
-
 public class ToggleCourseStatusController {
   private final CourseRepository courseRepository;
 
   private final AuthorizationService authz;
 
-  private final CourseService service;
+  private final CourseListService service;
 
   public ToggleCourseStatusController(CourseRepository courseRepository, AuthorizationService authz) {
     this.courseRepository = courseRepository;
     this.authz = authz;
-    this.service = new CourseService(courseRepository);
+    this.service = new CourseListService(courseRepository);
   }
 
   public Iterable<CourseDTO> listOpenCourses() {

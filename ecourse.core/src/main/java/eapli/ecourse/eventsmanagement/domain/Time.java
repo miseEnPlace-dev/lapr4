@@ -1,4 +1,4 @@
-package eapli.ecourse.extraordinaryclassmanagement.domain;
+package eapli.ecourse.eventsmanagement.domain;
 
 import java.util.Calendar;
 import javax.persistence.Embeddable;

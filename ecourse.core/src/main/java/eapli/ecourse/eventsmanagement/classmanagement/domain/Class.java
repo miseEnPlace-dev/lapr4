@@ -1,11 +1,12 @@
-package eapli.ecourse.classmanagement.domain;
+package eapli.ecourse.eventsmanagement.classmanagement.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+
+import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;

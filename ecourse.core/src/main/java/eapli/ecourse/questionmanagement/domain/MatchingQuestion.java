@@ -33,11 +33,26 @@ public class MatchingQuestion extends Question {
   @Column(name = "matchingOptionValue")
   private Map<Identifier, String> options;
 
-  public MatchingQuestion(final QuestionBody body, QuestionType type) {
+  @ElementCollection
+  @CollectionTable(name = "matchingOptionFeedback")
+  @MapKeyColumn(name = "matchingOptionIdentifier")
+  @Column(name = "matchingFeedbackValue")
+  private Map<Identifier, Feedback> feedbacks;
+
+  public MatchingQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
-    options = new HashMap<>();
-    matches = new HashMap<>();
-    correctMatches = new HashMap<>();
+    this.options = new HashMap<>();
+    this.matches = new HashMap<>();
+    this.correctMatches = new HashMap<>();
+    this.feedbacks = new HashMap<>();
+  }
+
+  public MatchingQuestion(final QuestionType type) {
+    super(type);
+    this.options = new HashMap<>();
+    this.matches = new HashMap<>();
+    this.correctMatches = new HashMap<>();
+    this.feedbacks = new HashMap<>();
   }
 
   protected MatchingQuestion() {
@@ -54,6 +69,10 @@ public class MatchingQuestion extends Question {
 
   public void addOption(final Identifier match, final String description) {
     options.put(match, description);
+  }
+
+  public void addFeedback(final Identifier match, final Feedback feedback) {
+    this.feedbacks.put(match, feedback);
   }
 
   @Override

@@ -1,0 +1,26 @@
+@startuml US1008_SSD
+autonumber
+
+actor "Student" as S
+participant "System" as SYS
+
+activate S
+
+S -> SYS : asks to list all the courses available for enrolment
+activate SYS
+SYS --> S : lists all available courses
+deactivate SYS
+
+S -> SYS : selects the desired course
+activate SYS
+SYS --> S : asks to confirm action
+deactivate SYS
+
+S -> SYS : confirms action
+activate SYS
+SYS --> S : reports the success of the enrolment request
+deactivate SYS
+
+deactivate S
+
+@enduml

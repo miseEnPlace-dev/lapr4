@@ -1,5 +1,6 @@
-package eapli.ecourse.app.backoffice.console.presentation.courses;
+package eapli.ecourse.app.backoffice.console.presentation.course;
 
+import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.application.ToggleCourseStatusController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -13,7 +14,7 @@ public class ToggleCourseStatusUI extends AbstractUI {
 
   private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
   private final ToggleCourseStatusController ctrl = new ToggleCourseStatusController(courseRepository,
-    AuthzRegistry.authorizationService());
+      AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {

@@ -1,7 +1,7 @@
 package eapli.ecourse.app.backoffice.console.presentation;
 
 import eapli.ecourse.Application;
-import eapli.ecourse.app.backoffice.console.presentation.courses.CoursesMenu;
+import eapli.ecourse.app.backoffice.console.presentation.course.CoursesMenu;
 import eapli.ecourse.app.backoffice.console.presentation.users.UsersMenu;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;

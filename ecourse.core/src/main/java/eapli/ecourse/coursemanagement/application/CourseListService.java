@@ -7,10 +7,10 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 
-public class CourseService {
+public class CourseListService {
   private CourseRepository courseRepository;
 
-  public CourseService(CourseRepository courseRepository) {
+  public CourseListService(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
   }
 

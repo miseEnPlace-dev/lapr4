@@ -17,8 +17,14 @@ public class MissingWordsQuestion extends Question {
   @ElementCollection(fetch = FetchType.EAGER)
   private List<String> options;
 
-  public MissingWordsQuestion(final QuestionBody body, QuestionType type) {
+  public MissingWordsQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
+    this.missingWords = new ArrayList<>();
+    this.options = new ArrayList<>();
+  }
+
+  public MissingWordsQuestion(final QuestionType type) {
+    super(type);
     this.missingWords = new ArrayList<>();
     this.options = new ArrayList<>();
   }

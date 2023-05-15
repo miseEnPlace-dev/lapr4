@@ -1,4 +1,4 @@
-package eapli.ecourse.app.backoffice.console.presentation.courses;
+package eapli.ecourse.app.common.console.presentation.course;
 
 import java.text.SimpleDateFormat;
 
@@ -11,7 +11,7 @@ public class CoursePrinter implements Visitor<CourseDTO> {
   public void visit(final CourseDTO visitee) {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-    System.out.printf("%-7s%-20s%-30s%-4s%-4s%-8s%-8s%-15s", visitee.getCode(), visitee.getTitle(),
+    System.out.printf("%-7s%-20s%-30s%-5s%-5s%-8s%-16s%-20s", visitee.getCode(), visitee.getTitle(),
         visitee.getDescription(), visitee.getEnrolmentLimits().minLimit(), visitee.getEnrolmentLimits().maxLimit(),
         visitee.getCourseState(),
         visitee.getEnrolmentState(), formatter.format(visitee.getCreatedAt().getTime()));

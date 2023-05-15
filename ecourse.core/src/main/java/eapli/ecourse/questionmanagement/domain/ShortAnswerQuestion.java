@@ -19,8 +19,13 @@ public class ShortAnswerQuestion extends Question {
   @Column(name = "grade")
   private Map<String, Double> correctAnswers;
 
-  public ShortAnswerQuestion(final QuestionBody body, QuestionType type) {
+  public ShortAnswerQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
+    this.correctAnswers = new HashMap<>();
+  }
+
+  public ShortAnswerQuestion(final QuestionType type) {
+    super(type);
     this.correctAnswers = new HashMap<>();
   }
 

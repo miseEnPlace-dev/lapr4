@@ -1,10 +1,13 @@
-package eapli.ecourse.extraordinaryclassmanagement.domain;
+package eapli.ecourse.eventsmanagement.classmanagement.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+
+import eapli.ecourse.eventsmanagement.domain.Duration;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;

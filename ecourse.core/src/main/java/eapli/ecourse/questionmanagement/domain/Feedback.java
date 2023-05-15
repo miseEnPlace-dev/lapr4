@@ -12,12 +12,16 @@ public class Feedback implements ValueObject {
 
   private String feedback;
 
-  public Feedback(String feedback) {
+  private Feedback(String feedback) {
     this.feedback = feedback;
   }
 
   protected Feedback() {
     // for ORM
+  }
+
+  public static Feedback valueOf(final String feedback) {
+    return new Feedback(feedback);
   }
 
   @Override

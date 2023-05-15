@@ -34,7 +34,7 @@ public class ECourseDemoBootstrapper implements Action {
     // execute all bootstrapping
     boolean ret = true;
     for (final Action boot : actions) {
-      System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
+      System.out.println("\n-- Bootstrapping " + nameOfEntity(boot) + "... --\n");
       ret &= boot.execute();
     }
     return ret;

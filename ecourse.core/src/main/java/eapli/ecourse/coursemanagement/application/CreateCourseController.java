@@ -10,6 +10,8 @@ import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.validations.Preconditions;
+
 import java.util.Optional;
 
 @UseCaseController
@@ -31,6 +33,8 @@ public class CreateCourseController {
       int min, int max, TeacherDTO teacherDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
+    Preconditions.noneNull(code, title, description, min, max, teacherDTO);
+
     Optional<Teacher> teacher = teacherRepository.findByTaxPayerNumber(teacherDTO.getNumber());
 
     if (!teacher.isPresent())
@@ -46,9 +50,8 @@ public class CreateCourseController {
   }
 
   private Course saveCourse(Course course) {
-    if (course == null) {
+    if (course == null)
       throw new IllegalArgumentException();
-    }
 
     return courseRepository.save(course);
   }
