@@ -11,10 +11,10 @@ import eapli.ecourse.studentmanagement.domain.events.NewUserRegisteredFromSignup
 import eapli.ecourse.studentmanagement.domain.events.SignupAcceptedEvent;
 import eapli.ecourse.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
 import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
+import eapli.framework.collections.util.ArrayPredicates;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 import eapli.framework.io.util.Console;
-import eapli.framework.util.ArrayPredicates;
 
 /**
  * eCourse Bootstrapping data app
