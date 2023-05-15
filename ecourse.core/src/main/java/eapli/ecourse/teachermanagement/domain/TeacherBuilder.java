@@ -1,6 +1,9 @@
 package eapli.ecourse.teachermanagement.domain;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -33,6 +36,17 @@ public class TeacherBuilder implements DomainFactory<Teacher> {
 
   public TeacherBuilder withBirthDate(final Calendar birthDate) {
     this.birthDate = BirthDate.valueOf(birthDate);
+    return this;
+  }
+
+  public TeacherBuilder withBirthDate(final String birthDate) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    Date date = sdf.parse(birthDate, new ParsePosition(0));
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(date);
+    this.birthDate = BirthDate.valueOf(cal);
+
     return this;
   }
 

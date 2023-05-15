@@ -25,6 +25,6 @@ public final class ClientRoles {
    * @return
    */
   public static Role[] nonUserValues() {
-    return new Role[] {MANAGER, TEACHER};
+    return new Role[] { MANAGER, TEACHER, STUDENT };
   }
 }

@@ -16,9 +16,8 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
  * @author Paulo Gandra de Sousa
  */
 /* package */ class AddStudentOnSignupAcceptedController {
-
   private final UserRepository repo = PersistenceContext.repositories().users();
-  private final StudentRepository clientUserRepository = PersistenceContext.repositories().students();
+  private final StudentRepository studentsRepository = PersistenceContext.repositories().students();
 
   public Student addStudent(final NewUserRegisteredFromSignupEvent event) {
     final Optional<SystemUser> newUser = findStudent(event);
@@ -28,7 +27,7 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
   private Student createStudent(final NewUserRegisteredFromSignupEvent event, SystemUser u) {
     final var student = new StudentBuilder()
         .withMecanographicNumber(event.mecanographicNumber()).withSystemUser(u).build();
-    return clientUserRepository.save(student);
+    return studentsRepository.save(student);
   }
 
   @SuppressWarnings("squid:S1488")
