@@ -17,7 +17,7 @@ public class Status implements ValueObject {
   }
 
   public Status() {
-    state = InviteStatus.NO_ANSWER;
+    state = InviteStatus.PENDING;
   }
 
   @Enumerated(EnumType.STRING)
@@ -35,16 +35,15 @@ public class Status implements ValueObject {
     return this.state == InviteStatus.REJECTED;
   }
 
-  public void changeToAccepted() {
+  public void accepted() {
     this.state = InviteStatus.ACCEPTED;
   }
 
-  public void changeToRejected() {
+  public void rejected() {
     this.state = InviteStatus.REJECTED;
   }
 
-  public void changeToPending() {
-    this.state = InviteStatus.PENDING;
+  public void noAnswer() {
+    this.state = InviteStatus.NO_ANSWER;
   }
-
 }

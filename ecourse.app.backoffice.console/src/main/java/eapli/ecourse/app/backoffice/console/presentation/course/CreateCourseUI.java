@@ -36,7 +36,7 @@ public class CreateCourseUI extends AbstractUI {
       return false;
     }
 
-    final SelectWidget<TeacherDTO> selector = new SelectWidget<>("Teachers:", teachers, new TeacherPrinter());
+    final SelectWidget<TeacherDTO> selector = new SelectWidget<>("\nTeachers:", teachers, new TeacherPrinter());
     selector.show();
     final TeacherDTO selected = selector.selectedElement();
 
