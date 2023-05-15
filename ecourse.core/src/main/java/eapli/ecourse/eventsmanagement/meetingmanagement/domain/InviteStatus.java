@@ -9,41 +9,41 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class Status implements ValueObject {
+public class InviteStatus implements ValueObject {
   private static final long serialVersionUID = 1L;
 
-  public enum InviteStatus {
+  public enum Status {
     PENDING, ACCEPTED, REJECTED, NO_ANSWER
   }
 
-  public Status() {
-    state = InviteStatus.PENDING;
+  public InviteStatus() {
+    state = Status.PENDING;
   }
 
   @Enumerated(EnumType.STRING)
-  private InviteStatus state;
+  private Status state;
 
   public boolean isPending() {
-    return this.state == InviteStatus.PENDING;
+    return this.state == Status.PENDING;
   }
 
   public boolean isAccepted() {
-    return this.state == InviteStatus.ACCEPTED;
+    return this.state == Status.ACCEPTED;
   }
 
   public boolean isRejected() {
-    return this.state == InviteStatus.REJECTED;
+    return this.state == Status.REJECTED;
   }
 
-  public void accepted() {
-    this.state = InviteStatus.ACCEPTED;
+  public void accept() {
+    this.state = Status.ACCEPTED;
   }
 
-  public void rejected() {
-    this.state = InviteStatus.REJECTED;
+  public void reject() {
+    this.state = Status.REJECTED;
   }
 
   public void noAnswer() {
-    this.state = InviteStatus.NO_ANSWER;
+    this.state = Status.NO_ANSWER;
   }
 }
