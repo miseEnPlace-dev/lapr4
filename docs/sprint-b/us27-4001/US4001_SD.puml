@@ -1,0 +1,41 @@
+@startuml US4001_SD
+autonumber
+
+actor "User" as U
+
+participant "ScheduleMeetingUI" as UI <<presentation>>
+participant "ScheduleMeetingController" as CTRL <<application>>
+participant "Meeting" as MEETING <<domain>>
+participant "User" as USER <<domain>>
+participant "Invite" as INVITE <<domain>>
+
+
+activate U
+
+U -> UI : Asks to schedule a meeting
+activate UI
+
+UI --> U : requests the data needed to schedule a meeting
+deactivate UI
+
+U -> UI : types the requested data
+activate UI
+
+UI --> U : shows the user the available time slots
+deactivate UI
+
+U -> UI : selects slot time
+activate UI
+
+UI --> U : shows the user the data types and asks for confirmation
+deactivate UI
+
+U -> UI : confirms the data
+activate UI
+
+UI --> U : informs operation sucess
+deactivate UI
+
+deactivate U
+
+@enduml
