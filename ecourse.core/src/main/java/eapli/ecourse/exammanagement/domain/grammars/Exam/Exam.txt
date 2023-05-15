@@ -10,6 +10,7 @@
 
 @title "Expressões regulares.";
 @description "Descrição da Secção";
+@score 50;
 
 @end-section;
 

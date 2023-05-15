@@ -9,20 +9,20 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 @EqualsAndHashCode
 /**
- * The score of a question in an exam.
+ * The score of a exam/section/question.
  */
-public class SectionScore implements ValueObject, Comparable<SectionScore> {
+public class Score implements ValueObject, Comparable<Score> {
   public static final long serialVersionUID = 1L;
 
   private int score;
 
   /**
-   * Constructor for SectionScore.
+   * Constructor for Score.
    *
    * @param score score of the section
    */
-  protected SectionScore(final int score) {
-    Preconditions.isPositive(score, "Section Score should be positive");
+  protected Score(final int score) {
+    Preconditions.isPositive(score, "Score should be positive");
 
     this.score = score;
   }
@@ -30,12 +30,12 @@ public class SectionScore implements ValueObject, Comparable<SectionScore> {
   /**
    * Empty constructor for ORM.
    */
-  protected SectionScore() {
+  protected Score() {
 
   }
 
   /**
-   * Returns the string representation of a SectionScore.
+   * Returns the string representation of a Score.
    *
    * @return score of the section
    */
@@ -45,14 +45,14 @@ public class SectionScore implements ValueObject, Comparable<SectionScore> {
   }
 
   /**
-   * Compares two SectionScore objects, comparing their scores.
+   * Compares two Score objects, comparing their scores.
    *
-   * @param sectionScore SectionScore to compare
+   * @param other Score to compare
    * @return 0 if the scores are equal, greater than 0 if this score is greater
    *         than the other, less than 0 if this score is less than the other.
    */
   @Override
-  public int compareTo(final SectionScore sectionScore) {
-    return Integer.compare(this.score, sectionScore.score);
+  public int compareTo(final Score other) {
+    return Integer.compare(this.score, other.score);
   }
 }

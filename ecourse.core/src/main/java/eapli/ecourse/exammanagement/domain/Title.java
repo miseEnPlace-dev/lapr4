@@ -8,23 +8,23 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 @EqualsAndHashCode
 /**
- * Section Title class.
+ * Exam/Section Title class.
  */
-public class SectionTitle implements ValueObject, Comparable<SectionTitle> {
+public class Title implements ValueObject, Comparable<Title> {
   private static final long serialVersionUID = 1L;
 
   private String title;
 
   /**
-   * Constructor for SectionTitle.
+   * Constructor for Title.
    *
    * @param title title of the section
    */
-  protected SectionTitle(final String title) {
-    Preconditions.nonEmpty(title, "Section Description should neither be null nor empty.");
+  protected Title(final String title) {
+    Preconditions.nonEmpty(title, "Title should neither be null nor empty.");
 
     if (title.length() > 255)
-      throw new IllegalArgumentException("Section Description should not exceed 255 characters");
+      throw new IllegalArgumentException("Title should not exceed 255 characters");
 
     this.title = title;
   }
@@ -32,11 +32,11 @@ public class SectionTitle implements ValueObject, Comparable<SectionTitle> {
   /**
    * Empty constructor for ORM.
    */
-  protected SectionTitle() {
+  protected Title() {
   }
 
   /**
-   * Returns the string representation of a SectionTitle.
+   * Returns the string representation of a Title.
    *
    * @return title of the section
    */
@@ -46,15 +46,15 @@ public class SectionTitle implements ValueObject, Comparable<SectionTitle> {
   }
 
   /**
-   * Compares two SectionTitle objects, comparing their titles.
+   * Compares two Title objects, comparing their titles.
    *
-   * @param sectionTitle SectionTitle to compare
+   * @param other Title to compare
    * @return 0 if the titles are equal, greater than 0 if this title
    *         is greater than the other, less than 0 if this title is less
    *         than the other.
    */
   @Override
-  public int compareTo(final SectionTitle sectionTitle) {
-    return this.title.compareTo(sectionTitle.title);
+  public int compareTo(final Title other) {
+    return this.title.compareTo(other.title);
   }
 }

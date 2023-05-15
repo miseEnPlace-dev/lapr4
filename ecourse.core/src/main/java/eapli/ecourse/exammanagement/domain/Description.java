@@ -9,33 +9,33 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 @EqualsAndHashCode
 /**
- * Exam Description class.
+ * Exam/Section Description class.
  */
-public class ExamDescription implements ValueObject, Comparable<ExamDescription> {
+public class Description implements ValueObject, Comparable<Description> {
   private static final long serialVersionUID = 1L;
 
   private String description;
 
   /**
-   * Constructor for ExamDescription.
+   * Constructor for Description.
    *
-   * @param description description of the exam
+   * @param description description of the exam/section
    */
-  protected ExamDescription(final String description) {
-    Preconditions.nonEmpty(description, "Exam Description should neither be null nor empty.");
+  protected Description(final String description) {
+    Preconditions.nonEmpty(description, "Description should neither be null nor empty.");
 
     if (description.length() > 255)
-      throw new IllegalArgumentException("Exam Description should not exceed 255 characters");
+      throw new IllegalArgumentException("Description should not exceed 255 characters");
 
     this.description = description;
   }
 
-  protected ExamDescription() {
+  protected Description() {
     // for ORM only
   }
 
   /**
-   * Returns the string representation of a ExamDescription.
+   * Returns the string representation of a Description.
    *
    * @return description of the exam
    */
@@ -45,15 +45,15 @@ public class ExamDescription implements ValueObject, Comparable<ExamDescription>
   }
 
   /**
-   * Compares two ExamDescription objects, comparing their descriptions.
+   * Compares two Description objects, comparing their descriptions.
    *
-   * @param examDescription ExamDescription to compare
+   * @param other Description to compare
    * @return 0 if the descriptions are equal, greater than 0 if this description
    *         is greater than the other, less than 0 if this description is less
    *         than the other.
    */
   @Override
-  public int compareTo(final ExamDescription examDescription) {
-    return this.description.compareTo(examDescription.description);
+  public int compareTo(final Description other) {
+    return this.description.compareTo(other.description);
   }
 }
