@@ -46,6 +46,13 @@
     },
     {
       "type": "java",
+      "name": "Board Backend",
+      "request": "launch",
+      "mainClass": "eapli.ecourse.app.board.backend.App",
+      "projectName": "app.board.backend"
+    },
+    {
+      "type": "java",
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}"

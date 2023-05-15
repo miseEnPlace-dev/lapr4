@@ -13,7 +13,7 @@ public class SystemUserPrinter implements Visitor<SystemUser> {
 
   @Override
   public void visit(final SystemUser visitee) {
-    System.out.printf("%-10s%-30s%-30s", visitee.username(), visitee.name().firstName(),
+    System.out.printf("%-20s%-30s%-30s", visitee.username(), visitee.name().firstName(),
         visitee.name().lastName());
   }
 }

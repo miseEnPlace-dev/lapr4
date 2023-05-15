@@ -3,7 +3,10 @@ package eapli.ecourse.app.backoffice.console.presentation.authz;
 import java.util.HashSet;
 import java.util.Set;
 
+import eapli.ecourse.app.common.console.presentation.student.StudentDataWidget;
+import eapli.ecourse.app.common.console.presentation.teacher.TeacherDataWidget;
 import eapli.ecourse.usermanagement.application.AddUserController;
+import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -25,8 +28,6 @@ public class AddUserUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final SystemUserDataWidget userData = new SystemUserDataWidget();
-    userData.show();
 
     final Set<Role> roleTypes = new HashSet<>();
     boolean show;
@@ -35,9 +36,25 @@ public class AddUserUI extends AbstractUI {
     } while (!show);
 
     try {
-      this.theController.addUser(userData.username(), userData.password(), userData.firstName(),
-          userData.lastName(),
-          userData.email(), roleTypes);
+      for (Role role : roleTypes) {
+        if (role.equals(ClientRoles.STUDENT)) {
+          final StudentDataWidget userData = new StudentDataWidget();
+          userData.show();
+          theController.addStudent(userData.username(), userData.password(), userData.firstName(),
+              userData.lastName(), userData.email(), userData.mecanographicNumber());
+        } else if (role.equals(ClientRoles.TEACHER)) {
+          final TeacherDataWidget userData = new TeacherDataWidget();
+          userData.show();
+          theController.addTeacher(userData.username(), userData.password(), userData.firstName(),
+              userData.lastName(), userData.email(), userData.taxPayerNumber(), userData.birthDate(),
+              userData.acronym());
+        } else {
+          final SystemUserDataWidget userData = new SystemUserDataWidget();
+          userData.show();
+          theController.addUser(userData.username(), userData.password(), userData.firstName(),
+              userData.lastName(), userData.email(), roleTypes);
+        }
+      }
     } catch (@SuppressWarnings("unused") final IntegrityViolationException e) {
       System.out.println("That username is already in use.");
     } catch (IllegalArgumentException e) {

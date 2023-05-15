@@ -6,9 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.teachermanagement.domain.Acronym;
+import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -26,7 +30,8 @@ public class CourseTest {
   }
 
   private Teacher getDummyTeacher() {
-    return new Teacher(getDummyUser(), TaxPayerNumber.valueOf("123456789"));
+    return new Teacher(getDummyUser(), TaxPayerNumber.valueOf("123456789"), Acronym.valueOf("dummy"),
+        BirthDate.valueOf(Calendar.getInstance()));
   }
 
   private SystemUser getDummyUser() {

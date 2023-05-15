@@ -3,8 +3,8 @@ package eapli.ecourse.teachermanagement.application;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import eapli.ecourse.coursemanagement.dto.TeacherDTO;
 import eapli.ecourse.teachermanagement.domain.Teacher;
+import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 
 public class TeacherService {

@@ -1,14 +1,17 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import eapli.ecourse.coursemanagement.dto.TeacherDTO;
 import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.teachermanagement.domain.Acronym;
+import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
+import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.domain.model.Role;
@@ -24,7 +27,8 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
 
     SystemUser u = registerUser(username, password, firstName, lastName, email, roles);
 
-    final Teacher teacher = new Teacher(u, TaxPayerNumber.valueOf("123456789"));
+    final Teacher teacher = new Teacher(u, TaxPayerNumber.valueOf("123456789"), Acronym.valueOf("abc"),
+        BirthDate.valueOf(Calendar.getInstance()));
     PersistenceContext.repositories().teachers().save(teacher);
 
     return teacher.toDto();

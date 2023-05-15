@@ -2,9 +2,14 @@ package eapli.ecourse.coursemanagement.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.Test;
+import java.util.Calendar;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
@@ -13,19 +18,16 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
-import eapli.ecourse.coursemanagement.dto.TeacherDTO;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.teachermanagement.domain.Acronym;
+import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.domain.TeacherBuilder;
+import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class CreateCourseControllerTest {
 
@@ -43,7 +45,8 @@ public class CreateCourseControllerTest {
   }
 
   private TeacherDTO getDummyTeacherDTO() {
-    return new TeacherDTO(TaxPayerNumber.valueOf("1234"));
+    return new TeacherDTO(TaxPayerNumber.valueOf("1234"), Acronym.valueOf("abc"),
+        BirthDate.valueOf(Calendar.getInstance()), Username.valueOf("aaa"));
   }
 
   private Teacher getDummyTeacher() {
