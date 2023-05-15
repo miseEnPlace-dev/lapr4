@@ -1,0 +1,49 @@
+@startuml US1006_SD
+autonumber
+
+actor "User" as USER
+participant "ListAvailableCoursesUI" as UI <<presentation>>
+participant "ListAvailableCoursesController" as CTRL <<application>>
+participant "CourseService" as SRV <<service>>
+participant "Course" as C <<domain>>
+participant "CourseDTO" as DTO <<dto>>
+
+database CourseRepository as REP <<repository>>
+
+activate USER
+
+USER -> UI : asks to list available courses
+activate UI
+
+UI -> CTRL : new
+activate CTRL
+CTRL -> SRV : new(courseRepository)
+deactivate CTRL
+
+UI -> CTRL : listAvailableCourses()
+activate CTRL
+CTRL -> SRV : listAvailableCourses()
+activate SRV
+SRV -> REP : findAllAvailable()
+activate REP
+REP --> SRV : courses
+deactivate REP
+
+loop for each course
+  SRV -> C : toDTO(course)
+  activate C
+  C -> DTO : new
+  deactivate C
+end loop
+
+SRV --> CTRL : courses
+deactivate SRV
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> USER : lists available courses
+deactivate UI
+
+deactivate USER
+
+@enduml

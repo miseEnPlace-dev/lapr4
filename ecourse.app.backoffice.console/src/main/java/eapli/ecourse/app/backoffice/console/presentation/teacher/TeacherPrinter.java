@@ -11,6 +11,6 @@ public class TeacherPrinter implements Visitor<TeacherDTO> {
   @Override
   public void visit(final TeacherDTO visitee) {
 
-    System.out.printf("%", visitee.getNumber());
+    System.out.printf("%s", visitee.getNumber());
   }
 }

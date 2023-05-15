@@ -5,29 +5,65 @@ actor "Manager" as M
 participant "CreateCourseUI" as UI <<presentation>>
 participant "CreateCourseController" as CTRL <<application>>
 participant "Course" as C <<domain>>
+participant "CourseBuilder" as B <<builder>>
+participant "TeacherService" as TS <<service>>
+participant "Teacher" as T <<domain>>
+participant "TeacherDTO" as DTO <<dto>>
 
 database CourseRepository as REPC <<repository>>
+database TeacherRepository as TEAC <<repository>>
 
 activate M
 
 M -> UI : asks to create a new Course
 activate UI
 
-UI --> M : requests data (code, title, description, enrollment_limits, (optional) course_state, (optional) course_enrolment_state)
+UI --> M : requests data (code, title, description, enrollment_limits)
 deactivate UI
 
 M -> UI : types request data
 activate UI
 
-UI -> CTRL : newCourse()
+UI -> CTRL : listAllTeachers()
 activate CTRL
 
-CTRL -> CTRL : checkDuplicates(course)
+CTRL -> TS : listAllIterableTeachers()
+activate TS
+
+loop for each teacher
+  TS -> T : toDTO(teacher)
+  activate T
+  T -> DTO : new
+  activate DTO
+  deactivate DTO
+  deactivate T
+end loop
+
+deactivate TS
+
+deactivate CTRL
+
+UI --> M : asks to select responsible teacher
+deactivate UI
+
+M -> UI : selects the teacher
+activate UI
+
+UI -> CTRL : createCourse()
 activate CTRL
 
-CTRL -> REPC : findByCode(course)
-activate REPC
-deactivate REPC
+CTRL -> TEAC : findByTaxPayerNumber()
+activate TEAC
+deactivate TEAC
+
+CTRL -> B : CourseBuilder()\n.withCode(code)\n.withTitle(title)\n.withDescription(description)\n.withEnrolmentLimits(min, max)\n.withTeacher(teacher.get())\n.build()
+activate B
+deactivate B
+
+CTRL -> C : containsOfIdentity()
+activate C
+deactivate C
+
 deactivate CTRL
 deactivate CTRL
 
@@ -39,14 +75,6 @@ activate UI
 
 UI->CTRL : saveCourse()
 activate CTRL
-
-CTRL -> C : saveCourse()
-activate C
-
-C-> C : checkErrors()
-activate C
-deactivate C
-deactivate C
 
 CTRL -> REPC : saveCourse()
 activate REPC

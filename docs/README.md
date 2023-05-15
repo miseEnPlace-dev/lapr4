@@ -55,6 +55,16 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 
 ### [Team Rules](team-rules.md)
 
+### 4.1. How to generate diagrams
+
+In order to generate diagrams just run the following command:
+
+> In Linux or Mac `./generate_plantuml-diagrams.sh`
+
+You can specify the folder that you want to generate the diagrams by passing the folder name as an argument:
+
+> In Linux or Mac `./generate_plantuml-diagrams.sh docs/sprint-a`
+
 ## 5. Client Communication
 
 ### [Sprint A](client-clarifications/sprint-a.md)
