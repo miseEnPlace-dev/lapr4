@@ -1,30 +1,42 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.usermanagement.domain.ClientRoles;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
 public class ToggleCourseStatusController {
-  private CourseRepository courseRepository;
+  private final CourseRepository courseRepository;
 
-  public ToggleCourseStatusController(CourseRepository courseRepository) {
+  private final AuthorizationService authz;
+
+  private final CourseListService service;
+
+  public ToggleCourseStatusController(CourseRepository courseRepository, AuthorizationService authz) {
     this.courseRepository = courseRepository;
-
+    this.authz = authz;
+    this.service = new CourseListService(courseRepository);
   }
 
-  public Iterable<Course> listOpenCourses() {
-    return courseRepository.findAllOpen();
+  public Iterable<CourseDTO> listOpenCourses() {
+    return service.listOpenCourses();
   }
 
-  public Iterable<Course> listClosedCourses() {
-    return courseRepository.findAllClosed();
+  public Iterable<CourseDTO> listClosedCourses() {
+    return service.listClosedCourses();
   }
 
-  public void toggleCourseStatus(Course course) {
-    if (course == null)
-      throw new IllegalArgumentException("Course cannot be null");
+  public void toggleCourseStatus(CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
-    course.toggleState();
+    Optional<Course> course = courseRepository.findByCode(courseDTO.getCode());
 
-    courseRepository.save(course);
+    if (course.isEmpty())
+      throw new IllegalArgumentException("There is no Course with the given code");
+
+    course.get().toggleState();
   }
 }

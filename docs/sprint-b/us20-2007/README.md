@@ -227,8 +227,14 @@ You can check a pratical example with all the question types [here](../../../eco
 - Relevant implementation details
 
 ```java
-  public void sample() {
-    return true;
+  public void addQuestionsFromFile(String filename, CourseDTO courseDTO) {
+    Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
+    List<Question> questions = QuestionsMain.parseWithVisitor(filename);
+
+    questions.forEach(question -> {
+      question.changeCourse(course);
+      addQuestion(question);
+    });
   }
 ```
 

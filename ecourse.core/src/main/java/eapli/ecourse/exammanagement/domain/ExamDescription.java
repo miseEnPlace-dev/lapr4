@@ -24,6 +24,9 @@ public class ExamDescription implements ValueObject, Comparable<ExamDescription>
   protected ExamDescription(final String description) {
     Preconditions.nonEmpty(description, "Exam description should neither be null nor empty.");
 
+    if (description.length() > 255)
+      throw new IllegalArgumentException("Exam Description should not exceed 255 characters");
+
     this.description = description;
   }
 

@@ -12,12 +12,16 @@ public class Identifier implements ValueObject {
 
   private String identifier;
 
-  public Identifier(String identifier) {
+  private Identifier(final String identifier) {
     this.identifier = identifier;
   }
 
   protected Identifier() {
     // for ORM
+  }
+
+  public static Identifier valueOf(final String identifier) {
+    return new Identifier(identifier);
   }
 
   @Override

@@ -1,4 +1,4 @@
-package eapli.ecourse.app.backoffice.console.presentation.courses;
+package eapli.ecourse.app.common.console.presentation.course;
 
 import java.text.SimpleDateFormat;
 

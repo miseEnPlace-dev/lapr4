@@ -1,4 +1,4 @@
-// Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
+// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -47,16 +47,6 @@ public interface ExamListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTitle(ExamParser.TitleContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExamParser#name}.
-	 * @param ctx the parse tree
-	 */
-	void enterName(ExamParser.NameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExamParser#name}.
-	 * @param ctx the parse tree
-	 */
-	void exitName(ExamParser.NameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExamParser#description}.
 	 * @param ctx the parse tree

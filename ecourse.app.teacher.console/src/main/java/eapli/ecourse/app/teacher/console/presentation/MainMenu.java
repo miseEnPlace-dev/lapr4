@@ -2,6 +2,7 @@ package eapli.ecourse.app.teacher.console.presentation;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
+import eapli.ecourse.app.teacher.console.presentation.questions.AddQuestionsUI;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -9,24 +10,21 @@ import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
+import eapli.framework.presentation.console.ShowMessageAction;
 import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
-/**
- * TODO split this class in more specialized classes for each menu
- *
- * @author Paulo Gandra Sousa
- */
 public class MainMenu extends AbstractUI {
 
   private static final String SEPARATOR_LABEL = "--------------";
 
   private static final int EXIT_OPTION = 0;
 
-  // MAIN MENU
-  private static final int MY_USER_OPTION = 1;
+  private static final int ADD_QUESTIONS_OPTION = 1;
+  private static final int ADD_EXAM_OPTION = 2;
+  private static final int MY_USER_OPTION = 3;
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
@@ -61,7 +59,6 @@ public class MainMenu extends AbstractUI {
 
   @Override
   public String headline() {
-
     return authz.session().map(s -> "Client [ @" + s.authenticatedUser().identity() + " ]")
         .orElse("Client [ ==Anonymous== ]");
   }
@@ -69,17 +66,14 @@ public class MainMenu extends AbstractUI {
   private Menu buildMainMenu() {
     final Menu mainMenu = new Menu();
 
-    final Menu myUserMenu = new MyUserMenu(ClientRoles.MANAGER);
+    final Menu myUserMenu = new MyUserMenu(ClientRoles.TEACHER);
+    mainMenu.addItem(ADD_QUESTIONS_OPTION, "Add Questions", new AddQuestionsUI()::show);
+    mainMenu.addItem(ADD_EXAM_OPTION, "Add Exam", new ShowMessageAction("Not implemented yet"));
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
     }
-
-    // if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.MANAGER)) {
-    // final Menu managerMenu = buildManagerMenu();
-    // mainMenu.addSubMenu(..., managerMenu);
-    // }
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
@@ -89,12 +83,4 @@ public class MainMenu extends AbstractUI {
 
     return mainMenu;
   }
-
-  // private Menu buildManagerMenu() {
-  // final Menu managerMenu = new Menu("Manager >");
-
-  // managerMenu.addItem(EXIT_OPTION, "Return", Actions.SUCCESS);
-
-  // return managerMenu;
-  // }
 }

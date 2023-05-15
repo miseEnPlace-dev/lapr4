@@ -5,8 +5,11 @@ actor "Manager" as M
 
 participant "SetCourseStatusUI" as UI <<presentation>>
 participant "SetCourseStatusController" as CTRL <<application>>
+participant "CourseListService" as SRV <<service>>
 participant "Course" as Course <<domain>>
+participant "CourseDTO" as DTO <<dto>>
 participant "CourseState" as CourseState <<domain>>
+
 
 database CourseRepository as REPO <<repository>>
 
@@ -21,24 +24,36 @@ UI -> CTRL**: new
 alt if close course
   UI -> CTRL: listOpenCourses()
   activate CTRL
-  CTRL -> REPO: openCourses()
-  activate REPO
-  REPO --> CTRL: courses
-  deactivate REPO
-  CTRL --> UI: courses
-  deactivate CTRL
+  CTRL -> SRV: listOpenCourses()
+  activate SRV
+  SRV -> REPO: findAllOpen()
+    activate REPO
+    deactivate REPO
+  loop for each course
+    SRV -> Course : toDTO(course)
+    activate Course
+    Course -> DTO : new
+    deactivate SRV
+    deactivate Course
+    deactivate CTRL
+  end loop
 else if open course
   UI -> CTRL: listClosedCourses()
-
   activate CTRL
-
-  CTRL -> REPO: openCourses()
+  CTRL -> SRV: listClosedCourses()
+  activate SRV
+  SRV -> REPO: findAllClosed()
   activate REPO
-  REPO --> CTRL: courses
   deactivate REPO
-  CTRL --> UI: courses
-  deactivate CTRL
-  end
+  loop for each course
+    SRV -> Course : toDTO(course)
+    activate Course
+    Course -> DTO : new
+    deactivate SRV
+    deactivate Course
+    deactivate CTRL
+  end loop
+end
 
 UI --> M: lists the available courses and their status and asks to select one
 
@@ -48,9 +63,7 @@ M -> UI: selects the desired course
 
 activate UI
 
-UI -> UI: course = get(index)
-
-
+UI -> UI: course = select(courses, index)dddd
 UI --> M: asks to confirm the toggle of the course status
 
 deactivate UI
@@ -61,27 +74,25 @@ activate UI
 
 UI -> CTRL: toggleCourseStatus(course)
 
-alt if close course
-  activate CTRL
-  CTRL -> CourseState: changeToClose()
-  activate CourseState
-  deactivate CourseState
+activate CTRL
 
-else if open course
+CTRL -> Course: course = toggleState()
 
-  CTRL -> CourseState: changeToOpen()
-  activate CourseState
-  deactivate CourseState
-  end
+activate Course
 
+Course -> CourseState: toggle()
+
+activate CourseState
+deactivate CourseState
+deactivate Course
 
 CTRL -> REPO: save(course)
 
 activate REPO
 deactivate REPO
-
 deactivate CTRL
 
 UI --> M: informs operation success
 
 @enduml
+

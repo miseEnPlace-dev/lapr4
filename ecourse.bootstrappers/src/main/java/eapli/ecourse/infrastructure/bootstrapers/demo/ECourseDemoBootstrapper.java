@@ -27,14 +27,14 @@ public class ECourseDemoBootstrapper implements Action {
   public boolean execute() {
     // declare bootstrap actions
     final Action[] actions = { new BackofficeUsersBootstrapper(), new StudentBootstrapper(),
-        new CoursesBootstrapper() };
+        new CoursesBootstrapper(), new QuestionsBootstrapper() };
 
     authenticateForBootstrapping();
 
     // execute all bootstrapping
     boolean ret = true;
     for (final Action boot : actions) {
-      System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
+      System.out.println("\n-- Bootstrapping " + nameOfEntity(boot) + "... --\n");
       ret &= boot.execute();
     }
     return ret;

@@ -7,15 +7,25 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 
-public class CourseService {
+public class CourseListService {
   private CourseRepository courseRepository;
 
-  public CourseService(CourseRepository courseRepository) {
+  public CourseListService(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {
     final Iterable<Course> types = courseRepository.findAllNotClosed();
+    return convertToDto(types);
+  }
+
+  public Iterable<CourseDTO> listClosedCourses() {
+    final Iterable<Course> types = courseRepository.findAllClosed();
+    return convertToDto(types);
+  }
+
+  public Iterable<CourseDTO> listOpenCourses() {
+    final Iterable<Course> types = courseRepository.findAllOpen();
     return convertToDto(types);
   }
 

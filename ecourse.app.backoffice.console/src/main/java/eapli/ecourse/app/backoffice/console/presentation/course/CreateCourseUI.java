@@ -1,4 +1,4 @@
-package eapli.ecourse.app.backoffice.console.presentation.courses;
+package eapli.ecourse.app.backoffice.console.presentation.course;
 
 import eapli.ecourse.app.backoffice.console.presentation.teacher.TeacherPrinter;
 import eapli.ecourse.coursemanagement.application.CreateCourseController;

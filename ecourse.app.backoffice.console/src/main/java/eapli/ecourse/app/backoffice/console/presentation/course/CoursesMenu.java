@@ -1,4 +1,4 @@
-package eapli.ecourse.app.backoffice.console.presentation.courses;
+package eapli.ecourse.app.backoffice.console.presentation.course;
 
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;

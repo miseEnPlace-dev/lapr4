@@ -9,100 +9,125 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.Test;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
+import eapli.ecourse.teachermanagement.domain.Teacher;
+import eapli.ecourse.usermanagement.domain.ClientRoles;
+import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
+import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
+import eapli.framework.infrastructure.authz.domain.model.Role;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
+import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
 public class CourseTest {
   private Course getDummyCourse() {
     return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
-        new CourseEnrolmentState());
+        new CourseEnrolmentState(), getDummyTeacher());
+  }
+
+  private Teacher getDummyTeacher() {
+    return new Teacher(getDummyUser(), TaxPayerNumber.valueOf("123456789"));
+  }
+
+  private SystemUser getDummyUser() {
+    return dummyUser("dummy", ClientRoles.MANAGER);
+  }
+
+  public static SystemUser dummyUser(final String username, final Role... roles) {
+    final SystemUserBuilder userBuilder = new SystemUserBuilder(new NilPasswordPolicy(), new PlainTextEncoder());
+    return userBuilder.with(username, "duMMy1", "dummy", "dummy", "a@b.ro").withRoles(roles)
+        .build();
   }
 
   private Course getDummyOpenCourse() {
     return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.OPEN),
-        new CourseEnrolmentState());
+        new CourseEnrolmentState(), getDummyTeacher());
   }
 
   private Course getDummyClosedCourse() {
     return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
-        new CourseEnrolmentState());
+        new CourseEnrolmentState(), getDummyTeacher());
   }
 
   private Course getDummyInProgressCourse() {
     return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20),
-        new CourseState(CourseState.State.IN_PROGRESS), new CourseEnrolmentState());
+        new CourseState(CourseState.State.IN_PROGRESS), new CourseEnrolmentState(), getDummyTeacher());
   }
 
   private Course getDummyFinishedCourse() {
     return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20),
-        new CourseState(CourseState.State.FINISHED), new CourseEnrolmentState());
+        new CourseState(CourseState.State.FINISHED), new CourseEnrolmentState(), getDummyTeacher());
   }
 
   @Test
   public void ensureCourseHasCode() {
     assertThrows(IllegalArgumentException.class, () -> new Course(null, CourseTitle.valueOf("dummy"),
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
-        new CourseEnrolmentState()));
+        new CourseEnrolmentState(), getDummyTeacher()));
   }
 
   @Test
   public void ensureCourseHasTitle() {
     assertThrows(IllegalArgumentException.class, () -> new Course(CourseCode.valueOf("1234"), null,
         CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
-        new CourseEnrolmentState()));
+        new CourseEnrolmentState(), getDummyTeacher()));
   }
 
   @Test
   public void ensureCourseHasDescription() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            null, EnrolmentLimits.valueOf(10, 20), new CourseState(), new CourseEnrolmentState()));
+            null, EnrolmentLimits.valueOf(10, 20), new CourseState(), new CourseEnrolmentState(), getDummyTeacher()));
   }
 
   @Test
   public void ensureCourseHasEnrolmentLimits() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), null, new CourseState(), new CourseEnrolmentState()));
+            CourseDescription.valueOf("dummy"), null, new CourseState(), new CourseEnrolmentState(),
+            getDummyTeacher()));
   }
 
   @Test
   public void ensureCourseHasCourseState() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), null, new CourseEnrolmentState()));
+            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), null, new CourseEnrolmentState(),
+            getDummyTeacher()));
   }
 
   @Test
   public void ensureCourseHasEnrolmentState() {
     assertThrows(IllegalArgumentException.class,
         () -> new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(), null));
+            CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(), null,
+            getDummyTeacher()));
   }
 
   @Test
   public void ensureCourseHasDefaultCourseState() {
     final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
     assertTrue(course.state().isClosed());
   }
 
   @Test
   public void ensureCourseHasDefaultEnrolmentState() {
     final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
     assertTrue(course.enrolmentState().isClosed());
   }
 
   @Test
   public void ensureCourseIdIsUnique() {
     final Course course1 = new Course(CourseCode.newID(), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
     final Course course2 = new Course(CourseCode.newID(), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
 
     assertNotEquals(course1.identity(), course2.identity());
   }
@@ -110,9 +135,9 @@ public class CourseTest {
   @Test
   public void ensureCourseIsEqualWithSameCode() {
     final Course course1 = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy1"),
-        CourseDescription.valueOf("dummy1"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy1"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
     final Course course2 = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy2"),
-        CourseDescription.valueOf("dummy2"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy2"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
 
     assertEquals(course1, course2);
   }
@@ -120,9 +145,9 @@ public class CourseTest {
   @Test
   public void ensureCourseIsEqualButNotSame() {
     final Course course1 = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy1"),
-        CourseDescription.valueOf("dummy1"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy1"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
     final Course course2 = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy2"),
-        CourseDescription.valueOf("dummy2"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy2"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
 
     assertEquals(course1, course2);
     assertFalse(course1.sameAs(course2));
@@ -131,9 +156,9 @@ public class CourseTest {
   @Test
   public void ensureCourseIsTheSameWithEqualAttributes() {
     final Course course1 = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
     final Course course2 = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
 
     assertTrue(course1.sameAs(course2));
   }
@@ -141,7 +166,7 @@ public class CourseTest {
   @Test
   public void ensureCourseIsNotSameAsWithDifferentClass() {
     final Course course = new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20));
+        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), getDummyTeacher());
 
     assertFalse(course.sameAs(new Object()));
   }

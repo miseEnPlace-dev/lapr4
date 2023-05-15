@@ -1,4 +1,4 @@
-// Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
+// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -34,12 +34,6 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTitle(ExamParser.TitleContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExamParser#name}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitName(ExamParser.NameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExamParser#description}.
 	 * @param ctx the parse tree

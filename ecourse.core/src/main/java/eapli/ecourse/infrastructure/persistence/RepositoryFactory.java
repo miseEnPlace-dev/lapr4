@@ -2,6 +2,7 @@ package eapli.ecourse.infrastructure.persistence;
 
 import eapli.ecourse.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -95,4 +96,13 @@ public interface RepositoryFactory {
   TeacherRepository teachers();
 
   TeacherRepository teachers(TransactionalContext autoTx);
+
+  /**
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  QuestionRepository questions();
+
+  QuestionRepository questions(TransactionalContext autoTx);
 }

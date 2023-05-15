@@ -4,7 +4,7 @@ autonumber
 actor "Manager" as M
 participant "ManageEnrolmentsUI" as UI <<presentation>>
 participant "ManageEnrolmentController" as CTRL <<application>>
-participant "CourseService" as SRV <<service>>
+participant "CourseListService" as SRV <<service>>
 participant "Course" as C <<domain>>
 participant "CourseDTO" as DTO <<dto>>
 

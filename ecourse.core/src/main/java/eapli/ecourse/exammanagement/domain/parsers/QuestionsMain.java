@@ -6,7 +6,8 @@ import java.util.List;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+
+import eapli.ecourse.questionmanagement.domain.Question;
 
 public class QuestionsMain {
   public static List<Question> parseWithVisitor(String file) {
@@ -22,6 +23,7 @@ public class QuestionsMain {
       System.out.println("\nFile not found!");
     } catch (Exception e) {
       System.out.println("\nThe specified questions don't follow the required format.");
+      System.out.println(e);
     }
 
     return null;

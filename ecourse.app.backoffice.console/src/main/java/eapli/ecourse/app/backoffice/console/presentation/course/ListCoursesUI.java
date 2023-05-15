@@ -1,5 +1,6 @@
-package eapli.ecourse.app.backoffice.console.presentation.courses;
+package eapli.ecourse.app.backoffice.console.presentation.course;
 
+import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
