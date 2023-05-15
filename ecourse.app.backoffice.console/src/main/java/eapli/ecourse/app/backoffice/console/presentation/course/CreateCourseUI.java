@@ -2,8 +2,8 @@ package eapli.ecourse.app.backoffice.console.presentation.course;
 
 import eapli.ecourse.app.backoffice.console.presentation.teacher.TeacherPrinter;
 import eapli.ecourse.coursemanagement.application.CreateCourseController;
-import eapli.ecourse.coursemanagement.dto.TeacherDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;

@@ -19,9 +19,6 @@ public class Identifier implements ValueObject, Comparable<Identifier> {
     if (identifier.length() > 255)
       throw new IllegalArgumentException("Identifier should not exceed 255 characters");
 
-    if (!identifier.matches("[a-zA-Z][a-zA-Z0-9_]*"))
-      throw new IllegalArgumentException("Identifier should only contain letters, numbers, and underscores.");
-
     this.identifier = identifier;
   }
 

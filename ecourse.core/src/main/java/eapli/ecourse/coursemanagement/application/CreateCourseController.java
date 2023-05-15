@@ -1,18 +1,18 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseBuilder;
-import eapli.ecourse.coursemanagement.dto.TeacherDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.teachermanagement.application.TeacherService;
 import eapli.ecourse.teachermanagement.domain.Teacher;
+import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.validations.Preconditions;
-
-import java.util.Optional;
 
 @UseCaseController
 public class CreateCourseController {

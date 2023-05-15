@@ -6,9 +6,9 @@ import org.apache.logging.log4j.Logger;
 import eapli.ecourse.coursemanagement.application.CreateCourseController;
 import eapli.ecourse.coursemanagement.application.ToggleCourseStatusController;
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.coursemanagement.dto.TeacherDTO;
 import eapli.ecourse.infrastructure.bootstrapers.demo.CoursesBootstrapper;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 
 public class CourseBootstrapperBase {
