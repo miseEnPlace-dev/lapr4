@@ -28,15 +28,55 @@ public interface ExamListener extends ParseTreeListener {
 	 */
 	void exitExam(ExamParser.ExamContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#exam_header}.
+	 * Enter a parse tree produced by {@link ExamParser#sections}.
 	 * @param ctx the parse tree
 	 */
-	void enterExam_header(ExamParser.Exam_headerContext ctx);
+	void enterSections(ExamParser.SectionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExamParser#exam_header}.
+	 * Exit a parse tree produced by {@link ExamParser#sections}.
 	 * @param ctx the parse tree
 	 */
-	void exitExam_header(ExamParser.Exam_headerContext ctx);
+	void exitSections(ExamParser.SectionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#section}.
+	 * @param ctx the parse tree
+	 */
+	void enterSection(ExamParser.SectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#section}.
+	 * @param ctx the parse tree
+	 */
+	void exitSection(ExamParser.SectionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#questions}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuestions(ExamParser.QuestionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#questions}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuestions(ExamParser.QuestionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#header}.
+	 * @param ctx the parse tree
+	 */
+	void enterHeader(ExamParser.HeaderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#header}.
+	 * @param ctx the parse tree
+	 */
+	void exitHeader(ExamParser.HeaderContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#proprieties}.
+	 * @param ctx the parse tree
+	 */
+	void enterProprieties(ExamParser.ProprietiesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#proprieties}.
+	 * @param ctx the parse tree
+	 */
+	void exitProprieties(ExamParser.ProprietiesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExamParser#title}.
 	 * @param ctx the parse tree
@@ -78,43 +118,53 @@ public interface ExamListener extends ParseTreeListener {
 	 */
 	void exitGrade(ExamParser.GradeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#sections}.
+	 * Enter a parse tree produced by {@link ExamParser#score}.
 	 * @param ctx the parse tree
 	 */
-	void enterSections(ExamParser.SectionsContext ctx);
+	void enterScore(ExamParser.ScoreContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExamParser#sections}.
+	 * Exit a parse tree produced by {@link ExamParser#score}.
 	 * @param ctx the parse tree
 	 */
-	void exitSections(ExamParser.SectionsContext ctx);
+	void exitScore(ExamParser.ScoreContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#section}.
+	 * Enter a parse tree produced by {@link ExamParser#start_exam}.
 	 * @param ctx the parse tree
 	 */
-	void enterSection(ExamParser.SectionContext ctx);
+	void enterStart_exam(ExamParser.Start_examContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExamParser#section}.
+	 * Exit a parse tree produced by {@link ExamParser#start_exam}.
 	 * @param ctx the parse tree
 	 */
-	void exitSection(ExamParser.SectionContext ctx);
+	void exitStart_exam(ExamParser.Start_examContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#section_header}.
+	 * Enter a parse tree produced by {@link ExamParser#end_exam}.
 	 * @param ctx the parse tree
 	 */
-	void enterSection_header(ExamParser.Section_headerContext ctx);
+	void enterEnd_exam(ExamParser.End_examContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExamParser#section_header}.
+	 * Exit a parse tree produced by {@link ExamParser#end_exam}.
 	 * @param ctx the parse tree
 	 */
-	void exitSection_header(ExamParser.Section_headerContext ctx);
+	void exitEnd_exam(ExamParser.End_examContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#questions}.
+	 * Enter a parse tree produced by {@link ExamParser#start_section}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuestions(ExamParser.QuestionsContext ctx);
+	void enterStart_section(ExamParser.Start_sectionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExamParser#questions}.
+	 * Exit a parse tree produced by {@link ExamParser#start_section}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuestions(ExamParser.QuestionsContext ctx);
+	void exitStart_section(ExamParser.Start_sectionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#end_section}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnd_section(ExamParser.End_sectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#end_section}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnd_section(ExamParser.End_sectionContext ctx);
 }

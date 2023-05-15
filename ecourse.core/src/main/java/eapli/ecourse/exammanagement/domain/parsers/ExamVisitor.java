@@ -23,11 +23,35 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExam(ExamParser.ExamContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#exam_header}.
+	 * Visit a parse tree produced by {@link ExamParser#sections}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExam_header(ExamParser.Exam_headerContext ctx);
+	T visitSections(ExamParser.SectionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#section}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSection(ExamParser.SectionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#questions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuestions(ExamParser.QuestionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#header}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHeader(ExamParser.HeaderContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#proprieties}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProprieties(ExamParser.ProprietiesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExamParser#title}.
 	 * @param ctx the parse tree
@@ -53,27 +77,33 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGrade(ExamParser.GradeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#sections}.
+	 * Visit a parse tree produced by {@link ExamParser#score}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSections(ExamParser.SectionsContext ctx);
+	T visitScore(ExamParser.ScoreContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#section}.
+	 * Visit a parse tree produced by {@link ExamParser#start_exam}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSection(ExamParser.SectionContext ctx);
+	T visitStart_exam(ExamParser.Start_examContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#section_header}.
+	 * Visit a parse tree produced by {@link ExamParser#end_exam}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSection_header(ExamParser.Section_headerContext ctx);
+	T visitEnd_exam(ExamParser.End_examContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#questions}.
+	 * Visit a parse tree produced by {@link ExamParser#start_section}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitQuestions(ExamParser.QuestionsContext ctx);
+	T visitStart_section(ExamParser.Start_sectionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#end_section}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnd_section(ExamParser.End_sectionContext ctx);
 }
