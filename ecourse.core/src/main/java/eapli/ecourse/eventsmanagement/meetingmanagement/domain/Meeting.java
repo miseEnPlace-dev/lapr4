@@ -3,6 +3,7 @@ package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Version;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
@@ -13,6 +14,9 @@ import eapli.framework.validations.Preconditions;
 @Entity
 public class Meeting implements AggregateRoot<MeetingID> {
   private static final long serialVersionUID = 1L;
+
+  @Version
+  private Long version;
 
   @Column(nullable = false)
   private Duration duration;

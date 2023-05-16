@@ -18,7 +18,7 @@ public interface InviteRepository extends DomainRepository<InviteID, Invite> {
    *
    * @return
    */
-  Iterable<Invite> findAllOpenForUsername(Username username);
+  Iterable<Invite> findAllPendingForUsername(Username username);
 
   /**
    * Returns the invites that are not finished

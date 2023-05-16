@@ -3,6 +3,8 @@ package eapli.ecourse.persistence.impl.jpa;
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
+import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
+import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
@@ -97,5 +99,26 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public QuestionRepository questions(TransactionalContext autoTx) {
     return new JpaQuestionRepository(autoTx);
+  }
+
+  @Override
+  public InviteRepository invites(TransactionalContext autoTx) {
+    return new JpaInviteRepository(autoTx);
+  }
+
+  @Override
+  public InviteRepository invites() {
+    return new JpaInviteRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public MeetingRepository meetings(TransactionalContext autoTx) {
+    return new JpaMeetingRepository(autoTx);
+  }
+
+  @Override
+  public MeetingRepository meetings() {
+    return new JpaMeetingRepository(Application.settings().persistenceUnitName());
+
   }
 }

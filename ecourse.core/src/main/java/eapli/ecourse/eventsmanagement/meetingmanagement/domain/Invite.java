@@ -2,6 +2,7 @@ package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Version;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -10,6 +11,9 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 @Entity
 public class Invite implements AggregateRoot<InviteID> {
   private static final long serialVersionUID = 1L;
+
+  @Version
+  private Long version;
 
   @Column(nullable = false)
   private InviteID id;
@@ -25,6 +29,11 @@ public class Invite implements AggregateRoot<InviteID> {
 
   protected Invite() {
     // ORM
+  }
+
+  public Invite(final Meeting meeting, final SystemUser user) {
+    this.meeting = meeting;
+    this.user = user;
   }
 
   @Override
