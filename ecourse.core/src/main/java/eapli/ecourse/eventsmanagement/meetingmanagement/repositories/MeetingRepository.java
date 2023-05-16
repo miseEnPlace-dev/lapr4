@@ -23,6 +23,6 @@ public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> 
    *
    * @return
    */
-  Iterable<Meeting> findAllIterableMeetings();
+  Iterable<Meeting> findAllIterableByUserMeetings();
 
 }

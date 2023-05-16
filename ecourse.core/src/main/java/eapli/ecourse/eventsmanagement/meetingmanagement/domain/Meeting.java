@@ -10,6 +10,7 @@ import javax.persistence.Version;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -96,5 +97,9 @@ public class Meeting implements AggregateRoot<MeetingID> {
   @Override
   public MeetingID identity() {
     return this.id;
+  }
+
+  public MeetingDTO toDto() {
+    return new MeetingDTO(this.id, this.participants, this.time, this.duration);
   }
 }

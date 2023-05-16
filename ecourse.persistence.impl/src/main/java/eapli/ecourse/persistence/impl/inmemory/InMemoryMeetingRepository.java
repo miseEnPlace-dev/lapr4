@@ -20,7 +20,7 @@ public class InMemoryMeetingRepository extends InMemoryDomainRepository<Meeting,
   }
 
   @Override
-  public Iterable<Meeting> findAllIterableMeetings() {
+  public Iterable<Meeting> findAllIterableByUserMeetings() {
     return null;
   }
 }

@@ -19,7 +19,7 @@ public class JpaMeetingRepository extends JpaAutoTxRepository<Meeting, MeetingID
   }
 
   @Override
-  public Iterable<Meeting> findAllIterableMeetings() {
+  public Iterable<Meeting> findAllIterableByUserMeetings() {
     return null;
   }
 
