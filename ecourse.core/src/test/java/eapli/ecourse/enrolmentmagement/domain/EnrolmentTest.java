@@ -3,6 +3,7 @@ package eapli.ecourse.enrolmentmagement.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -84,12 +85,6 @@ public class EnrolmentTest {
   }
 
   @Test
-  public void ensureDefaultStateIsPending() {
-    final Enrolment enrolment = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
-    assertTrue(enrolment.state().isPending());
-  }
-
-  @Test
   public void ensureEnrolmentIdIsUnique() {
     final Enrolment enrolment1 = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
@@ -102,6 +97,18 @@ public class EnrolmentTest {
     final Enrolment enrolment1 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
     assertEquals(enrolment1, enrolment2);
+  }
+
+  @Test
+  public void ensureEnrolmentIsCreatedWithPendingState() {
+    final Enrolment enrolment = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
+    assertTrue(enrolment.isPending());
+  }
+
+  @Test
+  public void ensureGeneratesId() {
+    final Enrolment enrolment = new Enrolment(getNewDummyStudent(), getNewDummyCourse());
+    assertNotNull(enrolment.identity());
   }
 
   @Test

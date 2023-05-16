@@ -73,11 +73,13 @@ This is the first time this task is assigned to be developed. This is a new func
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** xxx
+**Test 1:** Ensure enrolment is created with pending state
 
 ```java
   @Test
-  public void xxx() {
+  public void ensureEnrolmentIsCreatedWithPendingState() {
+    final Enrolment enrolment = new Enrolment(getNewDummyStudent(), getNewDummyCourse());
+    assertTrue(enrolment.isPending());
   }
 ```
 

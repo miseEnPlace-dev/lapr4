@@ -1,2 +1,4 @@
-package eapli.ecourse.coursemanagement.application;public class ListCourseExams {
+package eapli.ecourse.coursemanagement.application;
+
+public class ListCourseExamsController {
 }

@@ -119,8 +119,16 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
     return this.updatedAt;
   }
 
-  public EnrolmentState state() {
-    return this.state;
+  public boolean isPending() {
+    return state.isPending();
+  }
+
+  public boolean isAccepted() {
+    return state.isAccepted();
+  }
+
+  public boolean isRejected() {
+    return state.isRejected();
   }
 
   public Student student() {
