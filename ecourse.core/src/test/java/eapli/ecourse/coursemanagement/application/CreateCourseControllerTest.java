@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Calendar;
-import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Calendar;
+import java.util.Optional;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
@@ -42,6 +42,8 @@ public class CreateCourseControllerTest {
     courseRepository = mock(CourseRepository.class);
     teacherRepository = mock(TeacherRepository.class);
     controller = new CreateCourseController(courseRepository, authzRegistry, teacherRepository);
+    when(teacherRepository.findByTaxPayerNumber(TaxPayerNumber.valueOf("1234")))
+        .thenReturn(Optional.of(getDummyTeacher()));
   }
 
   private TeacherDTO getDummyTeacherDTO() {
@@ -53,7 +55,7 @@ public class CreateCourseControllerTest {
     return new TeacherBuilder().withTaxPayerNumber("1234").build();
   }
 
-  // @Test
+  @Test
   public void ensureItsNotPossibleToCreateCourseWithNullFields() {
 
     assertThrows(IllegalArgumentException.class, () -> controller.createCourse(null, null, null, 0, 0, null));
@@ -67,13 +69,11 @@ public class CreateCourseControllerTest {
 
   @Test
   public void ensureItsNotPossibleToCreateCourseWithNegativeLimits() {
-
     assertThrows(IllegalArgumentException.class, () -> controller.createCourse("1234", "dummy", "dummy", -1, -1, null));
   }
 
-  // @Test
+  @Test
   public void ensureItsPossibleToCreateCourses() {
-    when(teacherRepository.findByTaxPayerNumber(TaxPayerNumber.valueOf("1234"))).thenReturn(Optional.of(getDummyTeacher()));
     Course course = controller.createCourse("1234", "dummy", "dummy", 10, 20, getDummyTeacherDTO());
 
     assertEquals(CourseCode.valueOf("1234"), course.code());

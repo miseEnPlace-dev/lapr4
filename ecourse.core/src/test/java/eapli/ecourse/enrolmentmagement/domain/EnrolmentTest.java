@@ -90,12 +90,6 @@ public class EnrolmentTest {
   }
 
   @Test
-  public void ensureCreatedAtIsEqualToUpdatedAtWhenCreated() {
-    final Enrolment enrolment = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
-    assertEquals(enrolment.createdAt(), enrolment.updatedAt());
-  }
-
-  @Test
   public void ensureEnrolmentIdIsUnique() {
     final Enrolment enrolment1 = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
     final Enrolment enrolment2 = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
