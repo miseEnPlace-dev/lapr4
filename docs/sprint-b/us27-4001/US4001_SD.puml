@@ -6,9 +6,13 @@ actor "User" as U
 participant "ScheduleMeetingUI" as UI <<presentation>>
 participant "ScheduleMeetingController" as CTRL <<application>>
 participant "Meeting" as MEETING <<domain>>
+participant "MeetingService" as MS <<service>>
 participant "User" as USER <<domain>>
 participant "Invite" as INVITE <<domain>>
 
+database MeetingRepository as MR <<repository>>
+database UserRepository as UR <<repository>>
+database InviteRepository as IR <<repository>>
 
 activate U
 
@@ -21,17 +25,73 @@ deactivate UI
 U -> UI : types the requested data
 activate UI
 
-UI --> U : shows the user the available time slots
+UI -> CTRL : listAllUsersAvailable()
+activate CTRL
+
+CTRL -> MS : listAllIterableUsersAvailable()
+activate MS
+
+loop for each user
+  MS -> USER : toDTO(user)
+  activate USER
+  USER -> DTO : new
+  activate DTO
+  deactivate DTO
+  deactivate USER
+end loop
+
+deactivate MS
+
+deactivate CTRL
+
+UI --> M : asks to select the users to invite
 deactivate UI
 
-U -> UI : selects slot time
+M -> UI : selects the users to invite
 activate UI
 
-UI --> U : shows the user the data types and asks for confirmation
+UI -> CTRL : createMeeting()
+activate CTRL
+
+CTRL -> UR : findUsersById()
+activate UR
+
+loop for each user
+  UR -> USER : findById()
+  activate USER
+  USER -> DTO : new
+  activate DTO
+  deactivate DTO
+  deactivate USER
+end loop
+
+deactivate UR
+
+CTRL -> MEETING : containsOfIdentity()
+activate MEETING
+deactivate MEETING
+
+deactivate CTRL
+deactivate CTRL
+
+UI --> U : informs if the data is valid and if all users can attend the meeting
 deactivate UI
 
 U -> UI : confirms the data
 activate UI
+
+UI -> CTRL : scheduleMeeting()
+activate CTRL
+
+CTRL -> MR : saveMeeting()
+activate MR
+deactivate MR
+
+CTRL -> IR : saveInvites()
+activate IR
+deactivate IR
+
+deactivate CTRL
 
 UI --> U : informs operation sucess
 deactivate UI

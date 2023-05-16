@@ -86,12 +86,57 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.4. Tests
 
-**Test 1:** xxx
+**Test 1:** Ensure user can receive an invite to a meeting
 
 ```java
   @Test
-  private void test1() {
-    assetTrue(true);
+  public void testUserHasInvite() {
+    Invite invite = getDummyInvite();
+    assertEquals(invite.user(), getDummyUser());
+  }
+```
+
+**Test 2:** Ensure user can accept an invite to a meeting
+
+```java
+  @Test
+  public void testUserCanAcceptInvite() {
+    Invite invite = getDummyInvite();
+    invite.accept();
+    assertEquals(invite.status(), InviteStatus.Status.ACCEPTED);
+  }
+```
+
+**Test 3:** Ensure user can reject an invite to a meeting
+
+```java
+  @Test
+  public void testUserCanRejectInvite() {
+    Invite invite = getDummyInvite();
+    invite.reject();
+    assertEquals(invite.status(), InviteStatus.Status.REJECTED);
+  }
+```
+
+**Test 4:** Ensure user can ignore an invite to a meeting
+
+```java
+  @Test
+  public void testUserCanIgnoreInvite() {
+    Invite invite = getDummyInvite();
+    invite.ignore();
+    assertEquals(invite.status(), InviteStatus.Status.NO_ANSWER);
+  }
+```
+
+**Test 5:** Ensure its possible to create a meeting
+
+```java
+  @Test
+  public void ensureItsPossibleToCreateMeeting() {
+    Meeting meeting = getDummyMeeting();
+    assertEquals(meeting.time(), getDummyMeeting().time());
+    assertEquals(meeting.duration(), getDummyMeeting().duration());
   }
 ```
 
