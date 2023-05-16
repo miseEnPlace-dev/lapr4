@@ -34,6 +34,7 @@ public class Invite implements AggregateRoot<InviteID> {
   public Invite(final Meeting meeting, final SystemUser user) {
     this.meeting = meeting;
     this.user = user;
+    this.status = new InviteStatus();
   }
 
   @Override
@@ -63,7 +64,7 @@ public class Invite implements AggregateRoot<InviteID> {
 
   @Override
   public InviteID identity() {
-    return this.identity();
+    return this.id;
   }
 
   @Override

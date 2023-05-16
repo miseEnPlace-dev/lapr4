@@ -13,21 +13,21 @@ import lombok.EqualsAndHashCode;
 public class MeetingID implements ValueObject, Comparable<MeetingID> {
   private static final long serialVersionUID = 1L;
 
-  private String enrolmentId;
+  private String meetingId;
 
-  private MeetingID(final String enrolmentId) {
-    Preconditions.nonEmpty(enrolmentId);
+  private MeetingID(final String meetingId) {
+    Preconditions.nonEmpty(meetingId);
 
-    this.enrolmentId = UUID.fromString(enrolmentId).toString();
+    this.meetingId = UUID.fromString(meetingId).toString();
   }
 
   protected MeetingID() {
     // for ORM
-    this.enrolmentId = null;
+    this.meetingId = null;
   }
 
-  public static MeetingID valueOf(final String enrolmentId) {
-    return new MeetingID(enrolmentId);
+  public static MeetingID valueOf(final String meetingId) {
+    return new MeetingID(meetingId);
   }
 
   public static MeetingID newID() {
@@ -36,11 +36,11 @@ public class MeetingID implements ValueObject, Comparable<MeetingID> {
 
   @Override
   public String toString() {
-    return this.enrolmentId;
+    return this.meetingId;
   }
 
   @Override
   public int compareTo(final MeetingID arg0) {
-    return enrolmentId.compareTo(arg0.enrolmentId);
+    return meetingId.compareTo(arg0.meetingId);
   }
 }
