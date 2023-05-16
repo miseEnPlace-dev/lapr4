@@ -23,7 +23,7 @@ public class CoursesMenu {
 
     menu.addItem(CREATE_COURSES_OPTION, "Create Courses", new CreateCourseUI()::show);
     menu.addItem(LIST_COURSES_OPTION, "List All Courses", new ShowMessageAction("Not implemented yet"));
-    menu.addItem(TOGGLE_COURSE_STATE_OPTION, "Toggle Course State", new ShowMessageAction("Not implemented yet"));
+    menu.addItem(TOGGLE_COURSE_STATE_OPTION, "Toggle Course State", new ToggleCourseStatusUI()::show);
     menu.addItem(TOGGLE_COURSE_ENROLMENT_STATE_OPTION, "Toggle Course Enrolment State",
         new ToggleCourseEnrolmentStateUI()::show);
 

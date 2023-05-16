@@ -25,7 +25,7 @@ public class InMemoryCourseRepository extends
   }
 
   public Iterable<Course> findAllClosed() {
-    return match(e -> e.enrolmentState().isClosed());
+    return match(e -> e.state().isClosed());
   }
 
   @Override

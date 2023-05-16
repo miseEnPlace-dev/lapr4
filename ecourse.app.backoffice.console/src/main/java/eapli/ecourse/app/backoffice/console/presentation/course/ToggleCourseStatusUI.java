@@ -19,7 +19,7 @@ public class ToggleCourseStatusUI extends AbstractUI {
   @Override
   protected boolean doShow() {
 
-    System.out.println("\n[1] - Open Course");
+    System.out.println("[1] - Open Course");
     System.out.println("[2] - Close Course");
     System.out.println("[0] - Exit");
 
@@ -30,9 +30,9 @@ public class ToggleCourseStatusUI extends AbstractUI {
 
     Iterable<CourseDTO> courses;
     if (option == 1) {
-      courses = ctrl.listOpenCourses();
-    } else {
       courses = ctrl.listClosedCourses();
+    } else {
+      courses = ctrl.listOpenCourses();
     }
 
     if (!courses.iterator().hasNext()) {
