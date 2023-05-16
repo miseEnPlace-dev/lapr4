@@ -4,6 +4,7 @@ import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
+import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -127,4 +128,14 @@ public interface RepositoryFactory {
   InviteRepository invites();
 
   InviteRepository invites(TransactionalContext autoTx);
+
+  /**
+   *
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  ExamRepository exams();
+
+  ExamRepository exams(TransactionalContext autoTx);
 }
