@@ -1,0 +1,70 @@
+@startuml US1008_SD
+autonumber
+
+actor "Student" as S
+participant "RequestEnrolmentUI" as UI <<presentation>>
+participant "RequestEnrolmentController" as CTRL <<application>>
+participant "ListCourseService" as SRV <<service>>
+participant "Enrolment" as E <<domain>>
+participant "CourseDTO" as DTO <<dto>>
+
+database CourseRepository as REP <<repository>>
+database EnrolmentRepository as EREP <<repository>>
+
+activate S
+
+S -> UI : asks to list all the courses available for enrolment
+activate UI
+
+UI -> CTRL : new(courseRepository, enrolmentRepository)
+activate CTRL
+CTRL -> SRV : service=new(courseRepository)
+deactivate CTRL
+
+UI -> CTRL : listOpenForEnrolmentCourses()
+activate CTRL
+CTRL -> SRV : listOpenForEnrolment()
+activate SRV
+SRV -> REP : findAllOpenForEnrolment()
+activate REP
+REP --> SRV : courses
+deactivate REP
+
+loop for each course
+  SRV -> E : toDTO(course)
+  activate E
+  E -> DTO : new
+  deactivate E
+end loop
+
+SRV --> CTRL : courses
+deactivate SRV
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> S : lists all available courses
+deactivate UI
+
+S -> UI : selects the desired course
+activate UI
+UI -> UI : selectedCourse = select(courses, index)
+UI --> S : asks to confirm action
+deactivate UI
+
+S -> UI : confirms the action
+activate UI
+UI -> CTRL : requestEnrolment(selectedCourse)
+activate CTRL
+CTRL -> E : enrolment=new(selectedCourse, authenticatedUser)
+CTRL -> EREP : save(enrolment)
+activate EREP
+EREP --> CTRL : enrolment
+deactivate EREP
+CTRL --> UI : enrolment
+deactivate CTRL
+UI--> S : reports the success of the enrolment request
+deactivate UI
+
+deactivate S
+
+@enduml
