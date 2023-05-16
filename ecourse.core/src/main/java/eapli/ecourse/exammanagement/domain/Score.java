@@ -21,7 +21,7 @@ public class Score implements ValueObject, Comparable<Score> {
    *
    * @param score score of the section
    */
-  protected Score(final int score) {
+  private Score(final int score) {
     Preconditions.isPositive(score, "Score should be positive");
 
     this.score = score;
@@ -32,6 +32,10 @@ public class Score implements ValueObject, Comparable<Score> {
    */
   protected Score() {
 
+  }
+
+  public static Score valueOf(final int score) {
+    return new Score(score);
   }
 
   /**

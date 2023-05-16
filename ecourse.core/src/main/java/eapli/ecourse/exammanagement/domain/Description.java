@@ -21,8 +21,8 @@ public class Description implements ValueObject, Comparable<Description> {
    *
    * @param description description of the exam/section
    */
-  protected Description(final String description) {
-    Preconditions.nonEmpty(description, "Description should neither be null nor empty.");
+  private Description(final String description) {
+    Preconditions.nonNull(description, "Description should neither be null nor empty.");
 
     if (description.length() > 255)
       throw new IllegalArgumentException("Description should not exceed 255 characters");
@@ -32,6 +32,10 @@ public class Description implements ValueObject, Comparable<Description> {
 
   protected Description() {
     // for ORM only
+  }
+
+  public static Description valueOf(final String description) {
+    return new Description(description);
   }
 
   /**

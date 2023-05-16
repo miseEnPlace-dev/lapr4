@@ -1,5 +1,6 @@
 package eapli.ecourse.exammanagement.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,8 +46,12 @@ public class Section {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<SectionQuestion> questions;
 
-  protected Section() {
-    // For ORM only
+  public Section() {
+    this.identifier = null;
+    this.title = null;
+    this.description = null;
+    this.score = null;
+    this.questions = new ArrayList<SectionQuestion>();
   }
 
   public Section(final Identifier identifier, final Title title, final Description description, final Score score) {
@@ -54,7 +59,7 @@ public class Section {
     this.title = title;
     this.description = description;
     this.score = score;
-    this.questions = new LinkedList<SectionQuestion>();
+    this.questions = new ArrayList<SectionQuestion>();
   }
 
   public void addQuestion(SectionQuestion question) {
@@ -63,5 +68,21 @@ public class Section {
 
   public void addQuestions(Collection<SectionQuestion> questions) {
     this.questions.addAll(questions);
+  }
+
+  public void changeIdentifier(Identifier identifier) {
+    this.identifier = identifier;
+  }
+
+  public void changeTitle(Title title) {
+    this.title = title;
+  }
+
+  public void changeDescription(Description description) {
+    this.description = description;
+  }
+
+  public void changeScore(Score score) {
+    this.score = score;
   }
 }

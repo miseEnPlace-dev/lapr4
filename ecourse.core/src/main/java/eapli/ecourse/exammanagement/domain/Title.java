@@ -20,7 +20,7 @@ public class Title implements ValueObject, Comparable<Title> {
    *
    * @param title title of the section
    */
-  protected Title(final String title) {
+  private Title(final String title) {
     Preconditions.nonEmpty(title, "Title should neither be null nor empty.");
 
     if (title.length() > 255)
@@ -43,6 +43,10 @@ public class Title implements ValueObject, Comparable<Title> {
   @Override
   public String toString() {
     return this.title;
+  }
+
+  public static Title valueOf(final String title) {
+    return new Title(title);
   }
 
   /**
