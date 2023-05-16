@@ -10,13 +10,9 @@
   <packaging>pom</packaging>
 
   <properties>
-    <eapli.framework.core.version>v21.2.0-RELEASE</eapli.framework.core.version>
-    <eapli.framework.authz.version>v21.2.0-RELEASE</eapli.framework.authz.version>
-    <eapli.framework.pubsub.version>v21.2.0-RELEASE</eapli.framework.pubsub.version>
-
-    <eapli.framework.core.version-snapshot>21.2.0</eapli.framework.core.version-snapshot>
-    <eapli.framework.authz.version-snapshot>19.1.4</eapli.framework.authz.version-snapshot>
-    <eapli.framework.pubsub.version-snapshot>20.1.4</eapli.framework.pubsub.version-snapshot>
+    <eapli.framework.core.version>v22.2.0_RELEASE</eapli.framework.core.version>
+    <eapli.framework.authz.version>v22.2.0_RELEASE</eapli.framework.authz.version>
+    <eapli.framework.pubsub.version>v22.2.0_RELEASE</eapli.framework.pubsub.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -35,6 +31,7 @@
   <modules>
     <module>ecourse.app.backoffice.console</module>
     <module>ecourse.app.board.backend</module>
+    <module>ecourse.app.board.frontend</module>
     <module>ecourse.app.student.console</module>
     <module>ecourse.app.teacher.console</module>
     <module>ecourse.app.common.console</module>

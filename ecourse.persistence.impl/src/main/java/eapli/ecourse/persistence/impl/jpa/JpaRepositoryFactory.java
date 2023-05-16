@@ -5,6 +5,7 @@ import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
+import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
@@ -121,4 +122,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     return new JpaMeetingRepository(Application.settings().persistenceUnitName());
 
   }
+
+  @Override
+  public ExamRepository exams() {
+    return new JpaExamRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public ExamRepository exams(TransactionalContext autoTx) {
+    return new JpaExamRepository(autoTx);
+  }
+
 }

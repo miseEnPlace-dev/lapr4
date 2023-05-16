@@ -4,6 +4,7 @@ import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
+import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
@@ -119,5 +120,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   @Override
   public MeetingRepository meetings(final TransactionalContext autoTx) {
     return new InMemoryMeetingRepository();
+  }
+
+  @Override
+  public ExamRepository exams() {
+    return exams(null);
+  }
+
+  @Override
+  public ExamRepository exams(final TransactionalContext autoTx) {
+    return new InMemoryExamRepository();
   }
 }

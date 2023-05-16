@@ -14,7 +14,7 @@ public class TeacherService {
     this.teacherRepository = teacherRepository;
   }
 
-  public Iterable<TeacherDTO> listAllIterableTeachers() {
+  public Iterable<TeacherDTO> allTeachers() {
     final Iterable<Teacher> types = teacherRepository.findAll();
     return convertToDto(types);
   }

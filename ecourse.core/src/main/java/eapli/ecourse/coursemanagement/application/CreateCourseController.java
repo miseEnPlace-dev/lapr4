@@ -57,6 +57,6 @@ public class CreateCourseController {
   }
 
   public Iterable<TeacherDTO> listAllTeachers() {
-    return service.listAllIterableTeachers();
+    return service.allTeachers();
   }
 }

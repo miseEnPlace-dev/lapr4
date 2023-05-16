@@ -44,7 +44,7 @@ end note
 
 Enrolment --> "1" State : has
 
-Enrolment --> "1" Student : has
+Student --> "0..*" Enrolment : has
 Enrolment -> "1" Course : is for
 
 @enduml

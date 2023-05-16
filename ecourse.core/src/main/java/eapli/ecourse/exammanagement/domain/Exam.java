@@ -65,4 +65,6 @@ public abstract class Exam implements AggregateRoot<Long> {
     this.description = description;
     this.state = state;
   }
+
+  public Course course() { return this.course; }
 }
