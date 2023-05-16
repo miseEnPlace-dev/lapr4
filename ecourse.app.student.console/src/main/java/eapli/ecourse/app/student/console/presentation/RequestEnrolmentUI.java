@@ -41,7 +41,12 @@ public class RequestEnrolmentUI extends AbstractUI {
       return false;
     }
 
-    controller.requestEnrolment(selected);
+    try {
+      controller.requestEnrolment(selected);
+    } catch (IllegalStateException e) {
+      System.out.println("You are already enrolled in this course");
+      return false;
+    }
 
     return true;
   }

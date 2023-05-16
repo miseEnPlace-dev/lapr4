@@ -39,7 +39,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   private EnrolmentID id;
 
   /**
-   * cascade = CascadeType.NONE as the dishType is part of another aggregate
+   * cascade = CascadeType.NONE as the student is part of another aggregate
    */
   @XmlElement
   @JsonProperty
@@ -47,7 +47,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   private Student student;
 
   /**
-   * cascade = CascadeType.NONE as the dishType is part of another aggregate
+   * cascade = CascadeType.NONE as the course is part of another aggregate
    */
   @XmlElement
   @JsonProperty

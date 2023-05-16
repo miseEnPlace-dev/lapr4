@@ -33,6 +33,9 @@ public class ToggleCourseEnrolmentStateUI extends AbstractUI {
     selector.show();
     final CourseDTO selected = selector.selectedElement();
 
+    if (selected == null)
+      return false;
+
     try {
       this.ctrl.toggleEnrolmentState(selected);
       System.out.println("Course enrolment state toggled successfully\n");
