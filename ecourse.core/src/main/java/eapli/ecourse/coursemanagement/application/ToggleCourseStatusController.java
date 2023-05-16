@@ -38,5 +38,6 @@ public class ToggleCourseStatusController {
       throw new IllegalArgumentException("There is no Course with the given code");
 
     course.get().toggleState();
+    courseRepository.save(course.get());
   }
 }
