@@ -1,9 +1,9 @@
-package eapli.ecourse.app.board.backend;
+package eapli.ecourse.app.board.frontend;
 
 import java.io.IOException;
 
 public class App {
-  private static final int PORT = 9999;
+  private static final int PORT = 8080;
 
   public static void main(String[] args) {
     TcpServer server = new TcpServer(PORT);
