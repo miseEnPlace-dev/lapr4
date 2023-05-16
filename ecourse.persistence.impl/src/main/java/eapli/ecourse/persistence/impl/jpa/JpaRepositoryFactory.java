@@ -133,4 +133,13 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     return new JpaExamRepository(autoTx);
   }
 
+  @Override
+  public JpaEnrolmentRepository enrollments() {
+    return new JpaEnrolmentRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public JpaEnrolmentRepository enrollments(TransactionalContext autoTx) {
+    return new JpaEnrolmentRepository(autoTx);
+  }
 }

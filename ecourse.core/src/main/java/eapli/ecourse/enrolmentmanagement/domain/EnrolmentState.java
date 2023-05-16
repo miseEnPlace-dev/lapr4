@@ -1,12 +1,20 @@
 package eapli.ecourse.enrolmentmanagement.domain;
 
-import eapli.framework.domain.model.ValueObject;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
+import eapli.framework.domain.model.ValueObject;
+import lombok.EqualsAndHashCode;
+
+@Embeddable
+@EqualsAndHashCode
 public class EnrolmentState implements ValueObject {
   public enum State {
     PENDING, ACCEPTED, REJECTED
   }
 
+  @Enumerated(EnumType.STRING)
   private State state;
 
   public EnrolmentState(State state) {
@@ -39,17 +47,6 @@ public class EnrolmentState implements ValueObject {
 
   public boolean isRejected() {
     return state == State.REJECTED;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof EnrolmentState))
-      return false;
-
-    EnrolmentState that = (EnrolmentState) o;
-    return state == that.state;
   }
 
   @Override

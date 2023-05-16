@@ -25,12 +25,15 @@ public class ScheduleMeetingController {
 
     Preconditions.noneNull(time, duration);
 
-    Meeting meeting = new Meeting(time, duration);
-
-    if (meetingRepository.containsOfIdentity(meeting.identity()))
-      throw new IllegalStateException("There is already a meeting with that id.");
-
-    return saveMeeting(meeting);
+    /*
+     * Meeting meeting = new Meeting(time, duration);
+     * 
+     * if (meetingRepository.containsOfIdentity(meeting.identity()))
+     * throw new IllegalStateException("There is already a meeting with that id.");
+     * 
+     * return saveMeeting(meeting);
+     */
+    return null;
   }
 
   private Meeting saveMeeting(Meeting meeting) {

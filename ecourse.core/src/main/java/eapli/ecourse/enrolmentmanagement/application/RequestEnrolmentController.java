@@ -19,7 +19,7 @@ public class RequestEnrolmentController {
   private CourseRepository courseRepository;
   private EnrolmentRepository enrolmentRepository;
   private StudentRepository studentRepository;
-  private final ListCourseService listCoursesService = new ListCourseService(courseRepository);
+  private final ListCourseService listCoursesService;
   private AuthorizationService authz;
 
   public RequestEnrolmentController(final CourseRepository courseRepository,
@@ -28,6 +28,7 @@ public class RequestEnrolmentController {
     this.enrolmentRepository = enrolmentRepository;
     this.studentRepository = studentRepository;
     this.authz = authz;
+    this.listCoursesService = new ListCourseService(courseRepository);
   }
 
   public Iterable<CourseDTO> listOpenForEnrolmentCourses() {
