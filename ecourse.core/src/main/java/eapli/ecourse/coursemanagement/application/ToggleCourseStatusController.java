@@ -13,12 +13,12 @@ public class ToggleCourseStatusController {
 
   private final AuthorizationService authz;
 
-  private final CourseListService service;
+  private final ListCourseService service;
 
   public ToggleCourseStatusController(CourseRepository courseRepository, AuthorizationService authz) {
     this.courseRepository = courseRepository;
     this.authz = authz;
-    this.service = new CourseListService(courseRepository);
+    this.service = new ListCourseService(courseRepository);
   }
 
   public Iterable<CourseDTO> listOpenCourses() {
