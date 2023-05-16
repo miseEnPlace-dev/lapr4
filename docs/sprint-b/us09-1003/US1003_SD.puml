@@ -21,8 +21,8 @@ CTRL -> SRV : service=new(courseRepository)
 deactivate CTRL
 
 UI -> CTRL : listNotClosedCourses()
-CTRL -> SRV : listNotClosedCourses()
 activate CTRL
+CTRL -> SRV : listNotClosedCourses()
 activate SRV
 SRV -> REP : findAllNotClosed()
 activate REP

@@ -60,10 +60,21 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   public Enrolment(final EnrolmentID id, final Student student, final Course course) {
     Preconditions.noneNull(student, course);
 
+    this.id = id;
     this.student = student;
     this.course = course;
     this.state = new EnrolmentState();
-    this.id = id;
+    this.createdAt = Calendar.getInstance();
+    this.updatedAt = Calendar.getInstance();
+  }
+
+  public Enrolment(final Student student, final Course course) {
+    Preconditions.noneNull(student, course);
+
+    this.id = EnrolmentID.newID();
+    this.student = student;
+    this.course = course;
+    this.state = new EnrolmentState();
     this.createdAt = Calendar.getInstance();
     this.updatedAt = Calendar.getInstance();
   }
@@ -108,8 +119,16 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
     return this.updatedAt;
   }
 
-  public EnrolmentState state() {
-    return this.state;
+  public boolean isPending() {
+    return state.isPending();
+  }
+
+  public boolean isAccepted() {
+    return state.isAccepted();
+  }
+
+  public boolean isRejected() {
+    return state.isRejected();
   }
 
   public Student student() {

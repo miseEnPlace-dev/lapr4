@@ -28,11 +28,11 @@ public class InMemoryEnrolmentRepository
 
   @Override
   public Iterable<Enrolment> findCourseAccepted(final CourseCode courseCode) {
-    return match(e -> e.course().code().equals(courseCode) && e.state().isAccepted());
+    return match(e -> e.course().code().equals(courseCode) && e.isAccepted());
   }
 
   @Override
   public Iterable<Enrolment> findCourseRejected(final CourseCode courseCode) {
-    return match(e -> e.course().code().equals(courseCode) && e.state().isRejected());
+    return match(e -> e.course().code().equals(courseCode) && e.isRejected());
   }
 }
