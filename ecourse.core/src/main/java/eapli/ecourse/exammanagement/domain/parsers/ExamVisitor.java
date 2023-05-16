@@ -47,11 +47,11 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitHeader(ExamParser.HeaderContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#proprieties}.
+	 * Visit a parse tree produced by {@link ExamParser#properties}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProprieties(ExamParser.ProprietiesContext ctx);
+	T visitProperties(ExamParser.PropertiesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExamParser#title}.
 	 * @param ctx the parse tree

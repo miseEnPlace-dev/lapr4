@@ -8,8 +8,8 @@ section:	start_section header questions end_section;
 
 questions: ;
 
-header:				proprieties+;
-proprieties:	title | description | feedback | grade | score;
+header:			properties+;
+properties:	title | description | feedback | grade | score;
 
 title:				TITLE STRING EOI;
 description:	DESCRIPTION STRING EOI;

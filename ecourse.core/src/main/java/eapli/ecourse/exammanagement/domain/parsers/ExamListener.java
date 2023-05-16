@@ -68,15 +68,15 @@ public interface ExamListener extends ParseTreeListener {
 	 */
 	void exitHeader(ExamParser.HeaderContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#proprieties}.
+	 * Enter a parse tree produced by {@link ExamParser#properties}.
 	 * @param ctx the parse tree
 	 */
-	void enterProprieties(ExamParser.ProprietiesContext ctx);
+	void enterProperties(ExamParser.PropertiesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExamParser#proprieties}.
+	 * Exit a parse tree produced by {@link ExamParser#properties}.
 	 * @param ctx the parse tree
 	 */
-	void exitProprieties(ExamParser.ProprietiesContext ctx);
+	void exitProperties(ExamParser.PropertiesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExamParser#title}.
 	 * @param ctx the parse tree
