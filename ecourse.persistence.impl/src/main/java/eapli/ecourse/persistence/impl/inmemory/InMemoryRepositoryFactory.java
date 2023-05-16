@@ -2,6 +2,7 @@ package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
+import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
@@ -97,5 +98,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   @Override
   public QuestionRepository questions(final TransactionalContext autoTx) {
     return new InMemoryQuestionRepository();
+  }
+
+  @Override
+  public ExamRepository exams() {
+    return exams(null);
+  }
+
+  @Override
+  public ExamRepository exams(TransactionalContext autoTx) {
+    return new InMemoryExamRepository();
   }
 }
