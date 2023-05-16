@@ -1,5 +1,8 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
+import java.util.Calendar;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
 
 @Entity
@@ -30,15 +34,19 @@ public class Meeting implements AggregateRoot<MeetingID> {
   @EmbeddedId
   private MeetingID id;
 
+  @Column(nullable = false)
+  private Set<SystemUser> participants;
+
   protected Meeting() {
     // for ORM
   }
 
-  public Meeting(final Time time, final Duration duration) {
-    Preconditions.noneNull(time, duration);
+  public Meeting(final Time time, final Duration duration, final Set<SystemUser> participants) {
+    Preconditions.noneNull(time, duration, participants);
 
     this.time = time;
     this.duration = duration;
+    this.participants = participants;
     this.canceledAt = null;
   }
 
@@ -71,6 +79,18 @@ public class Meeting implements AggregateRoot<MeetingID> {
 
   public Duration duration() {
     return this.duration;
+  }
+
+  public Set<SystemUser> participants() {
+    return this.participants;
+  }
+
+  public Canceled canceledAt() {
+    return this.canceledAt;
+  }
+
+  public void cancel() {
+    this.canceledAt = new Canceled(Calendar.getInstance());
   }
 
   @Override

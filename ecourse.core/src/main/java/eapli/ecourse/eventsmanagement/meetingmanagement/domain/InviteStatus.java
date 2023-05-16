@@ -35,6 +35,10 @@ public class InviteStatus implements ValueObject {
     return this.state == Status.REJECTED;
   }
 
+  public boolean isNoAnswer() {
+    return this.state == Status.NO_ANSWER;
+  }
+
   public void accept() {
     this.state = Status.ACCEPTED;
   }

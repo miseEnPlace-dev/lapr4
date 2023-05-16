@@ -18,4 +18,9 @@ public class JpaMeetingRepository extends JpaAutoTxRepository<Meeting, MeetingID
     super(puname, Application.settings().extendedPersistenceProperties(), "id");
   }
 
+  @Override
+  public Iterable<Meeting> findAllIterableMeetings() {
+    return null;
+  }
+
 }
