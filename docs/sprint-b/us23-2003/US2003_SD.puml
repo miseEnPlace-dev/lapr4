@@ -1,0 +1,85 @@
+@startuml US2003_SD
+autonumber
+
+actor "Teacher" as T
+
+participant "ListCourseExamsUI" as UI <<presentation>>
+participant "ListCourseExamsController" as CTRL <<application>>
+participant "CourseListService" as C_SRV <<service>>
+participant "ExamListService" as E_SRV <<service>>
+participant "Exam" as Exam <<domain>>
+participant "Course" as Course <<domain>>
+participant "CourseDTO" as C_DTO <<dto>>
+participant "ExamDTO" as E_DTO <<dto>>
+
+
+database CourseRepository as CREPO <<repository>>
+database ExamRepository as EREPO <<repository>>
+
+T -> UI: requests to view the exams list of a course
+activate UI
+UI -> CTRL: new(courseRepository, examRepository)
+activate CTRL
+deactivate CTRL
+
+UI -> CTRL: courses = listOpenInProgressCourses()
+activate CTRL
+
+CTRL -> C_SRV: listOpenCourses()
+activate C_SRV
+C_SRV -> CREPO: findAllOpen()
+activate CREPO
+deactivate CREPO
+loop for each course
+    C_SRV -> Course : toDTO(course)
+    activate Course
+    Course -> C_DTO : new
+    deactivate C_SRV
+    deactivate Course
+  end loop
+deactivate C_SRV
+
+CTRL -> C_SRV: listInProgressCourses()
+activate C_SRV
+C_SRV -> CREPO: findAllInProgress()
+activate CREPO
+deactivate CREPO
+loop for each course
+    C_SRV -> Course : toDTO(course)
+    activate Course
+    Course -> C_DTO : new
+    deactivate C_SRV
+    deactivate Course
+  end loop
+deactivate C_SRV
+
+deactivate CTRL
+UI --> T: lists all the available courses and asks to select one
+deactivate UI
+
+T -> UI: selects the desired course
+activate UI
+
+UI -> UI: course = select(courses, index)
+
+UI -> CTRL: exams = listCourseExams(course)
+activate CTRL
+
+CTRL -> E_SRV: listAllCourseExams(course)
+activate E_SRV
+E_SRV -> EREPO: findAllCourseExams(course)
+activate EREPO
+deactivate EREPO
+loop for each exam
+    E_SRV -> Exam : toDTO(exam)
+    activate Exam
+    Exam -> E_DTO : new
+    deactivate C_SRV
+    deactivate Exam
+  end loop
+deactivate E_SRV
+deactivate CTRL
+
+UI --> T: displays all the exams of the chosen course
+
+@enduml

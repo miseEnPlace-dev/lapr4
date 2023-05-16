@@ -14,6 +14,7 @@ import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamState.State;
+import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
@@ -123,4 +124,12 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   }
 
   public abstract boolean sameAs(Object other);
+
+  public Course course() {
+    return this.course;
+  }
+
+  public ExamDTO toDto() {
+    return new ExamDTO(this.code, this.course, this.teacher, this.identifier, this.title, this.description, this.state);
+  }
 }

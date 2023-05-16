@@ -15,13 +15,7 @@ deactivate System
 User -> System : types the requested data
 activate System
 
-System --> User : shows the user the available time slots
-deactivate System
-
-User -> System : selects slot time
-activate System
-
-System --> User : shows the user the data types and asks for confirmation
+System --> User : informs if the data is valid and if all users can attend the meeting
 deactivate System
 
 User -> System : confirms the data

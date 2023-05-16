@@ -1,0 +1,15 @@
+@startuml US1004_SSD
+'https://plantuml.com/sequence-diagram
+actor "Teacher" as teacher
+participant ":System" as system
+autonumber
+
+teacher -> system: requests to view the exams list of a course
+
+system -> teacher: lists all the available courses and asks to select one
+
+teacher -> system: selects the desired course
+
+system -> teacher: lists all the exams of the chosen course
+
+@enduml

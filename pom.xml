@@ -31,6 +31,7 @@
   <modules>
     <module>ecourse.app.backoffice.console</module>
     <module>ecourse.app.board.backend</module>
+    <module>ecourse.app.board.frontend</module>
     <module>ecourse.app.student.console</module>
     <module>ecourse.app.teacher.console</module>
     <module>ecourse.app.common.console</module>

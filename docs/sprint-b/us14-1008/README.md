@@ -67,17 +67,19 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- **Factory**:
+- **Factory**: The factory pattern is used in the instantiation of the CourseRepository and EnrolmentRepository. This is done to enable the use of a mock repository in the tests and to allow swapping of the repository using a property file.
 
 ### 4.4. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** xxx
+**Test 1:** Ensure enrolment is created with pending state
 
 ```java
   @Test
-  public void xxx() {
+  public void ensureEnrolmentIsCreatedWithPendingState() {
+    final Enrolment enrolment = new Enrolment(getNewDummyStudent(), getNewDummyCourse());
+    assertTrue(enrolment.isPending());
   }
 ```
 
