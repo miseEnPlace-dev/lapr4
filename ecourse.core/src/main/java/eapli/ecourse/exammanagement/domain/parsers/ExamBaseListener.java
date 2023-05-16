@@ -88,13 +88,13 @@ public class ExamBaseListener implements ExamListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProprieties(ExamParser.ProprietiesContext ctx) { }
+	@Override public void enterProperties(ExamParser.PropertiesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProprieties(ExamParser.ProprietiesContext ctx) { }
+	@Override public void exitProperties(ExamParser.PropertiesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

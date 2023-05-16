@@ -59,7 +59,7 @@ public class ExamBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements E
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitProprieties(ExamParser.ProprietiesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitProperties(ExamParser.PropertiesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

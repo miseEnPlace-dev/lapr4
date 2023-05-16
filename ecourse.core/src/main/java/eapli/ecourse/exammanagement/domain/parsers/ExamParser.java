@@ -22,12 +22,12 @@ public class ExamParser extends Parser {
 		IDENTIFIER=14, WS=15, COMMENT=16;
 	public static final int
 		RULE_start = 0, RULE_exam = 1, RULE_sections = 2, RULE_section = 3, RULE_questions = 4, 
-		RULE_header = 5, RULE_proprieties = 6, RULE_title = 7, RULE_description = 8, 
+		RULE_header = 5, RULE_properties = 6, RULE_title = 7, RULE_description = 8, 
 		RULE_feedback = 9, RULE_grade = 10, RULE_score = 11, RULE_start_exam = 12, 
 		RULE_end_exam = 13, RULE_start_section = 14, RULE_end_section = 15;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "exam", "sections", "section", "questions", "header", "proprieties", 
+			"start", "exam", "sections", "section", "questions", "header", "properties", 
 			"title", "description", "feedback", "grade", "score", "start_exam", "end_exam", 
 			"start_section", "end_section"
 		};
@@ -361,11 +361,11 @@ public class ExamParser extends Parser {
 	}
 
 	public static class HeaderContext extends ParserRuleContext {
-		public List<ProprietiesContext> proprieties() {
-			return getRuleContexts(ProprietiesContext.class);
+		public List<PropertiesContext> properties() {
+			return getRuleContexts(PropertiesContext.class);
 		}
-		public ProprietiesContext proprieties(int i) {
-			return getRuleContext(ProprietiesContext.class,i);
+		public PropertiesContext properties(int i) {
+			return getRuleContext(PropertiesContext.class,i);
 		}
 		public HeaderContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -400,7 +400,7 @@ public class ExamParser extends Parser {
 				{
 				{
 				setState(51);
-				proprieties();
+				properties();
 				}
 				}
 				setState(54); 
@@ -420,7 +420,7 @@ public class ExamParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ProprietiesContext extends ParserRuleContext {
+	public static class PropertiesContext extends ParserRuleContext {
 		public TitleContext title() {
 			return getRuleContext(TitleContext.class,0);
 		}
@@ -436,28 +436,28 @@ public class ExamParser extends Parser {
 		public ScoreContext score() {
 			return getRuleContext(ScoreContext.class,0);
 		}
-		public ProprietiesContext(ParserRuleContext parent, int invokingState) {
+		public PropertiesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_proprieties; }
+		@Override public int getRuleIndex() { return RULE_properties; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterProprieties(this);
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).enterProperties(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitProprieties(this);
+			if ( listener instanceof ExamListener ) ((ExamListener)listener).exitProperties(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitProprieties(this);
+			if ( visitor instanceof ExamVisitor ) return ((ExamVisitor<? extends T>)visitor).visitProperties(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ProprietiesContext proprieties() throws RecognitionException {
-		ProprietiesContext _localctx = new ProprietiesContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_proprieties);
+	public final PropertiesContext properties() throws RecognitionException {
+		PropertiesContext _localctx = new PropertiesContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_properties);
 		try {
 			setState(61);
 			_errHandler.sync(this);

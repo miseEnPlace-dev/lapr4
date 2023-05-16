@@ -2,6 +2,7 @@ package eapli.ecourse.exammanagement.domain.dto;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.Description;
+import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.domain.ExamState;
 import eapli.ecourse.exammanagement.domain.Title;
 import eapli.ecourse.questionmanagement.domain.Identifier;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExamDTO {
-  private long id;
+  private ExamCode code;
   private Course course;
   private Teacher teacher;
   private Identifier identifier;

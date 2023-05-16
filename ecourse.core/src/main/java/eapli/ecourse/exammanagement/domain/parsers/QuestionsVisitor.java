@@ -232,4 +232,10 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
     return null;
   }
+
+  // private void raiseError(ParserRuleContext ctx, String msg) {
+  // Token token = ctx.getStart();
+  // int lineNo = token.getLine();
+  // throw new ParseException(lineNo, msg);
+  // }
 }
