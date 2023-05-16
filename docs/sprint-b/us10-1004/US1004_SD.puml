@@ -19,10 +19,10 @@ M -> UI: requests to open/close a course
 
 activate UI
 
-UI -> CTRL**: new
+UI -> CTRL**: new(courseRepository)
 
 alt if close course
-  UI -> CTRL: listOpenCourses()
+  UI -> CTRL: courses = listOpenCourses()
   activate CTRL
   CTRL -> SRV: listOpenCourses()
   activate SRV
@@ -38,7 +38,7 @@ alt if close course
     deactivate CTRL
   end loop
 else if open course
-  UI -> CTRL: listClosedCourses()
+  UI -> CTRL: courses = listClosedCourses()
   activate CTRL
   CTRL -> SRV: listClosedCourses()
   activate SRV
@@ -63,7 +63,7 @@ M -> UI: selects the desired course
 
 activate UI
 
-UI -> UI: course = select(courses, index)dddd
+UI -> UI: course = select(courses, index)
 UI --> M: asks to confirm the toggle of the course status
 
 deactivate UI
