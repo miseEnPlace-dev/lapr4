@@ -45,6 +45,9 @@ public class RequestEnrolmentController {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Enrolment enrolment = new Enrolment(student, course);
 
+    if (enrolmentRepository.findWithUserAndCourse(student.identity(), course.code()).isPresent())
+      throw new IllegalStateException("You are already enrolled in this course");
+
     return enrolmentRepository.save(enrolment).toDto();
   }
 }

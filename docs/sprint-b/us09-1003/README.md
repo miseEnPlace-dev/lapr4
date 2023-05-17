@@ -191,7 +191,13 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
+### 6.1. Success scenario
+
 ![US1003_DEMO](US1003_DEMO.png)
+
+### 6.2. Failure scenario
+
+![US1003_DEMO_FAIL](US1003_DEMO_FAIL.png)
 
 ## 7. Observations
 

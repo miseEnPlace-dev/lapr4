@@ -1,12 +1,15 @@
 package eapli.ecourse.app.student.console.presentation;
 
+import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.ShowMessageAction;
+import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
+import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
 /**
@@ -49,30 +52,40 @@ class MainMenu extends StudentBaseUI {
   @Override
   public boolean doShow() {
     final Menu menu = buildMainMenu();
-    final var renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    final MenuRenderer renderer = getRenderer(menu);
+
     return renderer.render();
+  }
+
+  private MenuRenderer getRenderer(final Menu menu) {
+    final MenuRenderer theRenderer;
+    if (Application.settings().isMenuLayoutHorizontal()) {
+      theRenderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    } else {
+      theRenderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+    }
+    return theRenderer;
   }
 
   private Menu buildMainMenu() {
     final Menu mainMenu = new Menu();
 
+    if (!Application.settings().isMenuLayoutHorizontal())
+      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+
     final Menu myUserMenu = new MyUserMenu();
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
-    mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
     final Menu accountMenu = buildAccountMenu();
     mainMenu.addSubMenu(ACCOUNT_OPTION, accountMenu);
 
-    mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-
     mainMenu.addItem(REQUEST_ENROLMENT_OPTION, "Request enrolment", new RequestEnrolmentUI()::show);
-    mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
     final Menu settingsMenu = buildAdminSettingsMenu();
     mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
 
-    mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+    if (!Application.settings().isMenuLayoutHorizontal())
+      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
     mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
