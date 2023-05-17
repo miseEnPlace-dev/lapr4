@@ -18,6 +18,11 @@ public class AddQuestionsUI extends AbstractUI {
   protected boolean doShow() {
     String fileName = Console.readLine("Enter the path of the file with the questions:");
 
+    if (!ctrl.fileExists(fileName)) {
+      System.out.println("\nInvalid file path!");
+      return false;
+    }
+
     final Iterable<CourseDTO> courses = this.ctrl.listAvailableCourses();
 
     new CourseHeader().printHeader();
@@ -27,9 +32,13 @@ public class AddQuestionsUI extends AbstractUI {
 
     try {
       ctrl.addQuestionsFromFile(fileName, selected);
+    } catch (IllegalArgumentException e) {
+      System.out.println("\nInvalid file path!");
     } catch (Exception e) {
-      System.out.println("Unexpected error!");
+      System.out.println("\nUnexpected error!");
     }
+
+    System.out.println("\n\nQuestions added successfully!");
 
     return false;
   }
