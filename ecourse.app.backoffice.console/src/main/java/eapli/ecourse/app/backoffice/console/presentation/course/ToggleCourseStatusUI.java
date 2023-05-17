@@ -24,7 +24,7 @@ public class ToggleCourseStatusUI extends AbstractUI {
     System.out.println("[4] - Finish Course");
     System.out.println("[0] - Exit");
 
-    int option = Console.readOption(1, 2, 0);
+    int option = Console.readOption(1, 4, 0);
 
     if (option == 0)
       return true;
@@ -37,6 +37,7 @@ public class ToggleCourseStatusUI extends AbstractUI {
       case 2:
       case 3:
         courses = ctrl.listOpenCourses();
+        break;
       case 4:
         courses = ctrl.listInProgressCourses();
         break;
@@ -52,6 +53,8 @@ public class ToggleCourseStatusUI extends AbstractUI {
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
+    if (selected == null)
+      return false;
     System.out.println("Current course state: " + selected.getEnrolmentState().toString());
 
     String confirm = "";
