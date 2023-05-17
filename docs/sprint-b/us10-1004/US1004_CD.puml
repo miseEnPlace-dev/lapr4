@@ -10,7 +10,9 @@ class ToggleCourseStatusController {
 - authorizationService
 + listOpenCourses()
 + listClosedCourses()
-+ toggleCourseStatus(course)
++ listInProgressCourses()
++ toggleToPreviousCourse()
++ toggleToNextCourse()
 }
 
 
@@ -23,6 +25,8 @@ class Course {
   - courseEnrolmentState
   - createdAt
   + toDto()
+  + previousState()
+  + nextState()
 }
 
 class RepositoryFactory {
@@ -33,6 +37,7 @@ interface CourseRepository {
   + save(course)
   + findAllOpen()
   + findAllClosed()
+  + findAllInProgress()
 }
 
 class CourseListService {
@@ -42,6 +47,7 @@ class CourseListService {
 
   + listClosedCourses()
   + listOpenCourses()
+  + listInProgressCourses()
   + save(course)
 }
 
@@ -64,12 +70,14 @@ class InMemoryCourseRepository {
   + save(course)
   + findAllOpen()
   + findAllClosed()
+  + findAllInProgress()
 }
 
 class JpaCourseRepository {
   + save(course)
   + findAllOpen()
   + findAllClosed()
+  + findAllInProgress()
 }
 
 class PersistenceContext {
