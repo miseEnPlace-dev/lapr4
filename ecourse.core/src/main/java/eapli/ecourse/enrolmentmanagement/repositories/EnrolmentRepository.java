@@ -1,5 +1,7 @@
 package eapli.ecourse.enrolmentmanagement.repositories;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentID;
@@ -14,4 +16,6 @@ public interface EnrolmentRepository extends DomainRepository<EnrolmentID, Enrol
   public Iterable<Enrolment> findCourseAccepted(CourseCode courseCode);
 
   public Iterable<Enrolment> findCourseRejected(CourseCode courseCode);
+
+  public Optional<Enrolment> findWithUserAndCourse(MecanographicNumber studentID, CourseCode courseCode);
 }

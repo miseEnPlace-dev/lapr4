@@ -1,4 +1,4 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
 import javax.persistence.Embeddable;
 

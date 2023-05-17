@@ -1,0 +1,122 @@
+@startuml US2001_SD
+autonumber
+
+actor "Teacher" as teacher
+
+participant "CreateExamUI" as ui <<presentation>>
+participant "CreateExamController" as controller <<application>>
+participant "AuthenticationService" as auth <<service>>
+participant "ListCourseService" as lcservice <<service>>
+participant "ExamsParser" as parser <<parser>>
+participant "ExamBuilder" as builder <<builder>>
+participant "Exam" as exam <<domain>>
+participant "Course" as course <<domain>>
+participant "CourseDTO" as coursedto <<dto>>
+
+database ExamRepository as examrepo <<repository>>
+database CourseRepository as courserepo <<repository>>
+database TeacherRepository as teacherrepo <<repository>>
+
+activate teacher
+teacher -> ui : Asks to create an exam
+
+activate ui
+ui -> controller : listInProgressCourses()
+
+activate controller
+controller -> lcservice : listInProgressCourses()
+
+activate lcservice
+lcservice -> courserepo : findAllInProgress()
+
+activate courserepo
+courserepo --> lcservice : courses
+deactivate courserepo
+
+loop for each course
+  lcservice -> course : toDTO(course)
+
+  activate course
+  course -> coursedto : new()
+  deactivate course
+end loop
+
+lcservice --> controller : courses
+deactivate lcservice
+
+controller --> ui : courses
+deactivate controller
+
+ui --> teacher : Lists all available courses and asks to select one
+deactivate ui
+
+teacher -> ui : Selects a course
+
+activate ui
+ui --> teacher : Asks the file path where the exam is defined
+deactivate ui
+
+teacher -> ui : Enters the file path
+
+activate ui
+ui -> controller : parseExam(filePath)
+
+activate controller
+controller -> parser : parseWithVisitor(filePath)
+
+activate parser
+note over parser
+The parser uses the
+visitor ANTLR pattern to
+parse the file, creating a
+new ExamBuilder instance
+end note
+parser -> builder : new()
+parser --> controller : examBuilder
+deactivate parser
+
+deactivate controller
+
+ui --> teacher : Asks the start and end date/time of exam
+deactivate ui
+
+teacher -> ui : Enters the start and end date/time
+
+activate ui
+ui -> controller : createExam(examBuilder, course, start, end)
+
+activate controller
+controller -> auth : loggedinUserWithPermissions(Roles.TEACHER)
+
+activate auth
+auth --> controller : authenticatedUser
+deactivate auth
+
+controller -> teacherrepo : findByUsername(authenticatedUser.username())
+
+activate teacherrepo
+teacherrepo --> controller : teacher
+deactivate teacherrepo
+
+controller -> builder : .withTeacher(teacher)\n.withCourse(course)\n.withStartDate(start)\n.withEndDate(end)
+activate builder
+deactivate builder
+
+controller -> builder : build()
+
+activate builder
+builder -> exam : new()
+builder --> controller : exam
+deactivate builder
+
+controller -> examrepo : save(exam)
+activate examrepo
+deactivate examrepo
+
+deactivate controller
+
+ui --> teacher : Informs operation success
+
+deactivate ui
+
+@enduml

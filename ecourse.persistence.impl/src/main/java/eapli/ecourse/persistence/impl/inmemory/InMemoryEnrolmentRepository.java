@@ -1,5 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentID;
@@ -34,5 +36,12 @@ public class InMemoryEnrolmentRepository
   @Override
   public Iterable<Enrolment> findCourseRejected(final CourseCode courseCode) {
     return match(e -> e.course().code().equals(courseCode) && e.isRejected());
+  }
+
+  @Override
+  public Optional<Enrolment> findWithUserAndCourse(final MecanographicNumber studentID,
+      final CourseCode courseCode) {
+    return matchOne(e -> e.student().mecanographicNumber().equals(studentID)
+        && e.course().code().equals(courseCode));
   }
 }

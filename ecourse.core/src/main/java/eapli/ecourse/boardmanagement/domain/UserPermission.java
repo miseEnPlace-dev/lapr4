@@ -1,12 +1,11 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import eapli.framework.domain.model.DomainEntity;
@@ -15,7 +14,6 @@ import eapli.framework.validations.Preconditions;
 
 @Entity
 public class UserPermission implements DomainEntity<UserPermissionID> {
-
   private static final long serialVersionUID = 1L;
 
   @Version
@@ -27,10 +25,9 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
   @Column
   private Calendar updatedAt;
 
-  @Column(nullable = false, updatable = false)
+  @ManyToOne
   private SystemUser user;
 
-  @Enumerated(EnumType.STRING)
   @Column(nullable = false, updatable = false)
   private PermissionType permissionType;
 

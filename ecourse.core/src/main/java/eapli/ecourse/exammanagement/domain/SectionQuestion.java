@@ -35,15 +35,11 @@ public class SectionQuestion {
   @Column(nullable = true)
   private Feedback generalFeedback;
 
-  @ManyToOne
-  private Course course;
-
   public SectionQuestion(Question question) {
     this.code = question.identity();
     this.body = question.body();
     this.type = question.type();
     this.generalFeedback = question.feedback();
-    this.course = question.course();
   }
 
   protected SectionQuestion() {

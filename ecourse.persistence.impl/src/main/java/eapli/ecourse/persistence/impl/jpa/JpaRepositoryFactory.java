@@ -1,7 +1,7 @@
 package eapli.ecourse.persistence.impl.jpa;
 
 import eapli.ecourse.Application;
-import eapli.ecourse.boardmanagment.repositories.BoardRepository;
+import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;

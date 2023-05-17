@@ -3,13 +3,6 @@
   "configurations": [
     {
       "type": "java",
-      "name": "ExamsMain",
-      "request": "launch",
-      "mainClass": "eapli.ecourse.exammanagement.domain.parsers.ExamsMain",
-      "projectName": "core"
-    },
-    {
-      "type": "java",
       "name": "QuestionsMain",
       "request": "launch",
       "mainClass": "eapli.ecourse.exammanagement.domain.parsers.QuestionsMain",

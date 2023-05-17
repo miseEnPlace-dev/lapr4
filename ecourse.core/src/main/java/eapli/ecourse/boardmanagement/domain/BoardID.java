@@ -1,4 +1,4 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
 import java.util.UUID;
 
@@ -13,9 +13,9 @@ import lombok.EqualsAndHashCode;
 public class BoardID implements ValueObject, Comparable<BoardID> {
   private static final long serialVersionUID = 1L;
 
-  String id;
+  private String id;
 
-  public BoardID(final String boardId) {
+  private BoardID(final String boardId) {
     Preconditions.nonEmpty(boardId);
 
     this.id = boardId;

@@ -1,12 +1,11 @@
-package eapli.ecourse.boardmanagment.repositories;
+package eapli.ecourse.boardmanagement.repositories;
 
+import eapli.ecourse.boardmanagement.domain.Board;
+import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 import java.util.Optional;
-
-import eapli.ecourse.boardmanagment.domain.Board;
-import eapli.ecourse.boardmanagment.domain.BoardID;
 
 public interface BoardRepository extends DomainRepository<BoardID, Board> {
 

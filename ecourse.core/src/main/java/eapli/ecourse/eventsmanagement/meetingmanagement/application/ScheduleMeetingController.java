@@ -4,13 +4,12 @@ import java.util.Set;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
+import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
-import eapli.framework.functional.Functions;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
@@ -55,7 +54,7 @@ public class ScheduleMeetingController {
 
   private Meeting saveMeeting(Meeting meeting) {
     if (meeting == null)
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Meeting cannot be null.");
 
     return meetingRepository.save(meeting);
   }

@@ -16,12 +16,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.questionmanagement.domain.Identifier;
+import eapli.framework.domain.model.DomainEntity;
 
 @Entity
 /**
  * A section of an exam.
  */
-public class Section {
+public class Section implements DomainEntity<Long> {
   private static final long serialVersionUID = 1L;
 
   @Version
@@ -46,43 +47,39 @@ public class Section {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<SectionQuestion> questions;
 
-  public Section() {
-    this.identifier = null;
-    this.title = null;
-    this.description = null;
-    this.score = null;
-    this.questions = new ArrayList<SectionQuestion>();
-  }
-
-  public Section(final Identifier identifier, final Title title, final Description description, final Score score) {
+  public Section(Identifier identifier, Title title, Description description, Score score,
+      Collection<SectionQuestion> questions) {
     this.identifier = identifier;
     this.title = title;
     this.description = description;
     this.score = score;
-    this.questions = new ArrayList<SectionQuestion>();
+    this.questions = new ArrayList<>(questions);
   }
 
-  public void addQuestion(SectionQuestion question) {
-    this.questions.add(question);
+  protected Section() {
+    // for ORM only
   }
 
-  public void addQuestions(Collection<SectionQuestion> questions) {
-    this.questions.addAll(questions);
+  public Long identity() {
+    return id;
   }
 
-  public void changeIdentifier(Identifier identifier) {
-    this.identifier = identifier;
+  public boolean sameAs(Object other) {
+    return this.equals(other);
   }
 
-  public void changeTitle(Title title) {
-    this.title = title;
-  }
+  @Override
+  public boolean equals(Object o) {
+    if (o == null)
+      return false;
+    if (this == o)
+      return true;
+    if (!(o instanceof Section))
+      return false;
 
-  public void changeDescription(Description description) {
-    this.description = description;
-  }
-
-  public void changeScore(Score score) {
-    this.score = score;
+    final Section that = (Section) o;
+    return this.identifier.equals(that.identifier) && this.title.equals(that.title)
+        && this.description.equals(that.description) && this.score.equals(that.score)
+        && this.questions.equals(that.questions);
   }
 }
