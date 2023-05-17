@@ -153,5 +153,4 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   public BoardRepository boards(TransactionalContext autoTx) {
     return new InMemoryBoardRepository();
   }
-
 }
