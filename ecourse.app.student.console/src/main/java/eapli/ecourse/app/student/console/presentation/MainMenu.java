@@ -2,6 +2,7 @@ package eapli.ecourse.app.student.console.presentation;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
+import eapli.ecourse.app.common.console.presentation.meeting.ScheduleMeetingUI;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -29,7 +30,8 @@ class MainMenu extends StudentBaseUI {
   private static final int MY_USER_OPTION = 1;
   private static final int ACCOUNT_OPTION = 2;
   private static final int REQUEST_ENROLMENT_OPTION = 3;
-  private static final int SETTINGS_OPTION = 4;
+  private static final int SCHEDULE_MEETING = 4;
+  private static final int SETTINGS_OPTION = 5;
 
   // ACCOUNT MENU
   // private static final int <something> = 1;
@@ -80,6 +82,7 @@ class MainMenu extends StudentBaseUI {
     mainMenu.addSubMenu(ACCOUNT_OPTION, accountMenu);
 
     mainMenu.addItem(REQUEST_ENROLMENT_OPTION, "Request enrolment", new RequestEnrolmentUI()::show);
+    mainMenu.addItem(SCHEDULE_MEETING, "Schedule meeting", new ScheduleMeetingUI()::show);
 
     final Menu settingsMenu = buildAdminSettingsMenu();
     mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);

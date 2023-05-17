@@ -31,7 +31,12 @@ public class ScheduleMeetingUI extends AbstractUI {
     Calendar time = Console.readCalendar("Time (HH:MM): ", "HH:mm");
     Time meetingTime = Time.valueOf(time);
 
-    Integer duration = Console.readInteger("Duration (minutes): ");
+    Integer duration = 0;
+
+    while (duration <= 0) {
+      duration = Console.readInteger("Duration (minutes): ");
+    }
+
     Duration meetingDuration = Duration.valueOf(duration);
 
     List<SystemUser> allUsers = (ArrayList<SystemUser>) userManagementService.allUsers();
@@ -44,7 +49,7 @@ public class ScheduleMeetingUI extends AbstractUI {
 
     final SelectWidget<SystemUser> selector = new SelectWidget<>("\nUsers:", allUsers, new SystemUserPrinter());
 
-    while (selector != null && allUsers.size() > 0) {
+    while (selector.selectedOption() != 0 && allUsers.size() > 0) {
       selector.show();
       final SystemUser selected = selector.selectedElement();
       allUsers.remove(selected);
@@ -74,7 +79,7 @@ public class ScheduleMeetingUI extends AbstractUI {
     System.out.println("\nMeeting successfully created");
     Console.readLine("Press Enter to continue...");
 
-    return true;
+    return false;
   }
 
   @Override
