@@ -1,0 +1,124 @@
+@startuml US2003_CD
+
+class ListCourseExamsUI {
+
+}
+
+class ListCourseExamsController {
+- courseListService
+- courseRepository
+- authorizationService
+- examListService
++ listOpenInProgressCourses()
++ listCourseExams(course)
+}
+
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+  + toDto()
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface CourseRepository {
+  + findAllOpen()
+  + findAllInProgress()
+}
+
+class CourseListService {
+  - courseRepository
+
+  + listOpenCourses()
+  + listInProgressCourses()
+}
+
+class ExamListService {
+- examRepository
++ listAllCourseExams(course)
+
+}
+
+class Exam {
+- code
+- course
+- teacher
+- identifier
+- title
+- description
+- state
++ toDto()
+}
+
+class ExamDTO {
+- code
+- course
+- teacher
+- identifier
+- title
+- description
+- state
+}
+
+class ExamDTOParser {
++ valueOf(examDTO)
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
+
+class InMemoryCourseRepository {
+  + findAllOpen()
+  + findAllInProgress()
+}
+
+class JpaCourseRepository {
+  + findAllOpen()
+  + findAllInProgress()
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+ListCourseExamsController ..> PersistenceContext
+ListCourseExamsController ..> Course
+ListCourseExamsUI ..> ListCourseExamsController
+
+ExamListService ..> Exam
+CourseListService ..> Course
+
+ExamDTOParser ..> ExamDTO
+ExamDTOParser ..> Exam
+ListCourseExamsController --> CourseListService
+ListCourseExamsController --> ExamListService
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
+
+@enduml

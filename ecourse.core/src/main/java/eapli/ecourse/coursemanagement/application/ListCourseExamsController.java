@@ -20,8 +20,6 @@ public class ListCourseExamsController {
 
   private final CourseRepository courseRepository;
 
-  private final ExamRepository examRepository;
-
   private final ListCourseService service;
 
   private final ExamListService examService;
@@ -29,7 +27,6 @@ public class ListCourseExamsController {
   public ListCourseExamsController(AuthorizationService authz, CourseRepository courseRepository, ExamRepository examRepository) {
     this.authz = authz;
     this.courseRepository = courseRepository;
-    this.examRepository = examRepository;
     this.service = new ListCourseService(courseRepository);
     this.examService = new ExamListService(examRepository);
   }
