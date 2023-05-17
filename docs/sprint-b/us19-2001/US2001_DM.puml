@@ -1,0 +1,137 @@
+@startuml DM-EXAM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Exam" {
+  entity Exam
+
+  entity Section
+
+  class Description
+
+  entity SectionQuestion
+  class Score
+
+  class State
+
+  class SectionName
+}
+
+package "<<aggregate>> FormativeExam" {
+  entity FormativeExam
+}
+
+entity FormativeExam <<entity>> <<root>> {
+}
+
+package "<<aggregate>> EvaluationExam" {
+  entity EvaluationExam
+
+  class Time
+  class FeedbackType
+  class GradeType
+}
+
+entity EvaluationExam <<entity>> <<root>> {
+}
+
+package "<<agregate>> Question" {
+  entity Question
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+}
+
+entity SectionQuestion <<entity>> {
+}
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Course" {
+  entity Course
+}
+
+entity Course <<entity>> <<root>> {
+}
+
+package "<<aggregate>> ExamAnswer" {
+  entity ExamAnswer
+}
+
+entity ExamAnswer <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+entity Exam <<entity>> <<root>> {
+}
+
+entity Section <<entity>> {}
+
+class SectionName <<(V,#FF8B40) value object>> {}
+class State <<(V,#FF8B40) value object>> {}
+
+class FeedbackType <<(V,#FF8B40) value object>> {}
+class GradeType <<(V,#FF8B40) value object>> {}
+class Description <<(V,#FF8B40) value object>> {}
+class Time <<(V,#FF8B40) value object>> {}
+class Score <<(V,#FF8B40) value object>> {}
+
+entity Question <<entity>> <<root>> {}
+
+Exam <|- EvaluationExam
+Exam <|-- FormativeExam
+
+EvaluationExam --> "0..1" Time : start time
+EvaluationExam --> "0..1" Time : end time
+
+Exam ---> "1" State : is in
+
+note bottom of State
+  DRAFT
+  PUBLISHED
+end note
+
+Exam *-- "1..*" Section
+Exam ---> "1" Course : is from
+Exam ---> "1" Teacher : is created by
+
+EvaluationExam *--- "1" FeedbackType
+EvaluationExam *--- "1" GradeType
+Exam *-- "1" Description
+
+note bottom of FeedbackType
+  NONE
+  ON_SUBMITION
+  AFTER_CLOSING
+end note
+
+note bottom of GradeType
+  NONE
+  ON_SUBMITION
+  AFTER_CLOSING
+end note
+
+Section *-- "1..*" SectionQuestion
+SectionQuestion --> "1" Question : corresponds to
+SectionQuestion -> "1" Score : has
+
+Section *-- SectionName
+
+Student --> "0..*" ExamAnswer : has
+
+ExamAnswer ---> "1" Exam : is for
+
+@enduml

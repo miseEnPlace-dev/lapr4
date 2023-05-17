@@ -11,6 +11,8 @@ system -> teacher : Lists all available courses and asks to select one
 teacher -> system : Selects a course
 system -> teacher : Asks the file path where the exam is defined
 teacher -> system : Enters the file path
+system -> teacher : Asks the start and end date/time of exam
+teacher -> system : Enters the start and end date/time
 system -> teacher : Informs operation success
 
 @enduml
