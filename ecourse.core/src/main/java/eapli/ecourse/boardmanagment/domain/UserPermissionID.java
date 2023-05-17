@@ -15,7 +15,7 @@ public class UserPermissionID implements ValueObject, Comparable<UserPermissionI
 
   private String id;
 
-  public UserPermissionID(final String userPermissionId) {
+  private UserPermissionID(final String userPermissionId) {
     Preconditions.nonEmpty(userPermissionId);
 
     this.id = userPermissionId;

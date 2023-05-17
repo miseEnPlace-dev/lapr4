@@ -47,16 +47,31 @@ public class Board implements AggregateRoot<BoardID> {
     // for ORM
   }
 
-  public Board(final Title title, final Archived archived, final List<UserPermission> permissions,
+  public Board(final Title title, final List<UserPermission> permissions,
       final List<BoardColumn> column, final List<BoardRow> row, final BoardID id, final SystemUser user) {
 
     // Only mandatory fields are checked
     Preconditions.noneNull(title, id, column, row, user);
 
     this.title = title;
-    this.archived = archived;
+    this.archived = null;
     this.permissions = permissions;
     this.id = id;
+    this.columns = column;
+    this.rows = row;
+    this.user = user;
+  }
+
+  public Board(final Title title, final List<UserPermission> permissions,
+      final List<BoardColumn> column, final List<BoardRow> row, final SystemUser user) {
+
+    // Only mandatory fields are checked
+    Preconditions.noneNull(title, column, row, user);
+
+    this.title = title;
+    this.archived = null;
+    this.permissions = permissions;
+    this.id = BoardID.newID();
     this.columns = column;
     this.rows = row;
     this.user = user;

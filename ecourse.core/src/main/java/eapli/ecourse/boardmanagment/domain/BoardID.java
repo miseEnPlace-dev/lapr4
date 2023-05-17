@@ -15,7 +15,7 @@ public class BoardID implements ValueObject, Comparable<BoardID> {
 
   String id;
 
-  public BoardID(final String boardId) {
+  private BoardID(final String boardId) {
     Preconditions.nonEmpty(boardId);
 
     this.id = boardId;
