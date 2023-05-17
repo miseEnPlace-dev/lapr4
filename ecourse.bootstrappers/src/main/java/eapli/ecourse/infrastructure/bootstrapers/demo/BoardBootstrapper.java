@@ -57,7 +57,7 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     roles.add(ClientRoles.TEACHER);
 
     SystemUser user = registerUser("user2", "Password1", "firstName", "lastName", "email@ddd.com", roles);
-    ctrl.createBoard("example", getPermissions(), getColumns(), getRows(), "boardID", user);
+    ctrl.createBoard("example", getPermissions(), getColumns(), getRows(), user);
 
     return true;
   }

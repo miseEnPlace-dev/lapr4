@@ -3,8 +3,7 @@ package eapli.ecourse.app.common.console.presentation.board;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
-
+import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
 import eapli.ecourse.boardmanagement.application.CreateBoardController;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -44,7 +43,7 @@ public class CreateBoardUI extends AbstractUI {
     final Iterable<SystemUser> users = this.ctrl.listAllUsers();
 
     Map<SystemUser, PermissionType> permissions = new HashMap<>();
-    while (Console.readLine("Do you want to add a Column? (Y/N)").toUpperCase().equals("Y")) {
+    while (Console.readLine("Do you want to add a User Permission? (Y/N)").toUpperCase().equals("Y")) {
 
       final SelectWidget<SystemUser> selector = new SelectWidget<>("\nUsers:", users, new SystemUserPrinter());
       selector.show();
@@ -59,17 +58,25 @@ public class CreateBoardUI extends AbstractUI {
       System.out.println("2. Write");
       System.out.println("0. Exit");
       Integer permission = Console.readOption(1, 2, 0);
-      PermissionType permissionType;
+
+      if (permission == 0) {
+        return false;
+      }
+
+      PermissionType permissionType = (permission == 1) ? PermissionType.read() : PermissionType.write();
 
       permissions.put(selected, permissionType);
 
     }
 
     try {
-      this.ctrl.createBoard(title, permissions, columns, rows, null, user);
+      this.ctrl.createBoard(title, permissions, columns, rows, user);
     } catch (Exception e) {
       System.out.println("Error creating board: " + e.getMessage());
     }
+
+    System.out.println("\nBoard successfully created");
+    Console.readLine("Press Enter to continue...");
 
     return true;
 
