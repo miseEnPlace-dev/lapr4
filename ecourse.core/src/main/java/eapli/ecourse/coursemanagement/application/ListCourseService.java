@@ -35,8 +35,13 @@ public class ListCourseService {
   }
 
   public Iterable<CourseDTO> listInProgressCourses() {
+<<<<<<< HEAD
     final Iterable<Course> courses = courseRepository.findAllInProgress();
     return convertToDto(courses);
+=======
+    final Iterable<Course> types = courseRepository.findAllInProgress();
+    return convertToDto(types);
+>>>>>>> 6dec93322a4e94af1f8ac0ba91aa8b6963f4bc07
   }
 
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
