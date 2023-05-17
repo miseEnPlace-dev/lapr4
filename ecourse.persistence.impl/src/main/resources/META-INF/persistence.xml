@@ -8,6 +8,7 @@
     <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
     <class>eapli.ecourse.studentmanagement.domain.Student</class>
+    <class>eapli.ecourse.exammanagement.domain.Exam</class>
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.classmanagement.domain.Class</class>
@@ -60,11 +61,19 @@
     <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
     <class>eapli.ecourse.studentmanagement.domain.Student</class>
+    <class>eapli.ecourse.exammanagement.domain.Exam</class>
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.classmanagement.domain.Class</class>
     <class>eapli.ecourse.teachermanagement.domain.Teacher</class>
     <class>eapli.ecourse.enrolmentmanagement.domain.Enrolment</class>
+    <class>eapli.ecourse.questionmanagement.domain.Question</class>
+    <class>eapli.ecourse.questionmanagement.domain.MatchingQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.MissingWordsQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.NumericalQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion</class>
+    <class>eapli.ecourse.questionmanagement.domain.TrueFalseQuestion</class>
 
     <properties>
       <property name="javax.persistence.jdbc.driver"
