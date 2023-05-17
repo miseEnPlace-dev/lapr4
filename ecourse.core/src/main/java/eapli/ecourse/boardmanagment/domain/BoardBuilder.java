@@ -1,14 +1,7 @@
 package eapli.ecourse.boardmanagment.domain;
 
-import java.security.Permission;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder.In;
-
-import org.springframework.boot.BootstrapRegistry;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -23,6 +16,7 @@ public class BoardBuilder implements DomainFactory<Board> {
   private List<UserPermission> permissions;
   private List<BoardColumn> columns;
   private List<BoardRow> rows;
+  private SystemUser user;
 
   public BoardBuilder withTitle(String title) {
     this.title = new Title(title);
@@ -114,6 +108,11 @@ public class BoardBuilder implements DomainFactory<Board> {
     return this;
   }
 
+  public BoardBuilder withUser(SystemUser user) {
+    this.user = user;
+    return this;
+  }
+
   private Board buildOrThrow() {
     if (board != null) {
       return board;
@@ -122,7 +121,7 @@ public class BoardBuilder implements DomainFactory<Board> {
     // Only fields that are mandatory are checked
     Preconditions.noneNull(title, id, columns, rows);
 
-    board = new Board(title, archived, permissions, columns, rows, id);
+    board = new Board(title, archived, permissions, columns, rows, id, user);
     return board;
 
   }

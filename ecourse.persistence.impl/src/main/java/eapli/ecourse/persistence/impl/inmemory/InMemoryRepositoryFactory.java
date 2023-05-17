@@ -1,5 +1,6 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
+import eapli.ecourse.boardmanagment.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
@@ -142,4 +143,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   public EnrolmentRepository enrollments(final TransactionalContext autoTx) {
     return new InMemoryEnrolmentRepository();
   }
+
+  @Override
+  public BoardRepository boards() {
+    return boards(null);
+  }
+
+  @Override
+  public BoardRepository boards(TransactionalContext autoTx) {
+    return new InMemoryBoardRepository();
+  }
+
 }

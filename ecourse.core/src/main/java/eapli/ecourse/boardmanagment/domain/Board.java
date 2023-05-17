@@ -11,6 +11,7 @@ import javax.persistence.EmbeddedId;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
 
 @Entity
@@ -26,6 +27,9 @@ public class Board implements AggregateRoot<BoardID> {
 
   @Column
   private Archived archived;
+
+  @Column
+  private SystemUser user;
 
   @EmbeddedId
   private BoardID id;
@@ -44,9 +48,10 @@ public class Board implements AggregateRoot<BoardID> {
   }
 
   public Board(final Title title, final Archived archived, final List<UserPermission> permissions,
-      final List<BoardColumn> column, final List<BoardRow> row, final BoardID id) {
+      final List<BoardColumn> column, final List<BoardRow> row, final BoardID id, final SystemUser user) {
 
-    Preconditions.noneNull(title, id, column, row);
+    // Only mandatory fields are checked
+    Preconditions.noneNull(title, id, column, row, user);
 
     this.title = title;
     this.archived = archived;
@@ -54,6 +59,7 @@ public class Board implements AggregateRoot<BoardID> {
     this.id = id;
     this.columns = column;
     this.rows = row;
+    this.user = user;
   }
 
   public Title title() {
@@ -74,6 +80,10 @@ public class Board implements AggregateRoot<BoardID> {
 
   public List<UserPermission> permissions() {
     return this.permissions;
+  }
+
+  public SystemUser user() {
+    return this.user;
   }
 
   @Override
@@ -112,7 +122,7 @@ public class Board implements AggregateRoot<BoardID> {
     }
 
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
-        && this.archived.equals(otherBoard.archived());
+        && this.archived.equals(otherBoard.archived()) && this.user.equals(otherBoard.user());
 
   }
 
