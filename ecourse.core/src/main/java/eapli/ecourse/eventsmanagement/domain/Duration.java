@@ -13,7 +13,7 @@ public class Duration implements ValueObject, Comparable<Duration> {
 
   protected Duration(final int duration) {
     if (duration <= 0)
-      throw new IllegalArgumentException("Duration should be > 0");
+      System.out.println("Duration should be greater than 0");
 
     this.duration = duration;
   }
