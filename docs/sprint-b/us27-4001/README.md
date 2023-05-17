@@ -158,4 +158,4 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 7. Observations
 
-- N/a
+- TODO: explain why the solution is designed like this (not using observer pattern, etc)

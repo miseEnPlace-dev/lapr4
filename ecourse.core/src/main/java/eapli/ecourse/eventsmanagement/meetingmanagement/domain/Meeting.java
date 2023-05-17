@@ -40,6 +40,7 @@ public class Meeting implements AggregateRoot<MeetingID> {
   public Meeting(final Time time, final Duration duration) {
     Preconditions.noneNull(time, duration);
 
+    this.id = MeetingID.newID();
     this.time = time;
     this.duration = duration;
     this.canceledAt = null;

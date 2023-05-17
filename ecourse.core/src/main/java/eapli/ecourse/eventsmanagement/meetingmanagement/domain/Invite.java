@@ -1,7 +1,10 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 import eapli.framework.domain.model.AggregateRoot;
@@ -15,16 +18,16 @@ public class Invite implements AggregateRoot<InviteID> {
   @Version
   private Long version;
 
-  @Column(nullable = false)
+  @EmbeddedId
   private InviteID id;
 
   @Column(nullable = false)
   private InviteStatus status;
 
-  @Column(nullable = false)
+  @OneToOne
   private Meeting meeting;
 
-  @Column(nullable = false)
+  @OneToOne
   private SystemUser user;
 
   protected Invite() {
@@ -35,6 +38,7 @@ public class Invite implements AggregateRoot<InviteID> {
     this.meeting = meeting;
     this.user = user;
     this.status = new InviteStatus();
+    this.id = InviteID.newID();
   }
 
   @Override

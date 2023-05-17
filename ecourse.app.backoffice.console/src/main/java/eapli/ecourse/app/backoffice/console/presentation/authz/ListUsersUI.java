@@ -1,5 +1,6 @@
 package eapli.ecourse.app.backoffice.console.presentation.authz;
 
+import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
 import eapli.ecourse.usermanagement.application.ListUsersController;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.presentation.console.AbstractListUI;
