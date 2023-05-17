@@ -7,26 +7,36 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 
-public class CourseListService {
+public class ListCourseService {
   private CourseRepository courseRepository;
 
-  public CourseListService(CourseRepository courseRepository) {
+  public ListCourseService(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {
-    final Iterable<Course> types = courseRepository.findAllNotClosed();
-    return convertToDto(types);
+    final Iterable<Course> courses = courseRepository.findAllNotClosed();
+    return convertToDto(courses);
   }
 
   public Iterable<CourseDTO> listClosedCourses() {
-    final Iterable<Course> types = courseRepository.findAllClosed();
-    return convertToDto(types);
+    final Iterable<Course> courses = courseRepository.findAllClosed();
+    return convertToDto(courses);
   }
 
   public Iterable<CourseDTO> listOpenCourses() {
-    final Iterable<Course> types = courseRepository.findAllOpen();
-    return convertToDto(types);
+    final Iterable<Course> courses = courseRepository.findAllOpen();
+    return convertToDto(courses);
+  }
+
+  public Iterable<CourseDTO> listOpenForEnrolment() {
+    final Iterable<Course> courses = courseRepository.findAllOpenForEnrolment();
+    return convertToDto(courses);
+  }
+
+  public Iterable<CourseDTO> listInProgressCourses() {
+    final Iterable<Course> courses = courseRepository.findAllInProgress();
+    return convertToDto(courses);
   }
 
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {

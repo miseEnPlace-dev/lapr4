@@ -34,7 +34,7 @@ public class CourseBootstrapperBase {
       final int max, final TeacherDTO teacher) {
     try {
       Course c = createCourseCtrl.createCourse(code, title, description, min, max, teacher);
-      toggleCourseStatusCtrl.toggleCourseStatus(c.toDto());
+      toggleCourseStatusCtrl.toggleToNextCourseStatus(c.toDto());
     } catch (final Exception e) {
       LOGGER.warn("Assuming {} already exists (activate trace log for details)", code);
       LOGGER.trace("Assuming existing record", e);

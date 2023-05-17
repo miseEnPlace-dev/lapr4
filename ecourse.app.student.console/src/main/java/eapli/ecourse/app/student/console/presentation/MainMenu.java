@@ -25,7 +25,8 @@ class MainMenu extends StudentBaseUI {
   // MAIN MENU
   private static final int MY_USER_OPTION = 1;
   private static final int ACCOUNT_OPTION = 2;
-  private static final int SETTINGS_OPTION = 3;
+  private static final int REQUEST_ENROLMENT_OPTION = 3;
+  private static final int SETTINGS_OPTION = 4;
 
   // ACCOUNT MENU
   // private static final int <something> = 1;
@@ -63,6 +64,9 @@ class MainMenu extends StudentBaseUI {
     final Menu accountMenu = buildAccountMenu();
     mainMenu.addSubMenu(ACCOUNT_OPTION, accountMenu);
 
+    mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+
+    mainMenu.addItem(REQUEST_ENROLMENT_OPTION, "Request enrolment", new RequestEnrolmentUI()::show);
     mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
     final Menu settingsMenu = buildAdminSettingsMenu();

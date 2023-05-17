@@ -28,6 +28,14 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
     return sb.toString();
   }
 
+  /*
+   * private void raiseError(ParserRuleContext ctx, String msg) {
+   * Token token = ctx.getStart();
+   * int lineNo = token.getLine();
+   * throw new ParseException(lineNo, msg);
+   * }
+   */
+
   @Override
   public List<Question> visitStart(QuestionParser.StartContext ctx) {
     visitChildren(ctx);
@@ -232,10 +240,4 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
     return null;
   }
-
-  // private void raiseError(ParserRuleContext ctx, String msg) {
-  // Token token = ctx.getStart();
-  // int lineNo = token.getLine();
-  // throw new ParseException(lineNo, msg);
-  // }
 }

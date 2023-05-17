@@ -27,7 +27,7 @@ public class CourseState implements ValueObject {
     state = State.CLOSED;
   }
 
-  public void changeToClose() {
+  public void changeToClosed() {
     changeTo(State.CLOSED);
   }
 
@@ -43,12 +43,34 @@ public class CourseState implements ValueObject {
     changeTo(State.FINISHED);
   }
 
-  public void toggle() {
-    // TODO add other state transitions
-    if (state == State.CLOSED)
-      changeToOpen();
-    else
-      changeToClose();
+  public void next() {
+    switch (state) {
+      case CLOSED:
+        changeToOpen();
+        break;
+      case OPEN:
+        changeToInProgress();
+        break;
+      case IN_PROGRESS:
+        changeToFinished();
+        break;
+      case FINISHED:
+        throw new IllegalStateException("Cannot toggle state of a finished course");
+    }
+  }
+
+  public void previous() {
+    switch (state) {
+      case CLOSED:
+        throw new IllegalStateException("Cannot toggle state of a closed course");
+      case OPEN:
+        changeToClosed();
+        break;
+      case IN_PROGRESS:
+        throw new IllegalStateException("Cannot close a course in progress");
+      case FINISHED:
+        throw new IllegalStateException("Cannot change the state of a finished course");
+    }
   }
 
   private void changeTo(State state) {

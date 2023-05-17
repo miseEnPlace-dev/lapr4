@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlElement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -38,7 +39,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   private EnrolmentID id;
 
   /**
-   * cascade = CascadeType.NONE as the dishType is part of another aggregate
+   * cascade = CascadeType.NONE as the student is part of another aggregate
    */
   @XmlElement
   @JsonProperty
@@ -46,7 +47,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   private Student student;
 
   /**
-   * cascade = CascadeType.NONE as the dishType is part of another aggregate
+   * cascade = CascadeType.NONE as the course is part of another aggregate
    */
   @XmlElement
   @JsonProperty
@@ -100,6 +101,11 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
 
     return this.identity().equals(that.identity()) && this.student.equals(that.student)
         && this.course.equals(that.course);
+  }
+
+  public EnrolmentDTO toDto() {
+    return new EnrolmentDTO(this.course.code().toString(), this.student.mecanographicNumber().toString(),
+        this.student.user().name().toString(), this.createdAt, this.state.toString());
   }
 
   @Override

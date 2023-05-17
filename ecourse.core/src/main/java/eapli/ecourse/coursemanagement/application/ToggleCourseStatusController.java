@@ -1,7 +1,5 @@
 package eapli.ecourse.coursemanagement.application;
 
-import java.util.Optional;
-
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -13,12 +11,12 @@ public class ToggleCourseStatusController {
 
   private final AuthorizationService authz;
 
-  private final CourseListService service;
+  private final ListCourseService service;
 
   public ToggleCourseStatusController(CourseRepository courseRepository, AuthorizationService authz) {
     this.courseRepository = courseRepository;
     this.authz = authz;
-    this.service = new CourseListService(courseRepository);
+    this.service = new ListCourseService(courseRepository);
   }
 
   public Iterable<CourseDTO> listOpenCourses() {
@@ -29,14 +27,29 @@ public class ToggleCourseStatusController {
     return service.listClosedCourses();
   }
 
-  public void toggleCourseStatus(CourseDTO courseDTO) {
+  public Iterable<CourseDTO> listInProgressCourses() {
+    return service.listInProgressCourses();
+  }
+
+  public Course toggleToNextCourseStatus(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
-    Optional<Course> course = courseRepository.findByCode(courseDTO.getCode());
+    Course course = getCourse(courseDTO);
 
-    if (course.isEmpty())
-      throw new IllegalArgumentException("There is no Course with the given code");
+    course.nextState();
+    return courseRepository.save(course);
+  }
 
-    course.get().toggleState();
+  public Course toggleToPreviousCourseStatus(CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    Course course = getCourse(courseDTO);
+
+    course.previousState();
+    return courseRepository.save(course);
+  }
+
+  private Course getCourse(CourseDTO courseDTO) {
+    return courseRepository.findByCode(courseDTO.getCode()).orElseThrow();
   }
 }

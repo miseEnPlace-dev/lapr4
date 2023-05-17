@@ -11,7 +11,6 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ToggleCourseStatusUI extends AbstractUI {
-
   private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
   private final ToggleCourseStatusController ctrl = new ToggleCourseStatusController(courseRepository,
       AuthzRegistry.authorizationService());
@@ -21,18 +20,29 @@ public class ToggleCourseStatusUI extends AbstractUI {
 
     System.out.println("[1] - Open Course");
     System.out.println("[2] - Close Course");
+    System.out.println("[3] - Start Course");
+    System.out.println("[4] - Finish Course");
     System.out.println("[0] - Exit");
 
-    int option = Console.readOption(1, 2, 0);
+    int option = Console.readOption(1, 4, 0);
 
     if (option == 0)
       return true;
 
     Iterable<CourseDTO> courses;
-    if (option == 1) {
-      courses = ctrl.listClosedCourses();
-    } else {
-      courses = ctrl.listOpenCourses();
+    switch (option) {
+      case 1:
+        courses = ctrl.listClosedCourses();
+        break;
+      case 2:
+      case 3:
+        courses = ctrl.listOpenCourses();
+        break;
+      case 4:
+        courses = ctrl.listInProgressCourses();
+        break;
+      default:
+        return false;
     }
 
     if (!courses.iterator().hasNext()) {
@@ -43,6 +53,8 @@ public class ToggleCourseStatusUI extends AbstractUI {
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
+    if (selected == null)
+      return false;
     System.out.println("Current course state: " + selected.getEnrolmentState().toString());
 
     String confirm = "";
@@ -52,15 +64,18 @@ public class ToggleCourseStatusUI extends AbstractUI {
       confirm = Console.readLine("Option: ").toUpperCase();
     }
 
-    if (confirm.equals("Y")) {
-      try {
-        ctrl.toggleCourseStatus(selected);
-      } catch (IllegalArgumentException exception) {
-        System.out.println("There is no course with the given code");
-        return false;
-      }
-    } else {
+    if (confirm.equals("N")) {
       System.out.println("Operation Cancelled");
+      return false;
+    }
+
+    try {
+      if (option == 2)
+        ctrl.toggleToPreviousCourseStatus(selected);
+      else
+        ctrl.toggleToNextCourseStatus(selected);
+    } catch (IllegalArgumentException exception) {
+      System.out.println("There is no course with the given code");
       return false;
     }
 

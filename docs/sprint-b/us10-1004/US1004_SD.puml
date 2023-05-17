@@ -21,7 +21,7 @@ activate UI
 
 UI -> CTRL**: new(courseRepository)
 
-alt if close course
+alt if (close course / start course)
   UI -> CTRL: courses = listOpenCourses()
   activate CTRL
   CTRL -> SRV: listOpenCourses()
@@ -53,7 +53,24 @@ else if open course
     deactivate Course
     deactivate CTRL
   end loop
+ else if finish course
+  UI -> CTRL: courses = listInProgressCourses()
+    activate CTRL
+    CTRL -> SRV: listInProgressCourses()
+    activate SRV
+    SRV -> REPO: findAllInProgress()
+    activate REPO
+    deactivate REPO
+    loop for each course
+      SRV -> Course : toDTO(course)
+      activate Course
+      Course -> DTO : new
+      deactivate SRV
+      deactivate Course
+      deactivate CTRL
+    end loop
 end
+
 
 UI --> M: lists the available courses and their status and asks to select one
 
@@ -72,25 +89,33 @@ M -> UI: confirms operation
 
 activate UI
 
-UI -> CTRL: toggleCourseStatus(course)
-
-activate CTRL
-
-CTRL -> Course: course = toggleState()
-
-activate Course
-
-Course -> CourseState: toggle()
-
-activate CourseState
-deactivate CourseState
-deactivate Course
-
-CTRL -> REPO: save(course)
-
-activate REPO
-deactivate REPO
-deactivate CTRL
+alt if close course
+  UI -> CTRL: course = toggleToPreviousCourseStatus()
+  activate CTRL
+  CTRL -> Course: previousState()
+  activate Course
+  Course -> CourseState: previous()
+  activate CourseState
+  deactivate CourseState
+  deactivate Course
+  CTRL -> REPO: save(course)
+  activate REPO
+  deactivate REPO
+  deactivate CTRL
+else else
+  UI -> CTRL: course = toggleToNextCourseStatus()
+  activate CTRL
+    CTRL -> Course: nextState()
+    activate Course
+    Course -> CourseState: next()
+    activate CourseState
+    deactivate CourseState
+    deactivate Course
+    CTRL -> REPO: save(course)
+    activate REPO
+    deactivate REPO
+    deactivate CTRL
+end
 
 UI --> M: informs operation success
 

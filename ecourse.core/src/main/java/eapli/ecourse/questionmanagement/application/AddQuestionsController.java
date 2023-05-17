@@ -2,7 +2,7 @@ package eapli.ecourse.questionmanagement.application;
 
 import java.util.List;
 
-import eapli.ecourse.coursemanagement.application.CourseListService;
+import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -15,7 +15,7 @@ import eapli.framework.infrastructure.authz.application.AuthorizationService;
 public class AddQuestionsController {
   private final QuestionRepository questionRepository;
   private final CourseRepository courseRepository;
-  private final CourseListService courseListService;
+  private final ListCourseService courseListService;
   private final AuthorizationService authz;
 
   public AddQuestionsController(QuestionRepository questionRepository, CourseRepository courseRepository,
@@ -24,7 +24,7 @@ public class AddQuestionsController {
     this.courseRepository = courseRepository;
     this.authz = authz;
 
-    this.courseListService = new CourseListService(courseRepository);
+    this.courseListService = new ListCourseService(courseRepository);
   }
 
   public Iterable<CourseDTO> listAvailableCourses() {

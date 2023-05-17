@@ -11,10 +11,11 @@ import javax.persistence.EmbeddedId;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-public class Board implements AggregateRoot<UserPermissionID> {
+public class Board implements AggregateRoot<BoardID> {
 
   private static final long serialVersionUID = 1L;
 
@@ -27,8 +28,14 @@ public class Board implements AggregateRoot<UserPermissionID> {
   @Column
   private Archived archived;
 
+  @Column
+  private SystemUser user;
+
   @EmbeddedId
-  private UserPermissionID id;
+  private BoardID id;
+
+  @OneToMany
+  private List<UserPermission> permissions;
 
   @OneToMany
   private List<BoardColumn> columns;
@@ -40,16 +47,19 @@ public class Board implements AggregateRoot<UserPermissionID> {
     // for ORM
   }
 
-  public Board(final Title title, final Archived archived, final UserPermissionID id, final List<BoardColumn> column,
-      final List<BoardRow> row) {
+  public Board(final Title title, final Archived archived, final List<UserPermission> permissions,
+      final List<BoardColumn> column, final List<BoardRow> row, final BoardID id, final SystemUser user) {
 
-    Preconditions.noneNull(title, id, column, row);
+    // Only mandatory fields are checked
+    Preconditions.noneNull(title, id, column, row, user);
 
     this.title = title;
     this.archived = archived;
+    this.permissions = permissions;
     this.id = id;
     this.columns = column;
     this.rows = row;
+    this.user = user;
   }
 
   public Title title() {
@@ -68,13 +78,21 @@ public class Board implements AggregateRoot<UserPermissionID> {
     return this.rows;
   }
 
+  public List<UserPermission> permissions() {
+    return this.permissions;
+  }
+
+  public SystemUser user() {
+    return this.user;
+  }
+
   @Override
   public boolean equals(Object other) {
     return DomainEntities.areEqual(this, other);
   }
 
   @Override
-  public UserPermissionID identity() {
+  public BoardID identity() {
     return this.id;
   }
 
@@ -98,8 +116,13 @@ public class Board implements AggregateRoot<UserPermissionID> {
         return false;
     }
 
+    for (UserPermission permission : permissions) {
+      if (!otherBoard.permissions().contains(permission))
+        return false;
+    }
+
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
-        && this.archived.equals(otherBoard.archived());
+        && this.archived.equals(otherBoard.archived()) && this.user.equals(otherBoard.user());
 
   }
 

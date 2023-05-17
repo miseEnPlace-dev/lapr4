@@ -90,8 +90,16 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
-   public void sample() {
-    return true;
+  public EnrolmentDTO requestEnrolment(final CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+
+    Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+
+    Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
+    Enrolment enrolment = new Enrolment(student, course);
+
+    return enrolmentRepository.save(enrolment).toDto();
   }
 ```
 

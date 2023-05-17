@@ -181,13 +181,11 @@ _Note: This are some simplified versions of the tests for readability purposes._
   public CourseDTO toggleEnrolmentState(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
-    Optional<Course> c = courseRepository.findByCode(courseDTO.getCode());
-    if (!c.isPresent())
-      throw new IllegalArgumentException("There is no course with the given code");
+    Course course = courseRepository.findByCode(courseDTO.getCode()).orElseThrow();
 
-    c.get().toggleEnrolmentState();
+    course.toggleEnrolmentState();
 
-    return courseRepository.save(c.get()).toDto();
+    return courseRepository.save(course).toDto();
   }
 ```
 

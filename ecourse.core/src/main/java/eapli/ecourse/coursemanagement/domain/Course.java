@@ -152,11 +152,12 @@ public class Course implements AggregateRoot<CourseCode> {
     enrolmentState.toggle();
   }
 
-  public void toggleState() {
-    if (courseState.isFinished())
-      throw new IllegalStateException("Cannot toggle state of a finished course");
+  public void nextState() {
+    courseState.next();
+  }
 
-    courseState.toggle();
+  public void previousState() {
+    courseState.previous();
   }
 
   public void addResponsibleTeacher(final Teacher teacher) {
