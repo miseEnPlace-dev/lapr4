@@ -1,6 +1,6 @@
 package eapli.ecourse.exammanagement.application.exceptions;
 
-public class ParseException extends Exception {
+public class ParseException extends RuntimeException {
   private int line;
   private String message;
 
@@ -15,13 +15,27 @@ public class ParseException extends Exception {
     this.message = msg;
   }
 
+  /**
+   * Initializes a new ParseException, without exception info.
+   */
+  public ParseException() {
+    this.line = -1;
+    this.message = "Error(s) detected in file.";
+  }
+
   @Override
   public String getMessage() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Parse error in line ");
-    sb.append(line);
-    sb.append(": ");
-    sb.append(message);
+
+    if (line == -1) {
+      sb.append("Error(s) detected: please fix all errors listed above.");
+    } else {
+      sb.append("Error detected in line ");
+      sb.append(line);
+      sb.append(": ");
+      sb.append(message);
+    }
+
     return sb.toString();
   }
 }

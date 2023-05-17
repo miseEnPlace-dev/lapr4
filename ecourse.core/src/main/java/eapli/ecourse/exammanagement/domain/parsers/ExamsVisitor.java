@@ -9,42 +9,44 @@ import java.util.Map;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
+import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.Description;
-import eapli.ecourse.exammanagement.domain.EvaluationExam;
+import eapli.ecourse.exammanagement.domain.ExamBuilder;
 import eapli.ecourse.exammanagement.domain.ExamInfo;
 import eapli.ecourse.exammanagement.domain.Score;
 import eapli.ecourse.exammanagement.domain.Section;
+import eapli.ecourse.exammanagement.domain.SectionBuilder;
 import eapli.ecourse.exammanagement.domain.Title;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 
-public class ExamsVisitor extends ExamBaseVisitor<EvaluationExam> {
-  private EvaluationExam exam;
-  private Section section;
+public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
+  private ExamBuilder builder;
+  private SectionBuilder section;
   private List<Section> sections;
 
   @Override
-  public EvaluationExam visitStart(ExamParser.StartContext ctx) {
+  public ExamBuilder visitStart(ExamParser.StartContext ctx) {
     visit(ctx.exam());
-    return exam;
+    return builder;
   }
 
   @Override
-  public EvaluationExam visitExam(ExamParser.ExamContext ctx) {
-    exam = new EvaluationExam();
+  public ExamBuilder visitExam(ExamParser.ExamContext ctx) {
+    builder = new ExamBuilder();
 
     visit(ctx.start_exam());
     visit(ctx.header());
     visit(ctx.sections());
 
-    return exam;
+    return builder;
   }
 
   @Override
-  public EvaluationExam visitStart_exam(ExamParser.Start_examContext ctx) {
+  public ExamBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     Identifier identifier = Identifier.valueOf(str);
-    exam.changeIdentifier(identifier);
-    return exam;
+    builder.withIdentifier(identifier);
+    return builder;
   }
 
   /**
@@ -55,37 +57,36 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExam> {
    * present).
    */
   @Override
-  public EvaluationExam visitHeader(ExamParser.HeaderContext ctx) {
+  public ExamBuilder visitHeader(ExamParser.HeaderContext ctx) {
     Map<String, Object> properties = new HashMap<>();
-
     ctx.properties().forEach(p -> {
       if (p.title() != null) {
         if (properties.containsKey("title"))
-          raiseError(p, "Title already defined");
+          raiseError(p, "Title already defined.");
 
         properties.put("title", extractString(p.title().STRING().getText()));
       }
       if (p.description() != null) {
         if (properties.containsKey("description"))
-          raiseError(p, "Description already defined");
+          raiseError(p, "Description already defined.");
 
         properties.put("description", extractString(p.description().STRING().getText()));
       }
       if (p.feedback() != null) {
         if (properties.containsKey("feedback"))
-          raiseError(p, "Feedback already defined");
+          raiseError(p, "Feedback already defined.");
 
         properties.put("feedback", p.feedback().FDB_GRD_TYPE().getText());
       }
       if (p.grade() != null) {
         if (properties.containsKey("grade"))
-          raiseError(p, "Grade already defined");
+          raiseError(p, "Grade already defined.");
 
         properties.put("grade", p.grade().FDB_GRD_TYPE().getText());
       }
       if (p.score() != null) {
         if (properties.containsKey("score"))
-          raiseError(p, "Score already defined");
+          raiseError(p, "Score already defined.");
 
         properties.put("score", Integer.parseInt(p.score().NUMBER().getText()));
       }
@@ -130,59 +131,66 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExam> {
       initializeSection(properties);
     }
 
-    return exam;
+    return builder;
   }
 
   @Override
-  public EvaluationExam visitSections(ExamParser.SectionsContext ctx) {
-    sections = new ArrayList<>();
+  public ExamBuilder visitSections(ExamParser.SectionsContext ctx) {
+    sections = new ArrayList<Section>();
     visitChildren(ctx);
-    return exam;
+    builder.withSections(sections);
+    return builder;
   }
 
   @Override
-  public EvaluationExam visitSection(ExamParser.SectionContext ctx) {
-    section = new Section();
+  public ExamBuilder visitSection(ExamParser.SectionContext ctx) {
+    section = new SectionBuilder();
 
     visit(ctx.start_section());
     visit(ctx.header());
     // visit(ctx.questions());
 
-    return exam;
+    return builder;
   }
 
   @Override
-  public EvaluationExam visitStart_section(ExamParser.Start_sectionContext ctx) {
+  public ExamBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     Identifier identifier = Identifier.valueOf(str);
-    section.changeIdentifier(identifier);
-    return exam;
+    section.withIdentifier(identifier);
+    return builder;
   }
 
   private void initializeExam(Map<String, Object> properties) {
     Title title = Title.valueOf(properties.get("title").toString());
-    exam.changeTitle(title);
+    builder.withTitle(title);
     ExamInfo feedbackInfo = ExamInfo.convert(properties.get("feedback").toString());
-    exam.changeFeedbackInfo(feedbackInfo);
+    builder.withFeedbackInfo(feedbackInfo);
     ExamInfo gradeInfo = ExamInfo.convert(properties.get("grade").toString());
-    exam.changeGradeInfo(gradeInfo);
+    builder.withGradeInfo(gradeInfo);
     Score score = Score.valueOf(Integer.parseInt(properties.get("score").toString()));
-    exam.changeScore(score);
+    builder.withScore(score);
     if (properties.containsKey("description")) {
       Description description = Description.valueOf(properties.get("description").toString());
-      exam.changeDescription(description);
+      builder.withDescription(description);
+    } else {
+      builder.withDescription(Description.valueOf(""));
     }
   }
 
   private void initializeSection(Map<String, Object> properties) {
     Title title = Title.valueOf(properties.get("title").toString());
-    section.changeTitle(title);
+    section.withTitle(title);
     Score score = Score.valueOf(Integer.parseInt(properties.get("score").toString()));
-    section.changeScore(score);
+    section.withScore(score);
     if (properties.containsKey("description")) {
       Description description = Description.valueOf(properties.get("description").toString());
-      section.changeDescription(description);
+      section.withDescription(description);
+    } else {
+      section.withDescription(Description.valueOf(""));
     }
+    section.withQuestions(new ArrayList<>());
+    Section section = this.section.build();
     sections.add(section);
   }
 
@@ -196,7 +204,6 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExam> {
   private void raiseError(ParserRuleContext ctx, String msg) {
     Token token = ctx.getStart();
     int lineNo = token.getLine();
-    // throw new ParseException(lineNo, msg);
-    System.out.println("Error in line " + lineNo + ": " + msg);
+    throw new ParseException(lineNo, msg);
   }
 }
