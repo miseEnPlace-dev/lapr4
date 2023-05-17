@@ -2,7 +2,7 @@ package eapli.ecourse.app.teacher.console.presentation;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
-import eapli.ecourse.app.common.console.presentation.meeting.ScheduleMeetingUI;
+import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
 import eapli.ecourse.app.teacher.console.presentation.exams.ListCourseExamsUI;
 import eapli.ecourse.app.teacher.console.presentation.questions.AddQuestionsUI;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -27,7 +27,7 @@ public class MainMenu extends AbstractUI {
   private static final int ADD_QUESTIONS_OPTION = 1;
   private static final int ADD_EXAM_OPTION = 2;
   private static final int LIST_COURSE_EXAMS = 3;
-  private static final int SCHEDULE_MEETING = 4;
+  private static final int CREATE_BOARD = 4;
   private static final int MY_USER_OPTION = 5;
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
@@ -74,7 +74,7 @@ public class MainMenu extends AbstractUI {
     mainMenu.addItem(ADD_QUESTIONS_OPTION, "Add Questions", new AddQuestionsUI()::show);
     mainMenu.addItem(ADD_EXAM_OPTION, "Add Exam", new ShowMessageAction("Not implemented yet"));
     mainMenu.addItem(LIST_COURSE_EXAMS, "List Course Exams", new ListCourseExamsUI()::show);
-    mainMenu.addItem(SCHEDULE_MEETING, "Schedule Meeting", new ScheduleMeetingUI()::show);
+    mainMenu.addItem(CREATE_BOARD, "Create Board", new CreateBoardUI()::show);
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
