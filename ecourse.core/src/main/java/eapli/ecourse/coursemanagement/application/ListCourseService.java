@@ -34,6 +34,11 @@ public class ListCourseService {
     return convertToDto(courses);
   }
 
+  public Iterable<CourseDTO> listInProgressCourses() {
+    final Iterable<Course> courses = courseRepository.findAllInProgress();
+    return convertToDto(courses);
+  }
+
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
     return StreamSupport.stream(courses.spliterator(), true)
         .map(Course::toDto)
