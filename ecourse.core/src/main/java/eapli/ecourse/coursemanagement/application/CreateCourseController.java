@@ -51,7 +51,7 @@ public class CreateCourseController {
 
   private Course saveCourse(Course course) {
     if (course == null)
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Course cannot be null.");
 
     return courseRepository.save(course);
   }

@@ -14,7 +14,6 @@ import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
-import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
@@ -24,8 +23,8 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.TEACHER);
 
-    SystemUser u1 = PersistenceContext.repositories().users().ofIdentity(Username.valueOf("user1")).orElse(null);
-    SystemUser u2 = PersistenceContext.repositories().users().ofIdentity(Username.valueOf("poweruser")).orElse(null);
+    SystemUser u1 = registerUser("user3", "Password1", "firstName", "lastName", "email@ddd.com", roles);
+    SystemUser u2 = registerUser("user4", "Password1", "firstName", "lastName", "email@ddd.com", roles);
 
     Map<SystemUser, PermissionType> map = new HashMap<>();
     map.put(u1, new PermissionType(PermissionType.Type.READ));
@@ -54,13 +53,12 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
 
   @Override
   public boolean execute() {
-    final Set<Role> roles = new HashSet<>();
+    Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.TEACHER);
 
-    SystemUser user = PersistenceContext.repositories().users().ofIdentity(Username.valueOf("user1")).orElse(null);
+    SystemUser user = registerUser("user2", "Password1", "firstName", "lastName", "email@ddd.com", roles);
     ctrl.createBoard("example", getPermissions(), getColumns(), getRows(), "boardID", user);
 
     return true;
   }
-
 }

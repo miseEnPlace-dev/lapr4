@@ -4,8 +4,8 @@ import java.util.Set;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
+import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
@@ -51,7 +51,7 @@ public class ScheduleMeetingController {
 
   private Meeting saveMeeting(Meeting meeting) {
     if (meeting == null)
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Meeting cannot be null.");
 
     return meetingRepository.save(meeting);
   }

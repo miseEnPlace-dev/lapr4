@@ -151,12 +151,12 @@ public class BoardBuilder implements DomainFactory<Board> {
 
   @Override
   public Board build() {
-    final Board board = buildOrThrow();
+    final Board b = buildOrThrow();
 
     // reset builder state so it can be used again
     this.board = null;
 
-    return board;
+    return b;
   }
 
 }

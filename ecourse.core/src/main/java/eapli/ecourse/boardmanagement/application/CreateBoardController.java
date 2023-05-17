@@ -35,11 +35,10 @@ public class CreateBoardController {
 
     Board board = boardBuilder.build();
 
-    // if (boardRepo.containsOfIdentity(board.identity()))
-    // throw new IllegalStateException("There is already a board with that id.");
+    if (boardRepo.containsOfIdentity(board.identity()))
+      throw new IllegalStateException("There is already a board with that id.");
 
     return saveBoard(board);
-
   }
 
   public Iterable<SystemUser> listAllUsers() {
@@ -48,9 +47,8 @@ public class CreateBoardController {
 
   public Board saveBoard(Board board) {
     if (board == null)
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Board cannot be null.");
 
     return boardRepo.save(board);
   }
-
 }
