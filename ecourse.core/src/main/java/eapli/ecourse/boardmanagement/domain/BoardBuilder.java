@@ -1,7 +1,9 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -11,12 +13,17 @@ public class BoardBuilder implements DomainFactory<Board> {
   private Board board;
 
   private Title title;
-  private Archived archived;
   private BoardID id;
   private List<UserPermission> permissions;
   private List<BoardColumn> columns;
   private List<BoardRow> rows;
   private SystemUser user;
+
+  public BoardBuilder() {
+    this.permissions = new ArrayList<>();
+    this.columns = new ArrayList<>();
+    this.rows = new ArrayList<>();
+  }
 
   public BoardBuilder withTitle(String title) {
     this.title = new Title(title);
@@ -28,28 +35,25 @@ public class BoardBuilder implements DomainFactory<Board> {
     return this;
   }
 
-  public BoardBuilder withArchived(Calendar archived) {
-    this.archived = new Archived(archived);
-    return this;
-  }
-
-  public BoardBuilder withArchived(Archived archived) {
-    this.archived = archived;
-    return this;
-  }
-
-  public BoardBuilder withId(String id) {
-    this.id = new BoardID(id);
-    return this;
-  }
-
   public BoardBuilder withId(BoardID id) {
     this.id = id;
     return this;
   }
 
+  public BoardBuilder withId(String id) {
+    this.id = BoardID.valueOf(id);
+    return this;
+  }
+
   public BoardBuilder withPermissions(List<UserPermission> permissions) {
     this.permissions = permissions;
+    return this;
+  }
+
+  public BoardBuilder withPermissions(Map<SystemUser, PermissionType> permissions) {
+    for (Map.Entry<SystemUser, PermissionType> entry : permissions.entrySet()) {
+      this.withPermission(entry.getKey(), entry.getValue());
+    }
     return this;
   }
 
@@ -59,15 +63,22 @@ public class BoardBuilder implements DomainFactory<Board> {
   }
 
   public BoardBuilder withPermission(SystemUser user, PermissionType permission) {
-    // TODO
-    UserPermissionID id = new UserPermissionID("TODO");
-    this.permissions.add(new UserPermission(id, Calendar.getInstance(), null, permission, user));
+    UserPermissionID id = UserPermissionID.newID();
+    Calendar createdAt = Calendar.getInstance();
+    this.permissions.add(new UserPermission(id, createdAt, createdAt, permission, user));
 
     return this;
   }
 
   public BoardBuilder withColumns(List<BoardColumn> columns) {
     this.columns = columns;
+    return this;
+  }
+
+  public BoardBuilder withColumns(Map<String, Integer> columns) {
+    for (Map.Entry<String, Integer> entry : columns.entrySet()) {
+      this.withColumn(entry.getKey(), entry.getValue());
+    }
     return this;
   }
 
@@ -89,6 +100,13 @@ public class BoardBuilder implements DomainFactory<Board> {
 
   public BoardBuilder withRows(List<BoardRow> rows) {
     this.rows = rows;
+    return this;
+  }
+
+  public BoardBuilder withRows(Map<String, Integer> rows) {
+    for (Map.Entry<String, Integer> entry : rows.entrySet()) {
+      this.withRow(entry.getKey(), entry.getValue());
+    }
     return this;
   }
 
@@ -121,19 +139,24 @@ public class BoardBuilder implements DomainFactory<Board> {
     // Only fields that are mandatory are checked
     Preconditions.noneNull(title, id, columns, rows);
 
-    board = new Board(title, archived, permissions, columns, rows, id, user);
+    if (id != null) {
+      board = new Board(title, permissions, columns, rows, id, user);
+    } else {
+      board = new Board(title, permissions, columns, rows, user);
+    }
+
     return board;
 
   }
 
   @Override
   public Board build() {
-    final Board board = buildOrThrow();
+    final Board b = buildOrThrow();
 
     // reset builder state so it can be used again
     this.board = null;
 
-    return board;
+    return b;
   }
 
 }

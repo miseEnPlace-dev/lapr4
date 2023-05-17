@@ -1,5 +1,6 @@
 package eapli.ecourse.questionmanagement.application;
 
+import java.io.File;
 import java.util.List;
 
 import eapli.ecourse.coursemanagement.application.ListCourseService;
@@ -34,6 +35,9 @@ public class AddQuestionsController {
   public void addQuestionsFromFile(String filename, CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
 
+    if (!fileExists(filename))
+      throw new IllegalArgumentException("Invalid file path!");
+
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     List<Question> questions = QuestionsMain.parseWithVisitor(filename);
 
@@ -41,6 +45,17 @@ public class AddQuestionsController {
       question.changeCourse(course);
       addQuestion(question);
     });
+  }
+
+  public boolean fileExists(String filename) {
+    if (filename == null || filename.isEmpty())
+      return false;
+
+    File f = new File(filename);
+    if (!f.exists() || f.isDirectory())
+      return false;
+
+    return true;
   }
 
   public Question addQuestion(Question question) {

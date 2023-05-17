@@ -1,8 +1,8 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Version;
 
 import eapli.framework.domain.model.DomainEntity;
@@ -19,8 +19,8 @@ public class BoardRow implements DomainEntity<Integer> {
   @Column
   private Title title;
 
-  @EmbeddedId
-  private Integer number;
+  @Id
+  private Integer rowNumber;
 
   protected BoardRow() {
     // for ORM
@@ -31,7 +31,7 @@ public class BoardRow implements DomainEntity<Integer> {
     Preconditions.noneNull(title, number);
 
     this.title = title;
-    this.number = number;
+    this.rowNumber = number;
   }
 
   public Title title() {
@@ -40,7 +40,7 @@ public class BoardRow implements DomainEntity<Integer> {
 
   @Override
   public Integer identity() {
-    return this.number;
+    return this.rowNumber;
   }
 
   @Override

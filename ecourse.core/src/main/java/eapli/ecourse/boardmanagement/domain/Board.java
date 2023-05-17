@@ -1,13 +1,14 @@
-package eapli.ecourse.boardmanagment.domain;
-
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
+package eapli.ecourse.boardmanagement.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -16,11 +17,13 @@ import eapli.framework.validations.Preconditions;
 
 @Entity
 public class Board implements AggregateRoot<BoardID> {
-
   private static final long serialVersionUID = 1L;
 
   @Version
   private Long version;
+
+  @EmbeddedId
+  private BoardID id;
 
   @Column(nullable = false)
   private Title title;
@@ -28,38 +31,50 @@ public class Board implements AggregateRoot<BoardID> {
   @Column
   private Archived archived;
 
-  @Column
-  private SystemUser user;
+  @ManyToOne
+  private SystemUser owner;
 
-  @EmbeddedId
-  private BoardID id;
-
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<UserPermission> permissions;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BoardColumn> columns;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BoardRow> rows;
 
   protected Board() {
     // for ORM
   }
 
-  public Board(final Title title, final Archived archived, final List<UserPermission> permissions,
+  public Board(final Title title, final List<UserPermission> permissions,
       final List<BoardColumn> column, final List<BoardRow> row, final BoardID id, final SystemUser user) {
 
     // Only mandatory fields are checked
     Preconditions.noneNull(title, id, column, row, user);
 
     this.title = title;
-    this.archived = archived;
+    this.archived = null;
     this.permissions = permissions;
     this.id = id;
     this.columns = column;
     this.rows = row;
-    this.user = user;
+    this.owner = user;
+  }
+
+  public Board(final Title title, final List<UserPermission> permissions,
+      final List<BoardColumn> column, final List<BoardRow> row, final SystemUser user) {
+
+    // Only mandatory fields are checked
+    Preconditions.noneNull(title, column, row, user);
+
+    this.title = title;
+    this.archived = null;
+    this.permissions = permissions;
+    this.id = BoardID.newID();
+    this.columns = column;
+    this.rows = row;
+    this.owner = user;
   }
 
   public Title title() {
@@ -83,7 +98,7 @@ public class Board implements AggregateRoot<BoardID> {
   }
 
   public SystemUser user() {
-    return this.user;
+    return this.owner;
   }
 
   @Override
@@ -122,8 +137,6 @@ public class Board implements AggregateRoot<BoardID> {
     }
 
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
-        && this.archived.equals(otherBoard.archived()) && this.user.equals(otherBoard.user());
-
+        && this.archived.equals(otherBoard.archived()) && this.owner.equals(otherBoard.user());
   }
-
 }

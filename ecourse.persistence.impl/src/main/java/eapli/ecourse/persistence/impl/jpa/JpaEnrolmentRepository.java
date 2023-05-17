@@ -1,5 +1,9 @@
 package eapli.ecourse.persistence.impl.jpa;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentID;
@@ -13,11 +17,11 @@ public class JpaEnrolmentRepository extends JpaAutoTxRepository<Enrolment, Enrol
     implements EnrolmentRepository {
 
   public JpaEnrolmentRepository(final TransactionalContext autoTx) {
-    super(autoTx, "enrolmentID");
+    super(autoTx, "id");
   }
 
   public JpaEnrolmentRepository(final String puname) {
-    super(puname, "enrolmentID");
+    super(puname, "id");
   }
 
   @Override
@@ -41,5 +45,16 @@ public class JpaEnrolmentRepository extends JpaAutoTxRepository<Enrolment, Enrol
   public Iterable<Enrolment> findCourseRejected(final CourseCode courseCode) {
     return match("e.course.code = :courseCode AND e.state = :state", "courseCode", courseCode,
         "state", EnrolmentState.State.REJECTED);
+  }
+
+  @Override
+  public Optional<Enrolment> findWithUserAndCourse(final MecanographicNumber studentID,
+      final CourseCode courseCode) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("studentID", studentID);
+    params.put("courseCode", courseCode);
+
+    return matchOne("e.student.mecanographicNumber = :studentID AND e.course.code = :courseCode",
+        params);
   }
 }

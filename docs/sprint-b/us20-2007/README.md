@@ -240,7 +240,13 @@ You can check a pratical example with all the question types [here](../../../eco
 
 ## 6. Integration & Demonstration
 
+### 6.1. Success scenario
+
 ![US2007_DEMO](US2007_DEMO.png)
+
+### 6.2. Fail scenario
+
+![US2007_DEMO_FAIL](US2007_DEMO_FAIL.png)
 
 ## 7. Observations
 

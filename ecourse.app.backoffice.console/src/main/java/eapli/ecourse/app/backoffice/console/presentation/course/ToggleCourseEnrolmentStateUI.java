@@ -38,11 +38,11 @@ public class ToggleCourseEnrolmentStateUI extends AbstractUI {
 
     try {
       this.ctrl.toggleEnrolmentState(selected);
-      System.out.println("Course enrolment state toggled successfully\n");
+      System.out.println("\n\nCourse enrolment state toggled successfully\n");
     } catch (IllegalArgumentException e) {
-      System.out.println("There is no course with the given code\n");
+      System.out.println("\n\nThere is no course with the given code\n");
     } catch (IllegalStateException e) {
-      System.out.println("Error: " + e.getMessage() + "\n");
+      System.out.println("\n\nError: " + e.getMessage() + "\n");
     }
 
     return false;

@@ -99,13 +99,28 @@ _Note: This are some simplified versions of the tests for readability purposes._
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Enrolment enrolment = new Enrolment(student, course);
 
+    if (enrolmentRepository.contains(enrolment))
+      throw new IllegalStateException("You are already enrolled in this course");
+
     return enrolmentRepository.save(enrolment).toDto();
   }
 ```
 
 ## 6. Integration & Demonstration
 
+### 6.1. Success scenario
+
 ![US1008_DEMO](US1008_DEMO.png)
+
+### 6.2. Failure scenarios
+
+#### 6.2.1. No courses available
+
+![US1008_DEMO__FAIL1](US1008_DEMO_FAIL.png)
+
+#### 6.2.2. Already enrolled
+
+![US1008_DEMO__FAIL2](US1008_DEMO_FAIL2.png)
 
 ## 7. Observations
 

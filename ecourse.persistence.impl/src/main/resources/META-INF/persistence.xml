@@ -23,6 +23,10 @@
     <class>eapli.ecourse.questionmanagement.domain.NumericalQuestion</class>
     <class>eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion</class>
     <class>eapli.ecourse.questionmanagement.domain.TrueFalseQuestion</class>
+    <class>eapli.ecourse.boardmanagement.domain.Board</class>
+    <class>eapli.ecourse.boardmanagement.domain.BoardRow</class>
+    <class>eapli.ecourse.boardmanagement.domain.BoardColumn</class>
+    <class>eapli.ecourse.boardmanagement.domain.UserPermission</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecourse" />
@@ -78,6 +82,10 @@
     <class>eapli.ecourse.questionmanagement.domain.NumericalQuestion</class>
     <class>eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion</class>
     <class>eapli.ecourse.questionmanagement.domain.TrueFalseQuestion</class>
+    <class>eapli.ecourse.boardmanagement.domain.Board</class>
+    <class>eapli.ecourse.boardmanagement.domain.BoardRow</class>
+    <class>eapli.ecourse.boardmanagement.domain.BoardColumn</class>
+    <class>eapli.ecourse.boardmanagement.domain.UserPermission</class>
 
     <properties>
       <property name="javax.persistence.jdbc.driver"

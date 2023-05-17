@@ -1,6 +1,6 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import eapli.ecourse.boardmanagment.repositories.BoardRepository;
+import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
