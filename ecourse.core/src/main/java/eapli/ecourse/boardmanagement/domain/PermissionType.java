@@ -14,6 +14,18 @@ public class PermissionType implements ValueObject {
     READ, WRITE
   }
 
+  public static PermissionType read() {
+    return new PermissionType(Type.READ);
+  }
+
+  public static PermissionType write() {
+    return new PermissionType(Type.WRITE);
+  }
+
+  public static Type[] options() {
+    return new Type[] { Type.READ, Type.WRITE };
+  }
+
   @Enumerated(EnumType.STRING)
   private Type type;
 
