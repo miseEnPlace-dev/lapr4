@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.exammanagement.domain.ExamState.State;
 import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -53,69 +52,20 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<Section> sections;
 
-  public Exam(final Course course, final Teacher teacher, final Identifier identifier, final Title title,
-      final Description description) {
+  protected Exam() {
+    // for ORM only
+  }
+
+  public Exam(Course course, Teacher teacher, Identifier identifier, Title title, Description description,
+      ExamState state, Collection<Section> sections) {
     this.code = ExamCode.newID();
     this.course = course;
     this.teacher = teacher;
     this.identifier = identifier;
     this.title = title;
     this.description = description;
-    this.state = new ExamState(State.DRAFT);
-    this.sections = new ArrayList<Section>();
-  }
-
-  public Exam(final Course course, final Teacher teacher, final Identifier identifier, final Title title) {
-    this.code = ExamCode.newID();
-    this.course = course;
-    this.teacher = teacher;
-    this.identifier = identifier;
-    this.title = title;
-    this.state = new ExamState(State.DRAFT);
-    this.sections = new ArrayList<Section>();
-  }
-
-  public Exam() {
-    this.code = ExamCode.newID();
-    this.course = null;
-    this.teacher = null;
-    this.identifier = null;
-    this.title = null;
-    this.description = null;
-    this.state = new ExamState(State.DRAFT);
-    this.sections = new ArrayList<Section>();
-  }
-
-  public void addSection(Section section) {
-    this.sections.add(section);
-  }
-
-  public void addSections(Collection<Section> sections) {
-    this.sections.addAll(sections);
-  }
-
-  public void changeCourse(Course course) {
-    this.course = course;
-  }
-
-  public void changeTeacher(Teacher teacher) {
-    this.teacher = teacher;
-  }
-
-  public void changeIdentifier(Identifier identifier) {
-    this.identifier = identifier;
-  }
-
-  public void changeTitle(Title title) {
-    this.title = title;
-  }
-
-  public void changeDescription(Description description) {
-    this.description = description;
-  }
-
-  public void changeState(ExamState state) {
     this.state = state;
+    this.sections = new ArrayList<>(sections);
   }
 
   @Override
@@ -131,5 +81,12 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
 
   public ExamDTO toDto() {
     return new ExamDTO(this.code, this.course, this.teacher, this.identifier, this.title, this.description, this.state);
+  }
+
+  @Override
+  public String toString() {
+    return "Exam [code=" + code + ", course=" + course + ", description=" + description + ", identifier=" + identifier
+        + ", sections=" + sections + ", state=" + state + ", teacher=" + teacher + ", title=" + title + ", version="
+        + version + "]";
   }
 }
