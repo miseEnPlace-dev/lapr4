@@ -13,7 +13,6 @@ public class BoardBuilder implements DomainFactory<Board> {
   private Board board;
 
   private Title title;
-  private BoardID id;
   private List<UserPermission> permissions;
   private List<BoardColumn> columns;
   private List<BoardRow> rows;
@@ -32,16 +31,6 @@ public class BoardBuilder implements DomainFactory<Board> {
 
   public BoardBuilder withTitle(Title title) {
     this.title = title;
-    return this;
-  }
-
-  public BoardBuilder withId(BoardID id) {
-    this.id = id;
-    return this;
-  }
-
-  public BoardBuilder withId(String id) {
-    this.id = BoardID.valueOf(id);
     return this;
   }
 
@@ -137,13 +126,9 @@ public class BoardBuilder implements DomainFactory<Board> {
     }
 
     // Only fields that are mandatory are checked
-    Preconditions.noneNull(title, id, columns, rows);
+    Preconditions.noneNull(title, columns, rows);
 
-    if (id != null) {
-      board = new Board(title, permissions, columns, rows, id, user);
-    } else {
-      board = new Board(title, permissions, columns, rows, user);
-    }
+    board = new Board(title, permissions, columns, rows, user);
 
     return board;
 

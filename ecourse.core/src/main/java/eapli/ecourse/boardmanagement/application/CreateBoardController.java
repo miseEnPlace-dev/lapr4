@@ -23,15 +23,12 @@ public class CreateBoardController {
   }
 
   public Board createBoard(final String title, final Map<SystemUser, PermissionType> permissions,
-      final Map<String, Integer> columns, final Map<String, Integer> rows, final String id, final SystemUser user) {
+      final Map<String, Integer> columns, final Map<String, Integer> rows, final SystemUser user) {
 
     Preconditions.noneNull(title, columns, rows, user);
 
     BoardBuilder boardBuilder = new BoardBuilder().withTitle(title).withUser(user).withPermissions(permissions)
         .withColumns(columns).withRows(rows);
-
-    if (id != null)
-      boardBuilder.withId(id);
 
     Board board = boardBuilder.build();
 
