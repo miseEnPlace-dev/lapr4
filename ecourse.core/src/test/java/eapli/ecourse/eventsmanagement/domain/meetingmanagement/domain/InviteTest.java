@@ -14,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,15 +31,9 @@ public class InviteTest {
         .build();
   }
 
-  private Set<SystemUser> getDummysUsers() {
-    Set<SystemUser> users = new HashSet<>();
-    users.add(getDummyUser());
-    return users;
-  }
-
   private Meeting getDummyMeeting() {
     Calendar c = Calendar.getInstance();
-    return new Meeting(Time.valueOf(c), Duration.valueOf(120), getDummysUsers());
+    return new Meeting(Time.valueOf(c), Duration.valueOf(120));
   }
 
   private Invite getDummyInvite() {
@@ -97,5 +89,29 @@ public class InviteTest {
   public void testInviteEqualInstance() {
     Invite invite = getDummyInvite();
     assertEquals(invite, getDummyInvite());
+  }
+
+  @Test
+  public void testInviteNotEqualInstance() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    invite2.status().accept();
+    assertEquals(invite, invite2);
+  }
+
+  @Test
+  public void testInviteNotEqualInstance2() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    invite2.status().reject();
+    assertEquals(invite, invite2);
+  }
+
+  @Test
+  public void testInviteNotEqualInstance3() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    invite2.status().noAnswer();
+    assertEquals(invite, invite2);
   }
 }

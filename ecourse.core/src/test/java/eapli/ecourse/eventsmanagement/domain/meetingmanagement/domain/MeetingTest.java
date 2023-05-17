@@ -15,8 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,15 +32,9 @@ public class MeetingTest {
         .build();
   }
 
-  private Set<SystemUser> getDummysUsers() {
-    Set<SystemUser> users = new HashSet<>();
-    users.add(getDummyUser());
-    return users;
-  }
-
   private Meeting getDummyMeeting() {
     Calendar c = Calendar.getInstance();
-    return new Meeting(Time.valueOf(c), Duration.valueOf(120), getDummysUsers());
+    return new Meeting(Time.valueOf(c), Duration.valueOf(120));
   }
 
   private Invite getDummyInvite() {
