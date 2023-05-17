@@ -62,19 +62,19 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US4001_SSD](out/US4001_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
-
-![US4001_SD](out/US4001_SD.svg)
-
-### 3.5. Partial Domain Model
+### 3.4. Partial Domain Model
 
 ![US4001_DM](out/US4001_DM.svg)
 
 ## 4. Design
 
-### 4.1. Functionality Realization
+### 4.1. Functionality Realization (Without observer pattern)
 
 ![US4001_SD](out/US4001_SD.svg)
+
+### 4.1. Functionality Realization (observer pattern)
+
+![US4001_SD2](out/US4001_SD2.svg)
 
 ### 4.2. Class Diagram
 
@@ -82,7 +82,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- xxx
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **State:** The state pattern is used to represent the state of the invite. This is done to keep the invite state logic encapsulated in the invite status class and to reduce coupling.
+- **Observer Pattern:** This is used to notify the user when he receives a invite to a meeting. This is done to reduce coupling and to make the system more extensible.
 
 ### 4.4. Tests
 
@@ -158,4 +160,4 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 7. Observations
 
-- TODO: explain why the solution is designed like this (not using observer pattern, etc)
+It was decided to not use the observer pattern because it would be too complex for the problem at hand. Since the system is not very complex, it was decided to use a simpler solution. The solution used was to have a list of participants in the meeting and to have a list of invites for each participant. This way, when a meeting is created, the system creates an invite for each participant and adds it to the list of invites of each participant. This way, when a participant accepts or rejects an invite, the system can check if all participants have accepted the invite and if so, the meeting is scheduled. If not, the meeting is not scheduled. To use the observer pattern, the system should have a interface to when the user receives a invite, it would appear on the screen of the user.
