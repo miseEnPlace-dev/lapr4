@@ -40,13 +40,7 @@ public class ListCourseExamsUI extends AbstractUI {
     selector.show();
     final CourseDTO selected = selector.selectedElement();
 
-    Iterable<ExamDTO> exams;
-    try {
-      exams = ctrl.listCourseExams(selected);
-    } catch (IllegalArgumentException exception) {
-      System.out.println("There is no course with the given code");
-      return false;
-    }
+    Iterable<ExamDTO> exams = ctrl.listCourseExams(selected);
     System.out.println(exams.iterator().hasNext());
 
     ListWidget<ExamDTO> list = new ListWidget<>("Exams of "+selected.getTitle(), exams, new ExamPrinter());
