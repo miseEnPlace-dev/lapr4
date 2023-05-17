@@ -1,12 +1,11 @@
-package eapli.ecourse.boardmanagment.application;
+package eapli.ecourse.boardmanagement.application;
 
 import java.util.Map;
 
-import eapli.ecourse.boardmanagment.domain.Board;
-import eapli.ecourse.boardmanagment.domain.BoardBuilder;
-import eapli.ecourse.boardmanagment.domain.BoardID;
-import eapli.ecourse.boardmanagment.domain.PermissionType;
-import eapli.ecourse.boardmanagment.repositories.BoardRepository;
+import eapli.ecourse.boardmanagement.domain.Board;
+import eapli.ecourse.boardmanagement.domain.BoardBuilder;
+import eapli.ecourse.boardmanagement.domain.PermissionType;
+import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -24,7 +23,7 @@ public class CreateBoardController {
   }
 
   public Board createBoard(final String title, final Map<SystemUser, PermissionType> permissions,
-      final Map<String, Integer> columns, final Map<String, Integer> rows, final BoardID id, final SystemUser user) {
+      final Map<String, Integer> columns, final Map<String, Integer> rows, final String id, final SystemUser user) {
 
     Preconditions.noneNull(title, columns, rows, user);
 
@@ -36,8 +35,8 @@ public class CreateBoardController {
 
     Board board = boardBuilder.build();
 
-    if (boardRepo.containsOfIdentity(id))
-      throw new IllegalStateException("There is already a board with that id.");
+    // if (boardRepo.containsOfIdentity(board.identity()))
+    // throw new IllegalStateException("There is already a board with that id.");
 
     return saveBoard(board);
 

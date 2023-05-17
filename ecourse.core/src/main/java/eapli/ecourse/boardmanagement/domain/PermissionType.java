@@ -1,6 +1,8 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import eapli.framework.domain.model.ValueObject;
 import lombok.EqualsAndHashCode;
@@ -12,10 +14,15 @@ public class PermissionType implements ValueObject {
     READ, WRITE
   }
 
+  @Enumerated(EnumType.STRING)
   private Type type;
 
   public PermissionType(Type type) {
     this.type = type;
+  }
+
+  protected PermissionType() {
+    // for ORM
   }
 
   public void changeToRead() {

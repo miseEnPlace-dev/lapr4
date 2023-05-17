@@ -1,5 +1,6 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,12 @@ public class BoardBuilder implements DomainFactory<Board> {
   private List<BoardColumn> columns;
   private List<BoardRow> rows;
   private SystemUser user;
+
+  public BoardBuilder() {
+    this.permissions = new ArrayList<>();
+    this.columns = new ArrayList<>();
+    this.rows = new ArrayList<>();
+  }
 
   public BoardBuilder withTitle(String title) {
     this.title = new Title(title);

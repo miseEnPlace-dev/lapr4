@@ -1,12 +1,10 @@
-package eapli.ecourse.boardmanagment.domain;
+package eapli.ecourse.boardmanagement.domain;
 
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Version;
 
 import eapli.framework.domain.model.DomainEntity;
@@ -30,7 +28,6 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
   @Column(nullable = false, updatable = false)
   private SystemUser user;
 
-  @Enumerated(EnumType.STRING)
   @Column(nullable = false, updatable = false)
   private PermissionType permissionType;
 
