@@ -1,4 +1,5 @@
 grammar Exam;
+
 start: exam;
 
 exam: start_exam header sections end_exam;
