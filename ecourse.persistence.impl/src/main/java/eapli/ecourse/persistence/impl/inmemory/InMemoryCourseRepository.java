@@ -35,11 +35,16 @@ public class InMemoryCourseRepository extends
 
   @Override
   public Iterable<Course> findAllNotClosed() {
-    return match(e -> !e.state().isFinished());
+    return match(e -> !e.state().isClosed());
   }
 
   @Override
   public Iterable<Course> findAllInProgress() {
     return match(e -> e.state().isInProgress());
+  }
+
+  @Override
+  public Iterable<Course> findAllNotFinished() {
+    return match(e -> !e.state().isFinished());
   }
 }

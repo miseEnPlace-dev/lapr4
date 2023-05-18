@@ -9,6 +9,7 @@ public class CoursesMenu {
   private static final int LIST_COURSES_OPTION = 2;
   private static final int TOGGLE_COURSE_STATE_OPTION = 3;
   private static final int TOGGLE_COURSE_ENROLMENT_STATE_OPTION = 4;
+  private static final int ADD_TEACHERS_OPTION = 5;
   private static final int EXIT_OPTION = 0;
 
   private static final String RETURN_LABEL = "Return ";
@@ -26,6 +27,7 @@ public class CoursesMenu {
     menu.addItem(TOGGLE_COURSE_STATE_OPTION, "Toggle Course State", new ToggleCourseStatusUI()::show);
     menu.addItem(TOGGLE_COURSE_ENROLMENT_STATE_OPTION, "Toggle Course Enrolment State",
         new ToggleCourseEnrolmentStateUI()::show);
+    menu.addItem(ADD_TEACHERS_OPTION, "Add Teachers", new AssignNewTeachersToCourseUI()::show);
 
     menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 

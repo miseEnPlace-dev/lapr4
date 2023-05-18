@@ -54,6 +54,11 @@ class JpaCourseRepository
 
   @Override
   public Iterable<Course> findAllNotClosed() {
+    return match("e.courseState <> :state", "state", new CourseState(CourseState.State.CLOSED));
+  }
+
+  @Override
+  public Iterable<Course> findAllNotFinished() {
     return match("e.courseState <> :state", "state", new CourseState(CourseState.State.FINISHED));
   }
 }

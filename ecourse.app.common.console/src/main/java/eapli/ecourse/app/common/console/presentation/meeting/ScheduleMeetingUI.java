@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
-import eapli.ecourse.app.common.console.util.MultipleSelector;
+import eapli.ecourse.app.common.console.util.MultipleSelectorWidget;
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.application.ScheduleMeetingController;
@@ -44,7 +44,7 @@ public class ScheduleMeetingUI extends AbstractUI {
       return false;
     }
 
-    MultipleSelector<SystemUser> selector = new MultipleSelector<>("Users:", allUsers,
+    MultipleSelectorWidget<SystemUser> selector = new MultipleSelectorWidget<>("Users:", allUsers,
         new SystemUserPrinter());
     Iterable<SystemUser> selectedUsers = selector.selectElements();
 

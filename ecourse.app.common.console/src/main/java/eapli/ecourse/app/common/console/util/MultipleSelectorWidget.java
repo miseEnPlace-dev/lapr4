@@ -6,12 +6,12 @@ import java.util.List;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.visitor.Visitor;
 
-public class MultipleSelector<T> {
+public class MultipleSelectorWidget<T> {
   private String header;
   private Iterable<T> source;
   private Visitor<T> visitor;
 
-  public MultipleSelector(String header, Iterable<T> source, Visitor<T> visitor) {
+  public MultipleSelectorWidget(String header, Iterable<T> source, Visitor<T> visitor) {
     this.header = header;
     this.source = source;
     this.visitor = visitor;
