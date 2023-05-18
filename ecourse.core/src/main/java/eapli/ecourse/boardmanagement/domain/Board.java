@@ -97,7 +97,7 @@ public class Board implements AggregateRoot<BoardID> {
     return this.permissions;
   }
 
-  public SystemUser user() {
+  public SystemUser owner() {
     return this.owner;
   }
 
@@ -137,6 +137,6 @@ public class Board implements AggregateRoot<BoardID> {
     }
 
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
-        && this.archived.equals(otherBoard.archived()) && this.owner.equals(otherBoard.user());
+        && this.archived.equals(otherBoard.archived()) && this.owner.equals(otherBoard.owner());
   }
 }

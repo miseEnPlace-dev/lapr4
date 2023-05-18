@@ -15,7 +15,7 @@ public class InMemoryBoardRepository extends InMemoryDomainRepository<Board, Boa
 
   @Override
   public Iterable<Board> findAllBoardsCreatedByUser(Username userName) {
-    return match(e -> e.user().username().equals(userName));
+    return match(e -> e.owner().username().equals(userName));
   }
 
 }
