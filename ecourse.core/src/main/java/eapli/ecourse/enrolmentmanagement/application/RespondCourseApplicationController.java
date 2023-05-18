@@ -8,7 +8,6 @@ import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
-import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -22,7 +21,7 @@ public class RespondCourseApplicationController {
   private AuthorizationService authz;
 
   public RespondCourseApplicationController(final CourseRepository courseRepository,
-      final EnrolmentRepository enrolmentRepository, StudentRepository studentRepository, AuthorizationService authz) {
+      final EnrolmentRepository enrolmentRepository, AuthorizationService authz) {
     this.enrolmentRepository = enrolmentRepository;
     this.authz = authz;
     this.listCoursesService = new ListCourseService(courseRepository);
