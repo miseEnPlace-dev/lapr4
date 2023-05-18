@@ -258,4 +258,57 @@ public class CourseTest {
     assertEquals(course.state(), dto.getCourseState());
     assertEquals(course.enrolmentState(), dto.getEnrolmentState());
   }
+
+  @Test
+  public void ensureIsPossibleToToggleOpenCourseStatus() {
+    final Course course = getDummyOpenCourse();
+
+    assertTrue(course.state().isOpen());
+    course.state().previous();
+    assertTrue(course.state().isClosed());
+    course.state().changeToOpen();
+    course.state().next();
+    assertTrue(course.state().isInProgress());
+  }
+
+  @Test
+  public void ensureIsPossibleToToggleClosedCourseStatus() {
+    final Course course = getDummyClosedCourse();
+
+    assertTrue(course.state().isClosed());
+    course.state().next();
+    assertTrue(course.state().isOpen());
+  }
+
+  @Test
+  public void ensureIsPossibleToToggleInProgressCourseStatus() {
+    final Course course = getDummyInProgressCourse();
+
+    assertTrue(course.state().isInProgress());
+    course.state().next();
+    assertTrue(course.state().isFinished());
+  }
+
+  @Test
+  public void ensureCannotCloseCourseInProgress() {
+    final Course course = getDummyInProgressCourse();
+
+    assertTrue(course.state().isInProgress());
+    assertThrows(IllegalStateException.class, () -> {
+      course.state().previous();
+    });
+  }
+
+  @Test
+  public void ensureCannotToggleFinishedCourseStatus() {
+    final Course course = getDummyFinishedCourse();
+
+    assertTrue(course.state().isFinished());
+    assertThrows(IllegalStateException.class, () -> {
+      course.state().previous();
+    });
+    assertThrows(IllegalStateException.class, () -> {
+      course.state().next();
+    });
+  }
 }

@@ -33,7 +33,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.3. Functional Requirements
 
-- FRC03 Open/Close Course - Only managers are able to execute this functionality.
+> **FRC03** Open/Close Course - Only managers are able to execute this functionality.
 
 ## 2.4. Acceptance Criteria
 
@@ -80,12 +80,81 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.4. Tests
 
-Test 1: xxx
+**Test 1:** Ensure is possible to toggle the status in an open course
 
-@Test
-private void test1() {
-assetTrue(true);
-}
+```java
+  @Test
+  public void ensureIsPossibleToToggleOpenCourseStatus() {
+    final Course course = getDummyOpenCourse();
+
+    assertTrue(course.state().isOpen());
+    course.state().previous();
+    assertTrue(course.state().isClosed());
+    course.state().changeToOpen();
+    course.state().next();
+    assertTrue(course.state().isInProgress());
+  }
+```
+
+
+**Test 2:** Ensure is possible to toggle the status in a closed course
+
+```java
+  @Test
+  public void ensureIsPossibleToToggleClosedCourseStatus() {
+    final Course course = getDummyClosedCourse();
+
+    assertTrue(course.state().isClosed());
+    course.state().next();
+    assertTrue(course.state().isOpen());
+  }
+```
+
+
+**Test 3:** Ensure is possible to toggle the status of an in progress course
+
+```java
+  @Test
+  public void ensureIsPossibleToToggleInProgressCourseStatus() {
+    final Course course = getDummyInProgressCourse();
+
+    assertTrue(course.state().isInProgress());
+    course.state().next();
+    assertTrue(course.state().isFinished());
+  }
+```
+
+**Test 4:** Ensure cannot close a course that is in progress
+
+```java
+  @Test
+  public void ensureCannotCloseCourseInProgress() {
+    final Course course = getDummyInProgressCourse();
+
+    assertTrue(course.state().isInProgress());
+    assertThrows(IllegalStateException.class, () -> {
+    course.state().previous();
+    });
+  }
+```
+
+**Test 5:** Ensure cannot toggle status of a finished course
+
+```java
+  @Test
+  public void ensureCannotToggleFinishedCourseStatus() {
+  final Course course = getDummyFinishedCourse();
+
+    assertTrue(course.state().isFinished());
+    assertThrows(IllegalStateException.class, () -> {
+    course.state().previous();
+    });
+    assertThrows(IllegalStateException.class, () -> {
+    course.state().next();
+    });
+  }
+```
+
 
 
 ## 5. Implementation
@@ -94,10 +163,25 @@ assetTrue(true);
 
 - Relevant implementation details
 
-  private void sample() {
-  return true;
+```java
+  public Course toggleToNextCourseStatus(CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    Course course = getCourse(courseDTO);
+
+    course.nextState();
+    return courseRepository.save(course);
   }
 
+  public Course toggleToPreviousCourseStatus(CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    Course course = getCourse(courseDTO);
+
+    course.previousState();
+    return courseRepository.save(course);
+  }
+```
 
 ## 6. Integration & Demonstration
 
