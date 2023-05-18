@@ -4,8 +4,6 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
@@ -20,12 +18,6 @@ public class EvaluationExam extends Exam {
   @Version
   private Long version;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  private Time startTime;
-
-  @Temporal(TemporalType.TIMESTAMP)
-  private Time endTime;
-
   @Column(nullable = false)
   private ExamInfo feedbackInfo;
 
@@ -39,9 +31,7 @@ public class EvaluationExam extends Exam {
       Description description, ExamState state, Collection<Section> sections, Time startTime, Time endTime,
       ExamInfo feedbackInfo,
       ExamInfo gradeInfo, Score score) {
-    super(course, teacher, identifier, title, description, state, sections);
-    this.startTime = startTime;
-    this.endTime = endTime;
+    super(course, teacher, identifier, title, description, state, startTime, endTime, sections);
     this.feedbackInfo = feedbackInfo;
     this.gradeInfo = gradeInfo;
     this.score = score;
