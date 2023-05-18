@@ -1,12 +1,11 @@
 package eapli.ecourse.app.common.console.presentation.meeting;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
+import eapli.ecourse.app.common.console.util.MultipleSelector;
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.application.ScheduleMeetingController;
@@ -16,7 +15,6 @@ import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.SelectWidget;
 
 public class ScheduleMeetingUI extends AbstractUI {
 
@@ -40,21 +38,15 @@ public class ScheduleMeetingUI extends AbstractUI {
     Duration meetingDuration = Duration.valueOf(duration);
 
     List<SystemUser> allUsers = (ArrayList<SystemUser>) userManagementService.allUsers();
-    Set<SystemUser> selectedUsers = new HashSet<>();
 
     if (!allUsers.iterator().hasNext()) {
       System.out.println("There are no registered users.");
       return false;
     }
 
-    final SelectWidget<SystemUser> selector = new SelectWidget<>("\nUsers:", allUsers, new SystemUserPrinter());
-
-    while (selector.selectedOption() != 0 && allUsers.size() > 0) {
-      selector.show();
-      final SystemUser selected = selector.selectedElement();
-      allUsers.remove(selected);
-      selectedUsers.add(selected);
-    }
+    MultipleSelector<SystemUser> selector = new MultipleSelector<>("Users:", allUsers,
+        new SystemUserPrinter());
+    Iterable<SystemUser> selectedUsers = selector.selectElements();
 
     System.out.println("\nDo you want to submit the data? [Y/N]");
 

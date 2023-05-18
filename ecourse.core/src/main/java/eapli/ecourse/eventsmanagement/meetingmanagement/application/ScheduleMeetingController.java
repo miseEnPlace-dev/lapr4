@@ -1,7 +1,5 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.application;
 
-import java.util.Set;
-
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
@@ -27,7 +25,7 @@ public class ScheduleMeetingController {
     this.inviteRepository = inviteRepository;
   }
 
-  public Meeting scheduleMeeting(Time time, Duration duration, Set<SystemUser> users) {
+  public Meeting scheduleMeeting(Time time, Duration duration, Iterable<SystemUser> users) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER, ClientRoles.MANAGER,
         ClientRoles.TEACHER);
 
@@ -44,7 +42,7 @@ public class ScheduleMeetingController {
     return m;
   }
 
-  private void sendInvites(Set<SystemUser> users, Meeting meeting) {
+  private void sendInvites(Iterable<SystemUser> users, Meeting meeting) {
     for (SystemUser user : users) {
       Invite invite = new Invite(meeting, user);
 

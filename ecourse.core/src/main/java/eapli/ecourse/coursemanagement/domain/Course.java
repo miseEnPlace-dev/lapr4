@@ -1,12 +1,14 @@
 package eapli.ecourse.coursemanagement.domain;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -44,7 +46,10 @@ public class Course implements AggregateRoot<CourseCode> {
   private Calendar createdAt;
 
   @ManyToOne
-  private Teacher teacher;
+  private Teacher teacherInCharge;
+
+  @OneToMany
+  private Set<Teacher> teachers;
 
   protected Course() {
     // for ORM
@@ -61,7 +66,7 @@ public class Course implements AggregateRoot<CourseCode> {
     this.enrolmentLimits = enrolmentLimits;
     this.courseState = courseState;
     this.enrolmentState = enrolmentState;
-    this.teacher = teacher;
+    this.teacherInCharge = teacher;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -75,7 +80,7 @@ public class Course implements AggregateRoot<CourseCode> {
     this.enrolmentLimits = enrolmentLimits;
     this.courseState = new CourseState();
     this.enrolmentState = new CourseEnrolmentState();
-    this.teacher = teacher;
+    this.teacherInCharge = teacher;
     this.createdAt = Calendar.getInstance();
   }
 
@@ -102,7 +107,7 @@ public class Course implements AggregateRoot<CourseCode> {
     return code().equals(that.code()) && title().equals(that.title())
         && description().equals(that.description()) && enrolmentLimits().equals(that.enrolmentLimits())
         && state().equals(that.state()) && enrolmentState().equals(that.enrolmentState())
-        && teacher().equals(that.teacher());
+        && teacherInCharge().equals(that.teacherInCharge());
   }
 
   public CourseCode code() {
@@ -133,8 +138,12 @@ public class Course implements AggregateRoot<CourseCode> {
     return this.enrolmentLimits;
   }
 
-  public Teacher teacher() {
-    return this.teacher;
+  public Teacher teacherInCharge() {
+    return this.teacherInCharge;
+  }
+
+  public Set<Teacher> teachers() {
+    return this.teachers;
   }
 
   public CourseDTO toDto() {
@@ -163,7 +172,7 @@ public class Course implements AggregateRoot<CourseCode> {
   public void addResponsibleTeacher(final Teacher teacher) {
     Preconditions.noneNull(teacher);
 
-    this.teacher = teacher;
+    this.teacherInCharge = teacher;
   }
 
   @Override
