@@ -1,0 +1,110 @@
+@startuml US3002_CD
+
+top to bottom direction
+
+
+class Board {
+  +title()
+  +archived()
+  +rows()
+  +columns()
+  +permissions()
+  +owner()
+}
+
+class BoardBuilder {
+  - board : Board
+  ---
+  +withTitle()
+  +withArchived()
+  +withRows()
+  +withColumns()
+  +withPermissions()
+  +withOwner()
+  +build()
+}
+
+class BoardID {
+  - code : string
+  ---
+  +newID()
+  +valueOf()
+}
+
+class Title {
+  - title : string
+}
+
+enum PermissionType {
+  READ
+  WRITE
+}
+
+class UserPermission {
+  - user : User
+  - permission : PermissionType
+}
+
+class UserPermissionID {
+  - code : string
+  ---
+  +newID()
+  +valueOf()
+}
+
+class BoardRow {
+  - title : string
+  - rowNumber : int
+}
+
+class BoardColumn {
+  - title : string
+  - columnNumber : int
+}
+
+class Archived {
+  - archivedAt : date
+}
+
+class UserManagementService {
+  +allUsers()
+}
+
+class CreateBoardUI { }
+
+class CreateBoardController {
+  +createBoard()
+  +saveBoard()
+}
+
+class User{
+
+}
+
+class BoardRepository {
+  +save()
+}
+
+BoardID --o Board
+BoardColumn --o Board
+BoardRow --o Board
+UserPermission --o Board
+Title --o Board
+Archived --o Board
+User --o Board
+
+Title --o BoardColumn
+Title --o BoardRow
+
+User --o UserPermission
+PermissionType --o UserPermission
+UserPermissionID --o UserPermission
+
+BoardRepository ..> Board
+
+CreateBoardUI ..> CreateBoardController
+CreateBoardController ..> Board
+CreateBoardController ..> UserManagementService
+CreateBoardController ..> BoardBuilder
+
+@enduml
