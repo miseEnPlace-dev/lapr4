@@ -1,0 +1,98 @@
+@startuml US1006_CD
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface CourseRepository {
+  {abstract} findAllNotClosed()
+  {abstract} save(course)
+}
+
+class InMemoryCourseRepository {
+  + findAllNotClosed()
+  + save(course)
+}
+
+class JpaCourseRepository {
+  + findAllNotClosed()
+  + save(course)
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+class CourseService {
+  + CourseService(courseRepository)
+
+  + listNotClosedCourses()
+  + toggleEnrolmentState(course)
+  + save(course)
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+
+  + toggleEnrolmentState()
+  + toDto()
+}
+
+enum CourseState {
+  CLOSED
+  OPEN
+  IN_PROGRESS
+  FINISHED
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
+class ListAvailableCoursesController {
+  + listNotClosedCourses()
+  + toggleEnrolmentState(course)
+}
+
+class ListAvailableCoursesUI {}
+
+ListAvailableCoursesUI ..> ListAvailableCoursesController
+ListAvailableCoursesController ..> PersistenceContext
+ListAvailableCoursesController --> CourseService
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+
+CourseService ..> Course
+CourseService ..> CourseRepository
+
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+
+Course --> CourseState
+Course --> CourseEnrolmentState
+
+@enduml
