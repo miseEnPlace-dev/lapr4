@@ -51,4 +51,11 @@ public interface CourseRepository extends DomainRepository<CourseCode, Course> {
    * @return
    */
   Iterable<Course> findAllInProgress();
+
+  /**
+   * Returns the courses that are not closed
+   *
+   * @return
+   */
+  Iterable<Course> findAllNotFinished();
 }

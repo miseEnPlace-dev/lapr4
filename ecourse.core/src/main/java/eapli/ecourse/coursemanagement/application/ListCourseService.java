@@ -39,6 +39,11 @@ public class ListCourseService {
     return convertToDto(courses);
   }
 
+  public Iterable<CourseDTO> listNotFinishedCourses() {
+    final Iterable<Course> courses = courseRepository.findAllNotFinished();
+    return convertToDto(courses);
+  }
+
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
     return StreamSupport.stream(courses.spliterator(), true)
         .map(Course::toDto)

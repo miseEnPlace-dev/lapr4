@@ -169,6 +169,12 @@ public class Course implements AggregateRoot<CourseCode> {
     courseState.previous();
   }
 
+  public void addTeachers(Set<Teacher> newTeachers) {
+    Preconditions.noneNull(newTeachers);
+
+    this.teachers.addAll(newTeachers);
+  }
+
   public void addResponsibleTeacher(final Teacher teacher) {
     Preconditions.noneNull(teacher);
 
