@@ -1,0 +1,60 @@
+@startuml US4001_SD
+autonumber
+
+actor "User" as U
+
+participant "ScheduleMeetingUI" as UI <<presentation>>
+participant "ScheduleMeetingController" as CTRL <<application>>
+participant "User" as USER <<domain>>
+participant "ConcreteSubject" as CS <<domain>>
+participant "Observer" as OBS <<domain>>
+
+
+activate U
+
+activate UI
+
+note over UI
+  the previous steps were omitted
+  to make it easier to understand
+end note
+
+activate CTRL
+
+CTRL -> USER : sendInvites()
+
+activate USER
+
+USER -> CS : setState(someState)
+activate CS
+
+CS -> CS : notifyObservers()
+activate CS
+
+CS -> OBS : update()
+activate OBS
+
+OBS -> OBS : updateState()
+activate OBS
+
+deactivate OBS
+deactivate OBS
+deactivate CS
+deactivate CS
+
+
+
+
+
+deactivate USER
+
+deactivate CTRL
+
+
+
+UI --> U : informs operation sucess
+deactivate UI
+
+deactivate U
+
+@enduml

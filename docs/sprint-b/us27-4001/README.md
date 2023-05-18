@@ -19,7 +19,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.1. Client Specifications
 
--
+- Classes and meetings are events that happen in some time and have a duration. They also have participants. However there is no concept of location related to classes and meetings. They do not take place in a specific location and "nothing" happens at the time of the event.
+
+- All users can create and use boards as well as meetings.
 
 ## 2.2. Client Clarifications
 
