@@ -1,4 +1,4 @@
-@startuml DM-EVENTS
+@startuml DM-MEETING
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
