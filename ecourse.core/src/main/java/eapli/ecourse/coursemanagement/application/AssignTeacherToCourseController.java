@@ -1,6 +1,5 @@
 package eapli.ecourse.coursemanagement.application;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import eapli.ecourse.coursemanagement.domain.Course;
@@ -13,13 +12,11 @@ import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 
 public class AssignTeacherToCourseController {
   private CourseRepository courseRepository;
-  private TeacherRepository teacherRepository;
   private TeacherService teacherService;
   private ListCourseService listCourseService;
 
   public AssignTeacherToCourseController(TeacherRepository teacherRepository, CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
-    this.teacherRepository = teacherRepository;
     this.teacherService = new TeacherService(teacherRepository);
     this.listCourseService = new ListCourseService(courseRepository);
   }
@@ -34,14 +31,10 @@ public class AssignTeacherToCourseController {
     return listCourseService.listNotFinishedCourses();
   }
 
-  public Course assignTeachersToCourse(Iterable<TeacherDTO> teacherDTO, CourseDTO courseDTO) {
+  public Course assignTeachersToCourse(Iterable<TeacherDTO> teachers, CourseDTO courseDTO) {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
-    Set<Teacher> teachers = new HashSet<>();
-    for (TeacherDTO teacher : teacherDTO) {
-      Teacher t = teacherRepository.ofIdentity(teacher.getNumber()).orElseThrow();
-      teachers.add(t);
-    }
-    course.addTeachers(teachers);
+
+    course.addTeachers(teacherService.toDomain(teachers));
     return courseRepository.save(course);
   }
 }

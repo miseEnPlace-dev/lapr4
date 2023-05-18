@@ -33,6 +33,15 @@ public class TeacherService {
     return teachersExceptFromCourse;
   }
 
+  public Iterable<Teacher> toDomain(Iterable<TeacherDTO> teachersDTO) {
+    Set<Teacher> teachers = new HashSet<>();
+    for (TeacherDTO teacher : teachersDTO) {
+      Teacher t = teacherRepository.ofIdentity(teacher.getNumber()).orElseThrow();
+      teachers.add(t);
+    }
+    return teachers;
+  }
+
   private Iterable<TeacherDTO> convertToDto(Iterable<Teacher> teachers) {
     return StreamSupport.stream(teachers.spliterator(), true)
         .map(Teacher::toDto)
