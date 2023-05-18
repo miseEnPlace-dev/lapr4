@@ -50,7 +50,7 @@ Student --> "1" MecanographicNumber : identified by
 
 Student -|> User
 
-Student --> "0..*" Enrolment : produces
+Enrolment --> "1" Student : has
 
 Student --> "0..*" ExamAnswer : has
 
