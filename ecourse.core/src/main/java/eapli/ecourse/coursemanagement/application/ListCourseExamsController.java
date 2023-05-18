@@ -3,7 +3,7 @@ package eapli.ecourse.coursemanagement.application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.exammanagement.domain.application.ExamListService;
+import eapli.ecourse.exammanagement.application.ExamListService;
 import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;

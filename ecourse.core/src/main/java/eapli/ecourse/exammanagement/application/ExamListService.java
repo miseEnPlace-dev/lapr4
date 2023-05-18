@@ -1,4 +1,4 @@
-package eapli.ecourse.exammanagement.domain.application;
+package eapli.ecourse.exammanagement.application;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.Exam;

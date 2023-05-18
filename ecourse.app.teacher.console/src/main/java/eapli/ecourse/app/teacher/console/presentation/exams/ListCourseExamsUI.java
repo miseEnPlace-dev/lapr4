@@ -39,12 +39,15 @@ public class ListCourseExamsUI extends AbstractUI {
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courseList, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
+    if (selected == null)
+      return false;
 
     Iterable<ExamDTO> exams = ctrl.listCourseExams(selected);
     System.out.println(exams.iterator().hasNext());
 
     ListWidget<ExamDTO> list = new ListWidget<>("Exams of "+selected.getTitle(), exams, new ExamPrinter());
     list.show();
+
 
     return true;
   }
