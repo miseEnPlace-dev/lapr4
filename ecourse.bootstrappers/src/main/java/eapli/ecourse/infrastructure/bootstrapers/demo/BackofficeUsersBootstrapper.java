@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
+import eapli.ecourse.usermanagement.application.AddUserController;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.domain.model.Role;
@@ -12,7 +13,7 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
  * @author Paulo Gandra Sousa
  */
 public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implements Action {
-
+  private final AddUserController controller = new AddUserController();
   @SuppressWarnings("squid:S2068")
   private static final String PASSWORD1 = "Password1";
 
@@ -28,7 +29,7 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.TEACHER);
 
-    registerUser(username, password, firstName, lastName, email, roles);
+    controller.addTeacher(username, password, firstName, lastName, email, "987654321", "20/02/1990", "pdf");
   }
 
   private void registerManager(final String username, final String password, final String firstName,
@@ -36,6 +37,6 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
-    registerUser(username, password, firstName, lastName, email, roles);
+    controller.addStudent(username, password, firstName, lastName, email, "987654321");
   }
 }
