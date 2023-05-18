@@ -1,0 +1,106 @@
+@startuml US1009_SD
+autonumber
+
+actor "Manager" as M
+participant "RespondCoursesApplicationsUI" as UI <<presentation>>
+participant "RespondCoursesApplicationsController" as CTRL <<application>>
+participant "CourseListService" as CSRV <<service>>
+participant "EnrolmentListService" as ESRV <<service>>
+participant "Course" as C <<domain>>
+participant "Enrolment" as E <<domain>>
+participant "CourseDTO" as CDTO <<dto>>
+participant "EnrolmentDTO" as EDTO <<dto>>
+
+database CourseRepository as CREP <<repository>>
+database EnrolmentRepository as EREP <<repository>>
+
+activate M
+
+M -> UI : asks the responde to applications for Courses
+activate UI
+
+UI -> CTRL : new(courseRepository, enrolmentRepository)
+activate CTRL
+CTRL -> CSRV : service=new(courseRepository)
+CTRL -> ESRV : service=new(enrolmentRepository)
+deactivate CTRL
+
+UI -> CTRL : listOpenForEnrolmentCourses()
+activate CTRL
+CTRL -> CSRV : listOpenForEnrolmentCourses()
+activate CSRV
+CSRV -> CREP : findAllOpenForEnrolmentCourses()
+activate CREP
+CREP --> CSRV : courses
+deactivate CREP
+
+loop for each course
+  CSRV -> C : toDTO(course)
+  activate C
+  C -> CDTO : new()
+  activate CDTO
+  deactivate CDTO
+  deactivate C
+end loop
+
+CSRV --> CTRL : courses
+deactivate CSRV
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> M : asks to select the course
+deactivate UI
+
+M -> UI : selects the desired course
+activate UI
+
+UI -> CTRL : listCourseAppllications(course)
+activate CTRL
+CTRL -> ESRV : listCourseAppllications(course)
+activate ESRV
+ESRV -> EREP : findAllCourseAppllications(course)
+activate EREP
+EREP --> ESRV : enrolments
+deactivate EREP
+
+loop for each enrolment
+  ESRV -> C : toDTO(enrolment)
+  activate C
+  C -> EDTO : new()
+  activate EDTO
+  deactivate EDTO
+  deactivate C
+end loop
+
+ESRV --> CTRL : enrolments
+deactivate ESRV
+CTRL --> UI : enrolments
+deactivate CTRL
+
+UI --> M : asks to select the user applications
+deactivate UI
+
+M -> UI : selects the user application
+activate UI
+UI--> M : asks to choose between the accepted and rejected applications
+deactivate UI
+
+M -> UI : accepts
+activate UI
+UI -> CTRL : accept(enrol)
+activate CTRL
+CTRL -> E : enrol=accept()
+activate E
+deactivate E
+CTRL -> EREP : save(enrol)
+activate EREP
+EREP --> CTRL : updatedEnrol
+deactivate EREP
+CTRL --> UI : updatedEnrol
+deactivate CTRL
+UI--> M : informs operation success
+deactivate UI
+
+deactivate M
+
+@enduml
