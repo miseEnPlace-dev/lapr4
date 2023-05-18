@@ -1,0 +1,70 @@
+@startuml US3002_SD
+autonumber
+
+actor "User" as U
+participant "CreateBoardUI" as UI <<presentation>>
+participant "CreateBoardController" as CTRL <<application>>
+participant "Board" as C <<domain>>
+participant "BoardBuilder" as B <<builder>>
+participant "UserManagementService" as SVC <<service>>
+
+database BoardRepository as REPO <<repository>>
+
+activate U
+
+U -> UI : asks to create a new Course
+activate UI
+
+UI --> U : requests data (title, rows, columns)
+deactivate UI
+
+U -> UI : types request data
+activate UI
+
+UI -> CTRL : listAllUsers()
+activate CTRL
+
+CTRL -> SVC : allUsers()
+activate SVC
+deactivate SVC
+
+deactivate CTRL
+
+UI --> U : asks to select user and permission type
+deactivate UI
+
+U -> UI : selects the user and permission type
+activate UI
+
+UI -> CTRL : creatBoard(title, permissions, columns, rows, user)
+activate CTRL
+
+CTRL -> B : new BoardBuilder().withTitle(title).\nwithUser(user).withPermissions(permissions)\n.withColumns(columns).withRows(rows).build()
+activate B
+deactivate B
+
+CTRL -> C : containsOfIdentity()
+activate C
+deactivate C
+
+CTRL -> CTRL : saveBoard()
+
+activate CTRL
+CTRL -> REPO : saveBoard()
+
+activate REPO
+deactivate REPO
+
+deactivate CTRL
+deactivate CTRL
+
+
+
+
+deactivate CTRL
+UI--> U : informs operation success
+deactivate UI
+
+deactivate U
+
+@enduml
