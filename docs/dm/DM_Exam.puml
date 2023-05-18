@@ -8,6 +8,7 @@ skinparam classBackgroundColor beige
 skinparam ArrowColor #222222
 
 package "<<aggregate>> Exam" {
+
   entity Exam
 
   entity Section
@@ -76,6 +77,7 @@ entity Teacher <<entity>> <<root>> {
 }
 
 entity Exam <<entity>> <<root>> {
+  - date
 }
 
 entity Section <<entity>> {}

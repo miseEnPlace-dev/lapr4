@@ -1,6 +1,8 @@
 package eapli.ecourse.exammanagement.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,6 +51,9 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @Column(nullable = false)
   private ExamState state;
 
+  @Column
+  private Calendar date;
+
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<Section> sections;
 
@@ -83,10 +88,15 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     return new ExamDTO(this.code, this.course, this.teacher, this.identifier, this.title, this.description, this.state);
   }
 
+  public void changeDate(Calendar date) {
+    this.date = date;
+  }
+
   @Override
   public String toString() {
+    final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     return "Exam [code=" + code + ", course=" + course + ", description=" + description + ", identifier=" + identifier
-        + ", sections=" + sections + ", state=" + state + ", teacher=" + teacher + ", title=" + title + ", version="
-        + version + "]";
+        + ", sections=" + sections + ", state=" + state + ", teacher=" + teacher + ", title=" + title + ", date="
+        + sdf.format(date) + "]";
   }
 }

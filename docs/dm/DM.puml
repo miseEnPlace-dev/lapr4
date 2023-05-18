@@ -121,7 +121,9 @@ package "<<agregate>> Exam" {
   entity SectionQuestion
 }
 
-entity Exam <<entity>> <<root>> {}
+entity Exam <<entity>> <<root>> {
+  -date
+}
 entity Section <<entity>> {}
 entity SectionQuestion <<entity>> {}
 
