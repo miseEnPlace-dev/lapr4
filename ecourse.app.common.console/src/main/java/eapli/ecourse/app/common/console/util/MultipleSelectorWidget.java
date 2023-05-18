@@ -17,9 +17,9 @@ public class MultipleSelectorWidget<T> {
     this.visitor = visitor;
   }
 
-  final SelectWidget<T> selector = new SelectWidget<>(header, source, visitor);
-
   public Iterable<T> selectElements() {
+    final SelectWidget<T> selector = new SelectWidget<>(header, source, visitor);
+
     List<T> selected = new ArrayList<>();
     List<T> sourceList = (ArrayList<T>) source;
 

@@ -2,10 +2,10 @@ package eapli.ecourse.exammanagement.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -49,9 +49,11 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   private Title title;
 
   @Temporal(TemporalType.TIMESTAMP)
+  @AttributeOverride(name = "time", column = @Column(name = "startTime"))
   private Time startTime;
 
   @Temporal(TemporalType.TIMESTAMP)
+  @AttributeOverride(name = "time", column = @Column(name = "endTime"))
   private Time endTime;
 
   @Column(nullable = true)

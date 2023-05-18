@@ -21,19 +21,19 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final Iterable<TeacherDTO> teachers = controller.allTeachers();
+    Iterable<TeacherDTO> teachers = controller.allTeachers();
 
     if (!teachers.iterator().hasNext()) {
       System.out.println("There are no teachers to assign.");
       return false;
     }
 
-    final MultipleSelectorWidget<TeacherDTO> teachersSelector = new MultipleSelectorWidget<>("Teachers", teachers,
+    final MultipleSelectorWidget<TeacherDTO> teachersSelector = new MultipleSelectorWidget<>("\nTeachers:", teachers,
         new TeacherPrinter());
 
     Iterable<TeacherDTO> selectedTeachers = teachersSelector.selectElements();
 
-    final Iterable<CourseDTO> courses = controller.allNotClosedCourses();
+    Iterable<CourseDTO> courses = controller.allNotClosedCourses();
 
     if (!courses.iterator().hasNext()) {
       System.out.println("There are no courses to assign.");

@@ -15,8 +15,8 @@ public class TeacherService {
   }
 
   public Iterable<TeacherDTO> allTeachers() {
-    final Iterable<Teacher> types = teacherRepository.findAll();
-    return convertToDto(types);
+    final Iterable<Teacher> teachers = teacherRepository.findAll();
+    return convertToDto(teachers);
   }
 
   private Iterable<TeacherDTO> convertToDto(Iterable<Teacher> teachers) {

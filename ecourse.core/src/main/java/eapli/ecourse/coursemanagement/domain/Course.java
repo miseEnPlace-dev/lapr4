@@ -49,6 +49,7 @@ public class Course implements AggregateRoot<CourseCode> {
   private Teacher teacherInCharge;
 
   @OneToMany
+  @AttributeOverride(name = "id", column = @Column(name = "teacher_id"))
   private Set<Teacher> teachers;
 
   protected Course() {
