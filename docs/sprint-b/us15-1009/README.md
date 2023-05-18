@@ -32,6 +32,10 @@ This is the first time this task is assigned to be developed. This is a new func
 > [**Question:** In US1009, What are the criteria for a student to be enrolled in a course?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22498)
 >
 > **Answer**: "This is not a system requirement. You should only register the decision of the manager."
+>
+> [**Question** A course can open if the limits are exceeded or not? Who can setup the limits? Are the limits mandatory?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21913)
+>
+> **Answer**: "Managers should be able to specify the limits. In my opinion the system should notify the manager if a course is out of the enrolment limits (before this course is changed to "in progress"). But, in the end, it is up to the manager to follow/enforce or not, the limits."
 
 ## 2.3. Functional Requirements
 
@@ -50,7 +54,6 @@ This is the first time this task is assigned to be developed. This is a new func
 - The manager must be authenticated and authorized to perform the operation.
 - The course must be open for enrolment.
 - The user must have applied to the course.
-- The course must have available slots.
 
 ### 3.2. System Sequence Diagram
 
