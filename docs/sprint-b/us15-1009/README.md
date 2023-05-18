@@ -86,83 +86,46 @@ This is the first time this task is assigned to be developed. This is a new func
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** Ensure the course is in the correct state after the operation
+**Test 1:** Ensure the enrolment state is accurate after accepting an application
 
 ```java
   @Test
   public void ensureCourseIsInCorrectStateAfterToggle() {
-    final Course course = getDummyOpenCourse();
+    final Enrolment enrolment = getDummyOpenCourse();
 
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isOpen());
+    assertTrue(enrolment.state().isPending());
+
+    enrolment.accept();
+
+    assertTrue(enrolment.state().isAccepted());
   }
 ```
 
-**Test 2:** Ensure that double toggle does not change the state (the state is reversible)
+**Test 1:** Ensure the enrolment state is accurate after accepting an application
 
 ```java
   @Test
-  public void ensureDoubleToggleDoesNotChangeState() {
-    final Course course = getDummyOpenCourse();
+  public void ensureCourseIsInCorrectStateAfterToggle() {
+    final Enrolment enrolment = getDummyOpenCourse();
 
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isClosed());
+    assertTrue(enrolment.state().isPending());
+
+    enrolment.reject();
+
+    assertTrue(enrolment.state().isRejected());
   }
 ```
 
-**Test 3:** Ensure that is not possible to open enrolments in a closed course
+**Test 3:** Ensure that is not possible to accept/reject an application in a course enrolment state is closed
 
 ```java
   @Test
-  public void ensureCannotOpenEnrolmentsInClosedCourse() {
-    final Course course = getDummyClosedCourse();
+  public void ensureCannotAcceptOrRejectApplicationInClosedCourse() {
+    final Enrolment enrolment = getDummyClosedCourse();
 
-    assertTrue(course.state().isClosed());
-    assertTrue(course.enrolmentState().isClosed());
-    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
-  }
-```
-
-**Test 4:** Ensure that is not possible to toggle enrolments in a course that is finished
-
-```java
-  @Test
-  public void ensureCannotOpenEnrolmentsInFinishedCourse() {
-    final Course course = getDummyFinishedCourse();
-
-    assertTrue(course.state().isFinished());
-    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
-  }
-```
-
-**Test 5:** Ensure that is possible to toggle enrolments in a course that is in progress
-
-```java
-  @Test
-  public void ensureIsPossibleToToggleEnrolmentsInProgressCourse() {
-    final Course course = getDummyInProgressCourse();
-
-    assertTrue(course.state().isInProgress());
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isOpen());
-  }
-```
-
-**Test 6:** Ensure that is possible to toggle enrolemtns in a course that is open
-
-```java
-  @Test
-  public void ensureIsPossibleToToggleEnrolmentsInOpenCourse() {
-    final Course course = getDummyOpenCourse();
-
-    assertTrue(course.state().isOpen());
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isOpen());
+    assertTrue(enrolment.state().isClosed());
+    assertThrows(IllegalStateException.class, () -> enrolment.accept());
+    assertThrows(IllegalStateException.class, () -> enrolment.reject());
   }
 ```
 
