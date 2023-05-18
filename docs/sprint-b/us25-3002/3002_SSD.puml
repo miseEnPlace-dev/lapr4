@@ -1,0 +1,29 @@
+@startuml US3002_SSD
+
+autonumber
+
+actor U as "User"
+
+activate U
+
+U -> ":System" : asks the system to create a new Board
+activate ":System"
+
+":System" --> U : requests data (title, rows, columns)
+deactivate ":System"
+
+U -> ":System" : types request data
+activate ":System"
+
+":System" --> U : list all users and permission types
+deactivate ":System"
+
+U -> ":System" : choses the user and permission type
+activate ":System"
+
+":System" --> U : informs operation success
+deactivate ":System"
+
+deactivate U
+
+@enduml

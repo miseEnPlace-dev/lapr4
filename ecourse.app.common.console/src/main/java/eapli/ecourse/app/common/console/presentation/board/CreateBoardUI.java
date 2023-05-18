@@ -40,6 +40,8 @@ public class CreateBoardUI extends AbstractUI {
       columns.put(columnName, columnNumber);
     }
 
+    // TODO - set max rows and columns
+
     final Iterable<SystemUser> users = this.ctrl.listAllUsers();
 
     Map<SystemUser, PermissionType> permissions = new HashMap<>();

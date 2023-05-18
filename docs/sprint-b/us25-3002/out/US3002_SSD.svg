@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="356px" preserveAspectRatio="none" style="width:357px;height:356px;background:#FFFFFF;" version="1.1" viewBox="0 0 357 356" width="357px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="166.7969" style="stroke:#181818;stroke-width:1.0;" width="10" x="19" y="91.2969"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="311" y="112.4297"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="311" y="170.6953"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="311" y="228.9609"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="24" x2="24" y1="81.2969" y2="276.0938"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="316" x2="316" y1="81.2969" y2="276.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5" y="77.9951">User</text><ellipse cx="24" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M24,21.5 L24,48.5 M11,29.5 L37,29.5 M24,48.5 L11,63.5 M24,48.5 L37,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5" y="288.0889">User</text><ellipse cx="24" cy="299.8906" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M24,307.8906 L24,334.8906 M11,315.8906 L37,315.8906 M24,334.8906 L11,349.8906 M24,334.8906 L37,349.8906 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="70" x="281" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="288" y="69.9951">:System</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="70" x="281" y="275.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="288" y="295.0889">:System</text><rect fill="#FFFFFF" height="166.7969" style="stroke:#181818;stroke-width:1.0;" width="10" x="19" y="91.2969"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="311" y="112.4297"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="311" y="170.6953"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="311" y="228.9609"/><polygon fill="#181818" points="299,108.4297,309,112.4297,299,116.4297,303,112.4297" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="305" y1="112.4297" y2="112.4297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="107.3638">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="250" x="49" y="107.3638">asks the system to create a new Board</text><polygon fill="#181818" points="40,137.5625,30,141.5625,40,145.5625,36,141.5625" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="34" x2="315" y1="141.5625" y2="141.5625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="46" y="136.4966">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="226" x="59" y="136.4966">requests data (title, rows, columns)</text><polygon fill="#181818" points="299,166.6953,309,170.6953,299,174.6953,303,170.6953" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="305" y1="170.6953" y2="170.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="165.6294">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="121" x="49" y="165.6294">types request data</text><polygon fill="#181818" points="40,195.8281,30,199.8281,40,203.8281,36,199.8281" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="34" x2="315" y1="199.8281" y2="199.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="46" y="194.7622">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="216" x="59" y="194.7622">list all users and permission types</text><polygon fill="#181818" points="299,224.9609,309,228.9609,299,232.9609,303,228.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="305" y1="228.9609" y2="228.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="223.895">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="236" x="49" y="223.895">choses the user and permission type</text><polygon fill="#181818" points="35,254.0938,25,258.0938,35,262.0938,31,258.0938" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="29" x2="315" y1="258.0938" y2="258.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="41" y="253.0278">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="54" y="253.0278">informs operation success</text><!--MD5=[0ed13654b7436d51c8df2ed84b787237]
+@startuml US1002_SSD
+
+autonumber
+
+actor U as "User"
+
+activate U
+
+U -> ":System" : asks the system to create a new Board
+activate ":System"
+
+":System" - -> U : requests data (title, rows, columns)
+deactivate ":System"
+
+U -> ":System" : types request data
+activate ":System"
+
+":System" - -> U : list all users and permission types
+deactivate ":System"
+
+U -> ":System" : choses the user and permission type
+activate ":System"
+
+":System" - -> U : informs operation success
+deactivate ":System"
+
+deactivate U
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
