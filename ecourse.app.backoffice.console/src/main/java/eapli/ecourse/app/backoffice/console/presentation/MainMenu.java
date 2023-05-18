@@ -2,6 +2,7 @@ package eapli.ecourse.app.backoffice.console.presentation;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.app.backoffice.console.presentation.course.CoursesMenu;
+import eapli.ecourse.app.backoffice.console.presentation.enrolment.EnrolmentsMenu;
 import eapli.ecourse.app.backoffice.console.presentation.users.UsersMenu;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -36,8 +37,9 @@ public class MainMenu extends AbstractUI {
   private static final int MY_USER_OPTION = 1;
   private static final int USERS_OPTION = 2;
   private static final int COURSES_OPTION = 3;
-  private static final int SETTINGS_OPTION = 4;
-  private static final int SOMETHING_OPTION = 5;
+  private static final int ENROLMENTS_OPTION = 4;
+  private static final int SETTINGS_OPTION = 5;
+  private static final int SOMETHING_OPTION = 6;
 
   private static final String SEPARATOR_LABEL = "--------------";
 
@@ -87,6 +89,8 @@ public class MainMenu extends AbstractUI {
       mainMenu.addSubMenu(USERS_OPTION, usersMenu);
       final Menu coursesMenu = new CoursesMenu().buildCoursesMenu();
       mainMenu.addSubMenu(COURSES_OPTION, coursesMenu);
+      final Menu enrolmentsMenu = new EnrolmentsMenu().buildEnrolmentsMenu();
+      mainMenu.addSubMenu(ENROLMENTS_OPTION, enrolmentsMenu);
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }

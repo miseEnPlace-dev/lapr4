@@ -11,7 +11,7 @@ import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
-public class RespondCourseApplicationUI extends AbstractUI {
+public class RespondCourseApplicationsUI extends AbstractUI {
 
   private final RespondCourseApplicationController theController = new RespondCourseApplicationController(
       PersistenceContext.repositories().courses(),
