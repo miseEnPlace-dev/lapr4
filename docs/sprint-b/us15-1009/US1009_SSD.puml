@@ -1,0 +1,34 @@
+@startuml US1009_SSD
+
+autonumber
+
+actor M as "Manager"
+
+activate M
+
+M -> ":System" : asks the responde to applications for Courses
+activate ":System"
+
+":System" --> M : asks to select the course
+deactivate ":System"
+
+M -> ":System" : selects the course
+activate ":System"
+
+":System" --> M : asks to select the user applications
+deactivate ":System"
+
+M -> ":System" :  selects the user application
+activate ":System"
+
+":System" --> M : asks to choose between the accepted and rejected applications
+deactivate ":System"
+
+M -> ":System" :  chooses option
+activate ":System"
+
+":System" --> M : informs operation suscess
+
+deactivate M
+
+@enduml
