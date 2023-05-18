@@ -65,23 +65,25 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 3.2. System Sequence Diagram
 
+**Note:** The system will request the user to input board rows and columns while he wants to add them or until he reaches the maximum number of rows and columns. The same applies to user permissions, but those are not mandatory.
+
 ![US3002_SSD](out/US3002_SSD.svg)
 
 ### 3.3. Partial Domain Model
 
 **Note:** The domain model was made in a way to avoid the synchronization problems, as several clients will try to concurrently update boards.
 
-![US1003_DM](out/US1003_DM.svg)
+![US3002_DM](out/US3002_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![US1003_SD](out/US1003_SD.svg)
+![US3002_SD](out/US3002_SD.svg)
 
 ### 4.2. Class Diagram
 
-![US1003_CD](out/US1003_CD.svg)
+![US3002_CD](out/US3002_CD.svg)
 
 ### 4.3. Applied Patterns
 
@@ -196,11 +198,11 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ### 6.1. Success scenario
 
-![US1003_DEMO](US1003_DEMO.png)
+![US3002_DEMO](US3002_DEMO.png)
 
 ### 6.2. Failure scenario
 
-![US1003_DEMO_FAIL](US1003_DEMO_FAIL.png)
+![US3002_DEMO_FAIL](US3002_DEMO_FAIL.png)
 
 ## 7. Observations
 
