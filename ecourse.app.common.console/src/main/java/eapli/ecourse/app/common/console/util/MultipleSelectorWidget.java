@@ -1,6 +1,7 @@
 package eapli.ecourse.app.common.console.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import eapli.framework.presentation.console.SelectWidget;
@@ -21,7 +22,7 @@ public class MultipleSelectorWidget<T> {
     final SelectWidget<T> selector = new SelectWidget<>(header, source, visitor);
 
     List<T> selected = new ArrayList<>();
-    List<T> sourceList = (ArrayList<T>) source;
+    List<T> sourceList = new ArrayList<T>((Collection<T>) source);
 
     while (selector.selectedOption() != 0 && sourceList.size() > 0) {
       selector.show();

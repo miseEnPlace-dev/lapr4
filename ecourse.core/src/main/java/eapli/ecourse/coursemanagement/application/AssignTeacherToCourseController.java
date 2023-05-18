@@ -32,7 +32,7 @@ public class AssignTeacherToCourseController {
     return listCourseService.listNotFinishedCourses();
   }
 
-  public void assignTeachersToCourse(Iterable<TeacherDTO> teacherDTO, CourseDTO courseDTO) {
+  public Course assignTeachersToCourse(Iterable<TeacherDTO> teacherDTO, CourseDTO courseDTO) {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Set<Teacher> teachers = new HashSet<>();
     for (TeacherDTO teacher : teacherDTO) {
@@ -40,5 +40,6 @@ public class AssignTeacherToCourseController {
       teachers.add(t);
     }
     course.addTeachers(teachers);
+    return courseRepository.save(course);
   }
 }

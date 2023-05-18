@@ -21,7 +21,7 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    Iterable<TeacherDTO> teachers = controller.allTeachers();
+    final Iterable<TeacherDTO> teachers = controller.allTeachers();
 
     if (!teachers.iterator().hasNext()) {
       System.out.println("There are no teachers to assign.");
@@ -31,9 +31,9 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
     final MultipleSelectorWidget<TeacherDTO> teachersSelector = new MultipleSelectorWidget<>("\nTeachers:", teachers,
         new TeacherPrinter());
 
-    Iterable<TeacherDTO> selectedTeachers = teachersSelector.selectElements();
+    final Iterable<TeacherDTO> selectedTeachers = teachersSelector.selectElements();
 
-    Iterable<CourseDTO> courses = controller.allNotClosedCourses();
+    final Iterable<CourseDTO> courses = controller.allNotClosedCourses();
 
     if (!courses.iterator().hasNext()) {
       System.out.println("There are no courses to assign.");
@@ -41,9 +41,11 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
     }
 
     final SelectWidget<CourseDTO> courseSelector = new SelectWidget<>("Courses", courses, new CoursePrinter());
+    courseSelector.show();
     CourseDTO selectedCourse = courseSelector.selectedElement();
     try {
       controller.assignTeachersToCourse(selectedTeachers, selectedCourse);
+      System.out.println("\n\nTeachers assigned to course successfully.");
     } catch (IllegalArgumentException e) {
       System.out.println("Error: " + e.getMessage());
     }
