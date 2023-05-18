@@ -5,18 +5,30 @@ class RepositoryFactory {
 }
 
 interface CourseRepository {
-  {abstract} findAllNotClosed()
+  {abstract} findAllOpenForEnrolment()
   {abstract} save(course)
 }
 
 class InMemoryCourseRepository {
-  + findAllNotClosed()
+  + findAllOpenForEnrolment()
   + save(course)
 }
 
 class JpaCourseRepository {
-  + findAllNotClosed()
+  + findAllOpenForEnrolment()
   + save(course)
+}
+
+interface EnrolmentRepository {
+  {abstract} save(enrolment)
+}
+
+class InMemoryEnrolmentRepository {
+  + save(enrolment)
+}
+
+class JpaEnrolmentRepository {
+  + save(Enrolment)
 }
 
 class PersistenceContext {
@@ -32,17 +44,19 @@ class CourseListService {
   + toggleEnrolmentState(course)
 }
 
-class ManageCourseEnrolmentStateUI {}
+class RequestEnrolmentUI {}
 
-class ManageCourseEnrolmentStateController {
+class RequestEnrolmentController {
   - courseRepository
-  - authorizationService
-  - courseListService
+  - enrolmentRepository
+  - studentRepository
+  - listCoursesService
+  - authz
 
-  + ManageCourseEnrolmentStateController(courseRepository, authorizationService)
+  + RequestEnrolmentController(courseRepository, enrolmentRepository, studentRepository, authz)
 
-  + listNotClosedCourses()
-  + toggleEnrolmentState(course)
+  + listOpenForEnrolmentCourses()
+  + requestEnrolment(courseDTO)
 }
 
 class Course {
@@ -56,6 +70,21 @@ class Course {
 
   + toggleEnrolmentState()
   + toDto()
+}
+
+class Student {
+  - mecanographicNumber
+  - systemUser
+}
+
+class Enrolment {
+  - createdAt
+  - updatedAt
+  - state
+  - id
+
+  + accept()
+  + reject()
 }
 
 enum CourseState {
@@ -80,19 +109,27 @@ class CourseDTO {
   - createdAt
 }
 
-ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
-ManageCourseEnrolmentStateUI ..> PersistenceContext
-ManageCourseEnrolmentStateController --> CourseListService
+RequestEnrolmentUI ..> RequestEnrolmentController
+RequestEnrolmentUI ..> PersistenceContext
+RequestEnrolmentController --> CourseListService
+RequestEnrolmentController ..> Enrolment
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
+RepositoryFactory --> EnrolmentRepository
 
 CourseListService ..> Course
 CourseListService ..> CourseDTO
 CourseListService ..> CourseRepository
-ManageCourseEnrolmentStateController --> CourseRepository
+RequestEnrolmentController --> CourseRepository
+
+Enrolment --> Course
+Enrolment --> Student
 
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository
+
+EnrolmentRepository <|.. InMemoryEnrolmentRepository
+EnrolmentRepository <|.. JpaEnrolmentRepository
 
 Course --> CourseState
 Course --> CourseEnrolmentState
