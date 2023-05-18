@@ -1,0 +1,31 @@
+@startuml US1010_SSD
+autonumber
+
+actor "Teacher" as T
+participant "System" as SYS
+
+activate T
+
+T -> SYS : asks to schedule a class
+activate SYS
+SYS --> T : lists the teacher's courses
+deactivate SYS
+
+T -> SYS : selects a course
+activate SYS
+SYS --> T : asks to select the day of the week
+deactivate SYS
+
+T -> SYS : chooses a week day
+activate SYS
+SYS --> T : asks to insert the hour and duration
+deactivate SYS
+
+T -> SYS : inserts the hour and duration of the class
+activate SYS
+SYS --> T : informs the operation success
+deactivate SYS
+
+deactivate T
+
+@enduml
