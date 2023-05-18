@@ -24,8 +24,17 @@ public class AssignTeacherToCourseController {
     this.listCourseService = new ListCourseService(courseRepository);
   }
 
-  public Iterable<TeacherDTO> allTeachers() {
-    return teacherService.allTeachers();
+  public Iterable<TeacherDTO> allTeachersExceptFromCourse(CourseDTO courseDTO) {
+    Set<Teacher> teachersFromCourse = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow().teachers();
+    Iterable<TeacherDTO> allTeachers = teacherService.allTeachers();
+    Set<TeacherDTO> teachersExceptFromCourse = new HashSet<>();
+
+    for (TeacherDTO teacher : allTeachers)
+      for (Teacher t : teachersFromCourse)
+        if (!teacher.getNumber().equals(t.taxPayerNumber()))
+          teachersExceptFromCourse.add(teacher);
+
+    return teachersExceptFromCourse;
   }
 
   public Iterable<CourseDTO> allNotClosedCourses() {
