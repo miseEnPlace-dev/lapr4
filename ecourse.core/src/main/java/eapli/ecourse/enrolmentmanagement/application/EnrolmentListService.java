@@ -2,7 +2,7 @@ package eapli.ecourse.enrolmentmanagement.application;
 
 import java.util.stream.StreamSupport;
 
-import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
@@ -15,8 +15,8 @@ public class EnrolmentListService {
     this.enrolmentRepository = enrolmentRepository;
   }
 
-  public Iterable<EnrolmentDTO> listCourseEnrolment(Course course) {
-    final Iterable<Enrolment> enrolments = enrolmentRepository.findByCourseCode(course.code());
+  public Iterable<EnrolmentDTO> listCourseEnrolment(CourseCode code) {
+    final Iterable<Enrolment> enrolments = enrolmentRepository.findByCourseCode(code);
 
     return convertToDTO(enrolments);
   }

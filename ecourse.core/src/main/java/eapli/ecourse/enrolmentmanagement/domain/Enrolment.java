@@ -144,4 +144,14 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   public Course course() {
     return this.course;
   }
+
+  public void accept() {
+    this.state.changeToAccepted();
+    this.updatedAt = Calendar.getInstance();
+  }
+
+  public void reject() {
+    this.state.changeToRejected();
+    this.updatedAt = Calendar.getInstance();
+  }
 }
