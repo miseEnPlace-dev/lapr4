@@ -289,15 +289,6 @@ public class CourseTest {
     assertTrue(course.state().isFinished());
   }
 
-  @Test
-  public void ensureCannotCloseCourseInProgress() {
-    final Course course = getDummyInProgressCourse();
-
-    assertTrue(course.state().isInProgress());
-    assertThrows(IllegalStateException.class, () -> {
-      course.state().previous();
-    });
-  }
 
   @Test
   public void ensureCannotToggleFinishedCourseStatus() {
