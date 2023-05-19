@@ -51,6 +51,7 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 3.2. Conditions
 
 - The manager must be authenticated and authorized to perform the operation.
+- The course must be in a state that allows the operation to be performed. (e.g. cannot toggle the state of a finished course)
 
 ### 3.3. System Sequence Diagram
 
@@ -124,21 +125,7 @@ This is the first time this task is assigned to be developed. This is a new func
   }
 ```
 
-**Test 4:** Ensure cannot close a course that is in progress
-
-```java
-  @Test
-  public void ensureCannotCloseCourseInProgress() {
-    final Course course = getDummyInProgressCourse();
-
-    assertTrue(course.state().isInProgress());
-    assertThrows(IllegalStateException.class, () -> {
-    course.state().previous();
-    });
-  }
-```
-
-**Test 5:** Ensure cannot toggle status of a finished course
+**Test 4:** Ensure cannot toggle status of a finished course
 
 ```java
   @Test
@@ -154,8 +141,6 @@ This is the first time this task is assigned to be developed. This is a new func
     });
   }
 ```
-
-
 
 ## 5. Implementation
 
