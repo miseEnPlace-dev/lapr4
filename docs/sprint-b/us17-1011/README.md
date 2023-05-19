@@ -60,6 +60,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.1. Functionality Realization
 
+TODO - add schedule availability sd
+
 ![US1011_SD](out/US1011_SD.svg)
 
 ### 4.2. Class Diagram
