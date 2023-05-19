@@ -1,43 +1,59 @@
 package eapli.ecourse.eventsmanagement.classmanagement.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Duration;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-public class Class implements AggregateRoot<Long> {
+public class Class implements AggregateRoot<ClassID> {
   private static final long serialVersionUID = 1L;
 
   @Version
   private Long version;
 
-  // we are coupling a business concept with an implementation detail
-  // until more info from the client, we will be using this solution
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  @EmbeddedId
+  private ClassID id;
 
+  @Column(nullable = false)
   private DayInWeek dayInWeek;
-  private Duration duration;
-  private SpecialClass specialClass;
 
-  // @ManyToOne(optional = false)
-  // private Teacher scheduledBy;
+  @Column(nullable = false)
+  private Duration duration;
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<SpecialClass> specialClass;
+
+  @ManyToOne(optional = false)
+  private Teacher scheduledBy;
+
+  @Column(nullable = false)
+  private Course course;
+
+  @Column(nullable = false)
+  private Hours hours;
 
   public Class(final DayInWeek dayInWeek, final Duration duration,
-      final SpecialClass specialClass) {
-    Preconditions.noneNull(dayInWeek, duration);
+      final List<SpecialClass> specialClass, final Hours hours) {
+    Preconditions.noneNull(dayInWeek, duration, hours);
 
+    this.id = ClassID.newID();
     this.dayInWeek = dayInWeek;
     this.duration = duration;
     this.specialClass = specialClass;
+    this.hours = hours;
   }
 
   protected Class() {
@@ -51,11 +67,27 @@ public class Class implements AggregateRoot<Long> {
 
   @Override
   public boolean sameAs(Object other) {
-    return DomainEntities.areEqual(this, other);
+    if (!(other instanceof Class))
+      return false;
+
+    final Class otherClass = (Class) other;
+
+    if (this == otherClass)
+      return true;
+
+    for (SpecialClass sc : this.specialClass) {
+      if (!otherClass.specialClass().contains(sc))
+        ;
+      return false;
+    }
+
+    return this.identity().equals(otherClass.identity()) && this.course.equals(otherClass.course())
+        && this.dayInWeek.equals(otherClass.dayInWeek()) && this.duration.equals(otherClass.duration())
+        && this.hours.equals(otherClass.hours()) && this.scheduledBy.equals(otherClass.scheduledBy());
   }
 
   @Override
-  public Long identity() {
+  public ClassID identity() {
     return this.id;
   }
 
@@ -72,11 +104,19 @@ public class Class implements AggregateRoot<Long> {
     return this.duration;
   }
 
-  public SpecialClass specialClass() {
+  public Course course() {
+    return this.course;
+  }
+
+  public Hours hours() {
+    return this.hours;
+  }
+
+  public List<SpecialClass> specialClass() {
     return this.specialClass;
   }
 
-  // public Teacher scheduledBy() {
-  // return scheduledBy;
-  // }
+  public Teacher scheduledBy() {
+    return this.scheduledBy;
+  }
 }

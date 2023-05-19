@@ -1,10 +1,11 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.eventsmanagement.classmanagement.domain.Class;
+import eapli.ecourse.eventsmanagement.classmanagement.domain.ClassID;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class InMemoryClassRepository extends InMemoryDomainRepository<Class, Long>
+public class InMemoryClassRepository extends InMemoryDomainRepository<Class, ClassID>
     implements ClassRepository {
 
   static {
