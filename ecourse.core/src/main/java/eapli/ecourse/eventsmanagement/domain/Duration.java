@@ -26,6 +26,14 @@ public class Duration implements ValueObject, Comparable<Duration> {
     return new Duration(duration);
   }
 
+  public int hour() {
+    return duration / 60;
+  }
+
+  public int minute() {
+    return duration % 60;
+  }
+
   @Override
   public String toString() {
     return String.valueOf(this.duration);

@@ -2,6 +2,10 @@ package eapli.ecourse.eventsmanagement.domain;
 
 import java.util.Calendar;
 import javax.persistence.Embeddable;
+
+import eapli.ecourse.eventsmanagement.classmanagement.domain.DayInWeek;
+import eapli.ecourse.eventsmanagement.classmanagement.domain.Hours;
+import eapli.ecourse.eventsmanagement.classmanagement.domain.WeekDay;
 import eapli.framework.domain.model.ValueObject;
 import lombok.EqualsAndHashCode;
 
@@ -27,6 +31,29 @@ public class Time implements ValueObject, Comparable<Time> {
     return new Time(time);
   }
 
+  public DayInWeek dayInWeek() {
+    WeekDay weekDay[] = WeekDay.values();
+    int day = time.get(Calendar.DAY_OF_WEEK);
+
+    return DayInWeek.valueOf(weekDay[day - 1]);
+  }
+
+  public int hour() {
+    return time.get(Calendar.HOUR_OF_DAY);
+  }
+
+  public int minute() {
+    return time.get(Calendar.MINUTE);
+  }
+
+  public Time addDuration(Duration duration) {
+    Calendar calendar = time;
+    calendar.add(Calendar.HOUR_OF_DAY, duration.hour());
+    calendar.add(Calendar.MINUTE, duration.minute());
+
+    return Time.valueOf(calendar);
+  }
+
   @Override
   public String toString() {
     return this.time.toString();
@@ -36,4 +63,11 @@ public class Time implements ValueObject, Comparable<Time> {
   public int compareTo(final Time arg0) {
     return time.compareTo(arg0.time);
   }
+
+  public int compareHours(final Hours hours) {
+    Hours thisHours = Hours.valueOf(this.time);
+
+    return thisHours.compareTo(hours);
+  }
+
 }

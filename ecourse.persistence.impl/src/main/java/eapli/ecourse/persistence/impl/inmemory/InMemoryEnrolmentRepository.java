@@ -44,4 +44,9 @@ public class InMemoryEnrolmentRepository
     return matchOne(e -> e.student().mecanographicNumber().equals(studentID)
         && e.course().code().equals(courseCode));
   }
+
+  @Override
+  public Iterable<Enrolment> findEnroledCoursesByStudent(MecanographicNumber studentID) {
+    return match(e -> e.student().mecanographicNumber().equals(studentID) && e.isAccepted());
+  }
 }
