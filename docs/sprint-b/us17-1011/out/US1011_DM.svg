@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="270px" preserveAspectRatio="none" style="width:1022px;height:270px;background:#FFFFFF;" version="1.1" viewBox="0 0 1022 270" width="1022px" zoomAndPan="magnify"><defs/><g><!--MD5=[07b6c462b4cc7627a92e62d67d168e36]
+cluster <<aggregate>> ExtraordinaryClass--><g id="cluster_&lt;&lt;aggregate&gt;&gt; ExtraordinaryClass"><path d="M8.5,6 L291.5,6 A3.75,3.75 0 0 1 294,8.5 L301,28.2969 L306.5,28.2969 A2.5,2.5 0 0 1 309,30.7969 L309,253.5 A2.5,2.5 0 0 1 306.5,256 L8.5,256 A2.5,2.5 0 0 1 6,253.5 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="301" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="282" x="10" y="20.9951">&lt;&lt;aggregate&gt;&gt; ExtraordinaryClass</text></g><!--MD5=[58b45488df0a3248650bf631dc2ea132]
+cluster <<aggregate>> Course--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Course"><path d="M335.5,158 L527.5,158 A3.75,3.75 0 0 1 530,160.5 L537,180.2969 L537.5,180.2969 A2.5,2.5 0 0 1 540,182.7969 L540,260.5 A2.5,2.5 0 0 1 537.5,263 L335.5,263 A2.5,2.5 0 0 1 333,260.5 L333,160.5 A2.5,2.5 0 0 1 335.5,158 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="333" x2="537" y1="180.2969" y2="180.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="191" x="337" y="172.9951">&lt;&lt;aggregate&gt;&gt; Course</text></g><!--MD5=[a83252410681a5ed1f47a8e4d10c71f1]
+cluster <<aggregate>> Teacher--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Teacher"><path d="M566.5,158 L766.5,158 A3.75,3.75 0 0 1 769,160.5 L776,180.2969 L776.5,180.2969 A2.5,2.5 0 0 1 779,182.7969 L779,260.5 A2.5,2.5 0 0 1 776.5,263 L566.5,263 A2.5,2.5 0 0 1 564,260.5 L564,160.5 A2.5,2.5 0 0 1 566.5,158 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="564" x2="776" y1="180.2969" y2="180.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="199" x="568" y="172.9951">&lt;&lt;aggregate&gt;&gt; Teacher</text></g><!--MD5=[b7bf1eec9a4925954e684954daad3e83]
+cluster <<aggregate>> Student--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Student"><path d="M805.5,158 L1002.5,158 A3.75,3.75 0 0 1 1005,160.5 L1012,180.2969 L1012.5,180.2969 A2.5,2.5 0 0 1 1015,182.7969 L1015,260.5 A2.5,2.5 0 0 1 1012.5,263 L805.5,263 A2.5,2.5 0 0 1 803,260.5 L803,160.5 A2.5,2.5 0 0 1 805.5,158 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="803" x2="1012" y1="180.2969" y2="180.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="196" x="807" y="172.9951">&lt;&lt;aggregate&gt;&gt; Student</text></g><!--MD5=[3d94e7e0003c8844ca1c1ff031a3be26]
+class ExtraordinaryClass--><g id="elem_ExtraordinaryClass"><rect codeLine="18" fill="#F5F5DC" height="54.2344" id="ExtraordinaryClass" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158" x="135" y="41"/><ellipse cx="150" cy="68.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M154.1094,74.1172 L146.3906,74.1172 L146.3906,61.7266 L154.1094,61.7266 L154.1094,63.8828 L148.8438,63.8828 L148.8438,66.5547 L153.6094,66.5547 L153.6094,68.7109 L148.8438,68.7109 L148.8438,71.9609 L154.1094,71.9609 L154.1094,74.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="202" y="57.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="207" y="71.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="164" y="86.9326">ExtraordinaryClass</text></g><!--MD5=[2e42295458bb0bec21c9622a623eb29e]
+class Time--><g id="elem_Time"><rect codeLine="15" fill="#F5F5DC" height="40.2656" id="Time" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="22" y="200"/><ellipse cx="37" cy="220.1328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M37.1094,224.5859 L39.2969,214.2422 L41.7656,214.2422 L38.8125,226.6328 L35.4219,226.6328 L32.4688,214.2422 L34.9375,214.2422 L37.1094,224.5859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="49" y="216.1387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="77" y="231.9639">Time</text></g><!--MD5=[a31224ed21acde414907719b8b5d2974]
+class Duration‎--><g id="elem_Duration‎"><rect codeLine="16" fill="#F5F5DC" height="40.2656" id="Duration‎" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="175" y="200"/><ellipse cx="190" cy="220.1328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M190.1094,224.5859 L192.2969,214.2422 L194.7656,214.2422 L191.8125,226.6328 L188.4219,226.6328 L185.4688,214.2422 L187.9375,214.2422 L190.1094,224.5859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="202" y="216.1387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="59" x="217.5" y="231.9639">Duration‎</text></g><!--MD5=[4066b0363c5a91ff3b6e03e0428953a9]
+class Course--><g id="elem_Course"><rect codeLine="25" fill="#F5F5DC" height="54.2344" id="Course" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="349" y="193"/><ellipse cx="364" cy="220.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M368.1094,226.1172 L360.3906,226.1172 L360.3906,213.7266 L368.1094,213.7266 L368.1094,215.8828 L362.8438,215.8828 L362.8438,218.5547 L367.6094,218.5547 L367.6094,220.7109 L362.8438,220.7109 L362.8438,223.9609 L368.1094,223.9609 L368.1094,226.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="378" y="209.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="383" y="223.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="378" y="238.9326">Course</text></g><!--MD5=[61a83f88cb8b7d3a80bc8c481f3736bf]
+class Teacher--><g id="elem_Teacher"><rect codeLine="32" fill="#F5F5DC" height="54.2344" id="Teacher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="89" x="579.5" y="193"/><ellipse cx="594.5" cy="220.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M598.6094,226.1172 L590.8906,226.1172 L590.8906,213.7266 L598.6094,213.7266 L598.6094,215.8828 L593.3438,215.8828 L593.3438,218.5547 L598.1094,218.5547 L598.1094,220.7109 L593.3438,220.7109 L593.3438,223.9609 L598.6094,223.9609 L598.6094,226.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="612" y="209.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="617" y="223.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="608.5" y="238.9326">Teacher</text></g><!--MD5=[d6181cb537bdc20c0a3007a98a56832d]
+class Student--><g id="elem_Student"><rect codeLine="39" fill="#F5F5DC" height="54.2344" id="Student" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="87" x="819.5" y="193"/><ellipse cx="834.5" cy="220.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M838.6094,226.1172 L830.8906,226.1172 L830.8906,213.7266 L838.6094,213.7266 L838.6094,215.8828 L833.3438,215.8828 L833.3438,218.5547 L838.1094,218.5547 L838.1094,220.7109 L833.3438,220.7109 L833.3438,223.9609 L838.6094,223.9609 L838.6094,226.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="851" y="209.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="856" y="223.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="848.5" y="238.9326">Student</text></g><!--MD5=[7b155e9d0a87c7271cefeaee965cd6ba]
+link ExtraordinaryClass to Teacher--><g id="link_ExtraordinaryClass_Teacher"><path codeLine="42" d="M293.39,94.37 C321.77,103.68 353.92,114.52 383,125 C449.78,149.07 525.98,179.25 574.5,198.83 " fill="none" id="ExtraordinaryClass-to-Teacher" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="579.4,200.8,572.5556,193.7181,574.7646,198.9258,569.5568,201.1348,579.4,200.8" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="424" y="138.0669">scheduled by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="563.3506" y="193.4363">1</text></g><!--MD5=[81f5fb179379282cf90eb27519737252]
+link ExtraordinaryClass to Student--><g id="link_ExtraordinaryClass_Student"><path codeLine="43" d="M293.21,77.81 C387.49,89.4 549.11,112.77 684,150 C729.32,162.51 779.09,182.2 814.62,197.35 " fill="none" id="ExtraordinaryClass-to-Student" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="819.31,199.37,812.6134,192.1481,814.7143,197.4004,809.462,199.5013,819.31,199.37" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="647" y="138.0669">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="788.5489" y="192.474">1..*</text></g><!--MD5=[34ad2a576fb1f384766114c35329a23f]
+link ExtraordinaryClass to Course--><g id="link_ExtraordinaryClass_Course"><path codeLine="44" d="M244.66,95.13 C275.6,121.5 323.31,162.16 355.55,189.64 " fill="none" id="ExtraordinaryClass-to-Course" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="359.4,192.92,355.1341,184.0429,355.5907,189.6813,349.9523,190.1379,359.4,192.92" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="298" y="138.0669">is related to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="343.3987" y="181.9785">1</text></g><!--MD5=[15501e3f8ae241b5379841d26564c88b]
+link ExtraordinaryClass to Time--><g id="link_ExtraordinaryClass_Time"><path codeLine="46" d="M190.83,95.13 C165.58,123.61 125.56,168.74 101.44,195.95 " fill="none" id="ExtraordinaryClass-to-Time" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="98,199.83,106.9612,195.7438,101.3147,196.0867,100.9718,190.4402,98,199.83" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="165" y="138.0669">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="93.6563" y="189.096">1</text></g><!--MD5=[3507df7d578d64bc1470b90a916e6bcd]
+link ExtraordinaryClass to Duration‎--><g id="link_ExtraordinaryClass_Duration‎"><path codeLine="47" d="M217.48,95.13 C221.22,123.14 227.1,167.27 230.75,194.6 " fill="none" id="ExtraordinaryClass-to-Duration‎" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="231.44,199.83,234.1958,190.3746,230.7689,194.8752,226.2682,191.4483,231.44,199.83" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23" x="225" y="138.0669">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="221.595" y="189.096">1</text></g><!--MD5=[30f2b0466ca5f3a6c64f9e952e245361]
+@startuml US1011_DM
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> ExtraordinaryClass" {
+  entity ExtraordinaryClass
+
+  class Time
+  class Duration‎
+}
+
+class Time <<(V,#FF8B40) value object>> {}
+class Duration‎ <<(V,#FF8B40) value object>> {}
+
+entity ExtraordinaryClass <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Course" {
+    entity Course
+}
+
+entity Course <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Student" {
+    entity Student
+}
+
+entity Student <<entity>> <<root>> {
+}
+
+ExtraordinaryClass - -> "1" Teacher : scheduled by
+ExtraordinaryClass - -> "1..*" Student : has
+ExtraordinaryClass - -> "1" Course : is related to
+
+ExtraordinaryClass - -> "1" "Time" : has
+ExtraordinaryClass - -> "1" "Duration‎" : has
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

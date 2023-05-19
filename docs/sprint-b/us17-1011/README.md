@@ -54,8 +54,6 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 3.3. Partial Domain Model
 
-**Note:** The domain model was made in a way to avoid the synchronization problems, as several clients will try to concurrently update boards.
-
 ![US1011_DM](out/US1011_DM.svg)
 
 ## 4. Design
