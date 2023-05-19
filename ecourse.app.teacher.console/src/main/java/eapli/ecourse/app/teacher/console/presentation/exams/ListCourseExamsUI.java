@@ -5,7 +5,7 @@ import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.exam.ExamPrinter;
-import eapli.ecourse.coursemanagement.application.ListCourseExamsController;
+import eapli.ecourse.exammanagement.application.ListCourseExamsController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
