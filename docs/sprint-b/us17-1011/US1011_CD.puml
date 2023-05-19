@@ -1,0 +1,124 @@
+@startuml US1011_CD
+
+class ListCourseService {
+  - courseRepository
+
+  + ListCourseService(courseRepository)
+
+  + listAllInProgressLecturedByTeacher(teacher)
+}
+
+class EnrolmentListService {
+  - enrolmentRepository
+
+  + EnrolmentListService(enrolmentRepository)
+
+  + listStudentsEnrolled(course)
+}
+
+class ScheduleExtraClassUI {}
+
+class ScheduleExtraClassController {
+  - courseRepository
+  - enrolmentRepository
+  - ListEnrolmentService
+  - ListCourseService
+
+  + ScheduleExtraClassController(courseRepository, enrolmentRepository)
+
+  + listAllInProgressLecturedByTeacher(teacher)
+  + listStudentsEnrolled(course)
+  + createExtraClass(course, teacher, date, duration, students)
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+
+  + toDto()
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
+class Enrolment{
+  - id
+  - student
+  - course
+  - state
+  - createdAt
+  - updatedAt
+
+  + toDto()
+}
+
+class EnrolmentDTO {
+  - id
+  - student
+  - course
+  - state
+  - createdAt
+  - updatedAt
+}
+
+class EnrolmentDTOParser {
+  + valueOf(enrolmentDTO)
+}
+
+class ExtraClass {
+  - time
+  - duration
+  - student
+  - teacher
+  - course
+
+  + ExtraClass(time, duration, student, teacher, course)
+}
+
+class ScheduleExtraClassService {
+  + areAllAvailable(users, time, duration)
+}
+
+
+
+ScheduleExtraClassUI ..> ScheduleExtraClassController
+ScheduleExtraClassController --> ListCourseService
+ScheduleExtraClassController --> EnrolmentListService
+ScheduleExtraClassController --> ScheduleExtraClassService
+
+ListCourseService ..> Course
+EnrolmentListService ..> Enrolment
+
+ScheduleExtraClassController --> ExtraClass
+
+
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
+
+EnrolmentDTOParser ..> EnrolmentDTO
+EnrolmentDTOParser ..> Enrolment
+
+Course --> CourseEnrolmentState
+
+@enduml
