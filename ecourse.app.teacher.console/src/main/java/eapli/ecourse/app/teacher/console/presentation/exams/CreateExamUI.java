@@ -1,6 +1,7 @@
 package eapli.ecourse.app.teacher.console.presentation.exams;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
@@ -21,12 +22,16 @@ public class CreateExamUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = this.ctrl.listInProgressCourses();
+    final Iterable<CourseDTO> courses = this.ctrl.listInProgressCoursesOfAuthenticatedTeacher();
 
+    System.out.println("Select the course where the exam will be created:");
     final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), courses,
         new CoursePrinter());
     selector.show();
     final CourseDTO selectedCourse = selector.selectedElement();
+
+    if (selectedCourse == null)
+      return false;
 
     String filePath = Console.readLine("Enter the file path where the exam is defined: ");
 
@@ -34,8 +39,10 @@ public class CreateExamUI extends AbstractUI {
       this.ctrl.parseExam(filePath);
     } catch (IOException ex) {
       System.out.println("The specified file does not exist.");
+      return false;
     } catch (ParseException ex) {
       System.out.println(ex.getMessage());
+      return false;
     }
 
     Time startTime = Time.valueOf(
@@ -46,7 +53,9 @@ public class CreateExamUI extends AbstractUI {
 
     this.ctrl.createExam(selectedCourse, startTime, endTime);
 
-    return true;
+    System.out.println("Exam created successfully.");
+
+    return false;
   }
 
   @Override

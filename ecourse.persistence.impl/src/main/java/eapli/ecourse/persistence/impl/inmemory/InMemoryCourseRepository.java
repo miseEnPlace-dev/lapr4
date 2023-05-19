@@ -5,6 +5,7 @@ import java.util.Optional;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 public class InMemoryCourseRepository extends
@@ -41,6 +42,12 @@ public class InMemoryCourseRepository extends
   @Override
   public Iterable<Course> findAllInProgress() {
     return match(e -> e.state().isInProgress());
+  }
+
+  @Override
+  public Iterable<Course> findAllInProgressLecturedByTeacher(Teacher teacher) {
+    return match(
+        e -> e.state().isInProgress() && (e.teachers().contains(teacher) | e.teacherInCharge().equals(teacher)));
   }
 
   @Override

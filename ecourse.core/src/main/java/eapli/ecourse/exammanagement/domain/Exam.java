@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +24,7 @@ import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
+import net.bytebuddy.utility.nullability.MaybeNull;
 
 /**
  * Abstract class that describes an exam.
@@ -37,10 +39,10 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @EmbeddedId
   private ExamCode code;
 
-  @Column(nullable = false)
+  @ManyToOne
   private Course course;
 
-  @Column(nullable = false)
+  @ManyToOne
   private Teacher teacher;
 
   @Column(nullable = false)
@@ -77,9 +79,18 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.title = title;
     this.description = description;
     this.state = new ExamState(State.DRAFT);
-    this.startTime = starTime;
-    this.endTime = endTime;
+    setDates(starTime, endTime);
     this.sections = new ArrayList<>(sections);
+  }
+
+  private void setDates(Time startTime, Time endTime) {
+    if (endTime.compareTo(startTime) < 0) {
+      this.startTime = endTime;
+      this.endTime = startTime;
+    } else {
+      this.startTime = startTime;
+      this.endTime = endTime;
+    }
   }
 
   @Override

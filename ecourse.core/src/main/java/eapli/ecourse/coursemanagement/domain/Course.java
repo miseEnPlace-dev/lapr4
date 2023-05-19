@@ -8,8 +8,8 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -49,7 +49,7 @@ public class Course implements AggregateRoot<CourseCode> {
   @ManyToOne
   private Teacher teacherInCharge;
 
-  @OneToMany
+  @ManyToMany
   @AttributeOverride(name = "id", column = @Column(name = "teacher_id"))
   private Set<Teacher> teachers;
 

@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -50,6 +54,16 @@ class JpaCourseRepository
   @Override
   public Iterable<Course> findAllInProgress() {
     return match("e.courseState = :state", "state", new CourseState(CourseState.State.IN_PROGRESS));
+  }
+
+  @Override
+  public Iterable<Course> findAllInProgressLecturedByTeacher(Teacher teacher) {
+    final TypedQuery<Course> query = entityManager().createQuery(
+        "SELECT c FROM Course c JOIN c.teachers t WHERE (t.taxPayerNumber = :number OR c.teacherInCharge.taxPayerNumber = :number) AND c.courseState = 'IN_PROGRESS'",
+        Course.class);
+    query.setParameter("number", teacher.taxPayerNumber());
+    query.setParameter("number", teacher.taxPayerNumber());
+    return query.getResultList();
   }
 
   @Override

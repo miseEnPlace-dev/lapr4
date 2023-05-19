@@ -6,6 +6,7 @@ import java.util.stream.StreamSupport;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.teachermanagement.domain.Teacher;
 
 public class ListCourseService {
   private CourseRepository courseRepository;
@@ -36,6 +37,11 @@ public class ListCourseService {
 
   public Iterable<CourseDTO> listInProgressCourses() {
     final Iterable<Course> courses = courseRepository.findAllInProgress();
+    return convertToDto(courses);
+  }
+
+  public Iterable<CourseDTO> listInProgressCoursesThatTeacherLectures(Teacher teacher) {
+    final Iterable<Course> courses = courseRepository.findAllInProgressLecturedByTeacher(teacher);
     return convertToDto(courses);
   }
 
