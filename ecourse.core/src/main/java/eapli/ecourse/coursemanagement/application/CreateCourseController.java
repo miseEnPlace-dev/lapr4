@@ -35,13 +35,10 @@ public class CreateCourseController {
 
     Preconditions.noneNull(code, title, description, min, max, teacherDTO);
 
-    Optional<Teacher> teacher = teacherRepository.findByTaxPayerNumber(teacherDTO.getNumber());
-
-    if (!teacher.isPresent())
-      throw new IllegalArgumentException("There is no teacher with the given tax payer number");
+    Teacher teacher = teacherRepository.findByTaxPayerNumber(teacherDTO.getNumber()).orElseThrow();
 
     Course course = new CourseBuilder().withCode(code).withTitle(title).withDescription(description)
-        .withEnrolmentLimits(min, max).withTeacher(teacher.get()).build();
+        .withEnrolmentLimits(min, max).withTeacher(teacher).build();
 
     if (courseRepository.containsOfIdentity(course.code()))
       throw new IllegalStateException("There is already a course with that code.");

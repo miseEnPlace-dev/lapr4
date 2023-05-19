@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
@@ -19,22 +21,28 @@ public class EvaluationExam extends Exam {
   private Long version;
 
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private ExamInfo feedbackInfo;
 
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private ExamInfo gradeInfo;
 
   @Column(nullable = false)
   private Score score;
 
   public EvaluationExam(Course course, Teacher teacher, Identifier identifier, Title title,
-      Description description, ExamState state, Collection<Section> sections, Time startTime, Time endTime,
+      Description description, Collection<Section> sections, Time startTime, Time endTime,
       ExamInfo feedbackInfo,
       ExamInfo gradeInfo, Score score) {
-    super(course, teacher, identifier, title, description, state, startTime, endTime, sections);
+    super(course, teacher, identifier, title, description, startTime, endTime, sections);
     this.feedbackInfo = feedbackInfo;
     this.gradeInfo = gradeInfo;
     this.score = score;
+  }
+
+  protected EvaluationExam() {
+    // For ORM only
   }
 
   @Override

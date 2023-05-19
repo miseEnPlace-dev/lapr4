@@ -5,12 +5,21 @@ import java.util.Optional;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.DomainRepository;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
 /**
  * TODO: not completed yet
  *
  */
 public interface TeacherRepository extends DomainRepository<TaxPayerNumber, Teacher> {
+  /**
+   * Returns the teacher with the given username.
+   *
+   * @param name
+   * @return
+   */
+  Optional<Teacher> findByUsername(final Username name);
+
   /**
    * Returns the teacher with the given tax payer number.
    *

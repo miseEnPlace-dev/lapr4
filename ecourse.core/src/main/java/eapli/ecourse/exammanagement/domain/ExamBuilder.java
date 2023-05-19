@@ -12,24 +12,17 @@ import eapli.framework.validations.Preconditions;
 public class ExamBuilder implements DomainFactory<EvaluationExam> {
   private EvaluationExam exam;
 
-  private ExamCode code;
   private Course course;
   private Teacher teacher;
   private Identifier identifier;
   private Title title;
   private Description description;
-  private ExamState state;
   private List<Section> sections;
   private Time startTime;
   private Time endTime;
   private ExamInfo feedbackInfo;
   private ExamInfo gradeInfo;
   private Score score;
-
-  public ExamBuilder withCode(ExamCode code) {
-    this.code = code;
-    return this;
-  }
 
   public ExamBuilder withCourse(Course course) {
     this.course = course;
@@ -53,11 +46,6 @@ public class ExamBuilder implements DomainFactory<EvaluationExam> {
 
   public ExamBuilder withDescription(Description description) {
     this.description = description;
-    return this;
-  }
-
-  public ExamBuilder withState(ExamState state) {
-    this.state = state;
     return this;
   }
 
@@ -95,9 +83,9 @@ public class ExamBuilder implements DomainFactory<EvaluationExam> {
     if (exam != null)
       return exam;
 
-    Preconditions.noneNull(code, course, teacher, identifier, title, description, state, sections);
+    Preconditions.noneNull(course, teacher, identifier, title, description, sections);
 
-    exam = new EvaluationExam(course, teacher, identifier, title, description, state, sections, startTime, endTime,
+    exam = new EvaluationExam(course, teacher, identifier, title, description, sections, startTime, endTime,
         feedbackInfo, gradeInfo, score);
     return exam;
   }

@@ -1,13 +1,16 @@
 package eapli.ecourse.exammanagement.domain;
 
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import eapli.framework.domain.model.ValueObject;
+import lombok.EqualsAndHashCode;
 
 /**
  * Enum that represents the state of an exam.
  */
+@Embeddable
 public class ExamState implements ValueObject {
   /**
    * Enum that represents the state of an exam.

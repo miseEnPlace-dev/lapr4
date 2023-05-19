@@ -5,6 +5,7 @@ import java.util.Optional;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 public class InMemoryTeacherRepository extends
@@ -12,6 +13,11 @@ public class InMemoryTeacherRepository extends
 
   static {
     InMemoryInitializer.init();
+  }
+
+  @Override
+  public Optional<Teacher> findByUsername(final Username name) {
+    return matchOne(e -> e.user().username().equals(name));
   }
 
   @Override

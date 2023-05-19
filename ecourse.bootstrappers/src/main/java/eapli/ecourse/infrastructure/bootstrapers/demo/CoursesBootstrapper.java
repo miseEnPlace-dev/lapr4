@@ -40,6 +40,7 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
     courseBootstrapperBase.createClosedCourse("1234", "Matemática", "Matemática simples", 1, 20, t);
     courseBootstrapperBase.createClosedCourse("4321", "ESINF", "Estruturas de Informação ", 5, 80, t);
     courseBootstrapperBase.createOpenCourse("2222", "EAPLI", "Engenharia de Aplicações", 10, 200, t);
+    courseBootstrapperBase.createInProgressCourse("4444", "LPROG", "Linguagens e Programação", 1, 190, t);
 
     return true;
   }

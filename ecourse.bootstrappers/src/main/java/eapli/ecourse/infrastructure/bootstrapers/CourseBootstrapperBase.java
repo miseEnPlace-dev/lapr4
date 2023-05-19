@@ -41,4 +41,17 @@ public class CourseBootstrapperBase {
       System.out.println(e);
     }
   }
+
+  public void createInProgressCourse(final String code, final String title, final String description, final int min,
+      final int max, final TeacherDTO teacher) {
+    try {
+      Course c = createCourseCtrl.createCourse(code, title, description, min, max, teacher);
+      toggleCourseStatusCtrl.toggleToNextCourseStatus(c.toDto());
+      toggleCourseStatusCtrl.toggleToNextCourseStatus(c.toDto());
+    } catch (final Exception e) {
+      LOGGER.warn("Assuming {} already exists (activate trace log for details)", code);
+      LOGGER.trace("Assuming existing record", e);
+      System.out.println(e);
+    }
+  }
 }

@@ -18,6 +18,7 @@ import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.exammanagement.domain.ExamState.State;
 import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -48,11 +49,9 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @Column(nullable = false)
   private Title title;
 
-  @Temporal(TemporalType.TIMESTAMP)
   @AttributeOverride(name = "time", column = @Column(name = "startTime"))
   private Time startTime;
 
-  @Temporal(TemporalType.TIMESTAMP)
   @AttributeOverride(name = "time", column = @Column(name = "endTime"))
   private Time endTime;
 
@@ -70,14 +69,14 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   }
 
   public Exam(Course course, Teacher teacher, Identifier identifier, Title title, Description description,
-      ExamState state, Time starTime, Time endTime, Collection<Section> sections) {
+      Time starTime, Time endTime, Collection<Section> sections) {
     this.code = ExamCode.newID();
     this.course = course;
     this.teacher = teacher;
     this.identifier = identifier;
     this.title = title;
     this.description = description;
-    this.state = state;
+    this.state = new ExamState(State.DRAFT);
     this.startTime = starTime;
     this.endTime = endTime;
     this.sections = new ArrayList<>(sections);
@@ -92,6 +91,10 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
 
   public Course course() {
     return this.course;
+  }
+
+  public void publish() {
+    this.state.changeToPublished();
   }
 
   public ExamDTO toDto() {

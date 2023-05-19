@@ -11,12 +11,6 @@ system -> manager : Lists all available courses and asks to select one
 manager -> system : Selects a course
 system -> manager : Asks if he wants to set regular teachers\nor teacher in charge
 manager -> system : Selects an option
-opt Set regular teachers
-    system -> manager : Lists all available teachers and asks to select one
-    manager -> system : Selects a teacher
-    system -> manager : Informs operation success\nand asks if he wants to set another teacher
-else Set teacher in charge
-    system -> manager : Lists all teachers of the selected course\nand asks to select one
-    manager -> system : Selects a teacher
-    system -> manager : Informs operation success
-end
+system -> manager : Lists all available teachers and asks to select one
+manager -> system : Selects a teacher
+system -> manager : Informs operation success\nand asks if he wants to set another teacher
