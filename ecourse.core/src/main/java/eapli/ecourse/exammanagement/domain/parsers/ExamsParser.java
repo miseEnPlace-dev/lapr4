@@ -7,10 +7,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.ExamBuilder;
+import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
 
 public class ExamsParser {
-  public static ExamBuilder parseWithVisitor(String filePath) throws IOException, ParseException {
+  public static EvaluationExamBuilder parseWithVisitor(String filePath) throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(filePath));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     ExamParser parser = new ExamParser(tokens);
@@ -20,6 +20,6 @@ public class ExamsParser {
       throw new ParseException();
 
     ExamsVisitor eval = new ExamsVisitor();
-    return (ExamBuilder) eval.visit(tree);
+    return (EvaluationExamBuilder) eval.visit(tree);
   }
 }

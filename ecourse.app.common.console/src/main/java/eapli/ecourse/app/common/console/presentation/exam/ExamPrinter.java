@@ -1,6 +1,6 @@
 package eapli.ecourse.app.common.console.presentation.exam;
 
-import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
+import eapli.ecourse.exammanagement.dto.ExamDTO;
 import eapli.framework.visitor.Visitor;
 
 public class ExamPrinter implements Visitor<ExamDTO> {

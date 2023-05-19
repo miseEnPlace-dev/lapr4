@@ -1,18 +1,17 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.ExamListService;
-import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.dto.ExamDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
-
-
-import java.util.Optional;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class ListCourseExamsController {
 
@@ -24,7 +23,8 @@ public class ListCourseExamsController {
 
   private final ExamListService examService;
 
-  public ListCourseExamsController(AuthorizationService authz, CourseRepository courseRepository, ExamRepository examRepository) {
+  public ListCourseExamsController(AuthorizationService authz, CourseRepository courseRepository,
+      ExamRepository examRepository) {
     this.authz = authz;
     this.courseRepository = courseRepository;
     this.service = new ListCourseService(courseRepository);
@@ -35,7 +35,8 @@ public class ListCourseExamsController {
     Iterable<CourseDTO> openCourses = this.service.listOpenCourses();
 
     Iterable<CourseDTO> inProgressCourses = this.service.listInProgressCourses();
-    Stream<CourseDTO> combinedStream = Stream.concat(StreamSupport.stream(openCourses.spliterator(), false), StreamSupport.stream(inProgressCourses.spliterator(), false));
+    Stream<CourseDTO> combinedStream = Stream.concat(StreamSupport.stream(openCourses.spliterator(), false),
+        StreamSupport.stream(inProgressCourses.spliterator(), false));
 
     return combinedStream::iterator;
   }
