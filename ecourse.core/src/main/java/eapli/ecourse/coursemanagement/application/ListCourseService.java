@@ -18,7 +18,7 @@ public class ListCourseService {
   }
 
   public Optional<CourseDTO> findByCode(final CourseCode code) {
-    final Optional<Course> courses = courseRepository.findByCode(code);
+    final Optional<Course> courses = courseRepository.ofIdentity(code);
     return convertToDTO(courses);
   }
 
@@ -59,8 +59,8 @@ public class ListCourseService {
 
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
     return StreamSupport.stream(courses.spliterator(), true)
-      .map(Course::toDto)
-      .collect(Collectors.toUnmodifiableList());
+        .map(Course::toDto)
+        .collect(Collectors.toUnmodifiableList());
 
   }
 

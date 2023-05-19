@@ -2,6 +2,7 @@ package eapli.ecourse.coursemanagement.domain;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -69,6 +70,7 @@ public class Course implements AggregateRoot<CourseCode> {
     this.courseState = courseState;
     this.enrolmentState = enrolmentState;
     this.teacherInCharge = teacher;
+    this.teachers = new HashSet<>();
     this.createdAt = Calendar.getInstance();
   }
 

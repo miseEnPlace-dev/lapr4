@@ -27,7 +27,7 @@ public class AssignTeacherToCourseController {
     return teacherService.allTeachersExceptFromCourse(teachersFromCourse);
   }
 
-  public Iterable<CourseDTO> allNotClosedCourses() {
+  public Iterable<CourseDTO> allNotFinishedCourses() {
     return listCourseService.listNotFinishedCourses();
   }
 

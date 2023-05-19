@@ -1,7 +1,5 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import java.util.Optional;
-
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -13,11 +11,6 @@ public class InMemoryCourseRepository extends
 
   static {
     InMemoryInitializer.init();
-  }
-
-  @Override
-  public Optional<Course> findByCode(final CourseCode code) {
-    return Optional.of(data().get(code));
   }
 
   @Override

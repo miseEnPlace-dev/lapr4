@@ -9,16 +9,6 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 public interface CourseRepository extends DomainRepository<CourseCode, Course> {
   /**
-   * Returns the course with the given code.
-   *
-   * @param code
-   * @return
-   */
-  default Optional<Course> findByCode(final CourseCode code) {
-    return ofIdentity(code);
-  }
-
-  /**
    * Returns the courses that are opened for enrollment.
    *
    * @return

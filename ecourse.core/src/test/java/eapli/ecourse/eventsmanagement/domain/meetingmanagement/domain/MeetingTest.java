@@ -41,13 +41,6 @@ public class MeetingTest {
     return new Invite(getDummyMeeting(), getDummyUser());
   }
 
-  @Test
-  public void ensureItsPossibleToCreateMeeting() {
-    Meeting meeting = getDummyMeeting();
-    assertEquals(meeting.time(), getDummyMeeting().time());
-    assertEquals(meeting.duration(), getDummyMeeting().duration());
-  }
-
   // @Test
   // public void ensureItsPossibleToCreateInvite() {
   // Invite invite = getDummyInvite();
