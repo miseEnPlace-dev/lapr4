@@ -1,6 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
 import java.util.Calendar;
+import java.util.Optional;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
@@ -15,6 +16,11 @@ public class InMemoryExamRepository extends InMemoryDomainRepository<EvaluationE
   static {
     InMemoryInitializer.init();
   }
+
+  public Optional<EvaluationExam> findByCode(final ExamCode examCode) {
+    return Optional.of(data().get(examCode));
+  }
+
 
   @Override
   public Iterable<EvaluationExam> findAllCourseExams(Course course) {

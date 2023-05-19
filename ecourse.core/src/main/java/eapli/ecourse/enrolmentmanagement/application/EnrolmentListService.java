@@ -6,6 +6,7 @@ import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
+import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 
 public class EnrolmentListService {
 
@@ -15,8 +16,14 @@ public class EnrolmentListService {
     this.enrolmentRepository = enrolmentRepository;
   }
 
-  public Iterable<EnrolmentDTO> listCourseEnrolment(CourseCode code) {
-    final Iterable<Enrolment> enrolments = enrolmentRepository.findByCourseCode(code);
+  public Iterable<EnrolmentDTO> listPendingCourseApplications(CourseCode code) {
+    final Iterable<Enrolment> enrolments = enrolmentRepository.findPendingByCourseCode(code);
+
+    return convertToDTO(enrolments);
+  }
+
+  public Iterable<EnrolmentDTO> findByStudentMecanographicNumber(MecanographicNumber studentID) {
+    final Iterable<Enrolment> enrolments = enrolmentRepository.findByStudentMecanographicNumber(studentID);
 
     return convertToDTO(enrolments);
   }

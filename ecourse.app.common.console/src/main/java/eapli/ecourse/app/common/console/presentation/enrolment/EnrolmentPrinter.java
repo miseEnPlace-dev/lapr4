@@ -11,7 +11,7 @@ public class EnrolmentPrinter implements Visitor<EnrolmentDTO> {
   public void visit(final EnrolmentDTO visitee) {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-    System.out.printf("%-10s%-20s%-30s%-5s%-5s%-8s%-16s%-20s", visitee.getCourseCode(), visitee.getStudentNumber(),
+    System.out.printf("%-10s%-20s%-30s%-5s%-5s", visitee.getCourseCode(), visitee.getStudentNumber(),
         visitee.getStudentName(), formatter.format(visitee.getCreatedAt().getTime()), visitee.getState());
   }
 

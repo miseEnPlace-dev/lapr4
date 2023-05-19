@@ -31,9 +31,9 @@ public class RespondCourseApplicationsUI extends AbstractUI {
     courseSelector.show();
     final CourseDTO selectedCourse = courseSelector.selectedElement();
 
-    final Iterable<EnrolmentDTO> enrolments = this.theController.listCourseApplications(selectedCourse);
+    final Iterable<EnrolmentDTO> enrolments = this.theController.listPendingCourseApplications(selectedCourse);
     if (!enrolments.iterator().hasNext()) {
-      System.out.println("There are no applications for this course");
+      System.out.println("There are no pending applications for this course");
       return false;
     }
 

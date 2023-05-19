@@ -1,5 +1,5 @@
 package eapli.ecourse.exammanagement.domain;
 
-public class ExamTest {
+public class SectionTest {
 
 }
