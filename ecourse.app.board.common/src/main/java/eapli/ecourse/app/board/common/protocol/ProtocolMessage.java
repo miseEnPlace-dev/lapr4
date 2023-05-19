@@ -12,7 +12,14 @@ public class ProtocolMessage {
   private int dataLength;
   private byte[] data;
 
-  public ProtocolMessage(byte protocolVersion, MessageCode code, int dataLength, byte[] data) {
+  public ProtocolMessage(MessageCode code, byte[] data, int dataLength) {
+    this.protocolVersion = PROTOCOL_VERSION;
+    this.code = code;
+    this.dataLength = dataLength;
+    this.data = data;
+  }
+
+  private ProtocolMessage(byte protocolVersion, MessageCode code, byte[] data, int dataLength) {
     this.protocolVersion = protocolVersion;
     this.code = code;
     this.dataLength = dataLength;
@@ -39,10 +46,9 @@ public class ProtocolMessage {
     int dataLength = metadata[2] + 256 * metadata[3];
 
     // read n bytes from the data field in the protocol
-    byte[] data = new byte[dataLength];
-    input.readNBytes(data, METADATA_LENGTH, dataLength);
+    byte[] data = input.readNBytes(dataLength);
 
-    return new ProtocolMessage(protocolVersion, code, dataLength, data);
+    return new ProtocolMessage(protocolVersion, code, data, dataLength);
   }
 
   public byte[] toByteStream() {
