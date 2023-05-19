@@ -1,20 +1,21 @@
 package eapli.ecourse.persistence.impl.jpa;
 
-import eapli.ecourse.Application;
-import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.domain.Exam;
-import eapli.ecourse.exammanagement.domain.ExamCode;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
-import eapli.framework.domain.repositories.TransactionalContext;
-import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class JpaExamRepository extends JpaAutoTxRepository<Exam, ExamCode, ExamCode> implements ExamRepository {
+import eapli.ecourse.Application;
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.exammanagement.domain.EvaluationExam;
+import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
+import eapli.framework.domain.repositories.TransactionalContext;
+import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
+
+public class JpaExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamCode, ExamCode>
+    implements ExamRepository {
   public JpaExamRepository(final TransactionalContext autoTx) {
     super(autoTx, "code");
   }
@@ -23,22 +24,23 @@ public class JpaExamRepository extends JpaAutoTxRepository<Exam, ExamCode, ExamC
     super(puname, Application.settings().extendedPersistenceProperties(), "code");
   }
 
-  public Optional<Exam> findById(final ExamCode code) {
+  public Optional<EvaluationExam> findById(final ExamCode code) {
     final Map<String, Object> params = new HashMap<>();
     params.put("code", code);
     return matchOne("e.code=:code", params);
   }
 
   @Override
-  public Iterable<Exam> findAllCourseExams(Course course) {
+  public Iterable<EvaluationExam> findAllCourseExams(Course course) {
     return match("e.course = :course", "course", course);
   }
 
   @Override
-  public Iterable<Exam> findAllFutureCourseExams(Course course) {
+  public Iterable<EvaluationExam> findAllFutureCourseExams(Course course) {
     final Calendar currentDate = Calendar.getInstance();
 
-    return match("e.course = :course AND e.startTime > :startTime", "course", course, "startTime", Time.valueOf(currentDate));
+    return match("e.course = :course AND e.startTime > :startTime", "course", course, "startTime",
+        Time.valueOf(currentDate));
   }
 
 }

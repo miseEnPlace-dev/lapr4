@@ -1,12 +1,13 @@
 package eapli.ecourse.exammanagement.application;
 
-import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.exammanagement.domain.Exam;
-import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
-
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.exammanagement.domain.EvaluationExam;
+import eapli.ecourse.exammanagement.domain.Exam;
+import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.dto.ExamDTO;
 
 public class ExamListService {
 
@@ -17,18 +18,18 @@ public class ExamListService {
   }
 
   public Iterable<ExamDTO> listAllCourseExams(Course course) {
-    final Iterable<Exam> types = examRepository.findAllCourseExams(course);
+    final Iterable<EvaluationExam> types = examRepository.findAllCourseExams(course);
     return convertToDto(types);
   }
 
   public Iterable<ExamDTO> listAllFutureCourseExams(Course course) {
-    final Iterable<Exam> types = examRepository.findAllFutureCourseExams(course);
+    final Iterable<EvaluationExam> types = examRepository.findAllFutureCourseExams(course);
     return convertToDto(types);
   }
 
-  private Iterable<ExamDTO> convertToDto(Iterable<Exam> exams) {
+  private Iterable<ExamDTO> convertToDto(Iterable<EvaluationExam> exams) {
     return StreamSupport.stream(exams.spliterator(), true)
-      .map(Exam::toDto)
-      .collect(Collectors.toUnmodifiableList());
+        .map(Exam::toDto)
+        .collect(Collectors.toUnmodifiableList());
   }
 }
