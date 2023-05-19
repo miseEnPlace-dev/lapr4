@@ -76,7 +76,6 @@ public class ListFutureExamsController {
 
   public Iterable<ExamDTO> futureExams(CourseDTO courseDTO) {
     return examListService.listAllFutureCourseExams(courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow());
-
   }
 
 }
