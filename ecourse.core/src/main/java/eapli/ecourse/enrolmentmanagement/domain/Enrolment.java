@@ -104,7 +104,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
   }
 
   public EnrolmentDTO toDto() {
-    return new EnrolmentDTO(this.course.code().toString(), this.student.mecanographicNumber().toString(),
+    return new EnrolmentDTO(this.course.code(), this.student.mecanographicNumber(),
         this.student.user().name().toString(), this.createdAt, this.state.toString());
   }
 

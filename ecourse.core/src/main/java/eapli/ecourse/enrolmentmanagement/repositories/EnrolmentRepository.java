@@ -7,7 +7,6 @@ import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentID;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.DomainRepository;
-import net.bytebuddy.asm.Advice.Enter;
 
 public interface EnrolmentRepository extends DomainRepository<EnrolmentID, Enrolment> {
   public Iterable<Enrolment> findByStudentMecanographicNumber(MecanographicNumber studentID);
@@ -23,4 +22,5 @@ public interface EnrolmentRepository extends DomainRepository<EnrolmentID, Enrol
   public Iterable<Enrolment> findCourseRejected(CourseCode courseCode);
 
   public Optional<Enrolment> findWithUserAndCourse(MecanographicNumber studentID, CourseCode courseCode);
+
 }

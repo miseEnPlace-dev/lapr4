@@ -53,7 +53,7 @@ public class ListFutureExamsController {
     List<CourseDTO> courses = new ArrayList<>();
     for (EnrolmentDTO enrolment : enrolmentListService.findByStudentMecanographicNumber(student.identity())) {
       if (enrolment.getState().equals(EnrolmentState.State.ACCEPTED.toString())) {
-        Optional<CourseDTO> course = courseService.findByCode(CourseCode.valueOf(enrolment.getCourseCode()));
+        Optional<CourseDTO> course = courseService.findByCode(enrolment.getCourseCode());
         course.ifPresent(courses::add);
       }
     }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import eapli.ecourse.studentmanagement.dto.StudentDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -76,6 +77,11 @@ public class Student implements AggregateRoot<MecanographicNumber> {
 
   public MecanographicNumber mecanographicNumber() {
     return identity();
+  }
+
+  public StudentDTO toDto() {
+    return new StudentDTO(this.mecanographicNumber, this.systemUser.username(),
+        this.systemUser.name().toString());
   }
 
   @Override
