@@ -45,7 +45,7 @@ public class ListCourseExamsController {
   public Iterable<ExamDTO> listCourseExams(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER, ClientRoles.MANAGER);
 
-    Optional<Course> course = courseRepository.findByCode(courseDTO.getCode());
+    Optional<Course> course = courseRepository.ofIdentity(courseDTO.getCode());
 
     if (course.isEmpty())
       throw new IllegalArgumentException("There is no Course with the given code");

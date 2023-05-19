@@ -1,13 +1,18 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
+import java.util.Set;
+
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -32,12 +37,19 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
   @ManyToOne(optional = false)
   public Teacher scheduledBy;
 
-  public ExtraordinaryClass(final Duration duration, final Time time) {
-    Preconditions.noneNull(duration, time);
+  @ManyToMany
+  @AttributeOverride(name = "id", column = @Column(name = "student_id"))
+  public Set<Student> students;
+
+  public ExtraordinaryClass(final Duration duration, final Time time, final Teacher scheduledBy,
+      final Set<Student> students) {
+    Preconditions.noneNull(duration, time, scheduledBy, students);
 
     this.id = ExtraordinaryClassID.newID();
     this.duration = duration;
     this.time = time;
+    this.scheduledBy = scheduledBy;
+    this.students = students;
   }
 
   protected ExtraordinaryClass() {

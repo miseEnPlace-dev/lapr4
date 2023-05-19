@@ -62,7 +62,7 @@ public class CreateExamController {
 
   public void createExam(CourseDTO courseDto, Time startTime, Time endTime) {
     setCurrentAuthenticatedTeacher();
-    Course course = courseRepository.findByCode(courseDto.getCode()).orElseThrow();
+    Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
     builder.withTeacher(teacher).withCourse(course).withStartTime(startTime).withEndTime(endTime);
 

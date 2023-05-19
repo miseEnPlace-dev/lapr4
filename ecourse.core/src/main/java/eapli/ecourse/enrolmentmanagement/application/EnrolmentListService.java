@@ -28,6 +28,12 @@ public class EnrolmentListService {
     return convertToDTO(enrolments);
   }
 
+  public Iterable<EnrolmentDTO> listStudentsEnrolled(CourseCode code) {
+    final Iterable<Enrolment> enrolments = enrolmentRepository.findCourseAccepted(code);
+
+    return convertToDTO(enrolments);
+  }
+
   private Iterable<EnrolmentDTO> convertToDTO(Iterable<Enrolment> enrolments) {
     return StreamSupport.stream(enrolments.spliterator(), true)
         .map(Enrolment::toDto)

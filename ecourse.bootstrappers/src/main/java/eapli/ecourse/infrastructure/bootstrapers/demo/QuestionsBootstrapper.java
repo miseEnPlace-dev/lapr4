@@ -101,7 +101,7 @@ public class QuestionsBootstrapper implements Action {
 
   @Override
   public boolean execute() {
-    course = PersistenceContext.repositories().courses().findByCode(CourseCode.valueOf("1234")).get();
+    course = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("1234")).get();
 
     addShortAnswerQuestion();
     addTrueOrFalseQuestion();
