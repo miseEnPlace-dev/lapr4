@@ -87,6 +87,7 @@ public class ExamBuilder implements DomainFactory<EvaluationExam> {
 
     exam = new EvaluationExam(course, teacher, identifier, title, description, sections, startTime, endTime,
         feedbackInfo, gradeInfo, score);
+    exam.publish();
     return exam;
   }
 

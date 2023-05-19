@@ -59,7 +59,7 @@ public class CreateExamController {
     builder = ExamsParser.parseWithVisitor(filePath);
   }
 
-  public Exam createExam(CourseDTO courseDto, Time startTime, Time endTime) {
+  public void createExam(CourseDTO courseDto, Time startTime, Time endTime) {
     setCurrentAuthenticatedTeacher();
     Course course = courseRepository.findByCode(courseDto.getCode()).orElseThrow();
 
@@ -67,6 +67,6 @@ public class CreateExamController {
 
     Exam exam = builder.build();
 
-    return examRepository.save(exam);
+    examRepository.save(exam);
   }
 }

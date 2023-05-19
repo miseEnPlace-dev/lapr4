@@ -23,6 +23,8 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
   private ExamBuilder builder;
   private SectionBuilder section;
   private List<Section> sections;
+  int examScore = 0;
+  int sectionsScore = 0;
 
   @Override
   public ExamBuilder visitStart(ExamParser.StartContext ctx) {
@@ -37,6 +39,10 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
     visit(ctx.start_exam());
     visit(ctx.header());
     visit(ctx.sections());
+
+    if (examScore != sectionsScore) {
+      raiseError(ctx, "The sum of the sections' scores must be equal to the exam's score.");
+    }
 
     return builder;
   }
@@ -170,6 +176,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
     builder.withGradeInfo(gradeInfo);
     Score score = Score.valueOf(Integer.parseInt(properties.get("score").toString()));
     builder.withScore(score);
+    examScore = Integer.parseInt(properties.get("score").toString());
     if (properties.containsKey("description")) {
       Description description = Description.valueOf(properties.get("description").toString());
       builder.withDescription(description);
@@ -183,6 +190,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
     section.withTitle(title);
     Score score = Score.valueOf(Integer.parseInt(properties.get("score").toString()));
     section.withScore(score);
+    sectionsScore += Integer.parseInt(properties.get("score").toString());
     if (properties.containsKey("description")) {
       Description description = Description.valueOf(properties.get("description").toString());
       section.withDescription(description);

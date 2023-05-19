@@ -51,7 +51,12 @@ public class CreateExamUI extends AbstractUI {
     Time endTime = Time.valueOf(
         Console.readCalendar("Enter the end date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
 
-    this.ctrl.createExam(selectedCourse, startTime, endTime);
+    try {
+      this.ctrl.createExam(selectedCourse, startTime, endTime);
+    } catch (Exception ex) {
+      System.out.println("An error occurred while creating the exam.");
+      return false;
+    }
 
     System.out.println("Exam created successfully.");
 
