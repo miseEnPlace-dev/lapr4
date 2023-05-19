@@ -1,0 +1,122 @@
+@startuml US1011_SD
+autonumber
+
+actor "Teacher" as T
+participant "ScheduleExtraClassUI" as UI <<presentation>>
+participant "ScheduleExtraClassController" as CTRL <<application>>
+participant "ListEnrolmentService" as ESRV <<service>>
+participant "ListCourseService" as CSRV <<service>>
+participant "ScheduleAvailabilityService" as SSRV <<service>>
+participant "Course" as C <<domain>>
+participant "CourseDTO" as CDTO <<dto>>
+participant "Enrolment" as E <<domain>>
+participant "Student" as S <<dto>>
+participant "StudentDTO" as SDTO <<dto>>
+participant "ExtraClass" as EX <<domain>>
+
+
+database CourseRepository as CREP <<repository>>
+database EnrolmentRepository as EREP <<repository>>
+database ExtraClassRepository as EXREP <<repository>>
+
+activate T
+
+T -> UI : asks to schedule an extra class
+activate UI
+
+UI -> CTRL : new(courseRepository, enrolmentRepository)
+activate CTRL
+CTRL -> CSRV : service=new(courseRepository)
+CTRL -> ESRV : service=new(enrolmentRepository)
+deactivate CTRL
+
+UI -> CTRL : ()
+activate CTRL
+CTRL -> CSRV : listAllInProgressLecturedByTeacher(teacher)
+activate CSRV
+CSRV -> CREP : findAllInProgressLecturedByTeacher(teacher)
+activate CREP
+CREP --> CSRV : courses
+deactivate CREP
+
+loop for each course
+  CSRV -> C : toDTO(course)
+  activate C
+  C -> CDTO : new()
+  activate CDTO
+  deactivate CDTO
+  deactivate C
+end loop
+
+CSRV --> CTRL : courses
+deactivate CSRV
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> T : asks to select the course
+deactivate UI
+
+T -> UI : selects the course
+activate UI
+
+UI -> CTRL : listStudentsEnrolled(course)
+activate CTRL
+CTRL -> ESRV : listStudentsEnrolled(course)
+activate ESRV
+ESRV -> EREP : findCourseAccepted(course)
+activate EREP
+EREP --> ESRV : enrolments
+deactivate EREP
+
+loop for each enrolment
+  ESRV -> E : student()
+  activate E
+  deactivate E
+
+  ESRV -> S : toDTO(student)
+  activate S
+  S -> SDTO : new()
+  activate SDTO
+  deactivate S
+  deactivate SDTO
+  deactivate E
+end loop
+
+ESRV --> CTRL : students
+deactivate ESRV
+CTRL --> UI : students
+deactivate CTRL
+
+UI --> T : asks to select the users to invite
+deactivate UI
+
+T -> UI : selects the users
+activate UI
+UI--> T : asks to enter the date/time start and duration
+deactivate UI
+
+T -> UI : enters the date/time start and duration
+activate UI
+UI -> CTRL : createExtraClass(course, teacher, date, duration, students)
+activate CTRL
+CTRL -> SSRV : areAllAvailable()
+activate SSRV
+deactivate SSRV
+CTRL -> EX : new(course, teacher, time, duration, students)
+activate EX
+deactivate EX
+CTRL -> CTRL : save(extraClass)
+activate CTRL
+deactivate CTRL
+CTRL -> EXREP : save(extraClass)
+activate EXREP
+EXREP --> CTRL : extraClass
+deactivate EXREP
+CTRL --> UI : sucess
+deactivate CTRL
+UI--> T : informs operation success
+deactivate UI
+
+deactivate T
+
+@enduml

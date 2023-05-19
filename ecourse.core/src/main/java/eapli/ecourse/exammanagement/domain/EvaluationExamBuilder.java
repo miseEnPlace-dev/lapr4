@@ -9,7 +9,7 @@ import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
-public class ExamBuilder implements DomainFactory<EvaluationExam> {
+public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
   private EvaluationExam exam;
 
   private Course course;
@@ -24,57 +24,57 @@ public class ExamBuilder implements DomainFactory<EvaluationExam> {
   private ExamInfo gradeInfo;
   private Score score;
 
-  public ExamBuilder withCourse(Course course) {
+  public EvaluationExamBuilder withCourse(Course course) {
     this.course = course;
     return this;
   }
 
-  public ExamBuilder withTeacher(Teacher teacher) {
+  public EvaluationExamBuilder withTeacher(Teacher teacher) {
     this.teacher = teacher;
     return this;
   }
 
-  public ExamBuilder withIdentifier(Identifier identifier) {
+  public EvaluationExamBuilder withIdentifier(Identifier identifier) {
     this.identifier = identifier;
     return this;
   }
 
-  public ExamBuilder withTitle(Title title) {
+  public EvaluationExamBuilder withTitle(Title title) {
     this.title = title;
     return this;
   }
 
-  public ExamBuilder withDescription(Description description) {
+  public EvaluationExamBuilder withDescription(Description description) {
     this.description = description;
     return this;
   }
 
-  public ExamBuilder withSections(List<Section> sections) {
+  public EvaluationExamBuilder withSections(List<Section> sections) {
     this.sections = sections;
     return this;
   }
 
-  public ExamBuilder withStartTime(Time startTime) {
+  public EvaluationExamBuilder withStartTime(Time startTime) {
     this.startTime = startTime;
     return this;
   }
 
-  public ExamBuilder withEndTime(Time endTime) {
+  public EvaluationExamBuilder withEndTime(Time endTime) {
     this.endTime = endTime;
     return this;
   }
 
-  public ExamBuilder withFeedbackInfo(ExamInfo feedbackInfo) {
+  public EvaluationExamBuilder withFeedbackInfo(ExamInfo feedbackInfo) {
     this.feedbackInfo = feedbackInfo;
     return this;
   }
 
-  public ExamBuilder withGradeInfo(ExamInfo gradeInfo) {
+  public EvaluationExamBuilder withGradeInfo(ExamInfo gradeInfo) {
     this.gradeInfo = gradeInfo;
     return this;
   }
 
-  public ExamBuilder withScore(Score score) {
+  public EvaluationExamBuilder withScore(Score score) {
     this.score = score;
     return this;
   }

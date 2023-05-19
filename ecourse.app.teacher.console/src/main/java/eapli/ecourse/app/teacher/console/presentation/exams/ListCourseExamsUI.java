@@ -1,29 +1,28 @@
 package eapli.ecourse.app.teacher.console.presentation.exams;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.exam.ExamPrinter;
 import eapli.ecourse.coursemanagement.application.ListCourseExamsController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.exammanagement.domain.dto.ExamDTO;
 import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.dto.ExamDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.presentation.console.SelectWidget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ListCourseExamsUI extends AbstractUI {
 
   private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
 
   private final ExamRepository examRepository = PersistenceContext.repositories().exams();
-  private final ListCourseExamsController ctrl = new ListCourseExamsController
-    (AuthzRegistry.authorizationService(), courseRepository, examRepository);
+  private final ListCourseExamsController ctrl = new ListCourseExamsController(AuthzRegistry.authorizationService(),
+      courseRepository, examRepository);
 
   @Override
   protected boolean doShow() {
@@ -45,9 +44,8 @@ public class ListCourseExamsUI extends AbstractUI {
     Iterable<ExamDTO> exams = ctrl.listCourseExams(selected);
     System.out.println(exams.iterator().hasNext());
 
-    ListWidget<ExamDTO> list = new ListWidget<>("Exams of "+selected.getTitle(), exams, new ExamPrinter());
+    ListWidget<ExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams, new ExamPrinter());
     list.show();
-
 
     return true;
   }

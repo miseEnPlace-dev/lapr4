@@ -8,8 +8,9 @@ import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+import eapli.ecourse.exammanagement.domain.EvaluationExam;
+import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.Exam;
-import eapli.ecourse.exammanagement.domain.ExamBuilder;
 import eapli.ecourse.exammanagement.domain.parsers.ExamsParser;
 import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -29,7 +30,7 @@ public class CreateExamController {
 
   private Teacher teacher;
 
-  private ExamBuilder builder;
+  private EvaluationExamBuilder builder;
 
   public CreateExamController(final AuthorizationService authz, final TeacherRepository teacherRepository,
       final ExamRepository examRepository, final CourseRepository courseRepository) {
@@ -65,7 +66,7 @@ public class CreateExamController {
 
     builder.withTeacher(teacher).withCourse(course).withStartTime(startTime).withEndTime(endTime);
 
-    Exam exam = builder.build();
+    EvaluationExam exam = builder.build();
 
     examRepository.save(exam);
   }

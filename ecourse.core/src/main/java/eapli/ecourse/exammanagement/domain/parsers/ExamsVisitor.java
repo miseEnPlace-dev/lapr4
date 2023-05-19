@@ -11,7 +11,7 @@ import org.antlr.v4.runtime.Token;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.Description;
-import eapli.ecourse.exammanagement.domain.ExamBuilder;
+import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.ExamInfo;
 import eapli.ecourse.exammanagement.domain.Score;
 import eapli.ecourse.exammanagement.domain.Section;
@@ -19,22 +19,22 @@ import eapli.ecourse.exammanagement.domain.SectionBuilder;
 import eapli.ecourse.exammanagement.domain.Title;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 
-public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
-  private ExamBuilder builder;
+public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
+  private EvaluationExamBuilder builder;
   private SectionBuilder section;
   private List<Section> sections;
   int examScore = 0;
   int sectionsScore = 0;
 
   @Override
-  public ExamBuilder visitStart(ExamParser.StartContext ctx) {
+  public EvaluationExamBuilder visitStart(ExamParser.StartContext ctx) {
     visit(ctx.exam());
     return builder;
   }
 
   @Override
-  public ExamBuilder visitExam(ExamParser.ExamContext ctx) {
-    builder = new ExamBuilder();
+  public EvaluationExamBuilder visitExam(ExamParser.ExamContext ctx) {
+    builder = new EvaluationExamBuilder();
 
     visit(ctx.start_exam());
     visit(ctx.header());
@@ -48,7 +48,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
   }
 
   @Override
-  public ExamBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
+  public EvaluationExamBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     Identifier identifier = Identifier.valueOf(str);
     builder.withIdentifier(identifier);
@@ -63,7 +63,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
    * present).
    */
   @Override
-  public ExamBuilder visitHeader(ExamParser.HeaderContext ctx) {
+  public EvaluationExamBuilder visitHeader(ExamParser.HeaderContext ctx) {
     Map<String, Object> properties = new HashMap<>();
     ctx.properties().forEach(p -> {
       if (p.title() != null) {
@@ -141,7 +141,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
   }
 
   @Override
-  public ExamBuilder visitSections(ExamParser.SectionsContext ctx) {
+  public EvaluationExamBuilder visitSections(ExamParser.SectionsContext ctx) {
     sections = new ArrayList<Section>();
     visitChildren(ctx);
     builder.withSections(sections);
@@ -149,7 +149,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
   }
 
   @Override
-  public ExamBuilder visitSection(ExamParser.SectionContext ctx) {
+  public EvaluationExamBuilder visitSection(ExamParser.SectionContext ctx) {
     section = new SectionBuilder();
 
     visit(ctx.start_section());
@@ -160,7 +160,7 @@ public class ExamsVisitor extends ExamBaseVisitor<ExamBuilder> {
   }
 
   @Override
-  public ExamBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
+  public EvaluationExamBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     Identifier identifier = Identifier.valueOf(str);
     section.withIdentifier(identifier);

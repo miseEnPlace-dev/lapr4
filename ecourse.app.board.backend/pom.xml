@@ -29,6 +29,11 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
+      <artifactId>app.board.common</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eapli.ecourse</groupId>
       <artifactId>core</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
