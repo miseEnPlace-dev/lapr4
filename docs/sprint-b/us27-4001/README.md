@@ -19,7 +19,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.1. Client Specifications
 
--
+- Classes and meetings are events that happen in some time and have a duration. They also have participants. However there is no concept of location related to classes and meetings. They do not take place in a specific location and "nothing" happens at the time of the event.
+
+- All users can create and use boards as well as meetings.
 
 ## 2.2. Client Clarifications
 
@@ -58,6 +60,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 - The user must be authenticated and authorized to perform the operation.
 
+- The system must check if all participants are available (no classes or meetings in that time) and send invitations to participants.
+
 ### 3.3. System Sequence Diagram
 
 ![US4001_SSD](out/US4001_SSD.svg)
@@ -87,6 +91,8 @@ This is the first time this task is assigned to be developed. This is a new func
 - **Observer Pattern:** This is used to notify the user when he receives a invite to a meeting. This is done to reduce coupling and to make the system more extensible.
 
 ### 4.4. Tests
+
+_Note: This are some simplified versions of the tests for readability purposes._
 
 **Test 1:** Ensure user can receive an invite to a meeting
 
@@ -149,8 +155,21 @@ This is the first time this task is assigned to be developed. This is a new func
 - Relevant implementation details
 
 ```java
-  private void sample() {
-    return true;
+ public Meeting scheduleMeeting(Time time, Duration duration, Iterable<SystemUser> users) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER, ClientRoles.MANAGER,
+        ClientRoles.TEACHER);
+
+    Preconditions.noneNull(time, duration);
+
+    Meeting meeting = new Meeting(time, duration);
+
+    if (meetingRepository.containsOfIdentity(meeting.identity()))
+      throw new IllegalStateException("There is already a meeting with that id.");
+    Meeting m = saveMeeting(meeting);
+
+    sendInvites(users, m);
+
+    return m;
   }
 ```
 

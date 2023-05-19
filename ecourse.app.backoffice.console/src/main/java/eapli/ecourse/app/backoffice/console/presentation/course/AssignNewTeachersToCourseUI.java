@@ -21,7 +21,17 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final Iterable<TeacherDTO> teachers = controller.allTeachers();
+    final Iterable<CourseDTO> courses = controller.allNotClosedCourses();
+
+    if (!courses.iterator().hasNext()) {
+      System.out.println("There are no courses to assign.");
+      return false;
+    }
+
+    final SelectWidget<CourseDTO> courseSelector = new SelectWidget<>("Courses", courses, new CoursePrinter());
+    courseSelector.show();
+    CourseDTO selectedCourse = courseSelector.selectedElement();
+    final Iterable<TeacherDTO> teachers = controller.allTeachersExceptFromCourse(selectedCourse);
 
     if (!teachers.iterator().hasNext()) {
       System.out.println("There are no teachers to assign.");
@@ -33,16 +43,6 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
 
     final Iterable<TeacherDTO> selectedTeachers = teachersSelector.selectElements();
 
-    final Iterable<CourseDTO> courses = controller.allNotClosedCourses();
-
-    if (!courses.iterator().hasNext()) {
-      System.out.println("There are no courses to assign.");
-      return false;
-    }
-
-    final SelectWidget<CourseDTO> courseSelector = new SelectWidget<>("Courses", courses, new CoursePrinter());
-    courseSelector.show();
-    CourseDTO selectedCourse = courseSelector.selectedElement();
     try {
       controller.assignTeachersToCourse(selectedTeachers, selectedCourse);
       System.out.println("\n\nTeachers assigned to course successfully.");

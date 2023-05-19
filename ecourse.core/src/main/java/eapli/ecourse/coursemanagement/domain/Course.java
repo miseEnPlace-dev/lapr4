@@ -1,6 +1,7 @@
 package eapli.ecourse.coursemanagement.domain;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -170,10 +171,10 @@ public class Course implements AggregateRoot<CourseCode> {
     courseState.previous();
   }
 
-  public void addTeachers(Set<Teacher> newTeachers) {
+  public void addTeachers(Iterable<Teacher> newTeachers) {
     Preconditions.noneNull(newTeachers);
 
-    this.teachers.addAll(newTeachers);
+    this.teachers.addAll((Collection<Teacher>) newTeachers);
   }
 
   public void addResponsibleTeacher(final Teacher teacher) {

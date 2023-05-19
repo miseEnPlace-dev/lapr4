@@ -1,0 +1,137 @@
+@startuml US1003_CD
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface CourseRepository {
+  {abstract} findAllOpenForEnrolment()
+  {abstract} save(course)
+}
+
+class InMemoryCourseRepository {
+  + findAllOpenForEnrolment()
+  + save(course)
+}
+
+class JpaCourseRepository {
+  + findAllOpenForEnrolment()
+  + save(course)
+}
+
+interface EnrolmentRepository {
+  {abstract} save(enrolment)
+}
+
+class InMemoryEnrolmentRepository {
+  + save(enrolment)
+}
+
+class JpaEnrolmentRepository {
+  + save(Enrolment)
+}
+
+class PersistenceContext {
+  + repositories()
+}
+
+class CourseListService {
+  - courseRepository
+
+  + CourseListService(courseRepository)
+
+  + listNotClosedCourses()
+  + toggleEnrolmentState(course)
+}
+
+class RequestEnrolmentUI {}
+
+class RequestEnrolmentController {
+  - courseRepository
+  - enrolmentRepository
+  - studentRepository
+  - listCoursesService
+  - authz
+
+  + RequestEnrolmentController(courseRepository, enrolmentRepository, studentRepository, authz)
+
+  + listOpenForEnrolmentCourses()
+  + requestEnrolment(courseDTO)
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+
+  + toggleEnrolmentState()
+  + toDto()
+}
+
+class Student {
+  - mecanographicNumber
+  - systemUser
+}
+
+class Enrolment {
+  - createdAt
+  - updatedAt
+  - state
+  - id
+
+  + accept()
+  + reject()
+}
+
+enum CourseState {
+  CLOSED
+  OPEN
+  IN_PROGRESS
+  FINISHED
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+RequestEnrolmentUI ..> RequestEnrolmentController
+RequestEnrolmentUI ..> PersistenceContext
+RequestEnrolmentController --> CourseListService
+RequestEnrolmentController ..> Enrolment
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> EnrolmentRepository
+
+CourseListService ..> Course
+CourseListService ..> CourseDTO
+CourseListService ..> CourseRepository
+RequestEnrolmentController --> CourseRepository
+
+Enrolment --> Course
+Enrolment --> Student
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+
+EnrolmentRepository <|.. InMemoryEnrolmentRepository
+EnrolmentRepository <|.. JpaEnrolmentRepository
+
+Course --> CourseState
+Course --> CourseEnrolmentState
+
+@enduml

@@ -25,15 +25,17 @@ public class EnrolmentState implements ValueObject {
     state = State.PENDING;
   }
 
-  public void changeToPending() {
-    state = State.PENDING;
-  }
-
   public void changeToAccepted() {
+    if (state != State.PENDING) {
+      throw new IllegalStateException("Enrolment already accepted/rejected");
+    }
     state = State.ACCEPTED;
   }
 
   public void changeToRejected() {
+    if (state != State.PENDING) {
+      throw new IllegalStateException("Enrolment already accepted/rejected");
+    }
     state = State.REJECTED;
   }
 

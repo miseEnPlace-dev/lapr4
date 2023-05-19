@@ -29,7 +29,7 @@ UI -> CTRL : listOpenForEnrolmentCourses()
 activate CTRL
 CTRL -> CSRV : listOpenForEnrolmentCourses()
 activate CSRV
-CSRV -> CREP : findAllOpenForEnrolmentCourses()
+CSRV -> CREP : findAllOpenForEnrolment()
 activate CREP
 CREP --> CSRV : courses
 deactivate CREP
@@ -58,18 +58,18 @@ UI -> CTRL : listCourseAppllications(course)
 activate CTRL
 CTRL -> ESRV : listCourseAppllications(course)
 activate ESRV
-ESRV -> EREP : findAllCourseAppllications(course)
+ESRV -> EREP : findByCourseCode(course)
 activate EREP
 EREP --> ESRV : enrolments
 deactivate EREP
 
 loop for each enrolment
-  ESRV -> C : toDTO(enrolment)
-  activate C
-  C -> EDTO : new()
+  ESRV -> E : toDTO(enrolment)
+  activate E
+  E -> EDTO : new()
   activate EDTO
   deactivate EDTO
-  deactivate C
+  deactivate E
 end loop
 
 ESRV --> CTRL : enrolments

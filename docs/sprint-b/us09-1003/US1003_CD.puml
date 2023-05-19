@@ -30,7 +30,6 @@ class CourseListService {
 
   + listNotClosedCourses()
   + toggleEnrolmentState(course)
-  + save(course)
 }
 
 class ManageCourseEnrolmentStateUI {}
@@ -81,10 +80,6 @@ class CourseDTO {
   - createdAt
 }
 
-class CourseDTOParser {
-  + valueOf(courseDTO)
-}
-
 ManageCourseEnrolmentStateUI ..> ManageCourseEnrolmentStateController
 ManageCourseEnrolmentStateUI ..> PersistenceContext
 ManageCourseEnrolmentStateController --> CourseListService
@@ -92,10 +87,9 @@ PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
 
 CourseListService ..> Course
+CourseListService ..> CourseDTO
+CourseListService ..> CourseRepository
 ManageCourseEnrolmentStateController --> CourseRepository
-
-CourseDTOParser ..> CourseDTO
-CourseDTOParser ..> Course
 
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository

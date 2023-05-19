@@ -21,6 +21,10 @@ public class ExamListService {
     return convertToDto(types);
   }
 
+  public Iterable<ExamDTO> listAllFutureCourseExams(Course course) {
+    final Iterable<Exam> types = examRepository.findAllFutureCourseExams(course);
+    return convertToDto(types);
+  }
 
   private Iterable<ExamDTO> convertToDto(Iterable<Exam> exams) {
     return StreamSupport.stream(exams.spliterator(), true)

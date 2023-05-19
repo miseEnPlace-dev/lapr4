@@ -1,9 +1,15 @@
-@startuml US2003_SSD
+@startuml US2002_SSD
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor "Student" as student
+participant ":System" as system
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+student -> system: request to see future exams
+
+system -> student: lists the courses the student's enrolled in
+
+student -> system: selects the desired course
+
+system -> student: lists all future exams of the chosen course
+
 @enduml

@@ -97,6 +97,10 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.state.changeToPublished();
   }
 
+  public Time startTime() {
+    return this.startTime;
+  }
+
   public ExamDTO toDto() {
     return new ExamDTO(this.code, this.course, this.teacher, this.identifier, this.title, this.description, this.state);
   }

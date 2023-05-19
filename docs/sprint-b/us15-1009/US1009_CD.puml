@@ -1,0 +1,157 @@
+@startuml US1009_CD
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface CourseRepository {
+  {abstract} findAllOpenForEnrolmentCourses()
+  {abstract} save(course)
+}
+
+interface EnrolmentRepository {
+  {abstract} findAllCourseApplications(course)
+  {abstract} save(enrolment)
+}
+
+class InMemoryCourseRepository {
+  + findAllOpenForEnrolmentCourses()
+  + save(course)
+}
+
+class InMemoryEnrolmentRepository {
+  + findAllCourseApplications(course)
+  + save(enrolment)
+}
+
+class JpaCourseRepository {
+  + findAllOpenForEnrolmentCourses()
+  + save(course)
+}
+
+class JpaEnrolmentRepository {
+  + findAllCourseApplications(course)
+  + save(enrolment)
+}
+
+class PersistenceContext {
+  + repositories()
+}
+
+class CourseListService {
+  - courseRepository
+
+  + CourseListService(courseRepository)
+
+  + listOpenForEnrolmentCourses()
+}
+
+class EnrolmentListService {
+  - enrolmentRepository
+
+  + EnrolmentListService(enrolmentRepository)
+
+  + listOpenForEnrolmentCourses()
+}
+
+class ResponseCourseApplicationUI {}
+
+class ResponseCourseApplicationController {
+  - courseRepository
+  - authorizationService
+  - courseListService
+  - enrolmentRepository
+  - enrolmentListRepository
+
+  + ResponseCourseApplicationController(courseRepository, enrolmentRepository)
+
+  + listOpenForEnrolmentCourses()
+  + listCourseApplications(course)
+  + accept(enrol)
+  + reject(enrol)
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+
+  + toDto()
+}
+
+enum CourseEnrolmentState {
+  OPEN
+  CLOSED
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
+class Enrolment{
+  - id
+  - student
+  - course
+  - state
+  - createdAt
+  - updatedAt
+
+  + toDto()
+}
+
+class EnrolmentDTO {
+  - id
+  - student
+  - course
+  - state
+  - createdAt
+  - updatedAt
+}
+
+class EnrolmentDTOParser {
+  + valueOf(enrolmentDTO)
+}
+
+ResponseCourseApplicationUI ..> ResponseCourseApplicationController
+ResponseCourseApplicationUI ..> PersistenceContext
+ResponseCourseApplicationController --> CourseListService
+ResponseCourseApplicationController --> EnrolmentListService
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> EnrolmentRepository
+
+CourseListService ..> Course
+ResponseCourseApplicationController --> CourseRepository
+
+EnrolmentListService ..> Enrolment
+ResponseCourseApplicationController --> EnrolmentRepository
+
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
+
+EnrolmentDTOParser ..> EnrolmentDTO
+EnrolmentDTOParser ..> Enrolment
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+
+EnrolmentRepository <|.. InMemoryEnrolmentRepository
+EnrolmentRepository <|.. JpaEnrolmentRepository
+
+Course --> CourseEnrolmentState
+
+@enduml
