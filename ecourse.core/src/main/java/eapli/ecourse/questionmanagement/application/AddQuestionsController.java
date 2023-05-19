@@ -1,13 +1,15 @@
 package eapli.ecourse.questionmanagement.application;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.exammanagement.domain.parsers.QuestionsMain;
+import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+import eapli.ecourse.exammanagement.domain.parsers.QuestionsParser;
 import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -32,14 +34,14 @@ public class AddQuestionsController {
     return this.courseListService.listNotClosedCourses();
   }
 
-  public void addQuestionsFromFile(String filename, CourseDTO courseDTO) {
+  public void addQuestionsFromFile(String filename, CourseDTO courseDTO) throws IOException, ParseException {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
 
     if (!fileExists(filename))
       throw new IllegalArgumentException("Invalid file path!");
 
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
-    List<Question> questions = QuestionsMain.parseWithVisitor(filename);
+    List<Question> questions = QuestionsParser.parseWithVisitor(filename);
 
     questions.forEach(question -> {
       question.changeCourse(course);
