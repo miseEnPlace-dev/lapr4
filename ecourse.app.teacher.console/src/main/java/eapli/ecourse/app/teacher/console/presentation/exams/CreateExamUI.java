@@ -1,6 +1,7 @@
 package eapli.ecourse.app.teacher.console.presentation.exams;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
@@ -34,8 +35,10 @@ public class CreateExamUI extends AbstractUI {
       this.ctrl.parseExam(filePath);
     } catch (IOException ex) {
       System.out.println("The specified file does not exist.");
+      return false;
     } catch (ParseException ex) {
       System.out.println(ex.getMessage());
+      return false;
     }
 
     Time startTime = Time.valueOf(
@@ -46,7 +49,9 @@ public class CreateExamUI extends AbstractUI {
 
     this.ctrl.createExam(selectedCourse, startTime, endTime);
 
-    return true;
+    System.out.println("Exam created successfully.");
+
+    return false;
   }
 
   @Override
