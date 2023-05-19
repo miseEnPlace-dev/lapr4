@@ -1,0 +1,37 @@
+@startuml US1012_SSD
+
+autonumber
+
+actor TEACHER as "Teacher"
+participant SYS as "System"
+
+activate TEACHER
+
+TEACHER -> SYS : asks to update the class schedule
+activate SYS
+
+SYS --> TEACHER: lists teacher classes
+deactivate SYS
+
+TEACHER -> SYS : selects class
+activate SYS
+
+SYS --> TEACHER : requests data (Day Of Week, time)
+deactivate SYS
+
+TEACHER -> SYS : types requested data
+activate SYS
+
+SYS --> TEACHER : shows if teacher and students are available
+deactivate SYS
+
+TEACHER -> SYS : confirms data
+activate SYS
+
+SYS --> TEACHER : informs operation success
+deactivate SYS
+
+deactivate TEACHER
+
+
+@enduml

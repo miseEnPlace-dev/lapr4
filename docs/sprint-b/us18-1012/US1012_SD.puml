@@ -1,0 +1,82 @@
+@startuml US1012_SD
+autonumber
+
+actor "Teacher" as T
+
+participant "UpdateClassScheduleUI" as UI <<presentation>>
+participant "UpdateClassScheduleController" as CTRL <<application>>
+participant "SpecialClass" as SC <<domain>>
+participant "ScheduleAvailabilityService" as SAREP <<service>>
+participant "SystemUser" as USER <<domain>>
+participant "UserDTO" as DTO <<dto>>
+
+database ClassRepository as REP <<repository>>
+
+activate T
+
+T -> UI : asks to update the class schedule
+activate UI
+
+UI -> CTRL : getTeacherClasses()
+activate CTRL
+
+CTRL -> REP : getTeacherClasses()
+activate REP
+deactivate REP
+
+deactivate CTRL
+
+UI --> T: lists teacher classes
+deactivate UI
+
+T -> UI : selects class
+activate UI
+
+UI --> T : requests data (Day Of Week, time)
+deactivate UI
+
+T -> UI : types requested data
+activate UI
+
+UI -> CTRL : updateClassSchedule()
+activate CTRL
+
+CTRL -> SAREP : isAvailableTeacherAvailable()
+activate SAREP
+deactivate SAREP
+
+CTRL -> SAREP : isAvailableUsers()
+activate SAREP
+
+loop for each user
+  SAREP -> USER : toDTO(user)
+  activate USER
+  USER -> DTO : new
+  activate DTO
+  deactivate DTO
+  deactivate USER
+end loop
+
+deactivate SAREP
+deactivate CTRL
+
+UI --> T : shows if teacher and students are available
+deactivate UI
+
+T -> UI : confirms data
+activate UI
+
+UI -> CTRL : saveClassSchedule()
+activate CTRL
+
+CTRL -> REP : save()
+activate REP
+deactivate REP
+
+UI --> T : informs operation success
+deactivate UI
+
+
+deactivate T
+
+@enduml
