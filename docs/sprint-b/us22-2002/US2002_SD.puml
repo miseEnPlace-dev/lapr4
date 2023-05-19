@@ -1,0 +1,80 @@
+@startuml US2002_SD
+autonumber
+
+actor "Student" as T
+
+participant "ListFutureExamsUI" as UI <<presentation>>
+participant "ListFutureExamsController" as CTRL <<application>>
+participant "AuthenticationService" as AUTH <<service>>
+participant "CourseListService" as C_SRV <<service>>
+participant "ExamListService" as E_SRV <<service>>
+participant "Exam" as Exam <<domain>>
+participant "Enrolment" as Enrolment <<domain>>
+participant "Course" as Course <<domain>>
+participant "CourseDTO" as C_DTO <<dto>>
+participant "ExamDTO" as E_DTO <<dto>>
+
+database CourseRepository as REP <<repository>>
+database StudentRepository as SREP <<repository>>
+database CourseRepository as CREPO <<repository>>
+database ExamRepository as EREPO <<repository>>
+database EnrolmentRepository as REPO <<repository>>
+
+T -> UI: requests to view the future exams in a course
+activate UI
+UI -> CTRL: new(examRepository, enrolmentRepository, studentRepository, courseRepository)
+activate CTRL
+deactivate CTRL
+
+UI -> CTRL: courses = listStudentCourses()
+activate CTRL
+
+CTRL -> AUTH : authenticatedUser = loggedinUserWithPermissions()
+activate AUTH
+deactivate AUTH
+CTRL -> SREP : student = findByUsername(authenticatedUser.username())
+activate SREP
+deactivate SREP
+
+CTRL -> REPO: enrolments = findByStudentMecanographicNumber(authenticatedUser.identity())
+activate REPO
+deactivate REPO
+
+loop for each enrolment
+  alt if enrolment.isAccepted()
+CTRL -> CTRL: courses = add(enrolment.course())
+activate CTRL
+deactivate CTRL
+  end
+end loop
+
+deactivate CTRL
+UI --> T: lists all the available courses and asks to select one
+deactivate UI
+
+T -> UI: selects the desired course
+activate UI
+
+UI -> UI: course = select(courses, index)
+
+UI -> CTRL: exams = futureExams(course)
+activate CTRL
+
+CTRL -> E_SRV: listAllFutureCourseExams(course)
+activate E_SRV
+E_SRV -> EREPO: findAllFutureCourseExams(course)
+activate EREPO
+deactivate EREPO
+loop for each exam
+    E_SRV -> Exam : toDTO(exam)
+    activate Exam
+    Exam -> E_DTO : new
+    deactivate C_SRV
+    deactivate Exam
+  end loop
+deactivate E_SRV
+deactivate CTRL
+
+UI --> T: displays all future exams of the chosen course
+
+@enduml
