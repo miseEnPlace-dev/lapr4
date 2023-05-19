@@ -42,13 +42,11 @@ deactivate REPO
 
 loop for each enrolment
   alt if enrolment.isAccepted()
-  loop for each enrolment course
-      CTRL -> Course : courseDTO = toDTO(course)
+      CTRL -> Course : courseDTO = toDTO(enrolment.course())
       activate Course
       Course -> C_DTO : new
       deactivate C_SRV
       deactivate Course
-    end loop
   deactivate C_SRV
 
 CTRL -> CTRL: courses = add(courseDTO)
