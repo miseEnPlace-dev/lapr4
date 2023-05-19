@@ -22,12 +22,16 @@ public class CreateExamUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = this.ctrl.listInProgressCourses();
+    final Iterable<CourseDTO> courses = this.ctrl.listInProgressCoursesOfAuthenticatedTeacher();
 
+    System.out.println("Select the course where the exam will be created:");
     final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), courses,
         new CoursePrinter());
     selector.show();
     final CourseDTO selectedCourse = selector.selectedElement();
+
+    if (selectedCourse == null)
+      return false;
 
     String filePath = Console.readLine("Enter the file path where the exam is defined: ");
 

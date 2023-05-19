@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -21,13 +22,13 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
   CourseBootstrapperBase courseBootstrapperBase = new CourseBootstrapperBase();
 
   private TeacherDTO registerDummyTeacher(final String username, final String password, final String firstName,
-      final String lastName, final String email) {
+      final String lastName, final String email, final String taxPayerNumber, final String acronym) {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.TEACHER);
 
     SystemUser u = registerUser(username, password, firstName, lastName, email, roles);
 
-    final Teacher teacher = new Teacher(u, TaxPayerNumber.valueOf("123456789"), Acronym.valueOf("abc"),
+    final Teacher teacher = new Teacher(u, TaxPayerNumber.valueOf(taxPayerNumber), Acronym.valueOf(acronym),
         BirthDate.valueOf(Calendar.getInstance()));
     PersistenceContext.repositories().teachers().save(teacher);
 
@@ -36,12 +37,19 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
 
   @Override
   public boolean execute() {
-    TeacherDTO t = registerDummyTeacher("teacher1", "Password1", "John", "Doe", "john@doe.com");
+    TeacherDTO t = registerDummyTeacher("teacher1", "Password1", "John", "Doe", "john@doe.com", "109123456", "jod");
+    TeacherDTO oms = registerDummyTeacher("oms", "Password1", "Orlando", "Sousa", "oms@isep.ipp.pt", "212345678",
+        "oms");
     courseBootstrapperBase.createClosedCourse("1234", "Matemática", "Matemática simples", 1, 20, t);
     courseBootstrapperBase.createClosedCourse("4321", "ESINF", "Estruturas de Informação ", 5, 80, t);
     courseBootstrapperBase.createOpenCourse("2222", "EAPLI", "Engenharia de Aplicações", 10, 200, t);
-    courseBootstrapperBase.createInProgressCourse("4444", "LPROG", "Linguagens e Programação", 1, 190, t);
-
+    CourseDTO lprog = courseBootstrapperBase.createInProgressCourse("4444", "LPROG", "Linguagens e Programação", 1,
+        190, t);
+    CourseDTO scomp = courseBootstrapperBase.createInProgressCourse("5555", "SCOMP", "Sistemas de Computadores", 0, 100,
+        t);
+    courseBootstrapperBase.createInProgressCourse("9876", "ARQCP", "Arquitetura de Computadores", 0, 100, t);
+    courseBootstrapperBase.assignTeacherToCourse(lprog, t);
+    courseBootstrapperBase.assignTeacherToCourse(scomp, oms);
     return true;
   }
 

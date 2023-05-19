@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import eapli.ecourse.Application;
@@ -58,7 +59,7 @@ class JpaCourseRepository
   @Override
   public Iterable<Course> findAllInProgressLecturedByTeacher(Teacher teacher) {
     final TypedQuery<Course> query = entityManager().createQuery(
-        "SELECT c FROM course c INNER JOIN course_teacher ct ON c.code = ct.course_code WHERE (ct.teachers_number = :number OR c.teacherInCharge_number = :number) AND e.courseState = 'IN_PROGRESS'",
+        "SELECT c FROM Course c JOIN c.teachers t WHERE (t.taxPayerNumber = :number OR c.teacherInCharge.taxPayerNumber = :number) AND c.courseState = 'IN_PROGRESS'",
         Course.class);
     query.setParameter("number", teacher.taxPayerNumber());
     query.setParameter("number", teacher.taxPayerNumber());

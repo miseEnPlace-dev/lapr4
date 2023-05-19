@@ -79,9 +79,18 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.title = title;
     this.description = description;
     this.state = new ExamState(State.DRAFT);
-    this.startTime = starTime;
-    this.endTime = endTime;
+    setDates(starTime, endTime);
     this.sections = new ArrayList<>(sections);
+  }
+
+  private void setDates(Time startTime, Time endTime) {
+    if (endTime.compareTo(startTime) < 0) {
+      this.startTime = endTime;
+      this.endTime = startTime;
+    } else {
+      this.startTime = startTime;
+      this.endTime = endTime;
+    }
   }
 
   @Override
