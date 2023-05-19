@@ -3,8 +3,8 @@ package eapli.ecourse.app.board.backend;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
+import eapli.ecourse.app.board.common.protocol.MessageCode;
 import eapli.ecourse.app.board.common.protocol.ProtocolMessage;
 import eapli.ecourse.app.board.common.protocol.UnsupportedVersionException;
 
@@ -39,9 +39,36 @@ public class ClientHandler implements Runnable {
 
       ProtocolMessage message = ProtocolMessage.fromDataStream(input);
 
+      System.out.println("\n[Client Handler Thread] Received request!");
       System.out.println("Protocol version: " + message.getProtocolVersion());
       System.out.println("Code: " + message.getCode());
       System.out.println("Data length: " + message.getDataLength());
+
+      // trolha
+      switch (message.getCode()) {
+        case ACK:
+          break;
+
+        case AUTH:
+          System.out.println("Trying to authenticate");
+          break;
+
+        case COMMTEST:
+          System.out.println("Comm test!");
+          break;
+
+        case DISCONN:
+          break;
+
+        case ERR:
+          break;
+
+        default:
+          System.out.println("Invalid code");
+          break;
+      }
+
+      System.out.println("[Client Handler Thread] Data: " + new String(message.getData()));
 
       // while (!client.isClosed()) {
       // // read from the client

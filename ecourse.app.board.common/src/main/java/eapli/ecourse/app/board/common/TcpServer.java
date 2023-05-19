@@ -1,7 +1,6 @@
 package eapli.ecourse.app.board.common;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -26,13 +25,15 @@ public class TcpServer {
       socket = tcpSocket.accept();
 
       try {
-        Runnable handler = handlerClass.getDeclaredConstructor().newInstance(socket);
+        // create a new client handler
+        Runnable handler = handlerClass.getConstructor(Socket.class).newInstance(socket);
 
         // create a new thread to handle the client
         Thread clientHandler = new Thread(handler);
 
         clientHandler.start();
       } catch (Exception e) {
+        System.out.println("Error creating the client handler thread");
         e.printStackTrace();
       }
     }
