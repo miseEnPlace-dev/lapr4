@@ -37,7 +37,7 @@ public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Acti
 
     requestCtrl.requestEnrolment(openForEnrolmentCourseDto, user);
 
-    EnrolmentDTO enrolmentDTO = respondeCtrl.listCourseApplications(openForEnrolmentCourseDto).iterator().next();
+    EnrolmentDTO enrolmentDTO = respondeCtrl.listPendingCourseApplications(openForEnrolmentCourseDto).iterator().next();
 
     respondeCtrl.accept(enrolmentDTO);
 

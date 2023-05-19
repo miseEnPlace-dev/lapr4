@@ -12,7 +12,6 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.infrastructure.bootstrapers.demo.CoursesBootstrapper;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 

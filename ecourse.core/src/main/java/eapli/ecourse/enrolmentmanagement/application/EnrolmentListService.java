@@ -16,8 +16,8 @@ public class EnrolmentListService {
     this.enrolmentRepository = enrolmentRepository;
   }
 
-  public Iterable<EnrolmentDTO> listCourseEnrolment(CourseCode code) {
-    final Iterable<Enrolment> enrolments = enrolmentRepository.findByCourseCode(code);
+  public Iterable<EnrolmentDTO> listPendingCourseApplications(CourseCode code) {
+    final Iterable<Enrolment> enrolments = enrolmentRepository.findPendingByCourseCode(code);
 
     return convertToDTO(enrolments);
   }

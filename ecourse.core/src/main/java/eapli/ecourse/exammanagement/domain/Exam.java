@@ -21,6 +21,7 @@ import eapli.ecourse.exammanagement.dto.ExamDTO;
 import eapli.ecourse.questionmanagement.domain.Identifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.validations.Preconditions;
 
 /**
  * Abstract class that describes an exam.
@@ -63,6 +64,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
 
   public Exam(Course course, Teacher teacher, Identifier identifier, Title title, Description description,
       Collection<Section> sections) {
+    Preconditions.noneNull(course, teacher, identifier, title, description, sections);
     this.code = ExamCode.newID();
     this.course = course;
     this.teacher = teacher;

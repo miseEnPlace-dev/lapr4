@@ -33,9 +33,9 @@ public class RespondCourseApplicationController {
     return listCoursesService.listOpenForEnrolment();
   }
 
-  public Iterable<EnrolmentDTO> listCourseApplications(final CourseDTO courseDTO) {
+  public Iterable<EnrolmentDTO> listPendingCourseApplications(final CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
-    return listEnrolmentService.listCourseEnrolment(courseDTO.getCode());
+    return listEnrolmentService.listPendingCourseApplications(courseDTO.getCode());
   }
 
   public EnrolmentDTO accept(final EnrolmentDTO enrolmentDTO) {
