@@ -1,8 +1,8 @@
 package eapli.ecourse.coursemanagement.application;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -11,8 +11,8 @@ import static org.mockito.Mockito.when;
 import java.util.Calendar;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
@@ -35,15 +35,15 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
-class ToggleCourseEnrolmentStateControllerTest {
+public class ToggleCourseEnrolmentStateControllerTest {
 
   private ToggleCourseEnrolmentStateController controller;
 
   private CourseRepository courseRepository;
   private AuthorizationService authz;
 
-  @BeforeEach
-  void setUp() {
+  @Before
+  public void setUp() {
     courseRepository = mock(CourseRepository.class);
     authz = mock(AuthorizationService.class);
     controller = new ToggleCourseEnrolmentStateController(courseRepository, authz);
@@ -86,13 +86,13 @@ class ToggleCourseEnrolmentStateControllerTest {
   }
 
   @Test
-  void testListNotClosedCourses() {
+  public void testListNotClosedCourses() {
     controller.listNotClosedCourses();
     verify(courseRepository, times(1)).findAllNotClosed();
   }
 
   @Test
-  void testToggleEnrolmentState() {
+  public void testToggleEnrolmentState() {
     Course course = getDummyCourse();
     CourseDTO courseDTO = getDummyCourseDTO();
 
@@ -110,7 +110,7 @@ class ToggleCourseEnrolmentStateControllerTest {
   }
 
   @Test
-  void ensureItIsNotPossibleToToggleStateOfFinishedCourse() {
+  public void ensureItIsNotPossibleToToggleStateOfFinishedCourse() {
     Course course = getDummyFinishedCourse();
     CourseDTO courseDTO = getDummyCourseDTO();
 

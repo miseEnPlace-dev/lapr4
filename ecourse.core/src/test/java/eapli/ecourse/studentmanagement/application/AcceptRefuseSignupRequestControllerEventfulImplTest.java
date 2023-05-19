@@ -1,13 +1,13 @@
 package eapli.ecourse.studentmanagement.application;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 
 import eapli.ecourse.studentmanagement.domain.SignupRequest;
@@ -23,15 +23,15 @@ import eapli.framework.time.util.CurrentTimeCalendars;
 /**
  * @author Paulo Gandra de Sousa 13/05/2022
  */
-class AcceptRefuseSignupRequestControllerEventfulImplTest {
+public class AcceptRefuseSignupRequestControllerEventfulImplTest {
 
   private AcceptRefuseSignupRequestControllerEventfulImpl subject;
   private SignupRequestRepository signupRequestsRepository;
   private AuthorizationService authorizationService;
   private EventPublisher dispatcher;
 
-  @BeforeEach
-  void setUp() {
+  @Before
+  public void setUp() {
     signupRequestsRepository = mock(SignupRequestRepository.class);
     authorizationService = mock(AuthorizationService.class);
     dispatcher = mock(EventPublisher.class);
@@ -41,7 +41,7 @@ class AcceptRefuseSignupRequestControllerEventfulImplTest {
   }
 
   @Test
-  void ensureSignupRequestIsAcceptedAndSignupEventIsPublished() {
+  public void ensureSignupRequestIsAcceptedAndSignupEventIsPublished() {
     final SignupRequest req = new SignupRequestBuilder(new NilPasswordPolicy(), new PlainTextEncoder())
         .withData("user", "pass", "a@b.com", "1234567").withName("Mary", "Smith")
         .createdOn(CurrentTimeCalendars.now()).build();

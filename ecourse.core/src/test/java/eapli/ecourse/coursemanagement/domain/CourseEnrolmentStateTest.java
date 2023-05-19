@@ -1,8 +1,8 @@
 package eapli.ecourse.coursemanagement.domain;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState.EnrolmentState;
 
