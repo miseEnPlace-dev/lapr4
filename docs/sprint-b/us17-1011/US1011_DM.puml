@@ -1,0 +1,50 @@
+@startuml US1011_DM
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> ExtraordinaryClass" {
+  entity ExtraordinaryClass
+
+  class Time
+  class Duration‎
+}
+
+class Time <<(V,#FF8B40) value object>> {}
+class Duration‎ <<(V,#FF8B40) value object>> {}
+
+entity ExtraordinaryClass <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Course" {
+    entity Course
+}
+
+entity Course <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Student" {
+    entity Student
+}
+
+entity Student <<entity>> <<root>> {
+}
+
+ExtraordinaryClass --> "1" Teacher : scheduled by
+ExtraordinaryClass --> "1..*" Student : has
+ExtraordinaryClass --> "1" Course : is related to
+
+ExtraordinaryClass --> "1" "Time" : has
+ExtraordinaryClass --> "1" "Duration‎" : has
+
+@enduml

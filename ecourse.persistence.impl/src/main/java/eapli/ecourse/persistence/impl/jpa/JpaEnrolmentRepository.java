@@ -57,4 +57,14 @@ public class JpaEnrolmentRepository extends JpaAutoTxRepository<Enrolment, Enrol
     return matchOne("e.student.mecanographicNumber = :studentID AND e.course.code = :courseCode",
         params);
   }
+
+  @Override
+  public Iterable<Enrolment> findEnroledCoursesByStudent(MecanographicNumber studentID) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("studentID", studentID);
+    params.put("state", new EnrolmentState(EnrolmentState.State.ACCEPTED));
+
+    return match("e.student.mecanographicNumber = :studentID AND e.state = :state",
+        params);
+  }
 }

@@ -1,0 +1,35 @@
+@startuml US1011_SSD
+
+autonumber
+
+actor T as "Teacher"
+
+activate T
+
+T -> ":System" : asks to schedule an extra class
+activate ":System"
+
+":System" --> T : asks to select the course
+deactivate ":System"
+
+T -> ":System" : selects the course
+activate ":System"
+
+":System" --> T : asks to select the users to invite
+deactivate ":System"
+
+T -> ":System" :  selects the users
+activate ":System"
+
+":System" --> T : asks to enter the date/time start and duration
+deactivate ":System"
+
+T --> ":System" : enters the date/time start and duration
+activate ":System"
+
+":System" --> T : informs operation sucess
+deactivate ":System"
+
+deactivate T
+
+@enduml

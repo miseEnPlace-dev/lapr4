@@ -1,5 +1,6 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.classmanagement.domain.Class;
 import eapli.ecourse.eventsmanagement.classmanagement.domain.ClassID;
 import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
@@ -10,6 +11,11 @@ public class InMemoryClassRepository extends InMemoryDomainRepository<Class, Cla
 
   static {
     InMemoryInitializer.init();
+  }
+
+  @Override
+  public Iterable<Class> findAllByCourseCode(CourseCode code) {
+    return match(e -> e.course().code().equals(code));
   }
 
   // @Override
