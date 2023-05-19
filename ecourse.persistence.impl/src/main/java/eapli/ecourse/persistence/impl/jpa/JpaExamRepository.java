@@ -24,7 +24,7 @@ public class JpaExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamC
     super(puname, Application.settings().extendedPersistenceProperties(), "code");
   }
 
-  public Optional<EvaluationExam> findById(final ExamCode code) {
+  public Optional<EvaluationExam> findByCode(final ExamCode code) {
     final Map<String, Object> params = new HashMap<>();
     params.put("code", code);
     return matchOne("e.code=:code", params);
