@@ -2,7 +2,6 @@ package eapli.ecourse.exammanagement.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +16,7 @@ import javax.persistence.Version;
 
 import eapli.ecourse.questionmanagement.domain.Identifier;
 import eapli.framework.domain.model.DomainEntity;
+import eapli.framework.validations.Preconditions;
 
 @Entity
 /**
@@ -49,6 +49,7 @@ public class Section implements DomainEntity<Long> {
 
   public Section(Identifier identifier, Title title, Description description, Score score,
       Collection<SectionQuestion> questions) {
+    Preconditions.noneNull(identifier, title, description, score);
     this.identifier = identifier;
     this.title = title;
     this.description = description;

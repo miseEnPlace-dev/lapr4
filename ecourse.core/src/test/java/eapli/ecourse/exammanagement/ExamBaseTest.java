@@ -9,6 +9,7 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
+import eapli.ecourse.exammanagement.domain.Section;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Acronym;
@@ -35,10 +36,6 @@ public class ExamBaseTest {
     return new Course(code, title, description, enrolmentLimits, courseState, enrolmentState, teacher);
   }
 
-  public static Student dummyStudent(final SystemUser user, final MecanographicNumber mecanographicNumber) {
-    return new Student(user, mecanographicNumber);
-  }
-
   public SystemUser getNewDummyUser() {
     return dummyUser("dummy", ClientRoles.MANAGER);
   }
@@ -54,7 +51,15 @@ public class ExamBaseTest {
         BirthDate.valueOf(Calendar.getInstance()));
   }
 
-  public Student getNewDummyStudent() {
-    return dummyStudent(getNewDummyUser(), MecanographicNumber.valueOf("1234"));
+  public Course getDummyInProgressCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("scomp"),
+        CourseDescription.valueOf("scomp"), EnrolmentLimits.valueOf(10, 20),
+        new CourseState(CourseState.State.IN_PROGRESS), new CourseEnrolmentState(), getNewDummyTeacher());
+  }
+
+  public Course getDummyClosedCourse() {
+    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("arqcp"),
+        CourseDescription.valueOf("arqcp"), EnrolmentLimits.valueOf(10, 20), new CourseState(CourseState.State.CLOSED),
+        new CourseEnrolmentState(), getNewDummyTeacher());
   }
 }
