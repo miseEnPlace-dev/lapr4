@@ -3,7 +3,7 @@ package eapli.ecourse.persistence.impl.jpa;
 import eapli.ecourse.Application;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.eventsmanagement.classmanagement.repositories.ClassRepository;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
@@ -64,12 +64,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public ClassRepository classes() {
+  public CourseClassRepository classes() {
     return new JpaClassRepository(Application.settings().persistenceUnitName());
   }
 
   @Override
-  public ClassRepository classes(TransactionalContext autoTx) {
+  public CourseClassRepository classes(TransactionalContext autoTx) {
     return new JpaClassRepository(autoTx);
   }
 

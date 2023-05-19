@@ -1,4 +1,4 @@
-package eapli.ecourse.eventsmanagement.classmanagement.domain;
+package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
 import java.util.Calendar;
 
