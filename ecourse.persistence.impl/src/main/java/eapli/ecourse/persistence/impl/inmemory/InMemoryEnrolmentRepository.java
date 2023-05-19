@@ -39,6 +39,11 @@ public class InMemoryEnrolmentRepository
   }
 
   @Override
+  public Iterable<Enrolment> findPendingByCourseCode(final CourseCode courseCode) {
+    return match(e -> e.course().code().equals(courseCode) && e.isPending());
+  }
+
+  @Override
   public Optional<Enrolment> findWithUserAndCourse(final MecanographicNumber studentID,
       final CourseCode courseCode) {
     return matchOne(e -> e.student().mecanographicNumber().equals(studentID)
@@ -49,4 +54,5 @@ public class InMemoryEnrolmentRepository
   public Iterable<Enrolment> findEnroledCoursesByStudent(MecanographicNumber studentID) {
     return match(e -> e.student().mecanographicNumber().equals(studentID) && e.isAccepted());
   }
+
 }
