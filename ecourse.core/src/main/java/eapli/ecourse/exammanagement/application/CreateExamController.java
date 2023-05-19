@@ -12,7 +12,7 @@ import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.parsers.ExamsParser;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.ExamRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;

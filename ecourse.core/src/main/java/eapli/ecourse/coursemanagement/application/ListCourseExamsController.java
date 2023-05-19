@@ -8,8 +8,8 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.ExamListService;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.repositories.ExamRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
