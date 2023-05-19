@@ -15,7 +15,7 @@ public class ListFutureExamsUI extends AbstractUI {
 
   private final ListFutureExamsController ctrl = new ListFutureExamsController(AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().exams(), PersistenceContext.repositories().enrollments(),
-      PersistenceContext.repositories().students(), PersistenceContext.repositories().courses());
+      PersistenceContext.repositories().courses());
 
   @Override
   protected boolean doShow() {

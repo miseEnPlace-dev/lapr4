@@ -35,7 +35,6 @@ public class ListFutureExamsController {
 
   private final ExamListService examListService;
 
-
   public ListFutureExamsController(AuthorizationService authz, ExamRepository examRepository,
       EnrolmentRepository enrolmentRepository, CourseRepository courseRepository) {
     this.authz = authz;
