@@ -1,4 +1,4 @@
-package eapli.ecourse.eventsmanagement.classmanagement.domain;
+package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-public class Class implements AggregateRoot<ClassID> {
+public class CourseClass implements AggregateRoot<ClassID> {
   private static final long serialVersionUID = 1L;
 
   @Version
@@ -45,7 +45,7 @@ public class Class implements AggregateRoot<ClassID> {
   @Column(nullable = false)
   private Hours hours;
 
-  public Class(final DayInWeek dayInWeek, final Duration duration,
+  public CourseClass(final DayInWeek dayInWeek, final Duration duration,
       final List<SpecialClass> specialClass, final Hours hours) {
     Preconditions.noneNull(dayInWeek, duration, hours);
 
@@ -56,7 +56,7 @@ public class Class implements AggregateRoot<ClassID> {
     this.hours = hours;
   }
 
-  protected Class() {
+  protected CourseClass() {
     // for ORM
   }
 
@@ -67,10 +67,10 @@ public class Class implements AggregateRoot<ClassID> {
 
   @Override
   public boolean sameAs(Object other) {
-    if (!(other instanceof Class))
+    if (!(other instanceof CourseClass))
       return false;
 
-    final Class otherClass = (Class) other;
+    final CourseClass otherClass = (CourseClass) other;
 
     if (this == otherClass)
       return true;

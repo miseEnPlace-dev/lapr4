@@ -5,7 +5,6 @@ actor "Teacher" as T
 
 participant "UpdateClassScheduleUI" as UI <<presentation>>
 participant "UpdateClassScheduleController" as CTRL <<application>>
-participant "SpecialClass" as SC <<domain>>
 participant "ScheduleAvailabilityService" as SAREP <<service>>
 participant "SystemUser" as USER <<domain>>
 participant "UserDTO" as DTO <<dto>>

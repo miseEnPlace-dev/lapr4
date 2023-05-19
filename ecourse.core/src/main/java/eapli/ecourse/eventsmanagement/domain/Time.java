@@ -3,9 +3,9 @@ package eapli.ecourse.eventsmanagement.domain;
 import java.util.Calendar;
 import javax.persistence.Embeddable;
 
-import eapli.ecourse.eventsmanagement.classmanagement.domain.DayInWeek;
-import eapli.ecourse.eventsmanagement.classmanagement.domain.Hours;
-import eapli.ecourse.eventsmanagement.classmanagement.domain.WeekDay;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.DayInWeek;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.Hours;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.WeekDay;
 import eapli.framework.domain.model.ValueObject;
 import lombok.EqualsAndHashCode;
 

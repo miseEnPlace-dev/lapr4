@@ -61,11 +61,6 @@ class CourseDTO {
   - createdAt
 }
 
-class CourseDTOParser {
-  + valueOf(courseDTO)
-}
-
-
 class InMemoryCourseRepository {
   + save(course)
   + findAllOpen()
@@ -92,6 +87,8 @@ enum CourseState {
   FINISHED
 }
 
+
+
 enum CourseEnrolmentState {
   OPEN
   CLOSED
@@ -110,9 +107,7 @@ ToggleCourseStatusController ..> Course
 ToggleCourseStatusUI ..> ToggleCourseStatusController
 
 CourseListService ..> Course
+CourseListService ..> CourseDTO
 ToggleCourseStatusController --> CourseListService
-
-CourseDTOParser ..> CourseDTO
-CourseDTOParser ..> Course
 
 @enduml
