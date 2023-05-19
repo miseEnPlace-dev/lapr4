@@ -40,6 +40,10 @@ public class RequestEnrolmentController {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
     SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
 
+    return requestEnrolment(courseDTO, authenticatedUser);
+  }
+
+  public EnrolmentDTO requestEnrolment(final CourseDTO courseDTO, SystemUser authenticatedUser) {
     Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
 
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
