@@ -19,11 +19,19 @@ public interface ExamRepository extends DomainRepository<ExamCode, Exam> {
   }
 
   /**
-   * Returns the exams of the given course.
+   * Returns all exams of the given course.
    *
    * @param course
    * @return
    */
   Iterable<Exam> findAllCourseExams(Course course);
+
+  /**
+   * Returns all future exams of the given course.
+   *
+   * @param course
+   * @return
+   */
+  Iterable<Exam> findAllFutureCourseExams(Course course);
 
 }

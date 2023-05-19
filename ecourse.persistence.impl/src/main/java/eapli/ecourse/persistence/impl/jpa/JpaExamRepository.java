@@ -2,12 +2,14 @@ package eapli.ecourse.persistence.impl.jpa;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -30,6 +32,13 @@ public class JpaExamRepository extends JpaAutoTxRepository<Exam, ExamCode, ExamC
   @Override
   public Iterable<Exam> findAllCourseExams(Course course) {
     return match("e.course = :course", "course", course);
+  }
+
+  @Override
+  public Iterable<Exam> findAllFutureCourseExams(Course course) {
+    final Calendar currentDate = Calendar.getInstance();
+
+    return match("e.course = :course AND e.startTime > :startTime", "course", course, "startTime", Time.valueOf(currentDate));
   }
 
 }
