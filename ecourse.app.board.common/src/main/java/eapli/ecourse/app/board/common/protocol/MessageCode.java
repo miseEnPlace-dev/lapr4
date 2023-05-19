@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.backend.protocol;
+package eapli.ecourse.app.board.common.protocol;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -5,8 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import eapli.ecourse.app.board.backend.protocol.ProtocolMessage;
-import eapli.ecourse.app.board.backend.protocol.UnsupportedVersionException;
+import eapli.ecourse.app.board.common.protocol.ProtocolMessage;
+import eapli.ecourse.app.board.common.protocol.UnsupportedVersionException;
 
 public class ClientHandler implements Runnable {
   private Socket client;

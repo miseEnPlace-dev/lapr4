@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.backend.protocol;
+package eapli.ecourse.app.board.common.protocol;
 
 public class UnsupportedVersionException extends Exception {
   public UnsupportedVersionException() {}

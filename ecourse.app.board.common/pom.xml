@@ -11,10 +11,10 @@
   </parent>
 
   <groupId>eapli.ecourse</groupId>
-  <artifactId>app.board.frontend</artifactId>
+  <artifactId>app.board.common</artifactId>
   <packaging>jar</packaging>
 
-  <name>ecourse.app.board.frontend</name>
+  <name>ecourse.app.board.common</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,10 +22,5 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>eapli.ecourse</groupId>
-      <artifactId>app.board.common</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
   </dependencies>
 </project>
