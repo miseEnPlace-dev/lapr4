@@ -9,7 +9,7 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
-import eapli.ecourse.exammanagement.domain.Section;
+import eapli.ecourse.exammanagement.domain.ExamSection;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Acronym;

@@ -25,19 +25,19 @@ public class MatchingQuestion extends Question {
   @CollectionTable(name = "match")
   @MapKeyColumn(name = "matchIdentifier")
   @Column(name = "matchValue")
-  private Map<Identifier, String> matches;
+  private Map<QuestionIdentifier, String> matches;
 
   @ElementCollection
   @CollectionTable(name = "matchingOption")
   @MapKeyColumn(name = "matchingOptionIdentifier")
   @Column(name = "matchingOptionValue")
-  private Map<Identifier, String> options;
+  private Map<QuestionIdentifier, String> options;
 
   @ElementCollection
   @CollectionTable(name = "matchingOptionFeedback")
   @MapKeyColumn(name = "matchingOptionIdentifier")
   @Column(name = "matchingFeedbackValue")
-  private Map<Identifier, Feedback> feedbacks;
+  private Map<QuestionIdentifier, Feedback> feedbacks;
 
   public MatchingQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
@@ -63,15 +63,15 @@ public class MatchingQuestion extends Question {
     correctMatches.put(option, match);
   }
 
-  public void addMatch(final Identifier match, final String description) {
+  public void addMatch(final QuestionIdentifier match, final String description) {
     matches.put(match, description);
   }
 
-  public void addOption(final Identifier match, final String description) {
+  public void addOption(final QuestionIdentifier match, final String description) {
     options.put(match, description);
   }
 
-  public void addFeedback(final Identifier match, final Feedback feedback) {
+  public void addFeedback(final QuestionIdentifier match, final Feedback feedback) {
     this.feedbacks.put(match, feedback);
   }
 

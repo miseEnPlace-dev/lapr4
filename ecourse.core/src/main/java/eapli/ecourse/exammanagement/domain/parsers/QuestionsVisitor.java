@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eapli.ecourse.questionmanagement.domain.Feedback;
-import eapli.ecourse.questionmanagement.domain.Identifier;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.MatchingQuestion;
 import eapli.ecourse.questionmanagement.domain.MissingWordsQuestion;
 import eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion;
@@ -60,7 +60,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
     ctx.option().forEach(o -> {
       String id = o.NUMBER().getText();
-      Identifier identifier = Identifier.valueOf(id);
+      QuestionIdentifier identifier = QuestionIdentifier.valueOf(id);
 
       String body = extractString(o.STRING(0).getText());
 
@@ -75,7 +75,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
     ctx.match().forEach(m -> {
       String id = m.NUMBER().getText();
-      Identifier identifier = Identifier.valueOf(id);
+      QuestionIdentifier identifier = QuestionIdentifier.valueOf(id);
 
       String body = extractString(m.STRING().getText());
 
@@ -123,14 +123,14 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
       else
         grade = Double.parseDouble(a.REAL_NUMBER().getText());
 
-      Identifier identifier = Identifier.valueOf(id);
+      QuestionIdentifier identifier = QuestionIdentifier.valueOf(id);
 
       q.addCorrectAnswer(identifier, grade);
     });
 
     ctx.option().forEach(o -> {
       String id = o.NUMBER().getText();
-      Identifier identifier = Identifier.valueOf(id);
+      QuestionIdentifier identifier = QuestionIdentifier.valueOf(id);
 
       String body = extractString(o.STRING(0).getText());
 
