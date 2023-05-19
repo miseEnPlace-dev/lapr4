@@ -81,6 +81,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 - Course (Selected from a list of courses)
 - Exam Structure (Text file)
+- Start and End time of exam
 
 #### Output
 
@@ -102,9 +103,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US2001_SD](out/US2001_SD.svg)
 
-### 4.2. Class Diagram
+<!-- ### 4.2. Class Diagram
 
-![US2001_CD](out/US2001_CD.svg)
+![US2001_CD](out/US2001_CD.svg) -->
 
 ### 4.3. Applied Patterns
 
@@ -139,7 +140,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 6. Integration & Demonstration
 
-![US2001_DEMO](US2001_DEMO.png)
+<!-- ![US2001_DEMO](US2001_DEMO.png) -->
 
 ---
 

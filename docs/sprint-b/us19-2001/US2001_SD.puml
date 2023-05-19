@@ -9,7 +9,7 @@ participant "AuthenticationService" as auth <<service>>
 participant "ListCourseService" as lcservice <<service>>
 participant "ExamsParser" as parser <<parser>>
 participant "ExamBuilder" as builder <<builder>>
-participant "Exam" as exam <<domain>>
+participant "EvaluationExam" as exam <<domain>>
 participant "Course" as course <<domain>>
 participant "CourseDTO" as coursedto <<dto>>
 
@@ -21,15 +21,33 @@ activate teacher
 teacher -> ui : Asks to create an exam
 
 activate ui
-ui -> controller : listInProgressCourses()
+ui -> controller : listInProgressCoursesLecturedByAuthenticatedTeacher()
 
 activate controller
-controller -> lcservice : listInProgressCourses()
+controller -> auth : loggedinUserWithPermissions(Roles.TEACHER)
+
+activate auth
+auth --> controller : authenticatedUser
+deactivate auth
+
+controller -> teacherrepo : findByUsername(authenticatedUser.username())
+
+activate teacherrepo
+teacherrepo --> controller : teacher
+deactivate teacherrepo
+
+controller -> lcservice : listInProgressCoursesLecturedByTeacher(teacher)
 
 activate lcservice
-lcservice -> courserepo : findAllInProgress()
+lcservice -> courserepo : findAllInProgressLecturedByTeacher(teacher)
 
 activate courserepo
+note over courserepo
+A typed query is executed
+to find all courses
+in progress lectured by
+the given teacher
+end note
 courserepo --> lcservice : courses
 deactivate courserepo
 
@@ -86,18 +104,6 @@ activate ui
 ui -> controller : createExam(examBuilder, course, start, end)
 
 activate controller
-controller -> auth : loggedinUserWithPermissions(Roles.TEACHER)
-
-activate auth
-auth --> controller : authenticatedUser
-deactivate auth
-
-controller -> teacherrepo : findByUsername(authenticatedUser.username())
-
-activate teacherrepo
-teacherrepo --> controller : teacher
-deactivate teacherrepo
-
 controller -> builder : .withTeacher(teacher)\n.withCourse(course)\n.withStartDate(start)\n.withEndDate(end)
 activate builder
 deactivate builder
