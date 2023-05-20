@@ -18,11 +18,8 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class ListCourseExamsUI extends AbstractUI {
 
-  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
-
-  private final ExamRepository examRepository = PersistenceContext.repositories().exams();
   private final ListCourseExamsController ctrl = new ListCourseExamsController(AuthzRegistry.authorizationService(),
-      courseRepository, examRepository);
+      PersistenceContext.repositories().courses(), PersistenceContext.repositories().exams());
 
   @Override
   protected boolean doShow() {

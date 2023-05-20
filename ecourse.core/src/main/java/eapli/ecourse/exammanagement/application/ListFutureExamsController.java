@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import eapli.ecourse.coursemanagement.application.ListCourseService;
-import eapli.ecourse.coursemanagement.domain.CourseCode;
+
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.application.EnrolmentListService;
@@ -31,8 +31,6 @@ public class ListFutureExamsController {
 
   private final CourseRepository courseRepository;
 
-  private final ListCourseService courseService;
-
   private final ExamListService examListService;
 
   public ListFutureExamsController(AuthorizationService authz, ExamRepository examRepository,
@@ -40,7 +38,6 @@ public class ListFutureExamsController {
     this.authz = authz;
     this.examListService = new ExamListService(examRepository);
     this.courseRepository = courseRepository;
-    this.courseService = new ListCourseService(courseRepository);
     this.enrolmentListService = new EnrolmentListService(enrolmentRepository);
     this.studentListService = new StudentService();
   }
@@ -53,10 +50,12 @@ public class ListFutureExamsController {
     List<CourseDTO> courses = new ArrayList<>();
     for (EnrolmentDTO enrolment : enrolmentListService.findByStudentMecanographicNumber(student.identity())) {
       if (enrolment.getState().equals(EnrolmentState.State.ACCEPTED.toString())) {
-        Optional<CourseDTO> course = courseService.findByCode(enrolment.getCourseCode());
-        course.ifPresent(courses::add);
+        Optional<Course> course = courseRepository.ofIdentity(enrolment.getCourseCode());
+        course.ifPresent(value -> courses.add(value.toDto()));
       }
     }
+
+
 
     return () -> new Iterator<CourseDTO>() {
       private int index = 0;
