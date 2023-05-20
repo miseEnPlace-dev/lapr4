@@ -31,4 +31,11 @@ public class BoardIDTest {
     assert (boardID1.compareTo(boardID2) != 0);
   }
 
+  @Test
+  public void ensureEqualsWorks() {
+    BoardID boardID1 = BoardID.valueOf("boardID1");
+    BoardID boardID2 = BoardID.valueOf("boardID2");
+    assert (boardID1.equals(boardID2) == false);
+  }
+
 }
