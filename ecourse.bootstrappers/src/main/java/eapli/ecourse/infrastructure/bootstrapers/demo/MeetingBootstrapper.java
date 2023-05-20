@@ -19,7 +19,9 @@ public class MeetingBootstrapper extends UsersBootstrapperBase implements Action
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
   private ScheduleMeetingController controller = new ScheduleMeetingController(
       PersistenceContext.repositories().meetings(), authz,
-      PersistenceContext.repositories().invites());
+      PersistenceContext.repositories().invites(), PersistenceContext.repositories().classes(),
+      PersistenceContext.repositories().extraordinaryClasses(), PersistenceContext.repositories().enrollments(),
+      PersistenceContext.repositories().students(), PersistenceContext.repositories().teachers());
 
   @Override
   public boolean execute() {
