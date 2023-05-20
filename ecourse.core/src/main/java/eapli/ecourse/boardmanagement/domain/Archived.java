@@ -26,10 +26,6 @@ public class Archived implements ValueObject, Comparable<Archived> {
     // for ORM
   }
 
-  public String archivedAt() {
-    return this.archivedAt.toString();
-  }
-
   private void validate(final Calendar archivedAt) {
     if (archivedAt.after(Calendar.getInstance())) {
       throw new IllegalArgumentException("Archived date should be in the past");

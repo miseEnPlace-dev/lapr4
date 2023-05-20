@@ -25,4 +25,10 @@ public class BoardColumnTest {
     assertTrue(boardColumn1.sameAs(boardColumn1));
   }
 
+  @Test
+  public void ensureSameAsWorksDifferentObject() {
+    BoardColumn boardColumn1 = new BoardColumn(new Title("title"), 1);
+    assertTrue(!boardColumn1.sameAs(new Object()));
+  }
+
 }

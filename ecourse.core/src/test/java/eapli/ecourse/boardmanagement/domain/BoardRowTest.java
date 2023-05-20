@@ -25,4 +25,10 @@ public class BoardRowTest {
     assertTrue(boardRow1.sameAs(boardRow1));
   }
 
+  @Test
+  public void ensureSameAsWorksDifferentObject() {
+    BoardRow boardRow1 = new BoardRow(new Title("title"), 1);
+    assertTrue(!boardRow1.sameAs(new Object()));
+  }
+
 }

@@ -43,4 +43,16 @@ public class ArchivedTest {
     assertTrue(new Archived(date2).compareTo(new Archived(date1)) < 0);
   }
 
+  @Test
+  public void ensureEqualsWorks() {
+    Calendar date1 = Calendar.getInstance();
+    Calendar date2 = Calendar.getInstance();
+
+    date2.add(Calendar.DAY_OF_MONTH, -1);
+
+    assertEquals(new Archived(date1), new Archived(date1));
+    assertTrue(!new Archived(date1).equals(new Archived(date2)));
+    assertTrue(!new Archived(date1).equals(new Object()));
+  }
+
 }
