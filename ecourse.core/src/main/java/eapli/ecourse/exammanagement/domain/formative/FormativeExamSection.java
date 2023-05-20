@@ -16,8 +16,8 @@ import javax.persistence.Version;
 
 import eapli.ecourse.exammanagement.domain.SectionDescription;
 import eapli.ecourse.exammanagement.domain.SectionIdentifier;
-import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
+import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.framework.domain.model.DomainEntityBase;
 import eapli.framework.validations.Preconditions;
 
@@ -41,11 +41,11 @@ public class FormativeExamSection extends DomainEntityBase<Long> {
   @Column(nullable = false)
   private SectionDescription description;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<SectionQuestion> questions;
+  @OneToMany(fetch = FetchType.EAGER)
+  private List<Question> questions;
 
   public FormativeExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
-      Collection<SectionQuestion> questions) {
+      Collection<Question> questions) {
     Preconditions.noneNull(identifier, title, description);
 
     this.identifier = identifier;

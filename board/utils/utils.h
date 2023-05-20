@@ -10,6 +10,11 @@
 void print_array(int *arr, int size);
 
 /**
+ * Prints a matrix of integers.
+ */
+void print_matrix(int **arr, int rows, int columns);
+
+/**
  * Initializes an array of integers with random values between min and max.
  */
 void initialize_array(int *arr, int size, int min, int max);

@@ -16,8 +16,8 @@ import javax.persistence.Version;
 
 import eapli.ecourse.exammanagement.domain.SectionDescription;
 import eapli.ecourse.exammanagement.domain.SectionIdentifier;
-import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
+import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
@@ -45,11 +45,11 @@ public class EvaluationExamSection implements DomainEntity<Long> {
   private ExamScore score;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<SectionQuestion> questions;
+  private List<Question> questions;
 
   public EvaluationExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
       ExamScore score,
-      Collection<SectionQuestion> questions) {
+      Collection<Question> questions) {
     Preconditions.noneNull(identifier, title, description, score);
     this.identifier = identifier;
     this.title = title;

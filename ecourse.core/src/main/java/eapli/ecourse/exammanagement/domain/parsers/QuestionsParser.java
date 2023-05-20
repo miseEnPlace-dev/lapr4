@@ -23,4 +23,17 @@ public class QuestionsParser {
     QuestionsVisitor eval = new QuestionsVisitor();
     return (List<Question>) eval.visit(tree);
   }
+
+  public static List<Question> parseWithVisitorFromString(String string) throws ParseException {
+    QuestionLexer lexer = new QuestionLexer(CharStreams.fromString(string));
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    QuestionParser parser = new QuestionParser(tokens);
+    ParseTree tree = parser.start();
+
+    if (parser.getNumberOfSyntaxErrors() > 0)
+      throw new ParseException();
+
+    QuestionsVisitor eval = new QuestionsVisitor();
+    return (List<Question>) eval.visit(tree);
+  }
 }

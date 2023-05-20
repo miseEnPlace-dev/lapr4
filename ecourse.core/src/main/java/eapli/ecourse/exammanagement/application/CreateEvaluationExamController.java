@@ -60,6 +60,7 @@ public class CreateEvaluationExamController {
   }
 
   public void createExam(CourseDTO courseDto, Time startTime, Time endTime) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
     setCurrentAuthenticatedTeacher();
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 

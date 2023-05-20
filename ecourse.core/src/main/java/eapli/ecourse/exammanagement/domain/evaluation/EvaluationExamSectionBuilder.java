@@ -4,8 +4,8 @@ import java.util.List;
 
 import eapli.ecourse.exammanagement.domain.SectionDescription;
 import eapli.ecourse.exammanagement.domain.SectionIdentifier;
-import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
+import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
@@ -16,7 +16,7 @@ public class EvaluationExamSectionBuilder implements DomainFactory<EvaluationExa
   private SectionTitle title;
   private SectionDescription description;
   private ExamScore score;
-  private List<SectionQuestion> questions;
+  private List<Question> questions;
 
   public EvaluationExamSectionBuilder withIdentifier(SectionIdentifier identifier) {
     this.identifier = identifier;
@@ -38,7 +38,7 @@ public class EvaluationExamSectionBuilder implements DomainFactory<EvaluationExa
     return this;
   }
 
-  public EvaluationExamSectionBuilder withQuestions(List<SectionQuestion> questions) {
+  public EvaluationExamSectionBuilder withQuestions(List<Question> questions) {
     this.questions = questions;
     return this;
   }

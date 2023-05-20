@@ -27,6 +27,15 @@ void print_array(int *arr, int size)
 }
 
 /**
+ * Prints a matrix of integers.
+ */
+void print_matrix(int **arr, int rows, int columns)
+{
+  for (int i = 0; i < rows; i++)
+    print_array(arr[i], columns);
+}
+
+/**
  * Initializes an array of integers with random values between min and max.
  */
 void initialize_array(int *arr, int size, int min, int max)

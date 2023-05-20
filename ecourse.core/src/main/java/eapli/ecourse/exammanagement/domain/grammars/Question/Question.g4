@@ -36,28 +36,27 @@ matchingQuestion:
 missingWordsQuestion:
 	'missing-words' EOI body feedback? missingWordsCorrectAnswer EOI;
 
-body: QUESTION_BODY ' ' STRING EOI;
+body: QUESTION_BODY STRING EOI;
 
 feedback: FEEDBACK STRING EOI;
 
-shortAnswerCorrectAnswer:
-	CORRECT_ANSWER STRING ' ' REAL_NUMBER EOI;
+shortAnswerCorrectAnswer: CORRECT_ANSWER STRING REAL_NUMBER EOI;
 
 multipleChoiceCorrectAnswer:
-	CORRECT_ANSWER NUMBER (' ' REAL_NUMBER)? EOI
+	CORRECT_ANSWER NUMBER (REAL_NUMBER)? EOI
 	| CORRECT_ANSWER NUMBER EOI;
 
 numericalCorrectAnswer: CORRECT_ANSWER REAL_NUMBER EOI;
 
 numericalAcceptedError: ACCEPTED_ERROR REAL_NUMBER EOI;
 
-option: OPTION ' ' NUMBER ' ' STRING (' ' STRING)? EOI;
+option: OPTION NUMBER STRING (STRING)? EOI;
 
-match: MATCH ' ' NUMBER ' ' STRING EOI;
+match: MATCH NUMBER STRING EOI;
 
-matchingCorrectAnswer: CORRECT_ANSWER NUMBER ' ' NUMBER EOI;
+matchingCorrectAnswer: CORRECT_ANSWER NUMBER NUMBER EOI;
 
-missingWordsCorrectAnswer: CORRECT_ANSWER STRING (' ' STRING)*;
+missingWordsCorrectAnswer: CORRECT_ANSWER STRING (STRING)*;
 
 trueFalseCorrectAnswer: CORRECT_ANSWER (TRUE | FALSE) EOI;
 
@@ -72,13 +71,13 @@ REAL_NUMBER:	[0-9]+ ('.' [0-9]+)?;
 
 START_QUESTION:									'@start-question';
 END_QUESTION:										'@end-question';
-TYPE:														'@type ';
+TYPE:														'@type';
 QUESTION_BODY:									'@question-body';
 START_CORRECT_ANSWERS_SECTION:	'@correct-answers';
-CORRECT_ANSWER:									'@correct-answer ';
+CORRECT_ANSWER:									'@correct-answer';
 END_CORRECT_ANSWERS_SECTION:		'@end-correct-answers';
-ACCEPTED_ERROR:									'@accepted-error ';
-FEEDBACK:												'@feedback ';
+ACCEPTED_ERROR:									'@accepted-error';
+FEEDBACK:												'@feedback';
 START_OPTIONS_SECTION:					'@start-options';
 END_OPTIONS_SECTION:						'@end-options';
 OPTION:													'@option';

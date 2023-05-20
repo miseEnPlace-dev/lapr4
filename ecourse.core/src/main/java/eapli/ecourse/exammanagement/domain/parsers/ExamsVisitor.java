@@ -21,11 +21,14 @@ import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSectionBuilder;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
+import eapli.ecourse.questionmanagement.domain.Question;
 
 public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamBuilder builder;
   private EvaluationExamSectionBuilder section;
   private List<EvaluationExamSection> sections;
+  private List<Question> questions;
+  private Question question;
   int examScore = 0;
   int sectionsScore = 0;
 
@@ -81,11 +84,11 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
         properties.put("description", extractString(p.description().STRING().getText()));
       }
-      if (p.feedback() != null) {
+      if (p.feedback_header() != null) {
         if (properties.containsKey("feedback"))
           raiseError(p, "Feedback already defined.");
 
-        properties.put("feedback", p.feedback().FDB_GRD_TYPE().getText());
+        properties.put("feedback", p.feedback_header().FDB_GRD_TYPE().getText());
       }
       if (p.grade() != null) {
         if (properties.containsKey("grade"))
@@ -154,11 +157,21 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   @Override
   public EvaluationExamBuilder visitSection(ExamParser.SectionContext ctx) {
     section = new EvaluationExamSectionBuilder();
+    questions = new ArrayList<Question>();
 
     visit(ctx.start_section());
     visit(ctx.header());
-    // visit(ctx.questions());
+    visit(ctx.questions());
 
+    section.withQuestions(questions);
+    sections.add(section.build());
+
+    return builder;
+  }
+
+  @Override
+  public EvaluationExamBuilder visitQuestions(ExamParser.QuestionsContext ctx) {
+    questions = QuestionsParser.parseWithVisitorFromString(ctx.getText().toString());
     return builder;
   }
 
@@ -200,9 +213,6 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
     } else {
       section.withDescription(SectionDescription.valueOf(""));
     }
-    section.withQuestions(new ArrayList<>());
-    EvaluationExamSection section = this.section.build();
-    sections.add(section);
   }
 
   private String extractString(String s) {

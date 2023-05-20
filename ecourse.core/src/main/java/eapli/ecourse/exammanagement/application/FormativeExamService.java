@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
-import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
@@ -39,25 +38,16 @@ public class FormativeExamService {
     return getRandomQuestions(numberOfQuestions, (List<Question>) questionsFromType);
   }
 
-  private Collection<SectionQuestion> buildSectionQuestions(Collection<Question> questions) {
-    Collection<SectionQuestion> sectionQuestions = new ArrayList<>();
-    for (Question question : questions)
-      sectionQuestions.add(new SectionQuestion(question));
-
-    return sectionQuestions;
-  }
-
   public Collection<FormativeExamSection> buildSections(FormativeExamRequest request, CourseDTO course) {
     List<FormativeExamSection> sections = new ArrayList<>();
     for (FormativeExamSectionRequest sectionRequest : request.sections()) {
       Collection<Question> questions = buildSection(sectionRequest.numberOfQuestions(),
           sectionRequest.questionsType(),
           course);
-      Collection<SectionQuestion> sectionQuestions = buildSectionQuestions(questions);
 
       final FormativeExamSection section = new FormativeExamSection(sectionRequest.identifier(), sectionRequest.title(),
           sectionRequest.description(),
-          sectionQuestions);
+          questions);
 
       sections.add(section);
     }

@@ -65,11 +65,11 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDescription(ExamParser.DescriptionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#feedback}.
+	 * Visit a parse tree produced by {@link ExamParser#feedback_header}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFeedback(ExamParser.FeedbackContext ctx);
+	T visitFeedback_header(ExamParser.Feedback_headerContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExamParser#grade}.
 	 * @param ctx the parse tree
@@ -106,4 +106,112 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEnd_section(ExamParser.End_sectionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#question}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuestion(ExamParser.QuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#numericalQuestion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumericalQuestion(ExamParser.NumericalQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#multipleChoiceQuestion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultipleChoiceQuestion(ExamParser.MultipleChoiceQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#shortAnswerQuestion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitShortAnswerQuestion(ExamParser.ShortAnswerQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#trueFalseQuestion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrueFalseQuestion(ExamParser.TrueFalseQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#matchingQuestion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMatchingQuestion(ExamParser.MatchingQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#missingWordsQuestion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMissingWordsQuestion(ExamParser.MissingWordsQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBody(ExamParser.BodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#feedback}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFeedback(ExamParser.FeedbackContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#shortAnswerCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitShortAnswerCorrectAnswer(ExamParser.ShortAnswerCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#multipleChoiceCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultipleChoiceCorrectAnswer(ExamParser.MultipleChoiceCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#numericalCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumericalCorrectAnswer(ExamParser.NumericalCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#numericalAcceptedError}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumericalAcceptedError(ExamParser.NumericalAcceptedErrorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#option}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOption(ExamParser.OptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#match}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMatch(ExamParser.MatchContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#matchingCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMatchingCorrectAnswer(ExamParser.MatchingCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#missingWordsCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMissingWordsCorrectAnswer(ExamParser.MissingWordsCorrectAnswerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#trueFalseCorrectAnswer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrueFalseCorrectAnswer(ExamParser.TrueFalseCorrectAnswerContext ctx);
 }

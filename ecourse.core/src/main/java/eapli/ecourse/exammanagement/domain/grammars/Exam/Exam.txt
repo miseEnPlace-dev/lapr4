@@ -10,7 +10,17 @@
 
 @title "Expressões regulares.";
 @description "Descrição da Secção";
-@score 50;
+@score 100;
+
+@start-question
+  @type short-answer;
+  @question-body "Como descreve a forma de um círculo?";
+  @correct-answers
+    @correct-answer "Assim" 0.5;
+    @correct-answer "Assado" 0.2;
+    @correct-answer "de Outra maneira" 0.1;
+  @end-correct-answers;
+@end-question;
 
 @end-section;
 
