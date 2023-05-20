@@ -2,33 +2,33 @@ package eapli.ecourse.exammanagement.domain.evaluation;
 
 import java.util.List;
 
-import eapli.ecourse.exammanagement.domain.ExamDescription;
-import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionDescription;
+import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionQuestion;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
+import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
 public class SectionBuilder implements DomainFactory<EvaluationExamSection> {
   private EvaluationExamSection section;
 
-  private QuestionIdentifier identifier;
-  private ExamTitle title;
-  private ExamDescription description;
+  private SectionIdentifier identifier;
+  private SectionTitle title;
+  private SectionDescription description;
   private ExamScore score;
   private List<SectionQuestion> questions;
 
-  public SectionBuilder withIdentifier(QuestionIdentifier identifier) {
+  public SectionBuilder withIdentifier(SectionIdentifier identifier) {
     this.identifier = identifier;
     return this;
   }
 
-  public SectionBuilder withTitle(ExamTitle title) {
+  public SectionBuilder withTitle(SectionTitle title) {
     this.title = title;
     return this;
   }
 
-  public SectionBuilder withDescription(ExamDescription description) {
+  public SectionBuilder withDescription(SectionDescription description) {
     this.description = description;
     return this;
   }

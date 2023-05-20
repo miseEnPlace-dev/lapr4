@@ -9,10 +9,9 @@ import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
-import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
 import eapli.ecourse.exammanagement.domain.parsers.FormativeExamsParser;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
-import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -70,11 +69,7 @@ public class CreateFormativeExamController {
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
     FormativeExamRequest request = builder.build();
-    for (FormativeExamSectionRequest sectionRequest : request.sections()) {
-      Iterable<Question> questions = examService.buildSection(sectionRequest.numberOfQuestions(),
-          sectionRequest.questionsType(),
-          courseDto);
-    }
+    Iterable<FormativeExamSection> sections = examService.buildSections(request, courseDto);
 
     // TODO
     // builder.withTeacher(teacher).withCourse(course);

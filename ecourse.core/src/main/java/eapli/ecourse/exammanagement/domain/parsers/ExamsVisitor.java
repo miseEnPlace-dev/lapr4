@@ -14,11 +14,13 @@ import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamInfo;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionDescription;
+import eapli.ecourse.exammanagement.domain.SectionIdentifier;
+import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.evaluation.SectionBuilder;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 
 public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamBuilder builder;
@@ -163,7 +165,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   @Override
   public EvaluationExamBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf(str);
+    SectionIdentifier identifier = SectionIdentifier.valueOf(str);
     section.withIdentifier(identifier);
     return builder;
   }
@@ -187,16 +189,16 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   }
 
   private void initializeSection(Map<String, Object> properties) {
-    ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
+    SectionTitle title = SectionTitle.valueOf(properties.get("title").toString());
     section.withTitle(title);
     ExamScore score = ExamScore.valueOf(Integer.parseInt(properties.get("score").toString()));
     section.withScore(score);
     sectionsScore += Integer.parseInt(properties.get("score").toString());
     if (properties.containsKey("description")) {
-      ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
+      SectionDescription description = SectionDescription.valueOf(properties.get("description").toString());
       section.withDescription(description);
     } else {
-      section.withDescription(ExamDescription.valueOf(""));
+      section.withDescription(SectionDescription.valueOf(""));
     }
     section.withQuestions(new ArrayList<>());
     EvaluationExamSection section = this.section.build();

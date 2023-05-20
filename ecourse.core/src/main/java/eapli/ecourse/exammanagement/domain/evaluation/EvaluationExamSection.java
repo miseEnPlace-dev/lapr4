@@ -14,10 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
-import eapli.ecourse.exammanagement.domain.ExamDescription;
-import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionDescription;
+import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionQuestion;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
+import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
@@ -33,13 +33,13 @@ public class EvaluationExamSection implements DomainEntity<Long> {
   private long id;
 
   @Column(nullable = false)
-  private QuestionIdentifier identifier;
+  private SectionIdentifier identifier;
 
   @Column(nullable = false)
-  private ExamTitle title;
+  private SectionTitle title;
 
   @Column(nullable = false)
-  private ExamDescription description;
+  private SectionDescription description;
 
   @Column(nullable = false)
   private ExamScore score;
@@ -47,7 +47,7 @@ public class EvaluationExamSection implements DomainEntity<Long> {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<SectionQuestion> questions;
 
-  public EvaluationExamSection(QuestionIdentifier identifier, ExamTitle title, ExamDescription description,
+  public EvaluationExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
       ExamScore score,
       Collection<SectionQuestion> questions) {
     Preconditions.noneNull(identifier, title, description, score);

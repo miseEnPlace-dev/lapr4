@@ -8,7 +8,10 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
+/**
+ * Exam/Section Title class.
+ */
+public class SectionTitle implements ValueObject, Comparable<SectionTitle> {
   private static final long serialVersionUID = 1L;
 
   private String title;
@@ -18,7 +21,7 @@ public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
    *
    * @param title title of the section
    */
-  private ExamTitle(final String title) {
+  private SectionTitle(final String title) {
     Preconditions.nonEmpty(title, "Title should neither be null nor empty.");
 
     if (title.length() > 255)
@@ -30,7 +33,7 @@ public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
   /**
    * Empty constructor for ORM.
    */
-  protected ExamTitle() {
+  protected SectionTitle() {
   }
 
   /**
@@ -43,8 +46,8 @@ public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
     return this.title;
   }
 
-  public static ExamTitle valueOf(final String title) {
-    return new ExamTitle(title);
+  public static SectionTitle valueOf(final String title) {
+    return new SectionTitle(title);
   }
 
   /**
@@ -56,7 +59,7 @@ public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
    *         than the other.
    */
   @Override
-  public int compareTo(final ExamTitle other) {
+  public int compareTo(final SectionTitle other) {
     return this.title.compareTo(other.title);
   }
 }

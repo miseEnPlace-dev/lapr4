@@ -12,7 +12,8 @@
     <class>eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam</class>
     <class>eapli.ecourse.exammanagement.domain.formative.FormativeExam</class>
     <class>eapli.ecourse.exammanagement.domain.SectionQuestion</class>
-    <class>eapli.ecourse.exammanagement.domain.ExamSection</class>
+    <class>eapli.ecourse.exammanagement.domain.formative.FormativeExamSection</class>
+    <class>eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection</class>
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.courseclassmanagement.domain.Class</class>
@@ -75,7 +76,8 @@
     <class>eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam</class>
     <class>eapli.ecourse.exammanagement.domain.formative.FormativeExam</class>
     <class>eapli.ecourse.exammanagement.domain.SectionQuestion</class>
-    <class>eapli.ecourse.exammanagement.domain.ExamSection</class>
+    <class>eapli.ecourse.exammanagement.domain.formative.FormativeExamSection</class>
+    <class>eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection</class>
     <class>eapli.ecourse.studentmanagement.domain.SignupRequest</class>
     <class>eapli.ecourse.coursemanagement.domain.Course</class>
     <class>eapli.ecourse.courseclassmanagement.domain.Class</class>
