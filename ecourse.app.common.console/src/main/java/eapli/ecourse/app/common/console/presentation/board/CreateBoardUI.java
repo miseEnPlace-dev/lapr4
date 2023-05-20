@@ -24,20 +24,23 @@ public class CreateBoardUI extends AbstractUI {
     String title = Console.readLine("Enter the title of the board: ");
 
     Map<String, Integer> rows = new HashMap<>();
-    while (Console.readLine("Do you want to add a Row? (Y/N)").toUpperCase().equals("Y")) {
+
+    System.out.println("Add rows: ");
+    do {
       String rowName = Console.readLine("Enter the name of the row: ");
       int rowNumber = Console.readInteger("Enter the number of the row: ");
       rows.put(rowName, rowNumber);
-    }
+    } while (Console.readLine("Do you want to add other a Row? (Y/N)").toUpperCase().equals("Y"));
 
     Map<String, Integer> columns = new HashMap<>();
-    while (Console.readLine("Do you want to add a Column? (Y/N)").toUpperCase().equals("Y")) {
+
+    System.out.println("Add columns: ");
+
+    do {
       String columnName = Console.readLine("Enter the name of the column: ");
       int columnNumber = Console.readInteger("Enter the number of the column: ");
       columns.put(columnName, columnNumber);
-    }
-
-    // TODO - set max rows and columns
+    } while (Console.readLine("Do you want to add other a Column? (Y/N)").toUpperCase().equals("Y"));
 
     final Iterable<SystemUser> users = this.ctrl.listAllUsers();
 

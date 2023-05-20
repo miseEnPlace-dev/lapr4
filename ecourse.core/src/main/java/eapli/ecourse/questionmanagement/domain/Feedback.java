@@ -3,6 +3,7 @@ package eapli.ecourse.questionmanagement.domain;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -13,6 +14,7 @@ public class Feedback implements ValueObject {
   private String feedback;
 
   private Feedback(String feedback) {
+    Preconditions.nonEmpty(feedback);
     this.feedback = feedback;
   }
 
