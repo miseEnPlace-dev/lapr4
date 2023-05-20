@@ -1,6 +1,5 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
-import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 
@@ -24,6 +23,10 @@ public class SpecialClass implements Comparable<SpecialClass> {
 
   protected SpecialClass() {
     // for ORM
+  }
+
+  public Time time() {
+    return this.time;
   }
 
   @Override

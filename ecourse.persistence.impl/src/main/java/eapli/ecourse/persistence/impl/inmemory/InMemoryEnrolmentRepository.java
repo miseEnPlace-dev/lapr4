@@ -51,7 +51,7 @@ public class InMemoryEnrolmentRepository
   }
 
   @Override
-  public Iterable<Enrolment> findEnroledCoursesByStudent(MecanographicNumber studentID) {
+  public Iterable<Enrolment> findEnroledStudentEnroledCourses(MecanographicNumber studentID) {
     return match(e -> e.student().mecanographicNumber().equals(studentID) && e.isAccepted());
   }
 

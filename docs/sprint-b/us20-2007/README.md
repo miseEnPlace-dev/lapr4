@@ -73,6 +73,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US2007_DM](out/US2007_DM.svg)
 
+---
+
 ## 4. Design
 
 ### 4.1. Grammar
@@ -220,6 +222,8 @@ _E.g. "restaurante" "bem";_
 
 You can check a pratical example with all the question types [here](../../../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.txt).
 
+---
+
 ## 5. Implementation
 
 ### 5.1. Controller
@@ -227,9 +231,14 @@ You can check a pratical example with all the question types [here](../../../eco
 - Relevant implementation details
 
 ```java
-  public void addQuestionsFromFile(String filename, CourseDTO courseDTO) {
+  public void addQuestionsFromFile(String filename, CourseDTO courseDTO) throws IOException, ParseException {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
+
+    if (!fileExists(filename))
+      throw new IllegalArgumentException("Invalid file path!");
+
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
-    List<Question> questions = QuestionsMain.parseWithVisitor(filename);
+    List<Question> questions = QuestionsParser.parseWithVisitor(filename);
 
     questions.forEach(question -> {
       question.changeCourse(course);
@@ -237,6 +246,8 @@ You can check a pratical example with all the question types [here](../../../eco
     });
   }
 ```
+
+---
 
 ## 6. Integration & Demonstration
 
@@ -247,6 +258,8 @@ You can check a pratical example with all the question types [here](../../../eco
 ### 6.2. Fail scenario
 
 ![US2007_DEMO_FAIL](US2007_DEMO_FAIL.png)
+
+---
 
 ## 7. Observations
 

@@ -1,5 +1,13 @@
 package eapli.ecourse.eventsmanagement.domain.meetingmanagement.domain;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Calendar;
+
+import org.junit.Test;
+
+import eapli.ecourse.eventsmanagement.domain.Duration;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -8,17 +16,6 @@ import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
-import eapli.ecourse.eventsmanagement.domain.Time;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Calendar;
-
-import org.junit.Test;
-
-import eapli.ecourse.eventsmanagement.domain.Duration;
 
 public class MeetingTest {
 

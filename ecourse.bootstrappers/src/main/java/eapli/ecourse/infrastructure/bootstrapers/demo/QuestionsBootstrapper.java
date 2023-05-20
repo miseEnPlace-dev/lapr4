@@ -1,18 +1,15 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.questionmanagement.application.AddQuestionsController;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.MatchingQuestion;
 import eapli.ecourse.questionmanagement.domain.MissingWordsQuestion;
 import eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion;
 import eapli.ecourse.questionmanagement.domain.NumericalQuestion;
 import eapli.ecourse.questionmanagement.domain.QuestionBody;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.QuestionType;
 import eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion;
 import eapli.ecourse.questionmanagement.domain.TrueFalseQuestion;
@@ -20,8 +17,6 @@ import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 
 public class QuestionsBootstrapper implements Action {
-  private static final Logger LOGGER = LogManager.getLogger(StudentBootstrapper.class);
-
   private final AddQuestionsController controller = new AddQuestionsController(
       PersistenceContext.repositories().questions(), PersistenceContext.repositories().courses(),
       AuthzRegistry.authorizationService());

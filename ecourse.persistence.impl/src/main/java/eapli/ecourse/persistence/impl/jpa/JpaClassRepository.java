@@ -30,7 +30,7 @@ public class JpaClassRepository extends JpaAutoTxRepository<CourseClass, ClassID
   }
 
   @Override
-  public Iterable<CourseClass> findAllByTeacherTaxPayerNumber(TaxPayerNumber number) {
+  public Iterable<CourseClass> findAllScheduledByTeacherTaxPayerNumber(TaxPayerNumber number) {
     final Map<String, Object> params = new HashMap<>();
     params.put("number", number);
     return match("e.scheduledBy.taxPayerNumber=:number", params);

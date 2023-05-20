@@ -5,7 +5,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import eapli.framework.domain.model.ValueObject;
-import lombok.EqualsAndHashCode;
 
 /**
  * Enum that represents the state of an exam.

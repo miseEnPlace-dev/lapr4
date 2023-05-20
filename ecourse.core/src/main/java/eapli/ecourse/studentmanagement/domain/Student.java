@@ -62,7 +62,13 @@ public class Student implements AggregateRoot<MecanographicNumber> {
 
   @Override
   public boolean equals(final Object o) {
-    return DomainEntities.areEqual(this, o);
+    if (o == null)
+      return false;
+    if (!(o instanceof Student))
+      return false;
+    if (this == o)
+      return true;
+    return this.mecanographicNumber.equals(((Student) o).mecanographicNumber);
   }
 
   @Override
