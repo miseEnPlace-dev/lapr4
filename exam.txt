@@ -1,0 +1,36 @@
+@start-exam exame_de_exemplo;
+    @score 100;
+    @title "Exame de Exemplo";
+    @description "Este exame serve de exemplo para testar a funcionalidade de criação de exames.";
+    @feedback none;
+    @grade on-submit;
+
+    @start-section section1;
+        @title "Título da Primeira Secção";
+        @description "Descrição da Secção";
+        @score 80;
+
+        @start-question
+            @type short-answer;
+            @question-body "Em que UC da LEI se aprende a programar em Java?";
+            @correct-answers
+                @correct-answer "APROG" 1.0;
+                @correct-answer "Algoritmia e Programação" 1.0;
+                @correct-answer "PPROG" 0.5;
+                @correct-answer "Paradigmas da Programação" 0.5;
+            @end-correct-answers;
+        @end-question;
+    @end-section;
+
+    @start-section section2;
+        @title "Título da Segunda Secção";
+        @description "Descrição da Secção";
+        @score 20;
+
+        @start-question
+            @type true-false;
+            @question-body "Em ESINF programa-se em Python.";
+            @correct-answer false;
+        @end-question;
+    @end-section;
+@end-exam;

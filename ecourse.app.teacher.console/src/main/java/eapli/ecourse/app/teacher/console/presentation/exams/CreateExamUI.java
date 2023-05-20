@@ -15,7 +15,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateExamUI extends AbstractUI {
-  CreateEvaluationExamController ctrl = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
+  private CreateEvaluationExamController ctrl = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
       PersistenceContext.repositories().courses());
 
