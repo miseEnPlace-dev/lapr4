@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class Title implements ValueObject {
+public class Title implements ValueObject, Comparable<Title> {
   private static final long serialVersionUID = 1L;
 
   private String title;
@@ -28,4 +28,13 @@ public class Title implements ValueObject {
     }
   }
 
+  @Override
+  public int compareTo(final Title arg0) {
+    return title.compareTo(arg0.title);
+  }
+
+  @Override
+  public String toString() {
+    return this.title;
+  }
 }
