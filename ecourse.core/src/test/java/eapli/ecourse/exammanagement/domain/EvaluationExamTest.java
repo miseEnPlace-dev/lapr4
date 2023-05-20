@@ -1,6 +1,9 @@
 package eapli.ecourse.exammanagement.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -118,5 +121,50 @@ public class EvaluationExamTest extends ExamBaseTest {
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
             null, null, new ArrayList<EvaluationExamSection>(), Time.valueOf(Calendar.getInstance()),
             Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+  }
+
+  @Test
+  public void ensureItIsPossibleToCreateEvaluationExam() {
+    final EvaluationExam exam = new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(),
+        ExamIdentifier.valueOf("Exame"),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+
+    assertEquals(getDummyInProgressCourse(), exam.course());
+  }
+
+  @Test
+  public void ensureItIsNotPossibleToSetDatesWithStartDateAfterEndDate() {
+    final Calendar startDate = Calendar.getInstance();
+    final Calendar endDate = Calendar.getInstance();
+    startDate.add(Calendar.DAY_OF_MONTH, 1);
+    assertThrows(IllegalArgumentException.class,
+        () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            Time.valueOf(startDate), Time.valueOf(endDate), ExamInfo.NONE,
+            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+  }
+
+  @Test
+  public void ensureSameAsWithWrongClass() {
+    final EvaluationExam exam = new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(),
+        ExamIdentifier.valueOf("Exame"),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+
+    assertFalse(exam.sameAs(new Object()));
+  }
+
+  @Test
+  public void ensureSameAsWorksWithSameInstance() {
+    final EvaluationExam exam = new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(),
+        ExamIdentifier.valueOf("Exame"),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+
+    assertTrue(exam.sameAs(exam));
   }
 }

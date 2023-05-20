@@ -85,4 +85,14 @@ public class ClientPasswordPolicyTest {
   public void testExcelentPassword6() {
     assertEquals(PasswordStrength.EXCELENT, subject.strength("A234?5678"));
   }
+
+  @Test
+  public void ensureItIsNotPossibleToSatisfyThePolicyWithNullPassword() {
+    assertFalse(subject.isSatisfiedBy(null));
+  }
+
+  @Test
+  public void ensureItIsNotPossibleToSatisfyThePolicyWithEmptyPassword() {
+    assertFalse(subject.isSatisfiedBy(""));
+  }
 }

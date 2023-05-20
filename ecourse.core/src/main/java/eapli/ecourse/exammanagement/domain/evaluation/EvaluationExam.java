@@ -88,9 +88,9 @@ public class EvaluationExam extends Exam {
         + ", score=" + score + ", startTime=" + startTime + ", endTime = " + endTime + "]";
   }
 
-
   public EvaluationExamDTO toDto() {
-    return new EvaluationExamDTO(identity(), title(), course(), teacher(), startTime, endTime, identifier(), description(), state());
+    return new EvaluationExamDTO(identity(), title(), course(), teacher(), startTime, endTime, identifier(),
+        description(), state());
   }
 
   @Override
