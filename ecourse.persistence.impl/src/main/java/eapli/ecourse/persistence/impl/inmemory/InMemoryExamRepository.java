@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 

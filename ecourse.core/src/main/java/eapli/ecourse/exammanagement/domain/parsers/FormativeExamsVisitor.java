@@ -12,8 +12,8 @@ import org.antlr.v4.runtime.Token;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
-import eapli.ecourse.exammanagement.domain.FormativeExamRequestBuilder;
-import eapli.ecourse.exammanagement.domain.FormativeExamSectionRequest;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 
 public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {

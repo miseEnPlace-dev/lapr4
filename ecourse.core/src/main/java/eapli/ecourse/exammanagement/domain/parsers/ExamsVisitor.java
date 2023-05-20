@@ -10,20 +10,20 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamInfo;
-import eapli.ecourse.exammanagement.domain.ExamScore;
-import eapli.ecourse.exammanagement.domain.ExamSection;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
-import eapli.ecourse.exammanagement.domain.SectionBuilder;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
+import eapli.ecourse.exammanagement.domain.evaluation.SectionBuilder;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 
 public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamBuilder builder;
   private SectionBuilder section;
-  private List<ExamSection> sections;
+  private List<EvaluationExamSection> sections;
   int examScore = 0;
   int sectionsScore = 0;
 
@@ -143,7 +143,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
   @Override
   public EvaluationExamBuilder visitSections(ExamParser.SectionsContext ctx) {
-    sections = new ArrayList<ExamSection>();
+    sections = new ArrayList<EvaluationExamSection>();
     visitChildren(ctx);
     builder.withSections(sections);
     return builder;
@@ -199,7 +199,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
       section.withDescription(ExamDescription.valueOf(""));
     }
     section.withQuestions(new ArrayList<>());
-    ExamSection section = this.section.build();
+    EvaluationExamSection section = this.section.build();
     sections.add(section);
   }
 

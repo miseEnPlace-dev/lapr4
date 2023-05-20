@@ -1,9 +1,13 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.evaluation;
 
 import java.util.List;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
+import eapli.ecourse.exammanagement.domain.ExamInfo;
+import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
@@ -16,7 +20,7 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
   private ExamIdentifier identifier;
   private ExamTitle title;
   private ExamDescription description;
-  private List<ExamSection> sections;
+  private List<EvaluationExamSection> sections;
   private Time startTime;
   private Time endTime;
   private ExamInfo feedbackInfo;
@@ -48,7 +52,7 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
     return this;
   }
 
-  public EvaluationExamBuilder withSections(List<ExamSection> sections) {
+  public EvaluationExamBuilder withSections(List<EvaluationExamSection> sections) {
     this.sections = sections;
     return this;
   }

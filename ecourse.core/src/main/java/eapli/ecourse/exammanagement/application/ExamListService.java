@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 

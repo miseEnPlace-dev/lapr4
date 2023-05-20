@@ -6,38 +6,44 @@ import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.EvaluationExam;
-import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
-import eapli.ecourse.exammanagement.domain.parsers.ExamsParser;
-import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
+import eapli.ecourse.exammanagement.domain.parsers.FormativeExamsParser;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.questionmanagement.domain.Question;
+import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
-import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
-@UseCaseController
-public class CreateExamController {
-  private final ListCourseService listCourseService;
+public class CreateFormativeExamController {
   private final AuthorizationService authz;
   private final TeacherRepository teacherRepository;
   private final CourseRepository courseRepository;
-  private final EvaluationExamRepository examRepository;
+  private final FormativeExamRepository examRepository;
+  private final QuestionRepository questionRepository;
+
+  private final ListCourseService listCourseService;
+  private final FormativeExamService examService;
 
   private Teacher teacher;
+  private FormativeExamRequestBuilder builder;
 
-  private EvaluationExamBuilder builder;
-
-  public CreateExamController(final AuthorizationService authz, final TeacherRepository teacherRepository,
-      final EvaluationExamRepository examRepository, final CourseRepository courseRepository) {
+  public CreateFormativeExamController(final AuthorizationService authz, final TeacherRepository teacherRepository,
+      final FormativeExamRepository examRepository, final CourseRepository courseRepository,
+      final QuestionRepository questionRepository) {
     this.authz = authz;
     this.teacherRepository = teacherRepository;
     this.examRepository = examRepository;
     this.courseRepository = courseRepository;
+    this.questionRepository = questionRepository;
+
     this.listCourseService = new ListCourseService(courseRepository);
+    this.examService = new FormativeExamService(questionRepository);
   }
 
   public void setCurrentAuthenticatedTeacher() {
@@ -56,17 +62,23 @@ public class CreateExamController {
   public void parseExam(final String filePath) throws IOException, ParseException {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
     setCurrentAuthenticatedTeacher();
-    builder = ExamsParser.parseWithVisitor(filePath);
+    builder = FormativeExamsParser.parseWithVisitor(filePath);
   }
 
-  public void createExam(CourseDTO courseDto, Time startTime, Time endTime) {
+  public void createExam(CourseDTO courseDto) {
     setCurrentAuthenticatedTeacher();
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
-    builder.withTeacher(teacher).withCourse(course).withStartTime(startTime).withEndTime(endTime);
+    FormativeExamRequest request = builder.build();
+    for (FormativeExamSectionRequest sectionRequest : request.sections()) {
+      Iterable<Question> questions = examService.buildSection(sectionRequest.numberOfQuestions(),
+          sectionRequest.questionsType(),
+          courseDto);
+    }
 
-    EvaluationExam exam = builder.build();
+    // TODO
+    // builder.withTeacher(teacher).withCourse(course);
 
-    examRepository.save(exam);
+    // FormativeExam exam = examRepository.save(exam);
   }
 }

@@ -1,13 +1,16 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.evaluation;
 
 import java.util.List;
 
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
-public class SectionBuilder implements DomainFactory<ExamSection> {
-  private ExamSection section;
+public class SectionBuilder implements DomainFactory<EvaluationExamSection> {
+  private EvaluationExamSection section;
 
   private QuestionIdentifier identifier;
   private ExamTitle title;
@@ -40,20 +43,20 @@ public class SectionBuilder implements DomainFactory<ExamSection> {
     return this;
   }
 
-  private ExamSection buildOrThrow() {
+  private EvaluationExamSection buildOrThrow() {
     if (section != null)
       return section;
 
     Preconditions.noneNull(identifier, title, description, score, questions);
 
-    section = new ExamSection(identifier, title, description, score, questions);
+    section = new EvaluationExamSection(identifier, title, description, score, questions);
 
     return section;
   }
 
   @Override
-  public ExamSection build() {
-    final ExamSection ret = buildOrThrow();
+  public EvaluationExamSection build() {
+    final EvaluationExamSection ret = buildOrThrow();
     section = null;
     return ret;
   }

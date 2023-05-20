@@ -6,7 +6,7 @@ import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.application.CreateExamController;
+import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -15,7 +15,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateExamUI extends AbstractUI {
-  CreateExamController ctrl = new CreateExamController(AuthzRegistry.authorizationService(),
+  CreateEvaluationExamController ctrl = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
       PersistenceContext.repositories().courses());
 

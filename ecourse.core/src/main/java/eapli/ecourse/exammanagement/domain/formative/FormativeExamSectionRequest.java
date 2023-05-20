@@ -1,5 +1,7 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.formative;
 
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.validations.Preconditions;
 

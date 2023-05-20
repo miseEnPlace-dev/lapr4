@@ -1,7 +1,9 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.formative;
 
 import java.util.List;
 
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;

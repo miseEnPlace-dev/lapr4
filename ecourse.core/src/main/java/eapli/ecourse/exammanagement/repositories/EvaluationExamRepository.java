@@ -1,8 +1,8 @@
 package eapli.ecourse.exammanagement.repositories;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.framework.domain.repositories.DomainRepository;
 
 public interface EvaluationExamRepository extends DomainRepository<ExamCode, EvaluationExam> {

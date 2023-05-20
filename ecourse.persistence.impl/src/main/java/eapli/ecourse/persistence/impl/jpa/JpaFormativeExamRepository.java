@@ -3,7 +3,7 @@ package eapli.ecourse.persistence.impl.jpa;
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamCode;
-import eapli.ecourse.exammanagement.domain.FormativeExam;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;

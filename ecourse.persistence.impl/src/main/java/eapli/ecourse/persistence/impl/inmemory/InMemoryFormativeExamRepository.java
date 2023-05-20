@@ -2,7 +2,7 @@ package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamCode;
-import eapli.ecourse.exammanagement.domain.FormativeExam;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 

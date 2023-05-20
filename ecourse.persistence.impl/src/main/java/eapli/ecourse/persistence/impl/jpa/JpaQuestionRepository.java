@@ -1,6 +1,10 @@
 package eapli.ecourse.persistence.impl.jpa;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import eapli.ecourse.Application;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.domain.QuestionCode;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
@@ -15,5 +19,13 @@ public class JpaQuestionRepository extends JpaAutoTxRepository<Question, Questio
 
   public JpaQuestionRepository(final String puname) {
     super(puname, Application.settings().extendedPersistenceProperties(), "code");
+  }
+
+  @Override
+  public Iterable<Question> findWithTypeFromCourse(String type, CourseCode code) {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("type", type);
+    params.put("code", code);
+    return match("e.type = :type AND e.course.code = :code", params);
   }
 }

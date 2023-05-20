@@ -1,4 +1,4 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.evaluation;
 
 import javax.persistence.Embeddable;
 

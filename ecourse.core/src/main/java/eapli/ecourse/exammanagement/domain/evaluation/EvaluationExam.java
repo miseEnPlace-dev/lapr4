@@ -1,16 +1,24 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.evaluation;
 
 import java.util.Collection;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.exammanagement.domain.Exam;
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
+import eapli.ecourse.exammanagement.domain.ExamInfo;
+import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.validations.Preconditions;
 
@@ -38,14 +46,20 @@ public class EvaluationExam extends Exam {
   @Column(nullable = false)
   private ExamScore score;
 
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private Collection<EvaluationExamSection> sections;
+
   public EvaluationExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
-      ExamDescription description, Collection<ExamSection> sections, Time startTime, Time endTime,
+      ExamDescription description, Collection<EvaluationExamSection> sections, Time startTime, Time endTime,
       ExamInfo feedbackInfo,
       ExamInfo gradeInfo, ExamScore score) {
-    super(course, teacher, identifier, title, description, sections);
-    Preconditions.noneNull(feedbackInfo, gradeInfo, startTime, endTime, score);
+    super(course, teacher, identifier, title, description);
+
+    Preconditions.noneNull(feedbackInfo, gradeInfo, startTime, endTime, score, sections);
+
     this.feedbackInfo = feedbackInfo;
     this.gradeInfo = gradeInfo;
+    this.sections = sections;
     setDates(startTime, endTime);
     this.score = score;
   }

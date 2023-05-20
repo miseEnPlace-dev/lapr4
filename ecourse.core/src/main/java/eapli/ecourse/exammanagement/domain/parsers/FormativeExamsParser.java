@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.FormativeExamRequestBuilder;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 
 public class FormativeExamsParser {
   public static FormativeExamRequestBuilder parseWithVisitor(String filePath) throws IOException, ParseException {

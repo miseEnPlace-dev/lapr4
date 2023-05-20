@@ -1,4 +1,4 @@
-package eapli.ecourse.exammanagement.domain;
+package eapli.ecourse.exammanagement.domain.evaluation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,12 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-public class ExamSection implements DomainEntity<Long> {
+public class EvaluationExamSection implements DomainEntity<Long> {
   private static final long serialVersionUID = 1L;
 
   @Version
@@ -44,7 +47,8 @@ public class ExamSection implements DomainEntity<Long> {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<SectionQuestion> questions;
 
-  public ExamSection(QuestionIdentifier identifier, ExamTitle title, ExamDescription description, ExamScore score,
+  public EvaluationExamSection(QuestionIdentifier identifier, ExamTitle title, ExamDescription description,
+      ExamScore score,
       Collection<SectionQuestion> questions) {
     Preconditions.noneNull(identifier, title, description, score);
     this.identifier = identifier;
@@ -54,7 +58,7 @@ public class ExamSection implements DomainEntity<Long> {
     this.questions = new ArrayList<>(questions);
   }
 
-  protected ExamSection() {
+  protected EvaluationExamSection() {
     // for ORM only
   }
 
@@ -72,10 +76,10 @@ public class ExamSection implements DomainEntity<Long> {
       return false;
     if (this == o)
       return true;
-    if (!(o instanceof ExamSection))
+    if (!(o instanceof EvaluationExamSection))
       return false;
 
-    final ExamSection that = (ExamSection) o;
+    final EvaluationExamSection that = (EvaluationExamSection) o;
     return this.identifier.equals(that.identifier) && this.title.equals(that.title)
         && this.description.equals(that.description) && this.score.equals(that.score)
         && this.questions.equals(that.questions);

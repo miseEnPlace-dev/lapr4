@@ -1,18 +1,11 @@
 package eapli.ecourse.exammanagement.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
@@ -54,17 +47,13 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @Column(nullable = false)
   private ExamState state;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<ExamSection> sections;
-
   protected Exam() {
     // for ORM only
   }
 
   public Exam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
-      ExamDescription description,
-      Collection<ExamSection> sections) {
-    Preconditions.noneNull(course, teacher, identifier, title, description, sections);
+      ExamDescription description) {
+    Preconditions.noneNull(course, teacher, identifier, title, description);
 
     this.code = ExamCode.newID();
     this.course = course;
@@ -73,7 +62,6 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.title = title;
     this.description = description;
     this.state = new ExamState(State.DRAFT);
-    this.sections = new ArrayList<>(sections);
   }
 
   @Override
@@ -98,6 +86,6 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @Override
   public String toString() {
     return "Exam [code=" + code + ", course=" + course + ", description=" + description + ", identifier=" + identifier
-        + ", sections=" + sections + ", state=" + state + ", teacher=" + teacher + ", title=" + title + "]";
+        + ", state=" + state + ", teacher=" + teacher + ", title=" + title + "]";
   }
 }
