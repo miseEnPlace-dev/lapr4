@@ -63,6 +63,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.state = new ExamState(State.DRAFT);
   }
 
+
   @Override
   public ExamCode identity() {
     return this.code;

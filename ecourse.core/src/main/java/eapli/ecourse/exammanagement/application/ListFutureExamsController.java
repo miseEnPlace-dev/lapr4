@@ -30,12 +30,12 @@ public class ListFutureExamsController {
 
   private final CourseRepository courseRepository;
 
-  private final ExamListService examListService;
+  private final EvaluationExamListService examListService;
 
   public ListFutureExamsController(AuthorizationService authz, EvaluationExamRepository examRepository,
                                    EnrolmentRepository enrolmentRepository, CourseRepository courseRepository, StudentRepository studentRepository) {
     this.authz = authz;
-    this.examListService = new ExamListService(examRepository);
+    this.examListService = new EvaluationExamListService(examRepository);
     this.courseRepository = courseRepository;
     this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
     this.studentRepository = studentRepository;
