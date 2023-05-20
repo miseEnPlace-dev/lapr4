@@ -5,9 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-
 import eapli.ecourse.coursemanagement.domain.Course;
-
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
@@ -55,8 +53,6 @@ public class ListFutureExamsController {
         course.ifPresent(value -> courses.add(value.toDto()));
       }
     }
-
-
 
     return () -> new Iterator<CourseDTO>() {
       private int index = 0;

@@ -11,43 +11,35 @@ import org.antlr.v4.runtime.Token;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
-import eapli.ecourse.exammanagement.domain.ExamScore;
-import eapli.ecourse.exammanagement.domain.ExamSection;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
-import eapli.ecourse.exammanagement.domain.FormativeExamBuilder;
-import eapli.ecourse.exammanagement.domain.SectionBuilder;
+import eapli.ecourse.exammanagement.domain.FormativeExamRequestBuilder;
+import eapli.ecourse.exammanagement.domain.FormativeExamSectionRequest;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 
-public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExamBuilder> {
-  private FormativeExamBuilder builder;
-  private SectionBuilder section;
-  private List<ExamSection> sections;
-  int examScore = 0;
-  int sectionsScore = 0;
+public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {
+  private FormativeExamRequestBuilder builder;
+  private FormativeExamSectionRequest section;
+  private List<FormativeExamSectionRequest> sections;
 
   @Override
-  public FormativeExamBuilder visitStart(FormativeExamParser.StartContext ctx) {
+  public FormativeExamRequestBuilder visitStart(FormativeExamParser.StartContext ctx) {
     visit(ctx.exam());
     return builder;
   }
 
   @Override
-  public FormativeExamBuilder visitExam(FormativeExamParser.ExamContext ctx) {
-    builder = new FormativeExamBuilder();
+  public FormativeExamRequestBuilder visitExam(FormativeExamParser.ExamContext ctx) {
+    builder = new FormativeExamRequestBuilder();
 
     visit(ctx.startExam());
     visit(ctx.header());
     visit(ctx.sections());
 
-    if (examScore != sectionsScore) {
-      raiseError(ctx, "The sum of the sections' scores must be equal to the exam's score.");
-    }
-
     return builder;
   }
 
   @Override
-  public FormativeExamBuilder visitStartExam(FormativeExamParser.StartExamContext ctx) {
+  public FormativeExamRequestBuilder visitStartExam(FormativeExamParser.StartExamContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     QuestionIdentifier identifier = QuestionIdentifier.valueOf(str);
     builder.withIdentifier(identifier);
@@ -62,7 +54,7 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
    * present).
    */
   @Override
-  public FormativeExamBuilder visitHeader(FormativeExamParser.HeaderContext ctx) {
+  public FormativeExamRequestBuilder visitHeader(FormativeExamParser.HeaderContext ctx) {
     Map<String, Object> properties = new HashMap<>();
     ctx.properties().forEach(p -> {
       if (p.title() != null) {
@@ -89,8 +81,6 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
       String[] requiredProps = {
           "title",
           "feedback",
-          "grade",
-          "score"
       };
 
       Arrays.asList(requiredProps).forEach(p -> {
@@ -103,11 +93,9 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
     } else {
       String[] requiredProps = {
           "title",
-          "score"
       };
       String[] forbiddenProps = {
           "feedback",
-          "grade"
       };
 
       Arrays.asList(requiredProps).forEach(p -> {
@@ -128,36 +116,44 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
   }
 
   @Override
-  public FormativeExamBuilder visitSections(FormativeExamParser.SectionsContext ctx) {
-    sections = new ArrayList<ExamSection>();
+  public FormativeExamRequestBuilder visitSections(FormativeExamParser.SectionsContext ctx) {
+    sections = new ArrayList<FormativeExamSectionRequest>();
     visitChildren(ctx);
     builder.withSections(sections);
     return builder;
   }
 
   @Override
-  public FormativeExamBuilder visitSection(FormativeExamParser.SectionContext ctx) {
-    section = new SectionBuilder();
+  public FormativeExamRequestBuilder visitSection(FormativeExamParser.SectionContext ctx) {
+    section = new FormativeExamSectionRequest();
 
-    visit(ctx.start_section());
+    visit(ctx.startSection());
     visit(ctx.header());
-    // visit(ctx.questions());
+    visit(ctx.numberOfQuestions());
+    visit(ctx.questionsType());
 
     return builder;
   }
 
   @Override
-  public FormativeExamBuilder visitStart_section(FormativeExamParser.Start_sectionContext ctx) {
+  public FormativeExamRequestBuilder visitNumberOfQuestions(FormativeExamParser.NumberOfQuestionsContext ctx) {
+    int numberOfQuestions = Integer.parseInt(ctx.NUMBER().getText());
+    section.changeNumberOfQuestions(numberOfQuestions);
+    return builder;
+  }
+
+  @Override
+  public FormativeExamRequestBuilder visitStartSection(FormativeExamParser.StartSectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     QuestionIdentifier identifier = QuestionIdentifier.valueOf(str);
-    section.withIdentifier(identifier);
+    section.changeIdentifier(identifier);
     return builder;
   }
 
   private void initializeExam(Map<String, Object> properties) {
     ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
     builder.withTitle(title);
-    examScore = Integer.parseInt(properties.get("score").toString());
+
     if (properties.containsKey("description")) {
       ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
       builder.withDescription(description);
@@ -168,18 +164,13 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
 
   private void initializeSection(Map<String, Object> properties) {
     ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
-    section.withTitle(title);
-    ExamScore score = ExamScore.valueOf(Integer.parseInt(properties.get("score").toString()));
-    section.withScore(score);
-    sectionsScore += Integer.parseInt(properties.get("score").toString());
+    section.changeTitle(title);
+
     if (properties.containsKey("description")) {
       ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
-      section.withDescription(description);
-    } else {
-      section.withDescription(ExamDescription.valueOf(""));
+      section.changeDescription(description);
     }
-    section.withQuestions(new ArrayList<>());
-    ExamSection section = this.section.build();
+
     sections.add(section);
   }
 

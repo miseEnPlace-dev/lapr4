@@ -1,4 +1,4 @@
-// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
+// Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -138,15 +138,15 @@ public interface FormativeExamListener extends ParseTreeListener {
 	 */
 	void exitEndExam(FormativeExamParser.EndExamContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormativeExamParser#start_section}.
+	 * Enter a parse tree produced by {@link FormativeExamParser#startSection}.
 	 * @param ctx the parse tree
 	 */
-	void enterStart_section(FormativeExamParser.Start_sectionContext ctx);
+	void enterStartSection(FormativeExamParser.StartSectionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormativeExamParser#start_section}.
+	 * Exit a parse tree produced by {@link FormativeExamParser#startSection}.
 	 * @param ctx the parse tree
 	 */
-	void exitStart_section(FormativeExamParser.Start_sectionContext ctx);
+	void exitStartSection(FormativeExamParser.StartSectionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormativeExamParser#endSection}.
 	 * @param ctx the parse tree

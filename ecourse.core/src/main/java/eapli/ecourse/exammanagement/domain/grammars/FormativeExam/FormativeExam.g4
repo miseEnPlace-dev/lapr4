@@ -6,7 +6,7 @@ exam: startExam header sections endExam;
 
 sections: section+;
 section:
-	start_section header numberOfQuestions questionsType endSection;
+	startSection header numberOfQuestions questionsType endSection;
 
 header:							properties+;
 properties:					title | description | feedback;
@@ -28,8 +28,8 @@ feedback:			FEEDBACK FDB_GRD_TYPE EOI;
 startExam:	START_EXAM IDENTIFIER EOI;
 endExam:		END_EXAM EOI;
 
-start_section:	START_SECTION IDENTIFIER EOI;
-endSection:			END_SECTION EOI;
+startSection:	START_SECTION IDENTIFIER EOI;
+endSection:		END_SECTION EOI;
 
 // ----- TOKENS -----
 

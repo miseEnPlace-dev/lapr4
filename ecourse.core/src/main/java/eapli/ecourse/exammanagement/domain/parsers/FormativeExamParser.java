@@ -1,4 +1,4 @@
-// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
+// Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -25,12 +25,12 @@ public class FormativeExamParser extends Parser {
 		RULE_start = 0, RULE_exam = 1, RULE_sections = 2, RULE_section = 3, RULE_header = 4, 
 		RULE_properties = 5, RULE_numberOfQuestions = 6, RULE_questionsType = 7, 
 		RULE_title = 8, RULE_description = 9, RULE_feedback = 10, RULE_startExam = 11, 
-		RULE_endExam = 12, RULE_start_section = 13, RULE_endSection = 14;
+		RULE_endExam = 12, RULE_startSection = 13, RULE_endSection = 14;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"start", "exam", "sections", "section", "header", "properties", "numberOfQuestions", 
 			"questionsType", "title", "description", "feedback", "startExam", "endExam", 
-			"start_section", "endSection"
+			"startSection", "endSection"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -267,8 +267,8 @@ public class FormativeExamParser extends Parser {
 	}
 
 	public static class SectionContext extends ParserRuleContext {
-		public Start_sectionContext start_section() {
-			return getRuleContext(Start_sectionContext.class,0);
+		public StartSectionContext startSection() {
+			return getRuleContext(StartSectionContext.class,0);
 		}
 		public HeaderContext header() {
 			return getRuleContext(HeaderContext.class,0);
@@ -308,7 +308,7 @@ public class FormativeExamParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(42);
-			start_section();
+			startSection();
 			setState(43);
 			header();
 			setState(44);
@@ -803,32 +803,32 @@ public class FormativeExamParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Start_sectionContext extends ParserRuleContext {
+	public static class StartSectionContext extends ParserRuleContext {
 		public TerminalNode START_SECTION() { return getToken(FormativeExamParser.START_SECTION, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(FormativeExamParser.IDENTIFIER, 0); }
 		public TerminalNode EOI() { return getToken(FormativeExamParser.EOI, 0); }
-		public Start_sectionContext(ParserRuleContext parent, int invokingState) {
+		public StartSectionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_start_section; }
+		@Override public int getRuleIndex() { return RULE_startSection; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormativeExamListener ) ((FormativeExamListener)listener).enterStart_section(this);
+			if ( listener instanceof FormativeExamListener ) ((FormativeExamListener)listener).enterStartSection(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormativeExamListener ) ((FormativeExamListener)listener).exitStart_section(this);
+			if ( listener instanceof FormativeExamListener ) ((FormativeExamListener)listener).exitStartSection(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FormativeExamVisitor ) return ((FormativeExamVisitor<? extends T>)visitor).visitStart_section(this);
+			if ( visitor instanceof FormativeExamVisitor ) return ((FormativeExamVisitor<? extends T>)visitor).visitStartSection(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Start_sectionContext start_section() throws RecognitionException {
-		Start_sectionContext _localctx = new Start_sectionContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_start_section);
+	public final StartSectionContext startSection() throws RecognitionException {
+		StartSectionContext _localctx = new StartSectionContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_startSection);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
