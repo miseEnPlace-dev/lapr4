@@ -45,7 +45,7 @@ public class BoardBuilderTest {
 
   @Test
   public void ensureBoardBuilderWithTitleWorks() {
-    boardBuilder.withTitle(new Title("title"));
+    boardBuilder.withTitle(new BoardTitle("title"));
     Board b = boardBuilder.build();
 
     assertEquals("title", b.title().toString());
@@ -111,7 +111,7 @@ public class BoardBuilderTest {
   @Test
   public void ensureBoardBuilderWorksWithListOfColumns() {
     List<BoardColumn> lst = new ArrayList<>();
-    lst.add(new BoardColumn(new Title("title"), 1));
+    lst.add(new BoardColumn(new BoardTitle("title"), 1));
 
     boardBuilder.withColumns(lst);
 
@@ -124,7 +124,7 @@ public class BoardBuilderTest {
   @Test
   public void ensureBoardBuilderWorksWithListOfRows() {
     List<BoardRow> lst = new ArrayList<>();
-    lst.add(new BoardRow(new Title("title"), 1));
+    lst.add(new BoardRow(new BoardTitle("title"), 1));
 
     boardBuilder.withRows(lst);
 
@@ -165,7 +165,7 @@ public class BoardBuilderTest {
   @Test
   public void ensureBoardBuilderWorksWithColumn() {
     boardBuilder.withColumns(new ArrayList<>());
-    boardBuilder.withColumn(new BoardColumn(new Title("title"), 1));
+    boardBuilder.withColumn(new BoardColumn(new BoardTitle("title"), 1));
 
     Board b = boardBuilder.build();
 
@@ -176,7 +176,7 @@ public class BoardBuilderTest {
   @Test
   public void ensureBoardBuilderWorksWithRow() {
     boardBuilder.withRows(new ArrayList<>());
-    boardBuilder.withRow(new BoardRow(new Title("title"), 1));
+    boardBuilder.withRow(new BoardRow(new BoardTitle("title"), 1));
 
     Board b = boardBuilder.build();
 
@@ -187,7 +187,7 @@ public class BoardBuilderTest {
   @Test
   public void ensureBoardBuilderWorksWithColumnTitleAndInt() {
     boardBuilder.withColumns(new ArrayList<>());
-    boardBuilder.withColumn(new Title("title"), 1);
+    boardBuilder.withColumn(new BoardTitle("title"), 1);
 
     Board b = boardBuilder.build();
 
@@ -198,7 +198,7 @@ public class BoardBuilderTest {
   @Test
   public void ensureBoardBuilderWorksWithRowTitleAndInt() {
     boardBuilder.withRows(new ArrayList<>());
-    boardBuilder.withRow(new Title("title"), 1);
+    boardBuilder.withRow(new BoardTitle("title"), 1);
 
     Board b = boardBuilder.build();
 

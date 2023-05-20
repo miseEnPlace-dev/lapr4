@@ -10,24 +10,24 @@ public class TitleTest {
 
   @Test
   public void ensureItIsNotPossibleToCreateTitleWithNull() {
-    assertThrows(IllegalArgumentException.class, () -> new Title(null));
+    assertThrows(IllegalArgumentException.class, () -> new BoardTitle(null));
   }
 
   @Test
   public void ensureItIsNotPossibleToCreateTitleWithEmpty() {
-    assertThrows(IllegalArgumentException.class, () -> new Title(""));
+    assertThrows(IllegalArgumentException.class, () -> new BoardTitle(""));
   }
 
   @Test
   public void ensureToStringWorks() {
-    assertEquals("Sample title", new Title("Sample title").toString());
+    assertEquals("Sample title", new BoardTitle("Sample title").toString());
   }
 
   @Test
   public void ensureCompareToWorks() {
-    assertEquals(0, new Title("Sample title").compareTo(new Title("Sample title")));
-    assertTrue(new Title("Sample title").compareTo(new Title("Sample title 2")) < 0);
-    assertTrue(new Title("Sample title 2").compareTo(new Title("Sample title")) > 0);
+    assertEquals(0, new BoardTitle("Sample title").compareTo(new BoardTitle("Sample title")));
+    assertTrue(new BoardTitle("Sample title").compareTo(new BoardTitle("Sample title 2")) < 0);
+    assertTrue(new BoardTitle("Sample title 2").compareTo(new BoardTitle("Sample title")) > 0);
   }
 
 }

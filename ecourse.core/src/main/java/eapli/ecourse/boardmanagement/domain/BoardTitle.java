@@ -7,29 +7,28 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class Title implements ValueObject, Comparable<Title> {
+public class BoardTitle implements ValueObject, Comparable<BoardTitle> {
   private static final long serialVersionUID = 1L;
 
   private String title;
 
-  public Title(final String title) {
+  public BoardTitle(final String title) {
     validate(title);
 
     this.title = title;
   }
 
-  protected Title() {
+  protected BoardTitle() {
     // for ORM
   }
 
   private void validate(final String title) {
-    if (title == null || title.isEmpty()) {
+    if (title == null || title.isEmpty())
       throw new IllegalArgumentException("Title should neither be null nor empty");
-    }
   }
 
   @Override
-  public int compareTo(final Title arg0) {
+  public int compareTo(final BoardTitle arg0) {
     return title.compareTo(arg0.title);
   }
 

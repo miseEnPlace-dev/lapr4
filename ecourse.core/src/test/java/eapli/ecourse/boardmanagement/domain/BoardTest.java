@@ -40,7 +40,7 @@ public class BoardTest {
     List<BoardColumn> columns = new ArrayList<>();
     List<BoardRow> rows = new ArrayList<>();
 
-    Board b = new Board(new Title("title"), null, columns, rows, user);
+    Board b = new Board(new BoardTitle("title"), null, columns, rows, user);
 
     assert (b != null);
   }
@@ -50,7 +50,8 @@ public class BoardTest {
     List<UserPermission> permissions = new ArrayList<>();
     List<BoardRow> rows = new ArrayList<>();
 
-    assertThrows(IllegalArgumentException.class, () -> new Board(new Title("title"), permissions, null, rows, user));
+    assertThrows(IllegalArgumentException.class,
+        () -> new Board(new BoardTitle("title"), permissions, null, rows, user));
   }
 
   @Test
@@ -58,7 +59,8 @@ public class BoardTest {
     List<UserPermission> permissions = new ArrayList<>();
     List<BoardColumn> columns = new ArrayList<>();
 
-    assertThrows(IllegalArgumentException.class, () -> new Board(new Title("title"), permissions, columns, null, user));
+    assertThrows(IllegalArgumentException.class,
+        () -> new Board(new BoardTitle("title"), permissions, columns, null, user));
   }
 
   @Test
@@ -67,7 +69,8 @@ public class BoardTest {
     List<BoardColumn> columns = new ArrayList<>();
     List<BoardRow> rows = new ArrayList<>();
 
-    assertThrows(IllegalArgumentException.class, () -> new Board(new Title("title"), permissions, columns, rows, null));
+    assertThrows(IllegalArgumentException.class,
+        () -> new Board(new BoardTitle("title"), permissions, columns, rows, null));
   }
 
   @Test
@@ -76,7 +79,7 @@ public class BoardTest {
     List<BoardColumn> columns = new ArrayList<>();
     List<BoardRow> rows = new ArrayList<>();
 
-    Board b = new Board(new Title("title"), permissions, columns, rows, user);
+    Board b = new Board(new BoardTitle("title"), permissions, columns, rows, user);
 
     assertEquals("title", b.title().toString());
     assertEquals(permissions, b.permissions());

@@ -26,7 +26,7 @@ public class Board implements AggregateRoot<BoardID> {
   private BoardID id;
 
   @Column(nullable = false)
-  private Title title;
+  private BoardTitle title;
 
   @Column
   private Archived archived;
@@ -47,7 +47,7 @@ public class Board implements AggregateRoot<BoardID> {
     // for ORM
   }
 
-  public Board(final Title title, final List<UserPermission> permissions,
+  public Board(final BoardTitle title, final List<UserPermission> permissions,
       final List<BoardColumn> column, final List<BoardRow> row, final BoardID id, final SystemUser user) {
 
     // Only mandatory fields are checked
@@ -62,7 +62,7 @@ public class Board implements AggregateRoot<BoardID> {
     this.owner = user;
   }
 
-  public Board(final Title title, final List<UserPermission> permissions,
+  public Board(final BoardTitle title, final List<UserPermission> permissions,
       final List<BoardColumn> column, final List<BoardRow> row, final SystemUser user) {
 
     // Only mandatory fields are checked
@@ -77,7 +77,7 @@ public class Board implements AggregateRoot<BoardID> {
     this.owner = user;
   }
 
-  public Title title() {
+  public BoardTitle title() {
     return this.title;
   }
 
