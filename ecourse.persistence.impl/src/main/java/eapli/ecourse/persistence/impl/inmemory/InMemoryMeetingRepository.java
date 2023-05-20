@@ -18,9 +18,4 @@ public class InMemoryMeetingRepository extends InMemoryDomainRepository<Meeting,
   public Optional<Meeting> findById(final MeetingID id) {
     return Optional.of(data().get(id));
   }
-
-  @Override
-  public Iterable<Meeting> findAllIterableByUserMeetings() {
-    return null;
-  }
 }

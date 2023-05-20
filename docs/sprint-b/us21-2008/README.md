@@ -25,6 +25,7 @@
 - "The usual workflow related to the course can be illustrated as follows:
   event create (-> state close) -> event open (-> state open) -> event open enrollments (-> state
   enroll) -> event close enrollments (-> state in progress) -> event close (-> state closed")
+  v
 
 ## 1.2. Client Clarifications
 
@@ -87,6 +88,8 @@ The registration information of the new category is persisted/saved in the syste
 
 ![US1006_DM](out/US1006_DM.svg)
 
+---
+
 ## 3. Design
 
 ### 3.1. Functionality Realization
@@ -116,6 +119,8 @@ The registration information of the new category is persisted/saved in the syste
   }
 ```
 
+---
+
 ## 4. Implementation
 
 ### 4.1. Controller
@@ -129,6 +134,8 @@ The registration information of the new category is persisted/saved in the syste
     return true;
   }
 ```
+
+---
 
 ## 5. Integration & Demonstration
 

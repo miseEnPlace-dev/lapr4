@@ -21,14 +21,14 @@ public class ListCourseExamsController {
 
   private final ListCourseService service;
 
-  private final ExamListService examService;
+  private final EvaluationExamListService examService;
 
   public ListCourseExamsController(AuthorizationService authz, CourseRepository courseRepository,
       EvaluationExamRepository examRepository) {
     this.authz = authz;
     this.courseRepository = courseRepository;
     this.service = new ListCourseService(courseRepository);
-    this.examService = new ExamListService(examRepository);
+    this.examService = new EvaluationExamListService(examRepository);
   }
 
   public Iterable<CourseDTO> listOpenInProgressCourses() {

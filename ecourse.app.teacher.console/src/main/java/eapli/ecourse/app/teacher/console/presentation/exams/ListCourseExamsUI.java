@@ -18,7 +18,6 @@ import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ListCourseExamsUI extends AbstractUI {
-
   private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
 
   private final EvaluationExamRepository examRepository = PersistenceContext.repositories().evaluationExams();
@@ -43,14 +42,14 @@ public class ListCourseExamsUI extends AbstractUI {
     if (selected == null)
       return false;
 
-
     Iterable<EvaluationExamDTO> exams = ctrl.listCourseExams(selected);
     if (!exams.iterator().hasNext()) {
       System.out.println("There are no exams in " + selected.getTitle());
       return false;
     }
 
-    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams, new EvaluationExamPrinter());
+    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams,
+        new EvaluationExamPrinter());
     list.show();
 
     return true;

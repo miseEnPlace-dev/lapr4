@@ -20,7 +20,7 @@ public class InMemoryClassRepository extends InMemoryDomainRepository<CourseClas
   }
 
   @Override
-  public Iterable<CourseClass> findAllByTeacherTaxPayerNumber(TaxPayerNumber number) {
+  public Iterable<CourseClass> findAllScheduledByTeacherTaxPayerNumber(TaxPayerNumber number) {
     return match(e -> e.scheduledBy().taxPayerNumber().equals(number));
   }
 

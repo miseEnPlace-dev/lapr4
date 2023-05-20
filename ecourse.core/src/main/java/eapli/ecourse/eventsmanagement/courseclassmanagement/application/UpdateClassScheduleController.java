@@ -5,8 +5,9 @@ import eapli.ecourse.eventsmanagement.application.ScheduleAvailabilityService;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.dto.ClassDTO;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
+import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -25,15 +26,17 @@ public class UpdateClassScheduleController {
   private TeacherRepository teacherRepository;
 
   public UpdateClassScheduleController(final CourseClassRepository classRepository,
-      final AuthorizationService authzRegistry,
-      MeetingRepository meetingRepository, EnrolmentRepository enrolmentRepository,
+      ExtraordinaryClassRepository extraClassRepository,
+      final AuthorizationService authzRegistry, InviteRepository inviteRepository,
+      EnrolmentRepository enrolmentRepository,
       StudentRepository studentRepository, TeacherRepository teacherRepository) {
     this.classRepository = classRepository;
-    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, meetingRepository,
-        enrolmentRepository, studentRepository);
     this.classService = new ListCourseClassService(classRepository);
     this.authzRegistry = authzRegistry;
     this.teacherRepository = teacherRepository;
+
+    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, extraClassRepository,
+        inviteRepository, enrolmentRepository, studentRepository, teacherRepository);
   }
 
   public CourseClass updateScheduleClass(Time time, ClassDTO courseClass) {
@@ -54,6 +57,6 @@ public class UpdateClassScheduleController {
   public Iterable<ClassDTO> listAllClassesForAuthenticatedTeacher() {
     SystemUser user = authzRegistry.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
     final TeacherDTO teacherDTO = teacherRepository.findByUsername(user.username()).orElseThrow().toDto();
-    return classService.findAllByTeacherTaxPayerNumber(teacherDTO.getNumber());
+    return classService.findAllScheduledByTeacherTaxPayerNumber(teacherDTO.getNumber());
   }
 }

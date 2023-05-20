@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 /**
  * Exam/Section Title class.
  */
-public class SectionTitle implements ValueObject, Comparable<SectionTitle> {
+public class SectionTitle implements ValueObject {
   private static final long serialVersionUID = 1L;
 
   private String title;
@@ -48,18 +48,5 @@ public class SectionTitle implements ValueObject, Comparable<SectionTitle> {
 
   public static SectionTitle valueOf(final String title) {
     return new SectionTitle(title);
-  }
-
-  /**
-   * Compares two Title objects, comparing their titles.
-   *
-   * @param other Title to compare
-   * @return 0 if the titles are equal, greater than 0 if this title
-   *         is greater than the other, less than 0 if this title is less
-   *         than the other.
-   */
-  @Override
-  public int compareTo(final SectionTitle other) {
-    return this.title.compareTo(other.title);
   }
 }

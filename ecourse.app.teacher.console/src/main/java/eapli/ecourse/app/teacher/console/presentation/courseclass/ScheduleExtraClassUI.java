@@ -18,11 +18,10 @@ public class ScheduleExtraClassUI extends AbstractUI {
   @Override
   protected boolean doShow() {
 
-    ScheduleExtraClassController ctrl = new ScheduleExtraClassController(
-        PersistenceContext.repositories().courses(), PersistenceContext.repositories().enrollments(),
-        PersistenceContext.repositories().extraordinaryClasses(), PersistenceContext.repositories().meetings(),
-        PersistenceContext.repositories().students(), PersistenceContext.repositories().teachers(),
-        PersistenceContext.repositories().classes());
+    ScheduleExtraClassController ctrl = new ScheduleExtraClassController(PersistenceContext.repositories().courses(),
+        PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().extraordinaryClasses(),
+        PersistenceContext.repositories().invites(), PersistenceContext.repositories().students(),
+        PersistenceContext.repositories().teachers(), PersistenceContext.repositories().classes());
 
     Iterable<CourseDTO> courses = ctrl.listAllInProgressLecturedBy();
     SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());

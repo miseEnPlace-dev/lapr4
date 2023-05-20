@@ -24,4 +24,27 @@ public class PermissionTypeTest {
     assertTrue(p2.isRead() == false);
   }
 
+  @Test
+  public void ensureChangeToReadWorks() {
+    PermissionType p = new PermissionType(PermissionType.Type.WRITE);
+    p.changeToRead();
+
+    assertTrue(p.isRead());
+    assertTrue(p.isWrite() == false);
+  }
+
+  @Test
+  public void ensureChangeToWriteWorks() {
+    PermissionType p = new PermissionType(PermissionType.Type.READ);
+    p.changeToWrite();
+
+    assertTrue(p.isWrite());
+    assertTrue(p.isRead() == false);
+  }
+
+  @Test
+  public void ensureOptionsWorks() {
+    assertTrue(PermissionType.options().length == 2);
+  }
+
 }

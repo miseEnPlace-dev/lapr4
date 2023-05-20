@@ -14,25 +14,18 @@ public interface InviteRepository extends DomainRepository<InviteID, Invite> {
   Iterable<Invite> findByUsername(Username username);
 
   /**
-   * Returns the invites that are open
+   * Returns the invites that are pending for a user
    *
    * @return
    */
   Iterable<Invite> findAllPendingForUsername(Username username);
 
   /**
-   * Returns the invites that are not finished
+   * Returns the invites that are accepted for a user
    *
    * @return
    */
-  Iterable<Invite> findAllNotClosedForUsername(Username username);
-
-  /**
-   * Returns the invites that are closed
-   *
-   * @return
-   */
-  Iterable<Invite> findAllClosedForUsername(Username username);
+  Iterable<Invite> findAllAcceptedForUsername(Username username);
 
   /**
    * Returns the invites that are accepted for a meeting

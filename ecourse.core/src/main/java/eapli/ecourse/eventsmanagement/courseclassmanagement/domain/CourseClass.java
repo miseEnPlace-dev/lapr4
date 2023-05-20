@@ -1,5 +1,6 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,25 +37,24 @@ public class CourseClass implements AggregateRoot<ClassID> {
   private Duration duration;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<SpecialClass> specialClass;
+  private List<SpecialClass> specialClasses;
 
-  @ManyToOne(optional = false)
+  @ManyToOne
   private Teacher scheduledBy;
 
-  @Column(nullable = false)
+  @ManyToOne
   private Course course;
 
   @Column(nullable = false)
   private Hours hours;
 
-  public CourseClass(final DayInWeek dayInWeek, final Duration duration,
-      final List<SpecialClass> specialClass, final Hours hours) {
+  public CourseClass(final DayInWeek dayInWeek, final Duration duration, final Hours hours) {
     Preconditions.noneNull(dayInWeek, duration, hours);
 
     this.id = ClassID.newID();
     this.dayInWeek = dayInWeek;
     this.duration = duration;
-    this.specialClass = specialClass;
+    this.specialClasses = new ArrayList<>();
     this.hours = hours;
   }
 
@@ -77,8 +77,8 @@ public class CourseClass implements AggregateRoot<ClassID> {
     if (this == otherClass)
       return true;
 
-    for (SpecialClass sc : this.specialClass) {
-      if (!otherClass.specialClass().contains(sc))
+    for (SpecialClass sc : this.specialClasses) {
+      if (!otherClass.specialClasses().contains(sc))
         ;
       return false;
     }
@@ -114,8 +114,8 @@ public class CourseClass implements AggregateRoot<ClassID> {
     return this.hours;
   }
 
-  public List<SpecialClass> specialClass() {
-    return this.specialClass;
+  public List<SpecialClass> specialClasses() {
+    return this.specialClasses;
   }
 
   public ClassDTO toDto() {
@@ -123,7 +123,7 @@ public class CourseClass implements AggregateRoot<ClassID> {
   }
 
   public void addSpecialClass(Time time) {
-    this.specialClass.add(new SpecialClass(time));
+    this.specialClasses.add(new SpecialClass(time));
   }
 
   public Teacher scheduledBy() {

@@ -20,7 +20,7 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseC
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
+import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.dto.StudentDTO;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -45,12 +45,12 @@ public class ScheduleExtraClassController {
   private StudentRepository studentRepository;
 
   public ScheduleExtraClassController(CourseRepository courseRepository, EnrolmentRepository enrolmentRepository,
-      ExtraordinaryClassRepository extraClassRepository, MeetingRepository meetingRepository,
+      ExtraordinaryClassRepository extraClassRepository, InviteRepository inviteRepository,
       StudentRepository studentRepository, TeacherRepository teacherRepository, CourseClassRepository classRepository) {
     this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
     this.listCourseService = new ListCourseService(courseRepository);
-    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, meetingRepository,
-        enrolmentRepository, studentRepository);
+    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, extraClassRepository,
+        inviteRepository, enrolmentRepository, studentRepository, teacherRepository);
 
     this.courseRepository = courseRepository;
     this.extraClassRepository = extraClassRepository;

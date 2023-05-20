@@ -1,7 +1,5 @@
 package eapli.ecourse.coursemanagement.application;
 
-import java.util.Optional;
-
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseBuilder;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -38,7 +36,7 @@ public class CreateCourseController {
     Teacher teacher = teacherRepository.findByTaxPayerNumber(teacherDTO.getNumber()).orElseThrow();
 
     Course course = new CourseBuilder().withCode(code).withTitle(title).withDescription(description)
-        .withEnrolmentLimits(min, max).withTeacher(teacher).build();
+        .withEnrolmentLimits(min, max).withResponsibleTeacher(teacher).build();
 
     if (courseRepository.containsOfIdentity(course.code()))
       throw new IllegalStateException("There is already a course with that code.");

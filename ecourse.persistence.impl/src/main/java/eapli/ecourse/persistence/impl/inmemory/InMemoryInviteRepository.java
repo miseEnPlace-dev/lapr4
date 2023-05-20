@@ -73,16 +73,4 @@ public class InMemoryInviteRepository extends InMemoryDomainRepository<Invite, I
   public Iterable<Invite> findAllPendingForMeetingId(MeetingID meetingId) {
     return match(e -> e.meeting().identity().equals(meetingId) && e.status().isPending());
   }
-
-  @Override
-  public Iterable<Invite> findAllNotClosedForUsername(Username username) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findAllNotClosedForUsername'");
-  }
-
-  @Override
-  public Iterable<Invite> findAllClosedForUsername(Username username) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findAllClosedForUsername'");
-  }
 }
