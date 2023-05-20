@@ -42,7 +42,10 @@ public class ListCourseExamsUI extends AbstractUI {
       return false;
 
     Iterable<ExamDTO> exams = ctrl.listCourseExams(selected);
-    System.out.println(exams.iterator().hasNext());
+    if (!exams.iterator().hasNext()) {
+      System.out.println("There are no exams in " + selected.getTitle());
+      return false;
+    }
 
     ListWidget<ExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams, new ExamPrinter());
     list.show();
