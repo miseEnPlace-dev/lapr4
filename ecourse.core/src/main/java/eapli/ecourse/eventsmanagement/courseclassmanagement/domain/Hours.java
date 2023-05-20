@@ -13,8 +13,8 @@ import lombok.EqualsAndHashCode;
 public class Hours implements ValueObject, Comparable<Hours> {
   private static final long serialVersionUID = 1L;
 
-  private Integer hour;
-  private Integer minute;
+  private Integer hours;
+  private Integer minutes;
 
   private Hours(int hour, int minute) {
   }
@@ -28,18 +28,18 @@ public class Hours implements ValueObject, Comparable<Hours> {
   }
 
   public Hours addDuration(Duration duration) {
-    return new Hours(this.hour + duration.hour(), this.minute + duration.minute());
+    return new Hours(this.hours + duration.hour(), this.minutes + duration.minute());
   }
 
   @Override
   public String toString() {
-    return this.hour.toString();
+    return this.hours.toString();
   }
 
   @Override
   public int compareTo(final Hours other) {
-    Integer thisToInt = this.hour * 60 + this.minute;
-    Integer thatToInt = other.hour * 60 + other.minute;
+    Integer thisToInt = this.hours * 60 + this.minutes;
+    Integer thatToInt = other.hours * 60 + other.minutes;
 
     return Integer.compare(thisToInt, thatToInt);
   }

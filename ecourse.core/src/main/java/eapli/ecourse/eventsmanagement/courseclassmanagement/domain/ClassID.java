@@ -2,9 +2,14 @@ package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
 import java.util.UUID;
 
+import javax.persistence.Embeddable;
+
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.Preconditions;
+import lombok.EqualsAndHashCode;
 
+@Embeddable
+@EqualsAndHashCode
 public class ClassID implements ValueObject, Comparable<ClassID> {
   private static final long serialVersionUID = 1L;
 

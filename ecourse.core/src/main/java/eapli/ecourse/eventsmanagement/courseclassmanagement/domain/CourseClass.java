@@ -7,7 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
@@ -39,10 +39,10 @@ public class CourseClass implements AggregateRoot<ClassID> {
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<SpecialClass> specialClasses;
 
-  @ManyToMany
+  @ManyToOne
   private Teacher scheduledBy;
 
-  @Column(nullable = false)
+  @ManyToOne
   private Course course;
 
   @Column(nullable = false)
