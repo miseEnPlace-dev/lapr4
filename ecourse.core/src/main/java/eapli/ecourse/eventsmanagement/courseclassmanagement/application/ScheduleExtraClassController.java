@@ -1,17 +1,25 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.application;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import eapli.ecourse.coursemanagement.application.ListCourseService;
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.application.EnrolmentListService;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.application.ScheduleAvailabilityService;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ExtraordinaryClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
+import eapli.ecourse.eventsmanagement.domain.Duration;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.dto.StudentDTO;
@@ -32,7 +40,6 @@ public class ScheduleExtraClassController {
   private Teacher teacher;
 
   private CourseRepository courseRepository;
-  private EnrolmentRepository enrolmentRepository;
   private ExtraordinaryClassRepository extraClassRepository;
   private TeacherRepository teacherRepository;
   private StudentRepository studentRepository;
@@ -46,7 +53,6 @@ public class ScheduleExtraClassController {
         enrolmentRepository, studentRepository);
 
     this.courseRepository = courseRepository;
-    this.enrolmentRepository = enrolmentRepository;
     this.extraClassRepository = extraClassRepository;
     this.teacherRepository = teacherRepository;
     this.studentRepository = studentRepository;
@@ -76,6 +82,36 @@ public class ScheduleExtraClassController {
       students.add(studentRepository.ofIdentity(enrolment.getStudentNumber()).orElseThrow().toDto());
 
     return students;
+  }
+
+  public ExtraordinaryClass createExtraordinaryClass(CourseCode code, int duration, Calendar time,
+      Set<StudentDTO> students) {
+
+    Course course = courseRepository.ofIdentity(code).orElseThrow();
+    Set<Student> studentsSet = new HashSet<>();
+
+    List<SystemUser> users = new ArrayList<>();
+
+    for (StudentDTO student : students) {
+      studentsSet.add(studentRepository.ofIdentity(student.getMecanographicNumber()).orElseThrow());
+      users.add(studentRepository.ofIdentity(student.getMecanographicNumber()).orElseThrow().user());
+    }
+    users.add(teacher.user());
+
+    Duration durationObj = Duration.valueOf(duration);
+
+    Time timeObj = Time.valueOf(time);
+
+    if (!scheduleAvailabilityService.areAllAvailable(users, timeObj, durationObj))
+      throw new IllegalArgumentException("The schedule is not available");
+
+    ExtraordinaryClass extraClass = new ExtraordinaryClass(durationObj, timeObj, this.teacher, studentsSet, course);
+
+    return saveExtraordinaryClass(extraClass);
+  }
+
+  private ExtraordinaryClass saveExtraordinaryClass(ExtraordinaryClass extraClass) {
+    return extraClassRepository.save(extraClass);
   }
 
 }

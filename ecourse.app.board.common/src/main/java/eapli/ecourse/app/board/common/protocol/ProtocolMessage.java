@@ -7,52 +7,62 @@ public class ProtocolMessage {
   private static final byte PROTOCOL_VERSION = 1;
   private static final byte METADATA_LENGTH = 4;
 
+  // metadata
   private byte protocolVersion;
   private MessageCode code;
-  private int dataLength;
-  private byte[] data;
+  private int payloadLength;
 
-  public ProtocolMessage(MessageCode code, byte[] data, int dataLength) {
+  private byte[] payload;
+
+  public ProtocolMessage(MessageCode code) {
     this.protocolVersion = PROTOCOL_VERSION;
     this.code = code;
-    this.dataLength = dataLength;
-    this.data = data;
+    this.payloadLength = 0;
+    this.payload = new byte[0];
   }
 
-  private ProtocolMessage(byte protocolVersion, MessageCode code, byte[] data, int dataLength) {
+  public ProtocolMessage(MessageCode code, byte[] payload, int payloadLength) {
+    this.protocolVersion = PROTOCOL_VERSION;
+    this.code = code;
+    this.payloadLength = payloadLength;
+    this.payload = payload;
+  }
+
+  private ProtocolMessage(byte protocolVersion, MessageCode code, byte[] payload,
+      int payloadLength) {
     this.protocolVersion = protocolVersion;
     this.code = code;
-    this.dataLength = dataLength;
-    this.data = data;
+    this.payloadLength = payloadLength;
+    this.payload = payload;
   }
 
   public static ProtocolMessage fromDataStream(DataInputStream input)
       throws IOException, UnsupportedVersionException {
     // according to the protocol message format, the first 4 bytes
-    // contain metadata about the message
+    // are the header of the message (metadata)
     byte[] metadata = input.readNBytes(METADATA_LENGTH);
 
     // the first byte is the protocol version
     byte protocolVersion = metadata[0];
 
     if (protocolVersion != PROTOCOL_VERSION)
-      throw new UnsupportedVersionException("Invalid version " + protocolVersion);
+      throw new UnsupportedVersionException("Unsupported protocol version " + protocolVersion);
 
     // the second byte is the code
     byte rawCode = metadata[1];
     MessageCode code = MessageCode.valueOf(rawCode);
 
     // the length of the data (d_length_1 + 256 * c d_length_2)
-    int dataLength = metadata[2] + 256 * metadata[3];
+    int payloadLength = metadata[2] + 256 * metadata[3];
 
-    // read n bytes from the data field in the protocol
-    byte[] data = input.readNBytes(dataLength);
+    // read the payload
+    byte[] payload = input.readNBytes(payloadLength);
 
-    return new ProtocolMessage(protocolVersion, code, data, dataLength);
+    return new ProtocolMessage(protocolVersion, code, payload, payloadLength);
   }
 
   public byte[] toByteStream() {
-    byte[] result = new byte[this.dataLength + METADATA_LENGTH];
+    byte[] result = new byte[this.payloadLength + METADATA_LENGTH];
 
     // version
     result[0] = this.protocolVersion;
@@ -61,10 +71,10 @@ public class ProtocolMessage {
     result[1] = this.code.toByte();
 
     // data length
-    result[2] = (byte) (this.dataLength % 256);
-    result[3] = (byte) (this.dataLength / 256);
+    result[2] = (byte) (this.payloadLength % 256);
+    result[3] = (byte) (this.payloadLength / 256);
 
-    System.arraycopy(this.data, 0, result, METADATA_LENGTH, this.dataLength);
+    System.arraycopy(this.payload, 0, result, METADATA_LENGTH, this.payloadLength);
 
     return result;
   }
@@ -77,11 +87,17 @@ public class ProtocolMessage {
     return this.code;
   }
 
-  public int getDataLength() {
-    return this.dataLength;
+  public int getPayloadLength() {
+    return this.payloadLength;
   }
 
-  public byte[] getData() {
-    return this.data;
+  public byte[] getPayload() {
+    return this.payload;
+  }
+
+  public String toString() {
+    return String.format(" --- ProtocolMessage version %d ---\n%s request, payload length: %d%s",
+        this.protocolVersion, this.code.toString(), this.payloadLength,
+        this.payloadLength != 0 ? "\nPayload: " + new String(this.payload) : "");
   }
 }

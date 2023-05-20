@@ -37,50 +37,42 @@ public class ClientHandler implements Runnable {
       // and a data output stream to write to the client
       DataOutputStream output = new DataOutputStream(client.getOutputStream());
 
+      // parse the message
       ProtocolMessage message = ProtocolMessage.fromDataStream(input);
 
       System.out.println("\n[Client Handler Thread] Received request!");
-      System.out.println("Protocol version: " + message.getProtocolVersion());
-      System.out.println("Code: " + message.getCode());
-      System.out.println("Data length: " + message.getDataLength());
+      System.out.println(message.toString());
 
       // trolha
       switch (message.getCode()) {
         case ACK:
+          // normally used in responses
           break;
 
         case AUTH:
-          System.out.println("Trying to authenticate");
+          // ...
+          byte[] buffer = (new String("Not Implemented")).getBytes();
+          output.write(new ProtocolMessage(MessageCode.ERR, buffer, buffer.length).toByteStream());
           break;
 
         case COMMTEST:
-          System.out.println("Comm test!");
+          System.out.println("Comm test! Sending ACK");
+          output.write(new ProtocolMessage(MessageCode.ACK).toByteStream());
           break;
 
         case DISCONN:
+          // ...
+          output.write(new ProtocolMessage(MessageCode.ACK).toByteStream());
           break;
 
         case ERR:
+          // this is an error message used in responses
           break;
 
         default:
-          System.out.println("Invalid code");
+          System.out.println("Unrecognized code!");
           break;
       }
-
-      System.out.println("[Client Handler Thread] Data: " + new String(message.getData()));
-
-      // while (!client.isClosed()) {
-      // // read from the client
-      // input.read(buffer, 0, buffer.length);
-
-      // System.out.println("[Client Handler Thread] Received: " + new String(buffer));
-
-      // // echo back
-      // output.write(buffer);
-
-      // System.out.println("[Client Handler Thread] Echoed back");
-      // }
 
       client.close();
 
