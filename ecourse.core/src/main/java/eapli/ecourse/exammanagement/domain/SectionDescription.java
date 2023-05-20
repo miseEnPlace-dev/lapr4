@@ -22,7 +22,7 @@ public class SectionDescription implements ValueObject {
    * @param description description of the exam/section
    */
   private SectionDescription(final String description) {
-    Preconditions.nonNull(description, "Description should neither be null nor empty.");
+    Preconditions.nonEmpty(description, "Description should neither be null nor empty.");
 
     if (description.length() > 255)
       throw new IllegalArgumentException("Description should not exceed 255 characters");
