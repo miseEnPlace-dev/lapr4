@@ -32,7 +32,7 @@ class MainMenu extends StudentBaseUI {
   private static final int REQUEST_ENROLMENT_OPTION = 3;
   private static final int SCHEDULE_MEETING = 4;
   private static final int VIEW_FUTURE_EXAMS = 5;
-  private static final int SETTINGS_OPTION = 5;
+  private static final int SETTINGS_OPTION = 6;
 
   // ACCOUNT MENU
   // private static final int <something> = 1;
