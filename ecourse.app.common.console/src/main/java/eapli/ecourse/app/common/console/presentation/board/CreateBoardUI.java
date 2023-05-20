@@ -7,7 +7,6 @@ import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
 import eapli.ecourse.boardmanagement.application.CreateBoardController;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.io.util.Console;
@@ -17,12 +16,10 @@ import eapli.framework.presentation.console.SelectWidget;
 public class CreateBoardUI extends AbstractUI {
 
   CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
-      AuthzRegistry.userService());
+      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {
-    SystemUser user = AuthzRegistry.authorizationService().loggedinUserWithPermissions(ClientRoles.MANAGER,
-        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
     String title = Console.readLine("Enter the title of the board: ");
 
@@ -72,12 +69,12 @@ public class CreateBoardUI extends AbstractUI {
     }
 
     try {
-      this.ctrl.createBoard(title, permissions, columns, rows, user);
+      this.ctrl.createBoard(title, permissions, columns, rows);
+      System.out.println("\nBoard successfully created");
     } catch (Exception e) {
       System.out.println("Error creating board: " + e.getMessage());
     }
 
-    System.out.println("\nBoard successfully created");
     Console.readLine("Press Enter to continue...");
 
     return true;

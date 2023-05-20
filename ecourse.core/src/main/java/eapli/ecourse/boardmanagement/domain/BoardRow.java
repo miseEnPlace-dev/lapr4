@@ -17,7 +17,7 @@ public class BoardRow implements DomainEntity<Integer> {
   private Long version;
 
   @Column
-  private Title title;
+  private BoardTitle title;
 
   @Id
   private Integer rowNumber;
@@ -26,7 +26,7 @@ public class BoardRow implements DomainEntity<Integer> {
     // for ORM
   }
 
-  public BoardRow(final Title title, final Integer number) {
+  public BoardRow(final BoardTitle title, final Integer number) {
 
     Preconditions.noneNull(title, number);
 
@@ -34,7 +34,7 @@ public class BoardRow implements DomainEntity<Integer> {
     this.rowNumber = number;
   }
 
-  public Title title() {
+  public BoardTitle title() {
     return this.title;
   }
 
