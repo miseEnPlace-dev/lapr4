@@ -7,6 +7,7 @@ participant "ListFutureExamsUI" as UI <<presentation>>
 participant "ListFutureExamsController" as CTRL <<application>>
 participant "AuthenticationService" as AUTH <<service>>
 participant "CourseListService" as C_SRV <<service>>
+participant "EnrolmentListService" as En_SRV <<service>>
 participant "ExamListService" as E_SRV <<service>>
 participant "Exam" as Exam <<domain>>
 participant "Enrolment" as Enrolment <<domain>>
@@ -36,13 +37,18 @@ CTRL -> SREP : student = findByUsername(authenticatedUser.username())
 activate SREP
 deactivate SREP
 
-CTRL -> REPO: enrolments = findByStudentMecanographicNumber(authenticatedUser.identity())
+CTRL -> En_SRV: enrolments = findByStudentMecanographicNumber(authenticatedUser.identity())
+activate En_SRV
+En_SRV -> REPO: findByStudentMecanographicNumber(ID)
 activate REPO
 deactivate REPO
+deactivate En_SRV
 
 loop for each enrolment
   alt if enrolment.isAccepted()
-      CTRL -> Course : courseDTO = toDTO(enrolment.course())
+      CTRL -> C_SRV : courseDTO = toDTO(enrolment.course())
+      activate C_SRV
+      C_SRV -> Course: toDTO(course)
       activate Course
       Course -> C_DTO : new
       deactivate C_SRV

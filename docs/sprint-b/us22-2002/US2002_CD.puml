@@ -1,0 +1,161 @@
+@startuml US2003_CD
+
+class ListFutureExamsUI {
+
+}
+
+class ListFutureExamsController {
+- enrolmentRepository
+- courseRepository
+- studentRepository
+- authorizationService
+- examListService
++ listStudentCourses()
++ futureExams(courseDTO)
+}
+
+interface StudentRepository {
++ findByUsername(username)
+}
+
+class InMemoryStudentRepository {
++ findByUsername(username)
+}
+
+class JpaStudentRepository {
++ findByUsername(username)
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+  + toDto()
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+interface CourseRepository {
+  + findByCode(code)
+}
+
+class InMemoryCourseRepository {
+  + findByCode(code)
+}
+
+class JpaCourseRepository {
+  + findByCode(code)
+}
+
+
+class Exam {
+- code
+- course
+- teacher
+- identifier
+- title
+- description
+- state
++ toDto()
+}
+
+class ExamDTO {
+- code
+- course
+- teacher
+- identifier
+- title
+- description
+- state
+}
+
+class ExamListService {
+- examRepository
++ listAllFutureCourseExams(course)
+}
+
+interface ExamRepository {
++ findAllFutureCourseExams(course)
+}
+
+
+class InMemoryExamRepository {
+findAllFutureCourseExams(course)
+}
+
+class JpaExamRepository {
+findAllFutureCourseExams(course)
+}
+
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+
+class PersistenceContext {
+  - repositories()
+}
+
+
+interface EnrolmentRepository {
++ findByStudentMecanographicNumber(studentID)
+}
+
+class InMemoryEnrolmentRepository {
++ findByStudentMecanographicNumber(studentID)
+}
+
+class JpaEnrolmentRepository {
++ findByStudentMecanographicNumber(studentID)
+}
+
+
+
+PersistenceContext ..> RepositoryFactory
+
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> ExamRepository
+RepositoryFactory --> StudentRepository
+RepositoryFactory --> EnrolmentRepository
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+ExamRepository <|.. InMemoryExamRepository
+ExamRepository <|.. JpaExamRepository
+StudentRepository <|.. InMemoryStudentRepository
+StudentRepository <|.. JpaStudentRepository
+EnrolmentRepository <|.. InMemoryEnrolmentRepository
+EnrolmentRepository <|.. JpaEnrolmentRepository
+
+
+ListFutureExamsController --> ExamListService
+ListFutureExamsController ..> Course
+ListFutureExamsController ..> CourseDTO
+ListFutureExamsController ..> PersistenceContext
+
+ListFutureExamsUI ..> ListFutureExamsController
+
+ExamListService ..> Exam
+ExamListService ..> ExamDTO
+ExamListService ..> ExamRepository
+ListFutureExamsController --> ExamRepository
+ListFutureExamsController --> StudentRepository
+ListFutureExamsController --> EnrolmentRepository
+ListFutureExamsController --> CourseRepository
+
+
+
+@enduml
