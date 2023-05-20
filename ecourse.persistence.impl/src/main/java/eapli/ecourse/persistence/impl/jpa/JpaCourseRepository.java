@@ -14,6 +14,7 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
+import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -27,13 +28,6 @@ class JpaCourseRepository
 
   public JpaCourseRepository(final String puname) {
     super(puname, Application.settings().extendedPersistenceProperties(), "code");
-  }
-
-  @Override
-  public Optional<Course> findByCode(final CourseCode code) {
-    final Map<String, Object> params = new HashMap<>();
-    params.put("code", code);
-    return matchOne("e.code=:code", params);
   }
 
   @Override
@@ -74,5 +68,11 @@ class JpaCourseRepository
   @Override
   public Iterable<Course> findAllNotFinished() {
     return match("e.courseState <> :state", "state", new CourseState(CourseState.State.FINISHED));
+  }
+
+  @Override
+  public void delete(Course entity) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'delete'");
   }
 }

@@ -6,7 +6,7 @@ import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.ExamRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;

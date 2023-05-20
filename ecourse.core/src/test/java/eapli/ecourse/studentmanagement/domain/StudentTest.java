@@ -1,13 +1,13 @@
 package eapli.ecourse.studentmanagement.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
@@ -19,12 +19,12 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 /**
  * @author Nuno Bettencourt [NMB] on 03/04/16.
  */
-class StudentTest {
+public class StudentTest {
 
   private final String aMecanographicNumber = "abc";
   private final String anotherMecanographicNumber = "xyz";
 
-  public static SystemUser dummyUser(final String username, final Role... roles) {
+  private SystemUser dummyUser(final String username, final Role... roles) {
     final SystemUserBuilder userBuilder = new SystemUserBuilder(new NilPasswordPolicy(), new PlainTextEncoder());
     return userBuilder.with(username, "duMMy1", "dummy", "dummy", "a@b.ro").withRoles(roles)
         .build();
@@ -35,7 +35,7 @@ class StudentTest {
   }
 
   @Test
-  void ensureStudentEqualsPassesForTheSameMecanographicNumber() throws Exception {
+  public void ensureStudentEqualsPassesForTheSameMecanographicNumber() throws Exception {
 
     final Student aStudent = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
@@ -49,7 +49,7 @@ class StudentTest {
   }
 
   @Test
-  void ensureStudentEqualsFailsForDifferenteMecanographicNumber() throws Exception {
+  public void ensureStudentEqualsFailsForDifferenteMecanographicNumber() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
@@ -65,14 +65,14 @@ class StudentTest {
   }
 
   @Test
-  void ensureStudentEqualsAreTheSameForTheSameInstance() throws Exception {
+  public void ensureStudentEqualsAreTheSameForTheSameInstance() throws Exception {
     final Student aStudent = new Student();
 
     assertEquals(aStudent, aStudent);
   }
 
   @Test
-  void ensureStudentEqualsFailsForDifferenteObjectTypes() throws Exception {
+  public void ensureStudentEqualsFailsForDifferenteObjectTypes() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
 
@@ -86,7 +86,7 @@ class StudentTest {
   }
 
   @Test
-  void ensureStudentIsTheSameAsItsInstance() throws Exception {
+  public void ensureStudentIsTheSameAsItsInstance() throws Exception {
     final Student aStudent = new StudentBuilder().withMecanographicNumber("DUMMY")
         .withSystemUser(getNewDummyUser()).build();
 
@@ -94,7 +94,7 @@ class StudentTest {
   }
 
   @Test
-  void enslientserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
+  public void enslientserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.MANAGER);
     final Student aStudent = new StudentBuilder()

@@ -4,7 +4,7 @@ import java.util.List;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.questionmanagement.domain.Identifier;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
@@ -14,15 +14,15 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
 
   private Course course;
   private Teacher teacher;
-  private Identifier identifier;
-  private Title title;
-  private Description description;
-  private List<Section> sections;
+  private QuestionIdentifier identifier;
+  private ExamTitle title;
+  private ExamDescription description;
+  private List<ExamSection> sections;
   private Time startTime;
   private Time endTime;
   private ExamInfo feedbackInfo;
   private ExamInfo gradeInfo;
-  private Score score;
+  private ExamScore score;
 
   public EvaluationExamBuilder withCourse(Course course) {
     this.course = course;
@@ -34,22 +34,22 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
     return this;
   }
 
-  public EvaluationExamBuilder withIdentifier(Identifier identifier) {
+  public EvaluationExamBuilder withIdentifier(QuestionIdentifier identifier) {
     this.identifier = identifier;
     return this;
   }
 
-  public EvaluationExamBuilder withTitle(Title title) {
+  public EvaluationExamBuilder withTitle(ExamTitle title) {
     this.title = title;
     return this;
   }
 
-  public EvaluationExamBuilder withDescription(Description description) {
+  public EvaluationExamBuilder withDescription(ExamDescription description) {
     this.description = description;
     return this;
   }
 
-  public EvaluationExamBuilder withSections(List<Section> sections) {
+  public EvaluationExamBuilder withSections(List<ExamSection> sections) {
     this.sections = sections;
     return this;
   }
@@ -74,7 +74,7 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
     return this;
   }
 
-  public EvaluationExamBuilder withScore(Score score) {
+  public EvaluationExamBuilder withScore(ExamScore score) {
     this.score = score;
     return this;
   }

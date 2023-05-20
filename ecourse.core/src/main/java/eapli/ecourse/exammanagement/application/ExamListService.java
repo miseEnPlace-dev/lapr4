@@ -8,8 +8,8 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.repositories.ExamRepository;
 
 public class ExamListService {
 

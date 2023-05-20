@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
-import eapli.ecourse.questionmanagement.domain.Identifier;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
@@ -22,7 +22,7 @@ import eapli.framework.validations.Preconditions;
 /**
  * A section of an exam.
  */
-public class Section implements DomainEntity<Long> {
+public class ExamSection implements DomainEntity<Long> {
   private static final long serialVersionUID = 1L;
 
   @Version
@@ -33,21 +33,21 @@ public class Section implements DomainEntity<Long> {
   private long id;
 
   @Column(nullable = false)
-  private Identifier identifier;
+  private QuestionIdentifier identifier;
 
   @Column(nullable = false)
-  private Title title;
+  private ExamTitle title;
 
   @Column(nullable = false)
-  private Description description;
+  private ExamDescription description;
 
   @Column(nullable = false)
-  private Score score;
+  private ExamScore score;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<SectionQuestion> questions;
 
-  public Section(Identifier identifier, Title title, Description description, Score score,
+  public ExamSection(QuestionIdentifier identifier, ExamTitle title, ExamDescription description, ExamScore score,
       Collection<SectionQuestion> questions) {
     Preconditions.noneNull(identifier, title, description, score);
     this.identifier = identifier;
@@ -57,7 +57,7 @@ public class Section implements DomainEntity<Long> {
     this.questions = new ArrayList<>(questions);
   }
 
-  protected Section() {
+  protected ExamSection() {
     // for ORM only
   }
 
@@ -75,10 +75,10 @@ public class Section implements DomainEntity<Long> {
       return false;
     if (this == o)
       return true;
-    if (!(o instanceof Section))
+    if (!(o instanceof ExamSection))
       return false;
 
-    final Section that = (Section) o;
+    final ExamSection that = (ExamSection) o;
     return this.identifier.equals(that.identifier) && this.title.equals(that.title)
         && this.description.equals(that.description) && this.score.equals(that.score)
         && this.questions.equals(that.questions);

@@ -7,7 +7,7 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.questionmanagement.application.AddQuestionsController;
-import eapli.ecourse.questionmanagement.domain.Identifier;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.MatchingQuestion;
 import eapli.ecourse.questionmanagement.domain.MissingWordsQuestion;
 import eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion;
@@ -32,11 +32,11 @@ public class QuestionsBootstrapper implements Action {
     MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(
         QuestionBody.valueOf("Qual a melhor coisa?"),
         QuestionType.FORMATIVE);
-    multipleChoiceQuestion.addCorrectAnswer(Identifier.valueOf("123"), 0.2);
-    multipleChoiceQuestion.addCorrectAnswer(Identifier.valueOf("456"), 0.4);
-    multipleChoiceQuestion.addOption(Identifier.valueOf("123"), "coisa");
-    multipleChoiceQuestion.addOption(Identifier.valueOf("456"), "coiso");
-    multipleChoiceQuestion.addOption(Identifier.valueOf("789"), "outra coisa");
+    multipleChoiceQuestion.addCorrectAnswer(QuestionIdentifier.valueOf("123"), 0.2);
+    multipleChoiceQuestion.addCorrectAnswer(QuestionIdentifier.valueOf("456"), 0.4);
+    multipleChoiceQuestion.addOption(QuestionIdentifier.valueOf("123"), "coisa");
+    multipleChoiceQuestion.addOption(QuestionIdentifier.valueOf("456"), "coiso");
+    multipleChoiceQuestion.addOption(QuestionIdentifier.valueOf("789"), "outra coisa");
     multipleChoiceQuestion.changeCourse(course);
     controller.addQuestion(multipleChoiceQuestion);
   }
@@ -79,13 +79,13 @@ public class QuestionsBootstrapper implements Action {
     matchingQuestion.addCorrectMatch("456", "B");
     matchingQuestion.addCorrectMatch("769", "C");
 
-    matchingQuestion.addOption(Identifier.valueOf("123"), "qualquer coisa");
-    matchingQuestion.addOption(Identifier.valueOf("456"), "outra situação");
-    matchingQuestion.addOption(Identifier.valueOf("789"), "mais situações");
+    matchingQuestion.addOption(QuestionIdentifier.valueOf("123"), "qualquer coisa");
+    matchingQuestion.addOption(QuestionIdentifier.valueOf("456"), "outra situação");
+    matchingQuestion.addOption(QuestionIdentifier.valueOf("789"), "mais situações");
 
-    matchingQuestion.addOption(Identifier.valueOf("A"), "associação 1");
-    matchingQuestion.addOption(Identifier.valueOf("B"), "associação 2");
-    matchingQuestion.addOption(Identifier.valueOf("C"), "associação 3");
+    matchingQuestion.addOption(QuestionIdentifier.valueOf("A"), "associação 1");
+    matchingQuestion.addOption(QuestionIdentifier.valueOf("B"), "associação 2");
+    matchingQuestion.addOption(QuestionIdentifier.valueOf("C"), "associação 3");
 
     matchingQuestion.changeCourse(course);
     controller.addQuestion(matchingQuestion);
@@ -101,7 +101,7 @@ public class QuestionsBootstrapper implements Action {
 
   @Override
   public boolean execute() {
-    course = PersistenceContext.repositories().courses().findByCode(CourseCode.valueOf("1234")).get();
+    course = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("1234")).get();
 
     addShortAnswerQuestion();
     addTrueOrFalseQuestion();

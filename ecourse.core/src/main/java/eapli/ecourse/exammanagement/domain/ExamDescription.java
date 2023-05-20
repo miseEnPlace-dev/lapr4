@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 /**
  * Exam/Section Description class.
  */
-public class Description implements ValueObject, Comparable<Description> {
+public class ExamDescription implements ValueObject, Comparable<ExamDescription> {
   private static final long serialVersionUID = 1L;
 
   private String description;
@@ -21,7 +21,7 @@ public class Description implements ValueObject, Comparable<Description> {
    *
    * @param description description of the exam/section
    */
-  private Description(final String description) {
+  private ExamDescription(final String description) {
     Preconditions.nonNull(description, "Description should neither be null nor empty.");
 
     if (description.length() > 255)
@@ -30,12 +30,12 @@ public class Description implements ValueObject, Comparable<Description> {
     this.description = description;
   }
 
-  protected Description() {
+  protected ExamDescription() {
     // for ORM only
   }
 
-  public static Description valueOf(final String description) {
-    return new Description(description);
+  public static ExamDescription valueOf(final String description) {
+    return new ExamDescription(description);
   }
 
   /**
@@ -57,7 +57,7 @@ public class Description implements ValueObject, Comparable<Description> {
    *         than the other.
    */
   @Override
-  public int compareTo(final Description other) {
+  public int compareTo(final ExamDescription other) {
     return this.description.compareTo(other.description);
   }
 }

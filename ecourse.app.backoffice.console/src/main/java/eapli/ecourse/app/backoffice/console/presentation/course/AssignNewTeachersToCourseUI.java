@@ -21,7 +21,7 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = controller.allNotClosedCourses();
+    final Iterable<CourseDTO> courses = controller.allNotFinishedCourses();
 
     if (!courses.iterator().hasNext()) {
       System.out.println("There are no courses to assign.");

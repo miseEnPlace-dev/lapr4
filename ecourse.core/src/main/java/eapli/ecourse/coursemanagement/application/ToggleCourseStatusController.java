@@ -50,6 +50,6 @@ public class ToggleCourseStatusController {
   }
 
   private Course getCourse(CourseDTO courseDTO) {
-    return courseRepository.findByCode(courseDTO.getCode()).orElseThrow();
+    return courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
   }
 }

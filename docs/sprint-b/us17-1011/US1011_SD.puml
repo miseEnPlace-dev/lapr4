@@ -30,7 +30,7 @@ CTRL -> CSRV : service=new(courseRepository)
 CTRL -> ESRV : service=new(enrolmentRepository)
 deactivate CTRL
 
-UI -> CTRL : ()
+UI -> CTRL : listAllInProgressLecturedByTeacher()
 activate CTRL
 CTRL -> CSRV : listAllInProgressLecturedByTeacher(teacher)
 activate CSRV

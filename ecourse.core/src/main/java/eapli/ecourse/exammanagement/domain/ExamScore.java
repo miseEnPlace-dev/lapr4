@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 /**
  * The score of a exam/section/question.
  */
-public class Score implements ValueObject, Comparable<Score> {
+public class ExamScore implements ValueObject, Comparable<ExamScore> {
   public static final long serialVersionUID = 1L;
 
   private int score;
@@ -21,7 +21,7 @@ public class Score implements ValueObject, Comparable<Score> {
    *
    * @param score score of the section
    */
-  private Score(final int score) {
+  private ExamScore(final int score) {
     Preconditions.isPositive(score, "Score should be positive");
 
     this.score = score;
@@ -30,12 +30,12 @@ public class Score implements ValueObject, Comparable<Score> {
   /**
    * Empty constructor for ORM.
    */
-  protected Score() {
+  protected ExamScore() {
 
   }
 
-  public static Score valueOf(final int score) {
-    return new Score(score);
+  public static ExamScore valueOf(final int score) {
+    return new ExamScore(score);
   }
 
   /**
@@ -56,7 +56,7 @@ public class Score implements ValueObject, Comparable<Score> {
    *         than the other, less than 0 if this score is less than the other.
    */
   @Override
-  public int compareTo(final Score other) {
+  public int compareTo(final ExamScore other) {
     return Integer.compare(this.score, other.score);
   }
 }

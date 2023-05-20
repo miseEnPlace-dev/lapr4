@@ -1,4 +1,4 @@
-package eapli.ecourse.exammanagement.domain.repositories;
+package eapli.ecourse.exammanagement.repositories;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.EvaluationExam;

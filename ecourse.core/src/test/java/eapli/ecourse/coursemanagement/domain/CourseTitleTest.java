@@ -1,10 +1,10 @@
 package eapli.ecourse.coursemanagement.domain;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class CourseTitleTest {
   @Test

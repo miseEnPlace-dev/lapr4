@@ -8,12 +8,12 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class Identifier implements ValueObject, Comparable<Identifier> {
+public class QuestionIdentifier implements ValueObject, Comparable<QuestionIdentifier> {
   private static final long serialVersionUID = 1L;
 
   private String identifier;
 
-  private Identifier(final String identifier) {
+  private QuestionIdentifier(final String identifier) {
     Preconditions.nonEmpty(identifier, "Identifier should neither be null nor empty.");
 
     if (identifier.length() > 255)
@@ -22,12 +22,12 @@ public class Identifier implements ValueObject, Comparable<Identifier> {
     this.identifier = identifier;
   }
 
-  protected Identifier() {
+  protected QuestionIdentifier() {
     // for ORM
   }
 
-  public static Identifier valueOf(final String identifier) {
-    return new Identifier(identifier);
+  public static QuestionIdentifier valueOf(final String identifier) {
+    return new QuestionIdentifier(identifier);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class Identifier implements ValueObject, Comparable<Identifier> {
    *         than the other.
    */
   @Override
-  public int compareTo(final Identifier other) {
+  public int compareTo(final QuestionIdentifier other) {
     return this.identifier.compareTo(other.identifier);
   }
 }

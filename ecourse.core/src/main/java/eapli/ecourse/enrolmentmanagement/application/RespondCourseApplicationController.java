@@ -41,8 +41,8 @@ public class RespondCourseApplicationController {
   public EnrolmentDTO accept(final EnrolmentDTO enrolmentDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
 
-    CourseCode code = CourseCode.valueOf(enrolmentDTO.getCourseCode());
-    MecanographicNumber number = MecanographicNumber.valueOf(enrolmentDTO.getStudentNumber());
+    CourseCode code = enrolmentDTO.getCourseCode();
+    MecanographicNumber number = enrolmentDTO.getStudentNumber();
 
     Enrolment enrolment = enrolmentRepository
         .findWithUserAndCourse(number, code).orElseThrow();
@@ -55,8 +55,8 @@ public class RespondCourseApplicationController {
   public EnrolmentDTO reject(final EnrolmentDTO enrolmentDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
 
-    CourseCode code = CourseCode.valueOf(enrolmentDTO.getCourseCode());
-    MecanographicNumber number = MecanographicNumber.valueOf(enrolmentDTO.getStudentNumber());
+    CourseCode code = enrolmentDTO.getCourseCode();
+    MecanographicNumber number = enrolmentDTO.getStudentNumber();
 
     Enrolment enrolment = enrolmentRepository
         .findWithUserAndCourse(number, code).orElseThrow();

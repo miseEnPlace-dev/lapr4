@@ -24,7 +24,7 @@ public class ToggleCourseEnrolmentStateController {
   public CourseDTO toggleEnrolmentState(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
 
-    Course course = courseRepository.findByCode(courseDTO.getCode()).orElseThrow();
+    Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
 
     course.toggleEnrolmentState();
 

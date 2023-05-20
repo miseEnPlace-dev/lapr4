@@ -17,19 +17,19 @@ public class MultipleChoiceQuestion extends Question {
   @CollectionTable(name = "multipleChoiceCorrectAnswer")
   @MapKeyColumn(name = "multipleChoiceCorrectOptionIdentifier")
   @Column(name = "weight")
-  private Map<Identifier, Double> correctAnswers;
+  private Map<QuestionIdentifier, Double> correctAnswers;
 
   @ElementCollection
   @CollectionTable(name = "multipleChoiceOption")
   @MapKeyColumn(name = "multipleOptionIdentifier")
   @Column(name = "multipleChoiceOptionValue")
-  private Map<Identifier, String> options;
+  private Map<QuestionIdentifier, String> options;
 
   @ElementCollection
   @CollectionTable(name = "multipleChoiceOptionFeedback")
   @MapKeyColumn(name = "multipleOptionIdentifier")
   @Column(name = "multipleChoiceFeedbackValue")
-  private Map<Identifier, Feedback> feedbacks;
+  private Map<QuestionIdentifier, Feedback> feedbacks;
 
   public MultipleChoiceQuestion(final QuestionBody body, final QuestionType type) {
     super(body, type);
@@ -49,27 +49,27 @@ public class MultipleChoiceQuestion extends Question {
     // for ORM only
   }
 
-  public void addCorrectAnswer(final Identifier identifier, final Double weight) {
+  public void addCorrectAnswer(final QuestionIdentifier identifier, final Double weight) {
     correctAnswers.put(identifier, weight);
   }
 
-  public void addOption(final Identifier identifier, final String option) {
+  public void addOption(final QuestionIdentifier identifier, final String option) {
     options.put(identifier, option);
   }
 
-  public void addFeedback(final Identifier identifier, final Feedback feedback) {
+  public void addFeedback(final QuestionIdentifier identifier, final Feedback feedback) {
     this.feedbacks.put(identifier, feedback);
   }
 
-  public Map<Identifier, Double> correctAnswers() {
+  public Map<QuestionIdentifier, Double> correctAnswers() {
     return this.correctAnswers;
   }
 
-  public Map<Identifier, String> options() {
+  public Map<QuestionIdentifier, String> options() {
     return this.options;
   }
 
-  public Map<Identifier, Feedback> feedbacks() {
+  public Map<QuestionIdentifier, Feedback> feedbacks() {
     return this.feedbacks;
   }
 

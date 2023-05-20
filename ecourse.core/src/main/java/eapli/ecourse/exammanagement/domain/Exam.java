@@ -18,7 +18,7 @@ import javax.persistence.Version;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamState.State;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
-import eapli.ecourse.questionmanagement.domain.Identifier;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.validations.Preconditions;
@@ -44,27 +44,29 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   private Teacher teacher;
 
   @Column(nullable = false)
-  private Identifier identifier;
+  private QuestionIdentifier identifier;
 
   @Column(nullable = false)
-  private Title title;
+  private ExamTitle title;
 
   @Column(nullable = true)
-  private Description description;
+  private ExamDescription description;
 
   @Column(nullable = false)
   private ExamState state;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<Section> sections;
+  private List<ExamSection> sections;
 
   protected Exam() {
     // for ORM only
   }
 
-  public Exam(Course course, Teacher teacher, Identifier identifier, Title title, Description description,
-      Collection<Section> sections) {
+  public Exam(Course course, Teacher teacher, QuestionIdentifier identifier, ExamTitle title,
+      ExamDescription description,
+      Collection<ExamSection> sections) {
     Preconditions.noneNull(course, teacher, identifier, title, description, sections);
+
     this.code = ExamCode.newID();
     this.course = course;
     this.teacher = teacher;

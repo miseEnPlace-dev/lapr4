@@ -42,7 +42,7 @@ public class CreateBoardController {
     return userSvc.allUsers();
   }
 
-  public Board saveBoard(Board board) {
+  private Board saveBoard(Board board) {
     if (board == null)
       throw new IllegalArgumentException("Board cannot be null.");
 

@@ -1,15 +1,16 @@
-package eapli.ecourse.coursemanagement.application;
+package eapli.ecourse.exammanagement.application;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.ExamListService;
-import eapli.ecourse.exammanagement.domain.repositories.ExamRepository;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.repositories.ExamRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
@@ -44,7 +45,7 @@ public class ListCourseExamsController {
   public Iterable<ExamDTO> listCourseExams(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER, ClientRoles.MANAGER);
 
-    Optional<Course> course = courseRepository.findByCode(courseDTO.getCode());
+    Optional<Course> course = courseRepository.ofIdentity(courseDTO.getCode());
 
     if (course.isEmpty())
       throw new IllegalArgumentException("There is no Course with the given code");

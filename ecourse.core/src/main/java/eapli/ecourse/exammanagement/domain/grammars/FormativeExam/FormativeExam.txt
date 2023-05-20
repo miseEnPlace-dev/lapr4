@@ -1,17 +1,25 @@
 @start-exam exame_de_lprog;
 
-@score 100;
 @title "Exame Nº1";
 @description "";
-@feedback none;
-@grade on-submit;
 
 @start-section section1;
 
 @title "Expressões regulares.";
 @description "Descrição da Secção";
-@score 50;
+@number-of-questions 2;
+@questions-type numerical;
 
 @end-section;
+
+@start-section section2;
+
+@title "Outra Secção";
+@description "Descrição da Secção2";
+@number-of-questions 10;
+@questions-type multiple-choice;
+
+@end-section;
+
 
 @end-exam;
