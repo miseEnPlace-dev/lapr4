@@ -4,6 +4,7 @@ import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.ExamRepository;
@@ -160,4 +161,8 @@ public interface RepositoryFactory {
   BoardRepository boards();
 
   BoardRepository boards(TransactionalContext autoTx);
+
+  ExtraordinaryClassRepository extraordinaryClasses();
+
+  ExtraordinaryClassRepository extraordinaryClasses(TransactionalContext autoTx);
 }

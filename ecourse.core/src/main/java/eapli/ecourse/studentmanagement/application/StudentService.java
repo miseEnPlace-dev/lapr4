@@ -1,10 +1,13 @@
 package eapli.ecourse.studentmanagement.application;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.dto.StudentDTO;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.ApplicationService;
@@ -28,5 +31,18 @@ public class StudentService {
   public Optional<Student> findStudentUserByUsername(final Username user) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
     return repo.findByUsername(user);
+  }
+
+  public Iterable<StudentDTO> findAll() {
+    final Iterable<Student> students = repo.findAll();
+    return convertToDto(students);
+
+  }
+
+  private Iterable<StudentDTO> convertToDto(Iterable<Student> students) {
+    return StreamSupport.stream(students.spliterator(), true)
+        .map(Student::toDto)
+        .collect(Collectors.toUnmodifiableList());
+
   }
 }
