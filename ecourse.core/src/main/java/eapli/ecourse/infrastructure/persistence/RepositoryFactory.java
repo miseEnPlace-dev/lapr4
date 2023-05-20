@@ -7,7 +7,8 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseC
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -138,9 +139,19 @@ public interface RepositoryFactory {
    *
    * @return
    */
-  ExamRepository exams();
+  EvaluationExamRepository evaluationExams();
 
-  ExamRepository exams(TransactionalContext autoTx);
+  EvaluationExamRepository evaluationExams(TransactionalContext autoTx);
+
+  /**
+   *
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  FormativeExamRepository formativeExams();
+
+  FormativeExamRepository formativeExams(TransactionalContext autoTx);
 
   /**
    *

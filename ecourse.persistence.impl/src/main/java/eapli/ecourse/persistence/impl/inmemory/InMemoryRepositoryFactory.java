@@ -7,7 +7,8 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseC
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
@@ -126,12 +127,12 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public ExamRepository exams() {
-    return exams(null);
+  public EvaluationExamRepository evaluationExams() {
+    return evaluationExams(null);
   }
 
   @Override
-  public ExamRepository exams(final TransactionalContext autoTx) {
+  public EvaluationExamRepository evaluationExams(final TransactionalContext autoTx) {
     return new InMemoryExamRepository();
   }
 
@@ -157,13 +158,21 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
   @Override
   public ExtraordinaryClassRepository extraordinaryClasses() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'extraordinaryClasses'");
+    return extraordinaryClasses(null);
   }
 
   @Override
   public ExtraordinaryClassRepository extraordinaryClasses(TransactionalContext autoTx) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'extraordinaryClasses'");
+    return new InMemoryExtraordinaryClassRepository();
+  }
+
+  @Override
+  public FormativeExamRepository formativeExams() {
+    return formativeExams(null);
+  }
+
+  @Override
+  public FormativeExamRepository formativeExams(TransactionalContext autoTx) {
+    return new InMemoryFormativeExamRepository();
   }
 }

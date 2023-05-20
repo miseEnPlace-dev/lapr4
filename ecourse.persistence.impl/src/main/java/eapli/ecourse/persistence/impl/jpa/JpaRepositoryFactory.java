@@ -7,7 +7,8 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseC
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
@@ -126,12 +127,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public ExamRepository exams() {
+  public EvaluationExamRepository evaluationExams() {
     return new JpaExamRepository(Application.settings().persistenceUnitName());
   }
 
   @Override
-  public ExamRepository exams(TransactionalContext autoTx) {
+  public EvaluationExamRepository evaluationExams(TransactionalContext autoTx) {
     return new JpaExamRepository(autoTx);
   }
 
@@ -157,13 +158,21 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
   @Override
   public ExtraordinaryClassRepository extraordinaryClasses() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'extraordinaryClasses'");
+    return new JpaExtraordinaryClassRepository(Application.settings().persistenceUnitName());
   }
 
   @Override
   public ExtraordinaryClassRepository extraordinaryClasses(TransactionalContext autoTx) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'extraordinaryClasses'");
+    return new JpaExtraordinaryClassRepository(autoTx);
+  }
+
+  @Override
+  public FormativeExamRepository formativeExams() {
+    return new JpaFormativeExamRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public FormativeExamRepository formativeExams(TransactionalContext autoTx) {
+    return new JpaFormativeExamRepository(autoTx);
   }
 }

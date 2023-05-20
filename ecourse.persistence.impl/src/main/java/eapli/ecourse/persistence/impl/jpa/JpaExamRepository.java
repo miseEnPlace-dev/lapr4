@@ -10,12 +10,12 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 public class JpaExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamCode, ExamCode>
-    implements ExamRepository {
+    implements EvaluationExamRepository {
   public JpaExamRepository(final TransactionalContext autoTx) {
     super(autoTx, "code");
   }

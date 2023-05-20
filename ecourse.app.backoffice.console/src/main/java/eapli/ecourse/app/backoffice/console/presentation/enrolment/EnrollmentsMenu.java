@@ -3,7 +3,7 @@ package eapli.ecourse.app.backoffice.console.presentation.enrolment;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 
-public class EnrolmentsMenu {
+public class EnrollmentsMenu {
 
   private static final int RESPOND_COURSE_APPLICATIONS_OPTION = 1;
   private static final int EXIT_OPTION = 0;

@@ -1,7 +1,6 @@
 package eapli.ecourse.app.teacher.console.presentation.exams;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
@@ -17,7 +16,7 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateExamUI extends AbstractUI {
   CreateExamController ctrl = new CreateExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().exams(),
+      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
       PersistenceContext.repositories().courses());
 
   @Override

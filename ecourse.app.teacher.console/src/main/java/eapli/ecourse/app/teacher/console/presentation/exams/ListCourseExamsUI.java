@@ -5,11 +5,11 @@ import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.exam.ExamPrinter;
-import eapli.ecourse.exammanagement.application.ListCourseExamsController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.exammanagement.application.ListCourseExamsController;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
@@ -18,8 +18,11 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class ListCourseExamsUI extends AbstractUI {
 
+  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
+
+  private final EvaluationExamRepository examRepository = PersistenceContext.repositories().evaluationExams();
   private final ListCourseExamsController ctrl = new ListCourseExamsController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().courses(), PersistenceContext.repositories().exams());
+      PersistenceContext.repositories().courses(), PersistenceContext.repositories().evaluationExams());
 
   @Override
   protected boolean doShow() {

@@ -2,7 +2,7 @@ package eapli.ecourse.app.backoffice.console.presentation;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.app.backoffice.console.presentation.course.CoursesMenu;
-import eapli.ecourse.app.backoffice.console.presentation.enrolment.EnrolmentsMenu;
+import eapli.ecourse.app.backoffice.console.presentation.enrolment.EnrollmentsMenu;
 import eapli.ecourse.app.backoffice.console.presentation.users.UsersMenu;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -19,13 +19,7 @@ import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
-/**
- * TODO split this class in more specialized classes for each menu
- *
- * @author Paulo Gandra Sousa
- */
 public class MainMenu extends AbstractUI {
-
   private static final String RETURN_LABEL = "Return ";
 
   private static final int EXIT_OPTION = 0;
@@ -37,7 +31,7 @@ public class MainMenu extends AbstractUI {
   private static final int MY_USER_OPTION = 1;
   private static final int USERS_OPTION = 2;
   private static final int COURSES_OPTION = 3;
-  private static final int ENROLMENTS_OPTION = 4;
+  private static final int ENROLLMENTS_OPTION = 4;
   private static final int SETTINGS_OPTION = 5;
   private static final int SOMETHING_OPTION = 6;
 
@@ -80,24 +74,22 @@ public class MainMenu extends AbstractUI {
     final Menu myUserMenu = new MyUserMenu();
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
-    if (!Application.settings().isMenuLayoutHorizontal()) {
+    if (!Application.settings().isMenuLayoutHorizontal())
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-    }
 
     if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
       final Menu usersMenu = new UsersMenu().buildUsersMenu();
       mainMenu.addSubMenu(USERS_OPTION, usersMenu);
       final Menu coursesMenu = new CoursesMenu().buildCoursesMenu();
       mainMenu.addSubMenu(COURSES_OPTION, coursesMenu);
-      final Menu enrolmentsMenu = new EnrolmentsMenu().buildEnrolmentsMenu();
-      mainMenu.addSubMenu(ENROLMENTS_OPTION, enrolmentsMenu);
+      final Menu enrollmentsMenu = new EnrollmentsMenu().buildEnrolmentsMenu();
+      mainMenu.addSubMenu(ENROLLMENTS_OPTION, enrollmentsMenu);
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
 
-    if (!Application.settings().isMenuLayoutHorizontal()) {
+    if (!Application.settings().isMenuLayoutHorizontal())
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-    }
 
     mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 

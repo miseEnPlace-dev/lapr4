@@ -11,7 +11,7 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.enrolmentmanagement.application.EnrolmentListService;
+import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.application.ScheduleAvailabilityService;
@@ -33,7 +33,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class ScheduleExtraClassController {
 
-  private EnrolmentListService enrolmentListService;
+  private ListEnrolmentService enrolmentListService;
   private ListCourseService listCourseService;
   private ScheduleAvailabilityService scheduleAvailabilityService;
 
@@ -47,7 +47,7 @@ public class ScheduleExtraClassController {
   public ScheduleExtraClassController(CourseRepository courseRepository, EnrolmentRepository enrolmentRepository,
       ExtraordinaryClassRepository extraClassRepository, MeetingRepository meetingRepository,
       StudentRepository studentRepository, TeacherRepository teacherRepository, CourseClassRepository classRepository) {
-    this.enrolmentListService = new EnrolmentListService(enrolmentRepository);
+    this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
     this.listCourseService = new ListCourseService(courseRepository);
     this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, meetingRepository,
         enrolmentRepository, studentRepository);

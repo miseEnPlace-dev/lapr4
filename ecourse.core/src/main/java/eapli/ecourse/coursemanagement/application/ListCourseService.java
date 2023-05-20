@@ -51,10 +51,14 @@ public class ListCourseService {
     return convertToDto(courses);
   }
 
+  public Iterable<CourseDTO> listAll() {
+    final Iterable<Course> courses = courseRepository.findAll();
+    return convertToDto(courses);
+  }
+
   private Iterable<CourseDTO> convertToDto(Iterable<Course> courses) {
     return StreamSupport.stream(courses.spliterator(), true)
         .map(Course::toDto)
         .collect(Collectors.toUnmodifiableList());
-
   }
 }

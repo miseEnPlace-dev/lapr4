@@ -17,7 +17,7 @@ public class RespondCourseApplicationController {
 
   private EnrolmentRepository enrolmentRepository;
   private final ListCourseService listCoursesService;
-  private final EnrolmentListService listEnrolmentService;
+  private final ListEnrolmentService listEnrolmentService;
   private AuthorizationService authz;
 
   public RespondCourseApplicationController(final CourseRepository courseRepository,
@@ -25,7 +25,7 @@ public class RespondCourseApplicationController {
     this.enrolmentRepository = enrolmentRepository;
     this.authz = authz;
     this.listCoursesService = new ListCourseService(courseRepository);
-    this.listEnrolmentService = new EnrolmentListService(enrolmentRepository);
+    this.listEnrolmentService = new ListEnrolmentService(enrolmentRepository);
   }
 
   public Iterable<CourseDTO> listOpenForEnrolmentCourses() {

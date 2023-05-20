@@ -7,11 +7,11 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 public class InMemoryExamRepository extends InMemoryDomainRepository<EvaluationExam, ExamCode>
-    implements ExamRepository {
+    implements EvaluationExamRepository {
 
   static {
     InMemoryInitializer.init();

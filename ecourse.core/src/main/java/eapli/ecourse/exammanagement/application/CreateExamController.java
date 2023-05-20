@@ -10,9 +10,8 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
-import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.parsers.ExamsParser;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -26,14 +25,14 @@ public class CreateExamController {
   private final AuthorizationService authz;
   private final TeacherRepository teacherRepository;
   private final CourseRepository courseRepository;
-  private final ExamRepository examRepository;
+  private final EvaluationExamRepository examRepository;
 
   private Teacher teacher;
 
   private EvaluationExamBuilder builder;
 
   public CreateExamController(final AuthorizationService authz, final TeacherRepository teacherRepository,
-      final ExamRepository examRepository, final CourseRepository courseRepository) {
+      final EvaluationExamRepository examRepository, final CourseRepository courseRepository) {
     this.authz = authz;
     this.teacherRepository = teacherRepository;
     this.examRepository = examRepository;
