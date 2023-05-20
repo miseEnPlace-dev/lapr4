@@ -55,6 +55,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US1008_DM](out/US1008_DM.svg)
 
+---
+
 ## 4. Design
 
 ### 4.1. Functionality Realization
@@ -118,6 +120,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
   }
 ```
 
+---
+
 ## 5. Implementation
 
 ### 5.1. Controller
@@ -145,6 +149,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
   }
 ```
 
+---
+
 ## 6. Integration & Demonstration
 
 ### 6.1. Success scenario
@@ -160,6 +166,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
 #### 6.2.2. Already enrolled
 
 ![US1008_DEMO__FAIL2](US1008_DEMO_FAIL2.png)
+
+---
 
 ## 7. Observations
 

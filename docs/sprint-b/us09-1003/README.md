@@ -69,7 +69,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 3.3. Partial Domain Model
 
-![US1003_DM](out/US1003_DM.svg)
+## ![US1003_DM](out/US1003_DM.svg)
 
 ## 4. Design
 
@@ -171,6 +171,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
   }
 ```
 
+---
+
 ## 5. Implementation
 
 ### 5.1. Controller
@@ -189,6 +191,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
   }
 ```
 
+---
+
 ## 6. Integration & Demonstration
 
 ### 6.1. Success scenario
@@ -197,7 +201,9 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ### 6.2. Failure scenario
 
-![US1003_DEMO_FAIL](US1003_DEMO_FAIL.png)
+## ![US1003_DEMO_FAIL](US1003_DEMO_FAIL.png)
+
+---
 
 ## 7. Observations
 
