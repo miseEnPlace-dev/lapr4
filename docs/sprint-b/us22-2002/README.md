@@ -121,7 +121,7 @@
 
 ### 6.1. Success scenario
 
-![US2002_DEMO](US1008_DEMO.png)
+![US2002_DEMO](US2002_DEMO.png)
 
 ### 6.2. Failure scenarios
 
