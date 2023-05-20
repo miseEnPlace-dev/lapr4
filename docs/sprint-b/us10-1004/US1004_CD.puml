@@ -34,7 +34,7 @@ class RepositoryFactory {
 }
 
 interface CourseRepository {
-  + save(course)
+
   + findAllOpen()
   + findAllClosed()
   + findAllInProgress()
@@ -44,11 +44,9 @@ class CourseListService {
   - courseRepository
 
   + CourseService(courseRepository)
-
   + listClosedCourses()
   + listOpenCourses()
   + listInProgressCourses()
-  + save(course)
 }
 
 class CourseDTO {
@@ -87,15 +85,7 @@ enum CourseState {
   FINISHED
 }
 
-
-
-enum CourseEnrolmentState {
-  OPEN
-  CLOSED
-}
-
 CourseState --> Course
-CourseEnrolmentState --> Course
 
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
@@ -108,6 +98,8 @@ ToggleCourseStatusUI ..> ToggleCourseStatusController
 
 CourseListService ..> Course
 CourseListService ..> CourseDTO
+CourseListService ..> CourseRepository
+
 ToggleCourseStatusController --> CourseListService
 
 @enduml

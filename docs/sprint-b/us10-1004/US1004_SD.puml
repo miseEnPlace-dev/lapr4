@@ -15,11 +15,16 @@ database CourseRepository as REPO <<repository>>
 
 activate M
 
-M -> UI: requests to open/close a course
-
+M -> UI: requests to change the status of a course
+activate UI
+UI -> CTRL: new(courseRepository)
+activate CTRL
+deactivate CTRL
+UI --> M: displays the possibilities (open/start/close/finish)
+deactivate UI
+M -> UI: select an option
 activate UI
 
-UI -> CTRL**: new(courseRepository)
 
 alt if (close course / start course)
   UI -> CTRL: courses = listOpenCourses()

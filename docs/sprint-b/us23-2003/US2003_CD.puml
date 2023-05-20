@@ -68,10 +68,6 @@ class ExamDTO {
 - state
 }
 
-class ExamDTOParser {
-+ valueOf(examDTO)
-}
-
 class CourseDTO {
   - code
   - title
@@ -82,9 +78,6 @@ class CourseDTO {
   - createdAt
 }
 
-class CourseDTOParser {
-  + valueOf(courseDTO)
-}
 
 
 class InMemoryCourseRepository {
@@ -108,17 +101,18 @@ RepositoryFactory --> CourseRepository
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository
 ListCourseExamsController ..> PersistenceContext
-ListCourseExamsController ..> Course
 ListCourseExamsUI ..> ListCourseExamsController
 
 ExamListService ..> Exam
 CourseListService ..> Course
+CourseListService ..> CourseRepository
 
-ExamDTOParser ..> ExamDTO
-ExamDTOParser ..> Exam
+ExamListService ..> ExamDTO
+CourseListService ..> CourseDTO
+
 ListCourseExamsController --> CourseListService
 ListCourseExamsController --> ExamListService
-CourseDTOParser ..> CourseDTO
-CourseDTOParser ..> Course
+
+
 
 @enduml

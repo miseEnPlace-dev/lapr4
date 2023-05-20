@@ -6,7 +6,6 @@ actor "Student" as T
 participant "ListFutureExamsUI" as UI <<presentation>>
 participant "ListFutureExamsController" as CTRL <<application>>
 participant "AuthenticationService" as AUTH <<service>>
-participant "CourseListService" as C_SRV <<service>>
 participant "EnrolmentListService" as En_SRV <<service>>
 participant "ExamListService" as E_SRV <<service>>
 participant "Exam" as Exam <<domain>>
@@ -46,12 +45,9 @@ deactivate En_SRV
 
 loop for each enrolment
   alt if enrolment.isAccepted()
-      CTRL -> C_SRV : courseDTO = toDTO(enrolment.course())
-      activate C_SRV
-      C_SRV -> Course: toDTO(course)
+      CTRL -> Course : courseDTO = toDTO(enrolment.course())
       activate Course
       Course -> C_DTO : new
-      deactivate C_SRV
       deactivate Course
   deactivate C_SRV
 
