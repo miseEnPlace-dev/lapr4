@@ -6,7 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -43,7 +43,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
    */
   @XmlElement
   @JsonProperty
-  @OneToOne(optional = false, cascade = CascadeType.ALL)
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
   private Student student;
 
   /**
@@ -51,7 +51,7 @@ public class Enrolment implements AggregateRoot<EnrolmentID> {
    */
   @XmlElement
   @JsonProperty
-  @OneToOne(optional = false, cascade = CascadeType.ALL)
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
   private Course course;
 
   protected Enrolment() {
