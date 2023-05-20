@@ -81,6 +81,22 @@ public class EvaluationExam extends Exam {
     return this.startTime;
   }
 
+  public Time endTime() {
+    return this.endTime;
+  }
+
+  public ExamScore score() {
+    return this.score;
+  }
+
+  public ExamInfo feedbackInfo() {
+    return this.feedbackInfo;
+  }
+
+  public ExamInfo gradeInfo() {
+    return this.gradeInfo;
+  }
+
   @Override
   public String toString() {
     return super.toString() + "EvaluationExam [endTime=" + endTime + ", feedbackInfo=" + feedbackInfo + ", gradeInfo="
@@ -91,6 +107,10 @@ public class EvaluationExam extends Exam {
   public EvaluationExamDTO toDto() {
     return new EvaluationExamDTO(identity(), title(), course(), teacher(), startTime, endTime, identifier(),
         description(), state());
+  }
+
+  public Collection<EvaluationExamSection> sections() {
+    return this.sections;
   }
 
   @Override
