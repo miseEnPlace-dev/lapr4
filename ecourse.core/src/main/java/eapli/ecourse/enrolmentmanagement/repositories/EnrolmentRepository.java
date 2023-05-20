@@ -11,7 +11,9 @@ import eapli.framework.domain.repositories.DomainRepository;
 public interface EnrolmentRepository extends DomainRepository<EnrolmentID, Enrolment> {
   public Iterable<Enrolment> findByStudentMecanographicNumber(MecanographicNumber studentID);
 
-  public Iterable<Enrolment> findEnroledStudentEnroledCourses(MecanographicNumber studentID);
+  public Iterable<Enrolment> findStudentCourses(MecanographicNumber studentID);
+
+  public Iterable<Enrolment> findStudentsEnrolledInCourse(CourseCode courseCode);
 
   public Iterable<Enrolment> findByCourseCode(CourseCode courseCode);
 
