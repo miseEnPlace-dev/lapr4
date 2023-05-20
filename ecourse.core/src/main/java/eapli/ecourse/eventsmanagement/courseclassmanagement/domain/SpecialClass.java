@@ -1,6 +1,5 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
-import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 

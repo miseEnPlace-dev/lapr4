@@ -3,10 +3,8 @@ package eapli.ecourse.coursemanagement.domain;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
-import lombok.EqualsAndHashCode;
 
 @Embeddable
-@EqualsAndHashCode
 public class EnrolmentLimits implements ValueObject {
   private static final long serialVersionUID = 1L;
 
@@ -42,6 +40,11 @@ public class EnrolmentLimits implements ValueObject {
 
   public String maxLimit() {
     return max.toString();
+  }
+
+  @Override
+  public int hashCode() {
+    return min.hashCode() + max.hashCode();
   }
 
   @Override

@@ -31,11 +31,12 @@ public class UpdateClassScheduleController {
       EnrolmentRepository enrolmentRepository,
       StudentRepository studentRepository, TeacherRepository teacherRepository) {
     this.classRepository = classRepository;
-    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, extraClassRepository,
-        inviteRepository, enrolmentRepository, studentRepository, teacherRepository);
     this.classService = new ListCourseClassService(classRepository);
     this.authzRegistry = authzRegistry;
     this.teacherRepository = teacherRepository;
+
+    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, extraClassRepository,
+        inviteRepository, enrolmentRepository, studentRepository, teacherRepository);
   }
 
   public CourseClass updateScheduleClass(Time time, ClassDTO courseClass) {

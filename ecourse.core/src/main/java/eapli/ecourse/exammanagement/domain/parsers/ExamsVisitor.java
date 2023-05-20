@@ -28,7 +28,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamSectionBuilder section;
   private List<EvaluationExamSection> sections;
   private List<Question> questions;
-  private Question question;
+
   int examScore = 0;
   int sectionsScore = 0;
 

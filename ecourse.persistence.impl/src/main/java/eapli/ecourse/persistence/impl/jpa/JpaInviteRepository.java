@@ -2,7 +2,6 @@ package eapli.ecourse.persistence.impl.jpa;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;

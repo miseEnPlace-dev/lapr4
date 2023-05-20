@@ -1,6 +1,5 @@
 package eapli.ecourse.app.common.console.presentation.student;
 
-import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.dto.StudentDTO;
 import eapli.framework.visitor.Visitor;
 

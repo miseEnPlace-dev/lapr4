@@ -7,8 +7,6 @@ import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.framework.domain.repositories.DomainRepository;
 
 public interface CourseClassRepository extends DomainRepository<ClassID, CourseClass> {
-  // Iterable<CourseClass> findAllActive();
-
   Iterable<CourseClass> findAllByCourseCode(CourseCode code);
 
   Iterable<CourseClass> findAllScheduledByTeacherTaxPayerNumber(TaxPayerNumber teacher);

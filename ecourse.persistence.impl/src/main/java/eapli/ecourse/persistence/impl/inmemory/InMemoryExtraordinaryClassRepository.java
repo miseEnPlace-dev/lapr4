@@ -1,6 +1,5 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ClassID;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ExtraordinaryClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ExtraordinaryClassID;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;

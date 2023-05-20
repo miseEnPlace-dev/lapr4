@@ -1,10 +1,5 @@
 package eapli.ecourse.persistence.impl.jpa;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import eapli.ecourse.Application;
@@ -14,7 +9,6 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
-import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

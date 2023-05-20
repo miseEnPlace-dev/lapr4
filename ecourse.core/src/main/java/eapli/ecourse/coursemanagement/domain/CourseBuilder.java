@@ -56,8 +56,13 @@ public class CourseBuilder implements DomainFactory<Course> {
     return this;
   }
 
-  public CourseBuilder withTeacher(Teacher teacher) {
+  public CourseBuilder withResponsibleTeacher(Teacher teacher) {
     this.teacher = teacher;
+    return this;
+  }
+
+  public CourseBuilder addTeacher(Teacher teacher) {
+    this.teachers.add(teacher);
     return this;
   }
 

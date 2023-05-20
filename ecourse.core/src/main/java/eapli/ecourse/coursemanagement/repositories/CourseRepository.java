@@ -1,7 +1,5 @@
 package eapli.ecourse.coursemanagement.repositories;
 
-import java.util.Optional;
-
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.teachermanagement.domain.Teacher;
