@@ -83,6 +83,41 @@ _Note: This are some simplified versions of the tests for readability purposes._
   }
 ```
 
+**Test 2:** Ensure it is possible to reject enrolment
+
+```java
+  @Test
+  public void ensureItIsPossibleToRejectEnrolment() {
+    EnrolmentState state = new EnrolmentState();
+    state.changeToRejected();
+    assertTrue(state.isRejected());
+  }
+```
+
+**Test 3:** Ensure it is not possible to change already accepted state
+
+```java
+  @Test
+  public void ensureItIsNotPossibleToChangeAlreadyAcceptedState() {
+    EnrolmentState state = new EnrolmentState();
+    state.changeToAccepted();
+    assertTrue(state.isAccepted());
+    assertThrows(IllegalStateException.class, () -> state.changeToRejected());
+  }
+```
+
+**Test 4:** Ensure it is not possible to change already rejected state
+
+```java
+  @Test
+  public void ensureItIsNotPossibleToChangeAlreadyRejectedState() {
+    EnrolmentState state = new EnrolmentState();
+    state.changeToRejected();
+    assertTrue(state.isRejected());
+    assertThrows(IllegalStateException.class, () -> state.changeToAccepted());
+  }
+```
+
 ## 5. Implementation
 
 ### 5.1. Controller
