@@ -117,21 +117,7 @@
   }
 ```
 
-## 6. Integration & Demonstration
 
-### 6.1. Success scenario
-
-![US2002_DEMO](US2002_DEMO.png)
-
-### 6.2. Failure scenarios
-
-#### 6.2.1. Student not enrolled in any course
-
-![US2002_DEMO_FAIL](US2002_DEMO_FAIL.png)
-
-#### 6.2.2. No future exams
-
-![US2002_DEMO_FAIL2](US2002_DEMO_FAIL2.png)
 
 ## 7. Observations
 
