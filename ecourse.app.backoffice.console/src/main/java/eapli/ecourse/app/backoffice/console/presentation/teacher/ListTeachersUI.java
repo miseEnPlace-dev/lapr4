@@ -36,6 +36,6 @@ public class ListTeachersUI extends AbstractListUI<TeacherDTO> {
 
   @Override
   protected String listHeader() {
-    return String.format("%-10s%-20s%-30s%-20s", "Tax Payer No.", "Username", "Acronym", "Birth Date");
+    return String.format("#    %-10s%-20s%-30s%-20s", "Tax Payer No.", "Username", "Acronym", "Birth Date");
   }
 }

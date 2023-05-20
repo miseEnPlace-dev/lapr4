@@ -41,6 +41,6 @@ public class ListUsersUI extends AbstractListUI<SystemUser> {
 
   @Override
   protected String listHeader() {
-    return String.format("#  %-20s%-30s%-30s%-15s", "Username", "F. Name", "L. Name", "Is Active");
+    return String.format("#   %-20s%-30s%-30s%-15s", "Username", "F. Name", "L. Name", "Is Active");
   }
 }

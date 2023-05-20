@@ -8,7 +8,7 @@ import java.util.Optional;
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.enrolmentmanagement.application.EnrolmentListService;
+import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentState;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
@@ -24,7 +24,7 @@ public class ListFutureExamsController {
 
   private final AuthorizationService authz;
 
-  private final EnrolmentListService enrolmentListService;
+  private final ListEnrolmentService enrolmentListService;
 
   private final StudentService studentListService;
 
@@ -40,7 +40,7 @@ public class ListFutureExamsController {
     this.examListService = new ExamListService(examRepository);
     this.courseRepository = courseRepository;
     this.courseService = new ListCourseService(courseRepository);
-    this.enrolmentListService = new EnrolmentListService(enrolmentRepository);
+    this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
     this.studentListService = new StudentService();
   }
 

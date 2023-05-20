@@ -9,18 +9,18 @@ import org.junit.Test;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.enrolmentmagement.EnrolmentBaseTest;
-import eapli.ecourse.enrolmentmanagement.application.EnrolmentListService;
+import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 
 public class EnrolmentListServiceTest extends EnrolmentBaseTest {
   private EnrolmentRepository enrolmentRepository;
-  private EnrolmentListService service;
+  private ListEnrolmentService service;
 
   @Before
   public void setUp() {
     enrolmentRepository = mock(EnrolmentRepository.class);
-    service = new EnrolmentListService(enrolmentRepository);
+    service = new ListEnrolmentService(enrolmentRepository);
   }
 
   @Test
