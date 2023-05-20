@@ -26,7 +26,7 @@ public class ListCoursesUI extends AbstractListUI<CourseDTO> {
 
   @Override
   protected Iterable<CourseDTO> elements() {
-    return controller.getForLoggedUser();
+    return controller.getCoursesForLoggedUser();
   }
 
   @Override

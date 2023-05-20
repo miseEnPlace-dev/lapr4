@@ -31,7 +31,7 @@ public class ListCoursesController {
     this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
   }
 
-  public Iterable<CourseDTO> getForLoggedUser() {
+  public Iterable<CourseDTO> getCoursesForLoggedUser() {
     if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.MANAGER, ClientRoles.POWER_USER))
       return listCourseService.listAll();
 
