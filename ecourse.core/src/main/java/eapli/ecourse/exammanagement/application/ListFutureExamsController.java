@@ -16,6 +16,7 @@ import eapli.ecourse.exammanagement.dto.ExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -26,25 +27,25 @@ public class ListFutureExamsController {
 
   private final ListEnrolmentService enrolmentListService;
 
-  private final StudentService studentListService;
+  private final StudentRepository studentRepository;
 
   private final CourseRepository courseRepository;
 
   private final ExamListService examListService;
 
   public ListFutureExamsController(AuthorizationService authz, EvaluationExamRepository examRepository,
-      EnrolmentRepository enrolmentRepository, CourseRepository courseRepository) {
+                                   EnrolmentRepository enrolmentRepository, CourseRepository courseRepository, StudentRepository studentRepository) {
     this.authz = authz;
     this.examListService = new ExamListService(examRepository);
     this.courseRepository = courseRepository;
     this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
-    this.studentListService = new StudentService();
+    this.studentRepository = studentRepository;
   }
 
   public Iterable<CourseDTO> listStudentCourses() {
     SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
 
-    Student student = studentListService.findStudentUserByUsername(authenticatedUser.identity()).orElseThrow();
+    Student student = studentRepository.findByUsername(authenticatedUser.identity()).orElseThrow();
 
     List<CourseDTO> courses = new ArrayList<>();
     for (EnrolmentDTO enrolment : enrolmentListService.findByStudentMecanographicNumber(student.identity())) {
