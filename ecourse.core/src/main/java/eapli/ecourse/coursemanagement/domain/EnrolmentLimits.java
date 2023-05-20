@@ -34,12 +34,12 @@ public class EnrolmentLimits implements ValueObject {
     return String.format("[ min=%d max=%d ]", min, max);
   }
 
-  public String minLimit() {
-    return min.toString();
+  public Integer minLimit() {
+    return min;
   }
 
-  public String maxLimit() {
-    return max.toString();
+  public Integer maxLimit() {
+    return max;
   }
 
   @Override

@@ -12,7 +12,7 @@ import eapli.framework.validations.Preconditions;
 public class BoardBuilder implements DomainFactory<Board> {
   private Board board;
 
-  private Title title;
+  private BoardTitle title;
   private List<UserPermission> permissions;
   private List<BoardColumn> columns;
   private List<BoardRow> rows;
@@ -25,11 +25,11 @@ public class BoardBuilder implements DomainFactory<Board> {
   }
 
   public BoardBuilder withTitle(String title) {
-    this.title = new Title(title);
+    this.title = new BoardTitle(title);
     return this;
   }
 
-  public BoardBuilder withTitle(Title title) {
+  public BoardBuilder withTitle(BoardTitle title) {
     this.title = title;
     return this;
   }
@@ -76,13 +76,13 @@ public class BoardBuilder implements DomainFactory<Board> {
     return this;
   }
 
-  public BoardBuilder withColumn(Title title, Integer number) {
+  public BoardBuilder withColumn(BoardTitle title, Integer number) {
     this.columns.add(new BoardColumn(title, number));
     return this;
   }
 
   public BoardBuilder withColumn(String title, Integer number) {
-    Title t = new Title(title);
+    BoardTitle t = new BoardTitle(title);
     this.columns.add(new BoardColumn(t, number));
     return this;
   }
@@ -104,13 +104,13 @@ public class BoardBuilder implements DomainFactory<Board> {
     return this;
   }
 
-  public BoardBuilder withRow(Title title, Integer number) {
+  public BoardBuilder withRow(BoardTitle title, Integer number) {
     this.rows.add(new BoardRow(title, number));
     return this;
   }
 
   public BoardBuilder withRow(String title, Integer number) {
-    Title t = new Title(title);
+    BoardTitle t = new BoardTitle(title);
     this.rows.add(new BoardRow(t, number));
     return this;
   }
@@ -121,9 +121,8 @@ public class BoardBuilder implements DomainFactory<Board> {
   }
 
   private Board buildOrThrow() {
-    if (board != null) {
+    if (board != null)
       return board;
-    }
 
     // Only fields that are mandatory are checked
     Preconditions.noneNull(title, columns, rows);

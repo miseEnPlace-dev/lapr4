@@ -48,7 +48,8 @@ public class CourseClass implements AggregateRoot<ClassID> {
   @Column(nullable = false)
   private Hours hours;
 
-  public CourseClass(final DayInWeek dayInWeek, final Duration duration, final Hours hours) {
+  public CourseClass(final DayInWeek dayInWeek, final Duration duration, final Hours hours, final Course course,
+      final Teacher scheduledBy) {
     Preconditions.noneNull(dayInWeek, duration, hours);
 
     this.id = ClassID.newID();
@@ -56,6 +57,7 @@ public class CourseClass implements AggregateRoot<ClassID> {
     this.duration = duration;
     this.specialClasses = new ArrayList<>();
     this.hours = hours;
+    this.course = course;
   }
 
   protected CourseClass() {

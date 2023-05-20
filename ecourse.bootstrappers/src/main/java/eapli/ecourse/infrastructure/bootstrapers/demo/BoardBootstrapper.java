@@ -17,7 +17,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
-      AuthzRegistry.userService());
+      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
   private Map<SystemUser, PermissionType> getPermissions() {
     final Set<Role> roles = new HashSet<>();
@@ -56,8 +56,7 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.TEACHER);
 
-    SystemUser user = registerUser("user2", "Password1", "firstName", "lastName", "email@ddd.com", roles);
-    ctrl.createBoard("example", getPermissions(), getColumns(), getRows(), user);
+    ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
 
     return true;
   }

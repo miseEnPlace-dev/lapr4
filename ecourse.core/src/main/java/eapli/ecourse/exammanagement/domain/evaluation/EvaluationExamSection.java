@@ -6,11 +6,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
@@ -22,17 +20,13 @@ import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-public class EvaluationExamSection implements DomainEntity<Long> {
+public class EvaluationExamSection implements DomainEntity<SectionIdentifier> {
   private static final long serialVersionUID = 1L;
 
   @Version
   private Long version;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-
-  @Column(nullable = false)
+  @EmbeddedId
   private SectionIdentifier identifier;
 
   @Column(nullable = false)
@@ -62,8 +56,24 @@ public class EvaluationExamSection implements DomainEntity<Long> {
     // for ORM only
   }
 
-  public Long identity() {
-    return id;
+  public SectionIdentifier identity() {
+    return identifier;
+  }
+
+  public SectionTitle title() {
+    return title;
+  }
+
+  public SectionDescription description() {
+    return description;
+  }
+
+  public ExamScore score() {
+    return score;
+  }
+
+  public List<Question> questions() {
+    return questions;
   }
 
   public boolean sameAs(Object other) {

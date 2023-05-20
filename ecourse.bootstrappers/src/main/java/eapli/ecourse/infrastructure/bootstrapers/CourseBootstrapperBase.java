@@ -36,16 +36,19 @@ public class CourseBootstrapperBase {
     }
   }
 
-  public void createOpenCourse(final String code, final String title, final String description, final int min,
+  public Course createOpenCourse(final String code, final String title, final String description, final int min,
       final int max, final TeacherDTO teacher) {
     try {
       Course c = createCourseCtrl.createCourse(code, title, description, min, max, teacher);
       toggleCourseStatusCtrl.toggleToNextCourseStatus(c.toDto());
+      return c;
+
     } catch (final Exception e) {
       LOGGER.warn("Assuming {} already exists (activate trace log for details)", code);
       LOGGER.trace("Assuming existing record", e);
       System.out.println(e);
     }
+    return null;
   }
 
   public CourseDTO createInProgressCourse(final String code, final String title, final String description,
