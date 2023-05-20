@@ -21,13 +21,15 @@ typedef struct
 
 int main()
 {
+  puts("Starting...");
+
   // Create shared memory for shared board
   shared_board_t *shared_board = (shared_board_t *)create_memory("/prototype_shm_board", sizeof(shared_board_t));
   // Create shared memory for counter of current board readers
-  int *readers = (int *)create_memory("/prototype_shm_readers", sizeof(int));
+  int *readers_counter = (int *)create_memory("/prototype_shm_readers", sizeof(int));
 
   // Create semaphore to guarantee mutual exclusion in access to counter of readers
-  sem_t *mutex_readers = (sem_t *)create_semaphore("prototype_sem_mutex_readers", 1);
+  sem_t *mutex_readers_counter = (sem_t *)create_semaphore("prototype_sem_mutex_readers", 1);
   // Create semaphore to guarantee priority to writers
   sem_t *priority = (sem_t *)create_semaphore("prototype_sem_priority", 1);
   // Create semaphore to guarantee mutual exclusion in access to board
@@ -77,14 +79,14 @@ int main()
 
       // Increment number of readers
       // Decrement/Wait to guarantee exclusive access to shm
-      sem_wait(mutex_readers);
-      *readers += 1;
+      sem_wait(mutex_readers_counter);
+      *readers_counter += 1;
       // If I'm the first reader starting the reading process, guarantee unique access to board
       // If there is already a reader reading, there is no need to decrement sem
-      if (*readers == 1)
+      if (*readers_counter == 1)
         sem_wait(mutex_board);
       // Increment shm sem
-      sem_post(mutex_readers);
+      sem_post(mutex_readers_counter);
 
       // Read number from cell [row][column]
       int row = user & ROWS;
@@ -94,14 +96,14 @@ int main()
 
       // Decrement number of readers
       // Decrement/Wait to guarantee exclusive access to shm
-      sem_wait(mutex_readers);
-      *readers -= 1;
+      sem_wait(mutex_readers_counter);
+      *readers_counter -= 1;
       // If I'm the last reader leaving the reading process, increment the mutex's sem, letting other proccess access the board
       // If there is still a reader reading, cannot increment sem already
-      if (*readers == 0)
+      if (*readers_counter == 0)
         sem_post(mutex_board);
       // Increment shm sem
-      sem_post(mutex_readers);
+      sem_post(mutex_readers_counter);
 
       exit(0);
     }
