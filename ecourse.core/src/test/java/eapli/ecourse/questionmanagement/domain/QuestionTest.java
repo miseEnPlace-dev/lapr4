@@ -26,7 +26,6 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
 public class QuestionTest {
-  private QuestionCode code;
   private QuestionBody body;
   private QuestionType type;
   private Feedback feedback;
@@ -61,7 +60,6 @@ public class QuestionTest {
 
   @Before
   public void setup() {
-    code = QuestionCode.newID();
     body = QuestionBody.valueOf("Question Body");
     type = QuestionType.FORMATIVE;
     feedback = Feedback.valueOf("feedback");
