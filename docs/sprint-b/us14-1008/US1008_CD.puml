@@ -6,28 +6,49 @@ class RepositoryFactory {
 
 interface CourseRepository {
   {abstract} findAllOpenForEnrolment()
+  {abstract} ofIdentity(code)
   {abstract} save(course)
 }
 
 class InMemoryCourseRepository {
   + findAllOpenForEnrolment()
+  + ofIdentity(code)
   + save(course)
 }
 
 class JpaCourseRepository {
   + findAllOpenForEnrolment()
+  + ofIdentity(code)
   + save(course)
+}
+
+interface StudentRepository {
+  {abstract} findByUsername(username)
+  {abstract} save(student)
+}
+
+class InMemoryStudentRepository {
+  + findByUsername(username)
+  + save(student)
+}
+
+class JpaStudentRepository {
+  + findByUsername(username)
+  + save(student)
 }
 
 interface EnrolmentRepository {
   {abstract} save(enrolment)
+  {abstract} findWithUserAndCourse(user, course)
 }
 
 class InMemoryEnrolmentRepository {
+  + findWithUserAndCourse(user, course)
   + save(enrolment)
 }
 
 class JpaEnrolmentRepository {
+  + findWithUserAndCourse(user, course)
   + save(Enrolment)
 }
 
@@ -35,13 +56,12 @@ class PersistenceContext {
   + repositories()
 }
 
-class CourseListService {
+class ListCourseService {
   - courseRepository
 
-  + CourseListService(courseRepository)
+  + ListCourseService(courseRepository)
 
   + listNotClosedCourses()
-  + toggleEnrolmentState(course)
 }
 
 class RequestEnrolmentUI {}
@@ -57,6 +77,12 @@ class RequestEnrolmentController {
 
   + listOpenForEnrolmentCourses()
   + requestEnrolment(courseDTO)
+  + requestEnrolment(courseDTO, authenticatedUser)
+}
+
+class AuthorizationService {
+  + ensureAuthenticatedUserHasAnyOf(...roles)
+  + loggedinUserWithPermissions(...roles)
 }
 
 class Course {
@@ -75,6 +101,16 @@ class Course {
 class Student {
   - mecanographicNumber
   - systemUser
+
+  + toDto()
+}
+
+class EnrolmentDTO {
+  - courseCode
+  - studentNumber
+  - studentName
+  - createdAt
+  - state
 }
 
 class Enrolment {
@@ -85,6 +121,7 @@ class Enrolment {
 
   + accept()
   + reject()
+  + toDto()
 }
 
 enum CourseState {
@@ -111,15 +148,22 @@ class CourseDTO {
 
 RequestEnrolmentUI ..> RequestEnrolmentController
 RequestEnrolmentUI ..> PersistenceContext
-RequestEnrolmentController --> CourseListService
+RequestEnrolmentUI ..> AuthorizationService
+
+RequestEnrolmentController --> ListCourseService
+RequestEnrolmentController --> AuthorizationService
 RequestEnrolmentController ..> Enrolment
+RequestEnrolmentController --> EnrolmentDTO
+RequestEnrolmentController ..> EnrolmentDTO
+
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
 RepositoryFactory --> EnrolmentRepository
+RepositoryFactory --> StudentRepository
 
-CourseListService ..> Course
-CourseListService ..> CourseDTO
-CourseListService ..> CourseRepository
+ListCourseService ..> Course
+ListCourseService ..> CourseDTO
+ListCourseService ..> CourseRepository
 RequestEnrolmentController --> CourseRepository
 
 Enrolment --> Course
@@ -130,6 +174,9 @@ CourseRepository <|.. JpaCourseRepository
 
 EnrolmentRepository <|.. InMemoryEnrolmentRepository
 EnrolmentRepository <|.. JpaEnrolmentRepository
+
+StudentRepository <|.. InMemoryStudentRepository
+StudentRepository <|.. JpaStudentRepository
 
 Course --> CourseState
 Course --> CourseEnrolmentState
