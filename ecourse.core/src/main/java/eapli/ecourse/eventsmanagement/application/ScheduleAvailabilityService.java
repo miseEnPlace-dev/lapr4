@@ -31,7 +31,7 @@ public class ScheduleAvailabilityService {
     this.studentRepository = studentRepository;
   }
 
-  public boolean areAllAvailable(ArrayList<SystemUser> systemUsers, Time time, Duration duration) {
+  public boolean areAllAvailable(Iterable<SystemUser> systemUsers, Time time, Duration duration) {
     for (SystemUser systemUser : systemUsers)
       if (!isAvailable(systemUser, time, duration))
         return false;

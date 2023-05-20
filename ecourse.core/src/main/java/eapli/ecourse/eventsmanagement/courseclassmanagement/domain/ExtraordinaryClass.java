@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.studentmanagement.domain.Student;
@@ -35,21 +36,25 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
   private Time time;
 
   @ManyToOne(optional = false)
-  public Teacher scheduledBy;
+  private Teacher scheduledBy;
+
+  @Column(nullable = false)
+  private Course course;
 
   @ManyToMany
   @AttributeOverride(name = "id", column = @Column(name = "student_id"))
   public Set<Student> students;
 
   public ExtraordinaryClass(final Duration duration, final Time time, final Teacher scheduledBy,
-      final Set<Student> students) {
-    Preconditions.noneNull(duration, time, scheduledBy, students);
+      final Set<Student> students, final Course course) {
+    Preconditions.noneNull(duration, time, scheduledBy, students, course);
 
     this.id = ExtraordinaryClassID.newID();
     this.duration = duration;
     this.time = time;
     this.scheduledBy = scheduledBy;
     this.students = students;
+    this.course = course;
   }
 
   protected ExtraordinaryClass() {
