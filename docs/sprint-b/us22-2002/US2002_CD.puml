@@ -1,4 +1,4 @@
-@startuml US2003_CD
+@startuml US2002_CD
 
 class ListFutureExamsUI {
 
@@ -86,6 +86,16 @@ class ExamListService {
 + listAllFutureCourseExams(course)
 }
 
+class StudentService {
+- studentRepository
++ findStudentUserByUsername()
+}
+
+class ListEnrolmentService {
+- enrolmentRepository
++ findByStudentMecanographicNumber()
+}
+
 interface ExamRepository {
 + findAllFutureCourseExams(course)
 }
@@ -140,22 +150,21 @@ StudentRepository <|.. JpaStudentRepository
 EnrolmentRepository <|.. InMemoryEnrolmentRepository
 EnrolmentRepository <|.. JpaEnrolmentRepository
 
-
+ListFutureExamsController --> ListEnrolmentService
 ListFutureExamsController --> ExamListService
+ListFutureExamsController --> StudentService
 ListFutureExamsController ..> Course
 ListFutureExamsController ..> CourseDTO
 ListFutureExamsController ..> PersistenceContext
 
 ListFutureExamsUI ..> ListFutureExamsController
 
+StudentService ..> StudentRepository
+ListEnrolmentService ..> EnrolmentRepository
+
 ExamListService ..> Exam
 ExamListService ..> ExamDTO
 ExamListService ..> ExamRepository
-ListFutureExamsController --> ExamRepository
-ListFutureExamsController --> StudentRepository
-ListFutureExamsController --> EnrolmentRepository
-ListFutureExamsController --> CourseRepository
-
 
 
 @enduml
