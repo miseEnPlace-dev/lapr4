@@ -44,9 +44,11 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 3.1. Main success scenario
 
 1. Manager asks to change course status
-2. The system lists all the available courses
-3. Manager selects the desired course
-4. System informs the success of the operation
+2. The system lists all the toggle operations
+3. selects one
+4. The system lists all the available courses for the operation
+5. Manager selects the desired course
+6. System informs the success of the operation
 
 ### 3.2. Conditions
 
@@ -172,7 +174,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 6.1. Success scenario
 
-![US2002_DEMO](US2002_DEMO.png)
+![US1004_DEMO](US1004_DEMO.png)
 
 ### 6.2. Failure scenarios
 

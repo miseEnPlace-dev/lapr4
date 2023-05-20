@@ -5,11 +5,15 @@ participant ":System" as system
 autonumber
 
 
-manager -> system: requests to open/close a course
+manager -> system: requests to change course status
 
-system -> manager: lists all the possible courses to open/close and their states
+system -> manager: lists all the possible toggle operations
 
 manager -> system: selects one
+
+system -> manager: displays all the available courses for the chosen toggle operation
+
+manager -> system: selects the desired course
 
 system -> manager: asks to confirm the change of the course status
 
