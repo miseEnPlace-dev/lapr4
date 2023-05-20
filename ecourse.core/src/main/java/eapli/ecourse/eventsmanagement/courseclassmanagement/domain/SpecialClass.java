@@ -1,30 +1,29 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
 import java.util.Calendar;
-import javax.persistence.Embeddable;
-import eapli.framework.domain.model.ValueObject;
-import lombok.EqualsAndHashCode;
+import javax.persistence.Entity;
+import javax.persistence.Version;
 
-@Embeddable
-@EqualsAndHashCode
-public class SpecialClass implements ValueObject, Comparable<SpecialClass> {
+import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.framework.validations.Preconditions;
+
+@Entity
+public class SpecialClass implements Comparable<SpecialClass> {
   private static final long serialVersionUID = 1L;
 
-  private Calendar time;
+  @Version
+  private Long version;
 
-  protected SpecialClass(final Calendar time) {
-    if (time == null)
-      throw new IllegalArgumentException("Time should not be null");
+  private Time time;
+
+  public SpecialClass(final Time time) {
+    Preconditions.nonNull(time);
 
     this.time = time;
   }
 
   protected SpecialClass() {
     // for ORM
-  }
-
-  public static SpecialClass valueOf(final Calendar time) {
-    return new SpecialClass(time);
   }
 
   @Override

@@ -19,9 +19,6 @@ import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-/**
- * A section of an exam.
- */
 public class ExamSection implements DomainEntity<Long> {
   private static final long serialVersionUID = 1L;
 

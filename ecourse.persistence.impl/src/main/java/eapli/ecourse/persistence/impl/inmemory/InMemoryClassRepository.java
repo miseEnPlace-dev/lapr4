@@ -4,6 +4,7 @@ import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ClassID;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
+import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
@@ -20,8 +21,8 @@ public class InMemoryClassRepository extends InMemoryDomainRepository<CourseClas
   }
 
   @Override
-  public Iterable<CourseClass> findAllByTeacher(Teacher teacher) {
-    return match(e -> e.scheduledBy().equals(teacher));
+  public Iterable<CourseClass> findAllByTeacherTaxPayerNumber(TaxPayerNumber number) {
+    return match(e -> e.scheduledBy().taxPayerNumber().equals(number));
   }
 
   // @Override

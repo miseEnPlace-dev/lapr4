@@ -11,7 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.dto.ClassDTO;
 import eapli.ecourse.eventsmanagement.domain.Duration;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -114,6 +116,14 @@ public class CourseClass implements AggregateRoot<ClassID> {
 
   public List<SpecialClass> specialClass() {
     return this.specialClass;
+  }
+
+  public ClassDTO toDto() {
+    return new ClassDTO(this.id, this.dayInWeek, this.duration, this.hours, this.course);
+  }
+
+  public void addSpecialClass(Time time) {
+    this.specialClass.add(new SpecialClass(time));
   }
 
   public Teacher scheduledBy() {

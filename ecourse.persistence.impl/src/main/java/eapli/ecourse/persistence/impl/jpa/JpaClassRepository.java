@@ -7,6 +7,7 @@ import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ClassID;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
+import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -30,9 +31,9 @@ public class JpaClassRepository extends JpaAutoTxRepository<CourseClass, ClassID
   }
 
   @Override
-  public Iterable<CourseClass> findAllByTeacher(Teacher teacher) {
+  public Iterable<CourseClass> findAllByTeacherTaxPayerNumber(TaxPayerNumber number) {
     final Map<String, Object> params = new HashMap<>();
-    params.put("teacher", teacher);
-    return match("e.scheduledBy=:teacher", params);
+    params.put("number", number);
+    return match("e.scheduledBy.taxPayerNumber=:number", params);
   }
 }
