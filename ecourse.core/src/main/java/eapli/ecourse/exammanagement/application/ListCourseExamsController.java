@@ -8,7 +8,7 @@ import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -41,7 +41,7 @@ public class ListCourseExamsController {
     return combinedStream::iterator;
   }
 
-  public Iterable<ExamDTO> listCourseExams(CourseDTO courseDTO) {
+  public Iterable<EvaluationExamDTO> listCourseExams(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER, ClientRoles.MANAGER);
 
     Optional<Course> course = courseRepository.ofIdentity(courseDTO.getCode());

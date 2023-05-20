@@ -19,6 +19,7 @@ import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamInfo;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.validations.Preconditions;
 
@@ -85,6 +86,11 @@ public class EvaluationExam extends Exam {
     return super.toString() + "EvaluationExam [endTime=" + endTime + ", feedbackInfo=" + feedbackInfo + ", gradeInfo="
         + gradeInfo
         + ", score=" + score + ", startTime=" + startTime + ", endTime = " + endTime + "]";
+  }
+
+
+  public EvaluationExamDTO toDto() {
+    return new EvaluationExamDTO(identity(), title(), course(), teacher(), startTime, endTime, identifier(), description(), state());
   }
 
   @Override

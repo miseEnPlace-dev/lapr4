@@ -102,7 +102,18 @@ public Iterable<ExamDTO> listCourseExams(CourseDTO courseDTO) {
 
 ## 6. Integration & Demonstration
 
-![US20033_DEMO](US2003_DEMO.png)
+## 6. Integration & Demonstration
+
+### 6.1. Success scenario
+
+![US2003_DEMO](US2003_DEMO.png)
+
+### 6.2. Failure scenarios
+
+#### 6.2.1. No exams in the course
+
+![US2003_DEMO_FAIL](US2003_DEMO_FAIL.png)
+
 
 
 ## 7. Observations

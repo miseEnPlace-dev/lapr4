@@ -12,9 +12,8 @@ import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.domain.EnrolmentState;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
-import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -71,7 +70,7 @@ public class ListFutureExamsController {
     };
   }
 
-  public Iterable<ExamDTO> futureExams(CourseDTO courseDTO) {
+  public Iterable<EvaluationExamDTO> futureExams(CourseDTO courseDTO) {
     return examListService.listAllFutureCourseExams(courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow());
   }
 
