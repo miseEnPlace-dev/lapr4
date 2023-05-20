@@ -170,7 +170,15 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 6. Integration & Demonstration
 
-![US1004_DEMO](US1004_DEMO.png)
+### 6.1. Success scenario
+
+![US2002_DEMO](US2002_DEMO.png)
+
+### 6.2. Failure scenarios
+
+#### 6.2.1. No courses available for the selected toggle operation
+
+![US1004_DEMO__FAIL](US1004_DEMO_FAIL.png)
 
 ## 7. Observations
 
