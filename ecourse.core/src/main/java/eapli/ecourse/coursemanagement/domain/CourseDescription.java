@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class CourseDescription implements ValueObject, Comparable<CourseDescription> {
+public class CourseDescription implements ValueObject {
   private static final long serialVersionUID = 1L;
 
   private String description;
@@ -32,10 +32,5 @@ public class CourseDescription implements ValueObject, Comparable<CourseDescript
   @Override
   public String toString() {
     return this.description;
-  }
-
-  @Override
-  public int compareTo(final CourseDescription arg0) {
-    return description.compareTo(arg0.description);
   }
 }

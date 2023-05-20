@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
+public class ExamTitle implements ValueObject {
   private static final long serialVersionUID = 1L;
 
   private String title;
@@ -45,18 +45,5 @@ public class ExamTitle implements ValueObject, Comparable<ExamTitle> {
 
   public static ExamTitle valueOf(final String title) {
     return new ExamTitle(title);
-  }
-
-  /**
-   * Compares two Title objects, comparing their titles.
-   *
-   * @param other Title to compare
-   * @return 0 if the titles are equal, greater than 0 if this title
-   *         is greater than the other, less than 0 if this title is less
-   *         than the other.
-   */
-  @Override
-  public int compareTo(final ExamTitle other) {
-    return this.title.compareTo(other.title);
   }
 }
