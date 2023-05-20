@@ -43,8 +43,16 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
     Preconditions.noneNull(id, createdAt, permissionType, user);
 
     this.id = id;
+    if (createdAt.after(updatedAt))
+      throw new IllegalArgumentException("The createdAt date must be before the updatedAt date");
+
+    if (createdAt.after(Calendar.getInstance()))
+      throw new IllegalArgumentException("The createdAt date must be before the current date");
+
     this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+
+    // if the updatedAt is null, then it is the same as createdAt
+    this.updatedAt = (updatedAt == null) ? createdAt : updatedAt;
     this.permissionType = permissionType;
     this.user = user;
   }

@@ -30,6 +30,8 @@ public class PermissionType implements ValueObject {
   private Type type;
 
   public PermissionType(Type type) {
+    if (type == null)
+      throw new IllegalArgumentException("Permission type should not be null");
     this.type = type;
   }
 

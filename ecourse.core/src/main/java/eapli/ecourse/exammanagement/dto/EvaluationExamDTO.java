@@ -1,6 +1,8 @@
 package eapli.ecourse.exammanagement.dto;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseTitle;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
@@ -16,12 +18,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExamDTO {
+public class EvaluationExamDTO {
   private ExamCode code;
+  private ExamTitle title;
   private Course course;
   private Teacher teacher;
+  private Time startTime;
+  private Time endTime;
   private ExamIdentifier identifier;
-  private ExamTitle title;
   private ExamDescription description;
   private ExamState state;
 }

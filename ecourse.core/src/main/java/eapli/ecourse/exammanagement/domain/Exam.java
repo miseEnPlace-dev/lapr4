@@ -10,7 +10,7 @@ import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamState.State;
-import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.validations.Preconditions;
@@ -69,6 +69,14 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     return this.code;
   }
 
+  public Teacher teacher() { return this.teacher; }
+
+  public ExamTitle title() { return this.title; }
+
+  public ExamDescription description() { return this.description; }
+
+  public ExamState state() {return this.state; }
+
   public abstract boolean sameAs(Object other);
 
   public Course course() {
@@ -79,9 +87,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.state.changeToPublished();
   }
 
-  public ExamDTO toDto() {
-    return new ExamDTO(this.code, this.course, this.teacher, this.identifier, this.title, this.description, this.state);
-  }
+  public ExamIdentifier identifier() { return this.identifier; }
 
   @Override
   public String toString() {

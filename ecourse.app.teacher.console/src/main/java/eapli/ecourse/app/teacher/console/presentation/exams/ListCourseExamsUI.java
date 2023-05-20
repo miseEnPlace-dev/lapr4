@@ -3,12 +3,13 @@ package eapli.ecourse.app.teacher.console.presentation.exams;
 import java.util.ArrayList;
 import java.util.List;
 
+import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.app.common.console.presentation.exam.ExamPrinter;
+import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.ListCourseExamsController;
-import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -35,19 +36,21 @@ public class ListCourseExamsUI extends AbstractUI {
       return false;
     }
 
+    new CourseHeader().printHeader();
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courseList, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
     if (selected == null)
       return false;
 
-    Iterable<ExamDTO> exams = ctrl.listCourseExams(selected);
+
+    Iterable<EvaluationExamDTO> exams = ctrl.listCourseExams(selected);
     if (!exams.iterator().hasNext()) {
       System.out.println("There are no exams in " + selected.getTitle());
       return false;
     }
 
-    ListWidget<ExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams, new ExamPrinter());
+    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams, new EvaluationExamPrinter());
     list.show();
 
     return true;

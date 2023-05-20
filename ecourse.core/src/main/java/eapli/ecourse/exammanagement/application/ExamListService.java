@@ -8,7 +8,7 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
-import eapli.ecourse.exammanagement.dto.ExamDTO;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 
 public class ExamListService {
@@ -19,28 +19,28 @@ public class ExamListService {
     this.examRepository = examRepository;
   }
 
-  public Optional<ExamDTO> findByCode(ExamCode examCode) {
+  public Optional<EvaluationExamDTO> findByCode(ExamCode examCode) {
     final Optional<EvaluationExam> evaluationExam = examRepository.ofIdentity(examCode);
     return convertToDTO(evaluationExam);
   }
 
-  public Iterable<ExamDTO> listAllCourseExams(Course course) {
+  public Iterable<EvaluationExamDTO> listAllCourseExams(Course course) {
     final Iterable<EvaluationExam> types = examRepository.findAllCourseExams(course);
     return convertToDto(types);
   }
 
-  public Iterable<ExamDTO> listAllFutureCourseExams(Course course) {
+  public Iterable<EvaluationExamDTO> listAllFutureCourseExams(Course course) {
     final Iterable<EvaluationExam> types = examRepository.findAllFutureCourseExams(course);
     return convertToDto(types);
   }
 
-  private Iterable<ExamDTO> convertToDto(Iterable<EvaluationExam> exams) {
+  private Iterable<EvaluationExamDTO> convertToDto(Iterable<EvaluationExam> exams) {
     return StreamSupport.stream(exams.spliterator(), true)
-        .map(Exam::toDto)
+        .map(EvaluationExam::toDto)
         .collect(Collectors.toUnmodifiableList());
   }
 
-  private Optional<ExamDTO> convertToDTO(Optional<EvaluationExam> courseOptional) {
-    return courseOptional.map(Exam::toDto);
+  private Optional<EvaluationExamDTO> convertToDTO(Optional<EvaluationExam> courseOptional) {
+    return courseOptional.map(EvaluationExam::toDto);
   }
 }

@@ -127,12 +127,11 @@
 
 #### 6.2.1. Student not enrolled in any course
 
-![US2002_DEMO__FAIL](US2002_DEMO_FAIL.png)
+![US2002_DEMO_FAIL](US2002_DEMO_FAIL.png)
 
 #### 6.2.2. No future exams
 
-![US2002_DEMO__FAIL2](US2002_DEMO_FAIL2.png)
-
+![US2002_DEMO_FAIL2](US2002_DEMO_FAIL2.png)
 
 ## 7. Observations
 
