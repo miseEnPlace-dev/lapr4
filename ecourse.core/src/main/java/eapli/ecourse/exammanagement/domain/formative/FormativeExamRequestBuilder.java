@@ -3,20 +3,20 @@ package eapli.ecourse.exammanagement.domain.formative;
 import java.util.List;
 
 import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
 public class FormativeExamRequestBuilder implements DomainFactory<FormativeExamRequest> {
   private FormativeExamRequest examRequest;
 
-  private QuestionIdentifier identifier;
+  private ExamIdentifier identifier;
   private ExamTitle title;
   private ExamDescription description;
   private List<FormativeExamSectionRequest> sections;
 
-  public FormativeExamRequestBuilder withIdentifier(QuestionIdentifier identifier) {
+  public FormativeExamRequestBuilder withIdentifier(ExamIdentifier identifier) {
     this.identifier = identifier;
     return this;
   }

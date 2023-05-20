@@ -19,12 +19,12 @@ import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSectionBuilder;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
-import eapli.ecourse.exammanagement.domain.evaluation.SectionBuilder;
 
 public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamBuilder builder;
-  private SectionBuilder section;
+  private EvaluationExamSectionBuilder section;
   private List<EvaluationExamSection> sections;
   int examScore = 0;
   int sectionsScore = 0;
@@ -153,7 +153,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
   @Override
   public EvaluationExamBuilder visitSection(ExamParser.SectionContext ctx) {
-    section = new SectionBuilder();
+    section = new EvaluationExamSectionBuilder();
 
     visit(ctx.start_section());
     visit(ctx.header());

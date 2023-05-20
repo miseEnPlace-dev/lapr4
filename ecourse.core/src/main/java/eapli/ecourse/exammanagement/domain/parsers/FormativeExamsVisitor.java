@@ -11,10 +11,13 @@ import org.antlr.v4.runtime.Token;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionDescription;
+import eapli.ecourse.exammanagement.domain.SectionIdentifier;
+import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 
 public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {
   private FormativeExamRequestBuilder builder;
@@ -41,7 +44,7 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
   @Override
   public FormativeExamRequestBuilder visitStartExam(FormativeExamParser.StartExamContext ctx) {
     String str = ctx.IDENTIFIER().getText();
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf(str);
+    ExamIdentifier identifier = ExamIdentifier.valueOf(str);
     builder.withIdentifier(identifier);
     return builder;
   }
@@ -145,7 +148,7 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
   @Override
   public FormativeExamRequestBuilder visitStartSection(FormativeExamParser.StartSectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf(str);
+    SectionIdentifier identifier = SectionIdentifier.valueOf(str);
     section.changeIdentifier(identifier);
     return builder;
   }
@@ -163,11 +166,11 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
   }
 
   private void initializeSection(Map<String, Object> properties) {
-    ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
+    SectionTitle title = SectionTitle.valueOf(properties.get("title").toString());
     section.changeTitle(title);
 
     if (properties.containsKey("description")) {
-      ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
+      SectionDescription description = SectionDescription.valueOf(properties.get("description").toString());
       section.changeDescription(description);
     }
 

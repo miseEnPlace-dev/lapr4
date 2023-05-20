@@ -9,7 +9,7 @@ import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
-public class SectionBuilder implements DomainFactory<EvaluationExamSection> {
+public class EvaluationExamSectionBuilder implements DomainFactory<EvaluationExamSection> {
   private EvaluationExamSection section;
 
   private SectionIdentifier identifier;
@@ -18,27 +18,27 @@ public class SectionBuilder implements DomainFactory<EvaluationExamSection> {
   private ExamScore score;
   private List<SectionQuestion> questions;
 
-  public SectionBuilder withIdentifier(SectionIdentifier identifier) {
+  public EvaluationExamSectionBuilder withIdentifier(SectionIdentifier identifier) {
     this.identifier = identifier;
     return this;
   }
 
-  public SectionBuilder withTitle(SectionTitle title) {
+  public EvaluationExamSectionBuilder withTitle(SectionTitle title) {
     this.title = title;
     return this;
   }
 
-  public SectionBuilder withDescription(SectionDescription description) {
+  public EvaluationExamSectionBuilder withDescription(SectionDescription description) {
     this.description = description;
     return this;
   }
 
-  public SectionBuilder withScore(ExamScore score) {
+  public EvaluationExamSectionBuilder withScore(ExamScore score) {
     this.score = score;
     return this;
   }
 
-  public SectionBuilder withQuestions(List<SectionQuestion> questions) {
+  public EvaluationExamSectionBuilder withQuestions(List<SectionQuestion> questions) {
     this.questions = questions;
     return this;
   }

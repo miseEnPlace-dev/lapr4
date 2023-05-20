@@ -1,9 +1,11 @@
 package eapli.ecourse.exammanagement.application;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
@@ -17,26 +19,7 @@ public class FormativeExamService {
     this.questionRepository = questionRepository;
   }
 
-  public Iterable<Question> buildSection(int numberOfQuestions, String questionsType, CourseDTO course) {
-    final Iterable<Question> questionsFromType = questionRepository.findWithTypeFromCourse(questionsType,
-        course.getCode());
-
-    return getRandomQuestions(numberOfQuestions, (List<Question>) questionsFromType);
-  }
-
-  public Iterable<FormativeExamSection> buildSections(FormativeExamRequest request, CourseDTO course) {
-    List<FormativeExamSection> sections = new ArrayList<>();
-    for (FormativeExamSectionRequest sectionRequest : request.sections()) {
-      Iterable<Question> questions = buildSection(sectionRequest.numberOfQuestions(),
-          sectionRequest.questionsType(),
-          course);
-      // sections.add(new FormativeExamSection(sectionRequest.title(), questions));
-    }
-
-    return sections;
-  }
-
-  private Iterable<Question> getRandomQuestions(int numberOfQuestions, List<Question> questionsFromType) {
+  private Collection<Question> getRandomQuestions(int numberOfQuestions, List<Question> questionsFromType) {
     List<Question> questions = new ArrayList<>();
 
     for (int i = 0; i < numberOfQuestions; i++) {
@@ -46,5 +29,39 @@ public class FormativeExamService {
     }
 
     return questions;
+  }
+
+  public Collection<Question> buildSection(int numberOfQuestions, String questionsType, CourseDTO course) {
+    final Collection<Question> questionsFromType = (Collection<Question>) questionRepository.findWithTypeFromCourse(
+        questionsType,
+        course.getCode());
+
+    return getRandomQuestions(numberOfQuestions, (List<Question>) questionsFromType);
+  }
+
+  private Collection<SectionQuestion> buildSectionQuestions(Collection<Question> questions) {
+    Collection<SectionQuestion> sectionQuestions = new ArrayList<>();
+    for (Question question : questions)
+      sectionQuestions.add(new SectionQuestion(question));
+
+    return sectionQuestions;
+  }
+
+  public Collection<FormativeExamSection> buildSections(FormativeExamRequest request, CourseDTO course) {
+    List<FormativeExamSection> sections = new ArrayList<>();
+    for (FormativeExamSectionRequest sectionRequest : request.sections()) {
+      Collection<Question> questions = buildSection(sectionRequest.numberOfQuestions(),
+          sectionRequest.questionsType(),
+          course);
+      Collection<SectionQuestion> sectionQuestions = buildSectionQuestions(questions);
+
+      final FormativeExamSection section = new FormativeExamSection(sectionRequest.identifier(), sectionRequest.title(),
+          sectionRequest.description(),
+          sectionQuestions);
+
+      sections.add(section);
+    }
+
+    return sections;
   }
 }

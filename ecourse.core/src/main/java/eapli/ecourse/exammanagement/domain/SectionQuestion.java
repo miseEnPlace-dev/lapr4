@@ -5,10 +5,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
-import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.questionmanagement.domain.Feedback;
 import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.domain.QuestionBody;

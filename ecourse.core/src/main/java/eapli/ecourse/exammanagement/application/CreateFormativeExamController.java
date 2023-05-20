@@ -1,12 +1,14 @@
 package eapli.ecourse.exammanagement.application;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
@@ -24,7 +26,6 @@ public class CreateFormativeExamController {
   private final TeacherRepository teacherRepository;
   private final CourseRepository courseRepository;
   private final FormativeExamRepository examRepository;
-  private final QuestionRepository questionRepository;
 
   private final ListCourseService listCourseService;
   private final FormativeExamService examService;
@@ -39,7 +40,6 @@ public class CreateFormativeExamController {
     this.teacherRepository = teacherRepository;
     this.examRepository = examRepository;
     this.courseRepository = courseRepository;
-    this.questionRepository = questionRepository;
 
     this.listCourseService = new ListCourseService(courseRepository);
     this.examService = new FormativeExamService(questionRepository);
@@ -64,16 +64,16 @@ public class CreateFormativeExamController {
     builder = FormativeExamsParser.parseWithVisitor(filePath);
   }
 
-  public void createExam(CourseDTO courseDto) {
+  public FormativeExam createExam(CourseDTO courseDto) {
     setCurrentAuthenticatedTeacher();
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
     FormativeExamRequest request = builder.build();
-    Iterable<FormativeExamSection> sections = examService.buildSections(request, courseDto);
+    Collection<FormativeExamSection> sections = examService.buildSections(request, courseDto);
 
-    // TODO
-    // builder.withTeacher(teacher).withCourse(course);
+    FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
+        request.description(), sections);
 
-    // FormativeExam exam = examRepository.save(exam);
+    return examRepository.save(exam);
   }
 }

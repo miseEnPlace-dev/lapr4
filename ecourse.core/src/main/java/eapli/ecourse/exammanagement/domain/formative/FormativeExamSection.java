@@ -18,7 +18,6 @@ import eapli.ecourse.exammanagement.domain.SectionDescription;
 import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionQuestion;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
-import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.framework.domain.model.DomainEntityBase;
 import eapli.framework.validations.Preconditions;
 
@@ -42,20 +41,16 @@ public class FormativeExamSection extends DomainEntityBase<Long> {
   @Column(nullable = false)
   private SectionDescription description;
 
-  @Column(nullable = false)
-  private ExamScore score;
-
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<SectionQuestion> questions;
 
   public FormativeExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
-      ExamScore score,
       Collection<SectionQuestion> questions) {
-    Preconditions.noneNull(identifier, title, description, score);
+    Preconditions.noneNull(identifier, title, description);
+
     this.identifier = identifier;
     this.title = title;
     this.description = description;
-    this.score = score;
     this.questions = new ArrayList<>(questions);
   }
 
@@ -82,7 +77,6 @@ public class FormativeExamSection extends DomainEntityBase<Long> {
 
     final FormativeExamSection that = (FormativeExamSection) o;
     return this.identifier.equals(that.identifier) && this.title.equals(that.title)
-        && this.description.equals(that.description) && this.score.equals(that.score)
-        && this.questions.equals(that.questions);
+        && this.description.equals(that.description) && this.questions.equals(that.questions);
   }
 }

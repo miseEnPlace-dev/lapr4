@@ -3,17 +3,17 @@ package eapli.ecourse.exammanagement.domain.formative;
 import java.util.List;
 
 import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.domain.model.DomainEntityBase;
 
-public class FormativeExamRequest extends DomainEntityBase<QuestionIdentifier> {
-  private QuestionIdentifier identifier;
+public class FormativeExamRequest extends DomainEntityBase<ExamIdentifier> {
+  private ExamIdentifier identifier;
   private ExamTitle title;
   private ExamDescription description;
   private List<FormativeExamSectionRequest> sections;
 
-  public FormativeExamRequest(QuestionIdentifier identifier, ExamTitle title, ExamDescription description,
+  public FormativeExamRequest(ExamIdentifier identifier, ExamTitle title, ExamDescription description,
       List<FormativeExamSectionRequest> sections) {
     this.identifier = identifier;
     this.title = title;
@@ -21,7 +21,7 @@ public class FormativeExamRequest extends DomainEntityBase<QuestionIdentifier> {
     this.sections = sections;
   }
 
-  public QuestionIdentifier identifier() {
+  public ExamIdentifier identifier() {
     return identifier;
   }
 
@@ -53,7 +53,7 @@ public class FormativeExamRequest extends DomainEntityBase<QuestionIdentifier> {
   }
 
   @Override
-  public QuestionIdentifier identity() {
+  public ExamIdentifier identity() {
     return identifier;
   }
 }

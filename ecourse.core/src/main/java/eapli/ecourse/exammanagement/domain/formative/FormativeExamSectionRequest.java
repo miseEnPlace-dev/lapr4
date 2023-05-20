@@ -1,21 +1,21 @@
 package eapli.ecourse.exammanagement.domain.formative;
 
-import eapli.ecourse.exammanagement.domain.ExamDescription;
-import eapli.ecourse.exammanagement.domain.ExamTitle;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
+import eapli.ecourse.exammanagement.domain.SectionDescription;
+import eapli.ecourse.exammanagement.domain.SectionIdentifier;
+import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.framework.validations.Preconditions;
 
 public class FormativeExamSectionRequest {
-  private QuestionIdentifier identifier;
-  private ExamTitle title;
-  private ExamDescription description;
+  private SectionIdentifier identifier;
+  private SectionTitle title;
+  private SectionDescription description;
   private Integer numberOfQuestions;
   private String questionsType;
 
   public FormativeExamSectionRequest() {
   }
 
-  public FormativeExamSectionRequest(QuestionIdentifier identifier, ExamTitle title, ExamDescription description,
+  public FormativeExamSectionRequest(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
       Integer numberOfQuestions,
       String questionsType) {
     Preconditions.noneNull(identifier, title, description, numberOfQuestions, questionsType);
@@ -27,29 +27,29 @@ public class FormativeExamSectionRequest {
     this.questionsType = questionsType;
   }
 
-  public QuestionIdentifier identifier() {
+  public SectionIdentifier identifier() {
     return identifier;
   }
 
-  public void changeIdentifier(QuestionIdentifier identifier) {
+  public void changeIdentifier(SectionIdentifier identifier) {
     Preconditions.noneNull(identifier);
     this.identifier = identifier;
   }
 
-  public ExamTitle title() {
+  public SectionTitle title() {
     return title;
   }
 
-  public void changeTitle(ExamTitle title) {
+  public void changeTitle(SectionTitle title) {
     Preconditions.noneNull(title);
     this.title = title;
   }
 
-  public ExamDescription description() {
+  public SectionDescription description() {
     return description;
   }
 
-  public void changeDescription(ExamDescription description) {
+  public void changeDescription(SectionDescription description) {
     Preconditions.noneNull(description);
     this.description = description;
   }
