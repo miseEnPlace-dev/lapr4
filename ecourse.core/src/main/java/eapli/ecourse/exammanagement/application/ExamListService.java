@@ -9,18 +9,18 @@ import eapli.ecourse.exammanagement.domain.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 
 public class ExamListService {
 
-  private ExamRepository examRepository;
+  private EvaluationExamRepository examRepository;
 
-  public ExamListService(ExamRepository examRepository) {
+  public ExamListService(EvaluationExamRepository examRepository) {
     this.examRepository = examRepository;
   }
 
   public Optional<ExamDTO> findByCode(ExamCode examCode) {
-    final Optional<EvaluationExam> evaluationExam = examRepository.findByCode(examCode);
+    final Optional<EvaluationExam> evaluationExam = examRepository.ofIdentity(examCode);
     return convertToDTO(evaluationExam);
   }
 

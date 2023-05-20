@@ -4,11 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import eapli.ecourse.coursemanagement.domain.CourseCode;
-import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ClassID;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
-import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

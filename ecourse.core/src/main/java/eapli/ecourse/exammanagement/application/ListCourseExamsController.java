@@ -8,9 +8,8 @@ import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
-import eapli.ecourse.exammanagement.application.ExamListService;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
-import eapli.ecourse.exammanagement.repositories.ExamRepository;
+import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
@@ -25,7 +24,7 @@ public class ListCourseExamsController {
   private final ExamListService examService;
 
   public ListCourseExamsController(AuthorizationService authz, CourseRepository courseRepository,
-      ExamRepository examRepository) {
+      EvaluationExamRepository examRepository) {
     this.authz = authz;
     this.courseRepository = courseRepository;
     this.service = new ListCourseService(courseRepository);

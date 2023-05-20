@@ -17,25 +17,25 @@ public class EnrolmentListService {
   }
 
   public Iterable<EnrolmentDTO> listPendingCourseApplications(CourseCode code) {
-    final Iterable<Enrolment> enrolments = enrolmentRepository.findPendingByCourseCode(code);
+    final Iterable<Enrolment> enrollments = enrolmentRepository.findPendingByCourseCode(code);
 
-    return convertToDTO(enrolments);
+    return convertToDTO(enrollments);
   }
 
   public Iterable<EnrolmentDTO> findByStudentMecanographicNumber(MecanographicNumber studentID) {
-    final Iterable<Enrolment> enrolments = enrolmentRepository.findByStudentMecanographicNumber(studentID);
+    final Iterable<Enrolment> enrollments = enrolmentRepository.findByStudentMecanographicNumber(studentID);
 
-    return convertToDTO(enrolments);
+    return convertToDTO(enrollments);
   }
 
   public Iterable<EnrolmentDTO> listStudentsEnrolled(CourseCode code) {
-    final Iterable<Enrolment> enrolments = enrolmentRepository.findCourseAccepted(code);
+    final Iterable<Enrolment> enrollments = enrolmentRepository.findCourseAccepted(code);
 
-    return convertToDTO(enrolments);
+    return convertToDTO(enrollments);
   }
 
-  private Iterable<EnrolmentDTO> convertToDTO(Iterable<Enrolment> enrolments) {
-    return StreamSupport.stream(enrolments.spliterator(), true)
+  private Iterable<EnrolmentDTO> convertToDTO(Iterable<Enrolment> enrollments) {
+    return StreamSupport.stream(enrollments.spliterator(), true)
         .map(Enrolment::toDto)
         .collect(java.util.stream.Collectors.toUnmodifiableList());
   }
