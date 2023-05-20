@@ -3,9 +3,12 @@ package eapli.ecourse.eventsmanagement.courseclassmanagement.application;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.application.ScheduleAvailabilityService;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.ExtraordinaryClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.dto.ClassDTO;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.dto.TeacherDTO;
@@ -25,12 +28,13 @@ public class UpdateClassScheduleController {
   private TeacherRepository teacherRepository;
 
   public UpdateClassScheduleController(final CourseClassRepository classRepository,
-      final AuthorizationService authzRegistry,
+      ExtraordinaryClassRepository extraClassRepository,
+      final AuthorizationService authzRegistry, InviteRepository inviteRepository,
       MeetingRepository meetingRepository, EnrolmentRepository enrolmentRepository,
       StudentRepository studentRepository, TeacherRepository teacherRepository) {
     this.classRepository = classRepository;
-    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, meetingRepository,
-        enrolmentRepository, studentRepository);
+    this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, extraClassRepository,
+        inviteRepository, enrolmentRepository, studentRepository, teacherRepository);
     this.classService = new ListCourseClassService(classRepository);
     this.authzRegistry = authzRegistry;
     this.teacherRepository = teacherRepository;

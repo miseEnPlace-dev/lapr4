@@ -20,6 +20,10 @@ public class InviteStatus implements ValueObject {
     state = Status.PENDING;
   }
 
+  public InviteStatus(Status state) {
+    this.state = state;
+  }
+
   @Enumerated(EnumType.STRING)
   private Status state;
 

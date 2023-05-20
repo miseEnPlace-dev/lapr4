@@ -1,8 +1,13 @@
 package eapli.ecourse.persistence.impl.jpa;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import eapli.ecourse.Application;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteID;
+import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteStatus;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -33,7 +38,10 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
    * @return
    */
   public Iterable<Invite> findAllPendingForUsername(Username username) {
-    return match("e.username = :username && e.", "username", username);
+    Map<String, Object> params = new HashMap<>();
+    params.put("username", username);
+    params.put("status", new InviteStatus(InviteStatus.Status.PENDING));
+    return match("e.username = :username && e.status", params);
   }
 
   /**
@@ -77,5 +85,13 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
    */
   public Iterable<Invite> findAllPendingForMeetingId(MeetingID meetingId) {
     return null;
+  }
+
+  @Override
+  public Iterable<Invite> findAllAcceptedForUsername(Username username) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("username", username);
+    params.put("status", new InviteStatus(InviteStatus.Status.ACCEPTED));
+    return match("e.username = :username && e.status", params);
   }
 }

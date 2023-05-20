@@ -26,6 +26,10 @@ public class SpecialClass implements Comparable<SpecialClass> {
     // for ORM
   }
 
+  public Time time() {
+    return this.time;
+  }
+
   @Override
   public String toString() {
     return this.time.toString();

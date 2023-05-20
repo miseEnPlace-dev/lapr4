@@ -17,12 +17,4 @@ public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> 
   default Optional<Meeting> findById(final MeetingID id) {
     return ofIdentity(id);
   }
-
-  /**
-   * Returns the all meetings created.
-   *
-   * @return
-   */
-  Iterable<Meeting> findAllIterableByUserMeetings();
-
 }

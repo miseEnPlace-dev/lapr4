@@ -69,6 +69,14 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
     return this.time;
   }
 
+  public Course course() {
+    return this.course;
+  }
+
+  public Set<Student> students() {
+    return this.students;
+  }
+
   @Override
   public boolean sameAs(Object other) {
     return DomainEntities.areEqual(this, other);
