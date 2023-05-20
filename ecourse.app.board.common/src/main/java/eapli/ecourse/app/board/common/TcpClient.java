@@ -28,11 +28,15 @@ public class TcpClient {
       // and a data output stream to write to the client
       DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 
-      // send a conntest message
-      ProtocolMessage message = new ProtocolMessage(MessageCode.COMMTEST, new byte[1], 1);
+      // send an auth request
+      ProtocolMessage message = new ProtocolMessage(MessageCode.AUTH);
 
       output.write(message.toByteStream());
-      System.out.println("Sent COMMTEST packet!");
+      System.out.println("Sent AUTH!");
+
+      // expect a ack or err response
+      ProtocolMessage response = ProtocolMessage.fromDataStream(input);
+      System.out.println(response.toString());
 
       socket.close();
     } catch (Exception e) {
