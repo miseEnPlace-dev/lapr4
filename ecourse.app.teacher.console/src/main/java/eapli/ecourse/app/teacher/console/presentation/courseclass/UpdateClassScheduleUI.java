@@ -15,9 +15,10 @@ import eapli.framework.presentation.console.SelectWidget;
 public class UpdateClassScheduleUI extends AbstractUI {
 
   private UpdateClassScheduleController controller = new UpdateClassScheduleController(
-      PersistenceContext.repositories().classes(), AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().meetings(), PersistenceContext.repositories().enrollments(),
-      PersistenceContext.repositories().students(), PersistenceContext.repositories().teachers());
+      PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
+      AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
+      PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
+      PersistenceContext.repositories().teachers());
 
   @Override
   protected boolean doShow() {
