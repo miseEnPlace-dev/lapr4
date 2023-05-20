@@ -85,7 +85,7 @@ public class ScheduleExtraClassController {
   }
 
   public ExtraordinaryClass createExtraordinaryClass(CourseCode code, int duration, Calendar time,
-      Set<StudentDTO> students) {
+      Iterable<StudentDTO> students) {
 
     Course course = courseRepository.ofIdentity(code).orElseThrow();
     Set<Student> studentsSet = new HashSet<>();

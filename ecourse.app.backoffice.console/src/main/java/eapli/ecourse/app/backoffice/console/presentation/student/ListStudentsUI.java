@@ -1,11 +1,12 @@
 package eapli.ecourse.app.backoffice.console.presentation.student;
 
+import eapli.ecourse.app.common.console.presentation.student.StudentPrinter;
 import eapli.ecourse.studentmanagement.application.ListStudentsController;
-import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.dto.StudentDTO;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
 
-public class ListStudentsUI extends AbstractListUI<Student> {
+public class ListStudentsUI extends AbstractListUI<StudentDTO> {
   private final ListStudentsController controller = new ListStudentsController();
 
   @Override
@@ -19,12 +20,12 @@ public class ListStudentsUI extends AbstractListUI<Student> {
   }
 
   @Override
-  protected Iterable<Student> elements() {
+  protected Iterable<StudentDTO> elements() {
     return controller.allStudents();
   }
 
   @Override
-  protected Visitor<Student> elementPrinter() {
+  protected Visitor<StudentDTO> elementPrinter() {
     return new StudentPrinter();
   }
 

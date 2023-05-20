@@ -81,7 +81,7 @@ public class Student implements AggregateRoot<MecanographicNumber> {
 
   public StudentDTO toDto() {
     return new StudentDTO(this.mecanographicNumber, this.systemUser.username(),
-        this.systemUser.name().toString());
+        this.systemUser.name());
   }
 
   @Override

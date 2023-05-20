@@ -4,6 +4,7 @@ import eapli.ecourse.Application;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
+import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.ExamRepository;
@@ -152,5 +153,17 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public BoardRepository boards(TransactionalContext autoTx) {
     return new JpaBoardRepository(autoTx);
+  }
+
+  @Override
+  public ExtraordinaryClassRepository extraordinaryClasses() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'extraordinaryClasses'");
+  }
+
+  @Override
+  public ExtraordinaryClassRepository extraordinaryClasses(TransactionalContext autoTx) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'extraordinaryClasses'");
   }
 }
