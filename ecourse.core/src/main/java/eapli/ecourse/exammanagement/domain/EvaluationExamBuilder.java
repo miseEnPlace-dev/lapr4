@@ -4,7 +4,6 @@ import java.util.List;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
@@ -14,7 +13,7 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
 
   private Course course;
   private Teacher teacher;
-  private QuestionIdentifier identifier;
+  private ExamIdentifier identifier;
   private ExamTitle title;
   private ExamDescription description;
   private List<ExamSection> sections;
@@ -34,7 +33,7 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
     return this;
   }
 
-  public EvaluationExamBuilder withIdentifier(QuestionIdentifier identifier) {
+  public EvaluationExamBuilder withIdentifier(ExamIdentifier identifier) {
     this.identifier = identifier;
     return this;
   }

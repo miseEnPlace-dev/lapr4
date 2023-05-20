@@ -11,7 +11,6 @@ import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.validations.Preconditions;
 
@@ -39,7 +38,7 @@ public class EvaluationExam extends Exam {
   @Column(nullable = false)
   private ExamScore score;
 
-  public EvaluationExam(Course course, Teacher teacher, QuestionIdentifier identifier, ExamTitle title,
+  public EvaluationExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
       ExamDescription description, Collection<ExamSection> sections, Time startTime, Time endTime,
       ExamInfo feedbackInfo,
       ExamInfo gradeInfo, ExamScore score) {

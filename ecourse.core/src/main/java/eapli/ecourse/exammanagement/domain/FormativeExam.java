@@ -5,13 +5,12 @@ import java.util.Collection;
 import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 
 public class FormativeExam extends Exam {
   private static final long serialVersionUID = 1L;
 
-  public FormativeExam(Course course, Teacher teacher, QuestionIdentifier identifier, ExamTitle title,
+  public FormativeExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
       ExamDescription description,
       Collection<ExamSection> sections) {
     super(course, teacher, identifier, title, description, sections);

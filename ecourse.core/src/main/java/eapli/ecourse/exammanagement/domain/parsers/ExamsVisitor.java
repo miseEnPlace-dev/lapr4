@@ -10,13 +10,14 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.EvaluationExamBuilder;
+import eapli.ecourse.exammanagement.domain.ExamDescription;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamInfo;
 import eapli.ecourse.exammanagement.domain.ExamScore;
 import eapli.ecourse.exammanagement.domain.ExamSection;
-import eapli.ecourse.exammanagement.domain.SectionBuilder;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.SectionBuilder;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 
 public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
@@ -50,7 +51,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   @Override
   public EvaluationExamBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
     String str = ctx.IDENTIFIER().getText();
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf(str);
+    ExamIdentifier identifier = ExamIdentifier.valueOf(str);
     builder.withIdentifier(identifier);
     return builder;
   }

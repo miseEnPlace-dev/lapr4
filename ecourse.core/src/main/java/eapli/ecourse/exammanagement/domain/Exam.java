@@ -18,7 +18,6 @@ import javax.persistence.Version;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamState.State;
 import eapli.ecourse.exammanagement.dto.ExamDTO;
-import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.validations.Preconditions;
@@ -44,7 +43,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   private Teacher teacher;
 
   @Column(nullable = false)
-  private QuestionIdentifier identifier;
+  private ExamIdentifier identifier;
 
   @Column(nullable = false)
   private ExamTitle title;
@@ -62,7 +61,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     // for ORM only
   }
 
-  public Exam(Course course, Teacher teacher, QuestionIdentifier identifier, ExamTitle title,
+  public Exam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
       ExamDescription description,
       Collection<ExamSection> sections) {
     Preconditions.noneNull(course, teacher, identifier, title, description, sections);
