@@ -39,6 +39,11 @@ public class UpdateClassScheduleUI extends AbstractUI {
       Calendar timeString = Console.readCalendar("Time (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
       Time time = Time.valueOf(timeString);
 
+      if (this.controller.checkIfUsersAreAvailable(selected.getCourse(), time, selected.getDuration())) {
+        System.out.println("The class is not available at the given time.");
+        return false;
+      }
+
       try {
         this.controller.updateScheduleClass(time, selected);
       } catch (final Exception e) {

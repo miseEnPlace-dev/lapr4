@@ -10,5 +10,4 @@ public interface CourseClassRepository extends DomainRepository<ClassID, CourseC
   Iterable<CourseClass> findAllByCourseCode(CourseCode code);
 
   Iterable<CourseClass> findAllScheduledByTeacherTaxPayerNumber(TaxPayerNumber teacher);
-
 }
