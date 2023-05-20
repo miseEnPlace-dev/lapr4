@@ -56,6 +56,6 @@ public class UpdateClassScheduleController {
   public Iterable<ClassDTO> listAllClassesForAuthenticatedTeacher() {
     SystemUser user = authzRegistry.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
     final TeacherDTO teacherDTO = teacherRepository.findByUsername(user.username()).orElseThrow().toDto();
-    return classService.findAllByTeacherTaxPayerNumber(teacherDTO.getNumber());
+    return classService.findAllScheduledByTeacherTaxPayerNumber(teacherDTO.getNumber());
   }
 }

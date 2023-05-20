@@ -14,7 +14,6 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
-import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -59,7 +58,6 @@ public class ScheduleAvailabilityService {
       Student student = studentRepository.findByUsername(user.identity()).orElseThrow();
       if (!isStudentAvailable(student, duration, time))
         return false;
-
     }
 
     if (user.hasAny(ClientRoles.TEACHER)) {
@@ -72,6 +70,50 @@ public class ScheduleAvailabilityService {
   }
 
   private boolean isTeacherAvailable(Teacher teacher, Duration duration, Time time) {
+    final Iterable<CourseClass> teacherClasses = classRepository
+        .findAllScheduledByTeacherTaxPayerNumber(teacher.taxPayerNumber());
+    for (CourseClass cl : teacherClasses) {
+      if (!isTeacherAvailableFromClass(cl, time, duration))
+        return false;
+      if (!isTeacherAvailableFromSpecialClasses(cl.specialClasses(), cl.duration(), time, duration))
+        return false;
+    }
+
+    return true;
+  }
+
+  private boolean isTeacherAvailableFromClass(CourseClass cl, Time time, Duration duration) {
+    if (cl.dayInWeek().equals(time.dayInWeek())) {
+      Time scheduleEnd = time.addDuration(duration);
+      Hours classEnd = cl.hours().addDuration(cl.duration());
+
+      if (overlaps(time, cl.hours(), scheduleEnd, classEnd))
+        return false;
+    }
+
+    return true;
+  }
+
+  private boolean isTeacherAvailableFromSpecialClasses(Iterable<SpecialClass> specialClasses, Duration duration,
+      Time time, Duration classDuration) {
+    for (SpecialClass specialClass : specialClasses) {
+      if (!isTeacherAvailableFromSpecialClass(specialClass, duration, time, classDuration))
+        return false;
+    }
+
+    return true;
+  }
+
+  private boolean isTeacherAvailableFromSpecialClass(SpecialClass specialClass, Duration duration, Time time,
+      Duration classDuration) {
+    if (specialClass.time().dayInWeek().equals(time.dayInWeek())) {
+      Time scheduleEnd = time.addDuration(duration);
+      Time classEnd = specialClass.time().addDuration(classDuration);
+
+      if (overlaps(time, specialClass.time(), scheduleEnd, classEnd))
+        return false;
+    }
+
     return true;
   }
 

@@ -14,8 +14,9 @@ public class ListCourseClassService {
     this.classRepository = classRepository;
   }
 
-  public Iterable<ClassDTO> findAllByTeacherTaxPayerNumber(final TaxPayerNumber teacherTaxPayerNumber) {
-    final Iterable<CourseClass> classes = classRepository.findAllByTeacherTaxPayerNumber(teacherTaxPayerNumber);
+  public Iterable<ClassDTO> findAllScheduledByTeacherTaxPayerNumber(final TaxPayerNumber teacherTaxPayerNumber) {
+    final Iterable<CourseClass> classes = classRepository
+        .findAllScheduledByTeacherTaxPayerNumber(teacherTaxPayerNumber);
     return toDto(classes);
   }
 
