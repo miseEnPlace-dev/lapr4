@@ -3,6 +3,7 @@ package eapli.ecourse.app.common.console.presentation.meeting;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
 import eapli.ecourse.app.common.console.util.MultipleSelectorWidget;
@@ -22,7 +23,10 @@ public class ScheduleMeetingUI extends AbstractUI {
 
   private final ScheduleMeetingController ctrl = new ScheduleMeetingController(
       PersistenceContext.repositories().meetings(),
-      AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites());
+      AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
+      PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
+      PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
+      PersistenceContext.repositories().teachers());
 
   @Override
   protected boolean doShow() {
@@ -46,7 +50,13 @@ public class ScheduleMeetingUI extends AbstractUI {
 
     MultipleSelectorWidget<SystemUser> selector = new MultipleSelectorWidget<>("Users:", allUsers,
         new SystemUserPrinter());
-    Iterable<SystemUser> selectedUsers = selector.selectElements();
+    Set<SystemUser> selectedUsers = (Set<SystemUser>) selector.selectElements();
+    selectedUsers.add(ctrl.getAuthenticatedUser());
+
+    if (ctrl.checkIfUsersAreAvailable(meetingTime, meetingDuration, selectedUsers)) {
+      System.out.println("Some of the selected users are not available at the given time.");
+      return false;
+    }
 
     System.out.println("\nDo you want to submit the data? [Y/N]");
 

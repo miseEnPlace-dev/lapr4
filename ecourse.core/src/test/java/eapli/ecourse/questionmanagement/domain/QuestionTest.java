@@ -1,4 +1,4 @@
-package eapli.ecourse.questionmanagement;
+package eapli.ecourse.questionmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,11 +14,6 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
-import eapli.ecourse.questionmanagement.domain.Feedback;
-import eapli.ecourse.questionmanagement.domain.Question;
-import eapli.ecourse.questionmanagement.domain.QuestionBody;
-import eapli.ecourse.questionmanagement.domain.QuestionCode;
-import eapli.ecourse.questionmanagement.domain.QuestionType;
 import eapli.ecourse.teachermanagement.domain.Acronym;
 import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;

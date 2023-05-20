@@ -33,7 +33,8 @@ public class MainMenu extends AbstractUI {
   private static final int COURSES_OPTION = 3;
   private static final int ENROLLMENTS_OPTION = 4;
   private static final int SETTINGS_OPTION = 5;
-  private static final int SOMETHING_OPTION = 6;
+  private static final int CREATE_BOARD_OPTION = 6;
+  private static final int SOMETHING_OPTION = 7;
 
   private static final String SEPARATOR_LABEL = "--------------";
 
@@ -100,6 +101,7 @@ public class MainMenu extends AbstractUI {
     final Menu menu = new Menu("Settings >");
 
     menu.addItem(SOMETHING_OPTION, "Test", new ShowMessageAction("Not implemented yet"));
+    menu.addItem(CREATE_BOARD_OPTION, "Create Board", new ShowMessageAction("Not implemented yet"));
     menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
     return menu;

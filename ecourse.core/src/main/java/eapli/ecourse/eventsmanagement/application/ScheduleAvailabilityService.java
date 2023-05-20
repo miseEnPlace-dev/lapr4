@@ -118,7 +118,7 @@ public class ScheduleAvailabilityService {
   }
 
   private boolean isStudentAvailable(Student student, Duration duration, Time time) {
-    Iterable<Enrolment> enrollments = enrolmentRepository.findEnroledStudentEnroledCourses(student.identity());
+    Iterable<Enrolment> enrollments = enrolmentRepository.findStudentCourses(student.identity());
 
     for (Enrolment enrolment : enrollments) {
       Course course = enrolment.course();

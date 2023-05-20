@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class QuestionIdentifier implements ValueObject, Comparable<QuestionIdentifier> {
+public class QuestionIdentifier implements ValueObject {
   private static final long serialVersionUID = 1L;
 
   private String identifier;
@@ -33,18 +33,5 @@ public class QuestionIdentifier implements ValueObject, Comparable<QuestionIdent
   @Override
   public String toString() {
     return this.identifier;
-  }
-
-  /**
-   * Compares two Identifier objects, comparing their identifiers.
-   *
-   * @param other Identifier to compare
-   * @return 0 if the identifiers are equal, greater than 0 if this identifier
-   *         is greater than the other, less than 0 if this identifier is less
-   *         than the other.
-   */
-  @Override
-  public int compareTo(final QuestionIdentifier other) {
-    return this.identifier.compareTo(other.identifier);
   }
 }
