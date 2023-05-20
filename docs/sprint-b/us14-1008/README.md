@@ -94,12 +94,16 @@ _Note: This are some simplified versions of the tests for readability purposes._
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
     SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
 
+    return requestEnrolment(courseDTO, authenticatedUser);
+  }
+
+  public EnrolmentDTO requestEnrolment(final CourseDTO courseDTO, SystemUser authenticatedUser) {
     Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
 
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Enrolment enrolment = new Enrolment(student, course);
 
-    if (enrolmentRepository.contains(enrolment))
+    if (enrolmentRepository.findWithUserAndCourse(student.identity(), course.code()).isPresent())
       throw new IllegalStateException("You are already enrolled in this course");
 
     return enrolmentRepository.save(enrolment).toDto();
@@ -124,4 +128,4 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 7. Observations
 
-- xxx
+- N/a
