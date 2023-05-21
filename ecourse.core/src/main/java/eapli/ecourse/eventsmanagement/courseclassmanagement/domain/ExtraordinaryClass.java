@@ -38,7 +38,7 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
   @ManyToOne(optional = false)
   private Teacher scheduledBy;
 
-  @Column(nullable = false)
+  @ManyToOne(optional = false)
   private Course course;
 
   @ManyToMany

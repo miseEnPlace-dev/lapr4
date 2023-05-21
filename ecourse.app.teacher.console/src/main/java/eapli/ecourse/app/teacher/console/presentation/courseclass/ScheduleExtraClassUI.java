@@ -24,7 +24,14 @@ public class ScheduleExtraClassUI extends AbstractUI {
         PersistenceContext.repositories().teachers(), PersistenceContext.repositories().classes());
 
     Iterable<CourseDTO> courses = ctrl.listAllInProgressLecturedBy();
+    if (!courses.iterator().hasNext()) {
+      System.out.println("There are no courses in progress.");
+      Console.readLine("Press Enter to continue...");
+      return false;
+    }
+
     SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
+
     selector.show();
     CourseDTO selected = selector.selectedElement();
 
@@ -50,7 +57,7 @@ public class ScheduleExtraClassUI extends AbstractUI {
       Console.readLine("Press Enter to continue...");
       return false;
     }
-
+    System.out.println("Extraordinary class scheduled with success!");
     Console.readLine("Press Enter to continue...");
 
     return false;

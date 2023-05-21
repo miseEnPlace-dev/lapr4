@@ -102,8 +102,9 @@ public class ScheduleExtraClassController {
 
     Time timeObj = Time.valueOf(time);
 
-    if (!scheduleAvailabilityService.areAllAvailable(users, timeObj, durationObj))
-      throw new IllegalArgumentException("The schedule is not available");
+    // if (!scheduleAvailabilityService.areAllAvailable(users, timeObj,
+    // durationObj))
+    // throw new IllegalArgumentException("The schedule is not available");
 
     ExtraordinaryClass extraClass = new ExtraordinaryClass(durationObj, timeObj, this.teacher, studentsSet, course);
 
