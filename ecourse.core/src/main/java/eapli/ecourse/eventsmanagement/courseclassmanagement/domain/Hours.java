@@ -17,6 +17,8 @@ public class Hours implements ValueObject, Comparable<Hours> {
   private Integer minutes;
 
   private Hours(int hour, int minute) {
+    this.hours = hour;
+    this.minutes = minute;
   }
 
   protected Hours() {
@@ -28,12 +30,17 @@ public class Hours implements ValueObject, Comparable<Hours> {
   }
 
   public Hours addDuration(Duration duration) {
-    return new Hours(this.hours + duration.hour(), this.minutes + duration.minute());
+    Calendar c = Calendar.getInstance();
+    c.set(Calendar.HOUR_OF_DAY, this.hours);
+    c.set(Calendar.MINUTE, this.minutes);
+    c.add(Calendar.MINUTE, duration.minute());
+
+    return Hours.valueOf(c);
   }
 
   @Override
   public String toString() {
-    return this.hours.toString();
+    return String.format("%02d:%02d", this.hours, this.minutes);
   }
 
   @Override
