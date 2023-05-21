@@ -8,9 +8,11 @@ class ListCourseExamsController {
 - courseListService
 - courseRepository
 - authorizationService
-- examListService
+- evaluationExamListService
+- formativeExamListService
 + listOpenInProgressCourses()
-+ listCourseExams(course)
++ listCourseEvaluationExams(courseDTO)
++ listCourseFormativeExams(courseDTO)
 }
 
 
