@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="414px" preserveAspectRatio="none" style="width:1111px;height:414px;background:#FFFFFF;" version="1.1" viewBox="0 0 1111 414" width="1111px" zoomAndPan="magnify"><defs/><g><!--MD5=[597c9b6a35d8038d4b40fd8870ba90aa]
+cluster <<aggregate>> User--><g id="cluster_&lt;&lt;aggregate&gt;&gt; User"><path d="M247.5,160 L419.5,160 A3.75,3.75 0 0 1 422,162.5 L429,182.2969 L851.5,182.2969 A2.5,2.5 0 0 1 854,184.7969 L854,404.5 A2.5,2.5 0 0 1 851.5,407 L247.5,407 A2.5,2.5 0 0 1 245,404.5 L245,162.5 A2.5,2.5 0 0 1 247.5,160 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="245" x2="429" y1="182.2969" y2="182.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="171" x="249" y="174.9951">&lt;&lt;aggregate&gt;&gt; User</text></g><!--MD5=[a83252410681a5ed1f47a8e4d10c71f1]
+cluster <<aggregate>> Teacher--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Teacher"><path d="M8.5,6 L208.5,6 A3.75,3.75 0 0 1 211,8.5 L218,28.2969 L218.5,28.2969 A2.5,2.5 0 0 1 221,30.7969 L221,268 A2.5,2.5 0 0 1 218.5,270.5 L8.5,270.5 A2.5,2.5 0 0 1 6,268 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="218" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="199" x="10" y="20.9951">&lt;&lt;aggregate&gt;&gt; Teacher</text></g><!--MD5=[b7bf1eec9a4925954e684954daad3e83]
+cluster <<aggregate>> Student--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Student"><path d="M880.5,6 L1077.5,6 A3.75,3.75 0 0 1 1080,8.5 L1087,28.2969 L1101.5,28.2969 A2.5,2.5 0 0 1 1104,30.7969 L1104,268 A2.5,2.5 0 0 1 1101.5,270.5 L880.5,270.5 A2.5,2.5 0 0 1 878,268 L878,8.5 A2.5,2.5 0 0 1 880.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="878" x2="1087" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="196" x="882" y="20.9951">&lt;&lt;aggregate&gt;&gt; Student</text></g><!--MD5=[10fd006fb483152218b3ecdedec963c1]
+cluster <<aggregate>> Manager--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Manager"><path d="M415.5,6 L618.5,6 A3.75,3.75 0 0 1 621,8.5 L628,28.2969 L628.5,28.2969 A2.5,2.5 0 0 1 631,30.7969 L631,108.5 A2.5,2.5 0 0 1 628.5,111 L415.5,111 A2.5,2.5 0 0 1 413,108.5 L413,8.5 A2.5,2.5 0 0 1 415.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="413" x2="628" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="202" x="417" y="20.9951">&lt;&lt;aggregate&gt;&gt; Manager</text></g><!--MD5=[3fd616f346a44cd59a91eb10b19e157c]
+class User--><g id="elem_User"><rect codeLine="21" fill="#F5F5DC" height="78.5313" id="User" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="483" y="195"/><ellipse cx="498" cy="222.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M502.1094,228.1172 L494.3906,228.1172 L494.3906,215.7266 L502.1094,215.7266 L502.1094,217.8828 L496.8438,217.8828 L496.8438,220.5547 L501.6094,220.5547 L501.6094,222.7109 L496.8438,222.7109 L496.8438,225.9609 L502.1094,225.9609 L502.1094,228.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="510" y="211.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="515" y="225.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="519" y="240.9326">User</text><line style="stroke:#181818;stroke-width:0.5;" x1="484" x2="560" y1="249.2344" y2="249.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="489" y="266.2295">-isActive</text></g><!--MD5=[2f01b1126ff33a0669651ec2488a5ef9]
+class Password--><g id="elem_Password"><rect codeLine="23" fill="#F5F5DC" height="40.2656" id="Password" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="261" y="351"/><ellipse cx="276" cy="371.1328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M276.1094,375.5859 L278.2969,365.2422 L280.7656,365.2422 L277.8125,377.6328 L274.4219,377.6328 L271.4688,365.2422 L273.9375,365.2422 L276.1094,375.5859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="288" y="367.1387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="299.5" y="382.9639">Password</text></g><!--MD5=[78bec0fde86ad92ec1dc3fb343b83709]
+class Email--><g id="elem_Email"><rect codeLine="26" fill="#F5F5DC" height="40.2656" id="Email" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="414" y="351"/><ellipse cx="429" cy="371.1328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M429.1094,375.5859 L431.2969,365.2422 L433.7656,365.2422 L430.8125,377.6328 L427.4219,377.6328 L424.4688,365.2422 L426.9375,365.2422 L429.1094,375.5859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="441" y="367.1387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="468" y="382.9639">Email</text></g><!--MD5=[ba7731d2bbdb81fc0704c700614d70af]
+class FullName--><g id="elem_FullName"><rect codeLine="24" fill="#F5F5DC" height="40.2656" id="FullName" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="567" y="351"/><ellipse cx="582" cy="371.1328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M582.1094,375.5859 L584.2969,365.2422 L586.7656,365.2422 L583.8125,377.6328 L580.4219,377.6328 L577.4688,365.2422 L579.9375,365.2422 L582.1094,375.5859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="594" y="367.1387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63" x="607.5" y="382.9639">FullName</text></g><!--MD5=[f338b7fac0450cb697edae5d9e4bb9ca]
+class ShortName--><g id="elem_ShortName"><rect codeLine="25" fill="#F5F5DC" height="40.2656" id="ShortName" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="720" y="351"/><ellipse cx="735" cy="371.1328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M735.1094,375.5859 L737.2969,365.2422 L739.7656,365.2422 L736.8125,377.6328 L733.4219,377.6328 L730.4688,365.2422 L732.9375,365.2422 L735.1094,375.5859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="747" y="367.1387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="753.5" y="382.9639">ShortName</text></g><!--MD5=[61a83f88cb8b7d3a80bc8c481f3736bf]
+class Teacher--><g id="elem_Teacher"><rect codeLine="39" fill="#F5F5DC" height="54.2344" id="Teacher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="89" x="101.5" y="41"/><ellipse cx="116.5" cy="68.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M120.6094,74.1172 L112.8906,74.1172 L112.8906,61.7266 L120.6094,61.7266 L120.6094,63.8828 L115.3438,63.8828 L115.3438,66.5547 L120.1094,66.5547 L120.1094,68.7109 L115.3438,68.7109 L115.3438,71.9609 L120.6094,71.9609 L120.6094,74.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="134" y="57.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="139" y="71.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="130.5" y="86.9326">Teacher</text></g><!--MD5=[739264bb8c13fd453fd6fc4eef2b32cc]
+class Acronym--><g id="elem_Acronym"><rect codeLine="58" fill="#F5F5DC" height="40.2656" id="Acronym" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="87" y="214.5"/><ellipse cx="102" cy="234.6328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M102.1094,239.0859 L104.2969,228.7422 L106.7656,228.7422 L103.8125,241.1328 L100.4219,241.1328 L97.4688,228.7422 L99.9375,228.7422 L102.1094,239.0859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="114" y="230.6387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="129" y="246.4639">Acronym</text></g><!--MD5=[d6181cb537bdc20c0a3007a98a56832d]
+class Student--><g id="elem_Student"><rect codeLine="48" fill="#F5F5DC" height="54.2344" id="Student" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="87" x="920.5" y="41"/><ellipse cx="935.5" cy="68.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M939.6094,74.1172 L931.8906,74.1172 L931.8906,61.7266 L939.6094,61.7266 L939.6094,63.8828 L934.3438,63.8828 L934.3438,66.5547 L939.1094,66.5547 L939.1094,68.7109 L934.3438,68.7109 L934.3438,71.9609 L939.6094,71.9609 L939.6094,74.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="952" y="57.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="957" y="71.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="949.5" y="86.9326">Student</text></g><!--MD5=[c3cb3626ac710d9e89af15a00badc09d]
+class MecanographicNumber--><g id="elem_MecanographicNumber"><rect codeLine="59" fill="#F5F5DC" height="40.2656" id="MecanographicNumber" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="193" x="894.5" y="214.5"/><ellipse cx="909.5" cy="234.6328" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M909.6094,239.0859 L911.7969,228.7422 L914.2656,228.7422 L911.3125,241.1328 L907.9219,241.1328 L904.9688,228.7422 L907.4375,228.7422 L909.6094,239.0859 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="959" y="230.6387">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="923.5" y="246.4639">MecanographicNumber</text></g><!--MD5=[b24ed8d4ae84bae9290d9aab401637c7]
+class Manager--><g id="elem_Manager"><rect codeLine="55" fill="#F5F5DC" height="54.2344" id="Manager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="476" y="41"/><ellipse cx="491" cy="68.1172" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M495.1094,74.1172 L487.3906,74.1172 L487.3906,61.7266 L495.1094,61.7266 L495.1094,63.8828 L489.8438,63.8828 L489.8438,66.5547 L494.6094,66.5547 L494.6094,68.7109 L489.8438,68.7109 L489.8438,71.9609 L495.1094,71.9609 L495.1094,74.1172 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="50" x="510" y="57.1387">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="515" y="71.1074">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="505" y="86.9326">Manager</text></g><!--MD5=[5ab1f46e477a8163e64d30b24bef4255]
+link User to Password--><g id="link_User_Password"><path codeLine="28" d="M482.84,239.41 C440.77,245.72 374.86,262.05 337,304 C326.85,315.24 322.6,331.75 320.89,345.44 " fill="none" id="User-to-Password" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="320.33,350.72,325.2591,342.1933,320.8586,345.748,317.304,341.3475,320.33,350.72" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="338" y="317.0669">associated with a</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="311.2978" y="339.9551">1</text></g><!--MD5=[176e07b16b38b5978b9bc82adf5db4ba]
+link User to FullName--><g id="link_User_FullName"><path codeLine="29" d="M545.86,274.4 C555.58,289.38 567.28,306.39 579,321 C586.1,329.85 594.51,338.97 602.23,346.91 " fill="none" id="User-to-FullName" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="605.96,350.7,602.499,341.4793,602.4532,347.136,596.7965,347.0902,605.96,350.7" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="580" y="317.0669">characterized by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="591.1988" y="339.9295">1</text></g><!--MD5=[2fbd8809877d07e1763fc513c669aea6]
+link User to ShortName--><g id="link_User_ShortName"><path codeLine="30" d="M561.23,248.15 C596.36,260.23 648.69,280.09 691,304 C713.07,316.47 735.92,333.76 752.8,347.51 " fill="none" id="User-to-ShortName" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="756.96,350.92,752.5486,342.1143,753.0979,347.7445,747.4677,348.2938,756.96,350.92" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="717" y="317.0669">characterized by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="741.3108" y="339.8658">1</text></g><!--MD5=[dbc364445409b51c9b407d19a07b4adf]
+link User to Email--><g id="link_User_Email"><path codeLine="31" d="M482.85,268.97 C473.58,279.17 464.96,291.13 460,304 C454.85,317.37 457.62,333.09 461.91,345.83 " fill="none" id="User-to-Email" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="463.68,350.74,464.3898,340.9168,461.9839,346.0365,456.8642,343.6305,463.68,350.74" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="461" y="317.0669">identified by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="451.9338" y="339.9807">1</text></g><!--MD5=[9141231bd43c3a57d4a7a731bf19c52b]
+link Student to MecanographicNumber--><g id="link_Student_MecanographicNumber"><path codeLine="61" d="M968.28,95.07 C973.42,126.41 981.99,178.61 987.01,209.16 " fill="none" id="Student-to-MecanographicNumber" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="987.84,214.24,990.3239,204.7095,987.0273,209.3065,982.4303,206.0099,987.84,214.24" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="976" y="140.0669">identified by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="977.8263" y="203.4807">1</text></g><!--MD5=[11f940fd4cae057b8e7923b67496b82a]
+link Teacher to Acronym--><g id="link_Teacher_Acronym"><path codeLine="63" d="M146,95.07 C146,126.41 146,178.61 146,209.16 " fill="none" id="Teacher-to-Acronym" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="146,214.24,150,205.24,146,209.24,142,205.24,146,214.24" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="147" y="140.0669">identified by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="136.875" y="203.4807">1</text></g><!--MD5=[0a356a4e09bd4fc4087bf5e4e9dbf72c]
+link Teacher to User--><g id="link_Teacher_User"><path codeLine="65" d="M190.61,88.52 C258.88,118.38 389.26,175.43 464.53,208.36 " fill="none" id="Teacher-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="none" points="467.33,201.94,482.85,216.37,461.72,214.77,467.33,201.94" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="466.8942" y="208.7668">1</text></g><!--MD5=[e7e4384c2e5b49218c5cd97f5ff6bc06]
+link Student to User--><g id="link_Student_User"><path codeLine="66" d="M920.41,85.22 C840.33,115.03 669.79,178.5 580.02,211.91 " fill="none" id="Student-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="none" points="582.3,218.53,561.12,218.94,577.42,205.41,582.3,218.53" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="569.0703" y="211.8107">1</text></g><!--MD5=[6eb6e197a729f6ec2412743e0bdbca1d]
+link Manager to User--><g id="link_Manager_User"><path codeLine="67" d="M522,95.07 C522,116.33 522,147.19 522,174.38 " fill="none" id="Manager-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="none" points="529,174.69,522,194.69,515,174.69,529,174.69" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="513.3375" y="183.971">1</text></g><!--MD5=[8e40378cdec5039ae2370665c613698b]
+@startuml DM-USER
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+  entity User
+  class Password
+  class Email
+  class FullName
+  class ShortName
+}
+
+entity User <<entity>> <<root>> {
+  - isActive
+}
+
+entity User
+
+class Password <<(V,#FF8B40) value object>> {}
+class FullName <<(V,#FF8B40) value object>> {}
+class ShortName <<(V,#FF8B40) value object>> {}
+class Email <<(V,#FF8B40) value object>> {}
+
+User - -> "1" Password : associated with a
+User - -> "1" FullName : characterized by
+User - -> "1" ShortName : characterized by
+User - -> "1" Email : identified by
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+  class Acronym
+}
+
+
+entity Teacher <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+  class MecanographicNumber
+}
+
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Manager" {
+  entity Manager
+}
+
+entity Manager <<entity>> <<root>> {
+}
+
+class Acronym <<(V,#FF8B40) value object>> {}
+class MecanographicNumber <<(V,#FF8B40) value object>> {}
+
+Student - -> "1" MecanographicNumber : identified by
+' Sprint 1 clarifications - question 18: "I think it would be wise to enforce that acronyms be unique" -> identified by
+Teacher - -> "1" Acronym : identified by
+
+Teacher - -|> "1" User
+Student - -|> "1" User
+Manager - -|> "1" User
+
+@enduml
+
+@startuml DM-USER
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+  entity User
+  class Password
+  class Email
+  class FullName
+  class ShortName
+}
+
+entity User <<entity>> <<root>> {
+  - isActive
+}
+
+entity User
+
+class Password <<(V,#FF8B40) value object>> {}
+class FullName <<(V,#FF8B40) value object>> {}
+class ShortName <<(V,#FF8B40) value object>> {}
+class Email <<(V,#FF8B40) value object>> {}
+
+User - -> "1" Password : associated with a
+User - -> "1" FullName : characterized by
+User - -> "1" ShortName : characterized by
+User - -> "1" Email : identified by
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+  class Acronym
+}
+
+
+entity Teacher <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+  class MecanographicNumber
+}
+
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Manager" {
+  entity Manager
+}
+
+entity Manager <<entity>> <<root>> {
+}
+
+class Acronym <<(V,#FF8B40) value object>> {}
+class MecanographicNumber <<(V,#FF8B40) value object>> {}
+
+Student - -> "1" MecanographicNumber : identified by
+Teacher - -> "1" Acronym : identified by
+
+Teacher - -|> "1" User
+Student - -|> "1" User
+Manager - -|> "1" User
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
