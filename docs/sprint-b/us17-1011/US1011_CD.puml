@@ -96,16 +96,9 @@ class ExtraClass {
   + ExtraClass(time, duration, student, teacher, course)
 }
 
-class ScheduleExtraClassService {
-  + areAllAvailable(users, time, duration)
-}
-
-
-
 ScheduleExtraClassUI ..> ScheduleExtraClassController
 ScheduleExtraClassController --> ListCourseService
 ScheduleExtraClassController --> EnrolmentListService
-ScheduleExtraClassController --> ScheduleExtraClassService
 
 ListCourseService ..> Course
 EnrolmentListService ..> Enrolment

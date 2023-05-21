@@ -6,7 +6,6 @@ participant "ScheduleExtraClassUI" as UI <<presentation>>
 participant "ScheduleExtraClassController" as CTRL <<application>>
 participant "ListEnrolmentService" as ESRV <<service>>
 participant "ListCourseService" as CSRV <<service>>
-participant "ScheduleAvailabilityService" as SSRV <<service>>
 participant "Course" as C <<domain>>
 participant "CourseDTO" as CDTO <<dto>>
 participant "Enrolment" as E <<domain>>
@@ -99,9 +98,6 @@ T -> UI : enters the date/time start and duration
 activate UI
 UI -> CTRL : createExtraClass(course, teacher, date, duration, students)
 activate CTRL
-CTRL -> SSRV : areAllAvailable()
-activate SSRV
-deactivate SSRV
 CTRL -> EX : new(course, teacher, time, duration, students)
 activate EX
 deactivate EX
