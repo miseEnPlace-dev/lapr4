@@ -36,11 +36,23 @@ public class UpdateClassScheduleUI extends AbstractUI {
     if (selected != null) {
       System.out.println("\nClass selected: " + selected);
 
-      Calendar timeString = Console.readCalendar("Time (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
+      Calendar timeString = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
       Time time = Time.valueOf(timeString);
 
       if (this.controller.checkIfUsersAreAvailable(selected.getCourse(), time, selected.getDuration())) {
         System.out.println("The class is not available at the given time.");
+        return false;
+      }
+
+      System.out.println("\nDo you want to submit the data? [Y/N]");
+
+      String confirm = "";
+      while (!confirm.equals("Y") && !confirm.equals("N")) {
+        confirm = Console.readLine("Option: ").toUpperCase();
+      }
+
+      if (confirm.equals("N")) {
+        System.out.println("Operation Cancelled!");
         return false;
       }
 
