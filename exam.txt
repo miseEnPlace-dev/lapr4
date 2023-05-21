@@ -23,9 +23,12 @@
     @end-section;
 
     @start-section section2;
-        @title "Título da Segunda Secção";
+        // Para além de serem permitidos
+        // comentários, as propriedades podem
+        // ser definidas em qualquer ordem.
         @description "Descrição da Secção";
         @score 20;
+        @title "Título da Segunda Secção";
 
         @start-question
             @type true-false;

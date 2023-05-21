@@ -107,11 +107,11 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US2001_CD](out/US2001_CD.svg) -->
 
-### 4.3. Applied Patterns
+<!-- ### 4.3. Applied Patterns
 
-- xxx
+- xxx -->
 
-### 4.4. Tests
+<!-- ### 4.4. Tests
 
 **Test 1:** xxx
 
@@ -120,27 +120,103 @@ This is the first time this task is assigned to be developed. This is a new func
   private void test1() {
     assetTrue(true);
   }
-```
+``` -->
 
 ---
 
 ## 5. Implementation
 
-### 5.1. Controller
+### 5.1. Parse Exam with ANTLR4 Visitors
 
-- Relevant implementation details
+- Parse the exam structure using the ANTLR4 Parser.
 
 ```java
-  private void sample() {
-    return true;
+  public static EvaluationExamBuilder parseWithVisitor(String filePath) throws IOException, ParseException {
+    ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(filePath));
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    ExamParser parser = new ExamParser(tokens);
+    ParseTree tree = parser.start();
+
+    if (parser.getNumberOfSyntaxErrors() > 0)
+      throw new ParseException();
+
+    ExamsVisitor eval = new ExamsVisitor();
+    return (EvaluationExamBuilder) eval.visit(tree);
   }
+```
+
+### 5.2. Developed Grammar
+
+- The grammar developed for this project is the following (extremely simplified):
+
+```antlr4
+grammar Exam;
+
+start: exam;
+
+exam: start_exam header sections end_exam;
+
+sections: section+;
+section: start_section header questions end_section;
+
+questions: question+;
+
+header: properties+;
+properties:
+	  title
+	  | description
+	  | feedback_header
+	  | grade
+	  | score;
 ```
 
 ---
 
 ## 6. Integration & Demonstration
 
-<!-- ![US2001_DEMO](US2001_DEMO.png) -->
+### 6.1. Demo Exam File
+
+```text
+@start-exam exame_de_exemplo;
+    @score 100;
+    @title "Exame de Exemplo";
+    @description "Este exame serve de exemplo para testar a funcionalidade de criação de exames.";
+    @feedback none;
+    @grade on-submit;
+
+    @start-section section1;
+        @title "Título da Primeira Secção";
+        @description "Descrição da Secção";
+        @score 80;
+
+        @start-question
+            @type short-answer;
+            @question-body "Em que UC da LEI se aprende a programar em Java?";
+            @correct-answers
+                @correct-answer "APROG" 1.0;
+                @correct-answer "Algoritmia e Programação" 1.0;
+                @correct-answer "PPROG" 0.5;
+                @correct-answer "Paradigmas da Programação" 0.5;
+            @end-correct-answers;
+        @end-question;
+    @end-section;
+
+    @start-section section2;
+        // Para além de serem permitidos
+        // comentários, as propriedades podem
+        // ser definidas em qualquer ordem.
+        @description "Descrição da Secção";
+        @score 20;
+        @title "Título da Segunda Secção";
+
+        @start-question
+            @type true-false;
+            @question-body "Em ESINF programa-se em Python.";
+            @correct-answer false;
+        @end-question;
+    @end-section;
+@end-exam;
+```
 
 ---
 
