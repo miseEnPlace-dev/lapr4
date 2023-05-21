@@ -1,7 +1,7 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
 public enum WeekDay {
-  SUNDAY, MONDAY, TUESDAY, WEDaNESDAY, THURSDAY, FRIDAY, SATURDAY;
+  SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
 
   public static WeekDay valueOf(final int weekDay) {
     switch (weekDay) {
@@ -12,7 +12,7 @@ public enum WeekDay {
       case 2:
         return TUESDAY;
       case 3:
-        return WEDaNESDAY;
+        return WEDNESDAY;
       case 4:
         return THURSDAY;
       case 5:
