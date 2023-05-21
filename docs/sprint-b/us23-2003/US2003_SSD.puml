@@ -1,4 +1,4 @@
-@startuml US1004_SSD
+@startuml US2003_SSD
 'https://plantuml.com/sequence-diagram
 actor "Teacher" as teacher
 participant ":System" as system
