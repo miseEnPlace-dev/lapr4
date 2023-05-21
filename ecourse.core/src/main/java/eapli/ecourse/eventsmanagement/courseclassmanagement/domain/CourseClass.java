@@ -58,6 +58,7 @@ public class CourseClass implements AggregateRoot<ClassID> {
     this.specialClasses = new ArrayList<>();
     this.hours = hours;
     this.course = course;
+    this.scheduledBy = scheduledBy;
   }
 
   protected CourseClass() {

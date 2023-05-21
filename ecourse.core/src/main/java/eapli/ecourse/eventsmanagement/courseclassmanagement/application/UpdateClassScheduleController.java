@@ -1,11 +1,18 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.application;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
+import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.application.ScheduleAvailabilityService;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.dto.ClassDTO;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.ExtraordinaryClassRepository;
+import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -24,6 +31,7 @@ public class UpdateClassScheduleController {
   private ScheduleAvailabilityService scheduleAvailabilityService;
   private AuthorizationService authzRegistry;
   private TeacherRepository teacherRepository;
+  private EnrolmentRepository enrolmentRepository;
 
   public UpdateClassScheduleController(final CourseClassRepository classRepository,
       ExtraordinaryClassRepository extraClassRepository,
@@ -34,6 +42,7 @@ public class UpdateClassScheduleController {
     this.classService = new ListCourseClassService(classRepository);
     this.authzRegistry = authzRegistry;
     this.teacherRepository = teacherRepository;
+    this.enrolmentRepository = enrolmentRepository;
 
     this.scheduleAvailabilityService = new ScheduleAvailabilityService(classRepository, extraClassRepository,
         inviteRepository, enrolmentRepository, studentRepository, teacherRepository);
@@ -58,5 +67,30 @@ public class UpdateClassScheduleController {
     SystemUser user = authzRegistry.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
     final TeacherDTO teacherDTO = teacherRepository.findByUsername(user.username()).orElseThrow().toDto();
     return classService.findAllScheduledByTeacherTaxPayerNumber(teacherDTO.getNumber());
+  }
+
+  public boolean checkIfUsersAreAvailable(Course course, Time classTime, Duration classDuration) {
+
+    if (scheduleAvailabilityService.areAllAvailable(getUsersEnrolledInCourse(course.code()), classTime,
+        classDuration))
+      return true;
+
+    return false;
+  }
+
+  public SystemUser getAuthenticatedUser() {
+    return authzRegistry.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow(IllegalStateException::new);
+  }
+
+  public Iterable<SystemUser> getUsersEnrolledInCourse(CourseCode courseCode) {
+    Iterable<Enrolment> enrolments = enrolmentRepository.findStudentsEnrolledInCourse(courseCode);
+
+    Set<SystemUser> users = new HashSet<>();
+
+    for (Enrolment enrolment : enrolments) {
+      users.add(enrolment.student().user());
+    }
+
+    return users;
   }
 }

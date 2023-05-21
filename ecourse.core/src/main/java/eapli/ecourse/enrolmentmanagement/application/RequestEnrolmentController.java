@@ -1,5 +1,8 @@
 package eapli.ecourse.enrolmentmanagement.application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -11,7 +14,6 @@ import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
-import eapli.framework.csv.util.CsvLineMarshaler;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
@@ -34,7 +36,23 @@ public class RequestEnrolmentController {
 
   public Iterable<CourseDTO> listOpenForEnrolmentCourses() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
-    return listCoursesService.listOpenForEnrolment();
+    final Iterable<CourseDTO> openForEnrolmentCourses = listCoursesService.listOpenForEnrolment();
+    List<CourseDTO> courses = new ArrayList<>();
+    for (CourseDTO courseDTO : openForEnrolmentCourses)
+      if (!isEnrolled(courseDTO))
+        courses.add(courseDTO);
+
+    return courses;
+  }
+
+  private boolean isEnrolled(final CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+
+    Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+    Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
+
+    return enrolmentRepository.findWithUserAndCourse(student.identity(), course.code()).isPresent();
   }
 
   public EnrolmentDTO requestEnrolment(final CourseDTO courseDTO) {
@@ -50,7 +68,7 @@ public class RequestEnrolmentController {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Enrolment enrolment = new Enrolment(student, course);
 
-    if (enrolmentRepository.findWithUserAndCourse(student.identity(), course.code()).isPresent())
+    if (isEnrolled(courseDTO))
       throw new IllegalStateException("You are already enrolled in this course");
 
     return enrolmentRepository.save(enrolment).toDto();
