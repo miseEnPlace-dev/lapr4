@@ -1,7 +1,9 @@
 package eapli.ecourse.boardmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +20,27 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 public class BoardTest {
 
   private SystemUser user;
+  private Board board;
+  private BoardID id;
+  private BoardTitle title;
+  private List<UserPermission> permissions;
+  private List<BoardColumn> columns;
+  private List<BoardRow> rows;
+  private SystemUser owner;
 
   @Before
   public void setUp() {
     final SystemUserBuilder userBuilder = new SystemUserBuilder(new NilPasswordPolicy(), new PlainTextEncoder());
     this.user = userBuilder.with("username", "duMMy1", "dummy", "dummy", "a@b.ro").withRoles(ClientRoles.STUDENT)
         .build();
+    this.owner = user;
+
+    id = BoardID.newID();
+    title = new BoardTitle("Test Board");
+    permissions = new ArrayList<>();
+    columns = new ArrayList<>();
+    rows = new ArrayList<>();
+    board = new Board(title, permissions, columns, rows, id, owner);
   }
 
   @Test
@@ -88,4 +105,40 @@ public class BoardTest {
     assertEquals(user, b.owner());
   }
 
+  @Test
+  public void testTitle() {
+    assertEquals(title, board.title());
+  }
+
+  @Test
+  public void testArchived() {
+    assertNull(board.archived());
+  }
+
+  @Test
+  public void testColumns() {
+    assertEquals(columns, board.columns());
+  }
+
+  @Test
+  public void testRows() {
+    assertEquals(rows, board.rows());
+  }
+
+  @Test
+  public void testPermissions() {
+    assertEquals(permissions, board.permissions());
+  }
+
+  @Test
+  public void testOwner() {
+    assertEquals(owner, board.owner());
+  }
+
+  @Test
+  public void testSameAs() {
+    Board other = new Board(new BoardTitle("Test Board"), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), id,
+        owner);
+    assertTrue(board.sameAs(other));
+  }
 }
