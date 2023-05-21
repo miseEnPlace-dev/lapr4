@@ -34,7 +34,8 @@ class MainMenu extends StudentBaseUI {
   private static final int SCHEDULE_MEETING = 4;
   private static final int VIEW_FUTURE_EXAMS = 5;
   private static final int CREATE_BOARD_OPTION = 6;
-  private static final int SETTINGS_OPTION = 7;
+  private static final int COURSES_OPTION = 7;
+  private static final int SETTINGS_OPTION = 8;
 
   // ACCOUNT MENU
   // private static final int <something> = 1;
@@ -88,6 +89,8 @@ class MainMenu extends StudentBaseUI {
     mainMenu.addItem(SCHEDULE_MEETING, "Schedule meeting", new ScheduleMeetingUI()::show);
     mainMenu.addItem(VIEW_FUTURE_EXAMS, "View future exams", new ListFutureExamsUI()::show);
     mainMenu.addItem(CREATE_BOARD_OPTION, "Create board", new CreateBoardUI()::show);
+    mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
+
 
     final Menu settingsMenu = buildAdminSettingsMenu();
     mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
