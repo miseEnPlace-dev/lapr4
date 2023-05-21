@@ -55,6 +55,6 @@ public class NumericalQuestion extends Question {
       return true;
 
     return this.body().equals(that.body()) && this.type().equals(that.type())
-        && this.correctAnswer == that.correctAnswer && this.acceptedError == that.acceptedError;
+        && this.correctAnswer.equals(that.correctAnswer) && this.acceptedError.equals(that.acceptedError);
   }
 }
