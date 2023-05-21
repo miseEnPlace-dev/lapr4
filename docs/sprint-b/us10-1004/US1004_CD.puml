@@ -8,6 +8,8 @@ class ToggleCourseStatusController {
 - courseListService
 - courseRepository
 - authorizationService
++ ToggleCourseStatusController(authorizationService, courseRepository)
+
 + listOpenCourses()
 + listClosedCourses()
 + listInProgressCourses()
@@ -92,7 +94,7 @@ RepositoryFactory --> CourseRepository
 
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository
-ToggleCourseStatusController ..> PersistenceContext
+ToggleCourseStatusUI ..> PersistenceContext
 ToggleCourseStatusController ..> Course
 ToggleCourseStatusUI ..> ToggleCourseStatusController
 
