@@ -85,9 +85,9 @@ In order to select the teacher in charge, the manager must first define the teac
 
 ![US1005_SD](out/US1005_SD.svg)
 
-### 4.2. Class Diagram
+<!-- ### 4.2. Class Diagram
 
-![US1005_CD](out/US1005_CD.svg)
+![US1005_CD](out/US1005_CD.svg) -->
 
 ### 4.3. Applied Patterns
 
@@ -95,16 +95,26 @@ In order to select the teacher in charge, the manager must first define the teac
 
 ### 4.4. Tests
 
-**Test 1:** xxx
+**Test 1:** Test to ensure that controller is able to assign teachers to a course.
 
 ```java
   @Test
-  private void test1() {
-    assetTrue(true);
+  public void testAssignTeachersToCourse() {
+    CourseDTO courseDTO = getDummyCourseDTO();
+    TeacherDTO teacherDTO = getNewTeacherDTO();
+
+    Course c = getDummyCourse();
+    when(courseRepository.ofIdentity(courseDTO.getCode())).thenReturn(Optional.of(c));
+    when(teacherRepository.ofIdentity(teacherDTO.getNumber())).thenReturn(Optional.of(getNewDummyTeacher()));
+    List<TeacherDTO> teachers = new ArrayList<>();
+    teachers.add(teacherDTO);
+    controller.assignTeachersToCourse(teachers, courseDTO);
+
+    assertEquals(new ArrayList<Teacher>(c.teachers()).get(0).identity(), teacherDTO.getNumber());
   }
 ```
 
----
+<!-- ---
 
 ## 5. Implementation
 
@@ -116,7 +126,7 @@ In order to select the teacher in charge, the manager must first define the teac
   private void sample() {
     return true;
   }
-```
+``` -->
 
 ---
 

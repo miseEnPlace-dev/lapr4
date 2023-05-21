@@ -1,0 +1,49 @@
+@startuml US1005_DM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+    entity User
+}
+
+entity User <<entity>> <<root>> {
+  - isActive
+}
+
+package "<<aggregate>> Course" {
+  entity Course
+}
+
+entity Course <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+
+  class BirthDate
+  class TaxPayerNumber
+  class Acronym
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+class BirthDate <<(V,#FF8B40) value object>> {}
+class TaxPayerNumber <<(V,#FF8B40) value object>> {}
+class Acronym <<(V,#FF8B40) value object>> {}
+
+Teacher --> "1" BirthDate : characterized by
+Teacher --> "1" TaxPayerNumber : characterized by
+Teacher --> "1" Acronym : characterized by
+
+Teacher -|> User
+
+Course --> "1" Teacher : has a responsible
+Course ---> "1..*" Teacher : has
+
+@enduml
