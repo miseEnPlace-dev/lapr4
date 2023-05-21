@@ -30,9 +30,19 @@ public class ScheduleAvailabilityService {
   private TeacherRepository teacherRepository;
 
   public ScheduleAvailabilityService(CourseClassRepository classRepository,
-      ExtraordinaryClassRepository extraordinaryClassRepository,
-      InviteRepository inviteRepository, EnrolmentRepository enrolmentRepository,
-      StudentRepository studentRepository, TeacherRepository teacherRepository) {
+      TeacherRepository teacherRepository) {
+    this.classRepository = classRepository;
+    this.teacherRepository = teacherRepository;
+    this.extraordinaryClassRepository = null;
+    this.inviteRepository = null;
+    this.enrolmentRepository = null;
+    this.studentRepository = null;
+  }
+
+  public ScheduleAvailabilityService(CourseClassRepository classRepository,
+      ExtraordinaryClassRepository extraordinaryClassRepository, InviteRepository inviteRepository,
+      EnrolmentRepository enrolmentRepository, StudentRepository studentRepository,
+      TeacherRepository teacherRepository) {
     this.classRepository = classRepository;
     this.extraordinaryClassRepository = extraordinaryClassRepository;
     this.inviteRepository = inviteRepository;
@@ -50,7 +60,8 @@ public class ScheduleAvailabilityService {
   }
 
   private boolean isAvailable(SystemUser user, Time time, Duration duration) {
-    Iterable<Invite> userMeetingInvites = inviteRepository.findAllAcceptedForUsername(user.username());
+    Iterable<Invite> userMeetingInvites =
+        inviteRepository.findAllAcceptedForUsername(user.username());
     if (!isAvailableFromMeetings(userMeetingInvites, duration, time))
       return false;
 
@@ -69,9 +80,9 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isTeacherAvailable(Teacher teacher, Duration duration, Time time) {
-    final Iterable<CourseClass> teacherClasses = classRepository
-        .findAllScheduledByTeacherTaxPayerNumber(teacher.taxPayerNumber());
+  public boolean isTeacherAvailable(Teacher teacher, Duration duration, Time time) {
+    final Iterable<CourseClass> teacherClasses =
+        classRepository.findAllScheduledByTeacherTaxPayerNumber(teacher.taxPayerNumber());
     for (CourseClass cl : teacherClasses) {
       if (!isTeacherAvailableFromClass(cl, time, duration))
         return false;
@@ -94,8 +105,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isTeacherAvailableFromSpecialClasses(Iterable<SpecialClass> specialClasses, Duration duration,
-      Time time, Duration classDuration) {
+  private boolean isTeacherAvailableFromSpecialClasses(Iterable<SpecialClass> specialClasses,
+      Duration duration, Time time, Duration classDuration) {
     for (SpecialClass specialClass : specialClasses) {
       if (!isTeacherAvailableFromSpecialClass(specialClass, duration, time, classDuration))
         return false;
@@ -104,8 +115,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isTeacherAvailableFromSpecialClass(SpecialClass specialClass, Duration duration, Time time,
-      Duration classDuration) {
+  private boolean isTeacherAvailableFromSpecialClass(SpecialClass specialClass, Duration duration,
+      Time time, Duration classDuration) {
     if (specialClass.time().dayInWeek().equals(time.dayInWeek())) {
       Time scheduleEnd = time.addDuration(duration);
       Time classEnd = specialClass.time().addDuration(classDuration);
@@ -147,7 +158,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isAvailableFromMeetings(Iterable<Invite> meetingInvites, Duration duration, Time time) {
+  private boolean isAvailableFromMeetings(Iterable<Invite> meetingInvites, Duration duration,
+      Time time) {
     for (Invite invite : meetingInvites)
       if (!isAvailableFromMeeting(invite.meeting(), duration, time))
         return false;
@@ -167,8 +179,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isStudentAvailableFromExtraClasses(Iterable<ExtraordinaryClass> extraClasses, Duration duration,
-      Time time) {
+  private boolean isStudentAvailableFromExtraClasses(Iterable<ExtraordinaryClass> extraClasses,
+      Duration duration, Time time) {
     for (ExtraordinaryClass extraClass : extraClasses)
       if (!isAvailableFromExtraClass(extraClass, duration, time))
         return false;
@@ -176,7 +188,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isAvailableFromExtraClass(ExtraordinaryClass extraClass, Duration duration, Time time) {
+  private boolean isAvailableFromExtraClass(ExtraordinaryClass extraClass, Duration duration,
+      Time time) {
     if (extraClass.time().dayInWeek().equals(time.dayInWeek())) {
       Time scheduleEnd = time.addDuration(duration);
       Time classEnd = extraClass.time().addDuration(extraClass.duration());
@@ -188,8 +201,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isStudentAvailableFromSpecialClasses(Iterable<SpecialClass> specialClasses, Duration classDuration,
-      Time time, Duration duration) {
+  private boolean isStudentAvailableFromSpecialClasses(Iterable<SpecialClass> specialClasses,
+      Duration classDuration, Time time, Duration duration) {
     for (SpecialClass specialClass : specialClasses) {
       if (specialClass.time().dayInWeek().equals(time.dayInWeek())) {
         Time specialClassStart = specialClass.time();
@@ -203,7 +216,8 @@ public class ScheduleAvailabilityService {
     return true;
   }
 
-  private boolean isStudentAvailableFromClass(CourseClass cl, Time scheduleStart, Duration duration) {
+  private boolean isStudentAvailableFromClass(CourseClass cl, Time scheduleStart,
+      Duration duration) {
     if (cl.dayInWeek().equals(scheduleStart.dayInWeek())) {
       Time scheduleEnd = scheduleStart.addDuration(duration);
       Hours classEnd = cl.hours().addDuration(cl.duration());
