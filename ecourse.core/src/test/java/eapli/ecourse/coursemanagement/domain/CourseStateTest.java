@@ -54,4 +54,16 @@ public class CourseStateTest {
     state.previous();
     assertTrue(state.isClosed());
   }
+
+  @Test
+  public void ensureItIsNotPossibleToChangeFinishedState() {
+    CourseState state = new CourseState(CourseState.State.FINISHED);
+    assertThrows(IllegalStateException.class, () -> state.changeToClosed());
+  }
+
+  @Test
+  public void ensureToStringIsWorking() {
+    CourseState state = new CourseState(CourseState.State.OPEN);
+    assertTrue(state.toString().contains("OPEN"));
+  }
 }
