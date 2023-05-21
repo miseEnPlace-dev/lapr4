@@ -25,10 +25,6 @@ public class ExamBootstrapper implements Action {
   private TeacherRepository teacherRepository = PersistenceContext.repositories().teachers();
 
   private EvaluationExamRepository evaluationRepository = PersistenceContext.repositories().evaluationExams();
-
-  private final CreateEvaluationExamController evaluationController = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
-    teacherRepository, evaluationRepository, PersistenceContext.repositories().courses());
-
   @Override
   public boolean execute() {
     course = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("2222")).get();

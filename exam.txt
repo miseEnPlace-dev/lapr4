@@ -1,7 +1,7 @@
 @start-exam exame_de_exemplo;
     @score 100;
     @title "Exame de Exemplo";
-    @description "Este exame serve de exemplo para testar a funcionalidade de criação de exames.";
+    @description "Exame de exemplo para testar a criação de testes.";
     @feedback none;
     @grade on-submit;
 

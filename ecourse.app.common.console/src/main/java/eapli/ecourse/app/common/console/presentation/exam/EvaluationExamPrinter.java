@@ -12,7 +12,7 @@ public class EvaluationExamPrinter implements Visitor<EvaluationExamDTO> {
     new EvaluationExamHeader().printHeader();
 
 
-    System.out.printf("%-39s %-22s%-8s%-10s%-18s%-18s%-18s%-40s%-8s", visitee.getCode(), visitee.getTitle(),
+    System.out.printf("%-39s %-22s%-8s%-10s%-18s%-18s%-18s%-40s%-10s", visitee.getCode(), visitee.getTitle(),
       visitee.getCourse().title(), visitee.getTeacher().acronym(), visitee.getStartTime().dayInWeek() + " " +
         visitee.getStartTime().hour() +":" + visitee.getStartTime().minute(), visitee.getEndTime().dayInWeek() + " " +
         visitee.getEndTime().hour() +":" + visitee.getEndTime().minute(), visitee.getIdentifier(),
