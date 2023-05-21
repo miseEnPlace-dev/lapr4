@@ -12,3 +12,7 @@ manager -> system : Selects a course
 system -> manager : Asks the file path where the students are listed
 manager -> system : Enters the file path
 system -> manager : Informs operation success
+
+deactivate manager
+
+@enduml
