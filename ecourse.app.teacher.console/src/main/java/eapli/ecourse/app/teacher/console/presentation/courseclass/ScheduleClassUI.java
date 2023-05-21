@@ -49,7 +49,6 @@ public class ScheduleClassUI extends AbstractUI {
     }
 
     Calendar hour = Console.readCalendar("Enter the hour for the class (hh:mm): ", "HH:mm");
-
     Hours hours = Hours.valueOf(hour);
 
     int duration = Console.readInteger("Enter the duration of the class (in minutes): ");

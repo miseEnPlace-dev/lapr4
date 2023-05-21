@@ -29,6 +29,10 @@ public class Hours implements ValueObject, Comparable<Hours> {
     return new Hours(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
   }
 
+  public static Hours valueOf(int hour, int minute) {
+    return new Hours(hour, minute);
+  }
+
   public Hours addDuration(Duration duration) {
     Calendar c = Calendar.getInstance();
     c.set(Calendar.HOUR_OF_DAY, this.hours);
