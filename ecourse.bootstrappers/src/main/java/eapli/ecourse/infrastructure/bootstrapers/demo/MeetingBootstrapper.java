@@ -21,7 +21,8 @@ public class MeetingBootstrapper extends UsersBootstrapperBase implements Action
       PersistenceContext.repositories().meetings(), authz,
       PersistenceContext.repositories().invites(), PersistenceContext.repositories().classes(),
       PersistenceContext.repositories().extraordinaryClasses(), PersistenceContext.repositories().enrollments(),
-      PersistenceContext.repositories().students(), PersistenceContext.repositories().teachers());
+      PersistenceContext.repositories().students(), PersistenceContext.repositories().teachers(),
+      AuthzRegistry.userService());
 
   @Override
   public boolean execute() {
