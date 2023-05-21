@@ -83,12 +83,13 @@
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** xxx
+**Test 1:** Ensure logged in
 
 ```java
   @Test
-  private void test1() {
-    assetTrue(true);
+  public void ensureLoggedIn() {
+    ListCoursesController ctrl = new ListCoursesController(null, courseRepository, teacherRepository, studentRepository, enrolmentRepository);
+    assertEquals(ctrl.getCoursesForLoggedUser(), null);
   }
 ```
 
