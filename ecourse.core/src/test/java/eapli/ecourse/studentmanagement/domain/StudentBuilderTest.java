@@ -29,7 +29,7 @@ public class StudentBuilderTest {
   public void testStudentBuilderWithInvalidMecanographicNumber() {
     final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
     SystemUser systemUser = userBuilder.withName("first", "last").withEmail("email@email.com").withUsername("username")
-        .withPassword("123Pa1").build();
+        .withPassword("123Pssssa1").build();
     String invalidMecanographicNumber = "";
     assertThrows(IllegalArgumentException.class, () -> {
       new StudentBuilder()
