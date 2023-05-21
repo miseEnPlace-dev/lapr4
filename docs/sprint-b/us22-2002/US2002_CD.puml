@@ -10,6 +10,9 @@ class ListFutureExamsController {
 - studentRepository
 - authorizationService
 - examListService
++ ListFutureExamsController(authorizationService, evaluationExamRepository,
+ enrolmentRepository, courseRepository, studentRepository)
+
 + listStudentCourses()
 + futureExams(courseDTO)
 }
