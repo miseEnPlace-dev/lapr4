@@ -30,15 +30,10 @@ public class ExamBootstrapper implements Action {
 
   private EvaluationExamBuilder evaluationBuilder;
 
-  private FormativeExamRequestBuilder formativeBuilder;
-
   private TeacherRepository teacherRepository = PersistenceContext.repositories().teachers();
 
   private EvaluationExamRepository evaluationRepository = PersistenceContext.repositories().evaluationExams();
 
-  private FormativeExamRepository formativeRepository = PersistenceContext.repositories().formativeExams();
-
-  private  FormativeExamService formativeExamService = new FormativeExamService(PersistenceContext.repositories().questions());
 
   @Override
   public boolean execute() {
@@ -50,14 +45,8 @@ public class ExamBootstrapper implements Action {
       throw new RuntimeException(e);
     }
 
-    try {
-      formativeBuilder = FormativeExamsParser.parseWithVisitor("formative.txt");
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
 
     addEvaluationExam();
-    addFormativeExam();
     return false;
   }
 
@@ -75,20 +64,5 @@ public class ExamBootstrapper implements Action {
     EvaluationExam exam = evaluationBuilder.build();
 
     evaluationRepository.save(exam);
-  }
-
-  private void addFormativeExam() {
-    FormativeExamRequest request = formativeBuilder.build();
-
-    try {
-      Collection<FormativeExamSection> sections = formativeExamService.buildSections(request, course.toDto());
-
-      FormativeExam exam = new FormativeExam(course, teacherRepository.ofIdentity(TaxPayerNumber.valueOf("212345678")).get(),
-        request.identifier(), request.title(), request.description(), sections);
-
-      formativeRepository.save(exam);
-    } catch (Exception e) {
-      throw new IllegalArgumentException("Invalid exam request");
-    }
   }
 }

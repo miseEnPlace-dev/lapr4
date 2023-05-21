@@ -1,0 +1,70 @@
+@startuml US1001_DM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> User" {
+  entity User
+  class Password
+  class Email
+  class FullName
+  class ShortName
+}
+
+entity User <<entity>> <<root>> {
+  - isActive
+}
+
+entity User
+
+class Password <<(V,#FF8B40) value object>> {}
+class FullName <<(V,#FF8B40) value object>> {}
+class ShortName <<(V,#FF8B40) value object>> {}
+class Email <<(V,#FF8B40) value object>> {}
+
+User --> "1" Password : associated with a
+User --> "1" FullName : characterized by
+User --> "1" ShortName : characterized by
+User --> "1" Email : identified by
+
+package "<<aggregate>> Teacher" {
+  entity Teacher
+  class Acronym
+}
+
+
+entity Teacher <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+  class MecanographicNumber
+}
+
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Manager" {
+  entity Manager
+}
+
+entity Manager <<entity>> <<root>> {
+}
+
+class Acronym <<(V,#FF8B40) value object>> {}
+class MecanographicNumber <<(V,#FF8B40) value object>> {}
+
+Student --> "1" MecanographicNumber : identified by
+' Sprint 1 clarifications - question 18: "I think it would be wise to enforce that acronyms be unique" -> identified by
+Teacher --> "1" Acronym : identified by
+
+Teacher --|> "1" User
+Student --|> "1" User
+Manager --|> "1" User
+
+@enduml

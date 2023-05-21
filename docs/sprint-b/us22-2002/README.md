@@ -68,7 +68,9 @@
 
 ### 4.3. Applied Patterns
 
-- xxx
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the courses, students, exams and enrolments. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of courses and exams to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
