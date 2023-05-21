@@ -6,11 +6,11 @@ import java.util.List;
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
+import eapli.ecourse.app.common.console.presentation.exam.FormativeExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
-import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.ListCourseExamsController;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
-import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
@@ -18,11 +18,9 @@ import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ListCourseExamsUI extends AbstractUI {
-  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
-
-  private final EvaluationExamRepository examRepository = PersistenceContext.repositories().evaluationExams();
   private final ListCourseExamsController ctrl = new ListCourseExamsController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().courses(), PersistenceContext.repositories().evaluationExams());
+      PersistenceContext.repositories().courses(), PersistenceContext.repositories().evaluationExams(),
+    PersistenceContext.repositories().formativeExams());
 
   @Override
   protected boolean doShow() {
@@ -42,15 +40,20 @@ public class ListCourseExamsUI extends AbstractUI {
     if (selected == null)
       return false;
 
-    Iterable<EvaluationExamDTO> exams = ctrl.listCourseExams(selected);
-    if (!exams.iterator().hasNext()) {
+    Iterable<EvaluationExamDTO> evaluationExams = ctrl.listCourseEvaluationExams(selected);
+    Iterable<FormativeExamDTO> formativeExams = ctrl.listCourseFormativeExams(selected);
+    if (!evaluationExams.iterator().hasNext() && !formativeExams.iterator().hasNext()) {
       System.out.println("There are no exams in " + selected.getTitle());
       return false;
     }
 
-    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), exams,
-        new EvaluationExamPrinter());
-    list.show();
+    ListWidget<EvaluationExamDTO> evaluationExamsList = new ListWidget<>("Evaluation Exams Of " + selected.getTitle(),
+      evaluationExams, new EvaluationExamPrinter());
+    evaluationExamsList.show();
+
+    ListWidget<FormativeExamDTO> formativeExamsList = new ListWidget<>("Formative Exams Of " + selected.getTitle(),
+      formativeExams, new FormativeExamPrinter());
+    formativeExamsList.show();
 
     return true;
   }
