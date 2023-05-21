@@ -37,19 +37,19 @@ public class RequestEnrolmentController {
   public Iterable<CourseDTO> listOpenForEnrolmentCourses() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
     final Iterable<CourseDTO> openForEnrolmentCourses = listCoursesService.listOpenForEnrolment();
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+
+    Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+
     List<CourseDTO> courses = new ArrayList<>();
     for (CourseDTO courseDTO : openForEnrolmentCourses)
-      if (!isEnrolled(courseDTO))
+      if (!isEnrolled(courseDTO, student))
         courses.add(courseDTO);
 
     return courses;
   }
 
-  private boolean isEnrolled(final CourseDTO courseDTO) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
-    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
-
-    Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+  private boolean isEnrolled(final CourseDTO courseDTO, Student student) {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
 
     return enrolmentRepository.findWithUserAndCourse(student.identity(), course.code()).isPresent();
@@ -68,7 +68,7 @@ public class RequestEnrolmentController {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Enrolment enrolment = new Enrolment(student, course);
 
-    if (isEnrolled(courseDTO))
+    if (isEnrolled(courseDTO, student))
       throw new IllegalStateException("You are already enrolled in this course");
 
     return enrolmentRepository.save(enrolment).toDto();

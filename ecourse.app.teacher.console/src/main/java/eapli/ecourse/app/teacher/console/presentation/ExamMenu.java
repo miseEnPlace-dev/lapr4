@@ -15,7 +15,7 @@ public class ExamMenu {
   public Menu buildMenu() {
     final Menu menu = new Menu("Exams >");
 
-    menu.addItem(ADD_QUESTIONS_OPTION, "Add Questions", new AddQuestionsUI()::show);
+    menu.addItem(ADD_QUESTIONS_OPTION, "Add Formative Questions", new AddQuestionsUI()::show);
     menu.addItem(CREATE_EXAM_OPTION, "Create Exam", new CreateExamUI()::show);
     menu.addItem(LIST_COURSE_EXAMS, "List Course Exams", new ListCourseExamsUI()::show);
     menu.addItem(CREATE_FORMATIVE_EXAM, "Create Formative Exam", new CreateFormativeExamUI()::show);

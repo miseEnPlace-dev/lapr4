@@ -28,11 +28,11 @@ public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Acti
 
   @Override
   public boolean execute() {
-    CourseDTO closedForEncolmentCourseDto = toggleCtrl.listNotClosedCourses().iterator().next();
+    CourseDTO closedForEnrolmentCourseDto = toggleCtrl.listNotClosedCourses().iterator().next();
 
-    CourseDTO openForEnrolmentCourseDto = toggleCtrl.toggleEnrolmentState(closedForEncolmentCourseDto);
+    CourseDTO openForEnrolmentCourseDto = toggleCtrl.toggleEnrolmentState(closedForEnrolmentCourseDto);
 
-    Username username = Username.valueOf("isep959");
+    Username username = Username.valueOf("user1");
     SystemUser user = AuthzRegistry.userService().userOfIdentity(username).orElseThrow(IllegalStateException::new);
 
     requestCtrl.requestEnrolment(openForEnrolmentCourseDto, user);
