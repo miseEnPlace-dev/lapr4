@@ -62,16 +62,20 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   @Test
   public void ensureClassHasTeacher() {
-    assertThrows(IllegalArgumentException.class, () -> new CourseClass(
-        Duration.valueOf(30), Time.valueOf(Calendar.getInstance()), teacher, students, null));
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), course, null));
   }
 ```
 
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+**Test 2:** Ensure CourseClass has a valid Duration
+
+```java
+  @Test
+  public void ensureClassHasDuration() {
+    assertThrows(IllegalArgumentException.class, () -> new CourseClass(
+        DayInWeek.valueOf(3), null, Hours.valueOf(Calendar.getInstance), course, teacher));
+  }
 ```
 
 ## 5. Implementation
@@ -82,9 +86,49 @@ _It is also a best practice to include a listing (with a brief summary) of the m
 
 ## 6. Integration/Demonstration
 
-_In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system_
+```java
+public class ScheduleClassController {
+  private ListCourseService listCourseService;
 
-_It is also important to explain any scripts or instructions required to execute an demonstrate this functionality_
+  private Teacher teacher;
+
+  private CourseClassRepository classRepository;
+  private CourseRepository courseRepository;
+  private TeacherRepository teacherRepository;
+
+  public ScheduleClassController(CourseClassRepository classRepository,
+      CourseRepository courseRepository, TeacherRepository teacherRepository) {
+    this.listCourseService = new ListCourseService(courseRepository);
+
+    this.classRepository = classRepository;
+    this.courseRepository = courseRepository;
+    this.teacherRepository = teacherRepository;
+  }
+
+  public void setCurrentAuthenticatedTeacher() {
+    AuthorizationService authz = AuthzRegistry.authorizationService();
+
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.TEACHER);
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
+
+    teacher = teacherRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+  }
+
+  public Iterable<CourseDTO> listAllInProgressLecturedBy() {
+    setCurrentAuthenticatedTeacher();
+
+    return listCourseService.listInProgressCoursesThatTeacherLectures(teacher);
+  }
+
+  public CourseClass createClass(CourseCode code, int duration, DayInWeek day, Hours hours) {
+    Course course = courseRepository.ofIdentity(code).orElseThrow();
+
+    Duration durationObj = Duration.valueOf(duration);
+
+    return classRepository.save(new CourseClass(day, durationObj, hours, course, teacher));
+  }
+}
+```
 
 ## 7. Observations
 
