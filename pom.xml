@@ -194,6 +194,7 @@
           <exclude>**/repositories/*</exclude>
           <exclude>**/presentation/**/*</exclude>
           <exclude>**/events/*</exclude>
+          <exclude>**/application/*</exclude>
           <exclude>**/persistence/impl/**/*</exclude>
         </excludes>
         </configuration>
