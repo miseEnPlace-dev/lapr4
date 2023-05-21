@@ -14,13 +14,13 @@ import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-public class JpaExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamCode, ExamCode>
+public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamCode, ExamCode>
     implements EvaluationExamRepository {
-  public JpaExamRepository(final TransactionalContext autoTx) {
+  public JpaEvaluationExamRepository(final TransactionalContext autoTx) {
     super(autoTx, "code");
   }
 
-  public JpaExamRepository(final String puname) {
+  public JpaEvaluationExamRepository(final String puname) {
     super(puname, Application.settings().extendedPersistenceProperties(), "code");
   }
 

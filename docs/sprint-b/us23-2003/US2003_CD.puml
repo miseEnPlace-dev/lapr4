@@ -8,9 +8,11 @@ class ListCourseExamsController {
 - courseListService
 - courseRepository
 - authorizationService
-- examListService
+- evaluationExamListService
+- formativeExamListService
 + listOpenInProgressCourses()
-+ listCourseExams(course)
++ listCourseEvaluationExams(courseDTO)
++ listCourseFormativeExams(courseDTO)
 }
 
 
@@ -34,6 +36,24 @@ interface CourseRepository {
   + findAllInProgress()
 }
 
+interface EvaluationExamRepository {
++ findAllCourseExams(course)
+}
+
+interface FormativeExamRepository {
++ findAllCourseExams(course)
+}
+
+class EvaluationExamListService {
+- examRepository
++ listAllCourseExams(course)
+}
+
+class FormativeExamListService {
+- examRepository
++ listAllCourseExams(course)
+}
+
 class CourseListService {
   - courseRepository
 
@@ -41,29 +61,49 @@ class CourseListService {
   + listInProgressCourses()
 }
 
-class ExamListService {
-- examRepository
-+ listAllCourseExams(course)
 
-}
-
-class Exam {
+class EvaluationExamDTO {
 - code
+- title
 - course
 - teacher
+- startTime
+- endTime
 - identifier
+- description
+- state
+}
+
+class EvaluationExam {
+- code
 - title
+- course
+- teacher
+- startTime
+- endTime
+- identifier
 - description
 - state
 + toDto()
 }
 
-class ExamDTO {
+class FormativeExam {
 - code
+- title
 - course
 - teacher
 - identifier
+- description
+- state
++ toDto()
+}
+
+class FormativeExamDTO {
+- code
 - title
+- course
+- teacher
+- identifier
 - description
 - state
 }
@@ -90,6 +130,22 @@ class JpaCourseRepository {
   + findAllInProgress()
 }
 
+class InMemoryFormativeExamRepository {
++ findAllCourseExams(course)
+}
+
+class JpaFormativeExamRepository {
++ findAllCourseExams(course)
+}
+
+class InMemoryEvaluationExamRepository {
++ findAllCourseExams(course)
+}
+
+class JpaEvaluationExamRepository {
++ findAllCourseExams(course)
+}
+
 class PersistenceContext {
   - repositories()
 }
@@ -97,21 +153,39 @@ class PersistenceContext {
 
 PersistenceContext ..> RepositoryFactory
 RepositoryFactory --> CourseRepository
+RepositoryFactory --> FormativeExamRepository
+RepositoryFactory --> EvaluationExamRepository
 
 CourseRepository <|.. InMemoryCourseRepository
 CourseRepository <|.. JpaCourseRepository
+
+EvaluationExamRepository <|.. InMemoryEvaluationExamRepository
+EvaluationExamRepository <|.. JpaEvaluationExamRepository
+
+FormativeExamRepository <|.. InMemoryFormativeExamRepository
+FormativeExamRepository <|.. JpaFormativeExamRepository
+
+
 ListCourseExamsController ..> PersistenceContext
 ListCourseExamsUI ..> ListCourseExamsController
 
-ExamListService ..> Exam
+
 CourseListService ..> Course
 CourseListService ..> CourseRepository
 
-ExamListService ..> ExamDTO
-CourseListService ..> CourseDTO
+FormativeExamListService ..> FormativeExamDTO
+FormativeExamListService ..> FormativeExam
 
+EvaluationExamListService ..> EvaluationExamDTO
+EvaluationExamListService ..> EvaluationExam
+
+CourseListService ..> CourseDTO
+ListCourseExamsController --> FormativeExamListService
 ListCourseExamsController --> CourseListService
-ListCourseExamsController --> ExamListService
+ListCourseExamsController --> EvaluationExamListService
+
+EvaluationExamListService ..> EvaluationExamRepository
+FormativeExamListService ..> FormativeExamRepository
 
 
 @enduml
