@@ -28,7 +28,7 @@ public class ECourseDemoBootstrapper implements Action {
     // declare bootstrap actions
     final Action[] actions = { new BackofficeUsersBootstrapper(), new StudentBootstrapper(),
         new CoursesBootstrapper(), new QuestionsBootstrapper(), new BoardBootstrapper(), new MeetingBootstrapper(),
-        new EnrolmentBootstrapper(), new CourseClassBootstrapper() };
+        new EnrolmentBootstrapper(), new CourseClassBootstrapper(), new ExamBootstrapper() };
 
     authenticateForBootstrapping();
 
