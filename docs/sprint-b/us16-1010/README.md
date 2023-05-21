@@ -15,17 +15,7 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 2. Requirements
 
-_In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies)._
-
-_Example_
-
 **US 1010** As Teacher, I want to schedule a class.
-
-<!-- - G002.1. Blá Blá Blá ... -->
-
-<!-- - G002.2. Blá Blá Blá ... -->
-
-<!-- _Regarding this requirement we understand that it relates to..._ -->
 
 ## 1.3. Functional Requirements
 
@@ -37,23 +27,45 @@ _Example_
 
 ## 3. Analysis
 
-_In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),_
+### 3.1. Conditions
+
+- The teacher must be authenticated and authorized to perform the operation;
+- The teacher must be teacher of the selected course;
+- The teacher must be available at the time of the class (no class or meeting overlap).
+
+### 3.2. System Sequence Diagram
+
+![US1010_SSD](out/US1010_SSD.svg)
 
 ## 4. Design
 
-_In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality._
+### 4.1. Functionality Realization
 
-### 4.1. Realization
+![US1010_SD](out/US1010_SD.svg)
 
 ### 4.2. Class Diagram
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+![US1010_CD](out/US1010_CD.svg)
 
 ### 4.3. Applied Patterns
 
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the scheduled extraordinary classes. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of System Users and courses to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
+
 ### 4.4. Tests
 
-**Test 1:** _Verifies that it is not possible to create an instance of the Example class with null values._
+_Note: This are some simplified versions of the tests for readability purposes._
+
+**Test 1:** Ensure CourseClass has a valid Teacher
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () -> new CourseClass(
+        Duration.valueOf(30), Time.valueOf(Calendar.getInstance()), teacher, students, null));
+  }
+```
 
 ```
 @Test(expected = IllegalArgumentException.class)
