@@ -17,7 +17,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2. Requirements
 
-### "Create Board - A user creates a board"
+### "Schedule an Extra Class - A teacher schedule an extraordinary class."
 
 ## 2.1. Client Specifications
 
@@ -31,7 +31,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.3. Functional Requirements
 
-> **FRC10** Schedule of Extra Class A - teacher schedule an extraordinary class. An extra class is a one occurrence only and it has a specific group of participants (a subset of the class students)
+> **FRC10** Schedule of Extra Class - A teacher schedule an extraordinary class. An extra class is a one occurrence only and it has a specific group of participants (a subset of the class students)
 
 ## 2.4. Acceptance Criteria
 

@@ -10,7 +10,7 @@ interface CourseRepository {
 }
 
 interface EnrolmentRepository {
-  {abstract} findAllCourseApplications(course)
+  {abstract} listPendingCourseApplications(course)
   {abstract} save(enrolment)
 }
 
@@ -20,7 +20,7 @@ class InMemoryCourseRepository {
 }
 
 class InMemoryEnrolmentRepository {
-  + findAllCourseApplications(course)
+  + listPendingCourseApplications(course)
   + save(enrolment)
 }
 
@@ -30,7 +30,7 @@ class JpaCourseRepository {
 }
 
 class JpaEnrolmentRepository {
-  + findAllCourseApplications(course)
+  + findPendingByCourseCode(courseID)
   + save(enrolment)
 }
 
@@ -43,7 +43,7 @@ class CourseListService {
 
   + CourseListService(courseRepository)
 
-  + listOpenForEnrolmentCourses()
+  + listOpenForEnrolment()
 }
 
 class EnrolmentListService {
@@ -66,7 +66,7 @@ class ResponseCourseApplicationController {
   + ResponseCourseApplicationController(courseRepository, enrolmentRepository)
 
   + listOpenForEnrolmentCourses()
-  + listCourseApplications(course)
+  + listPendingCourseApplications(course)
   + accept(enrol)
   + reject(enrol)
 }

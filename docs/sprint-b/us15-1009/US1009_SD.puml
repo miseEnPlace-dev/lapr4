@@ -54,11 +54,11 @@ deactivate UI
 M -> UI : selects the desired course
 activate UI
 
-UI -> CTRL : listCourseAppllications(course)
+UI -> CTRL : listPendingCourseApplications(course)
 activate CTRL
-CTRL -> ESRV : listCourseAppllications(course)
+CTRL -> ESRV : listPendingCourseApplications(course)
 activate ESRV
-ESRV -> EREP : findByCourseCode(course)
+ESRV -> EREP : findPendingByCourseCode(courseID)
 activate EREP
 EREP --> ESRV : enrolments
 deactivate EREP

@@ -17,7 +17,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2. Requirements
 
-### "Create Board - A user creates a board"
+### "Approve/Reject Enlistment in Course - A manager approves or rejects a students’ application to a course."
 
 ## 2.1. Client Specifications
 
@@ -75,14 +75,11 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- **Builder:** The builder pattern is used to provide a flexible way to create a board. This is done by using the `BoardBuilder` class. This allows the creation of a board with different ways to set some of its attributes and also allows the creation of a board without setting non mandatory attributes. This will also be useful to develop the tests.
-- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
-- **Repository:** This is used to store the boards. This is done to allow the persistence of the boards and to allow the use of the boards in other parts of the application.
-- **Service:** This is used to provide a list of System Users to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the enrollments. This is done to allow the persistence of the enrollments and to allow the use of the enrollments in other parts of the application.
+- **Service:** This is used to provide a list of courses and enrollments to the controller. This is done to reduce coupling and to allow the use of the services in other parts of the application.
 
 ### 4.4. Tests
-
-_Note: This are some simplified versions of the tests for readability purposes._
 
 **Test 1:** Ensure the enrolment state is accurate after accepting an application
 
@@ -134,15 +131,60 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
-  public CourseDTO toggleEnrolmentState(CourseDTO courseDTO) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+public class RespondCourseApplicationController {
 
-    Course course = courseRepository.findByCode(courseDTO.getCode()).orElseThrow();
+  private EnrolmentRepository enrolmentRepository;
+  private final ListCourseService listCoursesService;
+  private final ListEnrolmentService listEnrolmentService;
+  private AuthorizationService authz;
 
-    course.toggleEnrolmentState();
-
-    return courseRepository.save(course).toDto();
+  public RespondCourseApplicationController(final CourseRepository courseRepository,
+      final EnrolmentRepository enrolmentRepository, AuthorizationService authz) {
+    this.enrolmentRepository = enrolmentRepository;
+    this.authz = authz;
+    this.listCoursesService = new ListCourseService(courseRepository);
+    this.listEnrolmentService = new ListEnrolmentService(enrolmentRepository);
   }
+
+  public Iterable<CourseDTO> listOpenForEnrolmentCourses() {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
+    return listCoursesService.listOpenForEnrolment();
+  }
+
+  public Iterable<EnrolmentDTO> listPendingCourseApplications(final CourseDTO courseDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
+    return listEnrolmentService.listPendingCourseApplications(courseDTO.getCode());
+  }
+
+  public EnrolmentDTO accept(final EnrolmentDTO enrolmentDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
+
+    CourseCode code = enrolmentDTO.getCourseCode();
+    MecanographicNumber number = enrolmentDTO.getStudentNumber();
+
+    Enrolment enrolment = enrolmentRepository
+        .findWithUserAndCourse(number, code).orElseThrow();
+
+    enrolment.accept();
+
+    return enrolmentRepository.save(enrolment).toDto();
+  }
+
+  public EnrolmentDTO reject(final EnrolmentDTO enrolmentDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.MANAGER, ClientRoles.POWER_USER);
+
+    CourseCode code = enrolmentDTO.getCourseCode();
+    MecanographicNumber number = enrolmentDTO.getStudentNumber();
+
+    Enrolment enrolment = enrolmentRepository
+        .findWithUserAndCourse(number, code).orElseThrow();
+
+    enrolment.reject();
+
+    return enrolmentRepository.save(enrolment).toDto();
+  }
+
+}
 ```
 
 ## 6. Integration & Demonstration
@@ -152,6 +194,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ![US1009_DEMO](US1009_DEMO.png)
 
 ### 6.2. Failure scenario
+
+There are no pending applications for the course.
 
 ![US1009_DEMO_FAIL](US1009_DEMO_FAIL.png)
 
