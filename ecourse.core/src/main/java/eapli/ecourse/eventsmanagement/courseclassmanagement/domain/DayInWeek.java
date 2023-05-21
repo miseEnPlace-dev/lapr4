@@ -19,12 +19,25 @@ public class DayInWeek implements ValueObject {
     this.weekDay = weekDay;
   }
 
+  protected DayInWeek(final int weekDay) {
+    this.weekDay = WeekDay.valueOf(weekDay);
+  }
+
   protected DayInWeek() {
     // for ORM
   }
 
   public static DayInWeek valueOf(final WeekDay weekDay) {
     Preconditions.nonNull(weekDay);
+
+    return new DayInWeek(weekDay);
+  }
+
+  public static DayInWeek valueOf(final int weekDay) {
+    Preconditions.nonNull(weekDay);
+
+    if (weekDay < 0 || weekDay > 6)
+      throw new IllegalArgumentException("Invalid week day");
 
     return new DayInWeek(weekDay);
   }
