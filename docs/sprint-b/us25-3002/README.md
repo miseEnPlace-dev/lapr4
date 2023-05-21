@@ -96,102 +96,123 @@ This is the first time this task is assigned to be developed. This is a new func
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** Ensure the course is in the correct state after the operation
+**Test 1:** Ensure board has valid title
 
 ```java
-  @Test
-  public void ensureCourseIsInCorrectStateAfterToggle() {
-    final Course course = getDummyOpenCourse();
+@Test
+  public void ensureBoardHasTitle() {
+    List<UserPermission> permissions = new ArrayList<>();
+    List<BoardColumn> columns = new ArrayList<>();
+    List<BoardRow> rows = new ArrayList<>();
 
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isOpen());
+    assertThrows(IllegalArgumentException.class, () -> new Board(null, permissions, columns, rows, user));
   }
 ```
 
-**Test 2:** Ensure that double toggle does not change the state (the state is reversible)
+**Test 2:** Ensure board does not need permissions
 
 ```java
-  @Test
-  public void ensureDoubleToggleDoesNotChangeState() {
-    final Course course = getDummyOpenCourse();
+@Test
+public void ensureBoardPermissionsAreNotMandatory() {
+  List<BoardColumn> columns = new ArrayList<>();
+  List<BoardRow> rows = new ArrayList<>();
 
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isClosed());
-  }
+  Board b = new Board(new BoardTitle("title"), null, columns, rows, user);
+
+  assert (b != null);
+}
 ```
 
-**Test 3:** Ensure that is not possible to open enrolments in a closed course
+**Test 3:** Ensure board has valid columns
 
 ```java
-  @Test
-  public void ensureCannotOpenEnrolmentsInClosedCourse() {
-    final Course course = getDummyClosedCourse();
 
-    assertTrue(course.state().isClosed());
-    assertTrue(course.enrolmentState().isClosed());
-    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
-  }
+@Test
+public void ensureBoardHasColumns() {
+  List<UserPermission> permissions = new ArrayList<>();
+  List<BoardRow> rows = new ArrayList<>();
+
+  assertThrows(IllegalArgumentException.class,
+      () -> new Board(new BoardTitle("title"), permissions, null, rows, user));
+}
 ```
 
-**Test 4:** Ensure that is not possible to toggle enrolments in a course that is finished
+**Test 4:** Ensure board has valid rows
 
 ```java
-  @Test
-  public void ensureCannotOpenEnrolmentsInFinishedCourse() {
-    final Course course = getDummyFinishedCourse();
 
-    assertTrue(course.state().isFinished());
-    assertThrows(IllegalStateException.class, () -> course.toggleEnrolmentState());
-  }
+@Test
+public void ensureBoardHasRows() {
+  List<UserPermission> permissions = new ArrayList<>();
+  List<BoardColumn> columns = new ArrayList<>();
+
+  assertThrows(IllegalArgumentException.class,
+      () -> new Board(new BoardTitle("title"), permissions, columns, null, user));
+}
 ```
 
-**Test 5:** Ensure that is possible to toggle enrolments in a course that is in progress
+**Test 5:** Ensure board has valid owner
 
 ```java
-  @Test
-  public void ensureIsPossibleToToggleEnrolmentsInProgressCourse() {
-    final Course course = getDummyInProgressCourse();
 
-    assertTrue(course.state().isInProgress());
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isOpen());
-  }
-```
+@Test
+public void ensureBoardHasUser() {
+  List<UserPermission> permissions = new ArrayList<>();
+  List<BoardColumn> columns = new ArrayList<>();
+  List<BoardRow> rows = new ArrayList<>();
 
-**Test 6:** Ensure that is possible to toggle enrolemtns in a course that is open
-
-```java
-  @Test
-  public void ensureIsPossibleToToggleEnrolmentsInOpenCourse() {
-    final Course course = getDummyOpenCourse();
-
-    assertTrue(course.state().isOpen());
-    assertTrue(course.enrolmentState().isClosed());
-    course.toggleEnrolmentState();
-    assertTrue(course.enrolmentState().isOpen());
-  }
+  assertThrows(IllegalArgumentException.class,
+      () -> new Board(new BoardTitle("title"), permissions, columns, rows, null));
+}
 ```
 
 ## 5. Implementation
 
 ### 5.1. Controller
 
-- Relevant implementation details
-
 ```java
-  public CourseDTO toggleEnrolmentState(CourseDTO courseDTO) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+@UseCaseController
+public class CreateBoardController {
 
-    Course course = courseRepository.findByCode(courseDTO.getCode()).orElseThrow();
+  private BoardRepository boardRepo;
+  private UserManagementService userSvc;
+  private AuthorizationService authz;
 
-    course.toggleEnrolmentState();
-
-    return courseRepository.save(course).toDto();
+  public CreateBoardController(BoardRepository boardRepo, UserManagementService userSvc, AuthorizationService authz) {
+    this.boardRepo = boardRepo;
+    this.userSvc = userSvc;
+    this.authz = authz;
   }
+
+  public Board createBoard(final String title, final Map<SystemUser, PermissionType> permissions,
+      final Map<String, Integer> columns, final Map<String, Integer> rows) {
+
+    Preconditions.noneNull(title, columns, rows);
+
+    SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.MANAGER,
+        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
+
+    Board board = new BoardBuilder().withTitle(title).withUser(user).withPermissions(permissions)
+        .withColumns(columns).withRows(rows).build();
+
+    if (boardRepo.containsOfIdentity(board.identity()))
+      throw new IllegalStateException("There is already a board with that id.");
+
+    return saveBoard(board);
+  }
+
+  public Iterable<SystemUser> listAllUsers() {
+    return userSvc.allUsers();
+  }
+
+  private Board saveBoard(Board board) {
+    if (board == null)
+      throw new IllegalArgumentException("Board cannot be null.");
+
+    return boardRepo.save(board);
+  }
+}
+
 ```
 
 ## 6. Integration & Demonstration
@@ -200,10 +221,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ![US3002_DEMO](US3002_DEMO.png)
 
-### 6.2. Failure scenario
-
-![US3002_DEMO_FAIL](US3002_DEMO_FAIL.png)
+![US3002_DEMO_2](US3002_DEMO_2.png)
 
 ## 7. Observations
 
-- The history of the states of a course is not relevant.
+- All users can create a Board.

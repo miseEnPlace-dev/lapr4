@@ -20,8 +20,8 @@ public class HoursTest {
     Hours h = Hours.valueOf(c);
     Hours h2 = Hours.valueOf(c2);
 
-    assertTrue(h.compareTo(h2) > 0);
-    assertTrue(h2.compareTo(h) < 0);
+    assertTrue(h.compareTo(h2) < 0);
+    assertTrue(h2.compareTo(h) > 0);
     assertEquals(0, h.compareTo(h));
   }
 

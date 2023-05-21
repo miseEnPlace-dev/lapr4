@@ -5,6 +5,7 @@ import eapli.ecourse.app.backoffice.console.presentation.course.CoursesMenu;
 import eapli.ecourse.app.backoffice.console.presentation.enrolment.EnrollmentsMenu;
 import eapli.ecourse.app.backoffice.console.presentation.users.UsersMenu;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
+import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -92,6 +93,7 @@ public class MainMenu extends AbstractUI {
     if (!Application.settings().isMenuLayoutHorizontal())
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
+    mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
     mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
     return mainMenu;
@@ -101,7 +103,6 @@ public class MainMenu extends AbstractUI {
     final Menu menu = new Menu("Settings >");
 
     menu.addItem(SOMETHING_OPTION, "Test", new ShowMessageAction("Not implemented yet"));
-    menu.addItem(CREATE_BOARD_OPTION, "Create Board", new ShowMessageAction("Not implemented yet"));
     menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
     return menu;
