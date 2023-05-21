@@ -29,7 +29,10 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.2. Client Clarifications
 
-- N/A
+> [**Question:** A course can be open(to enroll), closed(after it ends) and in progress(decurring, closed for enrollment)?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21973)
+>
+> **Answer**: "Yes, a course may have several states."
+
 
 ## 2.3. Functional Requirements
 
@@ -45,7 +48,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 1. Manager asks to change course status
 2. The system lists all the toggle operations
-3. selects one
+3. Manager selects one
 4. The system lists all the available courses for the operation
 5. Manager selects the desired course
 6. System informs the success of the operation

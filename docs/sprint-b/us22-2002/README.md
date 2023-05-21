@@ -15,7 +15,7 @@
 
 ## 2.1 Client Specifications
 
-
+- N/A.
 
 ## 2.2. Client Clarifications
 
@@ -35,16 +35,14 @@
 
 ### 3.1. Main success scenario
 
-1. Student request so view future exams
+1. Student request to view future exams
 2. The system displays the courses the student's enrolled in
-3. Students selects one
+3. Student selects one
 4. System display all the future exams of the chosen course
-
 
 ### 3.2. Conditions
 
 - The student must be authenticated
-
 
 ### 3.3. System Sequence Diagram
 

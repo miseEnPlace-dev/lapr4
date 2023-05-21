@@ -282,6 +282,12 @@ Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de dep
 
 "Not relevant, but can be stored if you want."
 
+## [Question 50](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21973)
+
+> A course can be open(to enroll), closed(after it ends) and in progress(decurring, closed for enrollment)?
+
+"Yes, a course may have several states."
+
 ---
 
 _Last question: "US1004-As Manager, I want to open and close courses", by GOUVEIA._

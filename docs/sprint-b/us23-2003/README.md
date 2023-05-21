@@ -80,24 +80,31 @@
 - Relevant implementation details
 
 ```java
-public Iterable<CourseDTO> listOpenInProgressCourses() {
-    Iterable<CourseDTO> openCourses = this.service.listOpenCourses();
+  public Iterable<CourseDTO> listOpenInProgressCourses() {
+  Iterable<CourseDTO> openCourses = this.service.listOpenCourses();
 
-    Iterable<CourseDTO> inProgressCourses = this.service.listInProgressCourses();
-    Stream<CourseDTO> combinedStream = Stream.concat(StreamSupport.stream(openCourses.spliterator(), false), StreamSupport.stream(inProgressCourses.spliterator(), false));
+  Iterable<CourseDTO> inProgressCourses = this.service.listInProgressCourses();
+  Stream<CourseDTO> combinedStream = Stream.concat(StreamSupport.stream(openCourses.spliterator(), false),
+  StreamSupport.stream(inProgressCourses.spliterator(), false));
 
-    return combinedStream::iterator;
+  return combinedStream::iterator;
   }
 
-public Iterable<ExamDTO> listCourseExams(CourseDTO courseDTO) {
-    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER, ClientRoles.MANAGER);
-    Optional<Course> course = courseRepository.findByCode(courseDTO.getCode());
+public Iterable<EvaluationExamDTO> listCourseEvaluationExams(CourseDTO courseDTO) {
+  authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER, ClientRoles.MANAGER);
 
-    if (course.isEmpty())
-        throw new IllegalArgumentException("There is no Course with the given code");
+  Optional<Course> course = courseRepository.ofIdentity(courseDTO.getCode());
 
-    return examService.listAllCourseExams(course.get());
-}
+  if (course.isEmpty())
+  throw new IllegalArgumentException("There is no Course with the given code");
+
+  return evaluationExamService.listAllCourseExams(course.get());
+  }
+
+public Iterable<FormativeExamDTO> listCourseFormativeExams(CourseDTO courseDTO) {
+  Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
+  return formativeExamService.findAllCourseExams(course);
+  }
 ```
 
 ## 6. Integration & Demonstration
@@ -113,7 +120,6 @@ public Iterable<ExamDTO> listCourseExams(CourseDTO courseDTO) {
 #### 6.2.1. No exams in the course
 
 ![US2003_DEMO_FAIL](US2003_DEMO_FAIL.png)
-
 
 
 ## 7. Observations

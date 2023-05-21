@@ -36,7 +36,7 @@ class RepositoryFactory {
 }
 
 interface CourseRepository {
-
+  + save(course)
   + findAllOpen()
   + findAllClosed()
   + findAllInProgress()
