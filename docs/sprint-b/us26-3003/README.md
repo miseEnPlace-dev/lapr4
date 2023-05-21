@@ -36,3 +36,32 @@ The Readers/Writers problem is a classic synchronization problem that can be use
 
 In order to simulate the access to a shared board, it was created a matrix of 10x10, where each position of the matrix represents a position of the board. Each position of the matrix can have a value of 0 or 1, where 0 represents an empty position and 1 represents a position with information. The matrix is initialized with all positions with value 0.
 
+The solution consists of using 3 semaphores (mutex_readers_counter, mutex_board, priority). The mutex_readers_counter is going to guarantee mutual exclusion in access to counter of readers. The priority is going to guarantee priority to writers. The mutex_board is going to guarantee
+mutual exclusion in access to board.
+
+It is created 10 child's to simulate multiple users accessing the board to write/read. To tests reasons, the odd children number is going to be the reader and the even the writer.
+
+
+Writer behaviour:
+- Decrement priority's semaphore to guarantee my priority to board access
+- Decrement board mutex's semaphore to guarantee my unique access to board
+- Write random number to a random cell
+- Increment priority's semaphore
+- Increment board mutex's semaphore
+
+
+Reader behaviour:
+- Decrement the priority's semaphore and if there is a writer waiting, wait for it to finish
+- Decrement the readers counter mutex to guarantee mutual exclusion in access to counter of readers
+- Increment the readers counter
+- If it is the first reader, decrement the board mute's semaphore to guarantee my unique access to board
+- Increment the mutex_readers_counter semaphore
+- Reads from random cell number
+- Decrement mutex_readers_counter to guarantee exclusive
+- Decrement number of readers
+- If I'm the last reader leaving the reading process, increment the mutex's sem, letting other process access the board. If there is still a reader reading, cannot increment sem already
+- Increment mutex_readers_counter semaphore
+
+Parent process waits for all childs to finish.
+
+All memories get cleaned.
