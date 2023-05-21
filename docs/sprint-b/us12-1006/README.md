@@ -108,9 +108,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 5. Integration & Demonstration
 
-<!-- TODO -->
-
-![US1006_DEMO](assets/US1006_DEMO.png)
+![US1006_DEMO](US1006_DEMO.png)
 
 ## 6. Observations
 
