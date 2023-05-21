@@ -15,17 +15,7 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 2. Requirements
 
-_In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies)._
-
-_Example_
-
 **US 1010** As Teacher, I want to schedule a class.
-
-<!-- - G002.1. Blá Blá Blá ... -->
-
-<!-- - G002.2. Blá Blá Blá ... -->
-
-<!-- _Regarding this requirement we understand that it relates to..._ -->
 
 ## 1.3. Functional Requirements
 
@@ -37,47 +27,140 @@ _Example_
 
 ## 3. Analysis
 
-_In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),_
+### 3.1. Conditions
+
+- The teacher must be authenticated and authorized to perform the operation;
+- The teacher must be teacher of the selected course;
+- The teacher must be available at the time of the class (no class or meeting overlap).
+
+### 3.2. System Sequence Diagram
+
+![US1010_SSD](out/US1010_SSD.svg)
 
 ## 4. Design
 
-_In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality._
+### 4.1. Functionality Realization
 
-### 4.1. Realization
+![US1010_SD](out/US1010_SD.svg)
 
 ### 4.2. Class Diagram
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+![US1010_CD](out/US1010_CD.svg)
 
 ### 4.3. Applied Patterns
 
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the scheduled extraordinary classes. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of System Users and courses to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
+
 ### 4.4. Tests
 
-**Test 1:** _Verifies that it is not possible to create an instance of the Example class with null values._
+_Note: This are some simplified versions of the tests for readability purposes._
 
+**Test 1:** Ensure CourseClass has a valid day of week
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        null, Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), course, teacher));
+  }
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+
+**Test 2:** Ensure CourseClass has a valid Duration
+
+```java
+  @Test
+  public void ensureClassHasDuration() {
+    assertThrows(IllegalArgumentException.class, () -> new CourseClass(
+        DayInWeek.valueOf(3), null, Hours.valueOf(Calendar.getInstance), course, teacher));
+  }
+```
+
+**Test 3:** Ensure CourseClass has a valid Teacher
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), null, course, teacher));
+  }
+```
+
+**Test 4:** Ensure CourseClass has a valid Course
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), null, teacher));
+  }
+```
+
+**Test 5:** Ensure CourseClass has a valid Teacher
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), course, null));
+  }
 ```
 
 ## 5. Implementation
 
-_In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files._
+```java
+public class ScheduleClassController {
+  private ListCourseService listCourseService;
 
-_It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement._
+  private Teacher teacher;
+
+  private CourseClassRepository classRepository;
+  private CourseRepository courseRepository;
+  private TeacherRepository teacherRepository;
+
+  public ScheduleClassController(CourseClassRepository classRepository,
+      CourseRepository courseRepository, TeacherRepository teacherRepository) {
+    this.listCourseService = new ListCourseService(courseRepository);
+
+    this.classRepository = classRepository;
+    this.courseRepository = courseRepository;
+    this.teacherRepository = teacherRepository;
+  }
+
+  public void setCurrentAuthenticatedTeacher() {
+    AuthorizationService authz = AuthzRegistry.authorizationService();
+
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.TEACHER);
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
+
+    teacher = teacherRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+  }
+
+  public Iterable<CourseDTO> listAllInProgressLecturedBy() {
+    setCurrentAuthenticatedTeacher();
+
+    return listCourseService.listInProgressCoursesThatTeacherLectures(teacher);
+  }
+
+  public CourseClass createClass(CourseCode code, int duration, DayInWeek day, Hours hours) {
+    Course course = courseRepository.ofIdentity(code).orElseThrow();
+
+    Duration durationObj = Duration.valueOf(duration);
+
+    return classRepository.save(new CourseClass(day, durationObj, hours, course, teacher));
+  }
+}
+```
 
 ## 6. Integration/Demonstration
 
-_In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system_
-
-_It is also important to explain any scripts or instructions required to execute an demonstrate this functionality_
+![US1010_DEMO](US1010_DEMO.png)
 
 ## 7. Observations
 
-_This section should be used to include any content that does not fit any of the previous sections._
-
-_The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works_
-
-_The team should include in this section statements/references regarding third party works that were used in the development this work._
+N/A.
