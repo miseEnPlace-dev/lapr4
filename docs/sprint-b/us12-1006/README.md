@@ -96,13 +96,36 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ### 4.1. Controller
 
-<!-- TODO -->
-
-- Relevant implementation details
-
 ```java
-  private void sample() {
-    return true;
+  public ListCoursesController(AuthorizationService authz, CourseRepository courseRepository,
+      TeacherRepository teacherRepository, StudentRepository studentRepository,
+      EnrolmentRepository enrolmentRepository) {
+    this.authz = authz;
+    this.teacherRepository = teacherRepository;
+    this.studentRepository = studentRepository;
+
+    this.listCourseService = new ListCourseService(courseRepository);
+    this.enrolmentListService = new ListEnrolmentService(enrolmentRepository);
+  }
+
+  public Iterable<CourseDTO> getCoursesForLoggedUser() {
+    if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.MANAGER, ClientRoles.POWER_USER))
+      return listCourseService.listAll();
+
+    if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.TEACHER)) {
+      final SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
+      final Teacher teacher = teacherRepository.findByUsername(user.username()).orElseThrow();
+      return listCourseService.listInProgressCoursesThatTeacherLectures(teacher);
+    }
+
+    if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.STUDENT)) {
+      final SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+      final Student student = studentRepository.findByUsername(user.username()).orElseThrow();
+      return enrolmentListService
+          .listStudentsCourses(student.identity());
+    }
+
+    return null;
   }
 ```
 
