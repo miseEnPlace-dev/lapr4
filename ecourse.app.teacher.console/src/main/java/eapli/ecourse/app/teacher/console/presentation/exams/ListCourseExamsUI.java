@@ -51,7 +51,9 @@ public class ListCourseExamsUI extends AbstractUI {
       evaluationExams, new EvaluationExamPrinter());
     evaluationExamsList.show();
 
-    ListWidget<FormativeExamDTO> formativeExamsList = new ListWidget<>("Formative Exams Of " + selected.getTitle(),
+
+
+    ListWidget<FormativeExamDTO> formativeExamsList = new ListWidget<>("\nFormative Exams Of " + selected.getTitle(),
       formativeExams, new FormativeExamPrinter());
     formativeExamsList.show();
 

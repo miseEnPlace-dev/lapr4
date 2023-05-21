@@ -24,7 +24,8 @@ public class MainMenu extends AbstractUI {
   private static final int CREATE_BOARD_OPTION = 1;
   private static final int EXAMS_OPTION = 2;
   private static final int CLASSES_OPTION = 3;
-  private static final int MY_USER_OPTION = 4;
+  private static final int COURSES_OPTION = 4;
+  private static final int MY_USER_OPTION = 5;
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
@@ -70,6 +71,7 @@ public class MainMenu extends AbstractUI {
     mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
     mainMenu.addSubMenu(EXAMS_OPTION, new ExamMenu().buildMenu());
     mainMenu.addSubMenu(CLASSES_OPTION, new ClassesMenu().buildMenu());
+    mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
