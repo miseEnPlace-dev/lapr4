@@ -10,6 +10,9 @@ class ListCourseExamsController {
 - authorizationService
 - evaluationExamListService
 - formativeExamListService
++ ListCourseExamsController(authorizationService, courseRepository,
+                             evaluationExamRepository, formativeExamRepository)
+
 + listOpenInProgressCourses()
 + listCourseEvaluationExams(courseDTO)
 + listCourseFormativeExams(courseDTO)
@@ -166,7 +169,7 @@ FormativeExamRepository <|.. InMemoryFormativeExamRepository
 FormativeExamRepository <|.. JpaFormativeExamRepository
 
 
-ListCourseExamsController ..> PersistenceContext
+ListCourseExamsUI ..> PersistenceContext
 ListCourseExamsUI ..> ListCourseExamsController
 
 

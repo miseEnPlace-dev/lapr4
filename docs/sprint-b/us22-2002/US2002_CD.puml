@@ -152,8 +152,8 @@ ListFutureExamsController --> ListEnrolmentService
 ListFutureExamsController --> ExamListService
 ListFutureExamsController ..> Course
 ListFutureExamsController ..> CourseDTO
-ListFutureExamsController ..> PersistenceContext
 
+ListFutureExamsUI ..> PersistenceContext
 ListFutureExamsUI ..> ListFutureExamsController
 
 ListEnrolmentService ..> EnrolmentRepository
