@@ -80,12 +80,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 5. Implementation
 
-_In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files._
-
-_It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement._
-
-## 6. Integration/Demonstration
-
 ```java
 public class ScheduleClassController {
   private ListCourseService listCourseService;
@@ -130,10 +124,10 @@ public class ScheduleClassController {
 }
 ```
 
+## 6. Integration/Demonstration
+
+![US1010_DEMO](US1010_DEMO.png)
+
 ## 7. Observations
 
-_This section should be used to include any content that does not fit any of the previous sections._
-
-_The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works_
-
-_The team should include in this section statements/references regarding third party works that were used in the development this work._
+N/A.
