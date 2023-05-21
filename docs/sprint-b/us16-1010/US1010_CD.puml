@@ -1,1 +1,160 @@
 @startuml US1010_CD
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface CourseRepository {
+  {abstract} findAllNotClosed()
+  {abstract} findAllScheduledByTeacher(teacher)
+}
+
+class InMemoryCourseRepository {
+  + findAllNotClosed()
+  + save(course)
+}
+
+class JpaCourseRepository {
+  + findAllNotClosed()
+  + save(course)
+}
+
+interface TeacherRepository {
+  {abstract} findByUsername(username)
+}
+
+class InMemoryTeacherRepository {
+  + findByUsername(username)
+  + save(teacher)
+}
+
+class JpaTeacherRepository {
+  + findByUsername(username)
+  + save(teacher)
+}
+
+interface CourseClassRepository {
+  {abstract} findAllByCourseCode(code)
+}
+
+class InMemoryCourseClassRepository {
+  + findAllByCourseCode(code)
+  + save(class)
+}
+
+class JpaCourseClassRepository {
+  + findAllByCourseCode(code)
+  + save(class)
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+
+  + toggleEnrolmentState()
+  ' + toDto()
+}
+
+class CourseClass {
+  - dayInWeek
+  - duration
+  - hours
+  - scheduledBy
+
+  + toDto()
+}
+
+enum CourseState {
+  CLOSED
+  OPEN
+  IN_PROGRESS
+  FINISHED
+}
+
+' enum CourseEnrolmentState {
+'   OPEN
+'   CLOSED
+' }
+
+class ScheduleAvailabilityService {
+  + ScheduleAvailabilityService(classRepository, teacherRepository)
+
+  + isTeacherAvailable(teacher, time, duration)
+}
+
+class ListCourseService {
+  - courseRepository
+
+  + ListCourseService(courseRepository)
+
+  + listAllInProgressLecturedByTeacher(teacher)
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTOParser {
+  + valueOf(courseDTO)
+}
+
+class ScheduleClassController {
+  - classRepository
+  - courseRepository
+  - teacherRepository
+  - listCourseService
+  - availabilityService
+
+  + ScheduleClassController(classRepository, courseRepository, teacherRepository)
+
+  + listTeacherCourses()
+  + createClass(course, duration, dayInWeek, hours)
+}
+
+class ScheduleClassUI {}
+
+ScheduleClassUI ..> ScheduleClassController
+
+ScheduleClassController ..> PersistenceContext
+ScheduleClassController --> ScheduleAvailabilityService
+ScheduleClassController --> CourseClass
+ScheduleClassController --> ListCourseService
+
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> TeacherRepository
+RepositoryFactory --> CourseClassRepository
+
+CourseDTOParser ..> CourseDTO
+CourseDTOParser ..> Course
+
+CourseRepository <|.. InMemoryCourseRepository
+CourseRepository <|.. JpaCourseRepository
+
+CourseClassRepository <|.. InMemoryCourseClassRepository
+CourseClassRepository <|.. JpaCourseClassRepository
+
+TeacherRepository <|.. InMemoryTeacherRepository
+TeacherRepository <|.. JpaTeacherRepository
+
+ListCourseService ..> Course
+
+Course --> CourseState
+' Course --> CourseEnrolmentState
+
+@enduml

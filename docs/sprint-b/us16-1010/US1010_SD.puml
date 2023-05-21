@@ -1,1 +1,83 @@
 @startuml US1010_SD
+autonumber
+
+actor "Teacher" as T
+participant "ScheduleClassUI" as UI <<presentation>>
+participant "ScheduleClassController" as CTRL <<application>>
+participant "ListCourseService" as CSRV <<service>>
+participant "ScheduleAvailabilityService" as SSRV <<service>>
+participant "Course" as C <<domain>>
+participant "CourseDTO" as CDTO <<dto>>
+participant "CourseClass" as CL <<domain>>
+
+database CourseRepository as CREP <<repository>>
+database CourseClassRepository as CLREP <<repository>>
+
+activate T
+
+T -> UI : asks to schedule a class
+activate UI
+
+UI -> CTRL : new(classRepository, courseRepository, teacherRepository)
+activate CTRL
+CTRL -> CSRV : listCourseService=new(courseRepository)
+activate CSRV
+deactivate CSRV
+CTRL -> SSRV : availabilityService=new(classRepository, teacherRepository)
+activate SSRV
+deactivate SSRV
+deactivate CTRL
+
+UI -> CTRL : listAllInProgressLecturedByTeacher()
+activate CTRL
+CTRL -> CSRV : listAllInProgressLecturedByTeacher(teacher)
+activate CSRV
+CSRV -> CREP : findAllInProgressLecturedByTeacher(teacher)
+activate CREP
+CREP --> CSRV : courses
+deactivate CREP
+
+loop for each course
+  CSRV -> C : toDTO(course)
+  activate C
+  C -> CDTO : new()
+  activate CDTO
+  deactivate CDTO
+  deactivate C
+end loop
+
+CSRV --> CTRL : courses
+deactivate CSRV
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> T : asks to select the course
+deactivate UI
+
+T -> UI : selects the course
+activate UI
+UI--> T : asks to enter the date/time start and duration
+deactivate UI
+
+T -> UI : enters the day of the week, hour and duration
+activate UI
+UI -> CTRL : createClass(course, teacher, date, duration, students)
+activate CTRL
+CTRL -> SSRV : isTeacherAvailable()
+activate SSRV
+deactivate SSRV
+CTRL -> CL : new(dayInWeek, duration, houts, course, teacher)
+activate CL
+deactivate CL
+CTRL -> CLREP : save(class)
+activate CLREP
+CLREP --> CTRL : class
+deactivate CLREP
+CTRL --> UI : sucess
+deactivate CTRL
+UI--> T : informs operation success
+deactivate UI
+
+deactivate T
+
+@enduml
