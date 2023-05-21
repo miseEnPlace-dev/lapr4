@@ -57,14 +57,14 @@ This is the first time the task is assigned to be developed and is to be complet
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** Ensure CourseClass has a valid Teacher
+**Test 1:** Ensure CourseClass has a valid day of week
 
 ```java
   @Test
   public void ensureClassHasTeacher() {
     assertThrows(IllegalArgumentException.class, () ->
     new CourseClass(
-        DayInWeek.valueOf(3), Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), course, null));
+        null, Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), course, teacher));
   }
 ```
 
@@ -75,6 +75,39 @@ _Note: This are some simplified versions of the tests for readability purposes._
   public void ensureClassHasDuration() {
     assertThrows(IllegalArgumentException.class, () -> new CourseClass(
         DayInWeek.valueOf(3), null, Hours.valueOf(Calendar.getInstance), course, teacher));
+  }
+```
+
+**Test 3:** Ensure CourseClass has a valid Teacher
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), null, course, teacher));
+  }
+```
+
+**Test 4:** Ensure CourseClass has a valid Course
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), null, teacher));
+  }
+```
+
+**Test 5:** Ensure CourseClass has a valid Teacher
+
+```java
+  @Test
+  public void ensureClassHasTeacher() {
+    assertThrows(IllegalArgumentException.class, () ->
+    new CourseClass(
+        DayInWeek.valueOf(3), Duration.valueOf(60), Hours.valueOf(Calendar.getInstance), course, null));
   }
 ```
 
