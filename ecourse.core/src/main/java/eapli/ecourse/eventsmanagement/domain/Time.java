@@ -1,5 +1,7 @@
 package eapli.ecourse.eventsmanagement.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.Embeddable;
 
@@ -56,7 +58,9 @@ public class Time implements ValueObject, Comparable<Time> {
 
   @Override
   public String toString() {
-    return this.time.toString();
+    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+    return formatter.format(time.getTime());
   }
 
   @Override
