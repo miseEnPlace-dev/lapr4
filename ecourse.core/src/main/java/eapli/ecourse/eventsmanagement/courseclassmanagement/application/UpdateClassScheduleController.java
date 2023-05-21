@@ -64,7 +64,7 @@ public class UpdateClassScheduleController {
   }
 
   public Iterable<ClassDTO> listAllClassesForAuthenticatedTeacher() {
-    SystemUser user = authzRegistry.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
+    SystemUser user = getAuthenticatedUser();
     final TeacherDTO teacherDTO = teacherRepository.findByUsername(user.username()).orElseThrow().toDto();
     return classService.findAllScheduledByTeacherTaxPayerNumber(teacherDTO.getNumber());
   }
@@ -78,7 +78,7 @@ public class UpdateClassScheduleController {
     return false;
   }
 
-  public SystemUser getAuthenticatedUser() {
+  private SystemUser getAuthenticatedUser() {
     return authzRegistry.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow(IllegalStateException::new);
   }
 

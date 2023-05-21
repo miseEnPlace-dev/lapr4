@@ -25,20 +25,6 @@ class DayInWeek <<(V,#FF8B40) value object>> {}
 entity Class <<entity>> <<root>> {
 }
 
-package "<<aggregate>> ExtraordinaryClass" {
-  entity ExtraordinaryClass
-
-  class Time
-  class Duration‎
-}
-
-class Hours <<(V,#FF8B40) value object>> {}
-class Time <<(V,#FF8B40) value object>> {}
-class Duration‎ <<(V,#FF8B40) value object>> {}
-
-entity ExtraordinaryClass <<entity>> <<root>> {
-}
-
 package "<<aggregate>> Course" {
     entity Course
 }

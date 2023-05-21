@@ -19,13 +19,21 @@
 
 ## 2.2. Client Clarifications
 
+> [**Question**: Can a meeting and class overlap?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21994)
+>
+> **Answer**: "Regarding classes:
+> FRC09 - Schedule of Class A teacher schedule a class (always a recurring class, happens every week). System must check if the Teacher is available for the class period.
+
 ## 2.3. Functional Requirements
+
+- **FRC09** Schedule of Class A teacher schedule a class (always a recurring class, happens every week). System must check if the Teacher is available for the class period
 
 - **FRC11** Update Schedule of Class - A teacher changes the time of a specific class (only changes a specific occurrence of a recurring class).
 
 ## 2.4. Acceptance Criteria
 
-- N/a
+- Users must be able to attend the class in the new time.
+- Teacher must be able to give the class in the new time.
 
 ## 3. Analysis
 
@@ -55,10 +63,44 @@
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** Ensure the course is in the correct state after the operation
+**Test 1:** Ensure its possible to create class
 
 ```java
   @Test
+  public void ensureItsPossibleToCreateClass() {
+    new CourseClass(DayInWeek.valueOf(WeekDay.MONDAY), Duration.valueOf(50),
+        Hours.valueOf(Calendar.getInstance()), getDummyCourse(), getDummyTeacher());
+  }
+```
+
+**Test 2:** Ensure that the class is updated
+
+```java
+  @Test
+  public void ensureClassIsUpdated() {
+    CourseClass courseClass = createCourseClass();
+    Time time = createTime();
+
+    CourseClass updatedClass = updateScheduleClass(time, courseClass);
+
+    assertEquals(time, updatedClass.getSchedule().get(0));
+  }
+```
+
+**Test 3:** Ensure that the class is not updated if users are not available
+
+```java
+  @Test
+  public void ensureClassIsNotUpdatedIfUsersNotAvailable() {
+    CourseClass courseClass = createCourseClass();
+    Time time = createTime();
+
+    when(authzRegistry.isAuthenticatedUserAuthorizedTo(any())).thenReturn(false);
+
+    assertThrows(
+        AuthorizationException.class,
+        () -> updateScheduleClass(time, courseClass));
+  }
 ```
 
 ## 5. Implementation
@@ -68,7 +110,15 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
+  public CourseClass updateScheduleClass(Time time, ClassDTO courseClass) {
+    authzRegistry.ensureAuthenticatedUserHasAnyOf(ClientRoles.TEACHER);
 
+    Preconditions.noneNull(time, courseClass);
+
+    CourseClass newClass = classRepository.ofIdentity(courseClass.getId()).orElseThrow();
+    newClass.addSpecialClass(time);
+    return saveClass(newClass);
+  }
 ```
 
 ## 6. Integration & Demonstration
@@ -76,10 +126,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ### 6.1. Success scenario
 
 ![US1012_DEMO](US1012_DEMO.png)
-
-### 6.2. Failure scenario
-
-![US1012_DEMO_FAIL](US1012_DEMO_FAIL.png)
 
 ## 7. Observations
 

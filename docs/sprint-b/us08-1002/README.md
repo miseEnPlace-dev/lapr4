@@ -50,7 +50,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2.4. Acceptance Criteria
 
-- N/a
+- Course code must be unique.
+- Course code must be alphanumeric.
+- Limits must be positive.
 
 ---
 
@@ -68,6 +70,7 @@ This is the first time this task is assigned to be developed. This is a new func
 ### 3.2. Conditions
 
 - The manager must be authenticated and authorized to perform the operation.
+- Must exist at least one teacher in the system.
 
 ### 3.3. System Sequence Diagram
 
@@ -93,7 +96,10 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- xxx
+- - **Builder:** The builder pattern is used to provide a flexible way to create a course. This is done by using the `CourseBuilder` class. This allows the creation of a course with different ways to set some of its attributes and also allows the creation of a course without setting non mandatory attributes. This will also be useful to develop the tests.
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the courses. This is done to allow the persistence of the courses and to allow the use of the courses in other parts of the application.
+- **Service:** This is used to provide a list of Teachers to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
@@ -110,14 +116,30 @@ _Note: This are some simplified versions of the tests for readability purposes._
   }
 ```
 
-**Test 2:** xxx
+**Test 2:** Ensure its not possible to create a course with null fields.
 
 ```java
   @Test
-  private Course getDummyCourse() {
-    return new Course(CourseCode.valueOf("1234"), CourseTitle.valueOf("dummy"),
-        CourseDescription.valueOf("dummy"), EnrolmentLimits.valueOf(10, 20), new CourseState(),
-        new CourseEnrolmentState());
+  public void ensureItsNotPossibleToCreateCourseWithNullFields() {
+    assertThrows(IllegalArgumentException.class, () -> controller.createCourse(null, null, null, 0, 0, null));
+  }
+```
+
+**Test 3:** Ensure its not possible to create a course with empty fields.
+
+```java
+  @Test
+  public void ensureItsNotPossibleToCreateCourseWithEmptyFields() {
+    assertThrows(IllegalArgumentException.class, () -> controller.createCourse("", "", "", 0, 0, null));
+  }
+```
+
+**Test 4:** Ensure its not possible to create a course with negative limits.
+
+```java
+  @Test
+  public void ensureItsNotPossibleToCreateCourseWithNegativeLimits() {
+    assertThrows(IllegalArgumentException.class, () -> controller.createCourse("1234", "dummy", "dummy", -1, -1, null));
   }
 ```
 
@@ -128,14 +150,27 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
-  private void sample() {
-    return true;
+  public Course createCourse(String code, String title, String description,
+      int min, int max, TeacherDTO teacherDTO) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.MANAGER);
+
+    Preconditions.noneNull(code, title, description, min, max, teacherDTO);
+
+    Teacher teacher = teacherRepository.findByTaxPayerNumber(teacherDTO.getNumber()).orElseThrow();
+
+    Course course = new CourseBuilder().withCode(code).withTitle(title).withDescription(description)
+        .withEnrolmentLimits(min, max).withResponsibleTeacher(teacher).build();
+
+    if (courseRepository.containsOfIdentity(course.code()))
+      throw new IllegalStateException("There is already a course with that code.");
+
+    return saveCourse(course);
   }
 ```
 
 ## 6. Integration & Demonstration
 
-![US1002_DEMO](US1002_DEMO.png)
+![US1002_DEMO](./assets/Demo.png)
 
 ## 7. Observations
 

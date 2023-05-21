@@ -5,13 +5,12 @@ actor "User" as U
 
 participant "ScheduleMeetingUI" as UI <<presentation>>
 participant "ScheduleMeetingController" as CTRL <<application>>
+participant "UserManagementService" as UMS <<service>>
 participant "Meeting" as MEETING <<domain>>
 participant "MeetingService" as MS <<service>>
-participant "User" as USER <<domain>>
-participant "Invite" as INVITE <<domain>>
+participant "ScheduleAvailabilityService" as SAS <<service>>
 
 database MeetingRepository as MR <<repository>>
-database UserRepository as UR <<repository>>
 database InviteRepository as IR <<repository>>
 
 activate U
@@ -25,53 +24,27 @@ deactivate UI
 U -> UI : types the requested data
 activate UI
 
-UI -> CTRL : listAllUsersAvailable()
+UI -> CTRL : getUsers()
 activate CTRL
 
-CTRL -> MS : listAllIterableUsersAvailable()
-activate MS
-
-loop for each user
-  MS -> USER : toDTO(user)
-  activate USER
-  USER -> DTO : new
-  activate DTO
-  deactivate DTO
-  deactivate USER
-end loop
-
-deactivate MS
+CTRL -> UMS : allUsers()
+activate UMS
+deactivate UMS
 
 deactivate CTRL
 
-UI --> M : asks to select the users to invite
+UI --> U : asks to select the users to invite
 deactivate UI
 
-M -> UI : selects the users to invite
+U -> UI : selects the users to invite
 activate UI
 
-UI -> CTRL : createMeeting()
+UI -> CTRL : checkIfUsersAreAvailable()
 activate CTRL
 
-CTRL -> UR : findUsersById()
-activate UR
-
-loop for each user
-  UR -> USER : findById()
-  activate USER
-  USER -> DTO : new
-  activate DTO
-  deactivate DTO
-  deactivate USER
-end loop
-
-deactivate UR
-
-CTRL -> MEETING : containsOfIdentity()
-activate MEETING
-deactivate MEETING
-
-deactivate CTRL
+CTRL -> SAS : areAllAvailable()
+activate SAS
+deactivate SAS
 deactivate CTRL
 
 UI --> U : informs if the data is valid and if all users can attend the meeting
@@ -83,14 +56,20 @@ activate UI
 UI -> CTRL : scheduleMeeting()
 activate CTRL
 
+CTRL -> MEETING : new()
+activate MEETING
+deactivate MEETING
+
 CTRL -> MR : saveMeeting()
 activate MR
 deactivate MR
 
-CTRL -> IR : saveInvites()
+CTRL -> CTRL : sendInvites()
+activate CTRL
+
+CTRL -> IR : saveInvite()
 activate IR
 deactivate IR
-
 deactivate CTRL
 
 UI --> U : informs operation sucess
