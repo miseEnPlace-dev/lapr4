@@ -1,5 +1,7 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.application;
 
+import java.util.ArrayList;
+
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.eventsmanagement.application.ScheduleAvailabilityService;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
@@ -15,6 +17,7 @@ import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
 
@@ -24,16 +27,19 @@ public class ScheduleMeetingController {
   private final InviteRepository inviteRepository;
   private final AuthorizationService authz;
   private final ScheduleAvailabilityService sAvaService;
+  private final UserManagementService userManagementService;
 
   public ScheduleMeetingController(final MeetingRepository meetingRepository, final AuthorizationService authz,
       final InviteRepository inviteRepository, final CourseClassRepository classRepository,
       final ExtraordinaryClassRepository extraordinaryClassRepository, final EnrolmentRepository enrolmentRepository,
-      final StudentRepository studentRepository, final TeacherRepository teacherRepository) {
+      final StudentRepository studentRepository, final TeacherRepository teacherRepository,
+      final UserManagementService userManagementService) {
     this.meetingRepository = meetingRepository;
     this.authz = authz;
     this.inviteRepository = inviteRepository;
     this.sAvaService = new ScheduleAvailabilityService(classRepository, extraordinaryClassRepository, inviteRepository,
         enrolmentRepository, studentRepository, teacherRepository);
+    this.userManagementService = userManagementService;
   }
 
   public Meeting scheduleMeeting(Time time, Duration duration, Iterable<SystemUser> users) {
@@ -86,5 +92,9 @@ public class ScheduleMeetingController {
 
   public SystemUser getAuthenticatedUser() {
     return authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow(IllegalStateException::new);
+  }
+
+  public ArrayList<SystemUser> getUsers() {
+    return (ArrayList<SystemUser>) userManagementService.allUsers();
   }
 }

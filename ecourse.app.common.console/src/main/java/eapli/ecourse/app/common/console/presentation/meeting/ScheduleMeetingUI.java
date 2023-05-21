@@ -1,6 +1,5 @@
 package eapli.ecourse.app.common.console.presentation.meeting;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -12,21 +11,18 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.application.ScheduleMeetingController;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class ScheduleMeetingUI extends AbstractUI {
 
-  private UserManagementService userManagementService = AuthzRegistry.userService();
-
   private final ScheduleMeetingController ctrl = new ScheduleMeetingController(
       PersistenceContext.repositories().meetings(),
       AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
       PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
       PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
-      PersistenceContext.repositories().teachers());
+      PersistenceContext.repositories().teachers(), AuthzRegistry.userService());
 
   @Override
   protected boolean doShow() {
@@ -41,7 +37,7 @@ public class ScheduleMeetingUI extends AbstractUI {
 
     Duration meetingDuration = Duration.valueOf(duration);
 
-    List<SystemUser> allUsers = (ArrayList<SystemUser>) userManagementService.allUsers();
+    List<SystemUser> allUsers = this.ctrl.getUsers();
 
     if (!allUsers.iterator().hasNext()) {
       System.out.println("There are no registered users.");
