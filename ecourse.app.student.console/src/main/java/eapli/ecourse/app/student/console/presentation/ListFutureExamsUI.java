@@ -40,7 +40,7 @@ public class ListFutureExamsUI extends AbstractUI {
       return false;
     }
 
-    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Exams of " + selected.getTitle(), courseFutureExams,
+    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Future Exams Of " + selected.getTitle(), courseFutureExams,
         new EvaluationExamPrinter());
     list.show();
 
