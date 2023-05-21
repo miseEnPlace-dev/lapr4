@@ -6,19 +6,21 @@ actor "Teacher" as T
 participant "ListCourseExamsUI" as UI <<presentation>>
 participant "ListCourseExamsController" as CTRL <<application>>
 participant "CourseListService" as C_SRV <<service>>
-participant "ExamListService" as E_SRV <<service>>
+participant "EvaluationExamListService" as E_SRV <<service>>
+participant "FormativeExamListService" as F_SRV <<service>>
 participant "Exam" as Exam <<domain>>
 participant "Course" as Course <<domain>>
 participant "CourseDTO" as C_DTO <<dto>>
-participant "ExamDTO" as E_DTO <<dto>>
-
+participant "EvaluationExamDTO" as E_DTO <<dto>>
+participant "FormativeExamDTO" as F_DTO <<dto>>
 
 database CourseRepository as CREPO <<repository>>
-database ExamRepository as EREPO <<repository>>
+database EvaluationExamRepository as EREPO <<repository>>
+database FormativeExamRepository as FREPO <<repository>>
 
 T -> UI: requests to view the exams list of a course
 activate UI
-UI -> CTRL: new(courseRepository, examRepository)
+UI -> CTRL: new(courseRepository, evaluationExamRepository, formativeExamRepository)
 activate CTRL
 deactivate CTRL
 
@@ -62,7 +64,7 @@ activate UI
 
 UI -> UI: course = select(courses, index)
 
-UI -> CTRL: exams = listCourseExams(course)
+UI -> CTRL: evaluationExams = listCourseEvaluationExams(course)
 activate CTRL
 
 CTRL -> E_SRV: listAllCourseExams(course)
@@ -80,6 +82,23 @@ loop for each exam
 deactivate E_SRV
 deactivate CTRL
 
+UI -> CTRL: formativeExams = listCourseFormativeExams(course)
+activate CTRL
+CTRL -> F_SRV: listAllCourseExams(course)
+activate F_SRV
+F_SRV -> FREPO: findAllCourseExams(course)
+activate FREPO
+deactivate FREPO
+loop for each exam
+    F_SRV -> Exam : toDTO(exam)
+    activate Exam
+    Exam -> F_DTO : new
+    deactivate F_SRV
+    deactivate Exam
+  end loop
+
+deactivate F_SRV
+deactivate CTRL
 UI --> T: displays all the exams of the chosen course
 
 @enduml
