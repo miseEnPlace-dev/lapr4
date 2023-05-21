@@ -10,7 +10,7 @@ import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class InMemoryExamRepository extends InMemoryDomainRepository<EvaluationExam, ExamCode>
+public class InMemoryEvaluationExamRepository extends InMemoryDomainRepository<EvaluationExam, ExamCode>
     implements EvaluationExamRepository {
 
   static {
