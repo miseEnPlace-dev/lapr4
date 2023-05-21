@@ -26,6 +26,18 @@ deactivate CTRL
 
 UI -> CTRL : listOpenForEnrolmentCourses()
 activate CTRL
+CTRL -> AUTH : loggedinUserWithPermissions()
+activate AUTH
+AUTH --> CTRL : authenticatedUser
+deactivate AUTH
+CTRL -> SREP : findByUsername(authenticatedUser.username())
+activate SREP
+SREP --> CTRL : student
+deactivate SREP
+CTRL -> EREP : findWithUserAndCourse()
+activate EREP
+EREP --> CTRL : enrolments
+deactivate EREP
 CTRL -> SRV : listOpenForEnrolment()
 activate SRV
 SRV -> REP : findAllOpenForEnrolment()
@@ -34,10 +46,13 @@ REP --> SRV : courses
 deactivate REP
 
 loop for each course
-  SRV -> E : toDTO(course)
-  activate E
-  E -> DTO : new
-  deactivate E
+  SRV -> SRV : isEnroled(student, course)
+  opt if is not enroled
+    SRV -> E : toDTO(course)
+    activate E
+    E -> DTO : new
+    deactivate E
+  end opt
 end loop
 
 SRV --> CTRL : courses
