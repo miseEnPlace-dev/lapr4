@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.exammanagement.domain.SectionDescription;
@@ -38,7 +38,7 @@ public class EvaluationExamSection implements DomainEntity<SectionIdentifier> {
   @Column(nullable = false)
   private ExamScore score;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<Question> questions;
 
   public EvaluationExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,

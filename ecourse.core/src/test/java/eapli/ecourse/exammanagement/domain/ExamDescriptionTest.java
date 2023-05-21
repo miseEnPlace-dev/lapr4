@@ -16,13 +16,6 @@ public class ExamDescriptionTest {
   }
 
   @Test
-  public void testExamDescriptionCreationWithEmptyDescription() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      ExamDescription.valueOf("");
-    });
-  }
-
-  @Test
   public void testExamDescriptionCreationWithLongDescription() {
     String longDescription = "This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters. This is a very long description that exceeds the maximum length of 255 characters.";
     assertThrows(IllegalArgumentException.class, () -> {

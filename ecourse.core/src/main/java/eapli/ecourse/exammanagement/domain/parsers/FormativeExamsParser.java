@@ -11,7 +11,7 @@ import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder
 
 public class FormativeExamsParser {
   public static FormativeExamRequestBuilder parseWithVisitor(String filePath) throws IOException, ParseException {
-    ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(filePath));
+    FormativeExamLexer lexer = new FormativeExamLexer(CharStreams.fromFileName(filePath));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     FormativeExamParser parser = new FormativeExamParser(tokens);
     ParseTree tree = parser.start();

@@ -10,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 
 import eapli.ecourse.exammanagement.domain.SectionDescription;
@@ -40,7 +40,7 @@ public class FormativeExamSection extends DomainEntityBase<Long> {
   @Column(nullable = false)
   private SectionDescription description;
 
-  @OneToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER)
   private List<Question> questions;
 
   public FormativeExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,

@@ -69,11 +69,15 @@ public class CreateFormativeExamController {
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
     FormativeExamRequest request = builder.build();
-    Collection<FormativeExamSection> sections = examService.buildSections(request, courseDto);
+    try {
+      Collection<FormativeExamSection> sections = examService.buildSections(request, courseDto);
 
-    FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
-        request.description(), sections);
+      FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
+          request.description(), sections);
 
-    return examRepository.save(exam);
+      return examRepository.save(exam);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid exam request");
+    }
   }
 }

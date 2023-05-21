@@ -5,8 +5,7 @@ import java.io.IOException;
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
-import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
+import eapli.ecourse.exammanagement.application.CreateFormativeExamController;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -14,10 +13,11 @@ import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
-public class CreateExamUI extends AbstractUI {
-  private CreateEvaluationExamController ctrl = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
-      PersistenceContext.repositories().courses());
+public class CreateFormativeExamUI extends AbstractUI {
+  private CreateFormativeExamController ctrl = new CreateFormativeExamController(AuthzRegistry.authorizationService(),
+      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().formativeExams(),
+      PersistenceContext.repositories().courses(),
+      PersistenceContext.repositories().questions());
 
   @Override
   protected boolean doShow() {
@@ -42,24 +42,17 @@ public class CreateExamUI extends AbstractUI {
     try {
       this.ctrl.parseExam(filePath);
     } catch (IOException ex) {
-      System.out.println("The specified file does not exist.");
-      return false;
+      System.out.println("\n\nThe specified file does not exist.");
     } catch (ParseException ex) {
       System.out.println(ex.getMessage());
-      return false;
     }
 
-    Time startTime = Time.valueOf(
-        Console.readCalendar("Enter the start date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
-
-    Time endTime = Time.valueOf(
-        Console.readCalendar("Enter the end date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
+    System.out.println("\n\nChecked structure successfully!\n\n");
 
     try {
-      this.ctrl.createExam(selectedCourse, startTime, endTime);
-    } catch (Exception ex) {
-      System.out.println("\n\nAn error occurred while creating the exam.");
-      return false;
+      this.ctrl.createExam(selectedCourse);
+    } catch (IllegalArgumentException ex) {
+      System.out.println(ex.getMessage());
     }
 
     System.out.println("\n\nExam created successfully.");
@@ -69,6 +62,7 @@ public class CreateExamUI extends AbstractUI {
 
   @Override
   public String headline() {
-    return "Create Exam";
+    return "Create Formative Exam";
   }
+
 }

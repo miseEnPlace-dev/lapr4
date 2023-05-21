@@ -9,7 +9,7 @@ public class ClassesMenu {
   private static final int SCHEDULE_EXTRA_CLASS_OPTION = 2;
 
   public Menu buildMenu() {
-    final Menu menu = new Menu("Classes");
+    final Menu menu = new Menu("Classes >");
 
     menu.addItem(CHANGE_CLASS_SCHEDULE_OPTION, "Change class schedule", new UpdateClassScheduleUI()::show);
     menu.addItem(SCHEDULE_EXTRA_CLASS_OPTION, "Schedule extra class", new ScheduleExtraClassUI()::show);

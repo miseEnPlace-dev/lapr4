@@ -23,9 +23,9 @@ public class JpaQuestionRepository extends JpaAutoTxRepository<Question, Questio
 
   @Override
   public Iterable<Question> findWithTypeFromCourse(String type, CourseCode code) {
-    final Map<String, Object> params = new HashMap<>();
+    Map<String, Object> params = new HashMap<>();
     params.put("type", type);
     params.put("code", code);
-    return match("e.type = :type AND e.course.code = :code", params);
+    return match("e.disc = :type AND e.course.code = :code", params);
   }
 }

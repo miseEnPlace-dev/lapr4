@@ -7,8 +7,8 @@
 
 @title "Expressões regulares.";
 @description "Descrição da Secção";
-@number-of-questions 2;
-@questions-type numerical;
+@number-of-questions 1;
+@questions-type matching;
 
 @end-section;
 
@@ -16,8 +16,8 @@
 
 @title "Outra Secção";
 @description "Descrição da Secção2";
-@number-of-questions 10;
-@questions-type multiple-choice;
+@number-of-questions 1;
+@questions-type numerical;
 
 @end-section;
 

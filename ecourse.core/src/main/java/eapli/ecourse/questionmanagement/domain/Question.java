@@ -1,6 +1,8 @@
 package eapli.ecourse.questionmanagement.domain;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +16,8 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.framework.domain.model.AggregateRoot;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name = "disc", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Question implements AggregateRoot<QuestionCode> {
   private static final long serialVersionUID = 1L;
 
@@ -33,6 +36,9 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
 
   @Column(nullable = true)
   private Feedback generalFeedback;
+
+  @Column(name = "disc", insertable = false, updatable = false)
+  protected String disc;
 
   @ManyToOne
   private Course course;

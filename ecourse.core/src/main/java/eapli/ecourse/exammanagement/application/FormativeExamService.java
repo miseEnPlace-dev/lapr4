@@ -22,7 +22,7 @@ public class FormativeExamService {
     List<Question> questions = new ArrayList<>();
 
     for (int i = 0; i < numberOfQuestions; i++) {
-      int randomIndex = (int) (Math.random() * questionsFromType.size());
+      int randomIndex = Math.toIntExact(Math.round(Math.random() * (questionsFromType.size() - 1)));
       questions.add(questionsFromType.get(randomIndex));
       questionsFromType.remove(randomIndex);
     }
@@ -30,10 +30,24 @@ public class FormativeExamService {
     return questions;
   }
 
+  private String sanitizeType(String type) {
+    // remove -, use camel case
+    StringBuilder sb = new StringBuilder();
+    String[] words = type.split("-");
+    for (String word : words) {
+      sb.append(word.substring(0, 1).toUpperCase());
+      sb.append(word.substring(1));
+    }
+    return sb.toString() + "Question";
+  }
+
   public Collection<Question> buildSection(int numberOfQuestions, String questionsType, CourseDTO course) {
+    final String sanitizedType = sanitizeType(questionsType);
     final Collection<Question> questionsFromType = (Collection<Question>) questionRepository.findWithTypeFromCourse(
-        questionsType,
-        course.getCode());
+        sanitizedType, course.getCode());
+    if (questionsFromType.size() < numberOfQuestions)
+      throw new IllegalArgumentException(
+          "Not enough questions of type " + questionsType + " in course " + course.getCode() + ".");
 
     return getRandomQuestions(numberOfQuestions, (List<Question>) questionsFromType);
   }
@@ -41,8 +55,7 @@ public class FormativeExamService {
   public Collection<FormativeExamSection> buildSections(FormativeExamRequest request, CourseDTO course) {
     List<FormativeExamSection> sections = new ArrayList<>();
     for (FormativeExamSectionRequest sectionRequest : request.sections()) {
-      Collection<Question> questions = buildSection(sectionRequest.numberOfQuestions(),
-          sectionRequest.questionsType(),
+      Collection<Question> questions = buildSection(sectionRequest.numberOfQuestions(), sectionRequest.questionsType(),
           course);
 
       final FormativeExamSection section = new FormativeExamSection(sectionRequest.identifier(), sectionRequest.title(),

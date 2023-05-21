@@ -83,7 +83,6 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
     if (ctx.getParent().getStart().getText().equals("@start-exam")) {
       String[] requiredProps = {
           "title",
-          "feedback",
       };
 
       Arrays.asList(requiredProps).forEach(p -> {
@@ -142,6 +141,14 @@ public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExa
   public FormativeExamRequestBuilder visitNumberOfQuestions(FormativeExamParser.NumberOfQuestionsContext ctx) {
     int numberOfQuestions = Integer.parseInt(ctx.NUMBER().getText());
     section.changeNumberOfQuestions(numberOfQuestions);
+    return builder;
+  }
+
+  @Override
+  public FormativeExamRequestBuilder visitQuestionsType(FormativeExamParser.QuestionsTypeContext ctx) {
+    String str = ctx.getChild(1).getText();
+    section.changeQuestionsType(str);
+    sections.add(section);
     return builder;
   }
 

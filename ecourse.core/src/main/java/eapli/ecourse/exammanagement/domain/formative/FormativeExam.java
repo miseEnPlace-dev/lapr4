@@ -31,6 +31,10 @@ public class FormativeExam extends Exam {
     this.sections = sections;
   }
 
+  protected FormativeExam() {
+    // for ORM only
+  }
+
   @Version
   private Long version;
 
