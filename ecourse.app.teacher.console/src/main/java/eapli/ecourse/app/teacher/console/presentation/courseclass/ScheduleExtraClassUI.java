@@ -53,7 +53,7 @@ public class ScheduleExtraClassUI extends AbstractUI {
     try {
       ctrl.createExtraordinaryClass(selected.getCode(), duration, time, selected2);
     } catch (Exception e) {
-      System.out.println("Error creating board: " + e.getMessage());
+      System.out.println("Error scheduling extraordinary class: " + e.getMessage());
       Console.readLine("Press Enter to continue...");
       return false;
     }

@@ -40,7 +40,7 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
     Map<String, Object> params = new HashMap<>();
     params.put("username", username);
     params.put("status", new InviteStatus(InviteStatus.Status.PENDING));
-    return match("e.username = :username && e.status = :status", params);
+    return match("e.user.username = :username AND e.status = :status", params);
   }
 
   /**
@@ -91,6 +91,6 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
     Map<String, Object> params = new HashMap<>();
     params.put("username", username);
     params.put("status", new InviteStatus(InviteStatus.Status.ACCEPTED));
-    return match("e.username = :username && e.status = :status", params);
+    return match("e.user.username = :username AND e.status = :status", params);
   }
 }
