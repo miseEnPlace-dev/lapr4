@@ -36,6 +36,6 @@ public class ListStudentsUI extends AbstractListUI<StudentDTO> {
 
   @Override
   protected String listHeader() {
-    return String.format("#   %-15s%-20s%-30s%-30s", "Mec. Number", "Username", "F. Name", "L. Name");
+    return String.format("#  %-15s%-20s%-30s%-30s", "Mec. Number", "Username", "F. Name", "L. Name");
   }
 }
