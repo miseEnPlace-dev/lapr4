@@ -13,7 +13,7 @@ public class ExtraordinaryClassID implements ValueObject, Comparable<Extraordina
   private ExtraordinaryClassID(final String extraordinaryClassId) {
     Preconditions.nonEmpty(extraordinaryClassId);
 
-    this.extraordinaryClassId = UUID.fromString(extraordinaryClassId).toString();
+    this.extraordinaryClassId = extraordinaryClassId;
   }
 
   protected ExtraordinaryClassID() {

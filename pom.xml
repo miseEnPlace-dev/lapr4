@@ -180,6 +180,24 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco-maven-plugin.version}</version>
+        <configuration>
+        <excludes>
+          <exclude>**/dto/*</exclude>
+          <exclude>**/exceptions/*</exclude>
+          <exclude>**/parsers/*</exclude>
+          <exclude>**/infrastructure/**/*</exclude>
+          <exclude>**/bootstrappers/**/*</exclude>
+          <exclude>**/bootstrap/*</exclude>
+          <exclude>**/AppSettings.*</exclude>
+          <exclude>**/console/**/*</exclude>
+          <exclude>**/eventhandlers/*</exclude>
+          <exclude>**/repositories/*</exclude>
+          <exclude>**/presentation/**/*</exclude>
+          <exclude>**/events/*</exclude>
+          <exclude>**/application/*</exclude>
+          <exclude>**/persistence/impl/**/*</exclude>
+        </excludes>
+        </configuration>
         <executions>
           <execution>
             <id>prepare-agent</id>
@@ -214,6 +232,10 @@
           </reportSet>
         </reportSets>
       </plugin>
+      <plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+</plugin>
     </plugins>
   </reporting>
 </project>

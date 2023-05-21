@@ -18,7 +18,7 @@ public class ClassID implements ValueObject, Comparable<ClassID> {
   private ClassID(final String classId) {
     Preconditions.nonEmpty(classId);
 
-    this.classId = UUID.fromString(classId).toString();
+    this.classId = classId;
   }
 
   protected ClassID() {

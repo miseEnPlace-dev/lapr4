@@ -75,6 +75,22 @@ public class MatchingQuestion extends Question {
     this.feedbacks.put(match, feedback);
   }
 
+  public Map<String, String> correctMatches() {
+    return correctMatches;
+  }
+
+  public Map<QuestionIdentifier, String> matches() {
+    return matches;
+  }
+
+  public Map<QuestionIdentifier, String> options() {
+    return options;
+  }
+
+  public Map<QuestionIdentifier, Feedback> feedbacks() {
+    return feedbacks;
+  }
+
   @Override
   public boolean sameAs(Object other) {
     if (!(other instanceof MatchingQuestion))

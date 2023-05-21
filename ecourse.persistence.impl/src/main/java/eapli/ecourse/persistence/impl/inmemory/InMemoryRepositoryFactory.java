@@ -133,7 +133,7 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
   @Override
   public EvaluationExamRepository evaluationExams(final TransactionalContext autoTx) {
-    return new InMemoryExamRepository();
+    return new InMemoryEvaluationExamRepository();
   }
 
   @Override

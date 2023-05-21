@@ -3,6 +3,7 @@ package eapli.ecourse.exammanagement.domain.formative;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -15,6 +16,7 @@ import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 
+@Entity
 public class FormativeExam extends Exam {
   private static final long serialVersionUID = 1L;
 
@@ -35,7 +37,6 @@ public class FormativeExam extends Exam {
   public FormativeExamDTO toDto() {
     return new FormativeExamDTO(identity(), title(), course(), teacher(), identifier(), description(), state());
   }
-
 
   public Collection<FormativeExamSection> sections() {
     return sections;

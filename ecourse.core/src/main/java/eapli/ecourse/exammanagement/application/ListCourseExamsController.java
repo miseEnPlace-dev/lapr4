@@ -59,8 +59,7 @@ public class ListCourseExamsController {
 
 
   public Iterable<FormativeExamDTO> listCourseFormativeExams(CourseDTO courseDTO) {
-    Optional<Course> course = courseRepository.ofIdentity(courseDTO.getCode());
-
-    return formativeExamService.findAllCourseExams(course.get());
+    Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
+    return formativeExamService.findAllCourseExams(course);
   }
 }

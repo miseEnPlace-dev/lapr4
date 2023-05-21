@@ -37,6 +37,10 @@ public class ShortAnswerQuestion extends Question {
     correctAnswers.put(correctAnswer, grade);
   }
 
+  public Map<String, Double> correctAnswers() {
+    return correctAnswers;
+  }
+
   @Override
   public boolean sameAs(Object other) {
     if (!(other instanceof ShortAnswerQuestion))

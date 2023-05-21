@@ -4,6 +4,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -23,6 +24,8 @@ public class DayInWeek implements ValueObject {
   }
 
   public static DayInWeek valueOf(final WeekDay weekDay) {
+    Preconditions.nonNull(weekDay);
+
     return new DayInWeek(weekDay);
   }
 

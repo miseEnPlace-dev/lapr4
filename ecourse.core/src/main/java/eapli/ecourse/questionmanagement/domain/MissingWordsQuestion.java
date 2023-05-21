@@ -45,6 +45,10 @@ public class MissingWordsQuestion extends Question {
     return this.missingWords;
   }
 
+  public List<String> options() {
+    return this.options;
+  }
+
   @Override
   public boolean sameAs(Object other) {
     if (!(other instanceof MissingWordsQuestion))

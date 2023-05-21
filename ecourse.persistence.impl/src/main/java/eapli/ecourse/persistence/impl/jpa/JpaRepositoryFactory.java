@@ -128,12 +128,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
   @Override
   public EvaluationExamRepository evaluationExams() {
-    return new JpaExamRepository(Application.settings().persistenceUnitName());
+    return new JpaEvaluationExamRepository(Application.settings().persistenceUnitName());
   }
 
   @Override
   public EvaluationExamRepository evaluationExams(TransactionalContext autoTx) {
-    return new JpaExamRepository(autoTx);
+    return new JpaEvaluationExamRepository(autoTx);
   }
 
   @Override

@@ -16,7 +16,6 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
-import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 
 @Entity
@@ -79,7 +78,17 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
 
   @Override
   public boolean sameAs(Object other) {
-    return DomainEntities.areEqual(this, other);
+    if (!(other instanceof ExtraordinaryClass)) {
+      return false;
+    }
+
+    final ExtraordinaryClass that = (ExtraordinaryClass) other;
+    if (this == that) {
+      return true;
+    }
+
+    return identity().equals(that.identity()) && duration.equals(that.duration) && time.equals(that.time)
+        && scheduledBy.equals(that.scheduledBy) && students.equals(that.students) && course.equals(that.course);
   }
 
   @Override
