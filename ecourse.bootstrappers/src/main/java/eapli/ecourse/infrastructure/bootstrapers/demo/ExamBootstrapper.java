@@ -1,9 +1,12 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Collection;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
 import eapli.ecourse.exammanagement.application.FormativeExamService;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
@@ -19,11 +22,6 @@ import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.framework.actions.Action;
-import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Collection;
 
 public class ExamBootstrapper implements Action {
   private Course course;
@@ -38,7 +36,8 @@ public class ExamBootstrapper implements Action {
 
   private FormativeExamRepository formativeRepository = PersistenceContext.repositories().formativeExams();
 
-  private  FormativeExamService formativeExamService = new FormativeExamService(PersistenceContext.repositories().questions());
+  private FormativeExamService formativeExamService = new FormativeExamService(
+      PersistenceContext.repositories().questions());
 
   @Override
   public boolean execute() {
@@ -61,7 +60,6 @@ public class ExamBootstrapper implements Action {
     return false;
   }
 
-
   private void addEvaluationExam() {
     Calendar startTime = Calendar.getInstance();
     startTime.set(2023, Calendar.JULY, 23, 14, 30);
@@ -70,7 +68,7 @@ public class ExamBootstrapper implements Action {
     endTime.set(2023, Calendar.JULY, 23, 15, 30);
 
     evaluationBuilder.withCourse(course).withTeacher(teacherRepository.ofIdentity(TaxPayerNumber.valueOf("212345678"))
-      .orElseThrow()).withStartTime(Time.valueOf(startTime)).withEndTime(Time.valueOf(endTime));
+        .orElseThrow()).withStartTime(Time.valueOf(startTime)).withEndTime(Time.valueOf(endTime));
 
     EvaluationExam exam = evaluationBuilder.build();
 
@@ -83,8 +81,9 @@ public class ExamBootstrapper implements Action {
     try {
       Collection<FormativeExamSection> sections = formativeExamService.buildSections(request, course.toDto());
 
-      FormativeExam exam = new FormativeExam(course, teacherRepository.ofIdentity(TaxPayerNumber.valueOf("212345678")).get(),
-        request.identifier(), request.title(), request.description(), sections);
+      FormativeExam exam = new FormativeExam(course,
+          teacherRepository.ofIdentity(TaxPayerNumber.valueOf("212345678")).get(),
+          request.identifier(), request.title(), request.description(), sections);
 
       formativeRepository.save(exam);
     } catch (Exception e) {
