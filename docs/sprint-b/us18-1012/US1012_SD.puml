@@ -5,24 +5,34 @@ actor "Teacher" as T
 
 participant "UpdateClassScheduleUI" as UI <<presentation>>
 participant "UpdateClassScheduleController" as CTRL <<application>>
+participant "ClassService" as CLASSSERVICE <<service>>
+participant "CourseClass" as COURSECLASS <<domain>>
+participant "ClassDTO" as DTO <<dto>>
 participant "ScheduleAvailabilityService" as SAREP <<service>>
-participant "SystemUser" as USER <<domain>>
-participant "UserDTO" as DTO <<dto>>
 
-database ClassRepository as REP <<repository>>
+database CourseClassRepository as REP <<repository>>
 
 activate T
 
 T -> UI : asks to update the class schedule
 activate UI
 
-UI -> CTRL : getTeacherClasses()
+UI -> CTRL : listAllClassesForAuthenticatedTeacher()
 activate CTRL
 
-CTRL -> REP : getTeacherClasses()
-activate REP
-deactivate REP
+CTRL -> CLASSSERVICE : getTeacherClasses()
+activate CLASSSERVICE
 
+loop for each class
+  CLASSSERVICE -> COURSECLASS : toDTO(class)
+  activate COURSECLASS
+  COURSECLASS -> DTO : new
+  activate DTO
+  deactivate DTO
+  deactivate COURSECLASS
+end loop
+
+deactivate CLASSSERVICE
 deactivate CTRL
 
 UI --> T: lists teacher classes
@@ -37,24 +47,12 @@ deactivate UI
 T -> UI : types requested data
 activate UI
 
-UI -> CTRL : updateClassSchedule()
+UI -> CTRL : checkIfUsersAreAvailable()
 activate CTRL
 
-CTRL -> SAREP : isAvailableTeacherAvailable()
+CTRL -> SAREP : areAllAvailable()
 activate SAREP
 deactivate SAREP
-
-CTRL -> SAREP : isAvailableUsers()
-activate SAREP
-
-loop for each user
-  SAREP -> USER : toDTO(user)
-  activate USER
-  USER -> DTO : new
-  activate DTO
-  deactivate DTO
-  deactivate USER
-end loop
 
 deactivate SAREP
 deactivate CTRL
@@ -65,8 +63,16 @@ deactivate UI
 T -> UI : confirms data
 activate UI
 
-UI -> CTRL : saveClassSchedule()
+UI -> CTRL : updateScheduleClass()
 activate CTRL
+
+CTRL -> REP : getClass()
+activate REP
+deactivate REP
+
+CTRL -> COURSECLASS : addSpecialClass()
+activate COURSECLASS
+deactivate COURSECLASS
 
 CTRL -> REP : save()
 activate REP

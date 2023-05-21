@@ -64,6 +64,9 @@ public class UpdateClassScheduleUI extends AbstractUI {
       }
     }
 
+    System.out.println("\nClass scheduled updated successfully created");
+    Console.readLine("Press Enter to continue...");
+
     return false;
   }
 
