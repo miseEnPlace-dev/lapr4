@@ -36,8 +36,6 @@
 
 ## 1.4. Acceptance Criteria
 
-<!-- > **AC.1**: xxx -->
-
 > N/A.
 
 ---
@@ -77,13 +75,13 @@
 
 ### 3.3. Applied Patterns
 
-<!-- TODO -->
-
-- xxx
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the scheduled extraordinary classes. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of System Users and courses to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 3.4. Tests
 
-<!-- TODO -->
+_Note: This are some simplified versions of the tests for readability purposes._
 
 **Test 1:** xxx
 
