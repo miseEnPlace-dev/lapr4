@@ -18,7 +18,7 @@ public class MeetingID implements ValueObject, Comparable<MeetingID> {
   private MeetingID(final String meetingId) {
     Preconditions.nonEmpty(meetingId);
 
-    this.meetingId = UUID.fromString(meetingId).toString();
+    this.meetingId = meetingId;
   }
 
   protected MeetingID() {

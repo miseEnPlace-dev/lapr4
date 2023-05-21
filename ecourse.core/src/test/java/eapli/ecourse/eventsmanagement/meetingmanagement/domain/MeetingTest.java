@@ -1,7 +1,7 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
@@ -57,5 +57,22 @@ public class MeetingTest {
     Invite invite = getDummyInvite();
     invite.status().accept();
     assertTrue(invite.status().isAccepted());
+  }
+
+  @Test
+  public void ensureIdToStringIsWorking() {
+    Calendar c = Calendar.getInstance();
+
+    Meeting meeting = new Meeting(MeetingID.valueOf("123"), Time.valueOf(c), Duration.valueOf(120));
+    assertEquals("123", meeting.identity().toString());
+  }
+
+  @Test
+  public void ensureIdIsComparable() {
+    MeetingID id1 = MeetingID.valueOf("123");
+    MeetingID id2 = MeetingID.valueOf("122");
+    MeetingID id3 = MeetingID.valueOf("124");
+    assertTrue(id1.compareTo(id2) > 0);
+    assertTrue(id1.compareTo(id3) < 0);
   }
 }

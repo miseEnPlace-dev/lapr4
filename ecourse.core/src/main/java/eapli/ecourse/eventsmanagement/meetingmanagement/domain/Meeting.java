@@ -46,6 +46,15 @@ public class Meeting implements AggregateRoot<MeetingID> {
     this.canceledAt = null;
   }
 
+  public Meeting(MeetingID id, Time time, Duration duration) {
+    Preconditions.noneNull(id, time, duration);
+
+    this.id = id;
+    this.time = time;
+    this.duration = duration;
+    this.canceledAt = null;
+  }
+
   @Override
   public boolean equals(Object other) {
     return DomainEntities.areEqual(this, other);

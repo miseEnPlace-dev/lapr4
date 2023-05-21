@@ -137,6 +137,7 @@ public class Board implements AggregateRoot<BoardID> {
     }
 
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
-        && this.archived.equals(otherBoard.archived()) && this.owner.equals(otherBoard.owner());
+        && this.archived != null ? this.archived.equals(otherBoard.archived())
+            : otherBoard.archived() == null && this.owner.equals(otherBoard.owner());
   }
 }

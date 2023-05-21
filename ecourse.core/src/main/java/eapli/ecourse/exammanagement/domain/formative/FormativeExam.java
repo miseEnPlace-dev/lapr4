@@ -51,7 +51,9 @@ public class FormativeExam extends Exam {
     if (this == that)
       return true;
 
-    // TODO: compare fields
-    return super.identity().equals(that.identity());
+    return that.identity().equals(this.identity()) && that.title().equals(this.title())
+        && that.course().equals(this.course()) && that.teacher().equals(this.teacher())
+        && that.identifier().equals(this.identifier()) && that.description().equals(this.description())
+        && that.state().equals(this.state());
   }
 }
