@@ -13,15 +13,11 @@ public class HoursTest {
 
   @Test
   public void ensureCompareToWorks() {
-    Calendar c = Calendar.getInstance();
-    Calendar c2 = Calendar.getInstance();
-    c.add(Calendar.HOUR_OF_DAY, 8);
+    Hours h = Hours.valueOf(9, 30);
+    Hours h2 = Hours.valueOf(8, 30);
 
-    Hours h = Hours.valueOf(c);
-    Hours h2 = Hours.valueOf(c2);
-
-    assertTrue(h.compareTo(h2) < 0);
-    assertTrue(h2.compareTo(h) > 0);
+    assertTrue(h.compareTo(h2) > 0);
+    assertTrue(h2.compareTo(h) < 0);
     assertEquals(0, h.compareTo(h));
   }
 
