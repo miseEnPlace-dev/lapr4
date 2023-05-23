@@ -1,0 +1,21 @@
+@startuml US4003_SSD
+autonumber
+
+actor User as "User"
+actor System as "System"
+
+activate User
+activate System
+
+System --> User : Sends a meeting invitation to a user
+deactivate System
+
+User --> System : Accepts or reject the meeting invitation
+activate System
+
+System --> User : reports success of the invitation
+deactivate System
+
+deactivate User
+
+@enduml

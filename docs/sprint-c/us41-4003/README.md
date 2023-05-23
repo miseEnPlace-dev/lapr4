@@ -11,27 +11,27 @@
 
 ## 1. Context
 
-- XXX
+This is a new feature that allows users to accept or reject a meeting request.
 
 ## 2. Requirements
 
-### "XXX"
+### "As User, I want to accept or reject a meeting request."
 
 ## 2.1. Client Specifications
 
-- XXX
+- 4003
 
 ## 2.2. Client Clarifications
 
-- XXX
+- 4003
 
 ## 2.3. Functional Requirements
 
-- XXX
+- **FRM03** Accept/Reject Meeting A user accepts or rejects an invitation to a meeting.
 
 ## 2.4. Acceptance Criteria
 
-- XXX
+- 4003
 
 ---
 
@@ -39,43 +39,47 @@
 
 ### 3.1. Main success scenario
 
-- XXX
+1. System sends a meeting invitation to a user
+2. User accepts or rejects the invitation
+3. System reports the success of the operation
 
 ### 3.2. Conditions
 
-- XXX
+- The user must be authenticated and authorized to perform the operation.
+
+- The user must have received an invitation to a meeting.
 
 ### 3.3. System Sequence Diagram
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US4003_SSD](out/US4003_SSD.svg)
 
 ### 3.4. Sequence Diagram (Simplified)
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US4003_SD](out/US4003_SD.svg)
 
 ### 3.5. Partial Domain Model
 
-![USXXX_DM](out/USXXX_DM.svg)
+![US4003_DM](out/US4003_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US4003_SD](out/US4003_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US4003_CD](out/US4003_CD.svg)
 
 ### 4.3. Applied Patterns
 
-- XXX
+- 4003
 
 ### 4.4. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** 4003
 
 ```java
 
@@ -93,7 +97,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US4003_DEMO](out/US4003_DEMO.svg)
 
 ## 7. Observations
 
