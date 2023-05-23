@@ -27,9 +27,11 @@ public class MultipleSelectorWidget<T> {
 
     while (selector.selectedOption() != 0 && sourceList.size() > 0) {
       selector.show();
-      final T s = selector.selectedElement();
-      sourceList.remove(s);
-      selected.add(s);
+      if (selector.selectedOption() != 0) {
+        final T s = selector.selectedElement();
+        sourceList.remove(s);
+        selected.add(s);
+      }
     }
 
     return selected;

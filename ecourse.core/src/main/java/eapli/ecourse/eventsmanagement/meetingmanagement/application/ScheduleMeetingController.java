@@ -91,7 +91,8 @@ public class ScheduleMeetingController {
   }
 
   public SystemUser getAuthenticatedUser() {
-    return authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow(IllegalStateException::new);
+    return authz.loggedinUserWithPermissions(ClientRoles.TEACHER, ClientRoles.MANAGER, ClientRoles.MANAGER)
+        .orElseThrow(IllegalStateException::new);
   }
 
   public ArrayList<SystemUser> getUsers() {

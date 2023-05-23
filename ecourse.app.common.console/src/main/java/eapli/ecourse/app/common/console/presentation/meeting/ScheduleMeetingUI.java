@@ -1,6 +1,8 @@
 package eapli.ecourse.app.common.console.presentation.meeting;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -46,7 +48,7 @@ public class ScheduleMeetingUI extends AbstractUI {
 
     MultipleSelectorWidget<SystemUser> selector = new MultipleSelectorWidget<>("Users:", allUsers,
         new SystemUserPrinter());
-    Set<SystemUser> selectedUsers = (Set<SystemUser>) selector.selectElements();
+    ArrayList<SystemUser> selectedUsers = (ArrayList<SystemUser>) selector.selectElements();
     selectedUsers.add(ctrl.getAuthenticatedUser());
 
     if (ctrl.checkIfUsersAreAvailable(meetingTime, meetingDuration, selectedUsers)) {
