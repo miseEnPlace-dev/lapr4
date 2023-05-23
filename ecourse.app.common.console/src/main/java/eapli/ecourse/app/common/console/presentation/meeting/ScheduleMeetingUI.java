@@ -51,7 +51,7 @@ public class ScheduleMeetingUI extends AbstractUI {
     ArrayList<SystemUser> selectedUsers = (ArrayList<SystemUser>) selector.selectElements();
     selectedUsers.add(ctrl.getAuthenticatedUser());
 
-    if (ctrl.checkIfUsersAreAvailable(meetingTime, meetingDuration, selectedUsers)) {
+    if (!ctrl.checkIfUsersAreAvailable(meetingTime, meetingDuration, selectedUsers)) {
       System.out.println("Some of the selected users are not available at the given time.");
       return false;
     }
