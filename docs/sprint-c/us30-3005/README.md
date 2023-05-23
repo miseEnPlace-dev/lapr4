@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3005 -
+
+> As User, I want to view, in real-time, the updates in the shared boards
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 31                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 1                 |
 
 ## 1. Context
 

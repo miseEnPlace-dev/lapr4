@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 4004 - List of participants
+
+> As User, I want to view a list of participants in my meeting and their status (accept or reject)
+
+|             |              |
+| ----------- | ------------ |
+| ID          | 43           |
+| Sprint      | C            |
+| Application | 5 - Meetings |
+| Priority    | 5            |
 
 ## 1. Context
 

@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3008 - Undo last change post it
+
+> As User, I want to undo the last change in a post-it on a board
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 34                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 1                 |
 
 ## 1. Context
 

@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 4002 - Cancel Meeting
+
+> As User, I want to cancel a meeting
+
+|             |              |
+| ----------- | ------------ |
+| ID          | 41           |
+| Sprint      | C            |
+| Application | 5 - Meetings |
+| Priority    | 5            |
 
 ## 1. Context
 

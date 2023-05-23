@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3007 - Change a post it
+
+> As User, I want to change a post-it on a board
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 33                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 1                 |
 
 ## 1. Context
 

@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3006 - Create a post-it
+
+> As User, I want to create a post-it on a board
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 32                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 1                 |
 
 ## 1. Context
 

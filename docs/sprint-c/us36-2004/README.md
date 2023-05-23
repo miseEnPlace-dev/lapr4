@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 2004 - Take an exam
+
+> As Student, I want to take an exam
+
+|             |           |
+| ----------- | --------- |
+| ID          | 37        |
+| Sprint      | C         |
+| Application | 3 - Exams |
+| Priority    | 1         |
 
 ## 1. Context
 

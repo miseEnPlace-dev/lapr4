@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3010 - Archive board
+
+> As User, I want to archive a board I own
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 36                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 5                 |
 
 ## 1. Context
 

@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3009 - View board history
+
+> As User, I want to view the history of updates on a board
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 35                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 3                 |
 
 ## 1. Context
 

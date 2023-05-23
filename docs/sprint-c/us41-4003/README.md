@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 4003 - Accept/Reject Meeting
+
+> As User, I want to accept or reject a meeting request
+
+|             |              |
+| ----------- | ------------ |
+| ID          | 42           |
+| Sprint      | C            |
+| Application | 5 - Meetings |
+| Priority    | 5            |
 
 ## 1. Context
 

@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 3004 - Share a board
+
+> As User, I want to share a board
+
+|             |                   |
+| ----------- | ----------------- |
+| ID          | 30                |
+| Sprint      | C                 |
+| Application | 4 - Shared Boards |
+| Priority    | 1                 |
 
 ## 1. Context
 

@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 2009 - Take an formative exam
+
+> As Student, I want to take an automatic formative exam
+
+|             |           |
+| ----------- | --------- |
+| ID          | 40        |
+| Sprint      | C         |
+| Application | 3 - Exams |
+| Priority    | 5         |
 
 ## 1. Context
 

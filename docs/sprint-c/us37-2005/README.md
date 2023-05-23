@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 2005 - List of grades
+
+> As Student, I want to view a list of my grades
+
+|             |           |
+| ----------- | --------- |
+| ID          | 38        |
+| Sprint      | C         |
+| Application | 3 - Exams |
+| Priority    | 3         |
 
 ## 1. Context
 

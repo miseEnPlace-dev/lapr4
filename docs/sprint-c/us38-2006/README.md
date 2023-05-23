@@ -1,4 +1,13 @@
-# User Story XXX - XXX
+# User Story 2006 - List of grades in courses
+
+> As Teacher, I want to view a list of the grades of exams of my courses
+
+|             |           |
+| ----------- | --------- |
+| ID          | 39        |
+| Sprint      | C         |
+| Application | 3 - Exams |
+| Priority    | 3         |
 
 ## 1. Context
 
