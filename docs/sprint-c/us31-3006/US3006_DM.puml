@@ -1,5 +1,4 @@
-@startuml DM-POST-IT
-'https://plantuml.com/class-diagram
+@startuml US3006_DM
 
 skinparam classAttributeIconSize 0
 hide empty attributes
