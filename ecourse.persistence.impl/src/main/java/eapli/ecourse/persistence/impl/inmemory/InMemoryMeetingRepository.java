@@ -22,6 +22,6 @@ public class InMemoryMeetingRepository extends InMemoryDomainRepository<Meeting,
 
   @Override
   public Iterable<Meeting> findMeetingsByOwner(SystemUser owner) {
-    return match(e -> e.owner().equals(owner));
+    return match(e -> e.scheduledBy().equals(owner));
   }
 }

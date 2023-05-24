@@ -26,7 +26,7 @@ public class Meeting implements AggregateRoot<MeetingID> {
   private Duration duration;
 
   @Column(nullable = false)
-  private SystemUser owner;
+  private SystemUser scheduledBy;
 
   @Column
   private Canceled canceledAt;
@@ -48,17 +48,17 @@ public class Meeting implements AggregateRoot<MeetingID> {
     this.time = time;
     this.duration = duration;
     this.canceledAt = null;
-    this.owner = owner;
+    this.scheduledBy = owner;
   }
 
-  public Meeting(MeetingID id, Time time, Duration duration, SystemUser owner) {
-    Preconditions.noneNull(id, time, duration, owner);
+  public Meeting(MeetingID id, Time time, Duration duration, SystemUser user) {
+    Preconditions.noneNull(id, time, duration, user);
 
     this.id = id;
     this.time = time;
     this.duration = duration;
     this.canceledAt = null;
-    this.owner = owner;
+    this.scheduledBy = user;
   }
 
   @Override
@@ -101,13 +101,11 @@ public class Meeting implements AggregateRoot<MeetingID> {
   }
 
   @Override
-  public MeetingID identity() {
-    return this.id;
-  }
+  public MeetingID identity() { return this.id; }
 
   public MeetingDTO toDto() {
     return new MeetingDTO(this.id, this.time, this.duration);
   }
 
-  public SystemUser owner() { return this.owner; }
+  public SystemUser scheduledBy() { return this.scheduledBy; }
 }

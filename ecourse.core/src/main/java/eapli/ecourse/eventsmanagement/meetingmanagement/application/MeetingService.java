@@ -20,8 +20,8 @@ public class MeetingService {
     return convertToDto(types);
   }
 
-  public Iterable<MeetingDTO> meetingsOwnedBy(SystemUser owner) {
-    final Iterable<Meeting> types = meetingRepository.findMeetingsByOwner(owner);
+  public Iterable<MeetingDTO> meetingsScheduledBy(SystemUser user) {
+    final Iterable<Meeting> types = meetingRepository.findMeetingsByOwner(user);
 
     return convertToDto(types);
   }

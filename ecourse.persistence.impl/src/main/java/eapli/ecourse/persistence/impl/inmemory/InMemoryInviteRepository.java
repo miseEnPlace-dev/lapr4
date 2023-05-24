@@ -2,6 +2,7 @@ package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteID;
+import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
@@ -48,6 +49,11 @@ public class InMemoryInviteRepository extends InMemoryDomainRepository<Invite, I
     return match(e -> e.user().username().equals(username) && e.status().isRejected());
 
   }
+
+  public Iterable<Invite> findByMeetingID(MeetingID meetingID) {
+    return (match(e -> e.meeting().identity().equals(meetingID)));
+  }
+
 
   /**
    * Returns the invites that are accepted for a meeting
