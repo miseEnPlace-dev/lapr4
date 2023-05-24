@@ -62,10 +62,21 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
   }
 
   /**
+   * Returns the invites associated with the meeting
+   *
+   * @return
+   */
+
+  public Iterable<Invite> findByMeetingId(MeetingID meetingID) {
+    return match("e.meeting.meetingID = :meetingID", "meetingID",meetingID);
+  }
+
+  /**
    * Returns the invites that are accepted for a meeting
    *
    * @return
    */
+
   public Iterable<Invite> findAllAcceptedForMeetingId(MeetingID meetingId) {
     return null;
   }
@@ -93,4 +104,10 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
     params.put("status", new InviteStatus(InviteStatus.Status.ACCEPTED));
     return match("e.user.username = :username AND e.status = :status", params);
   }
+
+  @Override
+  public Iterable<Invite> findByMeetingID(MeetingID meetingID) {
+    return match("e.meeting.meetingID = :meetingID", "meetingID", meetingID);
+  }
+
 }

@@ -1,0 +1,19 @@
+@startuml
+autonumber
+
+actor User as "User"
+actor System as "System"
+
+User -> System: requests to cancel a meeting
+
+System -> User: displays the meetings that user owns
+
+User -> System: selects one
+
+System -> User: requests to confirm the operation
+
+User -> System: confirms
+
+System -> User: informs the success of operation
+
+@enduml

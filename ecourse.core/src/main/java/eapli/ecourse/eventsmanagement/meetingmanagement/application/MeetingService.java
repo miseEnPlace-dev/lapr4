@@ -6,6 +6,7 @@ import java.util.stream.StreamSupport;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class MeetingService {
   private MeetingRepository meetingRepository;
@@ -16,6 +17,12 @@ public class MeetingService {
 
   public Iterable<MeetingDTO> allTeachers() {
     final Iterable<Meeting> types = meetingRepository.findAll();
+    return convertToDto(types);
+  }
+
+  public Iterable<MeetingDTO> meetingsScheduledBy(SystemUser user) {
+    final Iterable<Meeting> types = meetingRepository.findMeetingsByOwner(user);
+
     return convertToDto(types);
   }
 

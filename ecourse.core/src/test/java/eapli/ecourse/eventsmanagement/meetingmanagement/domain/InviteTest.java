@@ -33,7 +33,7 @@ public class InviteTest {
     Calendar c = Calendar.getInstance();
     c.add(Calendar.YEAR, -1);
 
-    return new Meeting(Time.valueOf(c), Duration.valueOf(120));
+    return new Meeting(Time.valueOf(c), Duration.valueOf(120), getDummyUser());
   }
 
   private Invite getDummyInvite() {

@@ -31,7 +31,7 @@ public class MeetingTest {
 
   private Meeting getDummyMeeting() {
     Calendar c = Calendar.getInstance();
-    return new Meeting(Time.valueOf(c), Duration.valueOf(120));
+    return new Meeting(Time.valueOf(c), Duration.valueOf(120), getDummyUser());
   }
 
   private Invite getDummyInvite() {
@@ -63,7 +63,7 @@ public class MeetingTest {
   public void ensureIdToStringIsWorking() {
     Calendar c = Calendar.getInstance();
 
-    Meeting meeting = new Meeting(MeetingID.valueOf("123"), Time.valueOf(c), Duration.valueOf(120));
+    Meeting meeting = new Meeting(MeetingID.valueOf("123"), Time.valueOf(c), Duration.valueOf(120), getDummyUser());
     assertEquals("123", meeting.identity().toString());
   }
 

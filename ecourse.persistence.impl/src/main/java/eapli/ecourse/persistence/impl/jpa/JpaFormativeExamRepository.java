@@ -20,6 +20,6 @@ public class JpaFormativeExamRepository extends JpaAutoTxRepository<FormativeExa
 
   @Override
   public Iterable<FormativeExam> findAllCourseExams(Course course) {
-    return match("e.course.code = :course", "course", course.code());
+    return match("e.course = :course", "course", course);
   }
 }

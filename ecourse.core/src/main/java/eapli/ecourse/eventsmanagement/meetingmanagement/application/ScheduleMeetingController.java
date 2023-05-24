@@ -48,7 +48,7 @@ public class ScheduleMeetingController {
 
     Preconditions.noneNull(time, duration);
 
-    Meeting meeting = new Meeting(time, duration);
+    Meeting meeting = new Meeting(time, duration, getAuthenticatedUser());
 
     if (meetingRepository.containsOfIdentity(meeting.identity()))
       throw new IllegalStateException("There is already a meeting with that id.");
