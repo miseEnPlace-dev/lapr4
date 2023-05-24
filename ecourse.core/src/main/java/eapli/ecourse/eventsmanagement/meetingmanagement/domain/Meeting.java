@@ -12,6 +12,7 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
 
 @Entity
@@ -23,6 +24,9 @@ public class Meeting implements AggregateRoot<MeetingID> {
 
   @Column(nullable = false)
   private Duration duration;
+
+  @Column(nullable = false)
+  private SystemUser owner;
 
   @Column
   private Canceled canceledAt;
@@ -37,22 +41,24 @@ public class Meeting implements AggregateRoot<MeetingID> {
     // for ORM
   }
 
-  public Meeting(final Time time, final Duration duration) {
-    Preconditions.noneNull(time, duration);
+  public Meeting(final Time time, final Duration duration, SystemUser owner) {
+    Preconditions.noneNull(time, duration, owner);
 
     this.id = MeetingID.newID();
     this.time = time;
     this.duration = duration;
     this.canceledAt = null;
+    this.owner = owner;
   }
 
-  public Meeting(MeetingID id, Time time, Duration duration) {
-    Preconditions.noneNull(id, time, duration);
+  public Meeting(MeetingID id, Time time, Duration duration, SystemUser owner) {
+    Preconditions.noneNull(id, time, duration, owner);
 
     this.id = id;
     this.time = time;
     this.duration = duration;
     this.canceledAt = null;
+    this.owner = owner;
   }
 
   @Override
@@ -102,4 +108,6 @@ public class Meeting implements AggregateRoot<MeetingID> {
   public MeetingDTO toDto() {
     return new MeetingDTO(this.id, this.time, this.duration);
   }
+
+  public SystemUser owner() { return this.owner; }
 }
