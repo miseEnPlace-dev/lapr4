@@ -19,11 +19,11 @@ This is a new feature that allows users to accept or reject a meeting request.
 
 ## 2.1. Client Specifications
 
-- 4003
+- XXX
 
 ## 2.2. Client Clarifications
 
-- 4003
+- XXX
 
 ## 2.3. Functional Requirements
 
@@ -31,7 +31,7 @@ This is a new feature that allows users to accept or reject a meeting request.
 
 ## 2.4. Acceptance Criteria
 
-- 4003
+- N/a
 
 ---
 
@@ -39,15 +39,18 @@ This is a new feature that allows users to accept or reject a meeting request.
 
 ### 3.1. Main success scenario
 
-1. System sends a meeting invitation to a user
-2. User accepts or rejects the invitation
-3. System reports the success of the operation
+1. Checks if theres an invite to a meeting
+2. System shows list of invites
+3. Selects an invite
+4. Asks if the user wants to accept or reject the invite
+5. Accepts or reject the meeting invitation
+6. Reports success of the operation
 
 ### 3.2. Conditions
 
 - The user must be authenticated and authorized to perform the operation.
 
-- The user must have received an invitation to a meeting.
+- The user must have received an invitation to at least one meeting.
 
 ### 3.3. System Sequence Diagram
 
@@ -73,13 +76,13 @@ This is a new feature that allows users to accept or reject a meeting request.
 
 ### 4.3. Applied Patterns
 
-- 4003
+- XXX
 
 ### 4.4. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** 4003
+**Test 1:** XXX
 
 ```java
 
