@@ -168,7 +168,11 @@ public void ensureItsNotPossibleToRejectAMeetingInviteThatIsNotPending() {
 - Relevant implementation details
 
 ```java
-
+public MeetingResponseController(final InviteRepository inviteRepository, final MeetingRepository meetingRepository) {
+    this.inviteRepository = inviteRepository;
+    this.meetingRepository = meetingRepository;
+    this.meetingService = new MeetingService(meetingRepository, inviteRepository);
+  }
 ```
 
 ## 6. Integration & Demonstration
