@@ -1,0 +1,11 @@
+@startuml US4003_STATE
+
+[*] --> PENDING : create
+
+PENDING --> ACCEPT : accept
+PENDING --> REJECT : reject
+
+ACCEPT --> [*] : finish
+REJECT --> [*] : finish
+
+@enduml
