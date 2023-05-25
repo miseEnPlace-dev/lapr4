@@ -15,12 +15,16 @@ public class App {
   private static final int HTTP_SERVER_PORT = 8080;
 
   public static void main(String[] args) {
-    TcpServer server = new TcpServer(HTTP_SERVER_PORT, HttpRequestHandler.class);
-    // TcpServer server = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class);
+    TcpServer httpServer = new TcpServer(HTTP_SERVER_PORT, HttpRequestHandler.class);
+    Thread httpServerThread = new Thread(httpServer);
+
+    TcpServer appServer = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class);
+    Thread appServerThread = new Thread(appServer);
 
     try {
-      server.init();
-    } catch (IOException e) {
+      httpServerThread.start();
+      appServerThread.start();
+    } catch (Exception e) {
       System.out.println("Error creating the tcp server");
       e.printStackTrace();
     }

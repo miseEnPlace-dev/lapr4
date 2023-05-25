@@ -2,6 +2,7 @@ package eapli.ecourse.app.board.backend;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -16,25 +17,39 @@ public class HttpRequestHandler implements Runnable {
     this.client = socket;
   }
 
-  private void sendHttpHeaders(DataOutputStream output, int contentLength) throws IOException {
+  /**
+   * Sends the HTTP response headers to the client.
+   */
+  private void sendHttpResponseHeaders(DataOutputStream output, int status, String contentType,
+      int contentLength) throws IOException {
     List<String> headers = new ArrayList<>();
 
-    headers.add(HTTP_VERSION + " 200 OK");
-    headers.add("Content-Type: text/html; charset=UTF-8");
+    headers.add(HTTP_VERSION + " " + status);
+    headers.add("Content-Type: " + contentType);
     headers.add("Content-Length: " + contentLength);
 
     writeHeaders(output, headers);
   }
 
-  private void sendHttpBody(DataOutputStream output, String content) throws IOException {
+  /**
+   * Sends the content to the client.
+   *
+   * @param output
+   * @param content
+   * @throws IOException
+   */
+  private void sendHttpResponse(DataOutputStream output, int status, String contentType,
+      String content) throws IOException {
+    sendHttpResponseHeaders(output, status, contentType, content.length());
+
     output.writeBytes(content);
   }
 
   @Override
   public void run() {
     try {
-      System.out.printf("[HTTP Request Handler Thread] Connected to %s port %d!\n",
-          client.getInetAddress().toString(), client.getPort());
+      // System.out.printf("[HTTP Request Handler Thread] Connected to %s port %d!\n",
+      // client.getInetAddress().toString(), client.getPort());
 
       // create a data input stream to read from the client
       DataInputStream input = new DataInputStream(client.getInputStream());
@@ -45,17 +60,32 @@ public class HttpRequestHandler implements Runnable {
       // read the headers
       List<String> headers = readHeaders(input);
 
-      String content =
-          "<html><head><title>Shared Board</title></head><body><h1>Shared Board</h1><p>Shared Board</p></body></html>";
+      System.out.println(headers.get(0));
 
-      // send the headers
-      sendHttpHeaders(output, content.length());
+      // process the request
+      // ...
+      String method = headers.get(0).split(" ")[0];
+      String path = headers.get(0).split(" ")[1];
 
-      // send the body
-      sendHttpBody(output, content);
+      if (!path.equals("/") || !method.equals("GET")) {
+        sendHttpResponse(output, 404, "text/html; charset=UTF-8", "Not Found");
+        output.close();
+        input.close();
+        return;
+      }
 
-      client.close();
+      // read from file
+      CustomScanner scanner = new CustomScanner("www/index.html");
+      String content = new String("");
 
+      while (scanner.hasNextLine())
+        content += scanner.nextLine();
+
+      // send the headers and content
+      sendHttpResponse(output, 200, "text/html; charset=UTF-8", content);
+
+      output.close();
+      input.close();
     } catch (IOException e) {
       System.out.println("[Client Handler Thread] Error: " + e.getMessage());
       e.printStackTrace();
@@ -82,8 +112,8 @@ public class HttpRequestHandler implements Runnable {
       do {
         input.read(buffer, 0, 1);
 
-        if (buffer[0] == '\n' && buffer[0] != '\r')
-          line.concat(new String(buffer));
+        if (buffer[0] != '\n' && buffer[0] != '\r')
+          line += new String(buffer);
       } while (buffer[0] != '\n');
 
       headers.add(line);
