@@ -2,6 +2,7 @@ package eapli.ecourse.eventsmanagement.meetingmanagement.repositories;
 
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteID;
+import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
@@ -26,6 +27,16 @@ public interface InviteRepository extends DomainRepository<InviteID, Invite> {
    * @return
    */
   Iterable<Invite> findAllAcceptedForUsername(Username username);
+
+
+  /**
+   *
+   * Returns the invites associated with the meeting
+   * @return
+   */
+  Iterable<Invite> findByMeetingID(MeetingID meetingID);
+
+
 
   /**
    * Returns the invites that are accepted for a meeting

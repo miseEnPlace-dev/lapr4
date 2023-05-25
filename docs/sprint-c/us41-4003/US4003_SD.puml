@@ -1,0 +1,61 @@
+@startuml US4003_SD
+autonumber
+
+actor "User" as U
+
+participant "MeetingResponseUI" as UI <<presentation>>
+participant "MeetingResponseController" as CTRL <<controller>>
+participant "Invite" as INV <<domain>>
+
+database InviteRepository as IR <<repository>>
+
+U -> UI : checks if theres an invite to a meeting
+activate UI
+
+UI -> CTRL : getInvites()
+activate CTRL
+
+CTRL -> IR : getInvites()
+activate IR
+deactivate IR
+
+deactivate CTRL
+
+UI --> U : shows list of invites
+deactivate UI
+
+U -> UI : selects an invite
+activate UI
+
+UI --> U : asks if the user wants to accept or reject the invite
+deactivate UI
+
+U -> UI : Accepts or reject the meeting invitation
+activate UI
+
+UI -> CTRL : changeInviteStatus()
+activate CTRL
+
+alt Accept
+    CTRL -> INV : accept()
+    activate INV
+    deactivate INV
+else Reject
+    CTRL -> INV : reject()
+    activate INV
+    deactivate INV
+end
+
+CTRL -> IR : updateInvite()
+activate IR
+deactivate IR
+
+deactivate CTRL
+
+UI --> U : reports success of the operation
+deactivate UI
+
+
+
+
+@enduml

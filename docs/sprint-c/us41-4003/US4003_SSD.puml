@@ -5,15 +5,23 @@ actor User as "User"
 actor System as "System"
 
 activate User
+
+User -> System : checks if theres an invite to a meeting
 activate System
 
-System --> User : Sends a meeting invitation to a user
+System --> User : shows list of invites
 deactivate System
 
-User --> System : Accepts or reject the meeting invitation
+User -> System : selects an invite
 activate System
 
-System --> User : reports success of the invitation
+System --> User : asks if the user wants to accept or reject the invite
+deactivate System
+
+User -> System : Accepts or reject the meeting invitation
+activate System
+
+System --> User : reports success of the operation
 deactivate System
 
 deactivate User

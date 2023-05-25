@@ -5,6 +5,7 @@ import java.util.Optional;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.framework.domain.repositories.DomainRepository;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> {
 
@@ -17,4 +18,6 @@ public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> 
   default Optional<Meeting> findById(final MeetingID id) {
     return ofIdentity(id);
   }
+
+  public Iterable<Meeting> findMeetingsByOwner(SystemUser owner);
 }
