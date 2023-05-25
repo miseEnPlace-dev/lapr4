@@ -46,14 +46,14 @@
     },
     {
       "type": "java",
-      "name": "Board Backend",
+      "name": "Shared Board Server",
       "request": "launch",
       "mainClass": "eapli.ecourse.app.board.backend.App",
       "projectName": "app.board.backend"
     },
     {
       "type": "java",
-      "name": "Board Frontend",
+      "name": "Shared Board Console App",
       "request": "launch",
       "mainClass": "eapli.ecourse.app.board.frontend.App",
       "projectName": "app.board.frontend"
