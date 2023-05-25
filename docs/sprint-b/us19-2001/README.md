@@ -11,7 +11,7 @@
 
 ## 1. Context
 
-This is the first time this task is assigned to be developed. This is a new functionality that is needed to create new exams, using a specific language.
+This is the first time this task is assigned to be developed. This is a new functionality that is needed to create new exams, using a specific language defined by the team.
 
 ---
 
@@ -81,7 +81,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 - Course (Selected from a list of courses)
 - Exam Structure (Text file)
-- Start and End time of exam
+- Start and End date/time of exam
 
 #### Output
 
