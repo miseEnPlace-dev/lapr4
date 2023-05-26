@@ -5,6 +5,7 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
@@ -25,7 +26,7 @@ public class Meeting implements AggregateRoot<MeetingID> {
   @Column(nullable = false)
   private Duration duration;
 
-  @Column(nullable = false)
+  @ManyToOne(optional = false)
   private SystemUser scheduledBy;
 
   @Column
@@ -101,11 +102,15 @@ public class Meeting implements AggregateRoot<MeetingID> {
   }
 
   @Override
-  public MeetingID identity() { return this.id; }
+  public MeetingID identity() {
+    return this.id;
+  }
 
   public MeetingDTO toDto() {
     return new MeetingDTO(this.id, this.time, this.duration);
   }
 
-  public SystemUser scheduledBy() { return this.scheduledBy; }
+  public SystemUser scheduledBy() {
+    return this.scheduledBy;
+  }
 }

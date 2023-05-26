@@ -26,7 +26,7 @@ public class JpaClassRepository extends JpaAutoTxRepository<CourseClass, ClassID
   public Iterable<CourseClass> findAllByCourseCode(CourseCode code) {
     final Map<String, Object> params = new HashMap<>();
     params.put("code", code);
-    return match("e.code=:code", params);
+    return match("e.course.code=:code", params);
   }
 
   @Override

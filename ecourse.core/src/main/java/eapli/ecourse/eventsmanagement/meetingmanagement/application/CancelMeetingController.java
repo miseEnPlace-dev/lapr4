@@ -5,10 +5,8 @@ import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
-import eapli.framework.infrastructure.authz.application.AuthenticationService;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
-import org.springframework.security.core.Authentication;
 
 public class CancelMeetingController {
 
@@ -21,10 +19,10 @@ public class CancelMeetingController {
   private final AuthorizationService authz;
 
   public CancelMeetingController(AuthorizationService authz, MeetingRepository meetingRepository,
-                                 InviteRepository inviteRepository) {
+      InviteRepository inviteRepository) {
     this.authz = authz;
     this.meetingRepository = meetingRepository;
-    this.service = new MeetingService(meetingRepository);
+    this.service = new MeetingService(meetingRepository, inviteRepository);
     this.inviteRepository = inviteRepository;
   }
 
@@ -41,7 +39,7 @@ public class CancelMeetingController {
 
   public SystemUser getAuthenticatedUser() {
     return authz.loggedinUserWithPermissions(ClientRoles.TEACHER, ClientRoles.MANAGER, ClientRoles.STUDENT)
-      .orElseThrow(IllegalStateException::new);
+        .orElseThrow(IllegalStateException::new);
   }
 
 }

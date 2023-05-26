@@ -20,12 +20,12 @@ public class MultipleSelectorWidget<T> {
 
   public Iterable<T> selectElements() {
     List<T> sourceList = new ArrayList<T>((Collection<T>) source);
-
     SelectWidget<T> selector = new SelectWidget<>(header, sourceList, visitor);
 
     List<T> selected = new ArrayList<>();
 
     while (selector.selectedOption() != 0 && sourceList.size() > 0) {
+      selector = new SelectWidget<>(header, sourceList, visitor);
       selector.show();
       if (selector.selectedOption() != 0) {
         final T s = selector.selectedElement();

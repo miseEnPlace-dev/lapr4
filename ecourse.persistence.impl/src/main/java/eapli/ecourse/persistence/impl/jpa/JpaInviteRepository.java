@@ -2,6 +2,7 @@ package eapli.ecourse.persistence.impl.jpa;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
@@ -68,7 +69,7 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
    */
 
   public Iterable<Invite> findByMeetingId(MeetingID meetingID) {
-    return match("e.meeting.meetingID = :meetingID", "meetingID",meetingID);
+    return match("e.meeting.meetingID = :meetingID", "meetingID", meetingID);
   }
 
   /**
@@ -110,4 +111,10 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
     return match("e.meeting.meetingID = :meetingID", "meetingID", meetingID);
   }
 
+  @Override
+  public Optional<Invite> findInviteById(InviteID id) {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("id", id);
+    return matchOne("e.id=:id", params);
+  }
 }

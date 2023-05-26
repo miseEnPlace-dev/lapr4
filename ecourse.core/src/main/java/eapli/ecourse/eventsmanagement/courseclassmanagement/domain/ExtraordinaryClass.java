@@ -13,6 +13,7 @@ import javax.persistence.Version;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
@@ -42,7 +43,7 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
 
   @ManyToMany
   @AttributeOverride(name = "id", column = @Column(name = "student_id"))
-  public Set<Student> students;
+  private Set<Student> students;
 
   public ExtraordinaryClass(final Duration duration, final Time time, final Teacher scheduledBy,
       final Set<Student> students, final Course course) {
@@ -98,5 +99,14 @@ public class ExtraordinaryClass implements AggregateRoot<ExtraordinaryClassID> {
 
   public Teacher scheduledBy() {
     return this.scheduledBy;
+  }
+
+  public boolean containsStudent(MecanographicNumber mecanographicNumber) {
+    for (Student student : students) {
+      if (student.mecanographicNumber().equals(mecanographicNumber)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

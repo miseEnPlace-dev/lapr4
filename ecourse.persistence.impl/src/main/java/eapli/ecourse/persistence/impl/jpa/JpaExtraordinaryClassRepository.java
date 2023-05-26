@@ -23,8 +23,8 @@ public class JpaExtraordinaryClassRepository
 
   @Override
   public Iterable<ExtraordinaryClass> findAllByStudentMecanographicNumber(MecanographicNumber mecanographicNumber) {
-    final TypedQuery<ExtraordinaryClass> query = createQuery(
-        "SELECT ec FROM ExtraordinaryClass ec WHERE :mecanographicNumber MEMBER OF ec.students",
+    final TypedQuery<ExtraordinaryClass> query = entityManager().createQuery(
+        "SELECT ec FROM ExtraordinaryClass ec JOIN ec.students s WHERE s.mecanographicNumber = :mecanographicNumber",
         ExtraordinaryClass.class);
 
     query.setParameter("mecanographicNumber", mecanographicNumber);

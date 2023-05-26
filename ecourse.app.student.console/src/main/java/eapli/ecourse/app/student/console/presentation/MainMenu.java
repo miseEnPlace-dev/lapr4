@@ -3,7 +3,6 @@ package eapli.ecourse.app.student.console.presentation;
 import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
-import eapli.ecourse.app.common.console.presentation.meeting.ScheduleMeetingUI;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -31,7 +30,7 @@ class MainMenu extends StudentBaseUI {
   private static final int MY_USER_OPTION = 1;
   private static final int ACCOUNT_OPTION = 2;
   private static final int REQUEST_ENROLMENT_OPTION = 3;
-  private static final int SCHEDULE_MEETING = 4;
+  private static final int MEETINGS = 4;
   private static final int VIEW_FUTURE_EXAMS = 5;
   private static final int CREATE_BOARD_OPTION = 6;
   private static final int COURSES_OPTION = 7;
@@ -86,11 +85,10 @@ class MainMenu extends StudentBaseUI {
     mainMenu.addSubMenu(ACCOUNT_OPTION, accountMenu);
 
     mainMenu.addItem(REQUEST_ENROLMENT_OPTION, "Request enrolment", new RequestEnrolmentUI()::show);
-    mainMenu.addItem(SCHEDULE_MEETING, "Schedule meeting", new ScheduleMeetingUI()::show);
+    mainMenu.addSubMenu(MEETINGS, new MeetingsMenu().buildMenu());
     mainMenu.addItem(VIEW_FUTURE_EXAMS, "View future exams", new ListFutureExamsUI()::show);
     mainMenu.addItem(CREATE_BOARD_OPTION, "Create board", new CreateBoardUI()::show);
     mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
-
 
     final Menu settingsMenu = buildAdminSettingsMenu();
     mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);

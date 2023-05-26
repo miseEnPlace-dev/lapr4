@@ -26,7 +26,7 @@ public class ScheduleMeetingController {
   private final MeetingRepository meetingRepository;
   private final InviteRepository inviteRepository;
   private final AuthorizationService authz;
-  private final ScheduleAvailabilityService sAvaService;
+  private final ScheduleAvailabilityService scheduleAvailableService;
   private final UserManagementService userManagementService;
 
   public ScheduleMeetingController(final MeetingRepository meetingRepository, final AuthorizationService authz,
@@ -37,7 +37,8 @@ public class ScheduleMeetingController {
     this.meetingRepository = meetingRepository;
     this.authz = authz;
     this.inviteRepository = inviteRepository;
-    this.sAvaService = new ScheduleAvailabilityService(classRepository, extraordinaryClassRepository, inviteRepository,
+    this.scheduleAvailableService = new ScheduleAvailabilityService(classRepository, extraordinaryClassRepository,
+        inviteRepository,
         enrolmentRepository, studentRepository, teacherRepository);
     this.userManagementService = userManagementService;
   }
@@ -45,16 +46,30 @@ public class ScheduleMeetingController {
   public Meeting scheduleMeeting(Time time, Duration duration, Iterable<SystemUser> users) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER, ClientRoles.MANAGER,
         ClientRoles.TEACHER);
+    SystemUser authenticatedUser = getAuthenticatedUser();
+    Meeting m = scheduleMeeting(authenticatedUser, time, duration, users);
+
+    return m;
+  }
+
+  public Meeting scheduleMeeting(SystemUser meetingOwner, Time time, Duration duration, Iterable<SystemUser> users) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER, ClientRoles.MANAGER,
+        ClientRoles.TEACHER);
+    // TODO add missing authenticated user to users list
 
     Preconditions.noneNull(time, duration);
 
-    Meeting meeting = new Meeting(time, duration, getAuthenticatedUser());
+    Meeting meeting = new Meeting(time, duration, meetingOwner);
 
     if (meetingRepository.containsOfIdentity(meeting.identity()))
-      throw new IllegalStateException("There is already a meeting with that id.");
+      throw new IllegalStateException("There is already a meeting with that id");
+
+    System.out.println("creatng meeting");
     Meeting m = saveMeeting(meeting);
+    System.out.println("meeting created");
 
     sendInvites(users, m);
+    System.out.println("invites sent");
 
     return m;
   }
@@ -69,29 +84,30 @@ public class ScheduleMeetingController {
 
   private Meeting saveMeeting(Meeting meeting) {
     if (meeting == null)
-      throw new IllegalArgumentException("Meeting cannot be null.");
+      throw new IllegalArgumentException("Meeting cannot be null");
 
     return meetingRepository.save(meeting);
   }
 
   private void saveInvite(Invite invite) {
     if (invite == null)
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Invite cannot be null");
 
     inviteRepository.save(invite);
   }
 
   public boolean checkIfUsersAreAvailable(Time meetingTime, Duration meetingDuration,
       Iterable<SystemUser> selectedUsers) {
+    // TODO add missing authenticated user to users list
 
-    if (sAvaService.areAllAvailable(selectedUsers, meetingTime, meetingDuration))
+    if (scheduleAvailableService.areAllAvailable(selectedUsers, meetingTime, meetingDuration))
       return true;
 
     return false;
   }
 
   public SystemUser getAuthenticatedUser() {
-    return authz.loggedinUserWithPermissions(ClientRoles.TEACHER, ClientRoles.MANAGER, ClientRoles.MANAGER)
+    return authz.loggedinUserWithPermissions(ClientRoles.TEACHER, ClientRoles.STUDENT, ClientRoles.MANAGER)
         .orElseThrow(IllegalStateException::new);
   }
 
