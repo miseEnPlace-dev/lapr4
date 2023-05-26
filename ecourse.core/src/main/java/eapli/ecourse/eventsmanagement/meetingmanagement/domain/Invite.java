@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import eapli.ecourse.eventsmanagement.meetingmanagement.dto.InviteDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -86,6 +87,10 @@ public class Invite implements AggregateRoot<InviteID> {
   @Override
   public int hashCode() {
     return DomainEntities.hashCode(this);
+  }
+
+  public InviteDTO toDto() {
+    return new InviteDTO(this.id, this.status, this.meeting.time());
   }
 
 }

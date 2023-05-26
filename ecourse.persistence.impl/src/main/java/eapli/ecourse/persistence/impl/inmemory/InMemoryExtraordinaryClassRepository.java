@@ -16,6 +16,6 @@ public class InMemoryExtraordinaryClassRepository
 
   @Override
   public Iterable<ExtraordinaryClass> findAllByStudentMecanographicNumber(MecanographicNumber mecanographicNumber) {
-    return match(e -> e.students().contains(mecanographicNumber));
+    return match(e -> e.containsStudent(mecanographicNumber));
   }
 }

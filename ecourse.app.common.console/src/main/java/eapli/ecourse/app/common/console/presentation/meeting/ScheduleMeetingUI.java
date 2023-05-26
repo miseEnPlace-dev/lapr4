@@ -2,9 +2,7 @@ package eapli.ecourse.app.common.console.presentation.meeting;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
 import eapli.ecourse.app.common.console.util.MultipleSelectorWidget;
@@ -28,7 +26,7 @@ public class ScheduleMeetingUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    Calendar time = Console.readCalendar("Time (HH:MM): ", "HH:mm");
+    Calendar time = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
     Time meetingTime = Time.valueOf(time);
 
     Integer duration = 0;
@@ -49,7 +47,6 @@ public class ScheduleMeetingUI extends AbstractUI {
     MultipleSelectorWidget<SystemUser> selector = new MultipleSelectorWidget<>("Users:", allUsers,
         new SystemUserPrinter());
     ArrayList<SystemUser> selectedUsers = (ArrayList<SystemUser>) selector.selectElements();
-    selectedUsers.add(ctrl.getAuthenticatedUser());
 
     if (!ctrl.checkIfUsersAreAvailable(meetingTime, meetingDuration, selectedUsers)) {
       System.out.println("Some of the selected users are not available at the given time.");

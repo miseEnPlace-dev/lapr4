@@ -28,9 +28,12 @@ public class MeetingBootstrapper extends UsersBootstrapperBase implements Action
   public boolean execute() {
 
     final Set<SystemUser> users = new HashSet<>();
-    users.add(PersistenceContext.repositories().users().ofIdentity(Username.valueOf("user1")).orElse(null));
+    users.add(PersistenceContext.repositories().users().ofIdentity(Username.valueOf("isep959")).orElse(null));
 
-    controller.scheduleMeeting(Time.valueOf(Calendar.getInstance()), Duration.valueOf(120), users);
+    Username username = Username.valueOf("user1");
+    SystemUser user = AuthzRegistry.userService().userOfIdentity(username).orElseThrow(IllegalStateException::new);
+
+    controller.scheduleMeeting(user, Time.valueOf(Calendar.getInstance()), Duration.valueOf(120), users);
 
     return true;
 
