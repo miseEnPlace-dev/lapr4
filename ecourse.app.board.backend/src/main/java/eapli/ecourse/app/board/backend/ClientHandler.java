@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.common.protocol.MessageCode;
 import eapli.ecourse.app.board.common.protocol.ProtocolMessage;
 import eapli.ecourse.app.board.common.protocol.UnsupportedVersionException;
@@ -18,8 +20,8 @@ public class ClientHandler implements Runnable {
   @Override
   public void run() {
     try {
-      System.out.printf("[Client Handler Thread] Connected to %s port %d!\n",
-          client.getInetAddress().getHostAddress(), client.getPort());
+      // System.out.printf("[Client Handler Thread] Connected to %s port %d!\n",
+      // client.getInetAddress().getHostAddress(), client.getPort());
 
       // in udp applications, each send must match one receive in the
       // counterpart and the number of bytes transported by each datagram is
@@ -40,8 +42,8 @@ public class ClientHandler implements Runnable {
       // parse the message
       ProtocolMessage message = ProtocolMessage.fromDataStream(input);
 
-      System.out.println("\n[Client Handler Thread] Received request!");
-      System.out.println(message.toString());
+      Logger logger = LogManager.getLogger(ClientHandler.class);
+      logger.debug(message.toString());
 
       // trolha
       switch (message.getCode()) {
