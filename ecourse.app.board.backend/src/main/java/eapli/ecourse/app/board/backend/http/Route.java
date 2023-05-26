@@ -12,10 +12,11 @@ public class Route {
   }
 
   public boolean matches(Request req) {
-    return req.getMethod().equals(method) && req.getPath().equals(path);
+    return req.getMethod().equals(method) && req.getPath().matches(path);
   }
 
   public void handle(Request req, Response res) {
+    req.getPath().parseParams(path);
     handler.handle(req, res);
   }
 }

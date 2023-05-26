@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Router {
   public List<Route> routes;
-  public List<Middleware> middlewares;
+  public List<Pair<String, Middleware>> middlewares;
 
   public Router() {
     this.routes = new ArrayList<>();
@@ -32,19 +32,26 @@ public class Router {
     routes.add(new Route("DELETE", path, handler));
   }
 
-  // TODO
-  public void use(String path, Middleware middleware) {
-    // middlewares.add(middleware);
-  }
-
-  // TODO
   public void use(Middleware middleware) {
     // path is "/" by default
-    middlewares.add(middleware);
+    use("/", middleware);
+  }
+
+  public void use(String path, Middleware middleware) {
+    middlewares.add(new Pair<>(path, middleware));
   }
 
   public void handle(Request req, Response res) {
-    // for (Middleware middleware : middlewares) {
+    // for (Pair<String, Middleware> entry : middlewares) {
+    // String path = entry.getKey();
+    // Middleware middleware = entry.getValue();
+
+    // NextFunction nextFunction = () -> {
+
+    // handleRoute(req, res);
+    // };
+
+    // if (req.getPath().startsWith(path))
     // middleware.handle(req, res, this);
     // }
 

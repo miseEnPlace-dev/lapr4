@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Request {
   private String method;
-  private String path;
+  private Path path;
   private String address;
   private List<String> headers;
 
   public Request(String method, String path, String address, List<String> headers) {
     this.method = method;
-    this.path = path;
+    this.path = new Path(path);
     this.address = address;
     this.headers = headers;
   }
@@ -20,7 +20,7 @@ public class Request {
     return method;
   }
 
-  public String getPath() {
+  public Path getPath() {
     return path;
   }
 
@@ -30,5 +30,9 @@ public class Request {
 
   public List<String> getHeaders() {
     return new ArrayList<>(headers);
+  }
+
+  public String getParam(String name) {
+    return path.getParam(name);
   }
 }
