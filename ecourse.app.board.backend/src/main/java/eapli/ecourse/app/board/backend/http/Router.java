@@ -5,9 +5,11 @@ import java.util.List;
 
 public class Router {
   public List<Route> routes;
+  public List<Middleware> middlewares;
 
   public Router() {
-    routes = new ArrayList<>();
+    this.routes = new ArrayList<>();
+    this.middlewares = new ArrayList<>();
   }
 
   public void get(String path, RouteHandler handler) {
@@ -30,7 +32,26 @@ public class Router {
     routes.add(new Route("DELETE", path, handler));
   }
 
-  public void handleRoute(Request req, Response res) {
+  // TODO
+  public void use(String path, Middleware middleware) {
+    // middlewares.add(middleware);
+  }
+
+  // TODO
+  public void use(Middleware middleware) {
+    // path is "/" by default
+    middlewares.add(middleware);
+  }
+
+  public void handle(Request req, Response res) {
+    // for (Middleware middleware : middlewares) {
+    // middleware.handle(req, res, this);
+    // }
+
+    handleRoute(req, res);
+  }
+
+  private void handleRoute(Request req, Response res) {
     for (Route route : routes) {
       if (route.matches(req)) {
         route.handle(req, res);
