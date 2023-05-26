@@ -52,9 +52,9 @@ public class HttpClientHandler implements Runnable {
       });
 
       // TODO
-      router.use("/middleware", (req, res, next) -> {
-        System.out.println("Test Middleware but does not call next. Bye!");
-      });
+      // router.use("/middleware", (req, res, next) -> {
+      // System.out.println("Test Middleware but does not call next. Bye!");
+      // });
 
       // TODO
       // router.use(new StaticMiddleware(WWW_PATH));
@@ -63,8 +63,13 @@ public class HttpClientHandler implements Runnable {
         res.send("Hello World!");
       });
 
-      router.get("/hello", (req, res) -> {
-        res.send("Hello World from route /hello!");
+      router.get("/hello/:id", (req, res) -> {
+        res.send("Hello World from route /hello/:id! Id: " + req.getParam("id"));
+      });
+
+      router.get("/hello/:id/a", (req, res) -> {
+        res.send("Hello World from route /hello/:id/a! Id: " + req.getParam("id") + "<br>Name: "
+            + req.getQuery("name"));
       });
 
       router.get("/test", (req, res) -> {

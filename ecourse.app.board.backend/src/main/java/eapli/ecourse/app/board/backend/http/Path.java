@@ -17,7 +17,8 @@ public class Path {
     String[] parts = path.split("\\?");
 
     this.path = parts[0];
-    parseQuery(parts[1]);
+    if (parts.length > 1)
+      parseQuery(parts[1]);
   }
 
   public String getPath() {
@@ -46,7 +47,7 @@ public class Path {
       String pathPart = pathParts[i];
       String thisPathPart = thisPathParts[i];
 
-      if (thisPathPart.startsWith(":"))
+      if (pathPart.startsWith(":"))
         continue;
 
       if (!pathPart.equals(thisPathPart))
@@ -68,9 +69,9 @@ public class Path {
       String pathPart = pathParts[i];
       String thisPathPart = thisPathParts[i];
 
-      if (thisPathPart.startsWith(":")) {
-        String paramName = thisPathPart.substring(1);
-        params.put(paramName, pathPart);
+      if (pathPart.startsWith(":")) {
+        String paramName = pathPart.substring(1);
+        params.put(paramName, thisPathPart);
       }
     }
   }

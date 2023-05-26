@@ -35,4 +35,12 @@ public class Request {
   public String getParam(String name) {
     return path.getParam(name);
   }
+
+  public String getQuery(String name) {
+    return path.getQuery(name);
+  }
+
+  public List<String> getArrayQuery(String name) {
+    return path.getArrayQuery(name);
+  }
 }
