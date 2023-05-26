@@ -33,6 +33,10 @@ public class Router {
     routes.add(new Route("DELETE", path, handler));
   }
 
+  public void on(String path, String method, RouteHandler handler) {
+    routes.add(new Route(method, path, handler));
+  }
+
   public void use(Middleware middleware) {
     // path is "/" by default
     // use("/", middleware);
@@ -54,6 +58,10 @@ public class Router {
     // if (req.getPath().startsWith(path))
     // middleware.handle(req, res, this);
     // }
+
+    for (Middleware middleware : middlewares) {
+      middleware.handle(req, res, null);
+    }
 
     handleRoute(req, res);
   }
