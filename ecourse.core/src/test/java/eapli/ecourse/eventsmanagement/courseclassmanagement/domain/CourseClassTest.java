@@ -1,6 +1,8 @@
 package eapli.ecourse.eventsmanagement.courseclassmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 
@@ -14,6 +16,7 @@ import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.eventsmanagement.domain.Duration;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.teachermanagement.domain.Acronym;
 import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
@@ -27,7 +30,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 public class CourseClassTest {
 
   private CourseClass getDummyCourseClass() {
-    return new CourseClass(DayInWeek.valueOf(WeekDay.MONDAY), Duration.valueOf(50),
+    return new CourseClass(ClassID.valueOf("123"), DayInWeek.valueOf(WeekDay.MONDAY), Duration.valueOf(50),
         Hours.valueOf(Calendar.getInstance()), getDummyCourse(), getDummyTeacher());
   }
 
@@ -73,5 +76,57 @@ public class CourseClassTest {
   @Test
   public void ensureCourseClassHasTeacher() {
     assertEquals(getDummyCourseClass().scheduledBy(), getDummyTeacher());
+  }
+
+  @Test
+  public void ensureSameAsWorks() {
+    assertTrue(getDummyCourseClass().sameAs(getDummyCourseClass()));
+  }
+
+  @Test
+  public void ensureSameAsWorksWithSameInstance() {
+    final CourseClass courseClass = getDummyCourseClass();
+    assertTrue(courseClass.sameAs(courseClass));
+  }
+
+  @Test
+  public void ensureSameAsDoesNotWorkWithNull() {
+    final CourseClass courseClass = getDummyCourseClass();
+    assertFalse(courseClass.sameAs(null));
+  }
+
+  @Test
+  public void ensureSamAsDoesNotWorkWithOtherClass() {
+    final CourseClass courseClass = getDummyCourseClass();
+    assertFalse(courseClass.sameAs(new Object()));
+  }
+
+  @Test
+  public void ensureHashCodeWorks() {
+    assertEquals(getDummyCourse().hashCode(), getDummyCourse().hashCode());
+  }
+
+  @Test
+  public void ensureEqualsChecksId() {
+    final CourseClass courseClass = getDummyCourseClass();
+    final CourseClass otherCourseClass = new CourseClass(ClassID.valueOf("123"), DayInWeek.valueOf(WeekDay.MONDAY),
+        Duration.valueOf(50), Hours.valueOf(Calendar.getInstance()), getDummyCourse(), getDummyTeacher());
+    assertTrue(courseClass.equals(otherCourseClass));
+  }
+
+  @Test
+  public void ensureEqualsChecksIdAndNotOtherFields() {
+    final CourseClass courseClass = getDummyCourseClass();
+    final CourseClass otherCourseClass = new CourseClass(ClassID.valueOf("321"), DayInWeek.valueOf(WeekDay.MONDAY),
+        Duration.valueOf(50), Hours.valueOf(Calendar.getInstance()), getDummyCourse(), getDummyTeacher());
+    assertFalse(courseClass.equals(otherCourseClass));
+  }
+
+  @Test
+  public void ensureItIsPossibleToAddSpecialClass() {
+    final CourseClass courseClass = getDummyCourseClass();
+    assertTrue(courseClass.specialClasses().isEmpty());
+    courseClass.addSpecialClass(Time.valueOf(Calendar.getInstance()));
+    assertFalse(courseClass.specialClasses().isEmpty());
   }
 }

@@ -30,7 +30,6 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
 public class ExtraordinaryClassTest {
-
   private Teacher teacher;
   private Course course;
   private Set<Student> students;
@@ -118,4 +117,11 @@ public class ExtraordinaryClassTest {
     assertTrue(ec.identity() != null);
   }
 
+  @Test
+  public void testContainsStudent() {
+    ExtraordinaryClass ec = new ExtraordinaryClass(
+        Duration.valueOf(30), Time.valueOf(Calendar.getInstance()), teacher, students, course);
+
+    assertTrue(ec.containsStudent(students.iterator().next().identity()));
+  }
 }
