@@ -6,8 +6,10 @@ import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.Preconditions;
+import lombok.EqualsAndHashCode;
 
 @Embeddable
+@EqualsAndHashCode
 public class InviteID implements ValueObject, Comparable<InviteID> {
   private static final long serialVersionUID = 1L;
 
