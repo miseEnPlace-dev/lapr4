@@ -43,7 +43,7 @@ public class ScheduleMeetingController {
     this.userManagementService = userManagementService;
   }
 
-  public Meeting scheduleMeeting(Time time, Duration duration, Iterable<SystemUser> users) {
+  public Meeting scheduleMeeting(Time time, Duration duration, ArrayList<SystemUser> users) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER, ClientRoles.MANAGER,
         ClientRoles.TEACHER);
     SystemUser authenticatedUser = getAuthenticatedUser();
@@ -52,24 +52,22 @@ public class ScheduleMeetingController {
     return m;
   }
 
-  public Meeting scheduleMeeting(SystemUser meetingOwner, Time time, Duration duration, Iterable<SystemUser> users) {
+  public Meeting scheduleMeeting(SystemUser meetingOwner, Time time, Duration duration, ArrayList<SystemUser> users) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER, ClientRoles.MANAGER,
         ClientRoles.TEACHER);
-    // TODO add missing authenticated user to users list
 
-    Preconditions.noneNull(time, duration);
+    Preconditions.noneNull(meetingOwner, time, duration);
 
     Meeting meeting = new Meeting(time, duration, meetingOwner);
 
     if (meetingRepository.containsOfIdentity(meeting.identity()))
       throw new IllegalStateException("There is already a meeting with that id");
 
-    System.out.println("creatng meeting");
     Meeting m = saveMeeting(meeting);
-    System.out.println("meeting created");
+
+    users.add(meetingOwner);
 
     sendInvites(users, m);
-    System.out.println("invites sent");
 
     return m;
   }
@@ -97,8 +95,9 @@ public class ScheduleMeetingController {
   }
 
   public boolean checkIfUsersAreAvailable(Time meetingTime, Duration meetingDuration,
-      Iterable<SystemUser> selectedUsers) {
-    // TODO add missing authenticated user to users list
+      ArrayList<SystemUser> selectedUsers) {
+
+    selectedUsers.add(getAuthenticatedUser());
 
     if (scheduleAvailableService.areAllAvailable(selectedUsers, meetingTime, meetingDuration))
       return true;
@@ -112,6 +111,10 @@ public class ScheduleMeetingController {
   }
 
   public ArrayList<SystemUser> getUsers() {
-    return (ArrayList<SystemUser>) userManagementService.allUsers();
+    ArrayList<SystemUser> allUsers = (ArrayList<SystemUser>) userManagementService.allUsers();
+
+    allUsers.remove(getAuthenticatedUser());
+
+    return allUsers;
   }
 }

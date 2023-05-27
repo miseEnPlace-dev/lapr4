@@ -1,8 +1,7 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
@@ -27,7 +26,7 @@ public class MeetingBootstrapper extends UsersBootstrapperBase implements Action
   @Override
   public boolean execute() {
 
-    final Set<SystemUser> users = new HashSet<>();
+    final ArrayList<SystemUser> users = new ArrayList<>();
     users.add(PersistenceContext.repositories().users().ofIdentity(Username.valueOf("isep959")).orElse(null));
 
     Username username = Username.valueOf("user1");

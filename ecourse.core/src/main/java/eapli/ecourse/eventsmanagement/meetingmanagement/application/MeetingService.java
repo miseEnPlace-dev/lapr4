@@ -47,6 +47,6 @@ public class MeetingService {
   private Iterable<InviteDTO> convertToDtoInvites(Iterable<Invite> invites) {
     return StreamSupport.stream(invites.spliterator(), true)
         .map(Invite::toDto)
-        .collect(Collectors.toUnmodifiableList());
+        .collect(Collectors.toUnmodifiableSet());
   }
 }

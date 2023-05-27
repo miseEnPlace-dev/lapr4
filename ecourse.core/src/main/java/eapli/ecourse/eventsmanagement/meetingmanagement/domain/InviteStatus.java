@@ -54,4 +54,9 @@ public class InviteStatus implements ValueObject {
   public void noAnswer() {
     this.state = Status.NO_ANSWER;
   }
+
+  @Override
+  public String toString() {
+    return state.toString();
+  }
 }
