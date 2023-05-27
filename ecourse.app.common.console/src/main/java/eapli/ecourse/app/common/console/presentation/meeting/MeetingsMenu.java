@@ -1,7 +1,5 @@
-package eapli.ecourse.app.student.console.presentation;
+package eapli.ecourse.app.common.console.presentation.meeting;
 
-import eapli.ecourse.app.common.console.presentation.meeting.MeetingResponseUI;
-import eapli.ecourse.app.common.console.presentation.meeting.ScheduleMeetingUI;
 import eapli.framework.actions.menu.Menu;
 
 public class MeetingsMenu {

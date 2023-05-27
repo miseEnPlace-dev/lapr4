@@ -3,6 +3,7 @@ package eapli.ecourse.app.teacher.console.presentation;
 import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
+import eapli.ecourse.app.common.console.presentation.meeting.MeetingsMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -26,6 +27,7 @@ public class MainMenu extends AbstractUI {
   private static final int CLASSES_OPTION = 3;
   private static final int COURSES_OPTION = 4;
   private static final int MY_USER_OPTION = 5;
+  private static final int MEETINGS = 6;
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
@@ -73,6 +75,7 @@ public class MainMenu extends AbstractUI {
     mainMenu.addSubMenu(CLASSES_OPTION, new ClassesMenu().buildMenu());
     mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
+    mainMenu.addSubMenu(MEETINGS, new MeetingsMenu().buildMenu());
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));

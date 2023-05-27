@@ -6,6 +6,7 @@ import eapli.ecourse.app.backoffice.console.presentation.enrolment.EnrollmentsMe
 import eapli.ecourse.app.backoffice.console.presentation.users.UsersMenu;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
+import eapli.ecourse.app.common.console.presentation.meeting.MeetingsMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -35,7 +36,8 @@ public class MainMenu extends AbstractUI {
   private static final int ENROLLMENTS_OPTION = 4;
   private static final int SETTINGS_OPTION = 5;
   private static final int CREATE_BOARD_OPTION = 6;
-  private static final int SOMETHING_OPTION = 7;
+  private static final int MEETINGS_OPTION = 7;
+  private static final int SOMETHING_OPTION = 8;
 
   private static final String SEPARATOR_LABEL = "--------------";
 
@@ -88,6 +90,8 @@ public class MainMenu extends AbstractUI {
       mainMenu.addSubMenu(ENROLLMENTS_OPTION, enrollmentsMenu);
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+      final Menu meetingsMenu = new MeetingsMenu().buildMenu();
+      mainMenu.addSubMenu(MEETINGS_OPTION, meetingsMenu);
     }
 
     if (!Application.settings().isMenuLayoutHorizontal())

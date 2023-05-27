@@ -35,7 +35,7 @@ public class MeetingResponseUI extends AbstractUI {
       return false;
     }
 
-    System.out.println("Select one option:");
+    System.out.println("\nSelect one option:");
     System.out.println("1. Accept");
     System.out.println("2. Reject");
     System.out.println("0. Exit");

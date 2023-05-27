@@ -3,6 +3,7 @@ package eapli.ecourse.app.student.console.presentation;
 import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
+import eapli.ecourse.app.common.console.presentation.meeting.MeetingsMenu;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
