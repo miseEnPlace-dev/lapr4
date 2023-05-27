@@ -15,7 +15,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ## 2. Requirements
 
-### As Manager, I want to open and close courses.
+### As Manager, I want to open and close courses
 
 ## 2.1 Client Specifications
 
@@ -31,8 +31,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 > [**Question:** A course can be open(to enroll), closed(after it ends) and in progress(decurring, closed for enrollment)?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=21973)
 >
-> **Answer**: "Yes, a course may have several states."
-
+> **Answer:** "Yes, a course may have several states."
 
 ## 2.3. Functional Requirements
 
@@ -104,7 +103,6 @@ This is the first time this task is assigned to be developed. This is a new func
   }
 ```
 
-
 **Test 2:** Ensure is possible to toggle the status in a closed course
 
 ```java
@@ -117,7 +115,6 @@ This is the first time this task is assigned to be developed. This is a new func
     assertTrue(course.state().isOpen());
   }
 ```
-
 
 **Test 3:** Ensure is possible to toggle the status of an in progress course
 

@@ -1,0 +1,21 @@
+@startuml US1003_SSD
+autonumber
+
+actor "Student" as S
+participant "System" as SYS
+
+activate S
+
+S -> SYS : asks to list all of his grades
+activate SYS
+SYS --> S : lists all of the courses the student is enrolled in
+deactivate SYS
+
+S -> SYS : selects the desired course
+activate SYS
+SYS --> S : lists all of the grades for the selected course
+deactivate SYS
+
+deactivate S
+
+@enduml

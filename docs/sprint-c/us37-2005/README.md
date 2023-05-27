@@ -1,7 +1,5 @@
 # User Story 2005 - List of grades
 
-> As Student, I want to view a list of my grades
-
 |             |           |
 | ----------- | --------- |
 | ID          | 37        |
@@ -9,63 +7,71 @@
 | Application | 3 - Exams |
 | Priority    | 3         |
 
+---
+
 ## 1. Context
 
-- XXX
+This is the first time this task is assigned to be developed. This is a new functionality that is needed to enable students to view their grades.
+
+---
 
 ## 2. Requirements
 
-### "XXX"
+### "As Student, I want to view a list of my grades"
 
 ## 2.1. Client Specifications
 
-- XXX
+- "[...] students should be able to take these exams and automatically have feedback and resulting grades after submitting them"
+
+- "At the end of the exam, the system should display the feedback and result (i.e., grade) of the exam."
+
+- "support online exams that can be automatically graded."
 
 ## 2.2. Client Clarifications
 
-- XXX
+> [**Question:** If a student misses a exam, his grade should be 0 or what?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22187)
+>
+> **Answer:** "Should be N/A. You should not notify anyone about the absence of a student."
+
+> [**Question:** Do courses have a final grade?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22278)
+>
+> **Answer:** "No. You only need to list the grade of exams."
 
 ## 2.3. Functional Requirements
 
-- XXX
+> **FRE05** List Grades - The system displays to a students his/her grades
 
 ## 2.4. Acceptance Criteria
 
-- XXX
+- N/a
 
 ---
 
 ## 3. Analysis
 
-### 3.1. Main success scenario
+### 3.1. Conditions
 
-- XXX
+- The student must be authenticated and authorized to perform the operation.
 
-### 3.2. Conditions
+### 3.2. System Sequence Diagram
 
-- XXX
+![US2005_SSD](out/US2005_SSD.svg)
 
-### 3.3. System Sequence Diagram
+### 3.3. Partial Domain Model
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US2005_DM](out/US2005_DM.svg)
 
-### 3.4. Sequence Diagram (Simplified)
-
-![USXXX_SD](out/USXXX_SD.svg)
-
-### 3.5. Partial Domain Model
-
-![USXXX_DM](out/USXXX_DM.svg)
+---
 
 ## 4. Design
 
-### 4.1. Functionality Realization
+### 4.1. Sequence Diagram
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US2005_SD](out/US2005_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US2005_CD](out/US2005_CD.svg)
 
 ### 4.3. Applied Patterns
 
@@ -81,6 +87,8 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```
 
+---
+
 ## 5. Implementation
 
 ### 5.1. Controller
@@ -91,9 +99,11 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```
 
+---
+
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US2005_DEMO](out/US2005_DEMO.svg)
 
 ## 7. Observations
 
