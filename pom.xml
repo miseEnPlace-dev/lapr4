@@ -32,7 +32,7 @@
     <module>ecourse.app.backoffice.console</module>
     <module>ecourse.app.board.backend</module>
     <module>ecourse.app.board.common</module>
-    <module>ecourse.app.board.frontend</module>
+    <module>ecourse.app.board.console</module>
     <module>ecourse.app.student.console</module>
     <module>ecourse.app.teacher.console</module>
     <module>ecourse.app.common.console</module>
@@ -181,22 +181,22 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco-maven-plugin.version}</version>
         <configuration>
-        <excludes>
-          <exclude>**/dto/*</exclude>
-          <exclude>**/exceptions/*</exclude>
-          <exclude>**/parsers/*</exclude>
-          <exclude>**/infrastructure/**/*</exclude>
-          <exclude>**/bootstrappers/**/*</exclude>
-          <exclude>**/bootstrap/*</exclude>
-          <exclude>**/AppSettings.*</exclude>
-          <exclude>**/console/**/*</exclude>
-          <exclude>**/eventhandlers/*</exclude>
-          <exclude>**/repositories/*</exclude>
-          <exclude>**/presentation/**/*</exclude>
-          <exclude>**/events/*</exclude>
-          <exclude>**/application/*</exclude>
-          <exclude>**/persistence/impl/**/*</exclude>
-        </excludes>
+          <excludes>
+            <exclude>**/dto/*</exclude>
+            <exclude>**/exceptions/*</exclude>
+            <exclude>**/parsers/*</exclude>
+            <exclude>**/infrastructure/**/*</exclude>
+            <exclude>**/bootstrappers/**/*</exclude>
+            <exclude>**/bootstrap/*</exclude>
+            <exclude>**/AppSettings.*</exclude>
+            <exclude>**/console/**/*</exclude>
+            <exclude>**/eventhandlers/*</exclude>
+            <exclude>**/repositories/*</exclude>
+            <exclude>**/presentation/**/*</exclude>
+            <exclude>**/events/*</exclude>
+            <exclude>**/application/*</exclude>
+            <exclude>**/persistence/impl/**/*</exclude>
+          </excludes>
         </configuration>
         <executions>
           <execution>
@@ -233,9 +233,9 @@
         </reportSets>
       </plugin>
       <plugin>
-    <groupId>org.jacoco</groupId>
-    <artifactId>jacoco-maven-plugin</artifactId>
-</plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
     </plugins>
   </reporting>
 </project>

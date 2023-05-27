@@ -53,10 +53,10 @@
     },
     {
       "type": "java",
-      "name": "Shared Board Console App",
+      "name": "Shared Board App",
       "request": "launch",
-      "mainClass": "eapli.ecourse.app.board.frontend.App",
-      "projectName": "app.board.frontend"
+      "mainClass": "eapli.ecourse.app.board.console.App",
+      "projectName": "app.board.console"
     },
     {
       "type": "java",
