@@ -61,6 +61,20 @@ public class CourseClass implements AggregateRoot<ClassID> {
     this.scheduledBy = scheduledBy;
   }
 
+  public CourseClass(final ClassID id, final DayInWeek dayInWeek, final Duration duration, final Hours hours,
+      final Course course,
+      final Teacher scheduledBy) {
+    Preconditions.noneNull(dayInWeek, duration, hours);
+
+    this.id = id;
+    this.dayInWeek = dayInWeek;
+    this.duration = duration;
+    this.specialClasses = new ArrayList<>();
+    this.hours = hours;
+    this.course = course;
+    this.scheduledBy = scheduledBy;
+  }
+
   protected CourseClass() {
     // for ORM
   }
@@ -82,8 +96,7 @@ public class CourseClass implements AggregateRoot<ClassID> {
 
     for (SpecialClass sc : this.specialClasses) {
       if (!otherClass.specialClasses().contains(sc))
-        ;
-      return false;
+        return false;
     }
 
     return this.identity().equals(otherClass.identity()) && this.course.equals(otherClass.course())
