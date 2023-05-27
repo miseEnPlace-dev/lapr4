@@ -1,0 +1,24 @@
+@startuml US4004_SSD
+autonumber
+
+actor User as "User"
+actor System as "System"
+
+activate User
+
+User -> System : asks to check list of meetings
+activate System
+
+System --> User : shows list
+deactivate System
+
+User -> System : selects meeting
+activate System
+
+System --> User : shows list of participants and their status
+deactivate System
+
+deactivate User
+
+
+@enduml

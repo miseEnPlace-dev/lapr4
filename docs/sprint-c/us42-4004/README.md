@@ -11,11 +11,11 @@
 
 ## 1. Context
 
-- XXX
+This is a new feature that allows users to view a list of participants in a meeting and their status.
 
 ## 2. Requirements
 
-### "XXX"
+### "As User, I want to view a list of participants in my meeting and their status (accept or reject)."
 
 ## 2.1. Client Specifications
 
@@ -39,33 +39,38 @@
 
 ### 3.1. Main success scenario
 
-- XXX
+1. Asks to check the list of meetings
+2. System shows list of meetings
+3. Selects a meeting
+4. System shows list of participants and their status
 
 ### 3.2. Conditions
 
-- XXX
+- The user must be authenticated and authorized to perform the operation.
+
+- The user must have created at least one meeting.
 
 ### 3.3. System Sequence Diagram
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US4004_SSD](out/US4004_SSD.svg)
 
 ### 3.4. Sequence Diagram (Simplified)
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US4004_SD](out/US4004_SD.svg)
 
 ### 3.5. Partial Domain Model
 
-![USXXX_DM](out/USXXX_DM.svg)
+![US4004_DM](out/US4004_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US4004_SD](out/US4004_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US4004_CD](out/US4004_CD.svg)
 
 ### 4.3. Applied Patterns
 
@@ -93,7 +98,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US4004_DEMO](out/US4004_DEMO.svg)
 
 ## 7. Observations
 
