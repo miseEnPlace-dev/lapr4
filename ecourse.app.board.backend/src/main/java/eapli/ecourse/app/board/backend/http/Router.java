@@ -37,6 +37,11 @@ public class Router {
     routes.add(new Route(method, path, handler));
   }
 
+  public void use(String path, Router router) {
+    // middlewares.add(new Pair<>(path, middleware));
+    router.handle(null, null);
+  }
+
   public void use(Middleware middleware) {
     // path is "/" by default
     // use("/", middleware);
@@ -59,11 +64,22 @@ public class Router {
     // middleware.handle(req, res, this);
     // }
 
-    for (Middleware middleware : middlewares) {
-      middleware.handle(req, res, null);
+    handleMiddleware(req, res, 0);
+  }
+
+  private void handleMiddleware(Request req, Response res, int index) {
+    if (index >= middlewares.size()) {
+      handleRoute(req, res);
+      return;
     }
 
-    handleRoute(req, res);
+    Middleware middleware = middlewares.get(index);
+
+    NextFunction nextFunction = () -> {
+      handleMiddleware(req, res, index + 1);
+    };
+
+    middleware.handle(req, res, nextFunction);
   }
 
   private void handleRoute(Request req, Response res) {

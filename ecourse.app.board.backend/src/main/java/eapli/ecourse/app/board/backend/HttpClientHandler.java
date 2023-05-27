@@ -45,35 +45,11 @@ public class HttpClientHandler implements Runnable {
       // create the router
       Router router = new Router();
 
-      // TODO
-      router.use((req, res, next) -> {
-        System.out.println("Middleware!");
-        next.next();
-      });
+      router.use(new StaticMiddleware(WWW_PATH));
 
-      // TODO
-      // router.use("/middleware", (req, res, next) -> {
-      // System.out.println("Test Middleware but does not call next. Bye!");
-      // });
-
-      // TODO
-      // router.use(new StaticMiddleware(WWW_PATH));
-
-      router.get("/", (req, res) -> {
+      // add your routes here express.js style
+      router.get("/api", (req, res) -> {
         res.send("Hello World!");
-      });
-
-      router.get("/hello/:id", (req, res) -> {
-        res.send("Hello World from route /hello/:id! Id: " + req.getParam("id"));
-      });
-
-      router.get("/hello/:id/a", (req, res) -> {
-        res.send("Hello World from route /hello/:id/a! Id: " + req.getParam("id") + "<br>Name: "
-            + req.getQuery("name"));
-      });
-
-      router.get("/test", (req, res) -> {
-        res.status(404).send("Test route");
       });
 
       // create the request and response objects
