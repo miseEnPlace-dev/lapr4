@@ -66,6 +66,11 @@ First, start the H2 database. For that, **open a new terminal** and execute the 
 - On Linux/MacOS: `./h2.sh`
 - On Windows: `h2.bat`
 
+For the board app a server is needed. For that, **open a new terminal** and execute the following script:
+
+- On Linux/MacOS: `./run-board-server.sh`
+- On Windows: `run-board-server.bat`
+
 Leave this terminal open and running. Go back to the terminal where you executed the build script and continue with the next steps.
 In order to have the needed data for executing the app, you need to run the bootstrap script. For that, execute the following script:
 
@@ -86,6 +91,9 @@ You are now ready to run the app. Simply execute the script of the app you want 
 - For the manager app, execute the following script:
   - On Linux/MacOS: `./run-manager.sh`
   - On Windows: `run-manager.bat`
+- For the board app, execute the following script:
+  - On Linux/MacOS: `./run-board-app.sh`
+  - On Windows: `run-board-app.bat`
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
