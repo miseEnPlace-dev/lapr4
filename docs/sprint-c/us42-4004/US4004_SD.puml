@@ -1,0 +1,61 @@
+@startuml US4004_SD
+autonumber
+
+actor "User" as U
+
+participant "ListMeetingUI" as UI <<presentation>>
+participant "ListMeetingController" as CTRL <<controller>>
+participant "Invite" as INV <<entity>>
+
+database MeetingRepository as MR <<repository>>
+database InviteRepository as IR <<repository>>
+
+activate U
+
+U -> UI : asks to check list of meetings
+activate UI
+
+UI -> CTRL : getMeetingList()
+activate CTRL
+
+CTRL -> MR : findAllByUser()
+activate MR
+deactivate MR
+
+deactivate CTRL
+
+UI --> U : shows list and asks to select meeting
+deactivate UI
+
+U -> UI : selects meeting
+activate UI
+
+UI -> CTRL : getMeetingDetails()
+activate CTRL
+
+CTRL -> MR : findById()
+activate MR
+deactivate MR
+
+CTRL -> IR : findInvitesByMeeting()
+activate IR
+deactivate IR
+
+loop for each invite
+    CTRL -> INV : user()
+    activate INV
+    deactivate INV
+
+    CTRL -> INV : status()
+    activate INV
+    deactivate INV
+end loop
+
+deactivate CTRL
+
+UI --> U : shows list of participants and their status
+deactivate UI
+
+deactivate U
+
+@enduml

@@ -10,6 +10,8 @@ participant "Invite" as INV <<domain>>
 
 database InviteRepository as IR <<repository>>
 
+activate U
+
 U -> UI : checks if theres an invite to a meeting
 activate UI
 
@@ -64,7 +66,6 @@ deactivate CTRL
 UI --> U : reports success of the operation
 deactivate UI
 
-
-
+deactivate U
 
 @enduml
