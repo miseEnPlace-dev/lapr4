@@ -1,4 +1,4 @@
-@startuml US4003_SD
+@startuml US4002_SD
 autonumber
 
 actor "User" as U
@@ -24,7 +24,7 @@ activate MS
 MS -> MR: findNotCanceledMeetingsByOwner(owner)
 activate MR
 deactivate MR
-loop for each course
+loop for each meeting
     MS -> Meeting : toDTO(meeting)
     activate Meeting
     Meeting -> DTO : new
@@ -55,6 +55,16 @@ deactivate Meeting
 CTRL -> MR: save(meeting)
 activate MR
 deactivate MR
+CTRL -> IR: invites = findByMeetingId(selectedMeeting.identity())
+activate IR
+deactivate IR
+
+loop for each invite
+    CTRL -> IR: remove(invite)
+    activate IR
+    deactivate IR
+end loop
+
 deactivate CTRL
 UI --> U: informs the success of the operation
 
