@@ -1,6 +1,7 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
@@ -32,6 +34,11 @@ public class MeetingTest {
   private Meeting getDummyMeeting() {
     Calendar c = Calendar.getInstance();
     return new Meeting(Time.valueOf(c), Duration.valueOf(120), getDummyUser());
+  }
+
+  private Meeting getDummyMeeting2() {
+    Calendar c = Calendar.getInstance();
+    return new Meeting(Time.valueOf(c), Duration.valueOf(100), getDummyUser());
   }
 
   private Invite getDummyInvite() {
@@ -74,5 +81,66 @@ public class MeetingTest {
     MeetingID id3 = MeetingID.valueOf("124");
     assertTrue(id1.compareTo(id2) > 0);
     assertTrue(id1.compareTo(id3) < 0);
+  }
+
+  @Test
+  public void ensureIdIsComparableWithItself() {
+    MeetingID id1 = MeetingID.valueOf("123");
+    assertTrue(id1.compareTo(id1) == 0);
+  }
+
+  @Test
+  public void ensureIdIsEqual() {
+    MeetingID id1 = MeetingID.valueOf("123");
+    MeetingID id2 = MeetingID.valueOf("123");
+    assertTrue(id1.equals(id2));
+  }
+
+  @Test
+  public void ensureIdIsNotEqual() {
+    MeetingID id1 = MeetingID.valueOf("123");
+    MeetingID id2 = MeetingID.valueOf("122");
+    assertTrue(!id1.equals(id2));
+  }
+
+  @Test
+  public void ensureHashCodeIsWorking() {
+    MeetingID id1 = MeetingID.valueOf("123");
+    MeetingID id2 = MeetingID.valueOf("123");
+    assertTrue(id1.hashCode() == id2.hashCode());
+  }
+
+  @Test
+  public void ensureCanEqualIsWorking() {
+    MeetingID id1 = MeetingID.valueOf("123");
+    MeetingID id2 = MeetingID.valueOf("123");
+    assertTrue(id1.canEqual(id2));
+  }
+
+  @Test
+  public void ensureSameAsIsWorking() {
+    assertFalse(getDummyMeeting().sameAs(getDummyMeeting2()));
+  }
+
+  @Test
+  public void ensureSameAsIsWorkingWithOtherObject() {
+    assertFalse(getDummyMeeting().sameAs(getDummyUser()));
+  }
+
+  @Test
+  public void ensureSameAsIsWorkingWithSameObject() {
+    Meeting meeting = getDummyMeeting();
+    assertTrue(meeting.sameAs(meeting));
+  }
+
+  @Test
+  public void ensureToDTOIsWorking() {
+    Meeting meeting = getDummyMeeting();
+    MeetingDTO dto = meeting.toDto();
+    assertEquals(meeting.identity(), dto.getId());
+    assertEquals(meeting.time(), dto.getTime());
+    assertEquals(meeting.duration(), dto.getDuration());
+    assertEquals(meeting.scheduledBy(), dto.getScheduledBy());
+    assertEquals(meeting.canceledAt(), dto.getCanceledAt());
   }
 }
