@@ -12,7 +12,7 @@ public class MeetingsMenu {
     final Menu menu = new Menu("Meetings >");
 
     menu.addItem(SCHEDULE_MEETING, "Schedule Meeting", new ScheduleMeetingUI()::show);
-    // menu.addItem(LIST_MEETINGS, "List Meetings", new ()::show);
+    menu.addItem(LIST_MEETINGS, "List Meetings", new ListMeetingUI()::show);
     menu.addItem(CHECK_INVITES, "Accept or Reject invite", new MeetingResponseUI()::show);
 
     menu.addItem(CANCEL_MEETING, "Cancel a Meeting", new CancelMeetingUI()::show);

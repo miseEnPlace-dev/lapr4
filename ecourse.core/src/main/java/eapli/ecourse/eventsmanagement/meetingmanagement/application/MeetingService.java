@@ -5,6 +5,7 @@ import java.util.stream.StreamSupport;
 
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
+import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.InviteDTO;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
@@ -21,8 +22,14 @@ public class MeetingService {
     this.inviteRepository = inviteRepository;
   }
 
-  public Iterable<InviteDTO> getInvites(Username username) {
+  public Iterable<InviteDTO> getInvitesPending(Username username) {
     final Iterable<Invite> types = inviteRepository.findAllPendingForUsername(username);
+
+    return convertToDtoInvites(types);
+  }
+
+  public Iterable<InviteDTO> getAllInvitesByMeeting(MeetingID meetingID) {
+    final Iterable<Invite> types = inviteRepository.findByMeetingID(meetingID);
 
     return convertToDtoInvites(types);
   }
