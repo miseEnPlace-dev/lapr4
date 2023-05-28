@@ -4,6 +4,7 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteID;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteStatus;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.representations.dto.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +19,5 @@ public class InviteDTO {
   private Meeting meeting;
   private InviteStatus status;
   private Time time;
+  private SystemUser user;
 }

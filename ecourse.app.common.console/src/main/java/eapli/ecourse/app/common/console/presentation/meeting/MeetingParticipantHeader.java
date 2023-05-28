@@ -1,9 +1,9 @@
 package eapli.ecourse.app.common.console.presentation.meeting;
 
-public class MeetingHeader {
+public class MeetingParticipantHeader {
 
   public String header() {
-    return String.format("\n#  %-20s%-16s%-14s%14s", " Time", "Duration (m)", "Scheduled By", "Canceled At");
+    return String.format("%-16s%-14s", "Participants", "Status");
   }
 
   public void printHeader() {

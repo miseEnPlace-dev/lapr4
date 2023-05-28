@@ -90,7 +90,7 @@ public class Invite implements AggregateRoot<InviteID> {
   }
 
   public InviteDTO toDto() {
-    return new InviteDTO(this.id, this.meeting, this.status, this.meeting.time());
+    return new InviteDTO(this.id, this.meeting, this.status, this.meeting.time(), this.user);
   }
 
 }
