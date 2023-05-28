@@ -107,7 +107,7 @@ public class Meeting implements AggregateRoot<MeetingID> {
   }
 
   public MeetingDTO toDto() {
-    return new MeetingDTO(this.id, this.time, this.duration);
+    return new MeetingDTO(this.id, this.time, this.duration, this.scheduledBy, this.canceledAt);
   }
 
   public SystemUser scheduledBy() {
