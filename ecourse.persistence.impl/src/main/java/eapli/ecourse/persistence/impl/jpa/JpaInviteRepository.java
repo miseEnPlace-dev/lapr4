@@ -107,8 +107,8 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
   }
 
   @Override
-  public Iterable<Invite> findByMeetingID(MeetingID meetingID) {
-    return match("e.meeting.meetingID = :meetingID", "meetingID", meetingID);
+  public Iterable<Invite> findByMeetingID(MeetingID id) {
+    return match("e.meeting.id = :id", "id", id);
   }
 
   @Override

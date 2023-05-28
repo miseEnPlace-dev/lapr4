@@ -3,7 +3,6 @@ package eapli.ecourse.app.common.console.presentation.meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.application.CancelMeetingController;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
