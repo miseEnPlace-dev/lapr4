@@ -1,11 +1,61 @@
-@startuml
-'https://plantuml.com/sequence-diagram
-
+@startuml US4003_SD
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor "User" as U
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+participant "CancelMeetingUI" as UI <<presentation>>
+participant "CancelMeetingController" as CTRL <<controller>>
+participant "MeetingService" as MS <<service>>
+participant "Meeting" as Meeting <<domain>>
+participant "MeetingDTO" as DTO <<dto>>
+
+database InviteRepository as IR <<repository>>
+database MeetingRepository as MR <<repository>>
+
+
+
+U -> UI: requests to cancel a scheduled meeting
+activate UI
+UI -> CTRL: meetingsDTO = listNotCanceledScheduledMeetings()
+activate CTRL
+CTRL -> MS: notCanceledMeetingsScheduledBy(user)
+
+activate MS
+MS -> MR: findNotCanceledMeetingsByOwner(owner)
+activate MR
+deactivate MR
+loop for each course
+    MS -> Meeting : toDTO(meeting)
+    activate Meeting
+    Meeting -> DTO : new
+    deactivate MS
+    deactivate Meeting
+    deactivate CTRL
+  end loop
+UI --> U: lists all meetings scheduled by the user
+deactivate UI
+
+U -> UI: selects the desired meeting
+activate UI
+UI -> UI: selectedMeeting = select(meetingsDTO, index)
+
+UI --> U: requests to confirm the operation
+deactivate UI
+U -> UI: confirms operation
+activate UI
+UI -> CTRL: cancelMeeting(selectedMeeting)
+
+activate CTRL
+CTRL -> MR: meeting = findById(selectedMeeting.identity())
+activate MR
+deactivate MR
+CTRL -> Meeting: meeting = cancel()
+activate Meeting
+deactivate Meeting
+CTRL -> MR: save(meeting)
+activate MR
+deactivate MR
+deactivate CTRL
+UI --> U: informs the success of the operation
+
 @enduml
