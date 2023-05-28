@@ -8,8 +8,6 @@ public class MeetingsMenu {
   private static final int CHECK_INVITES = 3;
   private static final int CANCEL_MEETING = 4;
 
-
-
   public Menu buildMenu() {
     final Menu menu = new Menu("Meetings >");
 

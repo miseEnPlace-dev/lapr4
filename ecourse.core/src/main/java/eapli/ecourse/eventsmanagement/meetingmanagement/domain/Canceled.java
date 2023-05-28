@@ -2,8 +2,13 @@ package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import java.util.Calendar;
 
-import eapli.framework.domain.model.ValueObject;
+import javax.persistence.Embeddable;
 
+import eapli.framework.domain.model.ValueObject;
+import lombok.EqualsAndHashCode;
+
+@Embeddable
+@EqualsAndHashCode
 public class Canceled implements ValueObject, Comparable<Canceled> {
   private static final long serialVersionUID = 1L;
 
@@ -25,6 +30,10 @@ public class Canceled implements ValueObject, Comparable<Canceled> {
   @Override
   public String toString() {
     return canceledAt.toString();
+  }
+
+  public static Canceled valueOf(Calendar canceledAt) {
+    return new Canceled(canceledAt);
   }
 
   @Override

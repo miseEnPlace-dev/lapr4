@@ -1,17 +1,16 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.application;
 
-
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
+import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
-import javax.transaction.Transactional;
-
+@UseCaseController
 public class CancelMeetingController {
 
   MeetingRepository meetingRepository;
@@ -21,7 +20,6 @@ public class CancelMeetingController {
   private final MeetingService service;
 
   private final AuthorizationService authz;
-
 
   public CancelMeetingController(AuthorizationService authz, MeetingRepository meetingRepository,
       InviteRepository inviteRepository) {
@@ -34,7 +32,6 @@ public class CancelMeetingController {
   public Iterable<MeetingDTO> listNotCanceledScheduledMeetings() {
     return this.service.notCanceledMeetingsScheduledBy(getAuthenticatedUser());
   }
-
 
   public void cancelMeeting(MeetingDTO meetingDTO) {
     Meeting meeting = meetingRepository.ofIdentity(meetingDTO.getId()).orElseThrow();

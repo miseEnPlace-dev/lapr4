@@ -29,7 +29,7 @@ public class Meeting implements AggregateRoot<MeetingID> {
   @ManyToOne(optional = false)
   private SystemUser scheduledBy;
 
-  @Column
+  @Column(nullable = true)
   private Canceled canceledAt;
 
   @Column(nullable = false)
@@ -98,7 +98,7 @@ public class Meeting implements AggregateRoot<MeetingID> {
   }
 
   public void cancel() {
-    this.canceledAt = new Canceled(Calendar.getInstance());
+    this.canceledAt = Canceled.valueOf(Calendar.getInstance());
   }
 
   @Override
