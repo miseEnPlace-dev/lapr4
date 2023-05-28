@@ -34,7 +34,7 @@ public class CancelMeetingUI extends AbstractUI {
 
     String confirm = "";
     while (!confirm.equals("Y") && !confirm.equals("N")) {
-      confirm = Console.readLine("Do you want to confirm the cancellation of the meeting? [Y/N]\n");
+      confirm = Console.readLine("Do you want to confirm the cancellation of the meeting? [Y/N]\n").toUpperCase();
     }
 
     if (confirm.equals("N")) {
