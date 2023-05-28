@@ -39,7 +39,7 @@ public class CancelMeetingController {
     meetingRepository.save(meeting);
 
     Iterable<Invite> invites = inviteRepository.findByMeetingID(meetingDTO.getId());
-    invites.forEach(i -> inviteRepository.remove(i));
+    invites.forEach(inviteRepository::remove);
   }
 
   public SystemUser getAuthenticatedUser() {

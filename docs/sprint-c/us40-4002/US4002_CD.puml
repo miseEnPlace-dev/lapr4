@@ -1,0 +1,100 @@
+@startuml US4002_CD
+
+class CancelMeetingUI {
+
+}
+
+class CancelMeetingController {
+- authorizationService
+- meetingRepository
+- inviteRepository
+- meetingService
+
++ CancelMeetingController(authorizationService, meetingRepository,
+inviteRepository)
+
++ listNotCanceledScheduledMeetings()
++ cancelMeeting(meeting)
++ getAuthenticatedUser()
+}
+
+
+class Meeting {
+- id
+- duration
+- scheduledBy
+- canceledAt
+- time
+
++ cancel()
+}
+
+class MeetingDTO {
+- id
+- duration
+- scheduledBy
+- canceledAt
+- time
+}
+
+
+
+class MeetingService {
++ notCanceledMeetingsScheduledBy(user)
+}
+
+interface MeetingRepository {
++ findNotCanceledMeetingsByOwner(user)
+}
+
+class InMemoryMeetingRepository {
++ findNotCanceledMeetingsByOwner(user)
+}
+
+class JpaMeetingRepository {
++ findNotCanceledMeetingsByOwner(user)
+}
+
+interface InviteRepository {
++ findByMeetingID(meetingID)
++ remove(meeting)
+}
+
+class InMemoryInviteRepository {
++ findByMeetingID(meetingID)
+}
+
+class JpaInviteRepository {
++ findByMeetingID(meetingID)
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+
+class PersistenceContext {
+  - repositories()
+}
+
+
+MeetingService ..> Meeting
+MeetingService ..> MeetingDTO
+MeetingService ..> MeetingRepository
+
+MeetingRepository <|.. InMemoryMeetingRepository
+MeetingRepository <|.. JpaMeetingRepository
+
+InviteRepository <|.. InMemoryInviteRepository
+InviteRepository <|.. JpaInviteRepository
+
+CancelMeetingController --> MeetingService
+
+CancelMeetingUI ..> PersistenceContext
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> MeetingRepository
+RepositoryFactory --> InviteRepository
+
+CancelMeetingUI ..> CancelMeetingController
+
+@enduml
