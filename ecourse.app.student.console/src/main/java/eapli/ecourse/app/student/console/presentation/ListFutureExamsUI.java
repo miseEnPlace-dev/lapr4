@@ -2,6 +2,7 @@ package eapli.ecourse.app.student.console.presentation;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
+import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.ListFutureExamsController;
@@ -28,20 +29,22 @@ public class ListFutureExamsUI extends AbstractUI {
     }
 
     new CourseHeader().printHeader();
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", studentCourses, new CoursePrinter());
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>("", studentCourses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
     if (selected == null)
       return false;
 
+
     Iterable<EvaluationExamDTO> courseFutureExams = ctrl.futureExams(selected);
     if (!courseFutureExams.iterator().hasNext()) {
-      System.out.println("\nThere are no future exams");
+      System.out.println("\nThere are no future exams in " + selected.getTitle());
       return false;
     }
 
-    ListWidget<EvaluationExamDTO> list = new ListWidget<>("Future Exams Of " + selected.getTitle(), courseFutureExams,
-        new EvaluationExamPrinter());
+
+    new EvaluationExamHeader().printHeader();
+    ListWidget<EvaluationExamDTO> list = new ListWidget<>("", courseFutureExams, new EvaluationExamPrinter());
     list.show();
 
     return false;

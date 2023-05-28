@@ -5,7 +5,9 @@ import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
+import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
+import eapli.ecourse.app.common.console.presentation.exam.FormativeExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.FormativeExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.ListCourseExamsController;
@@ -47,15 +49,21 @@ public class ListCourseExamsUI extends AbstractUI {
       return false;
     }
 
-    ListWidget<EvaluationExamDTO> evaluationExamsList = new ListWidget<>("Evaluation Exams Of " + selected.getTitle(),
-      evaluationExams, new EvaluationExamPrinter());
-    evaluationExamsList.show();
+    if (evaluationExams.iterator().hasNext()) {
+      new EvaluationExamHeader().printHeader();
+      ListWidget<EvaluationExamDTO> evaluationExamsList = new ListWidget<>("", evaluationExams, new EvaluationExamPrinter());
+      evaluationExamsList.show();
+    } else {
+      System.out.println("No evaluation exams in " + selected.getTitle() + "\n");
+    }
 
-
-
-    ListWidget<FormativeExamDTO> formativeExamsList = new ListWidget<>("\nFormative Exams Of " + selected.getTitle(),
-      formativeExams, new FormativeExamPrinter());
-    formativeExamsList.show();
+    if (formativeExams.iterator().hasNext()) {
+      new FormativeExamHeader().printHeader();
+      ListWidget<FormativeExamDTO> formativeExamsList = new ListWidget<>("", formativeExams, new FormativeExamPrinter());
+      formativeExamsList.show();
+    } else {
+      System.out.println("\nNo formative exams in " + selected.getTitle());
+    }
 
     return true;
   }
