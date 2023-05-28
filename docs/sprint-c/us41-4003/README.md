@@ -58,11 +58,7 @@ This is a new feature that allows users to accept or reject a meeting request.
 
 ![US4003_SSD](out/US4003_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
-
-![US4003_SD](out/US4003_SD.svg)
-
-### 3.5. Partial Domain Model
+### 3.4. Partial Domain Model
 
 ![US4003_DM](out/US4003_DM.svg)
 
