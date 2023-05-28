@@ -19,5 +19,5 @@ public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> 
     return ofIdentity(id);
   }
 
-  public Iterable<Meeting> findMeetingsByOwner(SystemUser owner);
+  public Iterable<Meeting> findNotCanceledMeetingsByOwner(SystemUser owner);
 }

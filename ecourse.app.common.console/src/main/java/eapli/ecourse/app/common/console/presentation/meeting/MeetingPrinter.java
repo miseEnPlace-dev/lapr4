@@ -8,7 +8,7 @@ public class MeetingPrinter implements Visitor<MeetingDTO> {
   public void visit(MeetingDTO visitee) {
     new MeetingHeader().printHeader();
 
-    System.out.printf("%-7s%-10s%-10s%-14s%12s", visitee.getId(), visitee.getTime().toString(),
-      visitee.getDuration(), visitee.getScheduledBy(), visitee.getCanceledAt());
+    System.out.printf("  %-19s%-14s%-14s%14s", visitee.getTime().toString(),
+      visitee.getDuration(), visitee.getScheduledBy().username() , visitee.getCanceledAt());
   }
 }

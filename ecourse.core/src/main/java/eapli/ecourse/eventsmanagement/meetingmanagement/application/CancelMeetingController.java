@@ -26,15 +26,15 @@ public class CancelMeetingController {
     this.inviteRepository = inviteRepository;
   }
 
-  public Iterable<MeetingDTO> listScheduledMeetings() {
-    return this.service.meetingsScheduledBy(getAuthenticatedUser());
+  public Iterable<MeetingDTO> listNotCanceledScheduledMeetings() {
+    return this.service.notCanceledMeetingsScheduledBy(getAuthenticatedUser());
   }
 
   public void cancelMeeting(MeetingDTO meetingDTO) {
-    meetingRepository.deleteOfIdentity(meetingDTO.getId());
+    meetingRepository.findById(meetingDTO.getId()).orElseThrow().cancel();
 
-    Iterable<Invite> invites = inviteRepository.findByMeetingID(meetingDTO.getId());
-    invites.forEach(i -> inviteRepository.remove(i));
+    // Iterable<Invite> invites = inviteRepository.findByMeetingID(meetingDTO.getId());
+    // invites.forEach(i -> inviteRepository.remove(i));
   }
 
   public SystemUser getAuthenticatedUser() {

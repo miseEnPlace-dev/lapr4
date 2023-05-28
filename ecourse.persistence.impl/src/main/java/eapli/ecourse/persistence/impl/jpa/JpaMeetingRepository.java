@@ -22,7 +22,7 @@ public class JpaMeetingRepository extends JpaAutoTxRepository<Meeting, MeetingID
   }
 
   @Override
-  public Iterable<Meeting> findMeetingsByOwner(SystemUser owner) {
-    return match("e.owner = :owner", "owner", owner);
+  public Iterable<Meeting> findNotCanceledMeetingsByOwner(SystemUser scheduledBy) {
+    return match("e.scheduledBy = :scheduledBy AND e.canceledAt IS NULL", "scheduledBy", scheduledBy);
   }
 }

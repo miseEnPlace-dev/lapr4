@@ -32,8 +32,8 @@ public class MeetingService {
     return convertToDtoMeetings(types);
   }
 
-  public Iterable<MeetingDTO> meetingsScheduledBy(SystemUser user) {
-    final Iterable<Meeting> types = meetingRepository.findMeetingsByOwner(user);
+  public Iterable<MeetingDTO> notCanceledMeetingsScheduledBy(SystemUser user) {
+    final Iterable<Meeting> types = meetingRepository.findNotCanceledMeetingsByOwner(user);
 
     return convertToDtoMeetings(types);
   }
