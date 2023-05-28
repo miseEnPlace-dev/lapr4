@@ -177,7 +177,7 @@ public MeetingResponseController(final InviteRepository inviteRepository, final 
 
 ## 6. Integration & Demonstration
 
-![US4003_DEMO](out/US4003_DEMO.svg)
+![US4003_DEMO](assets/US4003_DEMO.png)
 
 ## 7. Observations
 

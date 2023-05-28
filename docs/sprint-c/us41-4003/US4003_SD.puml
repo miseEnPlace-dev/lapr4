@@ -5,6 +5,7 @@ actor "User" as U
 
 participant "MeetingResponseUI" as UI <<presentation>>
 participant "MeetingResponseController" as CTRL <<controller>>
+participant "MeetingService" as MS <<service>>
 participant "Invite" as INV <<domain>>
 
 database InviteRepository as IR <<repository>>
@@ -15,10 +16,14 @@ activate UI
 UI -> CTRL : getInvites()
 activate CTRL
 
-CTRL -> IR : getInvites()
+CTRL -> MS : getInvites()
+activate MS
+
+MS -> IR : findAllPendingForUsername()
 activate IR
 deactivate IR
 
+deactivate MS
 deactivate CTRL
 
 UI --> U : shows list of invites
@@ -35,6 +40,10 @@ activate UI
 
 UI -> CTRL : changeInviteStatus()
 activate CTRL
+
+CTRL -> IR : findInviteById()
+activate IR
+deactivate IR
 
 alt Accept
     CTRL -> INV : accept()
