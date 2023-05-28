@@ -5,7 +5,7 @@ actor "User" as U
 
 participant "ListMeetingUI" as UI <<presentation>>
 participant "ListMeetingController" as CTRL <<controller>>
-participant "Invite" as INV <<entity>>
+participant "MeetingService" as MS <<service>>
 
 database MeetingRepository as MR <<repository>>
 database InviteRepository as IR <<repository>>
@@ -18,9 +18,14 @@ activate UI
 UI -> CTRL : getMeetingList()
 activate CTRL
 
-CTRL -> MR : findAllByUser()
+CTRL -> MS : notCanceledMeetingsSheduledBy()
+activate MS
+
+MS -> MR : findNotCanceledMeetingsByOwner()
 activate MR
 deactivate MR
+
+deactivate MS
 
 deactivate CTRL
 
@@ -33,23 +38,14 @@ activate UI
 UI -> CTRL : getMeetingDetails()
 activate CTRL
 
-CTRL -> MR : findById()
-activate MR
-deactivate MR
+CTRL -> MS : getAllInvitesByMeeting()
+activate MS
 
-CTRL -> IR : findInvitesByMeeting()
+MS -> IR : findByMeetingID()
 activate IR
 deactivate IR
 
-loop for each invite
-    CTRL -> INV : user()
-    activate INV
-    deactivate INV
-
-    CTRL -> INV : status()
-    activate INV
-    deactivate INV
-end loop
+deactivate MS
 
 deactivate CTRL
 
