@@ -4,9 +4,9 @@ import eapli.ecourse.eventsmanagement.meetingmanagement.application.CancelMeetin
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.MeetingDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
+import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
-
 import java.util.NoSuchElementException;
 
 public class CancelMeetingUI extends AbstractUI {
@@ -23,13 +23,24 @@ public class CancelMeetingUI extends AbstractUI {
       return false;
     }
 
-    final SelectWidget<MeetingDTO> selector = new SelectWidget<>("Scheduled Meetings: ", userMeetings,
+    new MeetingHeader().printHeader();
+    final SelectWidget<MeetingDTO> selector = new SelectWidget<>("", userMeetings,
       new MeetingPrinter());
 
     selector.show();
     final MeetingDTO selected = selector.selectedElement();
     if (selected == null)
       return false;
+
+    String confirm = "";
+    while (!confirm.equals("Y") && !confirm.equals("N")) {
+      confirm = Console.readLine("Do you want to confirm the cancellation of the meeting? [Y/N]\n");
+    }
+
+    if (confirm.equals("N")) {
+      System.out.println("Operation Canceled");
+      return false;
+    }
 
     try {
       ctrl.cancelMeeting(selected);
@@ -44,6 +55,6 @@ public class CancelMeetingUI extends AbstractUI {
 
   @Override
   public String headline() {
-    return "Cancel Meeting";
+    return "Cancel Scheduled Meeting";
   }
 }

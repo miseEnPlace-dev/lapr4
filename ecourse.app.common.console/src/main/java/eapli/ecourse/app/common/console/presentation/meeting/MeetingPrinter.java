@@ -6,7 +6,6 @@ import eapli.framework.visitor.Visitor;
 public class MeetingPrinter implements Visitor<MeetingDTO> {
   @Override
   public void visit(MeetingDTO visitee) {
-    new MeetingHeader().printHeader();
 
     System.out.printf("  %-19s%-14s%-14s%14s", visitee.getTime().toString(),
       visitee.getDuration(), visitee.getScheduledBy().username() , visitee.getCanceledAt());
