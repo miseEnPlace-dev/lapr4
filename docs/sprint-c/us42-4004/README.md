@@ -19,19 +19,22 @@ This is a new feature that allows users to view a list of participants in a meet
 
 ## 2.1. Client Specifications
 
-- XXX
+- Classes and meetings are events that happen in some time and have a duration. They also have
+  participants. However there is no concept of location related to classes and meetings. They do
+  not take place in a specific location and "nothing" happens at the time of the event.
 
 ## 2.2. Client Clarifications
 
-- XXX
+- N/a
 
 ## 2.3. Functional Requirements
 
-- XXX
+- **FRM04** List Participants The system displays the lists of participants in a meeting and
+  the response status (accept or reject meeting)
 
 ## 2.4. Acceptance Criteria
 
-- XXX
+- N/a
 
 ---
 
@@ -54,11 +57,7 @@ This is a new feature that allows users to view a list of participants in a meet
 
 ![US4004_SSD](out/US4004_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
-
-![US4004_SD](out/US4004_SD.svg)
-
-### 3.5. Partial Domain Model
+### 3.4. Partial Domain Model
 
 ![US4004_DM](out/US4004_DM.svg)
 
@@ -74,16 +73,44 @@ This is a new feature that allows users to view a list of participants in a meet
 
 ### 4.3. Applied Patterns
 
-- XXX
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **State:** The state pattern is used to represent the state of the invite and the meeting. This is done to keep the invite and meeting state logic encapsulated in the invite status class/canceled meeting class and to reduce coupling.
 
 ### 4.4. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** Ensure meeting can be created
 
 ```java
+@Test
+public void ensureItsPossibleToCreateInvite() {
+  Invite invite = getDummyInvite();
+  assertEquals(invite.user(), getDummyUser());
+  assertTrue(invite.status().isPending());
+}
+```
 
+**Test 2:** Ensure meeting can be accepted
+
+```java
+@Test
+public void ensureItsPossibleToAcceptInvite() {
+  Invite invite = getDummyInvite();
+  invite.accept();
+  assertTrue(invite.status().isAccepted());
+}
+```
+
+**Test 3:** Ensure meeting can be rejected
+
+```java
+@Test
+public void ensureItsPossibleToRejectInvite() {
+  Invite invite = getDummyInvite();
+  invite.reject();
+  assertTrue(invite.status().isRejected());
+}
 ```
 
 ## 5. Implementation
@@ -93,7 +120,12 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
+public ListMeetingController(final MeetingRepository meetingRepository, final InviteRepository inviteRepository,
+      final AuthorizationService authz) {
+    this.authz = authz;
+    this.service = new MeetingService(meetingRepository, inviteRepository);
 
+  }
 ```
 
 ## 6. Integration & Demonstration
