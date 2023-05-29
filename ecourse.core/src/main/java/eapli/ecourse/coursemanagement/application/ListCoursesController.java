@@ -45,7 +45,7 @@ public class ListCoursesController {
       final SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
       final Student student = studentRepository.findByUsername(user.username()).orElseThrow();
       return enrolmentListService
-          .listStudentsCourses(student.identity());
+          .listStudentCourses(student.identity());
     }
 
     return null;

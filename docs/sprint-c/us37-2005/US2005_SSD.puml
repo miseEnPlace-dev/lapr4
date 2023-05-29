@@ -1,4 +1,4 @@
-@startuml US1003_SSD
+@startuml US2005_SSD
 autonumber
 
 actor "Student" as S

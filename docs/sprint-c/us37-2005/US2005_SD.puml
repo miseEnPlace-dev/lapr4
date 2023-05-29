@@ -1,0 +1,90 @@
+@startuml US2005_SD
+autonumber
+
+actor "Student" as S
+participant "ListStudentGradesUI" as UI <<presentation>>
+participant "ListStudentGradesController" as CTRL <<application>>
+participant "AuthenticationService" as AUTH <<service>>
+participant "ListEnrolmentService" as SRV <<service>>
+participant "ListExamAnswerService" as ESRV <<service>>
+participant "Course" as C <<domain>>
+participant "CourseDTO" as CDTO <<dto>>
+
+participant "ExamAnswer" as E <<domain>>
+participant "ExamAnswerDTO" as EDTO <<dto>>
+
+database EnrolmentRepository as EREP <<repository>>
+database ExamAnswerRepository as EXREP <<repository>>
+database StudentRepository as SREP <<repository>>
+
+activate S
+
+S -> UI : asks to list all of his grades
+activate UI
+
+UI -> CTRL : new(enrolmentRepository, examAnswerRepository, authenticationService)
+activate CTRL
+CTRL -> SRV : service=new(enrolmentRepository)
+deactivate CTRL
+
+UI -> CTRL : listStudentCourses()
+activate CTRL
+CTRL -> AUTH : loggedinUserWithPermissions()
+activate AUTH
+AUTH --> CTRL : authenticatedUser
+deactivate AUTH
+CTRL -> SREP : findByUsername(authenticatedUser.username())
+activate SREP
+SREP --> CTRL : student
+deactivate SREP
+CTRL -> SRV : listStudentCourses(student.identity())
+activate SRV
+SRV -> EREP : findByStudentMecanographicNumber(mecanographicNumber)
+activate EREP
+EREP --> SRV : enrolments
+deactivate EREP
+
+loop for each enrolment
+  SRV -> C : toDTO(enrolment.course())
+  activate C
+  C -> CDTO : new
+  deactivate C
+end loop
+
+SRV --> CTRL : courses
+deactivate SRV
+CTRL --> UI : courses
+deactivate CTRL
+
+UI --> S : lists all of the courses the student is enrolled in
+deactivate UI
+
+S -> UI : selects the desired course
+activate UI
+UI -> UI : selectedCourse = select(courses, index)
+UI -> CTRL : listStudentGrades(selectedCourse)
+activate CTRL
+CTRL -> ESRV : listStudentGrades(student, selectedCourse)
+activate ESRV
+ESRV -> EXREP : findAllWithStudentMecanographicNumberAndCourseCode(student.identity(), selectedCourse.code())
+activate EXREP
+EXREP --> ESRV : examAnswers
+deactivate EXREP
+
+loop for each examAnswer
+  ESRV -> E : toDTO(examAnswer)
+  activate E
+  E -> EDTO : new
+  deactivate E
+end loop
+
+ESRV --> CTRL : examAnswers
+deactivate ESRV
+CTRL --> UI : examAnswers
+deactivate CTRL
+UI --> S : lists all of the grades for the selected course
+deactivate UI
+
+deactivate S
+
+@enduml
