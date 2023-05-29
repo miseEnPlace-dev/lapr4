@@ -1,6 +1,7 @@
 package eapli.ecourse.persistence.impl.jpa;
 
 import eapli.ecourse.Application;
+import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.CourseClassRepository;
@@ -174,5 +175,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public FormativeExamRepository formativeExams(TransactionalContext autoTx) {
     return new JpaFormativeExamRepository(autoTx);
+  }
+
+  @Override
+  public ExamAnswerRepository answers() {
+    return new JpaExamAnswerRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public ExamAnswerRepository answers(TransactionalContext autoTx) {
+    return new JpaExamAnswerRepository(autoTx);
   }
 }

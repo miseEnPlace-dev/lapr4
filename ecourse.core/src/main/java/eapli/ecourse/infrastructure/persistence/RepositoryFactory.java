@@ -1,5 +1,6 @@
 package eapli.ecourse.infrastructure.persistence;
 
+import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
@@ -173,7 +174,23 @@ public interface RepositoryFactory {
 
   BoardRepository boards(TransactionalContext autoTx);
 
+  /**
+   *
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
   ExtraordinaryClassRepository extraordinaryClasses();
 
   ExtraordinaryClassRepository extraordinaryClasses(TransactionalContext autoTx);
+
+  /**
+   *
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  ExamAnswerRepository answers();
+
+  ExamAnswerRepository answers(TransactionalContext autoTx);
 }

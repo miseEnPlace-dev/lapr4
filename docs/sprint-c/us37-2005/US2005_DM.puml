@@ -44,7 +44,7 @@ class Score <<(V,#FF8B40) value object>> {}
 entity Exam <<entity>> <<root>> {}
 entity AnswerToQuestion <<entity>> {}
 
-Student --> "0..*"ExamAnswer : has
+ExamAnswer --> "1" Student : has
 ExamAnswer --> "1" Exam : is for
 AnswerToQuestion --> "0..1" Grade : has
 

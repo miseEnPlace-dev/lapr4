@@ -75,7 +75,8 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.3. Applied Patterns
 
-- XXX
+- **Factory:** The factory pattern is used in the instantiation of the repositories. This is done to enable the use of a mock repository in the tests and to allow swapping of the repository using a property file.
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
 
 ### 4.4. Tests
 
