@@ -32,7 +32,7 @@ public class ScheduleMeetingUI extends AbstractUI {
     Integer duration = 0;
 
     while (duration <= 0) {
-      duration = Console.readInteger("Duration (minutes): ");
+      duration = Console.readInteger("\nDuration (minutes): ");
     }
 
     Duration meetingDuration = Duration.valueOf(duration);
@@ -44,7 +44,7 @@ public class ScheduleMeetingUI extends AbstractUI {
       return false;
     }
 
-    MultipleSelectorWidget<SystemUser> selector = new MultipleSelectorWidget<>("Users:", allUsers,
+    MultipleSelectorWidget<SystemUser> selector = new MultipleSelectorWidget<>("\nUsers:", allUsers,
         new SystemUserPrinter());
     ArrayList<SystemUser> selectedUsers = (ArrayList<SystemUser>) selector.selectElements();
 

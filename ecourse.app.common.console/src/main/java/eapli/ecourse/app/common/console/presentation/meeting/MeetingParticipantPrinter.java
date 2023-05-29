@@ -9,7 +9,7 @@ public class MeetingParticipantPrinter implements Visitor<InviteDTO> {
   @Override
   public void visit(final InviteDTO visitee) {
 
-    System.out.printf("%-16s%-14s", visitee.getUser().username(), visitee.getStatus().toString());
+    System.out.printf("%-20s%-14s", visitee.getUser().username(), visitee.getStatus().toString());
   }
 
 }

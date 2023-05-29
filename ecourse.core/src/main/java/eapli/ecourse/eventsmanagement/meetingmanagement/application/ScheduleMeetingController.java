@@ -76,6 +76,9 @@ public class ScheduleMeetingController {
     for (SystemUser user : users) {
       Invite invite = new Invite(meeting, user);
 
+      if (user.equals(getAuthenticatedUser()))
+        invite.accept();
+
       saveInvite(invite);
     }
   }
@@ -97,9 +100,11 @@ public class ScheduleMeetingController {
   public boolean checkIfUsersAreAvailable(Time meetingTime, Duration meetingDuration,
       ArrayList<SystemUser> selectedUsers) {
 
-    selectedUsers.add(getAuthenticatedUser());
+    ArrayList<SystemUser> meetingUsers = new ArrayList<SystemUser>(selectedUsers);
 
-    if (scheduleAvailableService.areAllAvailable(selectedUsers, meetingTime, meetingDuration))
+    meetingUsers.add(getAuthenticatedUser());
+
+    if (scheduleAvailableService.areAllAvailable(meetingUsers, meetingTime, meetingDuration))
       return true;
 
     return false;

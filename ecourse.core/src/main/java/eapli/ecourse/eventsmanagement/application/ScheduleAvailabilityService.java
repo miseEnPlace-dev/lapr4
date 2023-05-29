@@ -60,8 +60,7 @@ public class ScheduleAvailabilityService {
   }
 
   private boolean isAvailable(SystemUser user, Time time, Duration duration) {
-    Iterable<Invite> userMeetingInvites =
-        inviteRepository.findAllAcceptedForUsername(user.username());
+    Iterable<Invite> userMeetingInvites = inviteRepository.findAllAcceptedForUsername(user.username());
     if (!isAvailableFromMeetings(userMeetingInvites, duration, time))
       return false;
 
@@ -81,8 +80,8 @@ public class ScheduleAvailabilityService {
   }
 
   public boolean isTeacherAvailable(Teacher teacher, Duration duration, Time time) {
-    final Iterable<CourseClass> teacherClasses =
-        classRepository.findAllScheduledByTeacherTaxPayerNumber(teacher.taxPayerNumber());
+    final Iterable<CourseClass> teacherClasses = classRepository
+        .findAllScheduledByTeacherTaxPayerNumber(teacher.taxPayerNumber());
     for (CourseClass cl : teacherClasses) {
       if (!isTeacherAvailableFromClass(cl, time, duration))
         return false;
