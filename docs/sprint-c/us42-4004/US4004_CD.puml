@@ -1,0 +1,130 @@
+@startuml US4004CD
+
+class ListMeetingUI {
+
+}
+
+class ListMeetingController {
+- authorizationService
+- meetingService
+
++ ListMeetingController(authorizationService, meetingRepository,
+inviteRepository)
+
++ getMeetingList()
++ getMeetingDetails()
++ getAuthenticatedUser()
+}
+
+class Invite {
+- id
+- meeting
+- user
+- status
+}
+
+class InviteDTO {
+- id
+- meeting
+- status
+- time
+- user
+}
+
+class Meeting {
+- id
+- duration
+- scheduledBy
+- canceledAt
+- time
+
+}
+
+class MeetingDTO {
+- id
+- duration
+- scheduledBy
+- canceledAt
+- time
+}
+
+class MeetingService {
++ getInvitesPending(username)
++ getAllInvitesByMeeting(meetingID)
+}
+
+interface MeetingRepository {
++ findNotCanceledMeetingsByOwner(user)
+}
+
+class InMemoryMeetingRepository {
++ findNotCanceledMeetingsByOwner(user)
+}
+
+class JpaMeetingRepository {
++ findNotCanceledMeetingsByOwner(user)
+}
+
+interface InviteRepository {
++ findByMeetingID(meetingID)
+}
+
+class InMemoryInviteRepository {
++ findAllPendingForUsername(username)
++ findByMeetingID(meetingID)
+}
+
+class JpaInviteRepository {
++ findByMeetingID(meetingID)
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+
+class PersistenceContext {
+  - repositories()
+}
+
+class InviteStatus {
+- status
+
+}
+
+enum Status {
+PENDING
+ACCEPTED
+REJECTED
+CANCELED
+NO_AWNSER
+}
+
+
+
+MeetingService ..> Invite
+MeetingService ..> InviteDTO
+MeetingService ..> InviteRepository
+MeetingService ..> Meeting
+MeetingService ..> MeetingDTO
+MeetingService ..> MeetingRepository
+
+InviteRepository <|.. InMemoryInviteRepository
+InviteRepository <|.. JpaInviteRepository
+
+MeetingRepository <|.. InMemoryMeetingRepository
+MeetingRepository <|.. JpaMeetingRepository
+
+ListMeetingController --> MeetingService
+
+Invite --> InviteStatus
+InviteStatus --> Status
+
+ListMeetingUI ..> PersistenceContext
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> InviteRepository
+RepositoryFactory --> MeetingRepository
+
+ListMeetingUI ..> ListMeetingController
+
+@enduml
