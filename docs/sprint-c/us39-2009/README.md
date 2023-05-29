@@ -11,27 +11,32 @@
 
 ## 1. Context
 
-- XXX
+This user story is related to the creation of a formative exam. The student should be able to take the exam and see the results.
 
 ## 2. Requirements
 
-### "XXX"
+### "As Student, I want to take an automatic formative exam"
 
 ## 2.1. Client Specifications
 
-- XXX
+- Students enroll in courses. They take exams. They can view the results of their exams
 
 ## 2.2. Client Clarifications
 
-- XXX
+> [**Question 19**: In regards to the exam, what do you mean by feedback and grading? Is it necessary to save the answers of the users showing and comparing them with the correct answer? Furthermore is it necessary to save the answer of the question?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22003)
+>
+> **Answer**: "The idea is to have feedback and grading similarly to what is available for tests in the moodle platform. How you may achieve this is not up to me to decide."
 
 ## 2.3. Functional Requirements
 
-- XXX
+- **FRE04** Take Exam A Student takes an exam and answer its questions. At the end of
+  the exam, the system should display the feedback and result (i.e., grade) of the exam. The
+  feedback and grade of the exam should be automatically calculated by a parser based on
+  the grammar defined for exams structure
 
 ## 2.4. Acceptance Criteria
 
-- XXX
+- A Student takes an automatic formative exam and answer its questions. Each time the system generates a new exam based on the database of questions and the specification of that exam. At the end of the exam, the system should display the feedback and result (i.e., grade) of the exam. The feedback and grade of the exam should be automatically calculated by a parser based on the grammar defined for exams structure.
 
 ---
 
@@ -39,33 +44,34 @@
 
 ### 3.1. Main success scenario
 
-- XXX
+1. The Student requests to take an formative exam
+2. The System asks to select a course
+3. The Student selects a course
+4. The System presents the exam to the Student
+5. The Student answers the questions and submits the exam
+6. The System calculates the grade and feedback of the exam
 
 ### 3.2. Conditions
 
-- XXX
+- The Student must be authenticated in the system
 
 ### 3.3. System Sequence Diagram
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US2009_SSD](out/US2009_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
+### 3.4. Partial Domain Model
 
-![USXXX_SD](out/USXXX_SD.svg)
-
-### 3.5. Partial Domain Model
-
-![USXXX_DM](out/USXXX_DM.svg)
+![US2009_DM](out/US2009_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US2009_SD](out/US2009_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US2009_CD](out/US2009_CD.svg)
 
 ### 4.3. Applied Patterns
 
@@ -93,7 +99,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US2009_DEMO](out/US2009_DEMO.svg)
 
 ## 7. Observations
 

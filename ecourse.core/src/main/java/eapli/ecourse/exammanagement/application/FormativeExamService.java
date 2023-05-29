@@ -41,7 +41,7 @@ public class FormativeExamService {
     return sb.toString() + "Question";
   }
 
-  public Collection<Question> buildSection(int numberOfQuestions, String questionsType, CourseDTO course) {
+  private Collection<Question> buildSection(int numberOfQuestions, String questionsType, CourseDTO course) {
     final String sanitizedType = sanitizeType(questionsType);
     final Collection<Question> questionsFromType = (Collection<Question>) questionRepository.findWithTypeFromCourse(
         sanitizedType, course.getCode());
