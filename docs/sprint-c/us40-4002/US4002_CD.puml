@@ -37,6 +37,29 @@ class MeetingDTO {
 - time
 }
 
+class Invite {
+- id
+- status
+- meeting
+- user
+
++ status()
+}
+
+class InviteStatus {
+- status
+
++ cancel()
+}
+
+enum Status {
+PENDING
+ACCEPTED
+REJECTED
+CANCELED
+NO_AWNSER
+}
+
 
 
 class MeetingService {
@@ -57,7 +80,7 @@ class JpaMeetingRepository {
 
 interface InviteRepository {
 + findByMeetingID(meetingID)
-+ remove(meeting)
++ save(invite)
 }
 
 class InMemoryInviteRepository {
@@ -89,6 +112,11 @@ InviteRepository <|.. InMemoryInviteRepository
 InviteRepository <|.. JpaInviteRepository
 
 CancelMeetingController --> MeetingService
+CancelMeetingController ..> Invite
+
+Invite --> InviteStatus
+InviteStatus --> Status
+
 
 CancelMeetingUI ..> PersistenceContext
 PersistenceContext ..> RepositoryFactory

@@ -8,6 +8,9 @@ participant "CancelMeetingController" as CTRL <<controller>>
 participant "MeetingService" as MS <<service>>
 participant "Meeting" as Meeting <<domain>>
 participant "MeetingDTO" as DTO <<dto>>
+participant "Invite" as Invite <<domain>>
+participant "InviteStatus" as InviteStatus <<domain>>
+
 
 database InviteRepository as IR <<repository>>
 database MeetingRepository as MR <<repository>>
@@ -60,7 +63,10 @@ activate IR
 deactivate IR
 
 loop for each invite
-    CTRL -> IR: remove(invite)
+    CTRL -> InviteStatus: invite = cancel()
+    activate InviteStatus
+    deactivate InviteStatus
+    CTRL -> IR: save(invite)
     activate IR
     deactivate IR
 end loop
