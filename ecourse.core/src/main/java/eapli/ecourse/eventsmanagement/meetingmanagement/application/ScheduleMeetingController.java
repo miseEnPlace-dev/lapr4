@@ -67,16 +67,16 @@ public class ScheduleMeetingController {
 
     users.add(meetingOwner);
 
-    sendInvites(users, m);
+    sendInvites(users, m, meetingOwner);
 
     return m;
   }
 
-  private void sendInvites(Iterable<SystemUser> users, Meeting meeting) {
+  private void sendInvites(Iterable<SystemUser> users, Meeting meeting, SystemUser owner) {
     for (SystemUser user : users) {
       Invite invite = new Invite(meeting, user);
 
-      if (user.equals(getAuthenticatedUser()))
+      if (user.equals(owner))
         invite.accept();
 
       saveInvite(invite);
