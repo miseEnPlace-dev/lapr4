@@ -20,11 +20,10 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
       AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
   private Map<SystemUser, PermissionType> getPermissions() {
-    final Set<Role> roles = new HashSet<>();
-    roles.add(ClientRoles.TEACHER);
-
-    SystemUser u1 = registerUser("user3", "Password1", "firstName", "lastName", "email@ddd.com", roles);
-    SystemUser u2 = registerUser("user4", "Password1", "firstName", "lastName", "email@ddd.com", roles);
+    SystemUser u1 = registerTeacher("user3", "Password1", "firstName", "lastName", "email@ddd.com", "abc", "12345678",
+        "01/01/2000");
+    SystemUser u2 = registerTeacher("user4", "Password1", "firstName", "lastName", "email@ddd.com", "cbo", "12345679",
+        "01/01/2000");
 
     Map<SystemUser, PermissionType> map = new HashMap<>();
     map.put(u1, new PermissionType(PermissionType.Type.READ));
