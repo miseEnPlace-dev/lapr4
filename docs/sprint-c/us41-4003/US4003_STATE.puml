@@ -4,8 +4,12 @@
 
 PENDING --> ACCEPT : accept
 PENDING --> REJECT : reject
+PENDING --> NO_ANSWER : no answer
+PENDING --> CANCELED : canceled
 
-ACCEPT --> [*] : finish
-REJECT --> [*] : finish
+ACCEPT --> [*]
+REJECT --> [*]
+NO_ANSWER --> [*]
+CANCELED --> [*]
 
 @enduml

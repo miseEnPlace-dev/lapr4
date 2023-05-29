@@ -1,0 +1,82 @@
+@startuml US4003_CD
+
+class MeetingResponseUI {
+
+}
+
+class MeetingResponseController {
+- authorizationService
+- meetingRepository
+- inviteRepository
+- meetingService
+
++ MeetingResponseController(authorizationService, meetingRepository,
+inviteRepository)
+
++ getInvites()
++ changeInviteStatus()
++ getAuthenticatedUser()
+- updateInvite()
+}
+
+class Invite {
+- id
+- meeting
+- user
+- status
+}
+
+class InviteDTO {
+- id
+- meeting
+- status
+- time
+- user
+}
+
+class MeetingService {
++ getInvitesPending(username)
+}
+
+interface InviteRepository {
++ findAllPendingForUsername(username)
++ findInviteById(id)
+}
+
+class InMemoryInviteRepository {
++ findAllPendingForUsername(username)
++ findInviteById(id)
+}
+
+class JpaInviteRepository {
++ findAllPendingForUsername(username)
++ findInviteById(id)
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+
+class PersistenceContext {
+  - repositories()
+}
+
+
+
+MeetingService ..> Invite
+MeetingService ..> InviteDTO
+MeetingService ..> InviteRepository
+
+InviteRepository <|.. InMemoryInviteRepository
+InviteRepository <|.. JpaInviteRepository
+
+MeetingResponseController --> MeetingService
+
+MeetingResponseUI ..> PersistenceContext
+PersistenceContext ..> RepositoryFactory
+RepositoryFactory --> InviteRepository
+
+MeetingResponseUI ..> MeetingResponseController
+
+@enduml
