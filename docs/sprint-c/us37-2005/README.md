@@ -81,11 +81,9 @@ This is the first time this task is assigned to be developed. This is a new func
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
-
-```java
-
-```
+**Test 1:** Ensure a student cannot check grade of a class that he is not enrolled in (throws exception).
+**Test 2:** Ensure a student can check his grade of a class that he is enrolled in.
+**Test 3:** Ensure a student can check his grade of a class that he is enrolled in, even if he has not taken any exams yet (returns empty list).
 
 ---
 

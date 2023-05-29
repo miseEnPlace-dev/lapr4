@@ -30,7 +30,7 @@ public class ListEnrolmentService {
     return convertToDTO(enrollments);
   }
 
-  public Iterable<CourseDTO> listStudentsCourses(MecanographicNumber studentID) {
+  public Iterable<CourseDTO> listStudentCourses(MecanographicNumber studentID) {
     final Iterable<Enrolment> enrollments = enrolmentRepository.findByStudentMecanographicNumber(studentID);
 
     return StreamSupport.stream(enrollments.spliterator(), true)
