@@ -27,6 +27,10 @@ This is a new feature that allows users to accept or reject a meeting request.
 >
 > **Answer**: "The status of someone that did not answer should be "no answer" or "unknown""
 
+> [**Question 51**: Devemos listar os participantes das meetings em que o user não criou mas que recebeu convite? E listar meetings que ja tenham ocorrido?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=23327)
+>
+> "[..] deve ser possível qualquer utilizador participante consultar os outros participantes em reuniões na qual ele também é participante. Relativamente à segunda questão, do ponto de vista do cliente faz sentido também ver reuniões que ocorreram no passado."
+
 ## 2.3. Functional Requirements
 
 - **FRM03** Accept/Reject Meeting A user accepts or rejects an invitation to a meeting.
