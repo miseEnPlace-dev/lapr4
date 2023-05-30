@@ -1,4 +1,4 @@
-// Generated from /home/kappa-laptop/faculdade/22/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
+// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -94,7 +94,7 @@ public class ExamBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements E
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitScore(ExamParser.ScoreContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCourse(ExamParser.CourseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -130,6 +130,34 @@ public class ExamBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements E
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitQuestion(ExamParser.QuestionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBody(ExamParser.BodyContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFeedback(ExamParser.FeedbackContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitScore(ExamParser.ScoreContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitQuestion_type(ExamParser.Question_typeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -172,20 +200,6 @@ public class ExamBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements E
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitMissingWordsQuestion(ExamParser.MissingWordsQuestionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitBody(ExamParser.BodyContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFeedback(ExamParser.FeedbackContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -95,7 +95,23 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
+  private Student getAuthenticatedStudent() {
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
 
+    return studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+  }
+
+  public Iterable<ExamAnswerDTO> listStudentGrades(CourseDTO course) {
+    Student student = getAuthenticatedStudent();
+    return listExamAnswerService.listStudentGrades(student, course.getCode());
+  }
+
+  public Iterable<CourseDTO> listStudentCourses() {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
+    Student student = getAuthenticatedStudent();
+
+    return listEnrolmentService.listStudentCourses(student.identity());
+  }
 ```
 
 ---

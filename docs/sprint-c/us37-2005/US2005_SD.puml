@@ -67,7 +67,7 @@ activate UI
 UI -> UI : selectedCourse = select(courses, index)
 UI -> CTRL : listStudentGrades(selectedCourse)
 activate CTRL
-CTRL -> ESRV : listStudentGrades(student, selectedCourse)
+CTRL -> ESRV : listStudentGrades(selectedCourse)
 activate ESRV
 ESRV -> EXREP : findAllWithStudentMecanographicNumberAndCourseCode(student.identity(), selectedCourse.code())
 activate EXREP

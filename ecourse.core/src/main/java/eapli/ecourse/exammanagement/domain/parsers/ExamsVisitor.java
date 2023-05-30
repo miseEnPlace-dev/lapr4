@@ -96,12 +96,6 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
         properties.put("grade", p.grade().FDB_GRD_TYPE().getText());
       }
-      if (p.score() != null) {
-        if (properties.containsKey("score"))
-          raiseError(p, "Score already defined.");
-
-        properties.put("score", Integer.parseInt(p.score().NUMBER().getText()));
-      }
     });
 
     if (ctx.getParent().getStart().getText().equals("@start-exam")) {

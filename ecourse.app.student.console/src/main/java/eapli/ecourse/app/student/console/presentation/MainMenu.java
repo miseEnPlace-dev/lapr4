@@ -4,6 +4,8 @@ import eapli.ecourse.Application;
 import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
 import eapli.ecourse.app.common.console.presentation.meeting.MeetingsMenu;
+import eapli.ecourse.app.student.console.presentation.courses.CoursesMenu;
+import eapli.ecourse.app.student.console.presentation.exams.ExamsMenu;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -14,37 +16,23 @@ import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
-/**
- * @author Paulo Gandra Sousa
- */
 class MainMenu extends StudentBaseUI {
-
   private static final String SEPARATOR_LABEL = "--------------";
-
   private static final String RETURN = "Return ";
-
   private static final String NOT_IMPLEMENTED_YET = "Not implemented yet";
 
   private static final int EXIT_OPTION = 0;
 
   // MAIN MENU
   private static final int MY_USER_OPTION = 1;
-  private static final int ACCOUNT_OPTION = 2;
-  private static final int REQUEST_ENROLMENT_OPTION = 3;
-  private static final int MEETINGS = 4;
-  private static final int VIEW_FUTURE_EXAMS = 5;
-  private static final int CREATE_BOARD_OPTION = 6;
-  private static final int COURSES_OPTION = 7;
-  private static final int SETTINGS_OPTION = 8;
-
-  // ACCOUNT MENU
-  // private static final int <something> = 1;
+  private static final int COURSES_OPTION = 2;
+  private static final int MEETINGS_MENU_OPTION = 3;
+  private static final int EXAMS_MENU_OPTION = 4;
+  private static final int CREATE_BOARD_OPTION = 5;
+  private static final int SETTINGS_OPTION = 6;
 
   // SETTINGS
   private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
-
-  // private final AuthorizationService authz =
-  // AuthzRegistry.authorizationService();
 
   @Override
   public boolean show() {
@@ -65,11 +53,11 @@ class MainMenu extends StudentBaseUI {
 
   private MenuRenderer getRenderer(final Menu menu) {
     final MenuRenderer theRenderer;
-    if (Application.settings().isMenuLayoutHorizontal()) {
+    if (Application.settings().isMenuLayoutHorizontal())
       theRenderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-    } else {
+    else
       theRenderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-    }
+
     return theRenderer;
   }
 
@@ -82,14 +70,10 @@ class MainMenu extends StudentBaseUI {
     final Menu myUserMenu = new MyUserMenu();
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
-    final Menu accountMenu = buildAccountMenu();
-    mainMenu.addSubMenu(ACCOUNT_OPTION, accountMenu);
-
-    mainMenu.addItem(REQUEST_ENROLMENT_OPTION, "Request enrolment", new RequestEnrolmentUI()::show);
-    mainMenu.addSubMenu(MEETINGS, new MeetingsMenu().buildMenu());
-    mainMenu.addItem(VIEW_FUTURE_EXAMS, "View future exams", new ListFutureExamsUI()::show);
-    mainMenu.addItem(CREATE_BOARD_OPTION, "Create board", new CreateBoardUI()::show);
     mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
+    mainMenu.addSubMenu(MEETINGS_MENU_OPTION, new MeetingsMenu().buildMenu());
+    mainMenu.addSubMenu(EXAMS_MENU_OPTION, new ExamsMenu().buildMenu());
+    mainMenu.addItem(CREATE_BOARD_OPTION, "Create board", new CreateBoardUI()::show);
 
     final Menu settingsMenu = buildAdminSettingsMenu();
     mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
@@ -100,15 +84,6 @@ class MainMenu extends StudentBaseUI {
     mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
     return mainMenu;
-  }
-
-  private Menu buildAccountMenu() {
-    final Menu accountMenu = new Menu("Account");
-    // accountMenu.addItem(<example>, "<something>", () -> {
-    // // ...
-    // });
-    accountMenu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
-    return accountMenu;
   }
 
   private Menu buildAdminSettingsMenu() {
