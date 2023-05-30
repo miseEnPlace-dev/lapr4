@@ -46,7 +46,7 @@ public class ListMeetingUI extends AbstractUI {
   }
 
   private void printMeetingDetails(Iterable<InviteDTO> invites) {
-    System.out.println("\nInvite details:");
+    System.out.println("\nInvite details:\n");
 
     new MeetingParticipantHeader().printHeader();
 
