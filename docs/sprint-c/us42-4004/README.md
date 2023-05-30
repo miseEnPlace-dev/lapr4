@@ -130,7 +130,7 @@ public ListMeetingController(final MeetingRepository meetingRepository, final In
 
 ## 6. Integration & Demonstration
 
-![US4004_DEMO](out/US4004_DEMO.svg)
+![US4004_DEMO](assets/US4004_DEMO.png)
 
 ## 7. Observations
 
