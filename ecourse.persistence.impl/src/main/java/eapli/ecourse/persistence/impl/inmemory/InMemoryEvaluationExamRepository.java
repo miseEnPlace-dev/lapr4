@@ -32,4 +32,11 @@ public class InMemoryEvaluationExamRepository extends InMemoryDomainRepository<E
 
     return match(e -> e.course().equals(course) && e.startTime().compareTo(Time.valueOf(currentDate)) > 0);
   }
+
+  @Override
+  public Iterable<EvaluationExam> findAllPastCourseExams(Course course) {
+    final Calendar currentDate = Calendar.getInstance();
+
+    return match(e -> e.course().equals(course) && e.startTime().compareTo(Time.valueOf(currentDate)) < 0);
+  }
 }

@@ -22,4 +22,12 @@ public interface EvaluationExamRepository extends DomainRepository<ExamCode, Eva
    */
   Iterable<EvaluationExam> findAllFutureCourseExams(Course course);
 
+  /**
+   * Returns all past exams of the given course.
+   *
+   * @param course
+   * @return
+   */
+  Iterable<EvaluationExam> findAllPastCourseExams(Course course);
+
 }

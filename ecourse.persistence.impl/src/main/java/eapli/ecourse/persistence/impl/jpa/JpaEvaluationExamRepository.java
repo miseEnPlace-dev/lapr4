@@ -43,4 +43,12 @@ public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationE
         Time.valueOf(currentDate));
   }
 
+  @Override
+  public Iterable<EvaluationExam> findAllPastCourseExams(Course course) {
+    final Calendar currentDate = Calendar.getInstance();
+
+    return match("e.course = :course AND e.startTime < :startTime", "course", course, "startTime",
+      Time.valueOf(currentDate));
+  }
+
 }
