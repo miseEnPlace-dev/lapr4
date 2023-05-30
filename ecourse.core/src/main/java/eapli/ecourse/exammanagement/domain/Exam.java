@@ -1,6 +1,8 @@
 package eapli.ecourse.exammanagement.domain;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -18,6 +20,7 @@ import eapli.framework.validations.Preconditions;
  * Abstract class that describes an exam.
  */
 @Entity
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Exam implements AggregateRoot<ExamCode> {
   private static final long serialVersionUID = 1L;
@@ -45,6 +48,9 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
 
   @Column(nullable = false)
   private ExamState state;
+
+  @Column(name = "type", insertable = false, updatable = false)
+  protected String type;
 
   protected Exam() {
     // for ORM only
@@ -82,6 +88,10 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
 
   public ExamState state() {
     return this.state;
+  }
+
+  public String type() {
+    return this.type;
   }
 
   public abstract boolean sameAs(Object other);

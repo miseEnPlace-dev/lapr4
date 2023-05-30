@@ -4,7 +4,7 @@ autonumber
 actor "Student" as S
 participant "ListStudentGradesUI" as UI <<presentation>>
 participant "ListStudentGradesController" as CTRL <<application>>
-participant "AuthenticationService" as AUTH <<service>>
+participant "AuthorizationService" as AUTH <<service>>
 participant "ListEnrolmentService" as SRV <<service>>
 participant "ListExamAnswerService" as ESRV <<service>>
 participant "Course" as C <<domain>>
@@ -25,7 +25,7 @@ activate S
 S -> UI : asks to list all of his grades
 activate UI
 
-UI -> CTRL : new(enrolmentRepository, examAnswerRepository, authenticationService)
+UI -> CTRL : new(enrolmentRepository, examAnswerRepository, studentRepository, formativeExamRepository, evaluationExamRepository, authorizationService)
 activate CTRL
 CTRL -> SRV : service=new(enrolmentRepository)
 deactivate CTRL
