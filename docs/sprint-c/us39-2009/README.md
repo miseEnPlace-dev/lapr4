@@ -11,7 +11,7 @@
 
 ## 1. Context
 
-This user story is related to the creation of a formative exam. The student should be able to take the exam and see the results.
+This is an enhance of last sprint's US 2001. The goal is to update the parser's implementation in order to make possible students to take an formative exam, using the parser to display and process the students' answers.
 
 ## 2. Requirements
 
@@ -19,9 +19,18 @@ This user story is related to the creation of a formative exam. The student shou
 
 ## 2.1. Client Specifications
 
-- Students enroll in courses. They take exams. They can view the results of their exams
+- Students enroll in courses. They take exams. They can view the results of their exams.
+- The system must provide a language to support the specification and "execution" of exams.
+- The language must support the design of the exam layout and its questions as well as solutions, feedback and grading.
+- The system must also support the automatic production of feedback and grading for the answers given by students when they take the exam. Usually this is done at the end of the exam.
+- At the end of the exam, the system should display the feedback and result (i.e., grade) of the exam.
+- The feedback and grade of the exam should be automatically calculated by a parser based on the grammar defined for exams structure.
 
 ## 2.2. Client Clarifications
+
+> [**Question 1**: How do exams get displayed to the user? Using a HTML page? Or console?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=23245)
+>
+> **Answer**: "Exams must be displayed using a normal Java Console application.
 
 > [**Question 19**: In regards to the exam, what do you mean by feedback and grading? Is it necessary to save the answers of the users showing and comparing them with the correct answer? Furthermore is it necessary to save the answer of the question?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22003)
 >
@@ -54,6 +63,7 @@ This user story is related to the creation of a formative exam. The student shou
 ### 3.2. Conditions
 
 - The Student must be authenticated in the system
+- The inserted file path must exist, and the defined exam structure must be valid, i.e., must be accepted by the defined grammar, described in [this](grammar.md) file.
 
 ### 3.3. System Sequence Diagram
 
