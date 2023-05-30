@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.backend.http;
+package eapli.ecourse.app.board.common.http;
 
 import java.io.File;
 import java.io.FileInputStream;

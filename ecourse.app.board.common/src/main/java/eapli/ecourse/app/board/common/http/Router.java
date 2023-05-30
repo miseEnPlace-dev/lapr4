@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.backend.http;
+package eapli.ecourse.app.board.common.http;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,27 +13,27 @@ public class Router {
     this.middlewares = new ArrayList<>();
   }
 
-  public void get(String path, RouteHandler handler) {
+  public void get(String path, RouteController handler) {
     routes.add(new Route("GET", path, handler));
   }
 
-  public void post(String path, RouteHandler handler) {
+  public void post(String path, RouteController handler) {
     routes.add(new Route("POST", path, handler));
   }
 
-  public void put(String path, RouteHandler handler) {
+  public void put(String path, RouteController handler) {
     routes.add(new Route("PUT", path, handler));
   }
 
-  public void patch(String path, RouteHandler handler) {
+  public void patch(String path, RouteController handler) {
     routes.add(new Route("PATCH", path, handler));
   }
 
-  public void delete(String path, RouteHandler handler) {
+  public void delete(String path, RouteController handler) {
     routes.add(new Route("DELETE", path, handler));
   }
 
-  public void on(String path, String method, RouteHandler handler) {
+  public void on(String path, String method, RouteController handler) {
     routes.add(new Route(method, path, handler));
   }
 

@@ -1,11 +1,11 @@
-package eapli.ecourse.app.board.backend.http;
+package eapli.ecourse.app.board.common.http;
 
 public class Route {
   private String method;
   private String path;
-  private RouteHandler handler;
+  private RouteController handler;
 
-  public Route(String method, String path, RouteHandler handler) {
+  public Route(String method, String path, RouteController handler) {
     this.method = method;
     this.path = path;
     this.handler = handler;

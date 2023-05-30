@@ -35,12 +35,6 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>persistence.impl</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>eapli.ecourse</groupId>
       <artifactId>app.board.common</artifactId>
       <version>${project.parent.version}</version>
     </dependency>

@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.backend.http;
+package eapli.ecourse.app.board.common.http;
 
 public interface NextFunction {
   void next();

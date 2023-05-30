@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.backend;
+package eapli.ecourse.app.board.common.http;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,18 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import eapli.ecourse.app.board.backend.http.Request;
-import eapli.ecourse.app.board.backend.http.Response;
-import eapli.ecourse.app.board.backend.http.Router;
-import eapli.ecourse.app.board.backend.http.StaticMiddleware;
 
 public class HttpClientHandler implements Runnable {
-  private static final String WWW_PATH = "www";
-
   private Socket client;
+  private Router router;
 
-  public HttpClientHandler(Socket socket) {
-    this.client = socket;
+  public HttpClientHandler(Socket client, Router router) {
+    this.client = client;
+    this.router = router;
   }
 
   @Override
@@ -42,26 +38,16 @@ public class HttpClientHandler implements Runnable {
       Logger logger = LogManager.getLogger(HttpClientHandler.class);
       logger.debug(method + " " + path);
 
-      // create the router
-      Router router = new Router();
-
-      router.use(new StaticMiddleware(WWW_PATH));
-
-      // add your routes here express.js style
-      router.get("/api", (req, res) -> {
-        res.send("Hello World!");
-      });
-
       // create the request and response objects
       Request req = new Request(method, path, address, headers);
       Response res = new Response(output);
 
-      router.handle(req, res);
+      this.router.handle(req, res);
 
       output.close();
       input.close();
     } catch (IOException e) {
-      System.out.println("[Client Handler Thread] Error: " + e.getMessage());
+      System.out.println("[HTTP Client Handler Thread] Error: " + e.getMessage());
       e.printStackTrace();
     }
   }
