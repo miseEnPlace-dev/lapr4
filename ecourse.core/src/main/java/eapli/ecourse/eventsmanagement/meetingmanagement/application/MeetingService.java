@@ -34,6 +34,12 @@ public class MeetingService {
     return convertToDtoInvites(types);
   }
 
+  public Iterable<MeetingDTO> allMeetingsByUser(SystemUser user) {
+    final Iterable<Meeting> types = meetingRepository.findMeetingsForUsername(user.username());
+
+    return convertToDtoMeetings(types);
+  }
+
   public Iterable<MeetingDTO> allTeachers() {
     final Iterable<Meeting> types = meetingRepository.findAll();
     return convertToDtoMeetings(types);

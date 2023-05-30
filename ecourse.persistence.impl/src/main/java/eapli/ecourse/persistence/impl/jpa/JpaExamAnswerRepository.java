@@ -36,5 +36,4 @@ public class JpaExamAnswerRepository
   public Iterable<ExamAnswer> findAllWithExam(Exam exam) {
     return match("e.exam = :exam", "exam", exam);
   }
-
 }

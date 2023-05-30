@@ -1,7 +1,8 @@
 package eapli.ecourse.persistence.impl.jpa;
 
+import javax.persistence.TypedQuery;
+
 import eapli.ecourse.Application;
-import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
@@ -24,5 +25,19 @@ public class JpaMeetingRepository extends JpaAutoTxRepository<Meeting, MeetingID
   @Override
   public Iterable<Meeting> findNotCanceledMeetingsByOwner(SystemUser scheduledBy) {
     return match("e.scheduledBy = :scheduledBy AND e.canceledAt IS NULL", "scheduledBy", scheduledBy);
+  }
+
+  @Override
+  public Iterable<Meeting> findMeetingsByOwner(SystemUser scheduledBy) {
+    return match("e.scheduledBy = :scheduledBy", "scheduledBy", scheduledBy);
+  }
+
+  @Override
+  public Iterable<Meeting> findMeetingsForUsername(Username username) {
+    final TypedQuery<Meeting> query = entityManager().createQuery(
+        "SELECT m FROM Meeting m JOIN Invite i ON i.meeting=m WHERE i.user.username = :username",
+        Meeting.class);
+    query.setParameter("username", username);
+    return query.getResultList();
   }
 }

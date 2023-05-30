@@ -50,5 +50,4 @@ public class ListEnrolmentService {
         .map(Enrolment::toDto)
         .collect(java.util.stream.Collectors.toUnmodifiableList());
   }
-
 }

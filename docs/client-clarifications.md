@@ -288,8 +288,16 @@ Nota: Em concreto, e apenas para a UC de LAPR4, existem vários "níveis" de dep
 
 "Yes, a course may have several states."
 
+## [Question 51](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=23327)
+
+> Devemos listar os participantes das meetings em que o user não criou mas que recebeu convite? E listar meetings que ja tenham ocorrido?
+
+"[..] deve ser possível qualquer utilizador participante consultar os outros participantes em reuniões na qual ele também é participante.
+
+Relativamente à segunda questão, do ponto de vista do cliente faz sentido também ver reuniões que ocorreram no passado."
+
 ---
 
-_Last question: "US1004-As Manager, I want to open and close courses", by GOUVEIA._
+_Last question: "US 4004 - Listar participantes de uma Meeting", by FERREIRA._
 
-_Last updated at 24/04/2023 09:56_
+_Last updated at 30/05/2023 15:24_

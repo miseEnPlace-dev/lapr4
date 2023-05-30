@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import eapli.ecourse.answermanagement.dto.ExamAnswerDTO;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.framework.domain.model.AggregateRoot;
@@ -75,5 +76,19 @@ public class ExamAnswer implements AggregateRoot<ExamAnswerId> {
 
   public List<AnswerToQuestion> answers() {
     return answers;
+  }
+
+  public Score score() {
+    Score total = Score.valueOf(0.0);
+    for (AnswerToQuestion answer : answers)
+      total = total.add(answer.score());
+
+    return total;
+  }
+
+  public ExamAnswerDTO toDto() {
+    return new ExamAnswerDTO(student.identity().toString(), student.user().name().toString(), exam.title().toString(),
+        exam.type(),
+        score().toString());
   }
 }
