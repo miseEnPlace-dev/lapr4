@@ -25,6 +25,21 @@ public class ExamAnswer implements AggregateRoot<ExamAnswerId> {
   @ManyToOne
   private Exam exam;
 
+  public ExamAnswer(final Student student, final Exam exam, final List<AnswerToQuestion> answers) {
+    this.id = ExamAnswerId.newID();
+    this.student = student;
+    this.exam = exam;
+    this.answers = answers;
+  }
+
+  public ExamAnswer(final ExamAnswerId id, final Student student, final Exam exam,
+      final List<AnswerToQuestion> answers) {
+    this.id = id;
+    this.student = student;
+    this.exam = exam;
+    this.answers = answers;
+  }
+
   protected ExamAnswer() {
     // for ORM
   }
