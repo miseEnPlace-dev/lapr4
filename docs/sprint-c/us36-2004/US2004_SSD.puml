@@ -1,0 +1,24 @@
+@startuml US2004_SSD
+autonumber
+
+actor "Student" as student
+participant ":System" as system
+
+activate student
+
+student -> system : Asks to take an exam
+system -> student : Asks the file path where the exam is defined
+student -> system : Enters the file path
+loop for each question
+system -> student : Shows the question content
+student -> system : Enters the answer
+end
+opt if grade is defined to be shown at end of exam
+system -> student : Shows final total grade of the exam
+end
+opt if feedback is defined to be shown at end of exam
+system -> student : Shows final feedback of exam
+end
+system -> student : Informs operation success
+
+@enduml
