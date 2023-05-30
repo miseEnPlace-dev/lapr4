@@ -50,15 +50,9 @@ public class ListMeetingUI extends AbstractUI {
 
     new MeetingParticipantHeader().printHeader();
 
-    // print meeting owner with (You)
     for (InviteDTO invite : invites) {
-      if (invite.getUser().equals(ctrl.getAuthenticatedUser())) {
-        System.out.printf("%-20s%-14s", invite.getUser().username() + " (You)", invite.getStatus().toString());
-        System.out.println();
-      } else {
-        new MeetingParticipantPrinter().visit(invite);
-        System.out.println();
-      }
+      new MeetingParticipantPrinter().visit(invite, ctrl.getAuthenticatedUser());
+      System.out.println();
     }
 
   }
