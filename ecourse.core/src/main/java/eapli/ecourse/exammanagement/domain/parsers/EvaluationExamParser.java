@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 
-public class ExamsParser {
+public class EvaluationExamParser {
   public static EvaluationExamBuilder parseWithVisitor(String filePath) throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(filePath));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
