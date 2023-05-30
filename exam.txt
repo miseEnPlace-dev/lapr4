@@ -1,39 +1,23 @@
-@start-exam exame_de_exemplo;
-    @score 100;
-    @title "Exame de Exemplo";
-    @description "Exame de exemplo para testes.";
+@start-exam example_exam;
+    @title "Example Exam";
+    @description "This is an example of a Exam.";
     @feedback none;
     @grade on-submit;
+    @course-code "COURSE-EXAMPLE";
 
     @start-section section1;
-        @title "Título da Primeira Secção";
-        @description "Descrição da Secção";
-        @score 80;
+        @title "First Section";
+        @description "This is the first section.";
 
         @start-question
             @type short-answer;
-            @question-body "Em que UC da LEI se aprende a programar em Java?";
+            @score 1.24;
+            @question-body "Como descreve a forma de um círculo?";
             @correct-answers
-                @correct-answer "APROG" 1.0;
-                @correct-answer "Algoritmia e Programação" 1.0;
-                @correct-answer "PPROG" 0.5;
-                @correct-answer "Paradigmas da Programação" 0.5;
+              @correct-answer "Assim" 0.5;
+              @correct-answer "Assado" 0.2;
+              @correct-answer "de Outra maneira" 0.1;
             @end-correct-answers;
-        @end-question;
-    @end-section;
-
-    @start-section section2;
-        // Para além de serem permitidos
-        // comentários, as propriedades podem
-        // ser definidas em qualquer ordem.
-        @description "Descrição da Secção";
-        @score 20;
-        @title "Título da Segunda Secção";
-
-        @start-question
-            @type true-false;
-            @question-body "Em ESINF programa-se em Python.";
-            @correct-answer false;
         @end-question;
     @end-section;
 @end-exam;
