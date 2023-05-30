@@ -22,7 +22,7 @@ public class ListMeetingController {
   }
 
   public Iterable<MeetingDTO> getMeetingList() {
-    return (Iterable<MeetingDTO>) this.service.notCanceledMeetingsScheduledBy(getAuthenticatedUser());
+    return (Iterable<MeetingDTO>) this.service.allMeetingsByUser(getAuthenticatedUser());
   }
 
   public Iterable<InviteDTO> getMeetingDetails(MeetingDTO selected) {

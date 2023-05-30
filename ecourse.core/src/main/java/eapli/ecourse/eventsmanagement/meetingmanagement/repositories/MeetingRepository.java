@@ -6,6 +6,7 @@ import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Meeting;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.MeetingID;
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> {
 
@@ -20,4 +21,8 @@ public interface MeetingRepository extends DomainRepository<MeetingID, Meeting> 
   }
 
   public Iterable<Meeting> findNotCanceledMeetingsByOwner(SystemUser owner);
+
+  public Iterable<Meeting> findMeetingsByOwner(SystemUser owner);
+
+  public Iterable<Meeting> findMeetingsForUsername(Username username);
 }

@@ -28,7 +28,7 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 2.2. Client Clarifications
 
-- XXX
+- N/A.
 
 ## 2.3. Functional Requirements
 
