@@ -1,4 +1,4 @@
-@startuml US4004CD
+@startuml US4004_CD
 
 class ListMeetingUI {
 
