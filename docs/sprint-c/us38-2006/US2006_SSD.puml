@@ -1,0 +1,16 @@
+@startuml
+autonumber
+
+actor Teacher as "Teacher"
+actor System as "System"
+
+
+Teacher -> System: requests to see a list of exam grades of  his/her courses
+System -> Teacher: displays the courses that teacher's lectures
+Teacher -> System: chooses the desired course
+System -> Teacher:  displays all the past evaluation exams of the chosen course
+Teacher -> System: selects the desired exam
+System -> Teacher: displays all the student's grades for the chosen exam
+
+
+@enduml
