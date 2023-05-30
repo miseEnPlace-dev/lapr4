@@ -55,25 +55,21 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ### 3.3. System Sequence Diagram
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US3004_SSD](out/US3004_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
+### 3.4. Partial Domain Model
 
-![USXXX_SD](out/USXXX_SD.svg)
-
-### 3.5. Partial Domain Model
-
-![USXXX_DM](out/USXXX_DM.svg)
+![US3004_DM](out/US3004_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US3004_SD](out/US3004_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US3004_CD](out/US3004_CD.svg)
 
 ### 4.3. Applied Patterns
 
