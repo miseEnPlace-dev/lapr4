@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.TypedQuery;
+
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -51,4 +55,12 @@ public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationE
       Time.valueOf(currentDate));
   }
 
+  public Iterable<EvaluationExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code, MecanographicNumber number) {
+    final TypedQuery<EvaluationExam> query = entityManager().createQuery(
+        "SELECT e FROM EvaluationExam e WHERE e NOT IN (SELECT a.exam FROM ExamAnswer a WHERE a.student = :number) AND e.course.code = :code",
+        EvaluationExam.class);
+    query.setParameter("code", code);
+    query.setParameter("number", number);
+    return query.getResultList();
+  }
 }

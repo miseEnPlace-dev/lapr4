@@ -10,7 +10,7 @@ With this language, it is possible to create evaluation and formative exams for 
 ### 1.2. Technical Context
 
 This language was created for the LPROG course to define the structure of the exams and their questions, as well as the correct answers, feedback and grading info.
-The language written by the teacher is then parsed and validated by the eCourse platform, which will then create the exam and its questions. To parse the exam, an ANTLR4 grammar was developed, which is available in the [this file](/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4).
+The text file written by the teacher is then parsed and validated by the eCourse platform, which will then create the exam and its questions. To parse the exam, an ANTLR4 grammar was developed, which is available in the [this file](/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4).
 
 ### 1.3. Exam Structure
 
@@ -76,3 +76,49 @@ It ends with the  `@end-section` tag.
     - **description**: (optional) the description of the section. Starts with the `@description` tag, followed by a string between quotes. Example: `@description "This section is about Statistics.";`;
     - **score**: (mandatory) the total score of the section. Starts with the `@score` tag, followed by a number. Example: `@score 25;`. Make sure that the sum of all sections' scores is the same as the exam score;
 - **questions**: (mandatory) defines the questions of the section. The questions' syntax can be consulted in [this](/docs/sprint-b/us20-2007/README.md) document.
+
+## 4. Exam Example
+
+The following text represents an exam defined by this language.
+
+```java
+@start-exam exame_de_exemplo;
+    @score 100;
+    @title "Exame de Exemplo";
+    @description "Exame de exemplo para testes.";
+    @feedback none;
+    @grade on-submit;
+
+    @start-section section1;
+        @title "Título da Primeira Secção";
+        @description "Descrição da Secção";
+        @score 80;
+
+        @start-question
+            @type short-answer;
+            @question-body "Em que UC da LEI se aprende a programar em Java?";
+            @correct-answers
+                @correct-answer "APROG" 1.0;
+                @correct-answer "Algoritmia e Programação" 1.0;
+                @correct-answer "PPROG" 0.5;
+                @correct-answer "Paradigmas da Programação" 0.5;
+            @end-correct-answers;
+        @end-question;
+    @end-section;
+
+    @start-section section2;
+        // Para além de serem permitidos
+        // comentários, as propriedades podem
+        // ser definidas em qualquer ordem.
+        @description "Descrição da Secção";
+        @score 20;
+        @title "Título da Segunda Secção";
+
+        @start-question
+            @type true-false;
+            @question-body "Em ESINF programa-se em Python.";
+            @correct-answer false;
+        @end-question;
+    @end-section;
+@end-exam;
+```
