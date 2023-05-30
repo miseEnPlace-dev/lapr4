@@ -1,4 +1,4 @@
-package eapli.ecourse.app.student.console.presentation;
+package eapli.ecourse.app.student.console.presentation.exams;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
@@ -35,13 +35,11 @@ public class ListFutureExamsUI extends AbstractUI {
     if (selected == null)
       return false;
 
-
     Iterable<EvaluationExamDTO> courseFutureExams = ctrl.futureExams(selected);
     if (!courseFutureExams.iterator().hasNext()) {
       System.out.println("\nThere are no future exams in " + selected.getTitle());
       return false;
     }
-
 
     new EvaluationExamHeader().printHeader();
     ListWidget<EvaluationExamDTO> list = new ListWidget<>("", courseFutureExams, new EvaluationExamPrinter());
