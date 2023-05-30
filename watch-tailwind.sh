@@ -1,3 +1,3 @@
 cd www
-npx tailwindcss -i style.css -o dist/output.css --watch
+npx tailwindcss -i src/style.css -o src/dist/output.css --watch
 cd ..
