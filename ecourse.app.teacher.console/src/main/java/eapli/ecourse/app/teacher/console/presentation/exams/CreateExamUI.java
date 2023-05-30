@@ -1,70 +1,80 @@
 package eapli.ecourse.app.teacher.console.presentation.exams;
 
-import java.io.IOException;
+// import java.io.IOException;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
-import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.coursemanagement.dto.CourseDTO;
-import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
-import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.io.util.Console;
+// import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
+// import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
+// import eapli.ecourse.coursemanagement.dto.CourseDTO;
+// import eapli.ecourse.eventsmanagement.domain.Time;
+// import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
+// import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+// import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+// import eapli.framework.infrastructure.authz.application.AuthzRegistry;
+// import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.SelectWidget;
+// import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateExamUI extends AbstractUI {
-  private CreateEvaluationExamController ctrl = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
-      PersistenceContext.repositories().courses());
+  // private CreateEvaluationExamController ctrl = new
+  // CreateEvaluationExamController(AuthzRegistry.authorizationService(),
+  // PersistenceContext.repositories().teachers(),
+  // PersistenceContext.repositories().evaluationExams(),
+  // PersistenceContext.repositories().courses());
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = this.ctrl.listInProgressCoursesOfAuthenticatedTeacher();
+    throw new UnsupportedOperationException("This option is no longer available.");
 
-    if (!courses.iterator().hasNext()) {
-      System.out.println("There are no courses available to you. Please contact the administrator");
-      return false;
-    }
+    // final Iterable<CourseDTO> courses =
+    // this.ctrl.listInProgressCoursesOfAuthenticatedTeacher();
 
-    System.out.println("Select the course where the exam will be created:");
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), courses,
-        new CoursePrinter());
-    selector.show();
-    final CourseDTO selectedCourse = selector.selectedElement();
+    // if (!courses.iterator().hasNext()) {
+    // System.out.println("There are no courses available to you. Please contact the
+    // administrator");
+    // return false;
+    // }
 
-    if (selectedCourse == null)
-      return false;
+    // System.out.println("Select the course where the exam will be created:");
+    // final SelectWidget<CourseDTO> selector = new SelectWidget<>(new
+    // CourseHeader().header(), courses,
+    // new CoursePrinter());
+    // selector.show();
+    // final CourseDTO selectedCourse = selector.selectedElement();
 
-    String filePath = Console.readLine("Enter the file path where the exam is defined: ");
+    // if (selectedCourse == null)
+    // return false;
 
-    try {
-      this.ctrl.parseExam(filePath);
-    } catch (IOException ex) {
-      System.out.println("The specified file does not exist.");
-      return false;
-    } catch (ParseException ex) {
-      System.out.println(ex.getMessage());
-      return false;
-    }
+    // String filePath = Console.readLine("Enter the file path where the exam is
+    // defined: ");
 
-    Time startTime = Time.valueOf(
-        Console.readCalendar("Enter the start date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
+    // try {
+    // this.ctrl.parseExam(filePath);
+    // } catch (IOException ex) {
+    // System.out.println("The specified file does not exist.");
+    // return false;
+    // } catch (ParseException ex) {
+    // System.out.println(ex.getMessage());
+    // return false;
+    // }
 
-    Time endTime = Time.valueOf(
-        Console.readCalendar("Enter the end date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
+    // Time startTime = Time.valueOf(
+    // Console.readCalendar("Enter the start date/time for the exam (dd/mm/yyyy
+    // hh:mm): ", "dd/MM/yyyy HH:mm"));
 
-    try {
-      this.ctrl.createExam(selectedCourse, startTime, endTime);
-    } catch (Exception ex) {
-      System.out.println("\n\nAn error occurred while creating the exam.");
-      return false;
-    }
+    // Time endTime = Time.valueOf(
+    // Console.readCalendar("Enter the end date/time for the exam (dd/mm/yyyy
+    // hh:mm): ", "dd/MM/yyyy HH:mm"));
 
-    System.out.println("\n\nExam created successfully.");
+    // try {
+    // this.ctrl.createExam(selectedCourse, startTime, endTime);
+    // } catch (Exception ex) {
+    // System.out.println("\n\nAn error occurred while creating the exam.");
+    // return false;
+    // }
 
-    return false;
+    // System.out.println("\n\nExam created successfully.");
+
+    // return false;
   }
 
   @Override
