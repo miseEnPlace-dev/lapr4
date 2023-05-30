@@ -7,6 +7,7 @@ import eapli.ecourse.answermanagement.domain.ExamAnswer;
 import eapli.ecourse.answermanagement.domain.ExamAnswerId;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
+import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -32,4 +33,7 @@ public class JpaExamAnswerRepository
     return match("e.student.identity = :number and e.exam.course.code = :code", params);
   }
 
+  public Iterable<ExamAnswer> findAllWithExam(Exam exam) {
+    return match("e.exam = :exam", "exam", exam);
+  }
 }

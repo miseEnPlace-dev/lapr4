@@ -1,6 +1,6 @@
 # User Story 3004 - Share a board
 
-> As User, I want to share a board
+> As User, I want to share a board.
 
 |             |                   |
 | ----------- | ----------------- |
@@ -11,15 +11,20 @@
 
 ## 1. Context
 
-- XXX
+This is the first time the task is assigned to be developed and is to be completed in this sprint. This user story is a feature.
 
 ## 2. Requirements
 
-### "XXX"
+- **NFR13** Design and Implement Shared Board Synchronization - This functional part of the system has very specific technical requirements, particularly some concerns about synchronization problems. In fact, several clients will try to concurrently update boards. As such, the solution design and implementation must be based on threads, condition variables and mutexes. Specific requirements will be provided in SCOMP.
 
 ## 2.1. Client Specifications
 
-- XXX
+- Shared Boards - Boards are one of the main used tools for teaching. From the old chalk boards to the new connected digital boards, boards are one of the most successful teaching tool. The project aims to implement the concept of shared board, as a board that can be used to share and organize ideas and information.
+- A shared board is a digital implementation of a post-it board.
+- Shared boards follow a specific design (as described in NFR07).
+- The owner can share the board with other users.
+- Users may have read or write access to the board.
+- There is a separation between a frontend (Shared Board App) and a backend (Shared Board Server). The server implements the shared boards and receives updates from the clients. As updates are executed in the server, the server notifies the clients of these updates. As such, all clients are able to maintain a "real-time" clone of the shared boards. The Shared Board App implements a "small" HTTP server that serves a page that displays a board view.
 
 ## 2.2. Client Clarifications
 
@@ -27,11 +32,14 @@
 
 ## 2.3. Functional Requirements
 
-- XXX
+- **FRB02** Share Board - A user shares a board it owns with other users.
 
 ## 2.4. Acceptance Criteria
 
-- XXX
+- This functional part of the system has very specific technical requirements, particularly some concerns about synchronization problems.
+- In fact, several clients will try to concurrently update boards.
+- As such, the solution design and implementation must be based on threads, condition variables and mutexes.
+- Specific requirements will be provided in SCOMP.
 
 ---
 

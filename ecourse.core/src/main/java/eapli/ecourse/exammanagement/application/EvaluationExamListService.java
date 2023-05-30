@@ -28,6 +28,11 @@ public class EvaluationExamListService {
     return convertToDto(types);
   }
 
+  public Iterable<EvaluationExamDTO> listAllPastCourseExams(Course course) {
+    final Iterable<EvaluationExam> types = examRepository.findAllPastCourseExams(course);
+    return convertToDto(types);
+  }
+
   private Iterable<EvaluationExamDTO> convertToDto(Iterable<EvaluationExam> exams) {
     return StreamSupport.stream(exams.spliterator(), true)
         .map(EvaluationExam::toDto)

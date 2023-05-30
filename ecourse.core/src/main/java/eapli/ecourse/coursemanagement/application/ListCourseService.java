@@ -1,9 +1,11 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -13,6 +15,11 @@ public class ListCourseService {
 
   public ListCourseService(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
+  }
+
+
+  public Optional<Course> findCourseByCourseCode(final CourseCode code) {
+    return courseRepository.ofIdentity(code);
   }
 
   public Iterable<CourseDTO> listNotClosedCourses() {

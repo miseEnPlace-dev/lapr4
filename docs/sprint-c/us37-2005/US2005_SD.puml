@@ -9,6 +9,7 @@ participant "ListEnrolmentService" as SRV <<service>>
 participant "ListExamAnswerService" as ESRV <<service>>
 participant "Course" as C <<domain>>
 participant "CourseDTO" as CDTO <<dto>>
+participant "Exam" as EXAM <<domain>>
 
 participant "ExamAnswer" as E <<domain>>
 participant "ExamAnswerDTO" as EDTO <<dto>>
@@ -16,6 +17,8 @@ participant "ExamAnswerDTO" as EDTO <<dto>>
 database EnrolmentRepository as EREP <<repository>>
 database ExamAnswerRepository as EXREP <<repository>>
 database StudentRepository as SREP <<repository>>
+database FormativeExamRepository as FEXAMREP <<repository>>
+database EvaluationExamRepository as EEXAMREP <<repository>>
 
 activate S
 
@@ -77,6 +80,32 @@ loop for each examAnswer
   E -> EDTO : new
   deactivate E
 end loop
+
+ESRV -> FEXAMREP : findAllCourseExamsWithNoAnswersFromStudent(selectedCourse.identity(), student.identity())
+activate FEXAMREP
+FEXAMREP --> ESRV : formativeExams
+deactivate FEXAMREP
+
+loop for each exam
+  ESRV -> EDTO : new
+end loop
+
+note right
+  This exam answers are marked as grade N/a
+end note
+
+ESRV -> ESRV : examAnswers.addAll(formativeExams)
+
+ESRV -> EEXAMREP : findAllCourseExamsWithNoAnswersFromStudent(selectedCourse.identity(), student.identity())
+activate EEXAMREP
+EEXAMREP --> ESRV : evaluationExams
+deactivate EEXAMREP
+
+loop for each exam
+  ESRV -> EDTO : new
+end loop
+
+ESRV -> ESRV : examAnswers.addAll(evaluationExams)
 
 ESRV --> CTRL : examAnswers
 deactivate ESRV
