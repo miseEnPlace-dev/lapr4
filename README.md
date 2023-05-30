@@ -115,7 +115,7 @@ First of all, make sure you have the dependencies installed. For that, go to the
 
 Once you are done, go back to the root of the project.
 
-In order to make the life of the developers easier a script was created to generate the Tailwind styles. To generate the styles (in watch mode) execute the following script:
+In order to make the life of the developers easier a script was created to generate the Tailwind styles. To generate the styles (in watch mode) execute the following script (in a different terminal):
 
 - On Linux/MacOS: `./watch-tailwind.sh`
 - On Windows: `./watch-tailwind.bat`
