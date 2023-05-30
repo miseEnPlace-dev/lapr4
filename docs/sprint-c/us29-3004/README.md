@@ -15,8 +15,6 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 2. Requirements
 
-<!-- ### "XXX" -->
-
 - **NFR13** Design and Implement Shared Board Synchronization - This functional part of the system has very specific technical requirements, particularly some concerns about synchronization problems. In fact, several clients will try to concurrently update boards. As such, the solution design and implementation must be based on threads, condition variables and mutexes. Specific requirements will be provided in SCOMP.
 
 ## 2.1. Client Specifications
@@ -30,17 +28,18 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 2.2. Client Clarifications
 
-- XXX
+- N/A.
 
 ## 2.3. Functional Requirements
 
-- **FRB02** Share Board - A user shares a board it owns with other users
+- **FRB02** Share Board - A user shares a board it owns with other users.
 
 ## 2.4. Acceptance Criteria
 
 - This functional part of the system has very specific technical requirements, particularly some concerns about synchronization problems.
 - In fact, several clients will try to concurrently update boards.
-- As such, the solution design and implementation must be based on threads, condition variables and mutexes. Specific requirements will be provided in SCOMP.
+- As such, the solution design and implementation must be based on threads, condition variables and mutexes.
+- Specific requirements will be provided in SCOMP.
 
 ---
 
