@@ -1,8 +1,10 @@
 package eapli.ecourse.exammanagement.repositories;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.ExamCode;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
+import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.DomainRepository;
 
 public interface FormativeExamRepository extends DomainRepository<ExamCode, FormativeExam> {
@@ -13,4 +15,11 @@ public interface FormativeExamRepository extends DomainRepository<ExamCode, Form
    * @return
    */
   Iterable<FormativeExam> findAllCourseExams(Course course);
+
+  /**
+   * Returns all exams of the given course that have no answers for a given
+   * student.
+   */
+  Iterable<FormativeExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode courseCode,
+      MecanographicNumber mecanographicNumber);
 }
