@@ -104,3 +104,18 @@ You are now ready to run the app. Simply execute the script of the app you want 
 To generate PlantUML diagrams for documentation execute the script (for the moment, available only for Linux/Unix/MacOS):
 
 `./generate-plantuml-diagrams.sh`
+
+## 8. For Developers
+
+### 8.1. How to Generate Tailwind Styles
+
+First of all, make sure you have the dependencies installed. For that, go to the `www` directory and execute the following script:
+
+`yarn install` or `npm install`
+
+Once you are done, go back to the root of the project.
+
+In order to make the life of the developers easier a script was created to generate the Tailwind styles. To generate the styles (in watch mode) execute the following script:
+
+- On Linux/MacOS: `./watch-tailwind.sh`
+- On Windows: `./watch-tailwind.bat`

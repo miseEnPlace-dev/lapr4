@@ -40,3 +40,5 @@ application.properties
 target/*
 
 *.log
+
+www/node_modules
