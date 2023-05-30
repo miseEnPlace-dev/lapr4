@@ -27,6 +27,9 @@ public class ListExamAnswerService {
     Iterable<ExamAnswer> answers = examAnswerRepository.findAllWithStudentMecanographicNumberAndCourseCode(
         student.identity(),
         course.code());
+
+    // TODO
+    return null;
   }
 
   private Iterable<ExamAnswerDTO> convertToDTO(Iterable<ExamAnswer> enrollments) {
