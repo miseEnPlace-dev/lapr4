@@ -28,8 +28,6 @@ entity Question <<entity>> <<root>> {
 package "<<aggregate>> ExamAnswer" {
   entity ExamAnswer
 
-  class Grade
-
   entity AnswerToQuestion
   class Answer
   class Score
@@ -37,7 +35,6 @@ package "<<aggregate>> ExamAnswer" {
 
 entity ExamAnswer <<entity>> <<root>> {}
 
-class Grade <<(V,#FF8B40) value object>> {}
 class Answer <<(V,#FF8B40) value object>> {}
 class Score <<(V,#FF8B40) value object>> {}
 
@@ -46,7 +43,6 @@ entity AnswerToQuestion <<entity>> {}
 
 ExamAnswer --> "1" Student : has
 ExamAnswer --> "1" Exam : is for
-AnswerToQuestion --> "0..1" Grade : has
 
 AnswerToQuestion --> "1" Question : is for
 AnswerToQuestion *-- "1" Answer

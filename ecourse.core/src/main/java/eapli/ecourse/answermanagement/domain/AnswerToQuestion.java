@@ -15,9 +15,6 @@ public class AnswerToQuestion {
   private Question question;
 
   @Column
-  private Grade grade;
-
-  @Column
   private Score score;
 
   protected AnswerToQuestion() {
@@ -35,10 +32,6 @@ public class AnswerToQuestion {
 
   public Question question() {
     return question;
-  }
-
-  public Grade grade() {
-    return grade;
   }
 
   public Score score() {
