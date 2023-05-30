@@ -7,7 +7,7 @@ import java.util.stream.StreamSupport;
 import eapli.ecourse.answermanagement.domain.ExamAnswer;
 import eapli.ecourse.answermanagement.dto.ExamAnswerDTO;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
-import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
@@ -28,21 +28,20 @@ public class ListExamAnswerService {
     this.formativeExamRepository = formativeExamRepository;
   }
 
-  public Collection<ExamAnswerDTO> listStudentGrades(Student student, Course course) {
+  public Collection<ExamAnswerDTO> listStudentGrades(Student student, CourseCode code) {
     Collection<ExamAnswer> answers = (Collection<ExamAnswer>) examAnswerRepository
         .findAllWithStudentMecanographicNumberAndCourseCode(
-            student.identity(),
-            course.code());
+            student.identity(), code);
 
     Collection<ExamAnswerDTO> result = (Collection<ExamAnswerDTO>) convertToDTO(answers);
 
     Collection<EvaluationExam> evaluationExams = (Collection<EvaluationExam>) evaluationExamRepository
-        .findAllCourseExamsWithNoAnswersFromStudent(course.code(), student.identity());
+        .findAllCourseExamsWithNoAnswersFromStudent(code, student.identity());
 
     result.addAll(createNotTakenExams(student, evaluationExams));
 
     Collection<FormativeExam> formativeExams = (Collection<FormativeExam>) formativeExamRepository
-        .findAllCourseExamsWithNoAnswersFromStudent(course.code(), student.identity());
+        .findAllCourseExamsWithNoAnswersFromStudent(code, student.identity());
 
     result.addAll(createNotTakenExams(student, formativeExams));
 

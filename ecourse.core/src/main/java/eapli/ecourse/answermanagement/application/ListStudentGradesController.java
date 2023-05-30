@@ -31,16 +31,21 @@ public class ListStudentGradesController {
         formativeExamRepository);
   }
 
-  public Iterable<ExamAnswerDTO> listStudentGrades() {
-    // TODO
-    return null;
+  private Student getAuthenticatedStudent() {
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+
+    return studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
+  }
+
+  public Iterable<ExamAnswerDTO> listStudentGrades(CourseDTO course) {
+    Student student = getAuthenticatedStudent();
+    return listExamAnswerService.listStudentGrades(student, course.getCode());
   }
 
   public Iterable<CourseDTO> listStudentCourses() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT, ClientRoles.POWER_USER);
-    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+    Student student = getAuthenticatedStudent();
 
-    Student student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
     return listEnrolmentService.listStudentCourses(student.identity());
   }
 }
