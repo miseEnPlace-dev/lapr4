@@ -1,5 +1,6 @@
 package eapli.ecourse.teachermanagement.application;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class TeacherService {
     return convertToDto(teachers);
   }
 
-  public Iterable<TeacherDTO> allTeachersExceptFromCourse(Set<Teacher> teachersFromCourse) {
+  public Collection<TeacherDTO> allTeachersExceptFromCourse(Set<Teacher> teachersFromCourse) {
     Set<TeacherDTO> teachersExceptFromCourse = new HashSet<>();
     final Iterable<TeacherDTO> allTeachers = allTeachers();
 

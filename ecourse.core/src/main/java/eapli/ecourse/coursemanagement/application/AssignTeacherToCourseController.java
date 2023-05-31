@@ -1,5 +1,6 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Collection;
 import java.util.Set;
 
 import eapli.ecourse.coursemanagement.domain.Course;
@@ -21,7 +22,7 @@ public class AssignTeacherToCourseController {
     this.listCourseService = new ListCourseService(courseRepository);
   }
 
-  public Iterable<TeacherDTO> allTeachersExceptFromCourse(CourseDTO courseDTO) {
+  public Collection<TeacherDTO> allTeachersExceptFromCourse(CourseDTO courseDTO) {
     Set<Teacher> teachersFromCourse = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow().teachers();
 
     return teacherService.allTeachersExceptFromCourse(teachersFromCourse);
