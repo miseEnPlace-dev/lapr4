@@ -110,12 +110,16 @@ _Note: This are some simplified versions of the tests for readability purposes._
 - Relevant implementation details
 
 ```java
-
+public ShareBoardController(BoardRepository boardRepo) {
+  this.authz = AuthzRegistry.authorizationService();
+  this.userService = AuthzRegistry.userService();
+  this.listBoardsService = new ListBoardsService(boardRepo);
+}
 ```
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US3004_DEMO](out/US3004_DEMO.svg)
 
 ## 7. Observations
 
