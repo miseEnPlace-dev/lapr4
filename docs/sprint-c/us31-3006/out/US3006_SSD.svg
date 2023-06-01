@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="415px" preserveAspectRatio="none" style="width:349px;height:415px;background:#FFFFFF;" version="1.1" viewBox="0 0 349 415" width="349px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="225.0625" style="stroke:#181818;stroke-width:1.0;" width="10" x="19" y="91.2969"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="112.4297"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="170.6953"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="228.9609"/><rect fill="#FFFFFF" height="38.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="287.2266"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="24" x2="24" y1="81.2969" y2="334.3594"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="308" x2="308" y1="81.2969" y2="334.3594"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5" y="77.9951">User</text><ellipse cx="24" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M24,21.5 L24,48.5 M11,29.5 L37,29.5 M24,48.5 L11,63.5 M24,48.5 L37,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5" y="346.3545">User</text><ellipse cx="24" cy="358.1563" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M24,366.1563 L24,393.1563 M11,374.1563 L37,374.1563 M24,393.1563 L11,408.1563 M24,393.1563 L37,408.1563 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="70" x="273" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="280" y="69.9951">:System</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="70" x="273" y="333.3594"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="280" y="353.3545">:System</text><rect fill="#FFFFFF" height="225.0625" style="stroke:#181818;stroke-width:1.0;" width="10" x="19" y="91.2969"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="112.4297"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="170.6953"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="228.9609"/><rect fill="#FFFFFF" height="38.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="303" y="287.2266"/><polygon fill="#181818" points="291,108.4297,301,112.4297,291,116.4297,295,112.4297" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="297" y1="112.4297" y2="112.4297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="107.3638">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="148" x="49" y="107.3638">asks to create a post-it</text><polygon fill="#181818" points="40,137.5625,30,141.5625,40,145.5625,36,141.5625" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="34" x2="307" y1="141.5625" y2="141.5625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="46" y="136.4966">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="154" x="59" y="136.4966">asks to select the board</text><polygon fill="#181818" points="291,166.6953,301,170.6953,291,174.6953,295,170.6953" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="297" y1="170.6953" y2="170.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="165.6294">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="111" x="49" y="165.6294">selects the board</text><polygon fill="#181818" points="40,195.8281,30,199.8281,40,203.8281,36,199.8281" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="34" x2="307" y1="199.8281" y2="199.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="46" y="194.7622">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="237" x="59" y="194.7622">asks to select the post-it coordinates</text><polygon fill="#181818" points="291,224.9609,301,228.9609,291,232.9609,295,228.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="297" y1="228.9609" y2="228.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="223.895">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="194" x="49" y="223.895">selects the post-it coordinates</text><polygon fill="#181818" points="40,254.0938,30,258.0938,40,262.0938,36,258.0938" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="34" x2="307" y1="258.0938" y2="258.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="46" y="253.0278">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="223" x="59" y="253.0278">asks to enter the title of the post-it</text><polygon fill="#181818" points="291,283.2266,301,287.2266,291,291.2266,295,287.2266" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="297" y1="287.2266" y2="287.2266"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="36" y="282.1606">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="180" x="49" y="282.1606">enters the title of the post-it</text><polygon fill="#181818" points="35,312.3594,25,316.3594,35,320.3594,31,316.3594" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="29" x2="302" y1="316.3594" y2="316.3594"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="41" y="311.2935">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="54" y="311.2935">informs operation suscess</text><!--MD5=[967216927e90e2463c4e1def5cac00a5]
+@startuml US3006_SSD
+
+autonumber
+
+actor U as "User"
+
+activate U
+
+U -> ":System" : asks to create a post-it
+activate ":System"
+
+":System" - -> U : asks to select the board
+deactivate ":System"
+
+U -> ":System" : selects the board
+activate ":System"
+
+":System" - -> U : asks to select the post-it coordinates
+deactivate ":System"
+
+U -> ":System" :  selects the post-it coordinates
+activate ":System"
+
+":System" - -> U : asks to enter the title of the post-it
+deactivate ":System"
+
+U -> ":System" :  enters the title of the post-it
+activate ":System"
+
+":System" - -> U : informs operation suscess
+
+deactivate U
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
