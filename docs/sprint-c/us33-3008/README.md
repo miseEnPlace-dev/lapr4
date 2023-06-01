@@ -45,6 +45,10 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 3. Analysis
 
+Multiple clients will try to concurrently update boards, as such, the solution design and implementation must be based on threads, condition variables and mutexes. The client will establish a TCP connection to the server and the communication protocol [described here](../../sprint-b/us24-3001/README.md) will be used.
+
+![US3008_DesiredSystem](out/US3008_DesiredSystem.svg)
+
 ### 3.1. Main success scenario
 
 The user is able to undo the last change in a post-it and it is reflected in the board.
