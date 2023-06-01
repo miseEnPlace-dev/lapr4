@@ -47,11 +47,25 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ### 3.1. Main success scenario
 
-- XXX
+The user who owns the board shares it with another user, giving him the appropriate permissions. The recipient user can now access this board.
+
+#### 3.1.1. Other scenarios
+
+- Recipient user does not exist
+
+The system notifies the user that the recipient user does not exist.
+
+- Recipient user already has permissions to the board
+
+The system notifies the user that the recipient user already has permissions to the board and asks if it is his desire to update them.
 
 ### 3.2. Conditions
 
-- XXX
+- The user must be authenticated in order to share a board.
+- The user must be the owner of the board to be able to share it.
+- The recipient user must exist in the system.
+- The recipient user must not have permissions to the board.
+- The recipient user must be given the appropriate permissions to the board.
 
 ### 3.3. System Sequence Diagram
 
