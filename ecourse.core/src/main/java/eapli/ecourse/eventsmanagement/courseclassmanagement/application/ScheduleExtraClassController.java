@@ -2,6 +2,7 @@ package eapli.ecourse.eventsmanagement.courseclassmanagement.application;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -75,10 +76,10 @@ public class ScheduleExtraClassController {
     teacher = teacherRepository.findByUsername(authenticatedUser.username()).orElseThrow();
   }
 
-  public Iterable<StudentDTO> listStudentsEnrolled(CourseDTO courseDTO) {
-    Iterable<EnrolmentDTO> enrolments = enrolmentListService.listStudentsEnrolled(courseDTO.getCode());
+  public Collection<StudentDTO> listStudentsEnrolled(CourseDTO courseDTO) {
+    Iterable<EnrolmentDTO> enrollments = enrolmentListService.listStudentsEnrolled(courseDTO.getCode());
     Set<StudentDTO> students = new HashSet<>();
-    for (EnrolmentDTO enrolment : enrolments)
+    for (EnrolmentDTO enrolment : enrollments)
       students.add(studentRepository.ofIdentity(enrolment.getStudentNumber()).orElseThrow().toDto());
 
     return students;

@@ -80,8 +80,7 @@ public class CreateBoardUI extends AbstractUI {
 
     Console.readLine("Press Enter to continue...");
 
-    return true;
-
+    return false;
   }
 
   @Override

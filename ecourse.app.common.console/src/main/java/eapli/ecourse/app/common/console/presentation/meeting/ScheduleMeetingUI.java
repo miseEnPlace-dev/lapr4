@@ -48,6 +48,11 @@ public class ScheduleMeetingUI extends AbstractUI {
         new SystemUserPrinter());
     ArrayList<SystemUser> selectedUsers = (ArrayList<SystemUser>) selector.selectElements();
 
+    if (selectedUsers.isEmpty()) {
+      System.out.println("No users selected. Please select at least one user. Operation cancelled.");
+      return false;
+    }
+
     if (!ctrl.checkIfUsersAreAvailable(meetingTime, meetingDuration, selectedUsers)) {
       System.out.println("Some of the selected users are not available at the given time.");
       return false;

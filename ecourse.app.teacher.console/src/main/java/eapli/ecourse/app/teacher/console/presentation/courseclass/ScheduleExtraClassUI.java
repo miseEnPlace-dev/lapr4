@@ -1,6 +1,7 @@
 package eapli.ecourse.app.teacher.console.presentation.courseclass;
 
 import java.util.Calendar;
+import java.util.Collection;
 
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.student.StudentPrinter;
@@ -38,7 +39,7 @@ public class ScheduleExtraClassUI extends AbstractUI {
     if (selected == null)
       return false;
 
-    Iterable<StudentDTO> students = ctrl.listStudentsEnrolled(selected);
+    Collection<StudentDTO> students = ctrl.listStudentsEnrolled(selected);
     MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("Students:", students,
         new StudentPrinter());
     Iterable<StudentDTO> selected2 = selector2.selectElements();

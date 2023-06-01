@@ -1,5 +1,7 @@
 package eapli.ecourse.app.backoffice.console.presentation.course;
 
+import java.util.Collection;
+
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.teacher.TeacherPrinter;
 import eapli.ecourse.app.common.console.util.MultipleSelectorWidget;
@@ -31,7 +33,7 @@ public class AssignNewTeachersToCourseUI extends AbstractUI {
     final SelectWidget<CourseDTO> courseSelector = new SelectWidget<>("Courses", courses, new CoursePrinter());
     courseSelector.show();
     CourseDTO selectedCourse = courseSelector.selectedElement();
-    final Iterable<TeacherDTO> teachers = controller.allTeachersExceptFromCourse(selectedCourse);
+    final Collection<TeacherDTO> teachers = controller.allTeachersExceptFromCourse(selectedCourse);
 
     if (!teachers.iterator().hasNext()) {
       System.out.println("There are no teachers to assign.");
