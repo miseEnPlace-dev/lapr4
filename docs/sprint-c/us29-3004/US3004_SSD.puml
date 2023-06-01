@@ -8,15 +8,16 @@ activate U
 
 U -> SYS : wants to share a board with someone else
 activate SYS
-SYS --> U : lists the boards the user is owner of
+SYS --> U : lists the boards the logged user is owner of
 deactivate SYS
 
 U -> SYS : selects a board
 activate SYS
-SYS --> U : asks to insert the email of the user to share the board with
+' SYS --> U : asks to insert the email of the user to share the board with
+SYS --> U : asks to select the user to share the board with
 deactivate SYS
 
-U -> SYS : inserts the email of the user to share the board with
+U -> SYS : selects the user to share the board with
 activate SYS
 SYS --> U : asks the permission type to assign to the user
 deactivate SYS
