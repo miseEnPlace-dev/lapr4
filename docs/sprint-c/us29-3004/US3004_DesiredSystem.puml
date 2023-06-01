@@ -1,0 +1,21 @@
+@startuml US3004_DesiredSystem
+
+left to right direction
+
+component "Shared Board App" <<Client>> as app1
+component "Shared Board App" <<Client>> as app2
+component "Shared Board App" <<Client>> as app3
+
+skinparam component<<Server>> {
+  FontSize 17
+  ' FontStyle bold
+  BackgroundColor gold
+}
+
+component "Shared Board Server" <<Server>> as server
+
+app1 ---> server
+app2 ---> server : "tcp connection"
+app3 ---> server
+
+@enduml

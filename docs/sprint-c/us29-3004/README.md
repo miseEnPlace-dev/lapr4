@@ -45,6 +45,10 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 3. Analysis
 
+Multiple clients will try to concurrently update boards, as such, the solution design and implementation must be based on threads, condition variables and mutexes. The client will establish a TCP connection to the server and the communication protocol [described here](../../sprint-b/us24-3001/README.md) will be used.
+
+![US3004_DesiredSystem](out/US3004_DesiredSystem.svg)
+
 ### 3.1. Main success scenario
 
 The user who owns the board shares it with another user, giving him the appropriate permissions. The recipient user can now access this board.
