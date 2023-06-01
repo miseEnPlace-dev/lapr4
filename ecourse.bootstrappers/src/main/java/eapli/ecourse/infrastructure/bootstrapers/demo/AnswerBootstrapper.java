@@ -6,7 +6,7 @@ public class AnswerBootstrapper implements Action {
 
   @Override
   public boolean execute() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    // TODO implement this
+    return false;
   }
 }

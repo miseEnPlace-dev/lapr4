@@ -53,11 +53,16 @@ This is the first time this task is assigned to be developed. This is a new func
 
 - The student must be authenticated and authorized to perform the operation.
 
-### 3.2. System Sequence Diagram
+### 3.2. Dependencies
+
+**US36 [2004]**: Take Exam
+**US39 [2009]**: Take Formative Exam
+
+### 3.3. System Sequence Diagram
 
 ![US2005_SSD](out/US2005_SSD.svg)
 
-### 3.3. Partial Domain Model
+### 3.4. Partial Domain Model
 
 ![US2005_DM](out/US2005_DM.svg)
 
