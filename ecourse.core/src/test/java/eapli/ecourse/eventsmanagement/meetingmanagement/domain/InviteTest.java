@@ -78,4 +78,52 @@ public class InviteTest {
     Invite invite = getDummyInvite();
     assertTrue(invite.sameAs(invite));
   }
+
+  @Test
+  public void ensureInviteIDIsComparable() {
+    InviteID invite1 = InviteID.newID();
+    InviteID invite2 = InviteID.valueOf(invite1.toString());
+    assertTrue(invite1.compareTo(invite2) == 0);
+  }
+
+  @Test
+  public void ensureInviteIDHashCodeWorks() {
+    InviteID invite1 = InviteID.newID();
+    InviteID invite2 = InviteID.valueOf(invite1.toString());
+    assertTrue(invite1.hashCode() == invite2.hashCode());
+  }
+
+  @Test
+  public void ensureInviteIDToStringWorks() {
+    InviteID invite1 = InviteID.newID();
+    InviteID invite2 = InviteID.valueOf(invite1.toString());
+    assertTrue(invite1.toString().equals(invite2.toString()));
+  }
+
+  @Test
+  public void ensureInviteIDIsNotEqualToNull() {
+    InviteID invite1 = InviteID.newID();
+    InviteID invite2 = null;
+    assertTrue(!invite1.equals(invite2));
+  }
+
+  @Test
+  public void ensureInviteIDIsNotEqualToAnotherClass() {
+    InviteID invite1 = InviteID.newID();
+    String invite2 = "invite";
+    assertTrue(!invite1.equals(invite2));
+  }
+
+  @Test
+  public void ensureInviteIDIsEqualToItself() {
+    InviteID invite1 = InviteID.newID();
+    assertTrue(invite1.equals(invite1));
+  }
+
+  @Test
+  public void ensureInviteIDCanEqualWorks() {
+    InviteID invite1 = InviteID.newID();
+    InviteID invite2 = InviteID.valueOf(invite1.toString());
+    assertTrue(invite1.canEqual(invite2));
+  }
 }
