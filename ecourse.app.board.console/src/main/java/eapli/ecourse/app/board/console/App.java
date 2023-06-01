@@ -12,7 +12,7 @@ public class App {
   private static final int BOARD_SERVER_PORT = 9999;
 
   private static final int HTTP_SERVER_PORT = 8080;
-  private static final String WWW_PATH = "www";
+  private static final String WWW_PATH = "www/src";
 
   public static void main(String[] args) {
     // create the router
