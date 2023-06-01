@@ -34,7 +34,7 @@ public class MultipleSelectorWidget<T> extends ListWidget<T> {
   @Override
   public void show() {
     super.show();
-    System.out.println("0. Confirm");
+    System.out.println("\n0. Confirm");
     this.option = Console.readOption(1, size(), 0);
   }
 
