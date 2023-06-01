@@ -7,7 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-
+import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.validations.Preconditions;
@@ -38,8 +38,8 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
     // for ORM
   }
 
-  public UserPermission(final UserPermissionID id, final Calendar createdAt, final Calendar updatedAt,
-      final PermissionType permissionType, final SystemUser user) {
+  public UserPermission(final UserPermissionID id, final Calendar createdAt,
+      final Calendar updatedAt, final PermissionType permissionType, final SystemUser user) {
     Preconditions.noneNull(id, createdAt, permissionType, user);
 
     this.id = id;
@@ -90,10 +90,15 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
       return true;
     }
 
-    return identity().equals(otherUserPermission.identity()) && createdAt().equals(otherUserPermission.createdAt())
-        && updatedAt().equals(otherUserPermission.updatedAt()) && user().equals(otherUserPermission.user())
+    return identity().equals(otherUserPermission.identity())
+        && createdAt().equals(otherUserPermission.createdAt())
+        && updatedAt().equals(otherUserPermission.updatedAt())
+        && user().equals(otherUserPermission.user())
         && permissionType().equals(otherUserPermission.permissionType());
 
   }
 
+  public UserPermissionDTO toDto() {
+    return new UserPermissionDTO(createdAt, updatedAt, user, permissionType, id);
+  }
 }
