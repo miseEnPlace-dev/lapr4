@@ -6,12 +6,19 @@ import java.io.IOException;
 import java.net.Socket;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import eapli.ecourse.app.board.common.protocol.MessageCode;
+import eapli.ecourse.app.board.backend.messages.AckMessage;
+import eapli.ecourse.app.board.backend.messages.AuthMessage;
+import eapli.ecourse.app.board.backend.messages.CommTestMessage;
+import eapli.ecourse.app.board.backend.messages.DisconnMessage;
+import eapli.ecourse.app.board.backend.messages.ErrMessage;
+import eapli.ecourse.app.board.backend.messages.Message;
+import eapli.ecourse.app.board.backend.messages.UnsupportedMessage;
 import eapli.ecourse.app.board.common.protocol.ProtocolMessage;
 import eapli.ecourse.app.board.common.protocol.UnsupportedVersionException;
 
 public class ClientHandler implements Runnable {
   private Socket client;
+  private Logger logger;
 
   public ClientHandler(Socket socket) {
     this.client = socket;
@@ -20,8 +27,10 @@ public class ClientHandler implements Runnable {
   @Override
   public void run() {
     try {
-      // System.out.printf("[Client Handler Thread] Connected to %s port %d!\n",
-      // client.getInetAddress().getHostAddress(), client.getPort());
+      logger = LogManager.getLogger(ClientHandler.class);
+
+      logger.debug("[Client Handler Thread] Connected to "
+          + client.getInetAddress().getHostAddress() + " port " + client.getPort() + "!");
 
       // in udp applications, each send must match one receive in the
       // counterpart and the number of bytes transported by each datagram is
@@ -39,48 +48,64 @@ public class ClientHandler implements Runnable {
       // and a data output stream to write to the client
       DataOutputStream output = new DataOutputStream(client.getOutputStream());
 
-      // parse the message
-      ProtocolMessage message = ProtocolMessage.fromDataStream(input);
+      while (!client.isClosed()) {
+        // parse the message
+        ProtocolMessage message = ProtocolMessage.fromDataStream(input);
 
-      Logger logger = LogManager.getLogger(ClientHandler.class);
-      logger.debug(message.toString());
-
-      // trolha
-      switch (message.getCode()) {
-        case ACK:
-          // normally used in responses
+        if (message == null)
           break;
 
-        case AUTH:
-          // ...
-          byte[] buffer = (new String("Not Implemented")).getBytes();
-          output.write(new ProtocolMessage(MessageCode.ERR, buffer, buffer.length).toByteStream());
-          break;
+        logger.debug("\n" + message.toString());
 
-        case COMMTEST:
-          System.out.println("Comm test! Sending ACK");
-          output.write(new ProtocolMessage(MessageCode.ACK).toByteStream());
-          break;
-
-        case DISCONN:
-          // ...
-          output.write(new ProtocolMessage(MessageCode.ACK).toByteStream());
-          break;
-
-        case ERR:
-          // this is an error message used in responses
-          break;
-
-        default:
-          System.out.println("Unrecognized code!");
-          break;
+        handle(message, output);
       }
 
-      client.close();
+      logger.debug("Connection closed.");
 
+      output.close();
+      input.close();
+      client.close();
     } catch (IOException | UnsupportedVersionException e) {
-      System.out.println("[Client Handler Thread] Error: " + e.getMessage());
+      logger.error("\n[Client Handler Thread] Error: " + e.getMessage());
       e.printStackTrace();
     }
+  }
+
+  private void handle(ProtocolMessage message, DataOutputStream output) throws IOException {
+
+    Message handleMessage;
+
+    // trolha
+    switch (message.getCode()) {
+      case ACK:
+        // normally used in responses
+        handleMessage = new AckMessage(message, output);
+        break;
+
+      case AUTH:
+        // ...
+        handleMessage = new AuthMessage(message, output);
+        break;
+
+      case COMMTEST:
+        handleMessage = new CommTestMessage(message, output);
+        break;
+
+      case DISCONN:
+        // ...
+        handleMessage = new DisconnMessage(message, output);
+        break;
+
+      case ERR:
+        // ...
+        handleMessage = new ErrMessage(message, output);
+        break;
+
+      default:
+        handleMessage = new UnsupportedMessage(output);
+        break;
+    }
+
+    handleMessage.handle();
   }
 }

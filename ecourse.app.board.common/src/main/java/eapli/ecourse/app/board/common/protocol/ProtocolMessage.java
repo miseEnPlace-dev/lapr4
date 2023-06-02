@@ -21,6 +21,20 @@ public class ProtocolMessage {
     this.payload = new byte[0];
   }
 
+  public ProtocolMessage(MessageCode code, String payload) {
+    this.protocolVersion = PROTOCOL_VERSION;
+    this.code = code;
+    this.payloadLength = payload.length();
+    this.payload = payload.getBytes();
+  }
+
+  public ProtocolMessage(MessageCode code, byte[] payload) {
+    this.protocolVersion = PROTOCOL_VERSION;
+    this.code = code;
+    this.payloadLength = payload.length;
+    this.payload = payload;
+  }
+
   public ProtocolMessage(MessageCode code, byte[] payload, int payloadLength) {
     this.protocolVersion = PROTOCOL_VERSION;
     this.code = code;
@@ -40,7 +54,11 @@ public class ProtocolMessage {
       throws IOException, UnsupportedVersionException {
     // according to the protocol message format, the first 4 bytes
     // are the header of the message (metadata)
-    byte[] metadata = input.readNBytes(METADATA_LENGTH);
+    byte[] metadata = new byte[METADATA_LENGTH];
+    int bytesRead = input.read(metadata, 0, METADATA_LENGTH);
+
+    if (bytesRead == -1)
+      return null;
 
     // the first byte is the protocol version
     byte protocolVersion = metadata[0];

@@ -38,6 +38,9 @@ public class TcpClient {
       ProtocolMessage response = ProtocolMessage.fromDataStream(input);
       System.out.println(response.toString());
 
+      // end the connection
+      output.close();
+      input.close();
       socket.close();
     } catch (Exception e) {
       System.out.println("Error connecting to server: " + e.getMessage());

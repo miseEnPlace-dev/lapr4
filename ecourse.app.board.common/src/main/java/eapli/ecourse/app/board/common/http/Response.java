@@ -8,6 +8,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,7 +61,18 @@ public class Response {
     }
   }
 
-  // public void json() {}
+  public void json(JsonObject jsonObject) {
+
+    setContentType("application/json");
+
+    try {
+      byte[] body = jsonObject.toString().getBytes(StandardCharsets.UTF_8);
+      sendHttpResponse(body, body.length);
+    } catch (IOException e) {
+      Logger logger = LogManager.getLogger(Response.class);
+      logger.error("Error sending response", e);
+    }
+  }
 
   // public
 
