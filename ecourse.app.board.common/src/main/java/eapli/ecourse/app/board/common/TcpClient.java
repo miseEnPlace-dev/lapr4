@@ -2,13 +2,22 @@ package eapli.ecourse.app.board.common;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
-import eapli.ecourse.app.board.common.protocol.MessageCode;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.common.protocol.ProtocolMessage;
+import eapli.ecourse.app.board.common.protocol.UnsupportedVersionException;
 
 public class TcpClient {
   private String hostname;
   private int port;
+
+  private Socket socket;
+  private DataInputStream input;
+  private DataOutputStream output;
+
+  private final Logger logger = LogManager.getLogger(TcpClient.class);
 
   public TcpClient(String hostname, int port) {
     this.hostname = hostname;
@@ -18,33 +27,31 @@ public class TcpClient {
   public void connect() {
     // connect to a tcp server
     try {
-      Socket socket = new Socket(this.hostname, this.port);
+      socket = new Socket(this.hostname, this.port);
 
-      System.out.println("Connected to server!");
+      logger.debug("Connected to server!");
 
       // create a data input stream to read from the client
-      DataInputStream input = new DataInputStream(socket.getInputStream());
+      input = new DataInputStream(socket.getInputStream());
 
       // and a data output stream to write to the client
-      DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-
-      // send an auth request
-      ProtocolMessage message = new ProtocolMessage(MessageCode.AUTH);
-
-      output.write(message.toByteStream());
-      System.out.println("Sent AUTH!");
-
-      // expect a ack or err response
-      ProtocolMessage response = ProtocolMessage.fromDataStream(input);
-      System.out.println(response.toString());
-
-      // end the connection
-      output.close();
-      input.close();
-      socket.close();
+      output = new DataOutputStream(socket.getOutputStream());
     } catch (Exception e) {
-      System.out.println("Error connecting to server: " + e.getMessage());
+      logger.error("Error connecting to server", e);
     }
+  }
 
+  public void send(ProtocolMessage msg) throws IOException {
+    output.write(msg.toByteStream());
+  }
+
+  public ProtocolMessage receive() throws IOException, UnsupportedVersionException {
+    return ProtocolMessage.fromDataStream(input);
+  }
+
+  public void close() throws IOException {
+    output.close();
+    input.close();
+    socket.close();
   }
 }
