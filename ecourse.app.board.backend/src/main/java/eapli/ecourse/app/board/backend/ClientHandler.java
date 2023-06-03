@@ -15,6 +15,12 @@ import eapli.ecourse.app.board.backend.messages.Message;
 import eapli.ecourse.app.board.backend.messages.UnsupportedMessage;
 import eapli.ecourse.app.board.common.protocol.ProtocolMessage;
 import eapli.ecourse.app.board.common.protocol.UnsupportedVersionException;
+import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
+import eapli.ecourse.infrastructure.authz.AuthenticationCredentialHandler;
+import eapli.ecourse.infrastructure.authz.CredentialHandler;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.usermanagement.domain.ClientPasswordPolicy;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 
 public class ClientHandler implements Runnable {
   private Socket client;
@@ -31,6 +37,9 @@ public class ClientHandler implements Runnable {
 
       logger.debug("[Client Handler Thread] Connected to "
           + client.getInetAddress().getHostAddress() + " port " + client.getPort() + "!");
+
+      AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
+          PasswordEncoderContext.passwordHash());
 
       // in udp applications, each send must match one receive in the
       // counterpart and the number of bytes transported by each datagram is
@@ -72,7 +81,6 @@ public class ClientHandler implements Runnable {
   }
 
   private void handle(ProtocolMessage message, DataOutputStream output) throws IOException {
-
     Message handleMessage;
 
     // trolha

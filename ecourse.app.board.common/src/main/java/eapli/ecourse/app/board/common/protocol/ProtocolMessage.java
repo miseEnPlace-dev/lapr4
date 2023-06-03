@@ -113,6 +113,10 @@ public class ProtocolMessage {
     return this.payload;
   }
 
+  public String getStringifiedPayload() {
+    return new String(this.payload);
+  }
+
   public String toString() {
     return String.format(" --- ProtocolMessage version %d ---\n%s request, payload length: %d%s",
         this.protocolVersion, this.code.toString(), this.payloadLength,
