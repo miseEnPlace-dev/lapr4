@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -12,10 +11,10 @@
   </parent>
 
   <groupId>eapli.ecourse</groupId>
-  <artifactId>app.board.console</artifactId>
+  <artifactId>common.board</artifactId>
   <packaging>jar</packaging>
 
-  <name>ecourse.app.board.console</name>
+  <name>ecourse.common.board</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,20 +22,5 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>eapli.ecourse</groupId>
-      <artifactId>app.common.console</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>eapli.ecourse</groupId>
-      <artifactId>common.board</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>eapli.ecourse</groupId>
-      <artifactId>infrastructure.application</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
   </dependencies>
 </project>

@@ -2,9 +2,9 @@ package eapli.ecourse.app.board.console.controllers;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import eapli.ecourse.app.board.common.http.Request;
-import eapli.ecourse.app.board.common.http.Response;
-import eapli.ecourse.app.board.common.http.RouteController;
+import eapli.ecourse.common.board.http.Request;
+import eapli.ecourse.common.board.http.Response;
+import eapli.ecourse.common.board.http.RouteController;
 
 public class ApiController implements RouteController {
   @Override
