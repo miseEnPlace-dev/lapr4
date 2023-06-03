@@ -9,7 +9,7 @@ import eapli.ecourse.app.board.common.http.RouteController;
 public class ApiController implements RouteController {
   @Override
   public void handle(Request req, Response res) {
-    JsonObject object = Json.createObjectBuilder().add("Hello", "World").build();
-    res.json(object);
+    JsonObject json = Json.createObjectBuilder().add("message", "Hello World!").build();
+    res.json(json);
   }
 }

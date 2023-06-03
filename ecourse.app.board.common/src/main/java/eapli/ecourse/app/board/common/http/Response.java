@@ -62,8 +62,7 @@ public class Response {
   }
 
   public void json(JsonObject jsonObject) {
-
-    setContentType("application/json");
+    setContentType(ContentTypes.JSON);
 
     try {
       byte[] body = jsonObject.toString().getBytes(StandardCharsets.UTF_8);
