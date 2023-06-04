@@ -1,6 +1,8 @@
 package eapli.ecourse.app.board.console.presentation;
 
 import eapli.ecourse.Application;
+import eapli.ecourse.app.board.console.lib.BoardBackend;
+import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
 import eapli.framework.presentation.console.AbstractUI;
@@ -18,6 +20,7 @@ public class MainMenu extends AbstractUI {
 
   private static final int COMMTEST_OPTION = 1;
   private static final int SHARE_BOARD_OPTION = 2;
+  private static final int SESSION_INFO_OPTION = 9;
 
   private final Menu menu;
   private final MenuRenderer renderer;
@@ -50,7 +53,8 @@ public class MainMenu extends AbstractUI {
 
   @Override
   public String headline() {
-    return "Main Menu";
+    UserDTO user = BoardBackend.getInstance().getCredentialStore().getUser();
+    return "Welcome, " + user.getFullName();
   }
 
   private Menu buildMainMenu() {
@@ -58,6 +62,7 @@ public class MainMenu extends AbstractUI {
 
     mainMenu.addItem(COMMTEST_OPTION, "Send COMMTEST", new CommTestUI()::show);
     mainMenu.addItem(SHARE_BOARD_OPTION, "Share Board", new ShareBoardUI()::show);
+    mainMenu.addItem(SESSION_INFO_OPTION, "Session Info", new SessionInfoUI()::show);
 
     if (!Application.settings().isMenuLayoutHorizontal()) {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));

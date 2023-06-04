@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.console.lib.BoardBackend;
 import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
@@ -13,15 +14,10 @@ import eapli.ecourse.infrastructure.authz.CredentialHandler;
 public class CredentialStore {
   private final static Logger LOGGER = LogManager.getLogger(CredentialStore.class);
 
-  private String username;
-  private String password;
+  private UserDTO user;
 
-  public String getUsername() {
-    return username;
-  }
-
-  public String getPassword() {
-    return password;
+  public UserDTO getUser() {
+    return new UserDTO(user);
   }
 
   public final CredentialHandler AUTHENTICATE = (u, p, r) -> {
@@ -35,8 +31,7 @@ public class CredentialStore {
       ProtocolMessage response = client.receive();
 
       if (response.getCode() == MessageCode.ACK) {
-        this.username = u;
-        this.password = p;
+        user = UserDTO.fromJson(response.getStringifiedPayload());
         return true;
       }
 

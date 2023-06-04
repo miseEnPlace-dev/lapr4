@@ -18,7 +18,7 @@ public class CommTestMessage extends Message {
     CredentialStore credentialStore = ClientState.getInstance().getCredentialStore();
 
     if (credentialStore.isAuthenticated()) {
-      send(new ProtocolMessage(MessageCode.ACK, credentialStore.getUsername()));
+      send(new ProtocolMessage(MessageCode.ACK, credentialStore.getUser().getEmail()));
     } else {
       send(new ProtocolMessage(MessageCode.ERR, "Not Authenticated"));
     }
