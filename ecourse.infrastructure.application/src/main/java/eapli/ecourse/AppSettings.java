@@ -22,7 +22,8 @@ public class AppSettings {
   private static final String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
   private static final String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
   private static final String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
-  private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
+  private static final String SCHEMA_GENERATION_KEY =
+      "javax.persistence.schema-generation.database.action";
   private static final String USE_EVENTFUL_CONTROLLERS = "UseEventfulControllers";
   private static final String PASSWORD_ENCODER_KEY = "auth.passwordEncoder";
 
@@ -33,7 +34,8 @@ public class AppSettings {
   }
 
   private void loadProperties() {
-    try (InputStream propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE)) {
+    try (InputStream propertiesStream =
+        this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE)) {
       if (propertiesStream == null) {
         throw new FileNotFoundException(
             "Property file '" + PROPERTIES_RESOURCE + "' not found in the classpath");
@@ -48,7 +50,7 @@ public class AppSettings {
 
   private void setDefaultProperties() {
     applicationProperties.setProperty(REPOSITORY_FACTORY_KEY,
-        "eapli.ecourse.persistence.jpa.JpaRepositoryFactory");
+        "eapli.ecourse.persistence.impl.jpa.JpaRepositoryFactory");
     applicationProperties.setProperty(UI_MENU_LAYOUT_KEY, "horizontal");
     applicationProperties.setProperty(PERSISTENCE_UNIT_KEY, "eapli.eCoursePU");
   }
@@ -70,7 +72,7 @@ public class AppSettings {
     return applicationProperties.getProperty(PASSWORD_ENCODER_KEY);
   }
 
-  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public Map extendedPersistenceProperties() {
     final Map ret = new HashMap();
     ret.put(SCHEMA_GENERATION_KEY, applicationProperties.getProperty(SCHEMA_GENERATION_KEY));
