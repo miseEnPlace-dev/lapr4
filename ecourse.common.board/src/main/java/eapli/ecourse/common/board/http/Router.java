@@ -91,6 +91,6 @@ public class Router {
     }
 
     // 404
-    res.status(404).send("Not found");
+    StaticMiddleware.serveStaticFile("www/src/404.html", req, res);
   }
 }

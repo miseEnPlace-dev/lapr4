@@ -15,7 +15,12 @@ public class StaticMiddleware implements Middleware {
 
   @Override
   public void handle(Request req, Response res, NextFunction next) {
-    File file = new File(this.path + req.getPath().getPath());
+    if (!serveStaticFile(this.path + req.getPath().getPath(), req, res))
+      next.next();
+  }
+
+  public static boolean serveStaticFile(String filepath, Request req, Response res) {
+    File file = new File(filepath);
 
     // index.html if path is a directory
     if (file.isDirectory())
@@ -36,8 +41,9 @@ public class StaticMiddleware implements Middleware {
 
       fileChannel.close();
       fileInputStream.close();
+      return true;
     } catch (IOException e) {
-      next.next();
+      return false;
     }
   }
 }
