@@ -6,14 +6,18 @@ import java.net.Socket;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
-public class DisconnMessage extends Message {
-  public DisconnMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
+public class BadRequestMessage extends Message {
+  public BadRequestMessage(DataOutputStream output, Socket socket) {
+    super(null, output, socket);
+  }
+
+  public BadRequestMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket) {
     super(protocolMessage, output, socket);
   }
 
   @Override
   public void handle() throws IOException {
-    send(new ProtocolMessage(MessageCode.ACK));
-    close();
+    super.send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
   }
 }

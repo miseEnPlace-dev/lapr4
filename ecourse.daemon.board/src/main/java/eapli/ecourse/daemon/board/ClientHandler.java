@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.daemon.board.messages.AckMessage;
@@ -12,12 +14,25 @@ import eapli.ecourse.daemon.board.messages.CommTestMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.Message;
-import eapli.ecourse.daemon.board.messages.UnsupportedMessage;
+import eapli.ecourse.daemon.board.messages.BadRequestMessage;
+import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class ClientHandler implements Runnable {
   private Socket client;
+
+  // define here the handler for the pretended message code
+  private final static Map<MessageCode, Class<? extends Message>> MESSAGE_MAP = new HashMap<>() {
+    {
+      put(MessageCode.ACK, AckMessage.class);
+      put(MessageCode.AUTH, AuthMessage.class);
+      put(MessageCode.COMMTEST, CommTestMessage.class);
+      put(MessageCode.DISCONN, DisconnMessage.class);
+      put(MessageCode.ERR, ErrMessage.class);
+    }
+  };
+
   private final Logger logger = LogManager.getLogger(ClientHandler.class);
 
   public ClientHandler(Socket socket) {
@@ -47,23 +62,26 @@ public class ClientHandler implements Runnable {
       DataOutputStream output = new DataOutputStream(client.getOutputStream());
 
       while (!client.isClosed()) {
-        // parse the message
-        ProtocolMessage message = ProtocolMessage.fromDataStream(input);
+        try {
+          // parse the message
+          ProtocolMessage message = ProtocolMessage.fromDataStream(input);
 
-        if (message == null)
-          break;
+          if (message == null)
+            break;
 
-        logger.debug("\n" + message.toString());
+          logger.debug("\n" + message.toString());
 
-        processMessage(message, output);
+          processMessage(message, output);
+        } catch (UnsupportedVersionException e) {
+          (new BadRequestMessage(output, client)).handle();
+        }
       }
 
       logger.debug("Connection closed.");
 
       output.close();
       input.close();
-      client.close();
-    } catch (IOException | UnsupportedVersionException e) {
+    } catch (IOException e) {
       logger.error("\n[Client Handler Thread] Error", e);
     }
   }
@@ -71,25 +89,19 @@ public class ClientHandler implements Runnable {
   private void processMessage(ProtocolMessage message, DataOutputStream output) throws IOException {
     Message handleMessage;
 
-    switch (message.getCode()) {
-      case ACK:
-        handleMessage = new AckMessage(message, output);
-        break;
-      case AUTH:
-        handleMessage = new AuthMessage(message, output);
-        break;
-      case COMMTEST:
-        handleMessage = new CommTestMessage(message, output);
-        break;
-      case DISCONN:
-        handleMessage = new DisconnMessage(message, output);
-        break;
-      case ERR:
-        handleMessage = new ErrMessage(message, output);
-        break;
-      default:
-        handleMessage = new UnsupportedMessage(output);
-        break;
+    Class<? extends Message> clazz = MESSAGE_MAP.get(message.getCode());
+
+    if (clazz == null) {
+      handleMessage = new BadRequestMessage(output, client);
+    } else {
+      try {
+        handleMessage = clazz
+            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class)
+            .newInstance(message, output, this.client);
+      } catch (Exception e) {
+        logger.error("\n[Client Handler Thread] Error", e);
+        return;
+      }
     }
 
     handleMessage.handle();

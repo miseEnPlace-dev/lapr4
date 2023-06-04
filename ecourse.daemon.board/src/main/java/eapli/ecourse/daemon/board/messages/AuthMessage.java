@@ -2,14 +2,16 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
+import eapli.ecourse.daemon.board.clientstate.ClientState;
 import eapli.ecourse.infrastructure.authz.AuthenticationCredentialHandler;
 import eapli.ecourse.infrastructure.authz.CredentialHandler;
 
 public class AuthMessage extends Message {
-  public AuthMessage(ProtocolMessage protocolMessage, DataOutputStream output) {
-    super(protocolMessage, output);
+  public AuthMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
+    super(protocolMessage, output, socket);
   }
 
   @Override
@@ -32,6 +34,9 @@ public class AuthMessage extends Message {
       send(new ProtocolMessage(MessageCode.ERR, "Wrong credentials!"));
       return;
     }
+
+    ClientState clientState = ClientState.getInstance();
+    clientState.getCredentialStore().storeCredentials(username, password);
 
     send(new ProtocolMessage(MessageCode.ACK, username));
   }
