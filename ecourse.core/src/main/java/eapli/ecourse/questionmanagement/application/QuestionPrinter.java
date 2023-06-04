@@ -14,7 +14,10 @@ public interface QuestionPrinter {
 
   public boolean getTrueFalseQuestionAnswer(final QuestionBody body);
 
-  public Set<QuestionIdentifier> getMultipleChoiceQuestionAnswer(final QuestionBody body,
+  public Set<QuestionIdentifier> getMultipleChoiceMultipleQuestionAnswer(final QuestionBody body,
+      final Map<QuestionIdentifier, String> options);
+
+  public QuestionIdentifier getMultipleChoiceSingleQuestionAnswer(final QuestionBody body,
       final Map<QuestionIdentifier, String> options);
 
   public Map<QuestionIdentifier, QuestionIdentifier> getMatchingQuestionAnswer(final QuestionBody body,

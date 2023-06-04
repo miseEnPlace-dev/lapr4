@@ -1,0 +1,34 @@
+@startuml US3006_SSD
+
+autonumber
+
+actor U as "User"
+
+activate U
+
+U -> ":System" : asks to create a post-it
+activate ":System"
+
+":System" --> U : asks to select the board
+deactivate ":System"
+
+U -> ":System" : selects the board
+activate ":System"
+
+":System" --> U : asks to select the post-it coordinates
+deactivate ":System"
+
+U -> ":System" :  selects the post-it coordinates
+activate ":System"
+
+":System" --> U : asks to enter the title of the post-it
+deactivate ":System"
+
+U -> ":System" :  enters the title of the post-it
+activate ":System"
+
+":System" --> U : informs operation suscess
+
+deactivate U
+
+@enduml

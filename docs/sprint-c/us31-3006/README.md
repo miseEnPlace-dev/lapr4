@@ -50,35 +50,31 @@
 
 ### 3.3. System Sequence Diagram
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US3006_SSD](out/US3006_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
+### 3.4. Partial Domain Model
 
-![USXXX_SD](out/USXXX_SD.svg)
-
-### 3.5. Partial Domain Model
-
-![USXXX_DM](out/USXXX_DM.svg)
+![US3006_DM](out/US3006_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US3006_SD](out/US3006_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US3006_CD](out/US3006_CD.svg)
 
 ### 4.3. Applied Patterns
 
-- XXX
+- 3006
 
 ### 4.4. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** 3006
 
 ```java
 
@@ -96,7 +92,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US3006_DEMO](out/US3006_DEMO.svg)
 
 ## 7. Observations
 
