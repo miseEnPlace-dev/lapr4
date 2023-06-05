@@ -1,5 +1,6 @@
 package eapli.ecourse.boardmanagement.dto;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.boardmanagement.domain.UserPermissionID;
@@ -13,7 +14,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPermissionDTO {
+public class UserPermissionDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private Calendar createdAt;
   private Calendar updatedAt;
   private SystemUser user;

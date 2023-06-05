@@ -34,12 +34,15 @@ public class Board implements AggregateRoot<BoardID> {
   @ManyToOne
   private SystemUser owner;
 
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  // @LazyCollection(LazyCollectionOption.FALSE) // this works but it's not good
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // fetch = FetchType.EAGER
   private List<UserPermission> permissions;
 
+  // @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BoardColumn> columns;
 
+  // @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BoardRow> rows;
 

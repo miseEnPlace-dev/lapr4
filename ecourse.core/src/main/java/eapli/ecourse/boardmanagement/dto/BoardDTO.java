@@ -1,5 +1,6 @@
 package eapli.ecourse.boardmanagement.dto;
 
+import java.io.Serializable;
 import java.util.List;
 import eapli.ecourse.boardmanagement.domain.Archived;
 import eapli.ecourse.boardmanagement.domain.BoardColumn;
@@ -17,7 +18,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDTO {
+public class BoardDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private BoardID id;
   private BoardTitle title;
   private Archived archived;
