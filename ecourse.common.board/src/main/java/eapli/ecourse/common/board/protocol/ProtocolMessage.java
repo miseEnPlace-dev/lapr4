@@ -1,7 +1,15 @@
 package eapli.ecourse.common.board.protocol;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 public class ProtocolMessage {
   private static final byte PROTOCOL_VERSION = 1;
@@ -48,6 +56,21 @@ public class ProtocolMessage {
     this.code = code;
     this.payloadLength = payloadLength;
     this.payload = payload;
+  }
+
+  public ProtocolMessage(MessageCode code, Object o) throws IOException {
+    this.protocolVersion = PROTOCOL_VERSION;
+    this.code = code;
+
+    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    ObjectOutputStream out = new ObjectOutputStream(bos);
+    out.writeObject(o);
+    out.flush();
+
+    this.payload = bos.toByteArray();
+    bos.close();
+
+    this.payloadLength = this.payload.length;
   }
 
   public static ProtocolMessage fromDataStream(DataInputStream input)
@@ -115,6 +138,21 @@ public class ProtocolMessage {
 
   public String getStringifiedPayload() {
     return new String(this.payload);
+  }
+
+  public Object getPayloadAsObject() throws IOException, ClassNotFoundException {
+    ByteArrayInputStream bis = new ByteArrayInputStream(this.payload);
+    ObjectInputStream in = new ObjectInputStream(bis);
+    Object o = in.readObject();
+    in.close();
+    return o;
+  }
+
+  public JsonObject getPayloadAsJsonObject() {
+    JsonReader reader = Json.createReader(new StringReader(getStringifiedPayload()));
+    JsonObject jsonObject = reader.readObject();
+    reader.close();
+    return jsonObject;
   }
 
   public String toString() {

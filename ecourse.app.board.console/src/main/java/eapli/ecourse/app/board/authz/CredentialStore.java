@@ -26,17 +26,18 @@ public class CredentialStore {
     TcpClient client = boardBackend.getTcpClient();
 
     try {
-      client.send(new ProtocolMessage(MessageCode.AUTH, new String(u + "\0" + p + "\0")));
-
-      ProtocolMessage response = client.receive();
+      ProtocolMessage response =
+          client.sendRecv(new ProtocolMessage(MessageCode.AUTH, new String(u + "\0" + p + "\0")));
 
       if (response.getCode() == MessageCode.ACK) {
-        user = UserDTO.fromJson(response.getStringifiedPayload());
+        System.out.println(response.toString());
+        // user = UserDTO.fromJson(response.getStringifiedPayload());
+        user = (UserDTO) response.getPayloadAsObject();
         return true;
       }
 
       return false;
-    } catch (IOException | UnsupportedVersionException e) {
+    } catch (IOException | UnsupportedVersionException | ClassNotFoundException e) {
       LOGGER.error("Error while authenticating", e);
       return false;
     }

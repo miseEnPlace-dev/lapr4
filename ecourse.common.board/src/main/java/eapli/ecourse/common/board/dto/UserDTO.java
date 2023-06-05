@@ -1,18 +1,19 @@
 package eapli.ecourse.common.board.dto;
 
-import java.io.StringReader;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
-import javax.json.JsonReader;
 import javax.json.JsonString;
 import javax.json.JsonValue.ValueType;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
-public class UserDTO {
+public class UserDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private String username;
   private String email;
   private String fullName;
@@ -66,11 +67,7 @@ public class UserDTO {
     return json.toString();
   }
 
-  public static UserDTO fromJson(String json) {
-    JsonReader reader = Json.createReader(new StringReader(json));
-    JsonObject jsonObject = reader.readObject();
-    reader.close();
-
+  public static UserDTO fromJson(JsonObject jsonObject) {
     String username = jsonObject.getString("username");
     String name = jsonObject.getString("name");
     String email = jsonObject.getString("email");

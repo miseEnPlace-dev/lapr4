@@ -56,6 +56,6 @@ public class AuthMessage extends Message {
 
     clientState.getCredentialStore().store(user);
 
-    send(new ProtocolMessage(MessageCode.ACK, user.toJson()));
+    send(new ProtocolMessage(MessageCode.ACK, user));
   }
 }
