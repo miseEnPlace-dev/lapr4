@@ -30,7 +30,6 @@ public class CredentialStore {
           client.sendRecv(new ProtocolMessage(MessageCode.AUTH, new String(u + "\0" + p + "\0")));
 
       if (response.getCode() == MessageCode.ACK) {
-        System.out.println(response.toString());
         user = (UserDTO) response.getPayloadAsObject();
         return true;
       }
