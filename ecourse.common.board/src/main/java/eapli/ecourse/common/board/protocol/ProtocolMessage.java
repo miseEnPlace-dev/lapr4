@@ -90,11 +90,12 @@ public class ProtocolMessage {
       throw new UnsupportedVersionException("Unsupported protocol version " + protocolVersion);
 
     // the second byte is the code
-    byte rawCode = metadata[1];
+    int rawCode = metadata[1] & 0xFF; // & 0xFF to "transform" in an unsigned byte
     MessageCode code = MessageCode.valueOf(rawCode);
 
     // the length of the data (d_length_1 + 256 * c d_length_2)
-    int payloadLength = metadata[2] + 256 * metadata[3];
+    // & 0xFF to "transform" in an unsigned byte
+    int payloadLength = (metadata[2] & 0xFF) + 256 * (metadata[3] & 0xFF);
 
     // read the payload
     byte[] payload = input.readNBytes(payloadLength);
@@ -148,7 +149,7 @@ public class ProtocolMessage {
     return o;
   }
 
-  public JsonObject getPayloadAsJsonObject() {
+  public JsonObject getPayloadAsJson() {
     JsonReader reader = Json.createReader(new StringReader(getStringifiedPayload()));
     JsonObject jsonObject = reader.readObject();
     reader.close();

@@ -29,4 +29,7 @@ public enum MessageCode {
     return CODES.get(code);
   }
 
+  public static MessageCode valueOf(int code) {
+    return CODES.get((byte) code);
+  }
 }
