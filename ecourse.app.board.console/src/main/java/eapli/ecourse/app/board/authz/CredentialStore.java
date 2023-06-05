@@ -31,7 +31,6 @@ public class CredentialStore {
 
       if (response.getCode() == MessageCode.ACK) {
         System.out.println(response.toString());
-        // user = UserDTO.fromJson(response.getStringifiedPayload());
         user = (UserDTO) response.getPayloadAsObject();
         return true;
       }
