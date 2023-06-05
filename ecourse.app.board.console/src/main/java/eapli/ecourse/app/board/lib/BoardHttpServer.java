@@ -1,6 +1,6 @@
-package eapli.ecourse.app.board.console.lib;
+package eapli.ecourse.app.board.lib;
 
-import eapli.ecourse.app.board.console.controllers.ApiController;
+import eapli.ecourse.app.board.controllers.ApiController;
 import eapli.ecourse.common.board.HttpServer;
 import eapli.ecourse.common.board.http.Router;
 import eapli.ecourse.common.board.http.StaticMiddleware;

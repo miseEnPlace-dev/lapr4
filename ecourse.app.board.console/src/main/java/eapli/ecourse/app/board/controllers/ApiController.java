@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.console.controllers;
+package eapli.ecourse.app.board.controllers;
 
 import javax.json.Json;
 import javax.json.JsonObject;

@@ -1,7 +1,7 @@
 package eapli.ecourse.app.board.console.presentation;
 
 import eapli.ecourse.Application;
-import eapli.ecourse.app.board.console.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;

@@ -1,8 +1,8 @@
-package eapli.ecourse.app.board.console.lib;
+package eapli.ecourse.app.board.lib;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import eapli.ecourse.app.board.console.authz.CredentialStore;
+import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.common.board.TcpClient;
 
 public class BoardBackend {

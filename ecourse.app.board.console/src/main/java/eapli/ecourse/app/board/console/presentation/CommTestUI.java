@@ -3,7 +3,7 @@ package eapli.ecourse.app.board.console.presentation;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import eapli.ecourse.app.board.console.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -20,9 +20,7 @@ public class CommTestUI extends AbstractUI {
     TcpClient client = BoardBackend.getInstance().getTcpClient();
 
     try {
-      client.send(new ProtocolMessage(MessageCode.COMMTEST));
-
-      ProtocolMessage response = client.receive();
+      ProtocolMessage response = client.sendRecv(new ProtocolMessage(MessageCode.COMMTEST));
 
       System.out.println(response.toString());
     } catch (IOException | UnsupportedVersionException e) {

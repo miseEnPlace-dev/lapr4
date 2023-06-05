@@ -1,9 +1,9 @@
-package eapli.ecourse.app.board.console.authz;
+package eapli.ecourse.app.board.authz;
 
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import eapli.ecourse.app.board.console.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;

@@ -13,7 +13,10 @@ import eapli.ecourse.daemon.board.messages.AuthMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
+import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
+import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
 import eapli.ecourse.daemon.board.messages.Message;
+import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -30,6 +33,9 @@ public class ClientHandler implements Runnable {
       put(MessageCode.COMMTEST, CommTestMessage.class);
       put(MessageCode.DISCONN, DisconnMessage.class);
       put(MessageCode.ERR, ErrMessage.class);
+      put(MessageCode.GET_BOARDS, GetBoardsMessage.class);
+      put(MessageCode.GET_OWN_BOARDS, GetOwnBoardsMessage.class);
+      put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
     }
   };
 

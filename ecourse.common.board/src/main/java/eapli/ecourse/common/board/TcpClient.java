@@ -40,6 +40,12 @@ public class TcpClient {
     return ProtocolMessage.fromDataStream(input);
   }
 
+  public ProtocolMessage sendRecv(ProtocolMessage msg)
+      throws IOException, UnsupportedVersionException {
+    send(msg);
+    return receive();
+  }
+
   public void close() throws IOException {
     output.close();
     input.close();
