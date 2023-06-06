@@ -19,7 +19,7 @@ public class EvaluationExamParser {
     if (parser.getNumberOfSyntaxErrors() > 0)
       throw new ParseException();
 
-    ExamsVisitor eval = new ExamsVisitor();
+    EvaluationExamVisitor eval = new EvaluationExamVisitor();
     return (EvaluationExamBuilder) eval.visit(tree);
   }
 }
