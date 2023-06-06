@@ -30,13 +30,13 @@
 
   <modules>
     <module>ecourse.app.backoffice.console</module>
-    <module>ecourse.app.board.backend</module>
-    <module>ecourse.app.board.common</module>
     <module>ecourse.app.board.console</module>
     <module>ecourse.app.student.console</module>
     <module>ecourse.app.teacher.console</module>
     <module>ecourse.app.common.console</module>
     <module>ecourse.app.bootstrap</module>
+    <module>ecourse.common.board</module>
+    <module>ecourse.daemon.board</module>
     <module>ecourse.bootstrappers</module>
     <module>ecourse.persistence.impl</module>
     <module>ecourse.infrastructure.application</module>
@@ -83,6 +83,18 @@
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>
       <version>2.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>1.1.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.1.4</version>
     </dependency>
 
     <!-- Project Lombok -->

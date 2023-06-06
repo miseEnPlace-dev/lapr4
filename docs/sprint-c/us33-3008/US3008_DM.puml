@@ -1,0 +1,54 @@
+@startuml DM-POST-IT
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+
+  class Title
+  class State
+  class Coordinates
+}
+
+package "<<aggregate>> User" {
+  entity User
+}
+
+entity User <<entity>> <<root>> {
+}
+
+entity PostIt <<entity>> <<root>>{
+  - createdAt
+}
+
+class Title <<(V,#FF8B40) value object>> {}
+
+class State <<(V,#FF8B40) value object>> {}
+class Coordinates <<(V,#FF8B40) value object>> {}
+
+note left of State
+  ACTIVE
+  DELETED
+end note
+
+package "<<aggregate>> Board" {
+  entity Board
+}
+
+entity Board <<entity>> <<root>>{
+}
+
+PostIt *- Title
+PostIt --> "1" State : has
+
+PostIt ---> "1" Board : belongs to
+PostIt --> "0..1" PostIt : previous
+PostIt --> "1" Coordinates : has
+PostIt ---> "1" User : is owned by
+
+@enduml

@@ -30,12 +30,12 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>core</artifactId>
+      <artifactId>common.board</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>app.board.common</artifactId>
+      <artifactId>infrastructure.application</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
   </dependencies>

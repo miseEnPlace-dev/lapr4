@@ -48,8 +48,8 @@
       "type": "java",
       "name": "Shared Board Server",
       "request": "launch",
-      "mainClass": "eapli.ecourse.app.board.backend.App",
-      "projectName": "app.board.backend"
+      "mainClass": "eapli.ecourse.daemon.board.App",
+      "projectName": "daemon.board"
     },
     {
       "type": "java",

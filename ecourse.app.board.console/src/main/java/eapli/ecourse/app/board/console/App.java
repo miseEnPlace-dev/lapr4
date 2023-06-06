@@ -1,39 +1,67 @@
 package eapli.ecourse.app.board.console;
 
-import eapli.ecourse.app.board.common.HttpServer;
-import eapli.ecourse.app.board.common.TcpClient;
-import eapli.ecourse.app.board.common.http.Router;
-import eapli.ecourse.app.board.common.http.StaticMiddleware;
-import eapli.ecourse.app.board.console.controllers.ApiController;
+import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import eapli.ecourse.app.board.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.BoardHttpServer;
+import eapli.ecourse.app.board.console.presentation.MainMenu;
+import eapli.ecourse.app.common.console.ECourseBaseApplication;
+import eapli.ecourse.app.common.console.presentation.authz.LoginUI;
+import eapli.framework.infrastructure.pubsub.EventDispatcher;
 
-public class App {
+public class App extends ECourseBaseApplication {
   // move to properties
   private static final String BOARD_SERVER_HOST = "localhost";
   private static final int BOARD_SERVER_PORT = 9999;
 
-  private static final int HTTP_SERVER_PORT = 8080;
-  private static final String WWW_PATH = "www";
+  private final static Logger LOGGER = LogManager.getLogger(App.class);
 
-  public static void main(String[] args) {
-    // create the router
-    Router router = new Router();
+  /**
+   * Empty constructor is private to avoid instantiation of this class.
+   */
+  private App() {}
 
-    // retrieve static files middleware
-    router.use(new StaticMiddleware(WWW_PATH));
-
-    // add your routes here
-    router.get("/api", new ApiController());
-
-    // ...
-
-    // create the http server
-    HttpServer httpServer = new HttpServer(HTTP_SERVER_PORT, router);
-    Thread httpServerThread = new Thread(httpServer);
-
-    httpServerThread.start();
-
-    // connect to the shared board server
-    TcpClient tcpClient = new TcpClient(BOARD_SERVER_HOST, BOARD_SERVER_PORT);
-    tcpClient.connect();
+  public static void main(final String[] args) {
+    new App().run(args);
   }
+
+  @Override
+  protected void doMain(String[] args) {
+    BoardBackend boardBackend = BoardBackend.getInstance();
+
+    // connect to the board server
+    try {
+      boardBackend.connect(BOARD_SERVER_HOST, BOARD_SERVER_PORT);
+    } catch (IOException e) {
+      LOGGER.error("Error connecting to the Shared Board Server", e);
+      return;
+    }
+
+    // start the board http server
+    BoardHttpServer.run();
+
+    final boolean logged = (new LoginUI(boardBackend.getCredentialStore().AUTHENTICATE)).show();
+
+    if (logged) {
+      // next ui
+      (new MainMenu()).mainLoop();
+    }
+  }
+
+  @Override
+  protected String appTitle() {
+    return "Shared Board App";
+  }
+
+  @Override
+  protected String appGoodbye() {
+    return "Bye!";
+  }
+
+  @Override
+  protected void doSetupEventHandlers(EventDispatcher dispatcher) {}
+
+  @Override
+  protected void configureAuthz() {}
 }

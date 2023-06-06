@@ -22,7 +22,7 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
   /**
    * Returns the courses that are opened for enrollment.
    *
-   * @return
+   * @return an iterable list of boards which the user owns
    */
   Iterable<Board> findAllBoardsCreatedByUser(Username user);
 

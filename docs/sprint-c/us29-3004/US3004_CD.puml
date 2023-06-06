@@ -1,3 +1,72 @@
 @startuml US3004_CD
 
+class ShareBoardUI {}
+
+class ShareBoardController {
+  - AuthorizationService authz
+  - UserManagementService userService
+  - ListBoardsService listBoardsService
+  - BoardRepository boardRepo
+
+  + ShareBoardController(BoardRepository)
+
+  + listUserBoards()
+  + userPermission(board, user)
+  + updateUserPermission(board, user, permission)
+}
+
+class ShareBoardController {}
+
+class AuthorizationService {
+  + session()
+}
+
+class UserSession {
+  + authenticatedUser()
+}
+
+class SystemUser {
+  + username
+}
+
+class UserManagementService {
+  + allUsers()
+}
+
+class UserPermissionDTO {}
+
+class PersistenceContext {
+  + repositories()
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface BoardRepository {
+  + findAllBoardCreatedByUser(username)
+}
+
+class JpaBoardRepository {}
+class InMemoryBoardRepository {}
+
+ShareBoardUI ..> ShareBoardController
+
+ShareBoardController --> AuthorizationService
+ShareBoardController --> UserManagementService
+ShareBoardController ..> PersistenceContext
+ShareBoardController ..> UserPermissionDTO
+
+AuthorizationService ..> UserSession
+
+UserSession ..> SystemUser
+UserManagementService ..> SystemUser
+
+PersistenceContext ..> RepositoryFactory
+
+RepositoryFactory ..> BoardRepository
+
+BoardRepository <|-- JpaBoardRepository
+BoardRepository <|-- InMemoryBoardRepository
+
 @enduml

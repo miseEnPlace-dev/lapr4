@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
-
+import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -34,12 +34,15 @@ public class Board implements AggregateRoot<BoardID> {
   @ManyToOne
   private SystemUser owner;
 
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  // @LazyCollection(LazyCollectionOption.FALSE) // this works but it's not good
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // fetch = FetchType.EAGER
   private List<UserPermission> permissions;
 
+  // @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BoardColumn> columns;
 
+  // @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<BoardRow> rows;
 
@@ -48,7 +51,8 @@ public class Board implements AggregateRoot<BoardID> {
   }
 
   public Board(final BoardTitle title, final List<UserPermission> permissions,
-      final List<BoardColumn> column, final List<BoardRow> row, final BoardID id, final SystemUser user) {
+      final List<BoardColumn> column, final List<BoardRow> row, final BoardID id,
+      final SystemUser user) {
 
     // Only mandatory fields are checked
     Preconditions.noneNull(title, id, column, row, user);
@@ -139,5 +143,10 @@ public class Board implements AggregateRoot<BoardID> {
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
         && this.archived != null ? this.archived.equals(otherBoard.archived())
             : otherBoard.archived() == null && this.owner.equals(otherBoard.owner());
+  }
+
+  public BoardDTO toDto() {
+    return new BoardDTO(this.id, this.title, this.archived, this.owner, this.permissions, this.rows,
+        this.columns);
   }
 }

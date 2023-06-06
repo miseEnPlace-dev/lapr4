@@ -1,0 +1,16 @@
+@startuml US3008_SSD
+autonumber
+
+actor "User" as U
+participant "System" as SYS
+
+activate U
+
+U -> SYS : wants to undo the last action of a post-it
+activate SYS
+SYS --> U : informs the operation success
+deactivate SYS
+
+deactivate U
+
+@enduml
