@@ -9,6 +9,8 @@ import java.util.Map;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
+import eapli.ecourse.answermanagement.domain.ExamAnswerBuilder;
+import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
@@ -23,42 +25,44 @@ import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSectionBuild
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Question;
 
-public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
-  private EvaluationExamBuilder builder;
-  private EvaluationExamSectionBuilder section;
+public class TakeEvaluationExamVisitor extends ExamBaseVisitor<ExamAnswerBuilder> {
+  private ExamAnswerBuilder answerBuilder;
+  private EvaluationExamBuilder examBuilder;
+  private EvaluationExamSectionBuilder sectionBuilder;
   private List<EvaluationExamSection> sections;
   private List<Question> questions;
 
-  int examScore = 0;
-  int sectionsScore = 0;
+  private ExamPrinter printer;
 
-  @Override
-  public EvaluationExamBuilder visitStart(ExamParser.StartContext ctx) {
-    visit(ctx.exam());
-    return builder;
+  public TakeEvaluationExamVisitor(final ExamPrinter printer) {
+    this.printer = printer;
   }
 
   @Override
-  public EvaluationExamBuilder visitExam(ExamParser.ExamContext ctx) {
-    builder = new EvaluationExamBuilder();
+  public ExamAnswerBuilder visitStart(ExamParser.StartContext ctx) {
+    visit(ctx.exam());
+    return answerBuilder;
+  }
+
+  @Override
+  public ExamAnswerBuilder visitExam(ExamParser.ExamContext ctx) {
+    answerBuilder = new ExamAnswerBuilder();
+    examBuilder = new EvaluationExamBuilder();
 
     visit(ctx.start_exam());
     visit(ctx.header());
     visit(ctx.sections());
 
-    if (examScore != sectionsScore) {
-      raiseError(ctx, "The sum of the sections' scores must be equal to the exam's score.");
-    }
-
-    return builder;
+    return answerBuilder;
   }
 
   @Override
-  public EvaluationExamBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
+  public ExamAnswerBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     ExamIdentifier identifier = ExamIdentifier.valueOf(str);
-    builder.withIdentifier(identifier);
-    return builder;
+    examBuilder.withIdentifier(identifier);
+
+    return answerBuilder;
   }
 
   /**
@@ -69,7 +73,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
    * present).
    */
   @Override
-  public EvaluationExamBuilder visitHeader(ExamParser.HeaderContext ctx) {
+  public ExamAnswerBuilder visitHeader(ExamParser.HeaderContext ctx) {
     Map<String, Object> properties = new HashMap<>();
     ctx.properties().forEach(p -> {
       if (p.title() != null) {
@@ -96,6 +100,12 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
         properties.put("grade", p.grade().FDB_GRD_TYPE().getText());
       }
+      if (p.course() != null) {
+        if (properties.containsKey("course-code"))
+          raiseError(p, "Course code already defined.");
+
+        properties.put("course-code", extractString(p.course().STRING().getText()));
+      }
     });
 
     if (ctx.getParent().getStart().getText().equals("@start-exam")) {
@@ -103,7 +113,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
           "title",
           "feedback",
           "grade",
-          "score"
+          "course-code"
       };
 
       Arrays.asList(requiredProps).forEach(p -> {
@@ -115,12 +125,12 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
       initializeExam(properties);
     } else {
       String[] requiredProps = {
-          "title",
-          "score"
+          "title"
       };
       String[] forbiddenProps = {
           "feedback",
-          "grade"
+          "grade",
+          "course-code"
       };
 
       Arrays.asList(requiredProps).forEach(p -> {
@@ -137,75 +147,78 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
       initializeSection(properties);
     }
 
-    return builder;
+    return answerBuilder;
   }
 
   @Override
-  public EvaluationExamBuilder visitSections(ExamParser.SectionsContext ctx) {
+  public ExamAnswerBuilder visitSections(ExamParser.SectionsContext ctx) {
     sections = new ArrayList<EvaluationExamSection>();
     visitChildren(ctx);
-    builder.withSections(sections);
-    return builder;
+    examBuilder.withSections(sections);
+    return answerBuilder;
   }
 
   @Override
-  public EvaluationExamBuilder visitSection(ExamParser.SectionContext ctx) {
-    section = new EvaluationExamSectionBuilder();
+  public ExamAnswerBuilder visitSection(ExamParser.SectionContext ctx) {
+    sectionBuilder = new EvaluationExamSectionBuilder();
     questions = new ArrayList<Question>();
 
     visit(ctx.start_section());
     visit(ctx.header());
     visit(ctx.questions());
 
-    section.withQuestions(questions);
-    sections.add(section.build());
+    sectionBuilder.withQuestions(questions);
+    sections.add(sectionBuilder.build());
 
-    return builder;
+    return answerBuilder;
   }
 
   @Override
-  public EvaluationExamBuilder visitQuestions(ExamParser.QuestionsContext ctx) {
-    questions = QuestionsParser.parseWithVisitorFromString(ctx.getText().toString());
-    return builder;
-  }
-
-  @Override
-  public EvaluationExamBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
+  public ExamAnswerBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     SectionIdentifier identifier = SectionIdentifier.valueOf(str);
-    section.withIdentifier(identifier);
-    return builder;
+    sectionBuilder.withIdentifier(identifier);
+
+    return answerBuilder;
   }
 
   private void initializeExam(Map<String, Object> properties) {
     ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
-    builder.withTitle(title);
+    examBuilder.withTitle(title);
     ExamInfo feedbackInfo = ExamInfo.convert(properties.get("feedback").toString());
-    builder.withFeedbackInfo(feedbackInfo);
+    examBuilder.withFeedbackInfo(feedbackInfo);
     ExamInfo gradeInfo = ExamInfo.convert(properties.get("grade").toString());
-    builder.withGradeInfo(gradeInfo);
+    examBuilder.withGradeInfo(gradeInfo);
     ExamScore score = ExamScore.valueOf(Integer.parseInt(properties.get("score").toString()));
-    builder.withScore(score);
-    examScore = Integer.parseInt(properties.get("score").toString());
+    examBuilder.withScore(score);
+
     if (properties.containsKey("description")) {
       ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
-      builder.withDescription(description);
+      examBuilder.withDescription(description);
+
+      printer.printExamHeader(title.toString(), description.toString());
     } else {
-      builder.withDescription(ExamDescription.valueOf(""));
+      examBuilder.withDescription(ExamDescription.valueOf(""));
+
+      printer.printExamHeader(title.toString(), "");
     }
   }
 
   private void initializeSection(Map<String, Object> properties) {
     SectionTitle title = SectionTitle.valueOf(properties.get("title").toString());
-    section.withTitle(title);
+    sectionBuilder.withTitle(title);
     ExamScore score = ExamScore.valueOf(Integer.parseInt(properties.get("score").toString()));
-    section.withScore(score);
-    sectionsScore += Integer.parseInt(properties.get("score").toString());
+    sectionBuilder.withScore(score);
+
     if (properties.containsKey("description")) {
       SectionDescription description = SectionDescription.valueOf(properties.get("description").toString());
-      section.withDescription(description);
+      sectionBuilder.withDescription(description);
+
+      printer.printSectionHeader(title.toString(), description.toString());
     } else {
-      section.withDescription(SectionDescription.valueOf(""));
+      sectionBuilder.withDescription(SectionDescription.valueOf(""));
+
+      printer.printSectionHeader(title.toString(), "");
     }
   }
 
