@@ -1,0 +1,121 @@
+@startuml US3006_SD
+autonumber
+
+actor "User" as M
+participant "CreatePostItUI" as UI <<presentation>>
+participant "CreatePostItController" as CTRL <<application>>
+participant "ListBoardService" as LBSRV <<service>>
+participant "BoardService" as BSRV <<service>>
+participant "Board" as B <<domain>>
+participant "PostIt" as P <<domain>>
+participant "BoardDTO" as BDTO <<dto>>
+
+database BoardRepository as BREP <<repository>>
+database PostItRepository as PREP <<repository>>
+
+activate M
+
+M -> UI : asks to create a post-it
+activate UI
+
+UI -> CTRL : new(boardRepository, postItRepository)
+activate CTRL
+CTRL -> LBSRV : new(boardRepository)
+activate LBSRV
+deactivate LBSRV
+UI -> CTRL : listBoardsThatUserCanWrite()
+
+CTRL -> LBSRV : listActiveBoardsThatUserCanWrite(userId)
+activate LBSRV
+LBSRV -> BREP : findActiveBoardsThatUserCanWrite(userId)
+activate BREP
+BREP --> LBSRV : boards
+deactivate BREP
+
+loop for each board
+  LBSRV -> B : toDTO(board)
+  activate B
+  B -> BDTO : new()
+  activate BDTO
+  deactivate BDTO
+  deactivate B
+end loop
+
+LBSRV --> CTRL : boards
+deactivate LBSRV
+CTRL --> UI : boards
+deactivate CTRL
+
+UI --> M : asks to select the board
+deactivate UI
+
+M -> UI : selects the board
+activate UI
+
+UI --> M : asks to select the post-it coordinates
+deactivate UI
+
+M -> UI : selects the post-it coordinates
+activate UI
+UI -> CTRL : validateCoordinates(boardId, x, y)
+activate CTRL
+CTRL -> BSRV : new(boardRepository, postItRepository)
+activate BSRV
+deactivate BSRV
+
+CTRL -> BSRV : existsPostIt(boardId, x, y)
+activate BSRV
+BSRV -> PREP : findAllByBoardId(boardId)
+activate PREP
+PREP --> BSRV : postIts
+deactivate PREP
+BSRV -> BSRV : latestPostIts = \ngetLatestVersionOfBoard(postIts)
+activate BSRV
+deactivate BSRV
+
+BSRV -> BSRV : existsPostIt(latestPostIts, x, y)
+activate BSRV
+deactivate BSRV
+
+BSRV --> CTRL : false
+deactivate BSRV
+CTRL --> UI : true
+deactivate CTRL
+
+UI --> M :  asks to enter the title of the post-it
+deactivate UI
+
+M --> UI : enters the title of the post-it
+activate UI
+
+UI -> CTRL : createPostIt(boardId, x, y, title)
+activate CTRL
+
+CTRL -> P : new(board, user, title, x, y)
+activate P
+deactivate P
+
+CTRL -> P : containsOfIdentity()
+activate P
+deactivate P
+
+CTRL -> CTRL : savePostIt()
+activate CTRL
+CTRL -> PREP : savePostIt()
+activate PREP
+deactivate PREP
+deactivate CTRL
+
+
+CTRL --> UI : success
+deactivate CTRL
+
+UI --> M : informs operation success
+deactivate UI
+
+
+
+
+deactivate M
+
+@enduml
