@@ -35,7 +35,7 @@ public class SpecialClassTest {
 
   @Test
   public void testToString() {
-    assertEquals("10-10-2020 10:30", specialClass.toString());
+    assertEquals("10/10/2020 10:30", specialClass.toString());
   }
 
   @Test
