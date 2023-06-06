@@ -95,8 +95,9 @@ public class Invite implements AggregateRoot<InviteID> {
   public InviteDTO toDto() {
     Time meetingTime = this.meeting.time();
 
-    String status = (meetingTime.compareTo(Time.valueOf(Calendar.getInstance()))) > 1 ? "NoAnswer"
-        : this.status.toString();
+    String status = (meetingTime.compareTo(Time.valueOf(Calendar.getInstance()))) < 1
+        && this.status.isPending() ? "No Answer"
+            : this.status.toString();
 
     return new InviteDTO(this.id, this.meeting, status, meetingTime, this.user);
   }
