@@ -1,11 +1,14 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.InviteDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -90,7 +93,12 @@ public class Invite implements AggregateRoot<InviteID> {
   }
 
   public InviteDTO toDto() {
-    return new InviteDTO(this.id, this.meeting, this.status, this.meeting.time(), this.user);
+    Time meetingTime = this.meeting.time();
+
+    String status = (meetingTime.compareTo(Time.valueOf(Calendar.getInstance()))) > 1 ? "NoAnswer"
+        : this.status.toString();
+
+    return new InviteDTO(this.id, this.meeting, status, meetingTime, this.user);
   }
 
 }

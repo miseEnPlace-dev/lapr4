@@ -1,6 +1,5 @@
 package eapli.ecourse.eventsmanagement.domain;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.Embeddable;
@@ -18,10 +17,7 @@ public class Time implements ValueObject, Comparable<Time> {
 
   private Calendar time;
 
-  protected Time(final Calendar time) {
-    if (time == null)
-      throw new IllegalArgumentException("Time should not be null");
-
+  private Time(final Calendar time) {
     this.time = time;
   }
 
@@ -30,6 +26,12 @@ public class Time implements ValueObject, Comparable<Time> {
   }
 
   public static Time valueOf(final Calendar time) {
+    if (time == null)
+      throw new IllegalArgumentException("Time should not be null");
+
+    time.set(Calendar.SECOND, 0);
+    time.set(Calendar.MILLISECOND, 0);
+
     return new Time(time);
   }
 
@@ -49,7 +51,7 @@ public class Time implements ValueObject, Comparable<Time> {
   }
 
   public Time addDuration(Duration duration) {
-    Calendar calendar = time;
+    Calendar calendar = (Calendar) time.clone();
     calendar.add(Calendar.HOUR_OF_DAY, duration.hour());
     calendar.add(Calendar.MINUTE, duration.minute());
 
@@ -58,9 +60,8 @@ public class Time implements ValueObject, Comparable<Time> {
 
   @Override
   public String toString() {
-    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-
-    return formatter.format(time.getTime());
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    return sdf.format(time.getTime());
   }
 
   @Override
