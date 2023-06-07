@@ -30,10 +30,9 @@ public class ListCourseExamGradesController {
 
   private final ListExamAnswerService answerService;
 
-
   public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-                                        FormativeExamRepository formativeRepository, CourseRepository courseRepository,
-                                        TeacherRepository teacherRepository, ExamAnswerRepository answerRepository) {
+      FormativeExamRepository formativeRepository, CourseRepository courseRepository,
+      TeacherRepository teacherRepository, ExamAnswerRepository answerRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
     this.formativeService = new FormativeExamListService(formativeRepository);
     this.authz = authz;
@@ -43,27 +42,32 @@ public class ListCourseExamGradesController {
   }
 
   public Iterable<CourseDTO> teacherCourses() {
-   SystemUser user =  authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
+    SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
 
-   Teacher teacher =  teacherRepository.findByUsername(user.username()).orElseThrow();
+    Teacher teacher = teacherRepository.findByUsername(user.username()).orElseThrow();
 
-   return courseService.listInProgressCoursesThatTeacherLectures(teacher);
+    return courseService.listInProgressCoursesThatTeacherLectures(teacher);
   }
 
   public Iterable<EvaluationExamDTO> courseEvaluationExams(CourseDTO course) {
-    return evaluationService.listAllPastCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
+    return evaluationService
+        .listAllPastCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
   }
 
   public Iterable<FormativeExamDTO> courseFormativeExams(CourseDTO course) {
     return formativeService.findAllCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
   }
 
-  public Iterable<ExamAnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
-    return answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getCode()).orElseThrow());
-  }
+  // public Iterable<ExamAnswerDTO> evaluationExamGrades(EvaluationExamDTO
+  // examDTO) {
+  // return
+  // answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getCode()).orElseThrow());
+  // }
 
-  public Iterable<ExamAnswerDTO> formativeExamGrades(FormativeExamDTO examDTO) {
-    return answerService.listExamGrades(formativeService.findExamByCode(examDTO.getCode()).orElseThrow());
-  }
+  // public Iterable<ExamAnswerDTO> formativeExamGrades(FormativeExamDTO examDTO)
+  // {
+  // return
+  // answerService.listExamGrades(formativeService.findExamByCode(examDTO.getCode()).orElseThrow());
+  // }
 
 }
