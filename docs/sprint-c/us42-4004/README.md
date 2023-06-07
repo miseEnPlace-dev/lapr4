@@ -85,9 +85,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
 @Test
 public void ensureItsPossibleToCreateInvite() {
-  Invite invite = getDummyInvite();
-  assertEquals(invite.user(), getDummyUser());
-  assertTrue(invite.status().isPending());
 }
 ```
 
@@ -96,9 +93,6 @@ public void ensureItsPossibleToCreateInvite() {
 ```java
 @Test
 public void ensureItsPossibleToAcceptInvite() {
-  Invite invite = getDummyInvite();
-  invite.accept();
-  assertTrue(invite.status().isAccepted());
 }
 ```
 
@@ -107,9 +101,6 @@ public void ensureItsPossibleToAcceptInvite() {
 ```java
 @Test
 public void ensureItsPossibleToRejectInvite() {
-  Invite invite = getDummyInvite();
-  invite.reject();
-  assertTrue(invite.status().isRejected());
 }
 ```
 

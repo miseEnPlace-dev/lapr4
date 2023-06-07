@@ -26,11 +26,11 @@ public class ScheduleMeetingUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    Calendar time = Calendar.getInstance();
+    Calendar time;
 
-    while (time.before(Calendar.getInstance())) {
+    do {
       time = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
-    }
+    } while (time.before(Calendar.getInstance()));
 
     Integer duration = 0;
 

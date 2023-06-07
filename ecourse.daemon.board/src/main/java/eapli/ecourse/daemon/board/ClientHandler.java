@@ -15,6 +15,7 @@ import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
+import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
@@ -35,6 +36,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.ERR, ErrMessage.class);
       put(MessageCode.GET_BOARDS, GetBoardsMessage.class);
       put(MessageCode.GET_OWN_BOARDS, GetOwnBoardsMessage.class);
+      put(MessageCode.GET_USER_PERMISSIONS, GetUserPermissionsMessage.class);
       put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
     }
   };

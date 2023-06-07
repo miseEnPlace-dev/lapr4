@@ -24,11 +24,11 @@ public class CreateCourseUI extends AbstractUI {
   public boolean doShow() {
     System.out.println("Insert the following information: ");
 
-    String code = Console.readLine("Code: ");
-    String title = Console.readLine("Title: ");
-    String description = Console.readLine("Description: ");
-    int minLimit = Console.readInteger("Minimum Enrolment Limit: ");
-    int maxLimit = Console.readInteger("Maximum Enrolment Limit: ");
+    String code = Console.readLine("\nCode: ");
+    String title = Console.readLine("\nTitle: ");
+    String description = Console.readLine("\nDescription: ");
+    int minLimit = Console.readInteger("\nMinimum Enrolment Limit: ");
+    int maxLimit = Console.readInteger("\nMaximum Enrolment Limit: ");
 
     final Iterable<TeacherDTO> teachers = this.ctrl.listAllTeachers();
     if (!teachers.iterator().hasNext()) {

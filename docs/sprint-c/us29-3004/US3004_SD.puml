@@ -1,3 +1,121 @@
 @startuml US3004_SD
+autonumber
+
+actor "User" as U
+participant "ShareBoardUI" as UI <<presentation>>
+participant "ShareBoardController" as CTRL <<application>>
+participant "ListBoardsService" as BOARDSRV <<service>>
+participant "UserManagementService" as USRSRV <<service>>
+participant "Board" as B <<domain>>
+participant "User" as USER <<domain>>
+participant "UserPermission" as PERM <<domain>>
+participant "BoardDTO" as BDTO <<dto>>
+participant "UserDTO" as USERDTO <<dto>>
+participant "UserPermissionsDTO" as PERMDTO <<dto>>
+
+database BoardRepository as BOARDREP <<repository>>
+database UserRepository as USERREP <<repository>>
+
+activate U
+
+U -> UI : asks to share a board
+activate UI
+  UI -> CTRL : new()
+  activate CTRL
+    CTRL -> BOARDSRV : listBoardService = new(boardRepository)
+    activate BOARDSRV
+    deactivate BOARDSRV
+
+    CTRL -> USRSRV : usrService = new(userRepository)
+    activate USRSRV
+    deactivate USRSRV
+  deactivate CTRL
+
+  UI -> CTRL : listUserBoards()
+  activate CTRL
+    CTRL -> BOARDSRV : userBoards(user)
+    activate BOARDSRV
+      BOARDSRV -> BOARDREP : findAllBoardsCreatedByUser(user)
+      activate BOARDREP
+         BOARDSRV <-- BOARDREP : boards
+      deactivate BOARDREP
+
+      loop for each board
+        BOARDSRV -> B : toDTO(course)
+        activate B
+          B -> BDTO : new()
+          activate BDTO
+          deactivate BDTO
+        deactivate B
+      end loop
+
+      CTRL <-- BOARDSRV : boards
+    deactivate BOARDSRV
+    UI <-- CTRL : boards
+  deactivate CTRL
+
+  U <-- UI : asks to select a board
+deactivate UI
+
+U -> UI : selects a board
+activate UI
+  UI <-- U : asks to enter the username of the user to share the board with
+deactivate UI
+
+U -> UI : enters the desired username
+activate UI
+
+  UI -> CTRL : userPermission(boardDto, username)
+  activate CTRL
+
+    CTRL -> USRSRV : user = usrService.userOfIdentity(username)
+    activate USRSRV
+
+      USRSRV -> USERREP : ofIdentity(username)
+      activate USERREP
+        USRSRV <-- USERREP : user
+      deactivate USERREP
+
+      CTRL <-- USRSRV : user
+    deactivate USRSRV
+
+    CTRL -> BOARDREP : board = boardRepository.ofIdentity(boardDto.id)
+    activate BOARDREP
+      CTRL <-- BOARDREP : board
+    deactivate BOARDREP
+
+    CTRL -> B : permissions(user)
+    activate B
+      B -> PERM
+      activate PERM
+        B <-- PERM : permissions
+      deactivate PERM
+      CTRL <-- B : permissions
+    deactivate B
+
+    CTRL -> PERMDTO : toDTO()
+    activate PERMDTO
+      CTRL <-- PERMDTO : permissionsDto
+    deactivate PERMDTO
+
+    UI <-- CTRL : permissionsDto
+  deactivate CTRL
+
+  U <-- UI : shows the current user permissions
+deactivate UI
+
+U -> UI : selects the desired permissions
+activate UI
+  UI -> CTRL : updateUserPermissions(boardDto, username, permission)
+  activate CTRL
+    CTRL -> PERM : update(user, permission)
+    activate PERM
+    deactivate PERM
+  deactivate CTRL
+
+  U <-- UI : informs operation success
+deactivate UI
+
+deactivate U
 
 @enduml

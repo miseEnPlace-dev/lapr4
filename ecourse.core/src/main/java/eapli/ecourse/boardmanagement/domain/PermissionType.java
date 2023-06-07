@@ -23,7 +23,7 @@ public class PermissionType implements ValueObject {
   }
 
   public static Type[] options() {
-    return new Type[] { Type.READ, Type.WRITE };
+    return new Type[] {Type.READ, Type.WRITE};
   }
 
   @Enumerated(EnumType.STRING)
@@ -55,4 +55,8 @@ public class PermissionType implements ValueObject {
     return type == Type.WRITE;
   }
 
+  @Override
+  public String toString() {
+    return type.toString();
+  }
 }

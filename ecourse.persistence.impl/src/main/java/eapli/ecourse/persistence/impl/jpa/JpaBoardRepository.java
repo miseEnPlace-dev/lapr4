@@ -1,6 +1,5 @@
 package eapli.ecourse.persistence.impl.jpa;
 
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import org.hibernate.annotations.QueryHints;
 import eapli.ecourse.boardmanagement.domain.Board;
@@ -34,10 +33,8 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
     // Reference: https://stackoverflow.com/a/51055523/15339625
 
-    EntityManager entityManager = entityManager();
-
-    TypedQuery<Board> query = entityManager.createQuery(
-        "SELECT DISTINCT b FROM Board b JOIN FETCH b.permissions WHERE b.owner.username = :username",
+    TypedQuery<Board> query = createQuery(
+        "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE b.owner.username = :username",
         Board.class);
 
     query.setParameter("username", user);
@@ -45,16 +42,16 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
     Iterable<Board> boards = query.getResultList();
 
-    query = entityManager.createQuery(
-        "SELECT DISTINCT b FROM Board b JOIN FETCH b.rows WHERE b in :boards", Board.class);
+    query = createQuery("SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.rows WHERE b in :boards",
+        Board.class);
 
     query.setParameter("boards", boards);
     query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
 
     boards = query.getResultList();
 
-    query = entityManager.createQuery(
-        "SELECT DISTINCT b FROM Board b JOIN FETCH b.columns WHERE b in :boards", Board.class);
+    query = createQuery(
+        "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.columns WHERE b in :boards", Board.class);
 
     query.setParameter("boards", boards);
     query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);

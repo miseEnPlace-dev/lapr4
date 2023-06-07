@@ -16,13 +16,11 @@ import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
-import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
-import eapli.framework.infrastructure.authz.domain.model.Username;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,19 +28,12 @@ import java.util.Collection;
 public class ListCourseExamGradesController {
 
   private final EvaluationExamListService evaluationService;
-
   private final FormativeExamListService formativeService;
-
   private final AuthorizationService authz;
-
   private final ListCourseService courseService;
-
   private final TeacherRepository teacherRepository;
-
   private final ListExamAnswerService answerService;
-
   private final ListEnrolmentService enrolmentService;
-
   private final StudentService studentService;
 
 
@@ -61,15 +52,16 @@ public class ListCourseExamGradesController {
   }
 
   public Iterable<CourseDTO> teacherCourses() {
-   SystemUser user =  authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
+    SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.TEACHER).orElseThrow();
 
-   Teacher teacher =  teacherRepository.findByUsername(user.username()).orElseThrow();
+    Teacher teacher = teacherRepository.findByUsername(user.username()).orElseThrow();
 
-   return courseService.listInProgressCoursesThatTeacherLectures(teacher);
+    return courseService.listInProgressCoursesThatTeacherLectures(teacher);
   }
 
   public Iterable<EvaluationExamDTO> courseEvaluationExams(CourseDTO course) {
-    return evaluationService.listAllPastCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
+    return evaluationService
+        .listAllPastCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
   }
 
   public Iterable<FormativeExamDTO> courseFormativeExams(CourseDTO course) {
