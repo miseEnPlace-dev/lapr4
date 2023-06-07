@@ -2,8 +2,11 @@ package eapli.ecourse.answermanagement.application;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
+import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.answermanagement.domain.ExamAnswer;
 import eapli.ecourse.answermanagement.dto.ExamAnswerDTO;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
@@ -48,10 +51,24 @@ public class ListExamAnswerService {
     return result;
   }
 
-public Collection<ExamAnswerDTO> listExamGrades(Exam exam) {
+public Collection<ExamAnswerDTO> listExamGrades(Exam exam, Collection<Student> studentsInCourse) {
+
   Collection<ExamAnswer> answers = (Collection<ExamAnswer>) examAnswerRepository.findAllWithExam(exam);
 
-  return (Collection<ExamAnswerDTO>) convertToDTO(answers);
+  Collection<ExamAnswerDTO> result = (Collection<ExamAnswerDTO>) convertToDTO(answers);
+
+  Set<Student> studentWhoAnswered = new HashSet<>();
+  for (ExamAnswer examAnswer: answers) {
+    studentWhoAnswered.add(examAnswer.student());
+  }
+
+  for (Student student: studentsInCourse) {
+    if (!studentWhoAnswered.contains(student))
+      result.add(new ExamAnswerDTO(student.identity().toString(), student.user().name().toString(),
+        exam.title().toString(), exam.type(), "N/a"));
+  }
+
+  return result;
 }
 
   private Collection<ExamAnswerDTO> createNotTakenExams(Student student, Collection<? extends Exam> exams) {
