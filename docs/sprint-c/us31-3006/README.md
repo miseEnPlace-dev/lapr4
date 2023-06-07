@@ -20,7 +20,6 @@
 ## 2.1. Client Specifications
 
 - When the server commits a post it also should notify all clients with access to the board of the update.
-<!-- TODO - check if post = post it-->
 - The user who created a post in a cell can change that post. It may change its contents or
   move the post into a free cell. The user can also undo the last change.
 - The owner of a post can delete it.

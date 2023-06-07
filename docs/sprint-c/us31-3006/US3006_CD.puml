@@ -1,0 +1,85 @@
+@startuml US3006_CD
+
+interface BoardRepository {
+  {abstract} findActiveBoardsThatUserCanWrite()
+}
+
+interface PostItRepository {
+  {abstract} findAllByBoardId(boardId)
+  {abstract} save(postIt)
+}
+
+class ListBoardService {
+  - boardRepository
+
+  + ListBoardService(boardRepository)
+
+  + listActiveBoardsThatUserCanWrite(userID)
+}
+
+class BoardService {
+  - postItRepository
+
+  + BoardService(postItRepository)
+
+  + existsPostIt(boardId, x, y)
+}
+
+class CreatePostItUI {}
+
+class CreatePostItController {
+  - boardRepository
+  - postItRepository
+
+  + CreatePostItController(boardRepository, postItRepository)
+
+  + listBoardsThatUserCanWrite()
+  + validateCoordinates(boardID, x, y)
+  + createPostIt(boardId, x, y, title)
+}
+
+class PostIt {
+  - title
+  - coordinates
+  - user
+  - board
+  - state
+}
+
+class PostIt {
+  - title
+  - coordinates
+  - user
+  - board
+  - state
+
+  + toDto()
+}
+
+class Board {
+}
+
+
+class BoardDTO {
+  + toDto()
+}
+
+class BoardDTOParser {
+  + toDto()
+}
+
+
+CreatePostItUI ..> CreatePostItController
+CreatePostItController --> ListBoardService
+CreatePostItController --> BoardService
+
+ListBoardService ..> Board
+CreatePostItController --> PostItRepository
+CreatePostItController --> BoardRepository
+
+BoardService ..> PostIt
+BoardService ..> Board
+BoardDTOParser ..> BoardDTO
+BoardDTOParser ..> Board
+
+@enduml
