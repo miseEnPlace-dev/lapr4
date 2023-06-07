@@ -3,7 +3,8 @@ package eapli.ecourse.app.board.application;
 public class ShareBoardController {
   // private
 
-  public ShareBoardController() {}
+  public ShareBoardController() {
+  }
 
   // listUserBoards()
   // userFromUsername()
