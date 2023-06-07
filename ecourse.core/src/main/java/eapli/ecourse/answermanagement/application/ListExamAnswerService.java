@@ -48,6 +48,12 @@ public class ListExamAnswerService {
     return result;
   }
 
+public Collection<ExamAnswerDTO> listExamGrades(Exam exam) {
+  Collection<ExamAnswer> answers = (Collection<ExamAnswer>) examAnswerRepository.findAllWithExam(exam);
+
+  return (Collection<ExamAnswerDTO>) convertToDTO(answers);
+}
+
   private Collection<ExamAnswerDTO> createNotTakenExams(Student student, Collection<? extends Exam> exams) {
     Collection<ExamAnswerDTO> examAnswers = new ArrayList<>();
 
