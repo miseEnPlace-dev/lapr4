@@ -29,8 +29,7 @@ This is a new feature that allows users to view a list of participants in a meet
 
 ## 2.3. Functional Requirements
 
-- **FRM04** List Participants The system displays the lists of participants in a meeting and
-  the response status (accept or reject meeting)
+- **FRM04** List Participants The system displays the lists of participants in a meeting and the response status (accept or reject meeting)
 
 ## 2.4. Acceptance Criteria
 
@@ -75,6 +74,7 @@ This is a new feature that allows users to view a list of participants in a meet
 
 - **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
 - **State:** The state pattern is used to represent the state of the invite and the meeting. This is done to keep the invite and meeting state logic encapsulated in the invite status class/canceled meeting class and to reduce coupling.
+- **Service:** This is used to provide a list of participants to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
@@ -85,9 +85,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
 @Test
 public void ensureItsPossibleToCreateInvite() {
-  Invite invite = getDummyInvite();
-  assertEquals(invite.user(), getDummyUser());
-  assertTrue(invite.status().isPending());
 }
 ```
 
@@ -96,9 +93,6 @@ public void ensureItsPossibleToCreateInvite() {
 ```java
 @Test
 public void ensureItsPossibleToAcceptInvite() {
-  Invite invite = getDummyInvite();
-  invite.accept();
-  assertTrue(invite.status().isAccepted());
 }
 ```
 
@@ -107,9 +101,6 @@ public void ensureItsPossibleToAcceptInvite() {
 ```java
 @Test
 public void ensureItsPossibleToRejectInvite() {
-  Invite invite = getDummyInvite();
-  invite.reject();
-  assertTrue(invite.status().isRejected());
 }
 ```
 
@@ -134,4 +125,4 @@ public ListMeetingController(final MeetingRepository meetingRepository, final In
 
 ## 7. Observations
 
-- N/a
+- It was decided to remove the Invite Status "No Answer" from the domain classes.

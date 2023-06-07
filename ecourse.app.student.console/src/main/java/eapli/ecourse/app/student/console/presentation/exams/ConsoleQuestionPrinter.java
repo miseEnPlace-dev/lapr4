@@ -10,12 +10,28 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import eapli.ecourse.questionmanagement.application.QuestionPrinter;
+import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.questionmanagement.domain.QuestionBody;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.io.util.Console;
 
-public class ConsoleQuestionPrinter implements QuestionPrinter {
+public class ConsoleQuestionPrinter implements ExamPrinter {
+  public void printExamHeader(final String title, final String description) {
+    System.out.println("EXAM " + title.toUpperCase() + "\n" + description);
+  }
+
+  public void printSectionHeader(final String title, final String description) {
+    System.out.println(title.toUpperCase() + "\n" + description);
+  }
+
+  public void printFeedback(final String feedback) {
+    System.out.println("Feedback: " + feedback);
+  }
+
+  public void printFinalScore(final int studentScore, final int examScore) {
+    System.out.println("Well done!\nYour score: " + studentScore + " out of " + examScore + ".");
+  }
+
   public Double getNumericalQuestionAnswer(final QuestionBody body) {
     System.out.println(body);
 

@@ -18,6 +18,10 @@ public class EvaluationExamListService {
     this.examRepository = examRepository;
   }
 
+  public Optional<EvaluationExam> findExamByCode(final ExamCode code) {
+    return examRepository.ofIdentity(code);
+  }
+
   public Iterable<EvaluationExamDTO> listAllCourseExams(Course course) {
     final Iterable<EvaluationExam> types = examRepository.findAllCourseExams(course);
     return convertToDto(types);

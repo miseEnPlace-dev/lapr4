@@ -6,11 +6,13 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import eapli.ecourse.answermanagement.domain.ExamAnswerBuilder;
+import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 
-public class EvaluationExamParser {
-  public static EvaluationExamBuilder parseWithVisitor(String filePath) throws IOException, ParseException {
+public class TakeEvaluationExamParser {
+  public static ExamAnswerBuilder parseWithVisitor(String filePath, ExamPrinter printer)
+      throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(filePath));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     ExamParser parser = new ExamParser(tokens);
@@ -19,7 +21,7 @@ public class EvaluationExamParser {
     if (parser.getNumberOfSyntaxErrors() > 0)
       throw new ParseException();
 
-    EvaluationExamVisitor eval = new EvaluationExamVisitor();
-    return (EvaluationExamBuilder) eval.visit(tree);
+    TakeEvaluationExamVisitor eval = new TakeEvaluationExamVisitor(printer);
+    return (ExamAnswerBuilder) eval.visit(tree);
   }
 }

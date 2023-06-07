@@ -13,7 +13,7 @@ public class InviteStatus implements ValueObject {
   private static final long serialVersionUID = 1L;
 
   public enum Status {
-    PENDING, ACCEPTED, REJECTED, CANCELED, NO_ANSWER
+    PENDING, ACCEPTED, REJECTED, CANCELED
   }
 
   public InviteStatus() {
@@ -39,10 +39,6 @@ public class InviteStatus implements ValueObject {
     return this.state == Status.REJECTED;
   }
 
-  public boolean isNoAnswer() {
-    return this.state == Status.NO_ANSWER;
-  }
-
   public boolean isCanceled() {
     return this.state == Status.CANCELED;
   }
@@ -55,11 +51,9 @@ public class InviteStatus implements ValueObject {
     this.state = Status.REJECTED;
   }
 
-  public void noAnswer() {
-    this.state = Status.NO_ANSWER;
+  public void cancel() {
+    this.state = Status.CANCELED;
   }
-
-  public void cancel() { this.state = Status.CANCELED; }
 
   @Override
   public String toString() {

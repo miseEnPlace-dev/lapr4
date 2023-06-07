@@ -80,6 +80,7 @@ This is a new feature that allows users to accept or reject a meeting request.
 
 - **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
 - **State:** The state pattern is used to represent the state of the invite. This is done to keep the invite state logic encapsulated in the invite status class and to reduce coupling.
+- **Service:** This is used to provide a list of meetings to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
@@ -90,17 +91,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
 @Test
 public void ensureItsPossibleToAcceptAMeetingInvite() {
-    // Arrange
-    MeetingInvite invite = new MeetingInvite();
-    invite.setStatus(MeetingInviteStatus.PENDING);
-    MeetingInviteRepository repository = new MeetingInviteRepository();
-    repository.add(invite);
-    MeetingInviteService service = new MeetingInviteService(repository);
-    MeetingInviteController controller = new MeetingInviteController(service);
-    // Act
-    controller.accept(invite);
-    // Assert
-    assertEquals(MeetingInviteStatus.ACCEPTED, invite.getStatus());
 }
 ```
 
@@ -109,17 +99,6 @@ public void ensureItsPossibleToAcceptAMeetingInvite() {
 ```java
 @Test
 public void ensureItsPossibleToRejectAMeetingInvite() {
-    // Arrange
-    MeetingInvite invite = new MeetingInvite();
-    invite.setStatus(MeetingInviteStatus.PENDING);
-    MeetingInviteRepository repository = new MeetingInviteRepository();
-    repository.add(invite);
-    MeetingInviteService service = new MeetingInviteService(repository);
-    MeetingInviteController controller = new MeetingInviteController(service);
-    // Act
-    controller.reject(invite);
-    // Assert
-    assertEquals(MeetingInviteStatus.REJECTED, invite.getStatus());
 }
 ```
 
@@ -128,17 +107,6 @@ public void ensureItsPossibleToRejectAMeetingInvite() {
 ```java
 @Test
 public void ensureItsNotPossibleToAcceptAMeetingInviteThatIsNotPending() {
-    // Arrange
-    MeetingInvite invite = new MeetingInvite();
-    invite.setStatus(MeetingInviteStatus.ACCEPTED);
-    MeetingInviteRepository repository = new MeetingInviteRepository();
-    repository.add(invite);
-    MeetingInviteService service = new MeetingInviteService(repository);
-    MeetingInviteController controller = new MeetingInviteController(service);
-    // Act
-    controller.accept(invite);
-    // Assert
-    assertEquals(MeetingInviteStatus.ACCEPTED, invite.getStatus());
 }
 ```
 
@@ -147,17 +115,6 @@ public void ensureItsNotPossibleToAcceptAMeetingInviteThatIsNotPending() {
 ```java
 @Test
 public void ensureItsNotPossibleToRejectAMeetingInviteThatIsNotPending() {
-    // Arrange
-    MeetingInvite invite = new MeetingInvite();
-    invite.setStatus(MeetingInviteStatus.REJECTED);
-    MeetingInviteRepository repository = new MeetingInviteRepository();
-    repository.add(invite);
-    MeetingInviteService service = new MeetingInviteService(repository);
-    MeetingInviteController controller = new MeetingInviteController(service);
-    // Act
-    controller.reject(invite);
-    // Assert
-    assertEquals(MeetingInviteStatus.REJECTED, invite.getStatus());
 }
 ```
 

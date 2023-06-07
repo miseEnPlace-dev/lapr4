@@ -67,13 +67,6 @@ public class InviteTest {
   }
 
   @Test
-  public void testInviteStatusChangeNoAnswer() {
-    Invite invite = getDummyInvite();
-    invite.status().noAnswer();
-    assertTrue(invite.status().isNoAnswer());
-  }
-
-  @Test
   public void testInviteSameAsInstance() {
     Invite invite = getDummyInvite();
     assertTrue(invite.sameAs(invite));

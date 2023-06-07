@@ -34,7 +34,6 @@ public class UpdateClassScheduleUI extends AbstractUI {
     final ClassDTO selected = selector.selectedElement();
 
     if (selected != null) {
-      System.out.println("\nClass selected: " + selected);
 
       Calendar timeString = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
       Time time = Time.valueOf(timeString);

@@ -1,0 +1,32 @@
+@startuml US2004_SD
+autonumber
+
+actor "Student" as student
+
+participant "TakeEvaluationExamUI" as ui <<presentation>>
+participant "TakeEvaluationExamController" as controller <<application>>
+participant "AuthenticationService" as auth <<service>>
+participant "ListCourseService" as lcservice <<service>>
+participant "ExamsParser" as parser <<parser>>
+participant "ExamBuilder" as builder <<builder>>
+participant "EvaluationExam" as exam <<domain>>
+participant "Course" as course <<domain>>
+participant "CourseDTO" as coursedto <<dto>>
+
+database ExamRepository as examrepo <<repository>>
+database CourseRepository as courserepo <<repository>>
+database studentRepository as studentrepo <<repository>>
+
+activate student
+student -> ui : Asks to take an exam
+
+activate ui
+ui -> student : Asks the file path where the exam is defined
+deactivate ui
+
+student -> ui : Enters the file path
+
+activate ui
+' TODO
+
+@enduml
