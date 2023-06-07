@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface BoardRepository extends DomainRepository<BoardID, Board> {
 
   /**
-   * Returns the course with the given code.
+   * Returns the board with the given code.
    *
    * @param code
    * @return
@@ -20,10 +20,9 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
   }
 
   /**
-   * Returns the courses that are opened for enrollment.
+   * Returns the boards created by a user.
    *
    * @return an iterable list of boards which the user owns
    */
   Iterable<Board> findAllBoardsCreatedByUser(Username user);
-
 }
