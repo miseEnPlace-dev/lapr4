@@ -12,8 +12,7 @@ import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-class JpaCourseRepository
-    extends JpaAutoTxRepository<Course, CourseCode, CourseCode>
+class JpaCourseRepository extends JpaAutoTxRepository<Course, CourseCode, CourseCode>
     implements CourseRepository {
 
   public JpaCourseRepository(final TransactionalContext autoTx) {
