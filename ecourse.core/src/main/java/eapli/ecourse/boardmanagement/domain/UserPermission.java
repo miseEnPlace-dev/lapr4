@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.framework.domain.model.DomainEntity;
@@ -38,6 +39,25 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
     // for ORM
   }
 
+  public UserPermission(final Calendar createdAt, final Calendar updatedAt,
+      final PermissionType permissionType, final SystemUser user) {
+    Preconditions.noneNull(createdAt, permissionType, user);
+
+    this.id = UserPermissionID.newID();
+    if (createdAt.after(updatedAt))
+      throw new IllegalArgumentException("The createdAt date must be before the updatedAt date");
+
+    if (createdAt.after(Calendar.getInstance()))
+      throw new IllegalArgumentException("The createdAt date must be before the current date");
+
+    this.createdAt = createdAt;
+
+    // if the updatedAt is null, then it is the same as createdAt
+    this.updatedAt = (updatedAt == null) ? createdAt : updatedAt;
+    this.permissionType = permissionType;
+    this.user = user;
+  }
+
   public UserPermission(final UserPermissionID id, final Calendar createdAt,
       final Calendar updatedAt, final PermissionType permissionType, final SystemUser user) {
     Preconditions.noneNull(id, createdAt, permissionType, user);
@@ -55,6 +75,11 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
     this.updatedAt = (updatedAt == null) ? createdAt : updatedAt;
     this.permissionType = permissionType;
     this.user = user;
+  }
+
+  @PreUpdate
+  public void preUpdateFunction() {
+    this.updatedAt = Calendar.getInstance();
   }
 
   public Calendar createdAt() {

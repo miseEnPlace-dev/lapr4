@@ -61,6 +61,22 @@ public class FormativeExamSection extends DomainEntityBase<Long> {
     return id;
   }
 
+  public SectionIdentifier identifier() {
+    return identifier;
+  }
+
+  public SectionTitle title() {
+    return title;
+  }
+
+  public SectionDescription description() {
+    return description;
+  }
+
+  public List<Question> questions() {
+    return questions;
+  }
+
   public boolean sameAs(Object other) {
     return this.equals(other);
   }

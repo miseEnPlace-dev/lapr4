@@ -26,6 +26,11 @@ public class AuthMessage extends Message {
     ClientState clientState = ClientState.getInstance();
     UserManagementService userSvc = AuthzRegistry.userService();
 
+    if (clientState.getCredentialStore().isAuthenticated()) {
+      // ignore
+      return;
+    }
+
     String payload = new String(protocolMessage.getPayload());
 
     String fields[] = payload.split("\0");

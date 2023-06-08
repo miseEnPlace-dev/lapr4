@@ -1,7 +1,10 @@
 package eapli.ecourse.coursemanagement.application;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseBuilder;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.teachermanagement.application.TeacherService;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -53,5 +56,9 @@ public class CreateCourseController {
 
   public Iterable<TeacherDTO> listAllTeachers() {
     return service.allTeachers();
+  }
+
+  public Optional<Course> checkIfCourseCodeExists(CourseCode code) {
+    return courseRepository.findByCode(code);
   }
 }

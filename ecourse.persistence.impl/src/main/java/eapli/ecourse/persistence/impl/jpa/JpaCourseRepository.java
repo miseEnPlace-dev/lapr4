@@ -1,5 +1,9 @@
 package eapli.ecourse.persistence.impl.jpa;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import javax.persistence.TypedQuery;
 
 import eapli.ecourse.Application;
@@ -12,8 +16,7 @@ import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-class JpaCourseRepository
-    extends JpaAutoTxRepository<Course, CourseCode, CourseCode>
+class JpaCourseRepository extends JpaAutoTxRepository<Course, CourseCode, CourseCode>
     implements CourseRepository {
 
   public JpaCourseRepository(final TransactionalContext autoTx) {
@@ -65,8 +68,9 @@ class JpaCourseRepository
   }
 
   @Override
-  public void delete(Course entity) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'delete'");
+  public Optional<Course> findByCode(CourseCode code) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("code", code);
+    return matchOne("e.code=:code", params);
   }
 }

@@ -24,6 +24,15 @@ public class BoardBuilder implements DomainFactory<Board> {
     this.rows = new ArrayList<>();
   }
 
+  public BoardBuilder withBoard(Board board) {
+    this.title = board.title();
+    this.user = board.owner();
+    this.permissions = board.permissions();
+    this.columns = board.columns();
+    this.rows = board.rows();
+    return this;
+  }
+
   public BoardBuilder withTitle(String title) {
     this.title = new BoardTitle(title);
     return this;
@@ -52,9 +61,8 @@ public class BoardBuilder implements DomainFactory<Board> {
   }
 
   public BoardBuilder withPermission(SystemUser user, PermissionType permission) {
-    UserPermissionID id = UserPermissionID.newID();
     Calendar createdAt = Calendar.getInstance();
-    this.permissions.add(new UserPermission(id, createdAt, createdAt, permission, user));
+    this.permissions.add(new UserPermission(createdAt, createdAt, permission, user));
 
     return this;
   }
@@ -130,7 +138,6 @@ public class BoardBuilder implements DomainFactory<Board> {
     board = new Board(title, permissions, columns, rows, user);
 
     return board;
-
   }
 
   @Override
@@ -142,5 +149,4 @@ public class BoardBuilder implements DomainFactory<Board> {
 
     return b;
   }
-
 }
