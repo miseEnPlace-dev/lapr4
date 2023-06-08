@@ -65,4 +65,23 @@ public class InviteStatusTest {
     assertTrue(status1.canEqual(status2));
   }
 
+  @Test
+  public void ensureInviteStatusToStringIsWorking() {
+    InviteStatus status = new InviteStatus();
+    assertEquals("PENDING", status.toString());
+  }
+
+  @Test
+  public void ensureInviteStatusCanBeCanceled() {
+    InviteStatus status = new InviteStatus();
+    status.cancel();
+    assertTrue(status.isCanceled());
+  }
+
+  @Test
+  public void ensureItsPOssibleToCreateInviteStatus() {
+    InviteStatus status = new InviteStatus(InviteStatus.Status.ACCEPTED);
+    assertTrue(status.isAccepted());
+  }
+
 }

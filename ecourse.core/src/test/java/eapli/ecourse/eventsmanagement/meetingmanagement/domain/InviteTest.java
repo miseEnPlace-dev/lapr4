@@ -1,6 +1,7 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
+import eapli.ecourse.eventsmanagement.meetingmanagement.dto.InviteDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
@@ -118,5 +120,105 @@ public class InviteTest {
     InviteID invite1 = InviteID.newID();
     InviteID invite2 = InviteID.valueOf(invite1.toString());
     assertTrue(invite1.canEqual(invite2));
+  }
+
+  @Test
+  public void ensureInviteCanBeRejected() {
+    Invite invite = getDummyInvite();
+    invite.reject();
+    assertTrue(invite.status().isRejected());
+  }
+
+  @Test
+  public void ensureInviteCanBeAccepted() {
+    Invite invite = getDummyInvite();
+    invite.accept();
+    assertTrue(invite.status().isAccepted());
+  }
+
+  @Test
+  public void ensureInviteSameAsIsWorking() {
+    Invite invite = getDummyInvite();
+    assertTrue(invite.sameAs(invite));
+  }
+
+  @Test
+  public void ensureInviteSameAsIsWorkingWithNull() {
+    Invite invite = getDummyInvite();
+    assertTrue(!invite.sameAs(null));
+  }
+
+  @Test
+  public void ensureInviteSameAsIsWorkingWithDifferentClass() {
+    Invite invite = getDummyInvite();
+    assertTrue(!invite.sameAs("dummy"));
+  }
+
+  @Test
+  public void ensureInviteSameAsIsWorkingWithDifferentInvite() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertFalse(invite.sameAs(invite2));
+  }
+
+  @Test
+  public void ensureInviteSameAsIsWorkingWithSameInvite() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertFalse(invite.sameAs(invite2));
+  }
+
+  @Test
+  public void ensureInviteMeetingIsTheSame() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertFalse(invite.meeting().equals(invite2.meeting()));
+  }
+
+  @Test
+  public void ensureInviteUserIsTheSame() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertTrue(invite.user().equals(invite2.user()));
+  }
+
+  @Test
+  public void ensureInviteHashCodeIsWorking() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertFalse(invite.hashCode() == invite2.hashCode());
+  }
+
+  @Test
+  public void ensureInviteToDTOIsWorking() {
+    Invite invite = getDummyInvite();
+    InviteDTO inviteDTO = invite.toDto();
+    assertTrue(inviteDTO.equals(invite.toDto()));
+  }
+
+  @Test
+  public void ensureInviteEqualsIsWorking() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertFalse(invite.equals(invite2));
+  }
+
+  @Test
+  public void ensureInviteEqualsIsWorkingWithNull() {
+    Invite invite = getDummyInvite();
+    assertFalse(invite.equals(null));
+  }
+
+  @Test
+  public void ensureInviteEqualsIsWorkingWithDifferentClass() {
+    Invite invite = getDummyInvite();
+    assertFalse(invite.equals("dummy"));
+  }
+
+  @Test
+  public void ensureInviteIdentityIsWorking() {
+    Invite invite = getDummyInvite();
+    Invite invite2 = new Invite(getDummyMeeting(), getDummyUser());
+    assertFalse(invite.identity().equals(invite2.identity()));
   }
 }
