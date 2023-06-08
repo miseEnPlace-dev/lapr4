@@ -51,10 +51,11 @@ public class EvaluationExam extends Exam {
   private Collection<EvaluationExamSection> sections;
 
   public EvaluationExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
-      ExamDescription description, Collection<EvaluationExamSection> sections, Time startTime, Time endTime,
+      ExamDescription description, String fileContent, Collection<EvaluationExamSection> sections, Time startTime,
+      Time endTime,
       ExamInfo feedbackInfo,
       ExamInfo gradeInfo, ExamScore score) {
-    super(course, teacher, identifier, title, description);
+    super(course, teacher, identifier, title, description, fileContent);
 
     Preconditions.noneNull(feedbackInfo, gradeInfo, startTime, endTime, score, sections);
 

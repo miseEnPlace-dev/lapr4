@@ -23,6 +23,7 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
   private List<EvaluationExamSection> sections;
   private Time startTime;
   private Time endTime;
+  private String fileContent;
   private ExamInfo feedbackInfo;
   private ExamInfo gradeInfo;
   private ExamScore score;
@@ -67,6 +68,11 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
     return this;
   }
 
+  public EvaluationExamBuilder withFileContent(String fileContent) {
+    this.fileContent = fileContent;
+    return this;
+  }
+
   public EvaluationExamBuilder withFeedbackInfo(ExamInfo feedbackInfo) {
     this.feedbackInfo = feedbackInfo;
     return this;
@@ -86,9 +92,10 @@ public class EvaluationExamBuilder implements DomainFactory<EvaluationExam> {
     if (exam != null)
       return exam;
 
-    Preconditions.noneNull(course, teacher, identifier, title, description, sections);
+    Preconditions.noneNull(teacher, identifier, title, description, sections);
 
-    exam = new EvaluationExam(course, teacher, identifier, title, description, sections, startTime, endTime,
+    exam = new EvaluationExam(course, teacher, identifier, title, description, fileContent, sections, startTime,
+        endTime,
         feedbackInfo, gradeInfo, score);
     exam.publish();
     return exam;
