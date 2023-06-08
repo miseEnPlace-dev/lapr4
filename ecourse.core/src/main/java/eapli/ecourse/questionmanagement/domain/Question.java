@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import eapli.ecourse.answermanagement.domain.Score;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.framework.domain.model.AggregateRoot;
 
@@ -33,6 +34,9 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private QuestionType type;
+
+  @Column(nullable = false)
+  private Score score;
 
   @Column(nullable = true)
   private Feedback generalFeedback;
@@ -78,6 +82,10 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
     this.course = course;
   }
 
+  public void changeScore(Score score) {
+    this.score = score;
+  }
+
   public QuestionBody body() {
     return this.body;
   }
@@ -92,6 +100,10 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
 
   public Course course() {
     return this.course;
+  }
+
+  public Score score() {
+    return this.score;
   }
 
   @Override

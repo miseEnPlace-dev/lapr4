@@ -35,20 +35,15 @@ public class EvaluationExamSection implements DomainEntity<SectionIdentifier> {
   @Column(nullable = false)
   private SectionDescription description;
 
-  @Column(nullable = false)
-  private ExamScore score;
-
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<Question> questions;
 
   public EvaluationExamSection(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
-      ExamScore score,
       Collection<Question> questions) {
-    Preconditions.noneNull(identifier, title, description, score);
+    Preconditions.noneNull(identifier, title, description);
     this.identifier = identifier;
     this.title = title;
     this.description = description;
-    this.score = score;
     this.questions = new ArrayList<>(questions);
   }
 
@@ -66,10 +61,6 @@ public class EvaluationExamSection implements DomainEntity<SectionIdentifier> {
 
   public SectionDescription description() {
     return description;
-  }
-
-  public ExamScore score() {
-    return score;
   }
 
   public List<Question> questions() {
@@ -91,7 +82,7 @@ public class EvaluationExamSection implements DomainEntity<SectionIdentifier> {
 
     final EvaluationExamSection that = (EvaluationExamSection) o;
     return this.identifier.equals(that.identifier) && this.title.equals(that.title)
-        && this.description.equals(that.description) && this.score.equals(that.score)
+        && this.description.equals(that.description)
         && this.questions.equals(that.questions);
   }
 }
