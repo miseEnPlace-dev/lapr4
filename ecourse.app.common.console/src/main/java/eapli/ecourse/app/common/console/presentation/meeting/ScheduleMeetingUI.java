@@ -30,6 +30,9 @@ public class ScheduleMeetingUI extends AbstractUI {
 
     do {
       time = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
+      if (time == null) {
+        System.out.println("Invalid date. Please enter a valid date.");
+      }
     } while (time.before(Calendar.getInstance()));
 
     Integer duration = 0;
@@ -37,6 +40,9 @@ public class ScheduleMeetingUI extends AbstractUI {
     Time meetingTime = Time.valueOf(time);
     while (duration <= 0) {
       duration = Console.readInteger("\nDuration (minutes): ");
+      if (duration <= 0) {
+        System.out.println("Invalid duration. Please enter a valid duration.");
+      }
     }
 
     Duration meetingDuration = Duration.valueOf(duration);
