@@ -1,5 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -46,5 +48,10 @@ public class InMemoryCourseRepository extends
   @Override
   public Iterable<Course> findAllNotFinished() {
     return match(e -> !e.state().isFinished());
+  }
+
+  @Override
+  public Optional<Course> findByCode(CourseCode code) {
+    return ofIdentity(code);
   }
 }

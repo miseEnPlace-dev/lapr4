@@ -1,5 +1,7 @@
 package eapli.ecourse.coursemanagement.repositories;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -54,4 +56,12 @@ public interface CourseRepository extends DomainRepository<CourseCode, Course> {
    * @return
    */
   Iterable<Course> findAllNotFinished();
+
+  /**
+   * Returns the course with the given code
+   *
+   * @param code
+   * @return
+   */
+  Optional<Course> findByCode(CourseCode code);
 }
