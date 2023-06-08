@@ -24,41 +24,38 @@ import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Question;
 
 public class EvaluationExamVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
-  private EvaluationExamBuilder builder;
-  private EvaluationExamSectionBuilder section;
+  private EvaluationExamBuilder examBuilder;
+  private EvaluationExamSectionBuilder sectionBuilder;
   private List<EvaluationExamSection> sections;
   private List<Question> questions;
 
-  int examScore = 0;
-  int sectionsScore = 0;
+  Double examScore = 0d;
 
   @Override
   public EvaluationExamBuilder visitStart(ExamParser.StartContext ctx) {
     visit(ctx.exam());
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public EvaluationExamBuilder visitExam(ExamParser.ExamContext ctx) {
-    builder = new EvaluationExamBuilder();
+    examBuilder = new EvaluationExamBuilder();
 
     visit(ctx.start_exam());
     visit(ctx.header());
     visit(ctx.sections());
 
-    if (examScore != sectionsScore) {
-      raiseError(ctx, "The sum of the sections' scores must be equal to the exam's score.");
-    }
+    examBuilder.withScore(ExamScore.valueOf(examScore));
 
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public EvaluationExamBuilder visitStart_exam(ExamParser.Start_examContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     ExamIdentifier identifier = ExamIdentifier.valueOf(str);
-    builder.withIdentifier(identifier);
-    return builder;
+    examBuilder.withIdentifier(identifier);
+    return examBuilder;
   }
 
   /**
@@ -102,8 +99,7 @@ public class EvaluationExamVisitor extends ExamBaseVisitor<EvaluationExamBuilder
       String[] requiredProps = {
           "title",
           "feedback",
-          "grade",
-          "score"
+          "grade"
       };
 
       Arrays.asList(requiredProps).forEach(p -> {
@@ -115,8 +111,7 @@ public class EvaluationExamVisitor extends ExamBaseVisitor<EvaluationExamBuilder
       initializeExam(properties);
     } else {
       String[] requiredProps = {
-          "title",
-          "score"
+          "title"
       };
       String[] forbiddenProps = {
           "feedback",
@@ -137,75 +132,75 @@ public class EvaluationExamVisitor extends ExamBaseVisitor<EvaluationExamBuilder
       initializeSection(properties);
     }
 
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public EvaluationExamBuilder visitSections(ExamParser.SectionsContext ctx) {
     sections = new ArrayList<EvaluationExamSection>();
     visitChildren(ctx);
-    builder.withSections(sections);
-    return builder;
+    examBuilder.withSections(sections);
+    return examBuilder;
   }
 
   @Override
   public EvaluationExamBuilder visitSection(ExamParser.SectionContext ctx) {
-    section = new EvaluationExamSectionBuilder();
+    sectionBuilder = new EvaluationExamSectionBuilder();
     questions = new ArrayList<Question>();
 
     visit(ctx.start_section());
     visit(ctx.header());
     visit(ctx.questions());
 
-    section.withQuestions(questions);
-    sections.add(section.build());
+    sectionBuilder.withQuestions(questions);
+    sections.add(sectionBuilder.build());
 
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public EvaluationExamBuilder visitQuestions(ExamParser.QuestionsContext ctx) {
     questions = QuestionsParser.parseWithVisitorFromString(ctx.getText().toString());
-    return builder;
+
+    for (Question q : questions)
+      this.examScore += q.score().value();
+
+    return examBuilder;
   }
 
   @Override
   public EvaluationExamBuilder visitStart_section(ExamParser.Start_sectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     SectionIdentifier identifier = SectionIdentifier.valueOf(str);
-    section.withIdentifier(identifier);
-    return builder;
+    sectionBuilder.withIdentifier(identifier);
+    return examBuilder;
   }
 
   private void initializeExam(Map<String, Object> properties) {
     ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
-    builder.withTitle(title);
+    examBuilder.withTitle(title);
     ExamInfo feedbackInfo = ExamInfo.convert(properties.get("feedback").toString());
-    builder.withFeedbackInfo(feedbackInfo);
+    examBuilder.withFeedbackInfo(feedbackInfo);
     ExamInfo gradeInfo = ExamInfo.convert(properties.get("grade").toString());
-    builder.withGradeInfo(gradeInfo);
-    ExamScore score = ExamScore.valueOf(Integer.parseInt(properties.get("score").toString()));
-    builder.withScore(score);
-    examScore = Integer.parseInt(properties.get("score").toString());
+    examBuilder.withGradeInfo(gradeInfo);
+
     if (properties.containsKey("description")) {
       ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
-      builder.withDescription(description);
+      examBuilder.withDescription(description);
     } else {
-      builder.withDescription(ExamDescription.valueOf(""));
+      examBuilder.withDescription(ExamDescription.valueOf(""));
     }
   }
 
   private void initializeSection(Map<String, Object> properties) {
     SectionTitle title = SectionTitle.valueOf(properties.get("title").toString());
-    section.withTitle(title);
-    ExamScore score = ExamScore.valueOf(Integer.parseInt(properties.get("score").toString()));
-    section.withScore(score);
-    sectionsScore += Integer.parseInt(properties.get("score").toString());
+    sectionBuilder.withTitle(title);
+
     if (properties.containsKey("description")) {
       SectionDescription description = SectionDescription.valueOf(properties.get("description").toString());
-      section.withDescription(description);
+      sectionBuilder.withDescription(description);
     } else {
-      section.withDescription(SectionDescription.valueOf(""));
+      sectionBuilder.withDescription(SectionDescription.valueOf(""));
     }
   }
 
