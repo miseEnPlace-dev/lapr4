@@ -3,7 +3,6 @@
     @description "This is an example of a Exam.";
     @feedback none;
     @grade on-submit;
-    @course-code "COURSE-EXAMPLE";
 
     @start-section section1;
         @title "First Section";

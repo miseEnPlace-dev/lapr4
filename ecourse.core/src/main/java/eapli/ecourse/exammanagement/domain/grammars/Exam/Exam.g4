@@ -9,19 +9,13 @@ section:	start_section header questions end_section;
 
 questions: question+;
 
-header: properties+;
-properties:
-	title
-	| description
-	| feedback_header
-	| grade
-	| course;
+header:			properties+;
+properties:	title | description | feedback_header | grade;
 
 title:						TITLE STRING EOI;
 description:			DESCRIPTION STRING EOI;
 feedback_header:	FEEDBACK FDB_GRD_TYPE EOI;
 grade:						GRADE FDB_GRD_TYPE EOI;
-course:						COURSE STRING EOI;
 
 start_exam:	START_EXAM IDENTIFIER EOI;
 end_exam:		END_EXAM EOI;
@@ -32,7 +26,7 @@ end_section:		END_SECTION EOI;
 // ----- QUESTIONS -----
 
 question:
-	START_QUESTION question_type score body feedback? (
+	START_QUESTION TYPE (
 		numericalQuestion
 		| multipleChoiceQuestion
 		| shortAnswerQuestion
@@ -41,40 +35,35 @@ question:
 		| missingWordsQuestion
 	) END_QUESTION EOI;
 
-body:			QUESTION_BODY STRING EOI;
-feedback:	FEEDBACK STRING EOI;
-score:		SCORE REAL_NUMBER EOI;
-
-question_type:
-	TYPE (
-		'numerical'
-		| 'multiple-choice'
-		| 'short-answer'
-		| 'true-false'
-		| 'matching'
-		| 'missing-words'
-	) EOI;
-
 numericalQuestion:
-	numericalCorrectAnswer numericalAcceptedError;
+	'numerical' EOI score body feedback? numericalCorrectAnswer numericalAcceptedError;
 
 multipleChoiceQuestion:
-	(
+	'multiple-choice' EOI score body feedback? (
 		START_CORRECT_ANSWERS_SECTION multipleChoiceCorrectAnswer+ END_CORRECT_ANSWERS_SECTION EOI
 		| multipleChoiceCorrectAnswer
 	) START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
 
 shortAnswerQuestion:
-	START_CORRECT_ANSWERS_SECTION shortAnswerCorrectAnswer+ END_CORRECT_ANSWERS_SECTION EOI;
+	'short-answer' EOI score body feedback? START_CORRECT_ANSWERS_SECTION shortAnswerCorrectAnswer+
+		END_CORRECT_ANSWERS_SECTION EOI;
 
-trueFalseQuestion: trueFalseCorrectAnswer;
+trueFalseQuestion:
+	'true-false' EOI score body feedback? trueFalseCorrectAnswer;
 
 matchingQuestion:
-	START_CORRECT_ANSWERS_SECTION matchingCorrectAnswer+ END_CORRECT_ANSWERS_SECTION EOI
-		START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI START_MATCHING_SECTION match+
-		END_MATCHING_SECTION EOI;
+	'matching' EOI score body feedback? START_CORRECT_ANSWERS_SECTION matchingCorrectAnswer+
+		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI
+		START_MATCHING_SECTION match+ END_MATCHING_SECTION EOI;
 
-missingWordsQuestion: missingWordsCorrectAnswer EOI;
+missingWordsQuestion:
+	'missing-words' EOI score body feedback? missingWordsCorrectAnswer EOI;
+
+body: QUESTION_BODY STRING EOI;
+
+feedback: FEEDBACK STRING EOI;
+
+score: SCORE REAL_NUMBER EOI;
 
 shortAnswerCorrectAnswer: CORRECT_ANSWER STRING REAL_NUMBER EOI;
 
@@ -110,7 +99,6 @@ TITLE:													'@title';
 DESCRIPTION:										'@description';
 FEEDBACK:												'@feedback';
 GRADE:													'@grade';
-COURSE:													'@course-code';
 START_SECTION:									'@start-section';
 END_SECTION:										'@end-section';
 SCORE:													'@score';

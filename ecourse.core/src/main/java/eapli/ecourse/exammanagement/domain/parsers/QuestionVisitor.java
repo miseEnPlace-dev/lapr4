@@ -71,6 +71,12 @@ public interface QuestionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFeedback(QuestionParser.FeedbackContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link QuestionParser#score}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScore(QuestionParser.ScoreContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link QuestionParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
