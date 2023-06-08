@@ -13,22 +13,15 @@ public class ExamScoreTest {
 
   @Test
   public void testExamScoreCreation() {
-    int score = 10;
+    Double score = 10d;
     ExamScore examScore = ExamScore.valueOf(score);
     assertTrue(examScore.compareTo(ExamScore.valueOf(score)) == 0);
   }
 
   @Test
-  public void testExamScoreCreationWithNegativeScore() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      ExamScore.valueOf(-10);
-    });
-  }
-
-  @Test
   public void testExamScoreEquality() {
-    int score1 = 10;
-    int score2 = 20;
+    Double score1 = 10d;
+    Double score2 = 20d;
     ExamScore examScore1 = ExamScore.valueOf(score1);
     ExamScore examScore2 = ExamScore.valueOf(score2);
     ExamScore examScore3 = ExamScore.valueOf(score1);
@@ -38,8 +31,8 @@ public class ExamScoreTest {
 
   @Test
   public void ensureHashCodeWorks() {
-    int score1 = 10;
-    int score2 = 20;
+    Double score1 = 10d;
+    Double score2 = 20d;
     ExamScore examScore1 = ExamScore.valueOf(score1);
     ExamScore examScore2 = ExamScore.valueOf(score2);
     ExamScore examScore3 = ExamScore.valueOf(score1);

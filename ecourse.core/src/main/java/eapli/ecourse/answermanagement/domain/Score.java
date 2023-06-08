@@ -28,6 +28,10 @@ public class Score implements ValueObject {
     return new Score(this.score + score.score);
   }
 
+  public Double value() {
+    return this.score;
+  }
+
   @Override
   public String toString() {
     return String.format(".2f", score);
