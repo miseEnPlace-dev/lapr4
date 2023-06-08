@@ -3,6 +3,7 @@ package eapli.ecourse.exammanagement.domain.parsers;
 import java.util.ArrayList;
 import java.util.List;
 
+import eapli.ecourse.answermanagement.domain.Score;
 import eapli.ecourse.questionmanagement.domain.Feedback;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.MatchingQuestion;
@@ -45,6 +46,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   @Override
   public List<Question> visitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx) {
     this.question = new MatchingQuestion(QuestionType.FORMATIVE);
+    visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -89,7 +91,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   @Override
   public List<Question> visitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx) {
     this.question = new NumericalQuestion(QuestionType.FORMATIVE);
-
+    visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -108,6 +110,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   @Override
   public List<Question> visitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx) {
     this.question = new MultipleChoiceQuestion(QuestionType.FORMATIVE);
+    visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -150,6 +153,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   @Override
   public List<Question> visitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx) {
     this.question = new ShortAnswerQuestion(QuestionType.FORMATIVE);
+    visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -170,6 +174,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   @Override
   public List<Question> visitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx) {
     this.question = new TrueFalseQuestion(QuestionType.FORMATIVE);
+    visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -186,6 +191,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   @Override
   public List<Question> visitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx) {
     this.question = new MissingWordsQuestion(QuestionType.FORMATIVE);
+    visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -207,6 +213,15 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
 
     QuestionBody b = new QuestionBody(body);
     this.question.changeBody(b);
+    return null;
+  }
+
+  @Override
+  public List<Question> visitScore(QuestionParser.ScoreContext ctx) {
+    double score = Double.parseDouble(ctx.REAL_NUMBER().getText());
+
+    Score s = Score.valueOf(score);
+    this.question.changeScore(s);
     return null;
   }
 

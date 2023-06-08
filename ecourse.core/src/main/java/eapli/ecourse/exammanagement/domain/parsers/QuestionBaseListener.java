@@ -136,6 +136,18 @@ public class QuestionBaseListener implements QuestionListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterScore(QuestionParser.ScoreContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitScore(QuestionParser.ScoreContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterShortAnswerCorrectAnswer(QuestionParser.ShortAnswerCorrectAnswerContext ctx) { }
 	/**
 	 * {@inheritDoc}

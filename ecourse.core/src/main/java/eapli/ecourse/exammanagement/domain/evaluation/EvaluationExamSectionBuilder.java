@@ -15,7 +15,6 @@ public class EvaluationExamSectionBuilder implements DomainFactory<EvaluationExa
   private SectionIdentifier identifier;
   private SectionTitle title;
   private SectionDescription description;
-  private ExamScore score;
   private List<Question> questions;
 
   public EvaluationExamSectionBuilder withIdentifier(SectionIdentifier identifier) {
@@ -33,11 +32,6 @@ public class EvaluationExamSectionBuilder implements DomainFactory<EvaluationExa
     return this;
   }
 
-  public EvaluationExamSectionBuilder withScore(ExamScore score) {
-    this.score = score;
-    return this;
-  }
-
   public EvaluationExamSectionBuilder withQuestions(List<Question> questions) {
     this.questions = questions;
     return this;
@@ -47,9 +41,9 @@ public class EvaluationExamSectionBuilder implements DomainFactory<EvaluationExa
     if (section != null)
       return section;
 
-    Preconditions.noneNull(identifier, title, description, score, questions);
+    Preconditions.noneNull(identifier, title, description, questions);
 
-    section = new EvaluationExamSection(identifier, title, description, score, questions);
+    section = new EvaluationExamSection(identifier, title, description, questions);
 
     return section;
   }

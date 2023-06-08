@@ -7,6 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
@@ -37,6 +38,10 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @ManyToOne
   private Teacher teacher;
 
+  @Lob
+  @Column(nullable = false)
+  private String fileContent;
+
   @Column(nullable = false)
   private ExamIdentifier identifier;
 
@@ -57,6 +62,20 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   }
 
   public Exam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
+      ExamDescription description, String fileContent) {
+    Preconditions.noneNull(course, teacher, identifier, title, description);
+
+    this.code = ExamCode.newID();
+    this.course = course;
+    this.teacher = teacher;
+    this.identifier = identifier;
+    this.title = title;
+    this.description = description;
+    this.fileContent = fileContent;
+    this.state = new ExamState(State.DRAFT);
+  }
+
+  public Exam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
       ExamDescription description) {
     Preconditions.noneNull(course, teacher, identifier, title, description);
 
@@ -66,6 +85,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.identifier = identifier;
     this.title = title;
     this.description = description;
+    this.fileContent = null;
     this.state = new ExamState(State.DRAFT);
   }
 

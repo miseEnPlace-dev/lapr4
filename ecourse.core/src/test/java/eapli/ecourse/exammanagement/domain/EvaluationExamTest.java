@@ -21,51 +21,55 @@ public class EvaluationExamTest extends ExamBaseTest {
   public void ensureEvaluationExamHasTitle() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            null, ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            null, ExamDescription.valueOf("Descricao"), null, new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasDescription() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), null, new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), null, null, new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()),
-            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasSections() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null, null,
             Time.valueOf(Calendar.getInstance()),
-            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasOpeningDate() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             null,
-            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasClosingDate() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
-            Time.valueOf(Calendar.getInstance()), null, ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
+            Time.valueOf(Calendar.getInstance()), null, ExamInfo.NONE, ExamInfo.AFTER_CLOSING,
+            ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasScore() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
             ExamInfo.AFTER_CLOSING, null));
   }
@@ -74,62 +78,67 @@ public class EvaluationExamTest extends ExamBaseTest {
   public void ensureEvaluationExamHasFeedbackInfo() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), null, ExamInfo.AFTER_CLOSING,
-            ExamScore.valueOf(100)));
+            ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasGradeInfo() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, null,
-            ExamScore.valueOf(100)));
+            ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasCourse() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(null, getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasTeacher() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), null, ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasIdentifier() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), null,
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureEvaluationExamHasTitleAndDescription() {
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            null, null, new ArrayList<EvaluationExamSection>(), Time.valueOf(Calendar.getInstance()),
-            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            null, null, null, new ArrayList<EvaluationExamSection>(), Time.valueOf(Calendar.getInstance()),
+            Time.valueOf(Calendar.getInstance()), ExamInfo.NONE, ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureItIsPossibleToCreateEvaluationExam() {
     final EvaluationExam exam = new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(),
         ExamIdentifier.valueOf("Exame"),
-        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null, new ArrayList<EvaluationExamSection>(),
         Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d));
 
     assertEquals(getDummyInProgressCourse(), exam.course());
   }
@@ -141,18 +150,19 @@ public class EvaluationExamTest extends ExamBaseTest {
     startDate.add(Calendar.DAY_OF_MONTH, 1);
     assertThrows(IllegalArgumentException.class,
         () -> new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(), ExamIdentifier.valueOf("Exame"),
-            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+            ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null,
+            new ArrayList<EvaluationExamSection>(),
             Time.valueOf(startDate), Time.valueOf(endDate), ExamInfo.NONE,
-            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100)));
+            ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d)));
   }
 
   @Test
   public void ensureSameAsWithWrongClass() {
     final EvaluationExam exam = new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(),
         ExamIdentifier.valueOf("Exame"),
-        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null, new ArrayList<EvaluationExamSection>(),
         Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d));
 
     assertFalse(exam.sameAs(new Object()));
   }
@@ -161,9 +171,9 @@ public class EvaluationExamTest extends ExamBaseTest {
   public void ensureSameAsWorksWithSameInstance() {
     final EvaluationExam exam = new EvaluationExam(getDummyInProgressCourse(), getNewDummyTeacher(),
         ExamIdentifier.valueOf("Exame"),
-        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null, new ArrayList<EvaluationExamSection>(),
         Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d));
 
     assertTrue(exam.sameAs(exam));
   }

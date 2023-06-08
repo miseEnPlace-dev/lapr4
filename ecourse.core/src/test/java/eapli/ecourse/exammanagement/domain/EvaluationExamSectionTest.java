@@ -20,7 +20,6 @@ public class EvaluationExamSectionTest {
   private SectionIdentifier identifier;
   private SectionTitle title;
   private SectionDescription description;
-  private ExamScore score;
   private List<Question> questions;
 
   @Before
@@ -28,36 +27,34 @@ public class EvaluationExamSectionTest {
     identifier = SectionIdentifier.valueOf("SEC001");
     title = SectionTitle.valueOf("Section Title");
     description = SectionDescription.valueOf("Section Description");
-    score = ExamScore.valueOf(10);
     questions = new ArrayList<>();
   }
 
   @Test
   public void testEvaluationExamSectionCreation() {
-    EvaluationExamSection section = new EvaluationExamSection(identifier, title, description, score, questions);
+    EvaluationExamSection section = new EvaluationExamSection(identifier, title, description, questions);
     assertEquals(identifier, section.identity());
     assertEquals(title, section.title());
     assertEquals(description, section.description());
-    assertEquals(score, section.score());
     assertEquals(questions, section.questions());
   }
 
   @Test
   public void testEvaluationExamSectionEquality() {
-    EvaluationExamSection section1 = new EvaluationExamSection(identifier, title, description, score, questions);
-    EvaluationExamSection section2 = new EvaluationExamSection(identifier, title, description, score, questions);
+    EvaluationExamSection section1 = new EvaluationExamSection(identifier, title, description, questions);
+    EvaluationExamSection section2 = new EvaluationExamSection(identifier, title, description, questions);
     EvaluationExamSection section3 = new EvaluationExamSection(SectionIdentifier.valueOf("SEC002"), title, description,
-        score, questions);
+        questions);
     assertEquals(section1, section2);
     assertNotEquals(section1, section3);
   }
 
   @Test
   public void ensureSameAsWorks() {
-    EvaluationExamSection section1 = new EvaluationExamSection(identifier, title, description, score, questions);
-    EvaluationExamSection section2 = new EvaluationExamSection(identifier, title, description, score, questions);
+    EvaluationExamSection section1 = new EvaluationExamSection(identifier, title, description, questions);
+    EvaluationExamSection section2 = new EvaluationExamSection(identifier, title, description, questions);
     EvaluationExamSection section3 = new EvaluationExamSection(SectionIdentifier.valueOf("SEC002"), title, description,
-        score, questions);
+        questions);
     assertTrue(section1.sameAs(section2));
     assertFalse(section1.sameAs(section3));
   }

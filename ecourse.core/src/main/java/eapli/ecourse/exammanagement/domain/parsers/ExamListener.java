@@ -118,16 +118,6 @@ public interface ExamListener extends ParseTreeListener {
 	 */
 	void exitGrade(ExamParser.GradeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExamParser#course}.
-	 * @param ctx the parse tree
-	 */
-	void enterCourse(ExamParser.CourseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExamParser#course}.
-	 * @param ctx the parse tree
-	 */
-	void exitCourse(ExamParser.CourseContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ExamParser#start_exam}.
 	 * @param ctx the parse tree
 	 */
@@ -177,46 +167,6 @@ public interface ExamListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitQuestion(ExamParser.QuestionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExamParser#body}.
-	 * @param ctx the parse tree
-	 */
-	void enterBody(ExamParser.BodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExamParser#body}.
-	 * @param ctx the parse tree
-	 */
-	void exitBody(ExamParser.BodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExamParser#feedback}.
-	 * @param ctx the parse tree
-	 */
-	void enterFeedback(ExamParser.FeedbackContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExamParser#feedback}.
-	 * @param ctx the parse tree
-	 */
-	void exitFeedback(ExamParser.FeedbackContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExamParser#score}.
-	 * @param ctx the parse tree
-	 */
-	void enterScore(ExamParser.ScoreContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExamParser#score}.
-	 * @param ctx the parse tree
-	 */
-	void exitScore(ExamParser.ScoreContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ExamParser#question_type}.
-	 * @param ctx the parse tree
-	 */
-	void enterQuestion_type(ExamParser.Question_typeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExamParser#question_type}.
-	 * @param ctx the parse tree
-	 */
-	void exitQuestion_type(ExamParser.Question_typeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExamParser#numericalQuestion}.
 	 * @param ctx the parse tree
@@ -277,6 +227,36 @@ public interface ExamListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMissingWordsQuestion(ExamParser.MissingWordsQuestionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#body}.
+	 * @param ctx the parse tree
+	 */
+	void enterBody(ExamParser.BodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#body}.
+	 * @param ctx the parse tree
+	 */
+	void exitBody(ExamParser.BodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#feedback}.
+	 * @param ctx the parse tree
+	 */
+	void enterFeedback(ExamParser.FeedbackContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#feedback}.
+	 * @param ctx the parse tree
+	 */
+	void exitFeedback(ExamParser.FeedbackContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExamParser#score}.
+	 * @param ctx the parse tree
+	 */
+	void enterScore(ExamParser.ScoreContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExamParser#score}.
+	 * @param ctx the parse tree
+	 */
+	void exitScore(ExamParser.ScoreContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExamParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree

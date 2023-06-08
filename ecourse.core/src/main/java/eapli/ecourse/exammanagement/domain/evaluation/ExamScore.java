@@ -3,7 +3,6 @@ package eapli.ecourse.exammanagement.domain.evaluation;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -14,16 +13,14 @@ import lombok.EqualsAndHashCode;
 public class ExamScore implements ValueObject, Comparable<ExamScore> {
   public static final long serialVersionUID = 1L;
 
-  private int score;
+  private Double score;
 
   /**
    * Constructor for Score.
    *
    * @param score score of the section
    */
-  private ExamScore(final int score) {
-    Preconditions.isPositive(score, "Score should be positive");
-
+  private ExamScore(final Double score) {
     this.score = score;
   }
 
@@ -34,7 +31,7 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
 
   }
 
-  public static ExamScore valueOf(final int score) {
+  public static ExamScore valueOf(final Double score) {
     return new ExamScore(score);
   }
 
@@ -45,7 +42,7 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
    */
   @Override
   public String toString() {
-    return Integer.toString(this.score);
+    return Double.toString(this.score);
   }
 
   /**
@@ -57,6 +54,6 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
    */
   @Override
   public int compareTo(final ExamScore other) {
-    return Integer.compare(this.score, other.score);
+    return Double.compare(this.score, other.score);
   }
 }

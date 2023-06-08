@@ -108,6 +108,16 @@ public interface QuestionListener extends ParseTreeListener {
 	 */
 	void exitFeedback(QuestionParser.FeedbackContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link QuestionParser#score}.
+	 * @param ctx the parse tree
+	 */
+	void enterScore(QuestionParser.ScoreContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link QuestionParser#score}.
+	 * @param ctx the parse tree
+	 */
+	void exitScore(QuestionParser.ScoreContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link QuestionParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree
 	 */

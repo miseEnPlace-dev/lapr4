@@ -1,6 +1,8 @@
 package eapli.ecourse.exammanagement.domain.parsers;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -20,6 +22,9 @@ public class EvaluationExamParser {
       throw new ParseException();
 
     EvaluationExamVisitor eval = new EvaluationExamVisitor();
-    return (EvaluationExamBuilder) eval.visit(tree);
+    EvaluationExamBuilder builder = (EvaluationExamBuilder) eval.visit(tree);
+
+    String fileContent = Files.readString(Paths.get(filePath));
+    return builder.withFileContent(fileContent);
   }
 }

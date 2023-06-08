@@ -78,9 +78,9 @@ public class ExamAnswerTest {
   private Exam dummyExam() {
     return new EvaluationExam(getDummyInProgressCourse(), getDummyTeacher(),
         ExamIdentifier.valueOf("Exame"),
-        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), new ArrayList<EvaluationExamSection>(),
+        ExamTitle.valueOf("Titulo"), ExamDescription.valueOf("Descricao"), null, new ArrayList<EvaluationExamSection>(),
         Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.NONE,
-        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100));
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100d));
   }
 
   @Before

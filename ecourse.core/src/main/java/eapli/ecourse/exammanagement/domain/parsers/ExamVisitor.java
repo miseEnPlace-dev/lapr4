@@ -77,12 +77,6 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGrade(ExamParser.GradeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExamParser#course}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCourse(ExamParser.CourseContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ExamParser#start_exam}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -112,30 +106,6 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitQuestion(ExamParser.QuestionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExamParser#body}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBody(ExamParser.BodyContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExamParser#feedback}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFeedback(ExamParser.FeedbackContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExamParser#score}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitScore(ExamParser.ScoreContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExamParser#question_type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitQuestion_type(ExamParser.Question_typeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExamParser#numericalQuestion}.
 	 * @param ctx the parse tree
@@ -172,6 +142,24 @@ public interface ExamVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMissingWordsQuestion(ExamParser.MissingWordsQuestionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBody(ExamParser.BodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#feedback}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFeedback(ExamParser.FeedbackContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExamParser#score}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScore(ExamParser.ScoreContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExamParser#shortAnswerCorrectAnswer}.
 	 * @param ctx the parse tree
