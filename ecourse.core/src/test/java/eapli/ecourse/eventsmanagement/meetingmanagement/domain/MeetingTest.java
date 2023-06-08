@@ -75,6 +75,26 @@ public class MeetingTest {
   }
 
   @Test
+  public void ensureMeetingIsComparable() {
+    Meeting meeting1 = getDummyMeeting();
+    Meeting meeting2 = getDummyMeeting2();
+    assertFalse(meeting1.equals(meeting2));
+  }
+
+  @Test
+  public void ensureMeetingIsComparableWithItself() {
+    Meeting meeting1 = getDummyMeeting();
+    assertTrue(meeting1.equals(meeting1));
+  }
+
+  @Test
+  public void ensureMeetingHashCodeIsWorking() {
+    Meeting meeting1 = getDummyMeeting();
+    Meeting meeting2 = getDummyMeeting2();
+    assertTrue(meeting1.hashCode() != meeting2.hashCode());
+  }
+
+  @Test
   public void ensureIdIsComparable() {
     MeetingID id1 = MeetingID.valueOf("123");
     MeetingID id2 = MeetingID.valueOf("122");
