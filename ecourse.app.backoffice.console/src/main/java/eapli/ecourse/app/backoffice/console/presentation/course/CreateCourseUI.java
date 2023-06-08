@@ -1,9 +1,9 @@
 package eapli.ecourse.app.backoffice.console.presentation.course;
 
 import eapli.ecourse.app.common.console.presentation.teacher.TeacherPrinter;
+import eapli.ecourse.app.common.console.util.FormatVerifier;
 import eapli.ecourse.coursemanagement.application.CreateCourseController;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
-import eapli.ecourse.exammanagement.service.FormatVerifier;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;

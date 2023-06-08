@@ -1,4 +1,4 @@
-package eapli.ecourse.exammanagement.service;
+package eapli.ecourse.app.common.console.util;
 
 import eapli.framework.io.util.Console;
 
