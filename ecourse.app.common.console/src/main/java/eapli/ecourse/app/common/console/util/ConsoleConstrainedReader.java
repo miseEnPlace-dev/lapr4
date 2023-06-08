@@ -7,14 +7,14 @@ import eapli.framework.io.util.Console;
  *
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public final class FormatVerifier {
+public final class ConsoleConstrainedReader {
   /**
    * Private constructor to avoid instantiation.
    */
-  private FormatVerifier() {
+  private ConsoleConstrainedReader() {
   }
 
-  public static String validateNonEmptyString(String message) {
+  public static String readNonEmptyString(String message) {
     String input = "";
     while (input.isEmpty()) {
       input = Console.readLine("\n" + message);

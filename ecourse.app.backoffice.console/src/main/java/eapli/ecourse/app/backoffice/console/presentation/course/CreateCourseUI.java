@@ -1,7 +1,7 @@
 package eapli.ecourse.app.backoffice.console.presentation.course;
 
 import eapli.ecourse.app.common.console.presentation.teacher.TeacherPrinter;
-import eapli.ecourse.app.common.console.util.FormatVerifier;
+import eapli.ecourse.app.common.console.util.ConsoleConstrainedReader;
 import eapli.ecourse.coursemanagement.application.CreateCourseController;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -26,19 +26,19 @@ public class CreateCourseUI extends AbstractUI {
   public boolean doShow() {
     System.out.println("Insert the following information: ");
 
-    String code = FormatVerifier.validateNonEmptyString("Code: ");
+    String code = ConsoleConstrainedReader.readNonEmptyString("Code: ");
     while (ctrl.checkIfCourseCodeExists(CourseCode.valueOf(code)).isPresent()) {
-      code = FormatVerifier.validateNonEmptyString(
+      code = ConsoleConstrainedReader.readNonEmptyString(
           "There is already a course with that code. Please enter a valid code: ");
     }
 
-    String title = FormatVerifier.validateNonEmptyString("Title: ");
-    String description = FormatVerifier.validateNonEmptyString("Description: ");
+    String title = ConsoleConstrainedReader.readNonEmptyString("Title: ");
+    String description = ConsoleConstrainedReader.readNonEmptyString("Description: ");
 
-    int minLimit = FormatVerifier.readNonNegativeInteger("Minimum number of students: ");
-    int maxLimit = FormatVerifier.readNonNegativeInteger("Maximum number of students: ");
+    int minLimit = ConsoleConstrainedReader.readNonNegativeInteger("Minimum number of students: ");
+    int maxLimit = ConsoleConstrainedReader.readNonNegativeInteger("Maximum number of students: ");
     while (maxLimit < minLimit) {
-      maxLimit = FormatVerifier.readNonNegativeInteger(
+      maxLimit = ConsoleConstrainedReader.readNonNegativeInteger(
           "Maximum limit can not be lower than the minimum limit. Please enter a valid maximum limit:");
     }
 
