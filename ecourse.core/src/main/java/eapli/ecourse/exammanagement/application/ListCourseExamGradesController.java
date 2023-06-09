@@ -1,7 +1,7 @@
 package eapli.ecourse.exammanagement.application;
 
 import eapli.ecourse.answermanagement.application.ListExamAnswerService;
-import eapli.ecourse.answermanagement.dto.ExamAnswerDTO;
+import eapli.ecourse.answermanagement.dto.AnswerDTO;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
@@ -36,11 +36,10 @@ public class ListCourseExamGradesController {
   private final ListEnrolmentService enrolmentService;
   private final StudentService studentService;
 
-
   public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-                                        FormativeExamRepository formativeRepository, CourseRepository courseRepository,
-                                        TeacherRepository teacherRepository, ExamAnswerRepository answerRepository,
-                                        EnrolmentRepository enrolmentRepository) {
+      FormativeExamRepository formativeRepository, CourseRepository courseRepository,
+      TeacherRepository teacherRepository, ExamAnswerRepository answerRepository,
+      EnrolmentRepository enrolmentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
     this.formativeService = new FormativeExamListService(formativeRepository);
     this.authz = authz;
@@ -68,14 +67,14 @@ public class ListCourseExamGradesController {
     return formativeService.findAllCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
   }
 
-  public Iterable<ExamAnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
+  public Iterable<AnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
     return answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getCode()).orElseThrow(),
-      studentsInCourse(examDTO.getCourse()));
+        studentsInCourse(examDTO.getCourse()));
   }
 
-  public Iterable<ExamAnswerDTO> formativeExamGrades(FormativeExamDTO examDTO) {
+  public Iterable<AnswerDTO> formativeExamGrades(FormativeExamDTO examDTO) {
     return answerService.listExamGrades(formativeService.findExamByCode(examDTO.getCode()).orElseThrow(),
-      studentsInCourse(examDTO.getCourse()));
+        studentsInCourse(examDTO.getCourse()));
   }
 
   private Collection<Student> studentsInCourse(Course course) {
@@ -83,8 +82,8 @@ public class ListCourseExamGradesController {
 
     Iterable<EnrolmentDTO> enrolments = enrolmentService.listStudentsEnrolled(course.code());
 
-    enrolments.forEach(e -> students.add(studentService.findStudentUserByMecNumber(e.getStudentNumber().toString()).orElseThrow()));
+    enrolments.forEach(
+        e -> students.add(studentService.findStudentUserByMecNumber(e.getStudentNumber().toString()).orElseThrow()));
     return students;
   }
 }
-

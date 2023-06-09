@@ -10,27 +10,27 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class ExamAnswerId implements ValueObject, Comparable<ExamAnswerId> {
+public class AnswerId implements ValueObject, Comparable<AnswerId> {
   private static final long serialVersionUID = 1L;
 
   private String code;
 
-  public ExamAnswerId(final String courseCode) {
+  public AnswerId(final String courseCode) {
     Preconditions.nonEmpty(courseCode);
 
     this.code = courseCode;
   }
 
-  protected ExamAnswerId() {
+  protected AnswerId() {
     // for ORM
     this.code = null;
   }
 
-  public static ExamAnswerId valueOf(final String courseCode) {
-    return new ExamAnswerId(courseCode);
+  public static AnswerId valueOf(final String courseCode) {
+    return new AnswerId(courseCode);
   }
 
-  public static ExamAnswerId newID() {
+  public static AnswerId newID() {
     return valueOf(UUID.randomUUID().toString());
   }
 
@@ -40,7 +40,7 @@ public class ExamAnswerId implements ValueObject, Comparable<ExamAnswerId> {
   }
 
   @Override
-  public int compareTo(final ExamAnswerId arg0) {
+  public int compareTo(final AnswerId arg0) {
     return code.compareTo(arg0.code);
   }
 }

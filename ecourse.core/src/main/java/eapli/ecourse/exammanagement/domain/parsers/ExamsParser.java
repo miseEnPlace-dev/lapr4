@@ -21,7 +21,7 @@ public class ExamsParser {
     if (parser.getNumberOfSyntaxErrors() > 0)
       throw new ParseException();
 
-    EvaluationExamVisitor eval = new EvaluationExamVisitor();
+    ExamsVisitor eval = new ExamsVisitor();
     EvaluationExamBuilder builder = (EvaluationExamBuilder) eval.visit(tree);
 
     String fileContent = Files.readString(Paths.get(filePath));

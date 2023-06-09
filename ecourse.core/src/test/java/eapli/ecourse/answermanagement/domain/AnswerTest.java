@@ -39,10 +39,9 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
-public class ExamAnswerTest {
-  private ExamAnswer answer;
-  private ExamAnswerId id;
-  private List<AnswerToQuestion> answers;
+public class AnswerTest {
+  private Answer answer;
+  private AnswerId id;
   private Student student;
   private Exam exam;
 
@@ -85,11 +84,10 @@ public class ExamAnswerTest {
 
   @Before
   public void setUp() {
-    id = ExamAnswerId.valueOf("123");
-    answers = new ArrayList<>();
+    id = AnswerId.valueOf("123");
     student = getNewDummyStudent();
     exam = dummyExam();
-    answer = new ExamAnswer(id, student, exam, answers);
+    answer = new Answer(id, student, exam);
   }
 
   @Test
@@ -108,13 +106,8 @@ public class ExamAnswerTest {
   }
 
   @Test
-  public void testAnswers() {
-    assertEquals(answers, answer.answers());
-  }
-
-  @Test
   public void testSameAs() {
-    ExamAnswer other = new ExamAnswer(id, student, exam, answers);
+    Answer other = new Answer(id, student, exam);
     assertTrue(answer.sameAs(other));
   }
 }

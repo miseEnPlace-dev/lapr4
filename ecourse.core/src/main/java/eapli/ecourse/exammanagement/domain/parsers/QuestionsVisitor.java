@@ -3,7 +3,7 @@ package eapli.ecourse.exammanagement.domain.parsers;
 import java.util.ArrayList;
 import java.util.List;
 
-import eapli.ecourse.answermanagement.domain.Score;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Feedback;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.MatchingQuestion;
@@ -220,7 +220,7 @@ public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
   public List<Question> visitScore(QuestionParser.ScoreContext ctx) {
     double score = Double.parseDouble(ctx.REAL_NUMBER().getText());
 
-    Score s = Score.valueOf(score);
+    ExamScore s = ExamScore.valueOf(score);
     this.question.changeScore(s);
     return null;
   }

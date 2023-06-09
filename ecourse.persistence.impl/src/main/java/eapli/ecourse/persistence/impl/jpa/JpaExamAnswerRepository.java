@@ -3,8 +3,8 @@ package eapli.ecourse.persistence.impl.jpa;
 import java.util.HashMap;
 import java.util.Map;
 
-import eapli.ecourse.answermanagement.domain.ExamAnswer;
-import eapli.ecourse.answermanagement.domain.ExamAnswerId;
+import eapli.ecourse.answermanagement.domain.Answer;
+import eapli.ecourse.answermanagement.domain.AnswerId;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
@@ -13,7 +13,7 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 public class JpaExamAnswerRepository
-    extends JpaAutoTxRepository<ExamAnswer, ExamAnswerId, ExamAnswerId>
+    extends JpaAutoTxRepository<Answer, AnswerId, AnswerId>
     implements ExamAnswerRepository {
 
   JpaExamAnswerRepository(final TransactionalContext autoTx) {
@@ -25,7 +25,7 @@ public class JpaExamAnswerRepository
   }
 
   @Override
-  public Iterable<ExamAnswer> findAllWithStudentMecanographicNumberAndCourseCode(
+  public Iterable<Answer> findAllWithStudentMecanographicNumberAndCourseCode(
       final MecanographicNumber number, final CourseCode code) {
     Map<String, Object> params = new HashMap<>();
     params.put("number", number);
@@ -33,7 +33,7 @@ public class JpaExamAnswerRepository
     return match("e.student.identity = :number and e.exam.course.code = :code", params);
   }
 
-  public Iterable<ExamAnswer> findAllWithExam(Exam exam) {
+  public Iterable<Answer> findAllWithExam(Exam exam) {
     return match("e.exam = :exam", "exam", exam);
   }
 }

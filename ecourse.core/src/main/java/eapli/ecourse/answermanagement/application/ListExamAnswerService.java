@@ -7,8 +7,7 @@ import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import eapli.ecourse.answermanagement.domain.Answer;
-import eapli.ecourse.answermanagement.domain.ExamAnswer;
-import eapli.ecourse.answermanagement.dto.ExamAnswerDTO;
+import eapli.ecourse.answermanagement.dto.AnswerDTO;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
@@ -31,12 +30,12 @@ public class ListExamAnswerService {
     this.formativeExamRepository = formativeExamRepository;
   }
 
-  public Collection<ExamAnswerDTO> listStudentGrades(Student student, CourseCode code) {
-    Collection<ExamAnswer> answers = (Collection<ExamAnswer>) examAnswerRepository
+  public Collection<AnswerDTO> listStudentGrades(Student student, CourseCode code) {
+    Collection<Answer> answers = (Collection<Answer>) examAnswerRepository
         .findAllWithStudentMecanographicNumberAndCourseCode(
             student.identity(), code);
 
-    Collection<ExamAnswerDTO> result = (Collection<ExamAnswerDTO>) convertToDTO(answers);
+    Collection<AnswerDTO> result = (Collection<AnswerDTO>) convertToDTO(answers);
 
     Collection<EvaluationExam> evaluationExams = (Collection<EvaluationExam>) evaluationExamRepository
         .findAllCourseExamsWithNoAnswersFromStudent(code, student.identity());
@@ -51,31 +50,31 @@ public class ListExamAnswerService {
     return result;
   }
 
-public Collection<ExamAnswerDTO> listExamGrades(Exam exam, Collection<Student> studentsInCourse) {
+  public Collection<AnswerDTO> listExamGrades(Exam exam, Collection<Student> studentsInCourse) {
 
-  Collection<ExamAnswer> answers = (Collection<ExamAnswer>) examAnswerRepository.findAllWithExam(exam);
+    Collection<Answer> answers = (Collection<Answer>) examAnswerRepository.findAllWithExam(exam);
 
-  Collection<ExamAnswerDTO> result = (Collection<ExamAnswerDTO>) convertToDTO(answers);
+    Collection<AnswerDTO> result = (Collection<AnswerDTO>) convertToDTO(answers);
 
-  Set<Student> studentWhoAnswered = new HashSet<>();
-  for (ExamAnswer examAnswer: answers) {
-    studentWhoAnswered.add(examAnswer.student());
+    Set<Student> studentWhoAnswered = new HashSet<>();
+    for (Answer examAnswer : answers) {
+      studentWhoAnswered.add(examAnswer.student());
+    }
+
+    for (Student student : studentsInCourse) {
+      if (!studentWhoAnswered.contains(student))
+        result.add(new AnswerDTO(student.identity().toString(), student.user().name().toString(),
+            exam.title().toString(), exam.type(), "N/a"));
+    }
+
+    return result;
   }
 
-  for (Student student: studentsInCourse) {
-    if (!studentWhoAnswered.contains(student))
-      result.add(new ExamAnswerDTO(student.identity().toString(), student.user().name().toString(),
-        exam.title().toString(), exam.type(), "N/a"));
-  }
-
-  return result;
-}
-
-  private Collection<ExamAnswerDTO> createNotTakenExams(Student student, Collection<? extends Exam> exams) {
-    Collection<ExamAnswerDTO> examAnswers = new ArrayList<>();
+  private Collection<AnswerDTO> createNotTakenExams(Student student, Collection<? extends Exam> exams) {
+    Collection<AnswerDTO> examAnswers = new ArrayList<>();
 
     for (Exam exam : exams) {
-      ExamAnswerDTO dto = new ExamAnswerDTO(student.identity().toString(), student.user().name().toString(),
+      AnswerDTO dto = new AnswerDTO(student.identity().toString(), student.user().name().toString(),
           exam.title().toString(), exam.type(), "N/a");
       examAnswers.add(dto);
     }
@@ -83,9 +82,9 @@ public Collection<ExamAnswerDTO> listExamGrades(Exam exam, Collection<Student> s
     return examAnswers;
   }
 
-  private Iterable<ExamAnswerDTO> convertToDTO(Iterable<ExamAnswer> answers) {
+  private Iterable<AnswerDTO> convertToDTO(Iterable<Answer> answers) {
     return StreamSupport.stream(answers.spliterator(), true)
-        .map(ExamAnswer::toDto)
+        .map(Answer::toDto)
         .collect(java.util.stream.Collectors.toUnmodifiableList());
   }
 }

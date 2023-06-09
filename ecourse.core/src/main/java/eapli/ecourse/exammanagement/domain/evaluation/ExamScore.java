@@ -45,6 +45,10 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
     return Double.toString(this.score);
   }
 
+  public Double value() {
+    return this.score;
+  }
+
   /**
    * Compares two Score objects, comparing their scores.
    *

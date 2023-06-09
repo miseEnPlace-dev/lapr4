@@ -1,6 +1,6 @@
 package eapli.ecourse.answermanagement.application;
 
-import eapli.ecourse.answermanagement.dto.ExamAnswerDTO;
+import eapli.ecourse.answermanagement.dto.AnswerDTO;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
@@ -37,7 +37,7 @@ public class ListStudentGradesController {
     return studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
   }
 
-  public Iterable<ExamAnswerDTO> listStudentGrades(CourseDTO course) {
+  public Iterable<AnswerDTO> listStudentGrades(CourseDTO course) {
     Student student = getAuthenticatedStudent();
     return listExamAnswerService.listStudentGrades(student, course.getCode());
   }
