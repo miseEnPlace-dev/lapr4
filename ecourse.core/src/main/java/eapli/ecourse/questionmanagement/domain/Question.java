@@ -115,4 +115,6 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   }
 
   public abstract boolean sameAs(Object other);
+
+  public abstract String getCorrectAnswer(Question question);
 }

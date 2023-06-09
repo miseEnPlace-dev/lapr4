@@ -73,6 +73,11 @@ public class QuestionTest {
       public boolean sameAs(Object other) {
         return false;
       }
+
+      @Override
+      public String getCorrectAnswer(Question question) {
+        return null;
+      }
     };
     assertEquals(body, question.body());
     assertEquals(type, question.type());
@@ -87,6 +92,11 @@ public class QuestionTest {
       public boolean sameAs(Object other) {
         return false;
       }
+
+      @Override
+      public String getCorrectAnswer(Question question) {
+        return null;
+      }
     };
     assertEquals(type, question.type());
   }
@@ -97,6 +107,11 @@ public class QuestionTest {
       @Override
       public boolean sameAs(Object other) {
         return false;
+      }
+
+      @Override
+      public String getCorrectAnswer(Question question) {
+        return null;
       }
     };
     assertEquals(body, question.body());
@@ -110,6 +125,11 @@ public class QuestionTest {
       public boolean sameAs(Object other) {
         return false;
       }
+
+      @Override
+      public String getCorrectAnswer(Question question) {
+        return null;
+      }
     };
     QuestionBody newBody = QuestionBody.valueOf("New Question Body");
     question.changeBody(newBody);
@@ -122,6 +142,11 @@ public class QuestionTest {
       @Override
       public boolean sameAs(Object other) {
         return false;
+      }
+
+      @Override
+      public String getCorrectAnswer(Question question) {
+        return null;
       }
     };
     Feedback newFeedback = Feedback.valueOf("new feedback");
