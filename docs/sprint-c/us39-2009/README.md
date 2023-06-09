@@ -91,10 +91,11 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** Ensure it is possible to generate structure of a formative exam string
 
 ```java
-
+@Test
+public void ensureIsPossibleToCreateFormativeExamString() {}
 ```
 
 ## 5. Implementation
