@@ -10,7 +10,7 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
-import eapli.ecourse.exammanagement.domain.parsers.EvaluationExamParser;
+import eapli.ecourse.exammanagement.domain.parsers.ExamsParser;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -56,7 +56,7 @@ public class CreateEvaluationExamController {
   public void parseExam(final String filePath) throws IOException, ParseException {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
     setCurrentAuthenticatedTeacher();
-    builder = EvaluationExamParser.parseWithVisitor(filePath);
+    builder = ExamsParser.parseWithVisitor(filePath);
   }
 
   public void createExam(CourseDTO courseDto, Time startTime, Time endTime) {

@@ -23,7 +23,7 @@ import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSectionBuild
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Question;
 
-public class EvaluationExamVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
+public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamBuilder examBuilder;
   private EvaluationExamSectionBuilder sectionBuilder;
   private List<EvaluationExamSection> sections;
