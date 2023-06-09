@@ -1,6 +1,7 @@
 package eapli.ecourse.app.board.authz;
 
 import java.io.IOException;
+import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.lib.BoardBackend;
@@ -16,8 +17,8 @@ public class CredentialStore {
 
   private UserDTO user;
 
-  public UserDTO getUser() {
-    return new UserDTO(user);
+  public Optional<UserDTO> getUser() {
+    return Optional.ofNullable(this.user);
   }
 
   public final CredentialHandler AUTHENTICATE = (u, p, r) -> {

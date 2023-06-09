@@ -38,12 +38,12 @@ public class App extends ECourseBaseApplication {
       return;
     }
 
-    // start the board http server
-    BoardHttpServer.run();
-
     final boolean logged = (new LoginUI(boardBackend.getCredentialStore().AUTHENTICATE)).show();
 
     if (logged) {
+      // start the board http server
+      BoardHttpServer.run();
+
       // next ui
       (new MainMenu()).mainLoop();
     }
