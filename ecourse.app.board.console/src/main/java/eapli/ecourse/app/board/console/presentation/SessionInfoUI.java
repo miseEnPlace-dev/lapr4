@@ -7,7 +7,7 @@ import eapli.framework.presentation.console.AbstractUI;
 public class SessionInfoUI extends AbstractUI {
   @Override
   protected boolean doShow() {
-    UserDTO user = BoardBackend.getInstance().getCredentialStore().getUser();
+    UserDTO user = BoardBackend.getInstance().getCredentialStore().getUser().get();
     System.out.println(user.toString());
     return false;
   }

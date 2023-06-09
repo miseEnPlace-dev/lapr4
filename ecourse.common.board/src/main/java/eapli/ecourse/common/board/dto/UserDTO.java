@@ -54,7 +54,7 @@ public class UserDTO implements Serializable {
         new HashSet<>(user.roleTypes()));
   }
 
-  public String toJson() {
+  public JsonObject toJson() {
     JsonArrayBuilder rolesJson = Json.createArrayBuilder();
 
     for (Role role : roles) {
@@ -64,7 +64,7 @@ public class UserDTO implements Serializable {
     JsonObject json = Json.createObjectBuilder().add("username", username).add("name", fullName)
         .add("email", email).add("roles", rolesJson.build()).build();
 
-    return json.toString();
+    return json;
   }
 
   public static UserDTO fromJson(JsonObject jsonObject) {

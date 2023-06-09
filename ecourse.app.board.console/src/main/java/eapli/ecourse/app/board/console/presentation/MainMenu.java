@@ -53,7 +53,7 @@ public class MainMenu extends AbstractUI {
 
   @Override
   public String headline() {
-    UserDTO user = BoardBackend.getInstance().getCredentialStore().getUser();
+    UserDTO user = BoardBackend.getInstance().getCredentialStore().getUser().get();
     return "Welcome, " + user.getFullName();
   }
 
