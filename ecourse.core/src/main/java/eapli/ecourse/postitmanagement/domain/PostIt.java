@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -53,12 +54,15 @@ public class PostIt implements AggregateRoot<PostItID> {
   @ManyToOne(optional = false, cascade = CascadeType.ALL)
   private SystemUser owner;
 
+  @Column(nullable = true)
+  private PostIt previous;
+
   protected PostIt() {
     // for ORM
   }
 
   public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
-      final SystemUser owner) {
+      final SystemUser owner, final PostIt previous) {
 
     Preconditions.noneNull(title, coordinates, board, owner);
 
@@ -68,6 +72,7 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.state = new PostItState();
     this.board = board;
     this.owner = owner;
+    this.previous = previous;
   }
 
   public SystemUser owner() {
@@ -88,6 +93,10 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   public PostItState state() {
     return this.state;
+  }
+
+  public PostIt previous() {
+    return this.previous;
   }
 
   @Override

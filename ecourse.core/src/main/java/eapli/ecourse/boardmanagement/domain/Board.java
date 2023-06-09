@@ -149,4 +149,19 @@ public class Board implements AggregateRoot<BoardID> {
     return new BoardDTO(this.id, this.title, this.archived, this.owner, this.permissions, this.rows,
         this.columns);
   }
+
+  public boolean canWrite(SystemUser user) {
+    if (this.owner().equals(user))
+      return true;
+
+    for (UserPermission permission : permissions) {
+      if (permission.canWrite(user))
+        return true;
+    }
+    return false;
+  }
+
+  public boolean isArchived() {
+    return this.archived != null;
+  }
 }

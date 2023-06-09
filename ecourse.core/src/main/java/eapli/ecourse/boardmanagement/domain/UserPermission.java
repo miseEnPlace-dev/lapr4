@@ -126,4 +126,8 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
   public UserPermissionDTO toDto() {
     return new UserPermissionDTO(createdAt, updatedAt, user, permissionType, id);
   }
+
+  public boolean canWrite(SystemUser user) {
+    return this.user.equals(user) || this.permissionType.equals(PermissionType.read());
+  }
 }

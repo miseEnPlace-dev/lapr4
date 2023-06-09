@@ -29,4 +29,14 @@ public class Coordinates implements ValueObject {
     return "X = " + x + ", Y = " + y;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Coordinates)) {
+      return false;
+    }
+    Coordinates coordinates = (Coordinates) o;
+    return x == coordinates.x && y == coordinates.y;
+  }
 }
