@@ -1,25 +1,20 @@
 @start-exam exame_de_lprog;
+    @title "Exame Nº1";
+    @description "";
+    @score 100;
 
-@title "Exame Nº1";
-@description "";
+    @start-section section1;
+        @title "Expressões regulares.";
+        @description "Descrição da Secção";
+        @number-of-questions 1;
+        @questions-type matching;
+    @end-section;
 
-@start-section section1;
-
-@title "Expressões regulares.";
-@description "Descrição da Secção";
-@number-of-questions 1;
-@questions-type matching;
-
-@end-section;
-
-@start-section section2;
-
-@title "Outra Secção";
-@description "Descrição da Secção2";
-@number-of-questions 1;
-@questions-type numerical;
-
-@end-section;
-
+    @start-section section2;
+        @title "Outra Secção";
+        @description "Descrição da Secção2";
+        @number-of-questions 1;
+        @questions-type numerical;
+    @end-section;
 
 @end-exam;

@@ -13,6 +13,7 @@ import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 
@@ -24,9 +25,9 @@ public class FormativeExam extends Exam {
   private Collection<FormativeExamSection> sections;
 
   public FormativeExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
-      ExamDescription description,
+      ExamDescription description, ExamScore score,
       Collection<FormativeExamSection> sections) {
-    super(course, teacher, identifier, title, description);
+    super(course, teacher, identifier, title, description, score);
 
     this.sections = sections;
   }
