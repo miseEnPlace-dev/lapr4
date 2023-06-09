@@ -19,7 +19,7 @@ import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
 
-public class FormativeExamsVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {
+public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {
   private FormativeExamRequestBuilder builder;
   private FormativeExamSectionRequest section;
   private List<FormativeExamSectionRequest> sections;

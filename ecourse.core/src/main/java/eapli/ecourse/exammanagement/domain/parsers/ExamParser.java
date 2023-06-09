@@ -17,33 +17,33 @@ public class ExamParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, EOI=7, STRING=8, START_EXAM=9, 
-		END_EXAM=10, TITLE=11, DESCRIPTION=12, FEEDBACK=13, GRADE=14, START_SECTION=15, 
-		END_SECTION=16, SCORE=17, START_QUESTION=18, END_QUESTION=19, TYPE=20, 
-		QUESTION_BODY=21, START_CORRECT_ANSWERS_SECTION=22, CORRECT_ANSWER=23, 
-		END_CORRECT_ANSWERS_SECTION=24, ACCEPTED_ERROR=25, START_OPTIONS_SECTION=26, 
-		END_OPTIONS_SECTION=27, OPTION=28, START_MATCHING_SECTION=29, END_MATCHING_SECTION=30, 
-		MATCH=31, TRUE=32, FALSE=33, FDB_GRD_TYPE=34, NUMBER=35, REAL_NUMBER=36, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, EOI=7, STRING=8, START_EXAM=9,
+		END_EXAM=10, TITLE=11, DESCRIPTION=12, FEEDBACK=13, GRADE=14, START_SECTION=15,
+		END_SECTION=16, SCORE=17, START_QUESTION=18, END_QUESTION=19, TYPE=20,
+		QUESTION_BODY=21, START_CORRECT_ANSWERS_SECTION=22, CORRECT_ANSWER=23,
+		END_CORRECT_ANSWERS_SECTION=24, ACCEPTED_ERROR=25, START_OPTIONS_SECTION=26,
+		END_OPTIONS_SECTION=27, OPTION=28, START_MATCHING_SECTION=29, END_MATCHING_SECTION=30,
+		MATCH=31, TRUE=32, FALSE=33, FDB_GRD_TYPE=34, NUMBER=35, REAL_NUMBER=36,
 		IDENTIFIER=37, WS=38, COMMENT=39;
 	public static final int
-		RULE_start = 0, RULE_exam = 1, RULE_sections = 2, RULE_section = 3, RULE_questions = 4, 
-		RULE_header = 5, RULE_properties = 6, RULE_title = 7, RULE_description = 8, 
-		RULE_feedback_header = 9, RULE_grade = 10, RULE_start_exam = 11, RULE_end_exam = 12, 
-		RULE_start_section = 13, RULE_end_section = 14, RULE_question = 15, RULE_numericalQuestion = 16, 
-		RULE_multipleChoiceQuestion = 17, RULE_shortAnswerQuestion = 18, RULE_trueFalseQuestion = 19, 
-		RULE_matchingQuestion = 20, RULE_missingWordsQuestion = 21, RULE_body = 22, 
-		RULE_feedback = 23, RULE_score = 24, RULE_shortAnswerCorrectAnswer = 25, 
-		RULE_multipleChoiceCorrectAnswer = 26, RULE_numericalCorrectAnswer = 27, 
-		RULE_numericalAcceptedError = 28, RULE_option = 29, RULE_match = 30, RULE_matchingCorrectAnswer = 31, 
+		RULE_start = 0, RULE_exam = 1, RULE_sections = 2, RULE_section = 3, RULE_questions = 4,
+		RULE_header = 5, RULE_properties = 6, RULE_title = 7, RULE_description = 8,
+		RULE_feedback_header = 9, RULE_grade = 10, RULE_start_exam = 11, RULE_end_exam = 12,
+		RULE_start_section = 13, RULE_end_section = 14, RULE_question = 15, RULE_numericalQuestion = 16,
+		RULE_multipleChoiceQuestion = 17, RULE_shortAnswerQuestion = 18, RULE_trueFalseQuestion = 19,
+		RULE_matchingQuestion = 20, RULE_missingWordsQuestion = 21, RULE_body = 22,
+		RULE_feedback = 23, RULE_score = 24, RULE_shortAnswerCorrectAnswer = 25,
+		RULE_multipleChoiceCorrectAnswer = 26, RULE_numericalCorrectAnswer = 27,
+		RULE_numericalAcceptedError = 28, RULE_option = 29, RULE_match = 30, RULE_matchingCorrectAnswer = 31,
 		RULE_missingWordsCorrectAnswer = 32, RULE_trueFalseCorrectAnswer = 33;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "exam", "sections", "section", "questions", "header", "properties", 
-			"title", "description", "feedback_header", "grade", "start_exam", "end_exam", 
-			"start_section", "end_section", "question", "numericalQuestion", "multipleChoiceQuestion", 
-			"shortAnswerQuestion", "trueFalseQuestion", "matchingQuestion", "missingWordsQuestion", 
-			"body", "feedback", "score", "shortAnswerCorrectAnswer", "multipleChoiceCorrectAnswer", 
-			"numericalCorrectAnswer", "numericalAcceptedError", "option", "match", 
+			"start", "exam", "sections", "section", "questions", "header", "properties",
+			"title", "description", "feedback_header", "grade", "start_exam", "end_exam",
+			"start_section", "end_section", "question", "numericalQuestion", "multipleChoiceQuestion",
+			"shortAnswerQuestion", "trueFalseQuestion", "matchingQuestion", "missingWordsQuestion",
+			"body", "feedback", "score", "shortAnswerCorrectAnswer", "multipleChoiceCorrectAnswer",
+			"numericalCorrectAnswer", "numericalAcceptedError", "option", "match",
 			"matchingCorrectAnswer", "missingWordsCorrectAnswer", "trueFalseCorrectAnswer"
 		};
 	}
@@ -51,25 +51,25 @@ public class ExamParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'numerical'", "'multiple-choice'", "'short-answer'", "'true-false'", 
-			"'matching'", "'missing-words'", "';'", null, "'@start-exam'", "'@end-exam'", 
-			"'@title'", "'@description'", "'@feedback'", "'@grade'", "'@start-section'", 
-			"'@end-section'", "'@score'", "'@start-question'", "'@end-question'", 
-			"'@type'", "'@question-body'", "'@correct-answers'", "'@correct-answer'", 
-			"'@end-correct-answers'", "'@accepted-error'", "'@start-options'", "'@end-options'", 
-			"'@option'", "'@start-matching'", "'@end-matching'", "'@match'", "'true'", 
+			null, "'numerical'", "'multiple-choice'", "'short-answer'", "'true-false'",
+			"'matching'", "'missing-words'", "';'", null, "'@start-exam'", "'@end-exam'",
+			"'@title'", "'@description'", "'@feedback'", "'@grade'", "'@start-section'",
+			"'@end-section'", "'@score'", "'@start-question'", "'@end-question'",
+			"'@type'", "'@question-body'", "'@correct-answers'", "'@correct-answer'",
+			"'@end-correct-answers'", "'@accepted-error'", "'@start-options'", "'@end-options'",
+			"'@option'", "'@start-matching'", "'@end-matching'", "'@match'", "'true'",
 			"'false'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, "EOI", "STRING", "START_EXAM", 
-			"END_EXAM", "TITLE", "DESCRIPTION", "FEEDBACK", "GRADE", "START_SECTION", 
-			"END_SECTION", "SCORE", "START_QUESTION", "END_QUESTION", "TYPE", "QUESTION_BODY", 
-			"START_CORRECT_ANSWERS_SECTION", "CORRECT_ANSWER", "END_CORRECT_ANSWERS_SECTION", 
-			"ACCEPTED_ERROR", "START_OPTIONS_SECTION", "END_OPTIONS_SECTION", "OPTION", 
-			"START_MATCHING_SECTION", "END_MATCHING_SECTION", "MATCH", "TRUE", "FALSE", 
+			null, null, null, null, null, null, null, "EOI", "STRING", "START_EXAM",
+			"END_EXAM", "TITLE", "DESCRIPTION", "FEEDBACK", "GRADE", "START_SECTION",
+			"END_SECTION", "SCORE", "START_QUESTION", "END_QUESTION", "TYPE", "QUESTION_BODY",
+			"START_CORRECT_ANSWERS_SECTION", "CORRECT_ANSWER", "END_CORRECT_ANSWERS_SECTION",
+			"ACCEPTED_ERROR", "START_OPTIONS_SECTION", "END_OPTIONS_SECTION", "OPTION",
+			"START_MATCHING_SECTION", "END_MATCHING_SECTION", "MATCH", "TRUE", "FALSE",
 			"FDB_GRD_TYPE", "NUMBER", "REAL_NUMBER", "IDENTIFIER", "WS", "COMMENT"
 		};
 	}
@@ -260,7 +260,7 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(76); 
+			setState(76);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -270,7 +270,7 @@ public class ExamParser extends Parser {
 				section();
 				}
 				}
-				setState(78); 
+				setState(78);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==START_SECTION );
@@ -379,7 +379,7 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(86); 
+			setState(86);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -389,7 +389,7 @@ public class ExamParser extends Parser {
 				question();
 				}
 				}
-				setState(88); 
+				setState(88);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==START_QUESTION );
@@ -439,7 +439,7 @@ public class ExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91); 
+			setState(91);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -449,7 +449,7 @@ public class ExamParser extends Parser {
 				properties();
 				}
 				}
-				setState(93); 
+				setState(93);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TITLE) | (1L << DESCRIPTION) | (1L << FEEDBACK) | (1L << GRADE))) != 0) );
@@ -1196,7 +1196,7 @@ public class ExamParser extends Parser {
 				{
 				setState(161);
 				match(START_CORRECT_ANSWERS_SECTION);
-				setState(163); 
+				setState(163);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
@@ -1206,7 +1206,7 @@ public class ExamParser extends Parser {
 					multipleChoiceCorrectAnswer();
 					}
 					}
-					setState(165); 
+					setState(165);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==CORRECT_ANSWER );
@@ -1227,7 +1227,7 @@ public class ExamParser extends Parser {
 			}
 			setState(173);
 			match(START_OPTIONS_SECTION);
-			setState(175); 
+			setState(175);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -1237,7 +1237,7 @@ public class ExamParser extends Parser {
 				option();
 				}
 				}
-				setState(177); 
+				setState(177);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==OPTION );
@@ -1326,7 +1326,7 @@ public class ExamParser extends Parser {
 
 			setState(189);
 			match(START_CORRECT_ANSWERS_SECTION);
-			setState(191); 
+			setState(191);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -1336,7 +1336,7 @@ public class ExamParser extends Parser {
 				shortAnswerCorrectAnswer();
 				}
 				}
-				setState(193); 
+				setState(193);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==CORRECT_ANSWER );
@@ -1514,7 +1514,7 @@ public class ExamParser extends Parser {
 
 			setState(214);
 			match(START_CORRECT_ANSWERS_SECTION);
-			setState(216); 
+			setState(216);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -1524,7 +1524,7 @@ public class ExamParser extends Parser {
 				matchingCorrectAnswer();
 				}
 				}
-				setState(218); 
+				setState(218);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==CORRECT_ANSWER );
@@ -1534,7 +1534,7 @@ public class ExamParser extends Parser {
 			match(EOI);
 			setState(222);
 			match(START_OPTIONS_SECTION);
-			setState(224); 
+			setState(224);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -1544,7 +1544,7 @@ public class ExamParser extends Parser {
 				option();
 				}
 				}
-				setState(226); 
+				setState(226);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==OPTION );
@@ -1554,7 +1554,7 @@ public class ExamParser extends Parser {
 			match(EOI);
 			setState(230);
 			match(START_MATCHING_SECTION);
-			setState(232); 
+			setState(232);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -1564,7 +1564,7 @@ public class ExamParser extends Parser {
 				match();
 				}
 				}
-				setState(234); 
+				setState(234);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==MATCH );

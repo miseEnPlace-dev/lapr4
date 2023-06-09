@@ -12,7 +12,7 @@ import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
-import eapli.ecourse.exammanagement.domain.parsers.FormativeExamsParser;
+import eapli.ecourse.exammanagement.domain.parsers.ANTLR4FormativeExamParser;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -30,6 +30,8 @@ public class CreateFormativeExamController {
   private final ListCourseService listCourseService;
   private final FormativeExamService examService;
 
+  private final ANTLR4FormativeExamParser parser;
+
   private Teacher teacher;
   private FormativeExamRequestBuilder builder;
 
@@ -43,6 +45,8 @@ public class CreateFormativeExamController {
 
     this.listCourseService = new ListCourseService(courseRepository);
     this.examService = new FormativeExamService(questionRepository);
+
+    this.parser = new ANTLR4FormativeExamParser();
   }
 
   public void setCurrentAuthenticatedTeacher() {
@@ -61,7 +65,7 @@ public class CreateFormativeExamController {
   public void parseExam(final String filePath) throws IOException, ParseException {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
     setCurrentAuthenticatedTeacher();
-    builder = FormativeExamsParser.parseWithVisitor(filePath);
+    builder = parser.parseFromFile(filePath);
   }
 
   public FormativeExam createExam(CourseDTO courseDto) {

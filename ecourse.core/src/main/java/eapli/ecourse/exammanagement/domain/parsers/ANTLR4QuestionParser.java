@@ -10,9 +10,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.questionmanagement.domain.Question;
 
-public class QuestionsParser {
-  public static List<Question> parseWithVisitor(String file) throws IOException, ParseException {
-    QuestionLexer lexer = new QuestionLexer(CharStreams.fromFileName(file));
+public class ANTLR4QuestionParser implements IParser<List<Question>> {
+  public List<Question> parseFromFile(String path) throws IOException, ParseException {
+    QuestionLexer lexer = new QuestionLexer(CharStreams.fromFileName(path));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     QuestionParser parser = new QuestionParser(tokens);
     ParseTree tree = parser.start();
@@ -20,12 +20,12 @@ public class QuestionsParser {
     if (parser.getNumberOfSyntaxErrors() > 0)
       throw new ParseException();
 
-    QuestionsVisitor eval = new QuestionsVisitor();
+    QuestionBuilderVisitor eval = new QuestionBuilderVisitor();
     return (List<Question>) eval.visit(tree);
   }
 
-  public static List<Question> parseWithVisitorFromString(String string) throws ParseException {
-    QuestionLexer lexer = new QuestionLexer(CharStreams.fromString(string));
+  public List<Question> parseFromString(String str) throws ParseException {
+    QuestionLexer lexer = new QuestionLexer(CharStreams.fromString(str));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     QuestionParser parser = new QuestionParser(tokens);
     ParseTree tree = parser.start();
@@ -33,7 +33,7 @@ public class QuestionsParser {
     if (parser.getNumberOfSyntaxErrors() > 0)
       throw new ParseException();
 
-    QuestionsVisitor eval = new QuestionsVisitor();
+    QuestionBuilderVisitor eval = new QuestionBuilderVisitor();
     return (List<Question>) eval.visit(tree);
   }
 }

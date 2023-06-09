@@ -23,11 +23,12 @@ import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSectionBuild
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Question;
 
-public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
+public class ExamBuilderVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
   private EvaluationExamBuilder examBuilder;
   private EvaluationExamSectionBuilder sectionBuilder;
   private List<EvaluationExamSection> sections;
   private List<Question> questions;
+  private ANTLR4QuestionParser questionParser = new ANTLR4QuestionParser();
 
   Double examScore = 0d;
 
@@ -160,7 +161,7 @@ public class ExamsVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
   @Override
   public EvaluationExamBuilder visitQuestions(ExamParser.QuestionsContext ctx) {
-    questions = QuestionsParser.parseWithVisitorFromString(ctx.getText().toString());
+    questions = questionParser.parseFromString(ctx.getText().toString());
 
     for (Question q : questions)
       this.examScore += q.score().value();

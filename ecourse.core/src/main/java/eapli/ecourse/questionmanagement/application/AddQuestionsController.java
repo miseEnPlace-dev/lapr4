@@ -9,7 +9,7 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.parsers.QuestionsParser;
+import eapli.ecourse.exammanagement.domain.parsers.ANTLR4QuestionParser;
 import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -20,6 +20,7 @@ public class AddQuestionsController {
   private final CourseRepository courseRepository;
   private final ListCourseService courseListService;
   private final AuthorizationService authz;
+  private final ANTLR4QuestionParser parser;
 
   public AddQuestionsController(QuestionRepository questionRepository, CourseRepository courseRepository,
       AuthorizationService authz) {
@@ -28,6 +29,8 @@ public class AddQuestionsController {
     this.authz = authz;
 
     this.courseListService = new ListCourseService(courseRepository);
+
+    this.parser = new ANTLR4QuestionParser();
   }
 
   public Iterable<CourseDTO> listAvailableCourses() {
@@ -41,7 +44,7 @@ public class AddQuestionsController {
       throw new IllegalArgumentException("Invalid file path!");
 
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
-    List<Question> questions = QuestionsParser.parseWithVisitor(filename);
+    List<Question> questions = parser.parseFromFile(filename);
 
     questions.forEach(question -> {
       question.changeCourse(course);

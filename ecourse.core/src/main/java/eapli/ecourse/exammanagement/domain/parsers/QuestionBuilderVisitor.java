@@ -16,7 +16,7 @@ import eapli.ecourse.questionmanagement.domain.QuestionType;
 import eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion;
 import eapli.ecourse.questionmanagement.domain.TrueFalseQuestion;
 
-public class QuestionsVisitor extends QuestionBaseVisitor<List<Question>> {
+public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> {
   List<Question> questions = new ArrayList<>();
   private Question question;
   private double real;

@@ -10,7 +10,7 @@ import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 
-public class TakeEvaluationExamParser {
+public class TakeExamsParser {
   // public static EvaluationExamBuilder parseWithVisitor(String filePath,
   // ExamPrinter printer)
   // throws IOException, ParseException {

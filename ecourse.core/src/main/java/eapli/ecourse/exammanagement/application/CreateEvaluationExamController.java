@@ -10,7 +10,8 @@ import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
-import eapli.ecourse.exammanagement.domain.parsers.ExamsParser;
+import eapli.ecourse.exammanagement.domain.parsers.ANTLR4ExamParser;
+import eapli.ecourse.exammanagement.domain.parsers.IParser;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -26,6 +27,7 @@ public class CreateEvaluationExamController {
   private final TeacherRepository teacherRepository;
   private final CourseRepository courseRepository;
   private final EvaluationExamRepository examRepository;
+  private final ANTLR4ExamParser parser;
 
   private Teacher teacher;
 
@@ -38,6 +40,7 @@ public class CreateEvaluationExamController {
     this.examRepository = examRepository;
     this.courseRepository = courseRepository;
     this.listCourseService = new ListCourseService(courseRepository);
+    this.parser = new ANTLR4ExamParser();
   }
 
   public void setCurrentAuthenticatedTeacher() {
@@ -56,7 +59,7 @@ public class CreateEvaluationExamController {
   public void parseExam(final String filePath) throws IOException, ParseException {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER);
     setCurrentAuthenticatedTeacher();
-    builder = ExamsParser.parseWithVisitor(filePath);
+    builder = parser.parseFromFile(filePath);
   }
 
   public void createExam(CourseDTO courseDto, Time startTime, Time endTime) {
