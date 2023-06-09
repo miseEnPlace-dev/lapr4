@@ -85,7 +85,7 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 
 ### 4.3. Applied Patterns
 
-- XXX
+- **Strategy**: This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them.
 
 ### 4.4. Tests
 
