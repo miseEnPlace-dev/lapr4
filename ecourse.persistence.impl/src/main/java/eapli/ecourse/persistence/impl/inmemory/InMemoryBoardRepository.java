@@ -3,7 +3,6 @@ package eapli.ecourse.persistence.impl.inmemory;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
@@ -15,13 +14,17 @@ public class InMemoryBoardRepository extends InMemoryDomainRepository<Board, Boa
   }
 
   @Override
-  public Iterable<Board> findAllBoardsCreatedByUser(Username userName) {
-    return match(e -> e.owner().username().equals(userName));
+  public Iterable<Board> findAllBoardsCreatedByUser(Username username) {
+    return match(e -> e.owner().username().equals(username));
   }
 
   @Override
-  public Iterable<Board> listActiveBoardsThatUserCanWrite(SystemUser user) {
-    return match(e -> e.canWrite(user) && !e.isArchived());
+  public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
+    return match(e -> e.canWrite(username) && !e.isArchived());
   }
 
+  @Override
+  public Iterable<Board> findAllUserBoards(Username username) {
+    return match(e -> e.participates(username) && !e.isArchived());
+  }
 }

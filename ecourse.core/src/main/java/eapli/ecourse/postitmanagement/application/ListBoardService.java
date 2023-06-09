@@ -16,7 +16,7 @@ public class ListBoardService {
   }
 
   public Iterable<BoardDTO> listBoardsThatUserCanWrite(SystemUser user) {
-    Iterable<Board> boards = boardRepository.listActiveBoardsThatUserCanWrite(user);
+    Iterable<Board> boards = boardRepository.findAllActiveBoardsWithUserWritePermission(user.username());
 
     return convertToDTO(boards);
   }

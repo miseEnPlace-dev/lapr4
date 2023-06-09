@@ -1,12 +1,13 @@
 package eapli.ecourse.persistence.impl.jpa;
 
 import javax.persistence.TypedQuery;
+
 import org.hibernate.annotations.QueryHints;
+
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -69,9 +70,20 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
   }
 
   @Override
-  public Iterable<Board> listActiveBoardsThatUserCanWrite(SystemUser user) {
+  public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username user) {
     // TODO
-    return null;
+    throw new UnsupportedOperationException("Unimplemented method 'findAllUserBoards'");
   }
 
+  @Override
+  public Iterable<Board> findAllUserBoards(Username username) {
+    TypedQuery<Board> query = createQuery(
+        "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE b.participants.username = :username AND b.archived NOT NULL",
+        Board.class);
+
+    query.setParameter("username", username);
+    query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
+
+    return query.getResultList();
+  }
 }

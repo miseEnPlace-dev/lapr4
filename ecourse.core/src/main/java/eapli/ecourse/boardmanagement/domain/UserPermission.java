@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
+
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.validations.Preconditions;
 
 @Entity
@@ -127,7 +129,7 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
     return new UserPermissionDTO(createdAt, updatedAt, user, permissionType, id);
   }
 
-  public boolean canWrite(SystemUser user) {
-    return this.user.equals(user) || this.permissionType.equals(PermissionType.read());
+  public boolean canWrite(Username username) {
+    return this.user.username().equals(username) || this.permissionType.equals(PermissionType.read());
   }
 }

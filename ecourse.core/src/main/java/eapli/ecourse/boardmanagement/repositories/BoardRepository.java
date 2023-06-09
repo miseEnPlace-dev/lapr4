@@ -1,12 +1,11 @@
 package eapli.ecourse.boardmanagement.repositories;
 
+import java.util.Optional;
+
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.framework.domain.repositories.DomainRepository;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
-
-import java.util.Optional;
 
 public interface BoardRepository extends DomainRepository<BoardID, Board> {
 
@@ -27,5 +26,7 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
    */
   Iterable<Board> findAllBoardsCreatedByUser(Username user);
 
-  Iterable<Board> listActiveBoardsThatUserCanWrite(SystemUser user);
+  Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username user);
+
+  Iterable<Board> findAllUserBoards(Username username);
 }
