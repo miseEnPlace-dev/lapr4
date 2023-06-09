@@ -3,7 +3,7 @@ package eapli.ecourse.app.common.console.util;
 import eapli.framework.io.util.Console;
 
 /**
- * Format Verifier with all the rules for the application.
+ * Console Constrained Reader utility class.
  *
  * @author André Barros <1211299@isep.ipp.pt>
  */

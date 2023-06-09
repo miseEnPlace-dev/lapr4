@@ -81,7 +81,7 @@ public class Teacher implements AggregateRoot<TaxPayerNumber> {
 
     final Teacher that = (Teacher) other;
 
-    return this.user().sameAs(other) && this.acronym().equals(that.acronym())
+    return this.user().sameAs(that.user()) && this.acronym().equals(that.acronym())
         && this.birthDate().equals(that.birthDate());
   }
 
