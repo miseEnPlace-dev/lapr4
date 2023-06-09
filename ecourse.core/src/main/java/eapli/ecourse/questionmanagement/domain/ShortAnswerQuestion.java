@@ -54,4 +54,19 @@ public class ShortAnswerQuestion extends Question {
     return this.body().equals(that.body()) && this.type().equals(that.type())
         && this.correctAnswers.equals(that.correctAnswers);
   }
+
+  @Override
+  public String getCorrectAnswer(Question q) {
+    ShortAnswerQuestion shortAnswerQuestion = (ShortAnswerQuestion) q;
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("@correct-answers");
+    for (Map.Entry<String, Double> entry : shortAnswerQuestion.correctAnswers().entrySet()) {
+      sb.append("@correct-answer \"" + entry.getKey() + "\" " + entry.getValue() + ";");
+    }
+    sb.append("@end-correct-answers;");
+
+    return sb.toString();
+  }
 }

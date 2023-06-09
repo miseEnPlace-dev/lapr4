@@ -57,4 +57,16 @@ public class NumericalQuestion extends Question {
     return this.body().equals(that.body()) && this.type().equals(that.type())
         && this.correctAnswer.equals(that.correctAnswer) && this.acceptedError.equals(that.acceptedError);
   }
+
+  @Override
+  public String getCorrectAnswer(Question q) {
+    NumericalQuestion question = (NumericalQuestion) q;
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("@correct-answer" + question.correctAnswer() + ";");
+    sb.append("@accepted-error" + question.acceptedError() + ";");
+
+    return sb.toString();
+  }
 }

@@ -105,4 +105,31 @@ public class MatchingQuestion extends Question {
         && this.options.equals(that.options) && this.matches.equals(that.matches)
         && this.correctMatches.equals(that.correctMatches);
   }
+
+  @Override
+  public String getCorrectAnswer(Question question) {
+    MatchingQuestion matchingQuestion = (MatchingQuestion) question;
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("@correct-answers");
+    for (Map.Entry<String, String> entry : matchingQuestion.correctMatches.entrySet()) {
+      sb.append("@correct-answer" + entry.getKey() + " "
+          + entry.getValue() + ";");
+    }
+    sb.append("@end-correct-answers;");
+
+    sb.append("@start-options");
+    for (Map.Entry<QuestionIdentifier, String> entry : matchingQuestion.options.entrySet()) {
+      sb.append("@option" + entry.getKey() + "  \"" + entry.getValue() + "\";");
+    }
+    sb.append("@end-options;");
+
+    sb.append("@start-matching");
+    for (Map.Entry<QuestionIdentifier, String> entry : matchingQuestion.matches.entrySet()) {
+      sb.append("@match" + entry.getKey() + "  \"" + entry.getValue() + "\";");
+    }
+    sb.append("@end-matching;");
+
+    return sb.toString();
+  }
 }

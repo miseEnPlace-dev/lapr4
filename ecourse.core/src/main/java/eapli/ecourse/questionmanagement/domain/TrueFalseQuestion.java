@@ -44,4 +44,15 @@ public class TrueFalseQuestion extends Question {
     return this.body().equals(that.body()) && this.type().equals(that.type())
         && this.correctAnswer == that.correctAnswer;
   }
+
+  @Override
+  public String getCorrectAnswer(Question q) {
+    TrueFalseQuestion question = (TrueFalseQuestion) q;
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("@correct-answer " + question.correctAnswer() + ";");
+
+    return sb.toString();
+  }
 }

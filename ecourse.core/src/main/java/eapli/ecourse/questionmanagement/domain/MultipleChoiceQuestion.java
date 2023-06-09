@@ -86,4 +86,24 @@ public class MultipleChoiceQuestion extends Question {
     return this.body().equals(that.body()) && this.type().equals(that.type())
         && this.correctAnswers.equals(that.correctAnswers) && this.options.equals(that.options);
   }
+
+  @Override
+  public String getCorrectAnswer(Question q) {
+    MultipleChoiceQuestion question = (MultipleChoiceQuestion) q;
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("@correct-answers");
+    for (Map.Entry<QuestionIdentifier, Double> entry : question.correctAnswers().entrySet()) {
+      sb.append("@correct-answer " + entry.getKey() + " " + entry.getValue() + ";");
+    }
+    sb.append("@end-correct-answers;");
+
+    sb.append("@start-options");
+    for (Map.Entry<QuestionIdentifier, String> entry : question.options.entrySet()) {
+      sb.append("@option " + entry.getKey() + " \"" + entry.getValue() + "\";");
+    }
+    sb.append("@end-options;");
+
+    return sb.toString();
+  }
 }

@@ -62,4 +62,25 @@ public class MissingWordsQuestion extends Question {
     return this.body().equals(that.body()) && this.type().equals(that.type())
         && this.missingWords.equals(that.missingWords);
   }
+
+  @Override
+  public String getCorrectAnswer(Question q) {
+    MissingWordsQuestion question = (MissingWordsQuestion) q;
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("@start-options");
+    for (String option : question.options()) {
+      sb.append("@option " + option + ";");
+    }
+    sb.append("@end-options;");
+
+    sb.append("@start-correct-answers");
+    for (String correct : question.missingWords()) {
+      sb.append("@correct-answer \"" + correct + "\";");
+    }
+    sb.append("@end-correct-answers;");
+
+    return sb.toString();
+  }
 }
