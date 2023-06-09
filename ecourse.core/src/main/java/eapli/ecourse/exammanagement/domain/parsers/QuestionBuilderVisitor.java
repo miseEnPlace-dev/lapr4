@@ -46,7 +46,8 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx) {
     this.question = new MatchingQuestion(QuestionType.FORMATIVE);
-    visit(ctx.score());
+    if (ctx.score() != null)
+      visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -91,7 +92,8 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx) {
     this.question = new NumericalQuestion(QuestionType.FORMATIVE);
-    visit(ctx.score());
+    if (ctx.score() != null)
+      visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -110,7 +112,8 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx) {
     this.question = new MultipleChoiceQuestion(QuestionType.FORMATIVE);
-    visit(ctx.score());
+    if (ctx.score() != null)
+      visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -153,7 +156,8 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx) {
     this.question = new ShortAnswerQuestion(QuestionType.FORMATIVE);
-    visit(ctx.score());
+    if (ctx.score() != null)
+      visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -174,7 +178,8 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx) {
     this.question = new TrueFalseQuestion(QuestionType.FORMATIVE);
-    visit(ctx.score());
+    if (ctx.score() != null)
+      visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -191,7 +196,8 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx) {
     this.question = new MissingWordsQuestion(QuestionType.FORMATIVE);
-    visit(ctx.score());
+    if (ctx.score() != null)
+      visit(ctx.score());
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());

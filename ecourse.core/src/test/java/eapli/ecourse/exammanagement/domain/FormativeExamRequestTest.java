@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
 
@@ -17,6 +18,7 @@ public class FormativeExamRequestTest {
   private ExamIdentifier identifier;
   private ExamTitle title;
   private ExamDescription description;
+  private ExamScore score;
   private List<FormativeExamSectionRequest> sections;
 
   @Before
@@ -30,11 +32,12 @@ public class FormativeExamRequestTest {
     SectionDescription sectionDescription = SectionDescription.valueOf("This is a test section");
     Integer numberOfQuestions = 10;
     String questionsType = "Multiple Choice";
+    score = ExamScore.valueOf(12d);
     FormativeExamSectionRequest sectionRequest = new FormativeExamSectionRequest(sectionIdentifier, sectionTitle,
         sectionDescription,
         numberOfQuestions, questionsType);
     sections.add(sectionRequest);
-    request = new FormativeExamRequest(identifier, title, description, sections);
+    request = new FormativeExamRequest(identifier, title, description, score, sections);
   }
 
   @Test
@@ -59,7 +62,7 @@ public class FormativeExamRequestTest {
 
   @Test
   public void testSameAs() {
-    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, sections);
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
     assertTrue(request.sameAs(other));
   }
 }

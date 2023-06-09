@@ -96,6 +96,7 @@ public class ExamBuilderVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
       }
     });
 
+    // Visiting Exam Header...
     if (ctx.getParent().getStart().getText().equals("@start-exam")) {
       String[] requiredProps = {
           "title",
@@ -110,7 +111,9 @@ public class ExamBuilderVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
       });
 
       initializeExam(properties);
-    } else {
+    }
+    // Visiting Section Header...
+    else {
       String[] requiredProps = {
           "title"
       };

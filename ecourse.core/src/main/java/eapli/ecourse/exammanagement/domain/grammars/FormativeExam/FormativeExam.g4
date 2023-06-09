@@ -9,7 +9,7 @@ section:
 	startSection header numberOfQuestions questionsType endSection;
 
 header:							properties+;
-properties:					title | description | feedback;
+properties:					title | description | feedback | score;
 numberOfQuestions:	NUMBER_OF_QUESTIONS NUMBER EOI;
 questionsType:
 	QUESTIONS_TYPE (
@@ -24,6 +24,7 @@ questionsType:
 title:				TITLE STRING EOI;
 description:	DESCRIPTION STRING EOI;
 feedback:			FEEDBACK FDB_GRD_TYPE EOI;
+score:				SCORE NUMBER EOI;
 
 startExam:	START_EXAM IDENTIFIER EOI;
 endExam:		END_EXAM EOI;
@@ -48,12 +49,15 @@ START_SECTION:				'@start-section';
 END_SECTION:					'@end-section';
 NUMBER_OF_QUESTIONS:	'@number-of-questions';
 QUESTIONS_TYPE:				'@questions-type';
+SCORE:								'@score';
 
 // Feedback/Grade type
 FDB_GRD_TYPE: 'none' | 'on-submit' | 'after-closing';
 
-NUMBER:			[0-9]+;
-IDENTIFIER:	[a-zA-Z][a-zA-Z0-9_]*;
+NUMBER:				REAL_NUMBER | INTEGER;
+REAL_NUMBER:	[0-9]+ '.' [0-9]+;
+INTEGER:			[0-9]+;
+IDENTIFIER:		[a-zA-Z][a-zA-Z0-9_]*;
 
 // Skip spaces, tabs and newlines
 WS: [ \t\n\r]+ -> skip;

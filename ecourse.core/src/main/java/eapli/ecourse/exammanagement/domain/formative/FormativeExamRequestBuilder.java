@@ -5,6 +5,7 @@ import java.util.List;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.validations.Preconditions;
 
@@ -15,6 +16,7 @@ public class FormativeExamRequestBuilder implements DomainFactory<FormativeExamR
   private ExamTitle title;
   private ExamDescription description;
   private List<FormativeExamSectionRequest> sections;
+  private ExamScore score;
 
   public FormativeExamRequestBuilder withIdentifier(ExamIdentifier identifier) {
     this.identifier = identifier;
@@ -23,6 +25,11 @@ public class FormativeExamRequestBuilder implements DomainFactory<FormativeExamR
 
   public FormativeExamRequestBuilder withTitle(ExamTitle title) {
     this.title = title;
+    return this;
+  }
+
+  public FormativeExamRequestBuilder withScore(ExamScore score) {
+    this.score = score;
     return this;
   }
 
@@ -42,7 +49,7 @@ public class FormativeExamRequestBuilder implements DomainFactory<FormativeExamR
 
     Preconditions.noneNull(identifier, title, description, sections);
 
-    examRequest = new FormativeExamRequest(identifier, title, description, sections);
+    examRequest = new FormativeExamRequest(identifier, title, description, score, sections);
     return examRequest;
   }
 

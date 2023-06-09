@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 
-public class ANTLR4FormativeExamParser implements IParser<FormativeExamRequestBuilder> {
+public class ANTLR4FormativeExamParser implements GrammarParser<FormativeExamRequestBuilder> {
   public FormativeExamRequestBuilder parseFromFile(String filePath) throws IOException, ParseException {
     FormativeExamLexer lexer = new FormativeExamLexer(CharStreams.fromFileName(filePath));
     CommonTokenStream tokens = new CommonTokenStream(lexer);

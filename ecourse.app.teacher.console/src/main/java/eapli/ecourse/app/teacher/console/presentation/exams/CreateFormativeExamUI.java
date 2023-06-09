@@ -43,8 +43,10 @@ public class CreateFormativeExamUI extends AbstractUI {
       this.ctrl.parseExam(filePath);
     } catch (IOException ex) {
       System.out.println("\n\nThe specified file does not exist.");
+      return false;
     } catch (ParseException ex) {
       System.out.println(ex.getMessage());
+      return false;
     }
 
     System.out.println("\n\nChecked structure successfully!\n\n");
@@ -53,6 +55,7 @@ public class CreateFormativeExamUI extends AbstractUI {
       this.ctrl.createExam(selectedCourse);
     } catch (IllegalArgumentException ex) {
       System.out.println(ex.getMessage());
+      return false;
     }
 
     System.out.println("\n\nExam created successfully.");

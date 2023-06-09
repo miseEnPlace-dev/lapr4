@@ -6,6 +6,8 @@ import eapli.framework.actions.Actions;
 public class ExamsMenu {
   private static final int VIEW_FUTURE_EXAMS_OPTION = 1;
   private static final int LIST_GRADES_OPTION = 2;
+  private static final int TAKE_EVAL_EXAM_OPTION = 3;
+  private static final int TAKE_FORM_EXAM_OPTION = 4;
   private static final int EXIT_OPTION = 0;
 
   private static final String RETURN = "Return ";
@@ -13,8 +15,10 @@ public class ExamsMenu {
   public Menu buildMenu() {
     final Menu menu = new Menu("Exams >");
 
-    menu.addItem(VIEW_FUTURE_EXAMS_OPTION, "View future exams", new ListFutureExamsUI()::show);
+    menu.addItem(VIEW_FUTURE_EXAMS_OPTION, "View Future Exams", new ListFutureExamsUI()::show);
     menu.addItem(LIST_GRADES_OPTION, "List Grades", new ListStudentGradesUI()::show);
+    // menu.addItem(TAKE_EVAL_EXAM_OPTION, "Take Evaluation Exam", );
+    // menu.addItem(TAKE_FORM_EXAM_OPTION, "Take Formative Exam", );
     menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
 
     return menu;

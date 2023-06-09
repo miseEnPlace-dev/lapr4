@@ -44,9 +44,6 @@ public class EvaluationExam extends Exam {
   @AttributeOverride(name = "time", column = @Column(name = "endTime"))
   private Time endTime;
 
-  @Column(nullable = false)
-  private ExamScore score;
-
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Collection<EvaluationExamSection> sections;
 
@@ -55,7 +52,7 @@ public class EvaluationExam extends Exam {
       Time endTime,
       ExamInfo feedbackInfo,
       ExamInfo gradeInfo, ExamScore score) {
-    super(course, teacher, identifier, title, description, fileContent);
+    super(course, teacher, identifier, title, description, score, fileContent);
 
     Preconditions.noneNull(feedbackInfo, gradeInfo, startTime, endTime, score, sections);
 
@@ -63,7 +60,6 @@ public class EvaluationExam extends Exam {
     this.gradeInfo = gradeInfo;
     this.sections = sections;
     setDates(startTime, endTime);
-    this.score = score;
   }
 
   protected EvaluationExam() {
@@ -86,10 +82,6 @@ public class EvaluationExam extends Exam {
     return this.endTime;
   }
 
-  public ExamScore score() {
-    return this.score;
-  }
-
   public ExamInfo feedbackInfo() {
     return this.feedbackInfo;
   }
@@ -102,7 +94,7 @@ public class EvaluationExam extends Exam {
   public String toString() {
     return super.toString() + "EvaluationExam [endTime=" + endTime + ", feedbackInfo=" + feedbackInfo + ", gradeInfo="
         + gradeInfo
-        + ", score=" + score + ", startTime=" + startTime + ", endTime = " + endTime + "]";
+        + ", startTime=" + startTime + ", endTime = " + endTime + "]";
   }
 
   public EvaluationExamDTO toDto() {
@@ -124,6 +116,6 @@ public class EvaluationExam extends Exam {
       return true;
 
     return this.feedbackInfo.equals(that.feedbackInfo) && this.gradeInfo.equals(that.gradeInfo)
-        && this.score.equals(that.score) && this.startTime.equals(that.startTime) && this.endTime.equals(that.endTime);
+        && this.startTime.equals(that.startTime) && this.endTime.equals(that.endTime);
   }
 }

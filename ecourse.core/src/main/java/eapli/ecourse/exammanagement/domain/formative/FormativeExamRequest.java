@@ -5,15 +5,17 @@ import java.util.List;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.framework.domain.model.DomainEntityBase;
 
 public class FormativeExamRequest extends DomainEntityBase<ExamIdentifier> {
   private ExamIdentifier identifier;
   private ExamTitle title;
   private ExamDescription description;
+  private ExamScore score;
   private List<FormativeExamSectionRequest> sections;
 
-  public FormativeExamRequest(ExamIdentifier identifier, ExamTitle title, ExamDescription description,
+  public FormativeExamRequest(ExamIdentifier identifier, ExamTitle title, ExamDescription description, ExamScore score,
       List<FormativeExamSectionRequest> sections) {
     this.identifier = identifier;
     this.title = title;
@@ -35,6 +37,10 @@ public class FormativeExamRequest extends DomainEntityBase<ExamIdentifier> {
 
   public List<FormativeExamSectionRequest> sections() {
     return sections;
+  }
+
+  public ExamScore score() {
+    return this.score;
   }
 
   @Override

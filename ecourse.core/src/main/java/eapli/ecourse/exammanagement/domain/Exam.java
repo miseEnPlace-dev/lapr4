@@ -13,6 +13,7 @@ import javax.persistence.Version;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamState.State;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.validations.Preconditions;
@@ -39,7 +40,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   private Teacher teacher;
 
   @Lob
-  @Column(nullable = false)
+  @Column(nullable = true)
   private String fileContent;
 
   @Column(nullable = false)
@@ -54,6 +55,9 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @Column(nullable = false)
   private ExamState state;
 
+  @Column(nullable = false)
+  private ExamScore score;
+
   @Column(name = "type", insertable = false, updatable = false)
   protected String type;
 
@@ -62,7 +66,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   }
 
   public Exam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
-      ExamDescription description, String fileContent) {
+      ExamDescription description, ExamScore score, String fileContent) {
     Preconditions.noneNull(course, teacher, identifier, title, description);
 
     this.code = ExamCode.newID();
@@ -72,11 +76,12 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.title = title;
     this.description = description;
     this.fileContent = fileContent;
+    this.score = score;
     this.state = new ExamState(State.DRAFT);
   }
 
   public Exam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
-      ExamDescription description) {
+      ExamDescription description, ExamScore score) {
     Preconditions.noneNull(course, teacher, identifier, title, description);
 
     this.code = ExamCode.newID();
@@ -86,6 +91,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.title = title;
     this.description = description;
     this.fileContent = null;
+    this.score = score;
     this.state = new ExamState(State.DRAFT);
   }
 
@@ -112,6 +118,10 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
 
   public String type() {
     return this.type;
+  }
+
+  public ExamScore score() {
+    return this.score;
   }
 
   public abstract boolean sameAs(Object other);

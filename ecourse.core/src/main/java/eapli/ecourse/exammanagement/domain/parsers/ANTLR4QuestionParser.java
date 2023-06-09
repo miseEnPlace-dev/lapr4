@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.questionmanagement.domain.Question;
 
-public class ANTLR4QuestionParser implements IParser<List<Question>> {
+public class ANTLR4QuestionParser implements GrammarParser<List<Question>> {
   public List<Question> parseFromFile(String path) throws IOException, ParseException {
     QuestionLexer lexer = new QuestionLexer(CharStreams.fromFileName(path));
     CommonTokenStream tokens = new CommonTokenStream(lexer);

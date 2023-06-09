@@ -35,7 +35,7 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   @Enumerated(EnumType.STRING)
   private QuestionType type;
 
-  @Column(nullable = false)
+  @Column(nullable = true)
   private ExamScore score;
 
   @Column(nullable = true)
@@ -53,17 +53,20 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
     this.type = type;
     this.generalFeedback = generalFeedback;
     this.course = course;
+    this.score = null;
   }
 
   public Question(QuestionType type) {
     this.code = QuestionCode.newID();
     this.type = type;
+    this.score = null;
   }
 
   public Question(QuestionBody body, QuestionType type) {
     this.code = QuestionCode.newID();
     this.body = body;
     this.type = type;
+    this.score = null;
   }
 
   protected Question() {

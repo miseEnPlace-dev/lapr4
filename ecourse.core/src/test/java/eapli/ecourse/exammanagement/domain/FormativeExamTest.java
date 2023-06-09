@@ -16,6 +16,7 @@ import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
 import eapli.ecourse.teachermanagement.domain.Acronym;
@@ -66,7 +67,8 @@ public class FormativeExamTest {
     ExamTitle title = ExamTitle.valueOf("Test Exam");
     ExamDescription description = ExamDescription.valueOf("This is a test exam");
     Collection<FormativeExamSection> sections = new ArrayList<>();
-    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, sections);
+    ExamScore score = ExamScore.valueOf(12d);
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, score, sections);
 
     assertEquals(course, exam.course());
     assertEquals(identifier, exam.identifier());
