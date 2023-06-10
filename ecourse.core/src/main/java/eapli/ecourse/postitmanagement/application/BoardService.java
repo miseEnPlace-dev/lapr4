@@ -19,9 +19,12 @@ public class BoardService {
     this.postItRepository = postItRepository;
   }
 
-  public boolean existsPostIt(BoardID id, int x, int y) {
-    // TODO
-    return false;
+  public boolean isCellAvailable(BoardID id, int x, int y) {
+    Iterable<PostIt> postIts = postItRepository.findAllByBoardId(id);
+
+    postIts = getLatestVersionOfBoard(boardRepository.ofIdentity(id).orElseThrow());
+
+    return !this.existsPostIt(postIts, x, y);
   }
 
   private Iterable<PostIt> getLatestVersionOfBoard(Board board) {
