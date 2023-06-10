@@ -26,7 +26,19 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
    */
   Iterable<Board> findAllBoardsCreatedByUser(Username user);
 
+  /**
+   * Returns the boards the user has write permissions to.
+   *
+   * @param user
+   * @return boards
+   */
   Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username user);
 
-  Iterable<Board> findAllUserBoards(Username username);
+  /**
+   * Returns the boards the user can access to.
+   *
+   * @param username
+   * @return boards
+   */
+  Iterable<Board> findAllBoardsAccessibleByUser(Username username);
 }
