@@ -62,11 +62,6 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
   }
 
   @Override
-  public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
-
-  }
-
-  @Override
   public Iterable<Board> findAllBoardsAccessibleByUser(Username username) {
     // ? check the comments above for more information on why this is done like this
 
@@ -97,4 +92,37 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
     return boards;
   }
+
+  @Override
+  public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
+    // ? check the comments above for more information on why this is done like this
+
+    TypedQuery<Board> query = createQuery(
+        "SELECT DISTINCT b FROM Board b JOIN FETCH b.permissions p WHERE :username = p.user.username AND p.permissionType = 'WRITE'",
+        Board.class);
+
+    query.setParameter("username", username);
+    query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
+
+    Iterable<Board> boards = query.getResultList();
+
+    query = createQuery("SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.rows WHERE b in :boards",
+        Board.class);
+
+    query.setParameter("boards", boards);
+    query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
+
+    boards = query.getResultList();
+
+    query = createQuery(
+        "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.columns WHERE b in :boards", Board.class);
+
+    query.setParameter("boards", boards);
+    query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
+
+    boards = query.getResultList();
+
+    return boards;
+  }
+
 }
