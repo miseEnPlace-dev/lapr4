@@ -19,6 +19,16 @@ public class ListBoardsService {
     return toDto(boardsList);
   }
 
+  public Iterable<BoardDTO> userAccessibleBoards(Username username) {
+    final Iterable<Board> boardsList = boardRepo.findAllBoardsAccessibleByUser(username);
+    return toDto(boardsList);
+  }
+
+  public Iterable<BoardDTO> userWritableBoards(Username username) {
+    Iterable<Board> boards = boardRepo.findAllActiveBoardsWithUserWritePermission(username);
+    return toDto(boards);
+  }
+
   private Iterable<BoardDTO> toDto(Iterable<Board> list) {
     return StreamSupport.stream(list.spliterator(), true).map(Board::toDto)
         .collect(Collectors.toUnmodifiableList());
