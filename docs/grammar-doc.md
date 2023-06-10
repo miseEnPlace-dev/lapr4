@@ -27,10 +27,9 @@
         - [2.1.1. Exam Structure](#211-exam-structure)
         - [2.1.2. Header](#212-header)
         - [2.1.3. Sections](#213-sections)
-        - [2.1.4. Questions Types](#214-questions-types)
-        - [2.1.5. Questions Components](#215-questions-components)
-        - [2.1.6. Correct Answers](#216-correct-answers)
-        - [2.1.7. Options](#217-options)
+        - [2.1.4. Questions](#214-questions)
+        - [2.1.5. Correct Answers](#216-correct-answers)
+        - [2.1.6. Options](#217-options)
 
       - [2.2. Example](#22-example)
 
@@ -225,49 +224,32 @@ All the files defining exams must follow the following structure:
 
 #### 2.1.1 Exam Structure:
 
-The exam starts with the keyword "@start-exam" followed by an identifier and ends with the keyword "@end-exam".
+The exam starts with the keyword **"@start-exam"** followed by an identifier and ends with the keyword **"@end-exam"**.
 The exam consists of a header section and multiple sections.
 
 #### 2.1.2 Header:
 
 The header section provides information about the exam, such as the title, description, feedback type, and grading type.
-It includes properties such as "@title", "@description", "@feedback", and "@grade".
+It includes properties such as **"@title"**, **"@description"**, **"@feedback"**, and **"@grade"**.
 
 #### 2.1.3 Sections:
 
-Each section begins with the keyword "@start-section" followed by an identifier and ends with "@end-section".
+Each section begins with the keyword **"@start-section"** followed by an identifier and ends with **"@end-section"**.
 Sections contains a set of one or more questions.
 
-#### 2.1.4 Question Types:
+#### 2.1.4 Questions:
 
-The grammar supports multiple question types such as:
-Numerical questions: defined using the keyword "numerical".
-Multiple-choice questions: defined using the keyword "multiple-choice".
-Short-answer questions: defined using the keyword "short-answer".
-True/false questions: defined using the keyword "true-false".
-Matching questions: defined using the keyword "matching".
-Missing words questions: defined using the keyword "missing-words".
+The questions section is defined using the keyword **"@start-questions"** followed by a list of questions and ends with the keyword **"@end-questions"**. To see more in detail the structure of each question type, please check the [Question Grammar](#11-question-grammar).
 
-#### 2.1.5 Question Components:
+#### 2.1.5 Correct Answers:
 
-Each question type has its own specific components.
-Common components include a score, question body, and feedback.
-Multiple-choice and matching questions also have options and correct answers.
-Short-answer questions have one or more correct answers.
-Numerical questions have a correct answer and an accepted error range.
-Missing words questions have a correct answer and a list of options.
-Matching questions have a list of matches, list of options, and a list of correct answers.
-True/false questions have a correct answer.
+The correct answers section is defined using the keyword **"@start-correct-answers"** followed by a list of correct answers and ends with the keyword **"@end-correct-answers"**.
+Each correct answer is defined using the keyword **"@correct-answer"** followed by the identifier of the correct answer and the score.
 
-#### 2.1.6 Correct Answers:
+#### 2.1.6 Options:
 
-The correct answers section is defined using the keyword "@start-correct-answers" followed by a list of correct answers and ends with the keyword "@end-correct-answers".
-Each correct answer is defined using the keyword "@correct-answer" followed by the identifier of the correct answer and the score.
-
-#### 2.1.7 Options:
-
-The options section is defined using the keyword "@start-options" followed by a list of options and ends with the keyword "@end-options".
-Each option is defined using the keyword "@option" followed by the identifier of the option and the option text.
+The options section is defined using the keyword **"@start-options"** followed by a list of options and ends with the keyword **"@end-options"**.
+Each option is defined using the keyword **"@option"** followed by the identifier of the option and the option text.
 
 ### 2.2. Example
 
