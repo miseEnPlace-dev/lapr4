@@ -66,9 +66,10 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
     // ? check the comments above for more information on why this is done like this
 
     TypedQuery<Board> query = createQuery(
-        "SELECT DISTINCT b FROM Board b JOIN FETCH b.permissions p WHERE :username = p.user.username",
+        "SELECT DISTINCT b FROM Board b JOIN FETCH b.permissions p WHERE :username = p.user.username OR b.owner.username = :username",
         Board.class);
 
+    query.setParameter("username", username);
     query.setParameter("username", username);
     query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
 
