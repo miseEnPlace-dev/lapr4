@@ -14,36 +14,30 @@ public class BoardMapper {
     JsonArrayBuilder rowJson = Json.createArrayBuilder(), colJson = Json.createArrayBuilder(),
         permsJson = Json.createArrayBuilder();
 
-    if (!board.getRows().isEmpty()) {
-      board.getRows().forEach(r -> {
-        JsonObjectBuilder row = Json.createObjectBuilder();
-        row.add("number", r.identity());
-        row.add("title", r.title().toString());
-        rowJson.add(row.build());
-      });
-    }
+    board.getRows().forEach(r -> {
+      JsonObjectBuilder row = Json.createObjectBuilder();
+      row.add("number", r.identity());
+      row.add("title", r.title().toString());
+      rowJson.add(row.build());
+    });
 
-    if (!board.getColumns().isEmpty()) {
-      board.getColumns().forEach(c -> {
-        JsonObjectBuilder col = Json.createObjectBuilder();
-        col.add("number", c.identity());
-        col.add("title", c.title().toString());
-        colJson.add(col.build());
-      });
-    }
+    board.getColumns().forEach(c -> {
+      JsonObjectBuilder col = Json.createObjectBuilder();
+      col.add("number", c.identity());
+      col.add("title", c.title().toString());
+      colJson.add(col.build());
+    });
 
-    if (!board.getPermissions().isEmpty()) {
-      SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-      board.getPermissions().forEach(p -> {
-        JsonObjectBuilder perm = Json.createObjectBuilder();
-        perm.add("user", UserMapper.toJson(UserDTO.from(p.user())));
-        perm.add("type", p.permissionType().toString());
-        perm.add("createdAt", formatter.format(p.createdAt().getTime()));
-        perm.add("updatedAt", formatter.format(p.updatedAt().getTime()));
-        permsJson.add(perm.build());
-      });
-    }
+    board.getPermissions().forEach(p -> {
+      JsonObjectBuilder perm = Json.createObjectBuilder();
+      perm.add("user", UserMapper.toJson(UserDTO.from(p.user())));
+      perm.add("type", p.permissionType().toString());
+      perm.add("createdAt", formatter.format(p.createdAt().getTime()));
+      perm.add("updatedAt", formatter.format(p.updatedAt().getTime()));
+      permsJson.add(perm.build());
+    });
 
     UserDTO owner = UserDTO.from(board.getOwner());
 

@@ -2,16 +2,24 @@ package eapli.ecourse.boardmanagement.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
-
+import org.hibernate.annotations.NaturalId;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"board_id", "rowNumber"})})
 public class BoardRow implements DomainEntity<Integer> {
 
   private static final long serialVersionUID = 1L;
+
+  @Id
+  @GeneratedValue
+  private Long pk;
 
   @Version
   private Long version;
@@ -19,8 +27,11 @@ public class BoardRow implements DomainEntity<Integer> {
   @Column
   private BoardTitle title;
 
-  @Id
+  @NaturalId
   private Integer rowNumber;
+
+  @NaturalId
+  private BoardID boardID;
 
   protected BoardRow() {
     // for ORM
