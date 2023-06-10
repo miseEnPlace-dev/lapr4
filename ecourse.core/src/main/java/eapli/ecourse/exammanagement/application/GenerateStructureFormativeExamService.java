@@ -16,15 +16,23 @@ public class GenerateStructureFormativeExamService {
 
     sb.append(buildStartExam());
     sb.append(buildDescriptionExam());
-    sb.append(buildFeedbackExam());
+    // sb.append(buildFeedbackExam());
+    // sb.append(buildGradeExam());
     sb.append(buildSections());
     sb.append(buildEndExam());
 
     return sb.toString();
   }
 
+  private String buildGradeExam() {
+    StringBuilder sb = new StringBuilder();
+
+    return sb.append("@grade on-submit").toString();
+  }
+
   private String buildFeedbackExam() {
     StringBuilder sb = new StringBuilder();
+
     return sb.append("@feedback none;").toString();
   }
 
@@ -73,7 +81,7 @@ public class GenerateStructureFormativeExamService {
 
   private String buildCorrectAnswers(Question question) {
     StringBuilder sb = new StringBuilder();
-    sb.append(question.getCorrectAnswer(question));
+    sb.append(question.getQuestionStructure(question));
     return sb.toString();
   }
 

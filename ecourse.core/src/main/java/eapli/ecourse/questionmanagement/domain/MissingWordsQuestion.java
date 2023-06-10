@@ -64,7 +64,7 @@ public class MissingWordsQuestion extends Question {
   }
 
   @Override
-  public String getCorrectAnswer(Question q) {
+  public String getQuestionStructure(Question q) {
     MissingWordsQuestion question = (MissingWordsQuestion) q;
 
     StringBuilder sb = new StringBuilder();
