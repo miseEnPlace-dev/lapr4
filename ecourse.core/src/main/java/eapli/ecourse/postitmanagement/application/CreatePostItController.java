@@ -59,6 +59,10 @@ public class CreatePostItController {
 
     PostIt postIt = new PostIt(postItTile, coordinates, board, user, null);
 
+    save(postIt);
+  }
+
+  private void save(PostIt postIt) {
     postItRepository.save(postIt);
   }
 

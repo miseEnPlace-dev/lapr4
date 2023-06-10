@@ -11,6 +11,7 @@ import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepo
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
+import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -185,5 +186,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public ExamAnswerRepository answers(TransactionalContext autoTx) {
     return new JpaExamAnswerRepository(autoTx);
+  }
+
+  @Override
+  public PostItRepository postIts() {
+    return new JpaPostItRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public PostItRepository postIts(TransactionalContext autoTx) {
+    return new JpaPostItRepository(autoTx);
   }
 }

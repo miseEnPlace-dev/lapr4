@@ -12,6 +12,7 @@ import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
+import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -185,5 +186,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   @Override
   public ExamAnswerRepository answers(TransactionalContext autoTx) {
     return new InMemoryExamAnswerRepository();
+  }
+
+  @Override
+  public PostItRepository postIts() {
+    return postIts(null);
+  }
+
+  @Override
+  public PostItRepository postIts(final TransactionalContext autoTx) {
+    return new InMemoryPostItRepository();
   }
 }
