@@ -36,8 +36,14 @@ public class ClientHandler implements Runnable {
       put(MessageCode.ERR, ErrMessage.class);
       put(MessageCode.GET_BOARDS, GetBoardsMessage.class);
       put(MessageCode.GET_OWN_BOARDS, GetOwnBoardsMessage.class);
+      // put(MessageCode.GET_BOARD, GetBoardMessage.class);
       put(MessageCode.GET_USER_PERMISSIONS, GetUserPermissionsMessage.class);
+      // put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
+      // put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
+      // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
+      // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
+      // put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
     }
   };
 
