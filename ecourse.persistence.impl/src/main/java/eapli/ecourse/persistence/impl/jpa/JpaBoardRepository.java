@@ -33,7 +33,7 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
   public Iterable<Board> findAllBoardsAccessibleByUser(Username username) {
     TypedQuery<Board> query = createQuery(
-        "SELECT b FROM Board b JOIN b.permissions p WHERE :username = p.user.username OR b.owner.username = :username",
+        "SELECT b FROM Board b LEFT JOIN b.permissions p WHERE :username = p.user.username OR b.owner.username = :username",
         Board.class);
 
     query.setParameter("username", username);
@@ -44,7 +44,7 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
   public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
     TypedQuery<Board> query = createQuery(
-        "SELECT b FROM Board b JOIN b.permissions p WHERE :username = p.user.username AND p.permissionType = 'WRITE' AND b.archived IS NULL",
+        "SELECT b FROM Board b LEFT JOIN b.permissions p WHERE :username = p.user.username AND p.permissionType = 'WRITE' AND b.archived IS NULL",
         Board.class);
 
     query.setParameter("username", username);
