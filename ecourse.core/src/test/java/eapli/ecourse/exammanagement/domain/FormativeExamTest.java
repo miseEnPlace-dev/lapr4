@@ -1,6 +1,8 @@
 package eapli.ecourse.exammanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +21,7 @@ import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
+import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.teachermanagement.domain.Acronym;
 import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
@@ -56,12 +59,24 @@ public class FormativeExamTest {
         .build();
   }
 
+  private FormativeExam dummyExam() {
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("1");
+    ExamTitle title = ExamTitle.valueOf("Test Exam");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    ExamScore score = ExamScore.valueOf(12d);
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, score, sections);
+
+    return exam;
+  }
+
   @Before
   public void setUp() {
   }
 
   @Test
-  public void ensureIsPossbileToCreateFormativeExam() {
+  public void ensureIsPossibleToCreateFormativeExam() {
     Course course = getDummyCourse();
     ExamIdentifier identifier = ExamIdentifier.valueOf("1");
     ExamTitle title = ExamTitle.valueOf("Test Exam");
@@ -75,5 +90,97 @@ public class FormativeExamTest {
     assertEquals(title, exam.title());
     assertEquals(description, exam.description());
     assertEquals(sections, exam.sections());
+  }
+
+  @Test
+  public void ensureFormativeExamIsComparable() {
+    exam = dummyExam();
+
+    FormativeExam exam2;
+
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("2");
+    ExamTitle title = ExamTitle.valueOf("Test Exam Formative");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    ExamScore score = ExamScore.valueOf(12d);
+    exam2 = new FormativeExam(course, getDummyTeacher(), identifier, title, description, score, sections);
+
+    assertFalse(exam.equals(exam2));
+  }
+
+  @Test
+  public void ensureFormativeExamIsNotEqualToNull() {
+    exam = dummyExam();
+
+    assertFalse(exam.equals(null));
+  }
+
+  @Test
+  public void ensureFormativeExamIsEqualToItself() {
+    exam = dummyExam();
+
+    assertTrue(exam.equals(exam));
+  }
+
+  @Test
+  public void ensureFormativeExamIsNotEqualToAnotherType() {
+    exam = dummyExam();
+
+    assertFalse(exam.equals("test"));
+  }
+
+  @Test
+  public void ensureFormativeExamHasSameHashCodeAsItself() {
+    exam = dummyExam();
+
+    assertEquals(exam.hashCode(), exam.hashCode());
+  }
+
+  @Test
+  public void ensureFormativeExamHasDifferentHashCodeThanAnother() {
+    exam = dummyExam();
+
+    FormativeExam exam2;
+
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("2");
+    ExamTitle title = ExamTitle.valueOf("Test Exam Formative");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    ExamScore score = ExamScore.valueOf(12d);
+    exam2 = new FormativeExam(course, getDummyTeacher(), identifier, title, description, score, sections);
+
+    assertFalse(exam.hashCode() == exam2.hashCode());
+  }
+
+  @Test
+  public void ensureFormativeExamSameAsIsWorking() {
+    exam = dummyExam();
+
+    FormativeExam exam2 = dummyExam();
+
+    assertTrue(exam.sameAs(exam2));
+  }
+
+  @Test
+  public void ensureFormativeExamSameAsIsWorkingWithNullFormativeExam() {
+    exam = dummyExam();
+
+    assertFalse(exam.sameAs(null));
+  }
+
+  @Test
+  public void ensureFormativeExamToDtoIsWorking() {
+    exam = dummyExam();
+
+    FormativeExamDTO dto = exam.toDto();
+
+    assertEquals(exam.course(), dto.getCourse());
+    assertEquals(exam.identifier(), dto.getIdentifier());
+    assertEquals(exam.title(), dto.getTitle());
+    assertEquals(exam.description(), dto.getDescription());
+    assertEquals(exam.state(), dto.getState());
+    assertEquals(exam.teacher(), dto.getTeacher());
   }
 }
