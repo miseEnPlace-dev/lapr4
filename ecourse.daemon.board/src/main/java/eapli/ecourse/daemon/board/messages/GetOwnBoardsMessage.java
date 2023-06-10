@@ -3,7 +3,6 @@ package eapli.ecourse.daemon.board.messages;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import javax.transaction.Transactional;
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.common.board.dto.UserDTO;
@@ -26,7 +25,6 @@ public class GetOwnBoardsMessage extends Message {
   }
 
   @Override
-  @Transactional
   public void handle() throws IOException {
     ClientState clientState = ClientState.getInstance();
 
