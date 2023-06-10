@@ -156,22 +156,14 @@ public class Board implements AggregateRoot<BoardID> {
     if (this.owner().username().equals(username))
       return true;
 
-    for (UserPermission permission : permissions)
-      if (permission.canWrite(username))
-        return true;
-
-    return false;
+    return permissions.stream().anyMatch(p -> p.canWrite(username));
   }
 
   public boolean participates(Username username) {
     if (this.owner().username().equals(username))
       return true;
 
-    for (UserPermission permission : permissions)
-      if (permission.user().username().equals(username))
-        return true;
-
-    return false;
+    return permissions.stream().anyMatch(p -> p.user().username().equals(username));
   }
 
   public boolean isArchived() {
