@@ -23,7 +23,11 @@ import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 public class GetBoardsController implements RouteController {
   private final static Logger LOGGER = LogManager.getLogger(GetBoardsController.class);
 
-  private TcpClient client = BoardBackend.getInstance().getTcpClient();
+  private TcpClient client;
+
+  public GetBoardsController() {
+    this.client = BoardBackend.getInstance().getTcpClient();
+  }
 
   @Override
   public void handle(Request req, Response res) {
@@ -35,14 +39,11 @@ public class GetBoardsController implements RouteController {
 
       Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
 
-      List<BoardDTO> result = StreamSupport.stream(obj.spliterator(), true)
-          .map(BoardDTO.class::cast).collect(Collectors.toUnmodifiableList());
-
       JsonArrayBuilder json = Json.createArrayBuilder();
 
-      for (BoardDTO board : result) {
-        json.add(BoardMapper.toJson(board));
-      }
+      // convert to dto and add to json obj
+      StreamSupport.stream(obj.spliterator(), true).map(BoardDTO.class::cast)
+          .collect(Collectors.toUnmodifiableList()).forEach(b -> json.add(BoardMapper.toJson(b)));
 
       res.json(json.build());
 

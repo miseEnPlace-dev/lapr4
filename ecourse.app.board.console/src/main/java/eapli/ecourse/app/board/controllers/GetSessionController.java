@@ -10,7 +10,11 @@ import eapli.ecourse.common.board.http.RouteController;
 import eapli.ecourse.common.board.mapper.UserMapper;
 
 public class GetSessionController implements RouteController {
-  private CredentialStore auth = BoardBackend.getInstance().getCredentialStore();
+  private CredentialStore auth;
+
+  public GetSessionController() {
+    this.auth = BoardBackend.getInstance().getCredentialStore();
+  }
 
   @Override
   public void handle(Request req, Response res) {

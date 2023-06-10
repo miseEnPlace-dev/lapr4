@@ -3,6 +3,7 @@ package eapli.ecourse.boardmanagement.application;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import eapli.ecourse.boardmanagement.domain.Board;
+import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
@@ -12,6 +13,12 @@ public class ListBoardsService {
 
   public ListBoardsService(BoardRepository boardRepo) {
     this.boardRepo = boardRepo;
+  }
+
+  public BoardDTO ofIdentity(BoardID boardId) {
+    final Board board = boardRepo.ofIdentity(boardId).orElseThrow(
+        () -> new IllegalArgumentException("There is no board with the given id: " + boardId));
+    return board.toDto();
   }
 
   public Iterable<BoardDTO> userBoards(Username username) {
