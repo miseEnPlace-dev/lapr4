@@ -34,7 +34,8 @@ matchingQuestion:
 		START_MATCHING_SECTION match+ END_MATCHING_SECTION EOI;
 
 missingWordsQuestion:
-	'missing-words' EOI score? body feedback? missingWordsCorrectAnswer EOI;
+	'missing-words' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION missingWordsCorrectAnswer+
+		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
 
 body: QUESTION_BODY STRING EOI;
 
@@ -58,7 +59,7 @@ match: MATCH NUMBER STRING EOI;
 
 matchingCorrectAnswer: CORRECT_ANSWER NUMBER NUMBER EOI;
 
-missingWordsCorrectAnswer: CORRECT_ANSWER STRING (STRING)*;
+missingWordsCorrectAnswer: CORRECT_ANSWER STRING EOI;
 
 trueFalseCorrectAnswer: CORRECT_ANSWER (TRUE | FALSE) EOI;
 
@@ -75,7 +76,7 @@ START_QUESTION:									'@start-question';
 END_QUESTION:										'@end-question';
 TYPE:														'@type';
 QUESTION_BODY:									'@question-body';
-START_CORRECT_ANSWERS_SECTION:	'@correct-answers';
+START_CORRECT_ANSWERS_SECTION:	'@start-correct-answers';
 CORRECT_ANSWER:									'@correct-answer';
 END_CORRECT_ANSWERS_SECTION:		'@end-correct-answers';
 ACCEPTED_ERROR:									'@accepted-error';

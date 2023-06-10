@@ -75,7 +75,7 @@ public class QuestionTest {
       }
 
       @Override
-      public String getCorrectAnswer(Question question) {
+      public String getQuestionStructure(Question question) {
         return null;
       }
     };
@@ -94,7 +94,7 @@ public class QuestionTest {
       }
 
       @Override
-      public String getCorrectAnswer(Question question) {
+      public String getQuestionStructure(Question question) {
         return null;
       }
     };
@@ -110,7 +110,7 @@ public class QuestionTest {
       }
 
       @Override
-      public String getCorrectAnswer(Question question) {
+      public String getQuestionStructure(Question question) {
         return null;
       }
     };
@@ -127,7 +127,7 @@ public class QuestionTest {
       }
 
       @Override
-      public String getCorrectAnswer(Question question) {
+      public String getQuestionStructure(Question question) {
         return null;
       }
     };
@@ -145,7 +145,7 @@ public class QuestionTest {
       }
 
       @Override
-      public String getCorrectAnswer(Question question) {
+      public String getQuestionStructure(Question question) {
         return null;
       }
     };

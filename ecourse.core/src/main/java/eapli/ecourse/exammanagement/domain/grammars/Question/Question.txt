@@ -9,7 +9,7 @@
 @start-question
   @type short-answer;
   @question-body "Como descreve a forma de um círculo?";
-  @correct-answers
+  @start-correct-answers
     @correct-answer "Assim" 0.5;
     @correct-answer "Assado" 0.2;
     @correct-answer "de Outra maneira" 0.1;
@@ -27,7 +27,7 @@
   @question-body "Quais das seguintes opções são números primos?";
   @feedback "General feedback";
 
-  @correct-answers
+  @start-correct-answers
     @correct-answer 1 0.2;
     @correct-answer 2 0.3;
     @correct-answer 4 0.4;
@@ -64,7 +64,7 @@
   @question-body "Associe cada figura à sua área";
   @feedback "General feedback";
 
-  @correct-answers
+  @start-correct-answers
     @correct-answer 1 2;
     @correct-answer 2 4;
     @correct-answer 3 5;
@@ -90,5 +90,17 @@
 @start-question
   @type missing-words;
   @question-body "A melhor __ de todas é a __";
-  @correct-answer "coisa" "pizza";
+  @feedback "General feedback";
+
+  @start-correct-answers
+    @correct-answer "coisa";
+    @correct-answer "pizza";
+  @end-correct-answers;
+
+  @start-options
+    @option 1 "coisa";
+    @option 2 "pizza";
+    @option 3 "outra coisa";
+    @option 4 "outra pizza";
+  @end-options;
 @end-question;

@@ -120,7 +120,7 @@ To make the understanding easier we will use the following notation:
   @type short-answer;
   @question-body "<question-body>";
 
-  @correct-answers
+  @start-correct-answers
     {@correct-answer "<answer>" <score>;}
   @end-correct-answers;
 @end-question;
@@ -147,7 +147,7 @@ To make the understanding easier we will use the following notation:
   @question-body "<question-body>";
   [@feedback <feedback>;]
 
-  @correct-answers
+  @start-correct-answers
     {@correct-answer <id> <score>;}
   @end-correct-answers;
 
@@ -182,7 +182,7 @@ To make the understanding easier we will use the following notation:
   @question-body "<question-body>";
   [@feedback "<feedback>";]
 
-  @correct-answers
+  @start-correct-answers
     {@correct-answer <id> <id-match>;}
   @end-correct-answers;
 

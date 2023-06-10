@@ -46,7 +46,7 @@ public class TrueFalseQuestion extends Question {
   }
 
   @Override
-  public String getCorrectAnswer(Question q) {
+  public String getQuestionStructure(Question q) {
     TrueFalseQuestion question = (TrueFalseQuestion) q;
 
     StringBuilder sb = new StringBuilder();

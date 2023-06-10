@@ -4,19 +4,18 @@
     @feedback none;
     @grade on-submit;
 
-    @start-section section1;
-        @title "First Section";
-        @description "This is the first section.";
+    @start-section
+      @title "First Section";
+      @description "This is the first section.";
 
-        @start-question
-            @type short-answer;
-            @score 1.24;
-            @question-body "Como descreve a forma de um círculo?";
-            @correct-answers
-              @correct-answer "Assim" 0.5;
-              @correct-answer "Assado" 0.2;
-              @correct-answer "de Outra maneira" 0.1;
-            @end-correct-answers;
-        @end-question;
+      @start-question
+        @type short-answer;
+        @question-body "Como descreve a forma de um círculo?";
+        @start-correct-answers
+          @correct-answer "Assim" 0.5;
+          @correct-answer "Assado" 0.2;
+          @correct-answer "de Outra maneira" 0.1;
+        @end-correct-answers;
+      @end-question;
     @end-section;
 @end-exam;

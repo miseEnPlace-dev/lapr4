@@ -36,28 +36,29 @@ question:
 	) END_QUESTION EOI;
 
 numericalQuestion:
-	'numerical' EOI score body feedback? numericalCorrectAnswer numericalAcceptedError;
+	'numerical' EOI score? body feedback? numericalCorrectAnswer numericalAcceptedError;
 
 multipleChoiceQuestion:
-	'multiple-choice' EOI score body feedback? (
+	'multiple-choice' EOI score? body feedback? (
 		START_CORRECT_ANSWERS_SECTION multipleChoiceCorrectAnswer+ END_CORRECT_ANSWERS_SECTION EOI
 		| multipleChoiceCorrectAnswer
 	) START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
 
 shortAnswerQuestion:
-	'short-answer' EOI score body feedback? START_CORRECT_ANSWERS_SECTION shortAnswerCorrectAnswer+
+	'short-answer' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION shortAnswerCorrectAnswer+
 		END_CORRECT_ANSWERS_SECTION EOI;
 
 trueFalseQuestion:
-	'true-false' EOI score body feedback? trueFalseCorrectAnswer;
+	'true-false' EOI score? body feedback? trueFalseCorrectAnswer;
 
 matchingQuestion:
-	'matching' EOI score body feedback? START_CORRECT_ANSWERS_SECTION matchingCorrectAnswer+
+	'matching' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION matchingCorrectAnswer+
 		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI
 		START_MATCHING_SECTION match+ END_MATCHING_SECTION EOI;
 
 missingWordsQuestion:
-	'missing-words' EOI score body feedback? missingWordsCorrectAnswer EOI;
+	'missing-words' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION missingWordsCorrectAnswer+
+		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
 
 body: QUESTION_BODY STRING EOI;
 
@@ -81,7 +82,7 @@ match: MATCH NUMBER STRING EOI;
 
 matchingCorrectAnswer: CORRECT_ANSWER NUMBER NUMBER EOI;
 
-missingWordsCorrectAnswer: CORRECT_ANSWER STRING (STRING)*;
+missingWordsCorrectAnswer: CORRECT_ANSWER STRING EOI;
 
 trueFalseCorrectAnswer: CORRECT_ANSWER (TRUE | FALSE) EOI;
 
@@ -106,7 +107,7 @@ START_QUESTION:									'@start-question';
 END_QUESTION:										'@end-question';
 TYPE:														'@type';
 QUESTION_BODY:									'@question-body';
-START_CORRECT_ANSWERS_SECTION:	'@correct-answers';
+START_CORRECT_ANSWERS_SECTION:	'@start-correct-answers';
 CORRECT_ANSWER:									'@correct-answer';
 END_CORRECT_ANSWERS_SECTION:		'@end-correct-answers';
 ACCEPTED_ERROR:									'@accepted-error';

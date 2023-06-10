@@ -64,22 +64,22 @@ public class MissingWordsQuestion extends Question {
   }
 
   @Override
-  public String getCorrectAnswer(Question q) {
+  public String getQuestionStructure(Question q) {
     MissingWordsQuestion question = (MissingWordsQuestion) q;
 
     StringBuilder sb = new StringBuilder();
-
-    sb.append("@start-options");
-    for (String option : question.options()) {
-      sb.append("@option " + option + ";");
-    }
-    sb.append("@end-options;");
 
     sb.append("@start-correct-answers");
     for (String correct : question.missingWords()) {
       sb.append("@correct-answer \"" + correct + "\";");
     }
     sb.append("@end-correct-answers;");
+
+    sb.append("@start-options");
+    for (String option : question.options()) {
+      sb.append("@option \"" + option + "\";");
+    }
+    sb.append("@end-options;");
 
     return sb.toString();
   }
