@@ -3,24 +3,40 @@
 ## Table of Contents
 
 - [LPROG - eCourse - Grammar Documentation](#lprog---ecourse---grammar-documentation)
+
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
-  - [Design](#design)
-    - [Grammar](#grammar)
-      - [1.1 Question Grammar](#11-question-grammar)
-        - [1.1.1. Numerical](#111-numerical)
-        - [1.1.2. Short Answer](#112-short-answer)
-        - [1.1.3. True/False](#113-truefalse)
-        - [1.1.4. Multiple Choice (Multiple Answers)](#114-multiple-choice-multiple-answers)
-        - [1.1.5. Multiple Choice (Single Answer)](#115-multiple-choice-single-answer)
-        - [1.1.6. Matching](#116-matching)
-        - [1.1.7 Select Missing Words](#117-select-missing-words)
-        - [1.2. Example](#12-example)
-      - [2. Exam Grammar](#2-exam-grammar)
+  - [Grammar](#grammar)
+
+    - [1. Question Grammar](#11-question-grammar)
+
+      - [1.1.1. Numerical](#111-numerical)
+      - [1.1.2. Short Answer](#112-short-answer)
+      - [1.1.3. True/False](#113-truefalse)
+      - [1.1.4. Multiple Choice (Multiple Answers)](#114-multiple-choice-multiple-answers)
+      - [1.1.5. Multiple Choice (Single Answer)](#115-multiple-choice-single-answer)
+      - [1.1.6. Matching](#116-matching)
+      - [1.1.7 Select Missing Words](#117-select-missing-words)
+
+    - [1.2. Example](#12-example)
+
+    - [2. Exam Grammar](#2-exam-grammar)
+
+      - [2.1. Structure](#21-Structure)
+
+        - [2.1.1. Exam Structure](#211-exam-structure)
+        - [2.1.2. Header](#212-header)
+        - [2.1.3. Sections](#213-sections)
+        - [2.1.4. Questions Types](#214-questions-types)
+        - [2.1.5. Questions Components](#215-questions-components)
+        - [2.1.6. Correct Answers](#216-correct-answers)
+        - [2.1.7. Options](#217-options)
+
+      - [2.2. Example](#22-example)
 
 ## Introduction
 
-This document describes the grammar used to define the questions to be used in exams. As required, there are 6 types of questions:
+This document describes the grammar used to define the Questions to be used in Exams, as well as the grammar defined in the Exams. As required, there are 6 types of questions:
 
 - Numerical
 - Short Answer
@@ -32,11 +48,18 @@ This document describes the grammar used to define the questions to be used in e
 
 The grammar was defined using the [ANTLR](https://www.antlr.org/) tool. ANTLR is a powerful parser generator for reading, processing, executing, or translating structured text or binary files. It's widely used to build languages, tools, and frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees.
 
-## Design
-
-### Grammar
+## Grammar
 
 We defined some custom tokens to keep the input files simple and readable.
+
+To make the understanding easier we will use the following notation:
+
+- [] - optional
+- <> - replace with the value (required)
+- | - or
+- {} - repeatable.
+
+### 1.1 Question Grammar
 
 All the files defining questions to be used in exams must follow the following structure:
 
@@ -49,15 +72,6 @@ All the files defining questions to be used in exams must follow the following s
 ```
 
 This is the base structure. As there are many question types and each one has its own structure, we will define the structure of each one of them.
-
-To make the understanding easier we will use the following notation:
-
-- [] - optional
-- <> - replace with the value (required)
-- | - or
-- {} - repeatable.
-
-### 1.1 Question Grammar
 
 #### 1.1.1. Numerical
 
@@ -177,9 +191,9 @@ _E.g. "restaurante" "bem";_
 @end-question;
 ```
 
-#### 1.2. Example
+### 1.2. Example
 
-You can check a pratical example with all the question types [here](../../../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.txt).
+You can check a practical example with all the question types [here](../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.txt).
 
 ## 2. Exam Grammar
 
@@ -207,141 +221,54 @@ All the files defining exams must follow the following structure:
 
 **Note 2:** The sum of the scores specified in the `@correct-answers` section must be 1.
 
-The exam grammar is defined as follows:
+### 2.1. Structure
 
-```g4
-grammar Exam;
+#### 2.1.1 Exam Structure:
 
-start: exam;
+The exam starts with the keyword "@start-exam" followed by an identifier and ends with the keyword "@end-exam".
+The exam consists of a header section and multiple sections.
 
-exam: start_exam header sections end_exam;
+#### 2.1.2 Header:
 
-sections:	section+;
-section:	start_section header questions end_section;
+The header section provides information about the exam, such as the title, description, feedback type, and grading type.
+It includes properties such as "@title", "@description", "@feedback", and "@grade".
 
-questions: question+;
+#### 2.1.3 Sections:
 
-header:			properties+;
-properties:	title | description | feedback_header | grade;
+Each section begins with the keyword "@start-section" followed by an identifier and ends with "@end-section".
+Sections contains a set of one or more questions.
 
-title:						TITLE STRING EOI;
-description:			DESCRIPTION STRING EOI;
-feedback_header:	FEEDBACK FDB_GRD_TYPE EOI;
-grade:						GRADE FDB_GRD_TYPE EOI;
+#### 2.1.4 Question Types:
 
-start_exam:	START_EXAM IDENTIFIER EOI;
-end_exam:		END_EXAM EOI;
+The grammar supports multiple question types such as:
+Numerical questions: defined using the keyword "numerical".
+Multiple-choice questions: defined using the keyword "multiple-choice".
+Short-answer questions: defined using the keyword "short-answer".
+True/false questions: defined using the keyword "true-false".
+Matching questions: defined using the keyword "matching".
+Missing words questions: defined using the keyword "missing-words".
 
-start_section:	START_SECTION IDENTIFIER EOI;
-end_section:		END_SECTION EOI;
+#### 2.1.5 Question Components:
 
-// ----- QUESTIONS -----
+Each question type has its own specific components.
+Common components include a score, question body, and feedback.
+Multiple-choice and matching questions also have options and correct answers.
+Short-answer questions have one or more correct answers.
+Numerical questions have a correct answer and an accepted error range.
+Missing words questions have a correct answer and a list of options.
+Matching questions have a list of matches, list of options, and a list of correct answers.
+True/false questions have a correct answer.
 
-question:
-	START_QUESTION TYPE (
-		numericalQuestion
-		| multipleChoiceQuestion
-		| shortAnswerQuestion
-		| trueFalseQuestion
-		| matchingQuestion
-		| missingWordsQuestion
-	) END_QUESTION EOI;
+#### 2.1.6 Correct Answers:
 
-numericalQuestion:
-	'numerical' EOI score? body feedback? numericalCorrectAnswer numericalAcceptedError;
+The correct answers section is defined using the keyword "@start-correct-answers" followed by a list of correct answers and ends with the keyword "@end-correct-answers".
+Each correct answer is defined using the keyword "@correct-answer" followed by the identifier of the correct answer and the score.
 
-multipleChoiceQuestion:
-	'multiple-choice' EOI score? body feedback? (
-		START_CORRECT_ANSWERS_SECTION multipleChoiceCorrectAnswer+ END_CORRECT_ANSWERS_SECTION EOI
-		| multipleChoiceCorrectAnswer
-	) START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
+#### 2.1.7 Options:
 
-shortAnswerQuestion:
-	'short-answer' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION shortAnswerCorrectAnswer+
-		END_CORRECT_ANSWERS_SECTION EOI;
+The options section is defined using the keyword "@start-options" followed by a list of options and ends with the keyword "@end-options".
+Each option is defined using the keyword "@option" followed by the identifier of the option and the option text.
 
-trueFalseQuestion:
-	'true-false' EOI score? body feedback? trueFalseCorrectAnswer;
+### 2.2. Example
 
-matchingQuestion:
-	'matching' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION matchingCorrectAnswer+
-		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI
-		START_MATCHING_SECTION match+ END_MATCHING_SECTION EOI;
-
-missingWordsQuestion:
-	'missing-words' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION missingWordsCorrectAnswer+
-		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
-
-body: QUESTION_BODY STRING EOI;
-
-feedback: FEEDBACK STRING EOI;
-
-score: SCORE REAL_NUMBER EOI;
-
-shortAnswerCorrectAnswer: CORRECT_ANSWER STRING REAL_NUMBER EOI;
-
-multipleChoiceCorrectAnswer:
-	CORRECT_ANSWER NUMBER (REAL_NUMBER)? EOI
-	| CORRECT_ANSWER NUMBER EOI;
-
-numericalCorrectAnswer: CORRECT_ANSWER REAL_NUMBER EOI;
-
-numericalAcceptedError: ACCEPTED_ERROR REAL_NUMBER EOI;
-
-option: OPTION NUMBER STRING (STRING)? EOI;
-
-match: MATCH NUMBER STRING EOI;
-
-matchingCorrectAnswer: CORRECT_ANSWER NUMBER NUMBER EOI;
-
-missingWordsCorrectAnswer: CORRECT_ANSWER STRING EOI;
-
-trueFalseCorrectAnswer: CORRECT_ANSWER (TRUE | FALSE) EOI;
-
-// ----- TOKENS -----
-
-// End of instruction
-EOI: ';';
-
-// Chars wrapped in double quotes, allowing escaped quotes and backslash
-STRING: '"' ( '\\' [\\"] | ~[\\"])* '"';
-
-START_EXAM:											'@start-exam';
-END_EXAM:												'@end-exam';
-TITLE:													'@title';
-DESCRIPTION:										'@description';
-FEEDBACK:												'@feedback';
-GRADE:													'@grade';
-START_SECTION:									'@start-section';
-END_SECTION:										'@end-section';
-SCORE:													'@score';
-START_QUESTION:									'@start-question';
-END_QUESTION:										'@end-question';
-TYPE:														'@type';
-QUESTION_BODY:									'@question-body';
-START_CORRECT_ANSWERS_SECTION:	'@start-correct-answers';
-CORRECT_ANSWER:									'@correct-answer';
-END_CORRECT_ANSWERS_SECTION:		'@end-correct-answers';
-ACCEPTED_ERROR:									'@accepted-error';
-START_OPTIONS_SECTION:					'@start-options';
-END_OPTIONS_SECTION:						'@end-options';
-OPTION:													'@option';
-START_MATCHING_SECTION:					'@start-matching';
-END_MATCHING_SECTION:						'@end-matching';
-MATCH:													'@match';
-TRUE:														'true';
-FALSE:													'false';
-
-// Feedback/Grade type
-FDB_GRD_TYPE: 'none' | 'on-submit' | 'after-closing';
-
-NUMBER:				[0-9]+;
-REAL_NUMBER:	[0-9]+ ('.' [0-9]+)?;
-IDENTIFIER:		[a-zA-Z][a-zA-Z0-9_]*;
-
-// Skip spaces, tabs and newlines
-WS: [ \t\n\r]+ -> skip;
-
-// Skip comments
-COMMENT: '//' ~[\r\n]* -> skip;
-```
+You can check a practical example of an Exam [here](../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.txt).
