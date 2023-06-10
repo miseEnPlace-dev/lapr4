@@ -1,5 +1,7 @@
 package eapli.ecourse.exammanagement.domain;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -85,7 +87,37 @@ public class GenerateStructureFormativeExamServiceTest {
     GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
     String struct = service.generateStructureFile();
     System.out.println(struct);
-
   }
 
+  @Test
+  public void ensureFormativeExamStringIsCorrect() {
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("1");
+    ExamTitle title = ExamTitle.valueOf("Test Exam");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    QuestionBody body = QuestionBody.valueOf("This is a test question");
+    QuestionType type = QuestionType.FORMATIVE;
+
+    TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion(body, type, false);
+    NumericalQuestion numericalQuestion = new NumericalQuestion(body, type, 1, 0.5);
+    SectionTitle sectionTitle = SectionTitle.valueOf("Section title");
+    SectionIdentifier id = SectionIdentifier.valueOf("id");
+    SectionDescription des = SectionDescription.valueOf("description");
+
+    Collection<Question> questions = new ArrayList<>();
+    questions.add(trueFalseQuestion);
+    questions.add(numericalQuestion);
+
+    FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
+    sections.add(section);
+
+    String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
+
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    String struct = service.generateStructureFile();
+
+    assertEquals(examStruct, struct);
+  }
 }
