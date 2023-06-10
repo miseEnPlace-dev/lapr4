@@ -2,16 +2,23 @@ package eapli.ecourse.boardmanagement.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
-
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"board_id", "columnNumber"})})
 public class BoardColumn implements DomainEntity<Integer> {
 
   private static final long serialVersionUID = 1L;
+
+  @Id
+  @GeneratedValue
+  private Long pk;
 
   @Version
   private Long version;
@@ -19,8 +26,10 @@ public class BoardColumn implements DomainEntity<Integer> {
   @Column
   private BoardTitle title;
 
-  @Id
   private Integer columnNumber;
+
+  @Column(name = "board_id")
+  private BoardID boardID;
 
   protected BoardColumn() {
     // for ORM
@@ -53,7 +62,8 @@ public class BoardColumn implements DomainEntity<Integer> {
     if (this == otherBoardColumn)
       return true;
 
-    return identity().equals(otherBoardColumn.identity()) && title().equals(otherBoardColumn.title());
+    return identity().equals(otherBoardColumn.identity())
+        && title().equals(otherBoardColumn.title());
   }
 
 }

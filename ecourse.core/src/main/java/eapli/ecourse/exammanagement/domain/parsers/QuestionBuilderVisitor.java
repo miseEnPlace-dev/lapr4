@@ -204,10 +204,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
     MissingWordsQuestion q = (MissingWordsQuestion) this.question;
 
-    ctx.missingWordsCorrectAnswer().STRING().forEach(s -> {
-      String missingWord = extractString(s.getText());
-      q.addMissingWord(missingWord);
-    });
+    // ctx.missingWordsCorrectAnswer().STRING().forEach(s -> {
+    // String missingWord = extractString(s.getText());
+    // q.addMissingWord(missingWord);
+    // });
 
     questions.add(q);
     return questions;

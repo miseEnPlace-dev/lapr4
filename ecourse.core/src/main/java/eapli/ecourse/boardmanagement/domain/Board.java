@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -36,16 +37,15 @@ public class Board implements AggregateRoot<BoardID> {
   @ManyToOne
   private SystemUser owner;
 
-  // @LazyCollection(LazyCollectionOption.FALSE) // this works but it's not good
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // fetch = FetchType.EAGER
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<UserPermission> permissions;
 
-  // @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "board_id")
   private List<BoardColumn> columns;
 
-  // @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "board_id")
   private List<BoardRow> rows;
 
   protected Board() {

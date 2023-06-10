@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.postitmanagement.domain.PostItState.State;
+import eapli.ecourse.postitmanagement.dto.PostItDTO;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -63,6 +65,20 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   protected PostIt() {
     // for ORM
+  }
+
+  public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
+      final SystemUser owner) {
+
+    Preconditions.noneNull(title, coordinates, board, owner);
+
+    this.id = PostItID.newID();
+    this.title = title;
+    this.coordinates = coordinates;
+    this.state = new PostItState();
+    this.board = board;
+    this.owner = owner;
+    this.previous = null;
   }
 
   public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
@@ -132,9 +148,10 @@ public class PostIt implements AggregateRoot<PostItID> {
     if (this != that)
       return false;
 
-    return this.owner.identity().equals(that.owner.identity()) && this.board.identity().equals(that.board.identity())
-        && this.title.equals(that.title) && this.coordinates.equals(that.coordinates)
-        && this.identity().equals(that.identity()) && this.state.equals(that.state);
+    return this.owner.identity().equals(that.owner.identity())
+        && this.board.identity().equals(that.board.identity()) && this.title.equals(that.title)
+        && this.coordinates.equals(that.coordinates) && this.identity().equals(that.identity())
+        && this.state.equals(that.state);
   }
 
   public void delete() {
@@ -149,4 +166,8 @@ public class PostIt implements AggregateRoot<PostItID> {
     return this.state.isDeleted();
   }
 
+  public PostItDTO toDto() {
+    return new PostItDTO(this.id, this.title, this.coordinates, this.state, this.board.toDto(),
+        UserDTO.from(this.owner), this.previous == null ? null : this.previous.toDto());
+  }
 }
