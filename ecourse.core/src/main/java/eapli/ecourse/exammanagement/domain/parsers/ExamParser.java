@@ -1,4 +1,4 @@
-// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
+// Generated from /home/drew/Faculdade/LAPR4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -55,7 +55,7 @@ public class ExamParser extends Parser {
 			"'matching'", "'missing-words'", "';'", null, "'@start-exam'", "'@end-exam'", 
 			"'@title'", "'@description'", "'@feedback'", "'@grade'", "'@start-section'", 
 			"'@end-section'", "'@score'", "'@start-question'", "'@end-question'", 
-			"'@type'", "'@question-body'", "'@correct-answers'", "'@correct-answer'", 
+			"'@type'", "'@question-body'", "'@start-correct-answers'", "'@correct-answer'", 
 			"'@end-correct-answers'", "'@accepted-error'", "'@start-options'", "'@end-options'", 
 			"'@option'", "'@start-matching'", "'@end-matching'", "'@match'", "'true'", 
 			"'false'"

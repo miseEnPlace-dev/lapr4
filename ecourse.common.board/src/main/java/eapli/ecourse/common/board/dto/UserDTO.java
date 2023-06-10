@@ -3,11 +3,6 @@ package eapli.ecourse.common.board.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonString;
-import javax.json.JsonValue.ValueType;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
@@ -52,34 +47,6 @@ public class UserDTO implements Serializable {
   public static UserDTO from(SystemUser user) {
     return new UserDTO(user.username().toString(), user.email().toString(), user.name().toString(),
         new HashSet<>(user.roleTypes()));
-  }
-
-  public JsonObject toJson() {
-    JsonArrayBuilder rolesJson = Json.createArrayBuilder();
-
-    for (Role role : roles) {
-      rolesJson.add(role.toString());
-    }
-
-    JsonObject json = Json.createObjectBuilder().add("username", username).add("name", fullName)
-        .add("email", email).add("roles", rolesJson.build()).build();
-
-    return json;
-  }
-
-  public static UserDTO fromJson(JsonObject jsonObject) {
-    String username = jsonObject.getString("username");
-    String name = jsonObject.getString("name");
-    String email = jsonObject.getString("email");
-
-    Collection<Role> roles = new HashSet<>();
-
-    jsonObject.getJsonArray("roles").forEach(role -> {
-      if (role.getValueType().equals(ValueType.STRING))
-        roles.add(Role.valueOf(((JsonString) role).getString()));
-    });
-
-    return new UserDTO(username, email, name, roles);
   }
 
   @Override

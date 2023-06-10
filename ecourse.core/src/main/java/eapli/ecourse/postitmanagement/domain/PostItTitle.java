@@ -20,7 +20,7 @@ public class PostItTitle implements ValueObject, Comparable<PostItTitle> {
     // for ORM
   }
 
-  public static PostItTitle ValueObject(String title) {
+  public static PostItTitle valueOf(String title) {
     Preconditions.nonNull(title);
 
     return new PostItTitle(title);

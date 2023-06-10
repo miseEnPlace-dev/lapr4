@@ -14,7 +14,7 @@ null
 '@end-question'
 '@type'
 '@question-body'
-'@correct-answers'
+'@start-correct-answers'
 '@correct-answer'
 '@end-correct-answers'
 '@accepted-error'

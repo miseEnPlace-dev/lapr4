@@ -56,12 +56,12 @@ public class ShortAnswerQuestion extends Question {
   }
 
   @Override
-  public String getCorrectAnswer(Question q) {
+  public String getQuestionStructure(Question q) {
     ShortAnswerQuestion shortAnswerQuestion = (ShortAnswerQuestion) q;
 
     StringBuilder sb = new StringBuilder();
 
-    sb.append("@correct-answers");
+    sb.append("@start-correct-answers");
     for (Map.Entry<String, Double> entry : shortAnswerQuestion.correctAnswers().entrySet()) {
       sb.append("@correct-answer \"" + entry.getKey() + "\" " + entry.getValue() + ";");
     }

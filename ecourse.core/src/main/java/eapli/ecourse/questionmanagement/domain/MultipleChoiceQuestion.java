@@ -88,11 +88,11 @@ public class MultipleChoiceQuestion extends Question {
   }
 
   @Override
-  public String getCorrectAnswer(Question q) {
+  public String getQuestionStructure(Question q) {
     MultipleChoiceQuestion question = (MultipleChoiceQuestion) q;
     StringBuilder sb = new StringBuilder();
 
-    sb.append("@correct-answers");
+    sb.append("@start-correct-answers");
     for (Map.Entry<QuestionIdentifier, Double> entry : question.correctAnswers().entrySet()) {
       sb.append("@correct-answer " + entry.getKey() + " " + entry.getValue() + ";");
     }

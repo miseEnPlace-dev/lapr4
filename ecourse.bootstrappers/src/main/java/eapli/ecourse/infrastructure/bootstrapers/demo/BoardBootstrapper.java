@@ -1,23 +1,25 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import eapli.ecourse.boardmanagement.application.CreateBoardController;
+import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.usermanagement.domain.ClientRoles;
+import eapli.ecourse.postitmanagement.application.CreatePostItController;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
-import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
       AuthzRegistry.userService(), AuthzRegistry.authorizationService());
+
+  private CreatePostItController ctrlPostIt = new CreatePostItController(
+      PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
+      AuthzRegistry.authorizationService());
 
   private Map<SystemUser, PermissionType> getPermissions() {
     SystemUser u1 = registerTeacher("user3", "Password1", "firstName", "lastName", "email@ddd.com", "abc", "12345678",
@@ -52,10 +54,11 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
 
   @Override
   public boolean execute() {
-    Set<Role> roles = new HashSet<>();
-    roles.add(ClientRoles.TEACHER);
 
-    ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
+    Board b = ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
+
+    ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1");
+    ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2");
 
     return true;
   }

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
 
 public class FormativeExamRequestTest {
@@ -64,5 +65,29 @@ public class FormativeExamRequestTest {
   public void testSameAs() {
     FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
     assertTrue(request.sameAs(other));
+  }
+
+  @Test
+  public void testEquals() {
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
+    assertEquals(request, other);
+  }
+
+  @Test
+  public void testHashCode() {
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
+    assertEquals(request.hashCode(), other.hashCode());
+  }
+
+  @Test
+  public void testBuilder() {
+    FormativeExamRequestBuilder builder = new FormativeExamRequestBuilder();
+    builder.withIdentifier(identifier);
+    builder.withTitle(title);
+    builder.withDescription(description);
+    builder.withScore(score);
+    builder.withSections(sections);
+    FormativeExamRequest other = builder.build();
+    assertEquals(request, other);
   }
 }

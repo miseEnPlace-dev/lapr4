@@ -10,6 +10,8 @@ import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepos
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.postitmanagement.domain.PostIt;
+import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -193,4 +195,14 @@ public interface RepositoryFactory {
   ExamAnswerRepository answers();
 
   ExamAnswerRepository answers(TransactionalContext autoTx);
+
+  /**
+   *
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  PostItRepository postIts();
+
+  PostItRepository postIts(TransactionalContext autoTx);
 }

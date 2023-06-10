@@ -3,8 +3,12 @@ package eapli.ecourse.daemon.board.messages;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Optional;
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
+import eapli.ecourse.boardmanagement.domain.Board;
+import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -12,16 +16,12 @@ import eapli.ecourse.daemon.board.clientstate.ClientState;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
-/**
- * Get boards which the user owns.
- */
-public class GetOwnBoardsMessage extends Message {
-  private ListBoardsService listBoardsService;
+public class GetBoardMessage extends Message {
+  private BoardRepository boardRepo;
 
-  public GetOwnBoardsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket) {
+  public GetBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
     super(protocolMessage, output, socket);
-    this.listBoardsService = new ListBoardsService(PersistenceContext.repositories().boards());
+    this.boardRepo = PersistenceContext.repositories().boards();
   }
 
   @Override
@@ -35,11 +35,23 @@ public class GetOwnBoardsMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    Iterable<BoardDTO> boards = listBoardsService.userBoards(username);
+    Optional<Board> b =
+        boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
 
-    // make sure the boards are fully loaded before sending
-    ListBoardsService.eagerLoad(boards);
+    if (b.isEmpty()) {
+      send(new ProtocolMessage(MessageCode.ERR, "Board not found"));
+      return;
+    }
 
-    send(new ProtocolMessage(MessageCode.GET_OWN_BOARDS, boards));
+    if (!b.get().participates(username)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Forbidden"));
+      return;
+    }
+
+    // make sure the board is fully loaded before sending
+    BoardDTO boardDto = b.get().toDto();
+    ListBoardsService.eagerLoad(boardDto);
+
+    send(new ProtocolMessage(MessageCode.GET_BOARD, boardDto));
   }
 }

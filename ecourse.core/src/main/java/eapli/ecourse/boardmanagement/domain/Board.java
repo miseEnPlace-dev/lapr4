@@ -9,10 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.validations.Preconditions;
 
 @Entity
@@ -150,15 +152,18 @@ public class Board implements AggregateRoot<BoardID> {
         this.columns);
   }
 
-  public boolean canWrite(SystemUser user) {
-    if (this.owner().equals(user))
+  public boolean canWrite(Username username) {
+    if (this.owner().username().equals(username))
       return true;
 
-    for (UserPermission permission : permissions) {
-      if (permission.canWrite(user))
-        return true;
-    }
-    return false;
+    return permissions.stream().anyMatch(p -> p.canWrite(username));
+  }
+
+  public boolean participates(Username username) {
+    if (this.owner().username().equals(username))
+      return true;
+
+    return permissions.stream().anyMatch(p -> p.user().username().equals(username));
   }
 
   public boolean isArchived() {

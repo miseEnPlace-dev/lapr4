@@ -13,16 +13,19 @@ import eapli.framework.presentation.console.AbstractUI;
 public class CommTestUI extends AbstractUI {
   private static final Logger LOGGER = LogManager.getLogger(CommTestUI.class);
 
-  // ShareBoardController ctrl = new ShareBoardController();
-
   @Override
   protected boolean doShow() {
     TcpClient client = BoardBackend.getInstance().getTcpClient();
 
     try {
-      ProtocolMessage response = client.sendRecv(new ProtocolMessage(MessageCode.COMMTEST));
+      long start = System.nanoTime();
+      client.sendRecv(new ProtocolMessage(MessageCode.COMMTEST));
+      long end = System.nanoTime();
 
-      System.out.println(response.toString());
+      long elapsed = end - start;
+      float ms = elapsed / 1000000f;
+
+      System.out.printf("Communication test successful. Round-trip time: %f ms\n", ms);
     } catch (IOException | UnsupportedVersionException e) {
       LOGGER.error("Error sending COMMTEST message", e);
     }
@@ -34,6 +37,5 @@ public class CommTestUI extends AbstractUI {
   public String headline() {
     return "CommTest";
   }
-
 }
 

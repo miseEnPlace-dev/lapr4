@@ -3,16 +3,24 @@ package eapli.ecourse.daemon.board.messages;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import eapli.ecourse.boardmanagement.application.ListBoardsService;
+import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
 /**
  * Get boards which the user has permission to access.
  */
 public class GetBoardsMessage extends Message {
+  private ListBoardsService listBoardsService;
+
   public GetBoardsMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
     super(protocolMessage, output, socket);
+    this.listBoardsService = new ListBoardsService(PersistenceContext.repositories().boards());
   }
 
   @Override
@@ -23,6 +31,14 @@ public class GetBoardsMessage extends Message {
     if (!clientState.getCredentialStore().isAuthenticated())
       return;
 
-    send(new ProtocolMessage(MessageCode.ERR, "Not Implemented"));
+    UserDTO user = clientState.getCredentialStore().getUser();
+    Username username = Username.valueOf(user.getUsername());
+
+    Iterable<BoardDTO> boards = listBoardsService.userAccessibleBoards(username);
+
+    // make sure the boards are fully loaded before sending
+    ListBoardsService.eagerLoad(boards);
+
+    send(new ProtocolMessage(MessageCode.GET_BOARDS, boards));
   }
 }

@@ -107,11 +107,11 @@ public class MatchingQuestion extends Question {
   }
 
   @Override
-  public String getCorrectAnswer(Question question) {
+  public String getQuestionStructure(Question question) {
     MatchingQuestion matchingQuestion = (MatchingQuestion) question;
     StringBuilder sb = new StringBuilder();
 
-    sb.append("@correct-answers");
+    sb.append("@start-correct-answers");
     for (Map.Entry<String, String> entry : matchingQuestion.correctMatches.entrySet()) {
       sb.append("@correct-answer" + entry.getKey() + " "
           + entry.getValue() + ";");
