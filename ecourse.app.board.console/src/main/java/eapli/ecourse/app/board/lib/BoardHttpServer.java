@@ -1,6 +1,7 @@
 package eapli.ecourse.app.board.lib;
 
 import eapli.ecourse.app.board.controllers.ApiController;
+import eapli.ecourse.app.board.controllers.GetBoardsController;
 import eapli.ecourse.app.board.controllers.GetSessionController;
 import eapli.ecourse.app.board.controllers.ViewBoardController;
 import eapli.ecourse.common.board.HttpServer;
@@ -23,6 +24,7 @@ public class BoardHttpServer {
 
     router.get("/api/session", new GetSessionController());
     router.get("/api/board/:id", new ViewBoardController());
+    router.get("/api/boards", new GetBoardsController());
 
     // create the http server
     HttpServer httpServer = new HttpServer(HTTP_SERVER_PORT, router);

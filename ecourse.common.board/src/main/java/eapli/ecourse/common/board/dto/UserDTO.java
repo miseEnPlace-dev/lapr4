@@ -3,11 +3,6 @@ package eapli.ecourse.common.board.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonString;
-import javax.json.JsonValue.ValueType;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
