@@ -1,8 +1,5 @@
 package eapli.ecourse.postitmanagement.application;
 
-import java.util.List;
-
-import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
@@ -22,22 +19,9 @@ public class BoardService {
   public boolean isCellAvailable(BoardID id, int x, int y) {
     Iterable<PostIt> postIts = postItRepository.findAllByBoardId(id);
 
-    postIts = getLatestVersionOfBoard(boardRepository.ofIdentity(id).orElseThrow());
+    postIts = postItRepository.findLatestVersionOfBoard(id);
 
     return !this.existsPostIt(postIts, x, y);
-  }
-
-  private Iterable<PostIt> getLatestVersionOfBoard(Board board) {
-
-    List<PostIt> postIts = (List<PostIt>) postItRepository.findAllByBoardId(board.identity());
-
-    for (PostIt p : postIts) {
-      if (postIts.contains(p)) {
-        postIts.remove(p);
-      }
-    }
-
-    return postIts;
   }
 
   private boolean existsPostIt(Iterable<PostIt> postIts, int x, int y) {
