@@ -25,6 +25,6 @@ public class InMemoryBoardRepository extends InMemoryDomainRepository<Board, Boa
 
   @Override
   public Iterable<Board> findAllBoardsAccessibleByUser(Username username) {
-    return match(e -> e.participates(username) && !e.isArchived());
+    return match(e -> e.participates(username));
   }
 }

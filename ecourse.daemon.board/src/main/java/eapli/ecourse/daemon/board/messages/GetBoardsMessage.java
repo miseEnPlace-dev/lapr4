@@ -36,6 +36,9 @@ public class GetBoardsMessage extends Message {
 
     Iterable<BoardDTO> boards = listBoardsService.userAccessibleBoards(username);
 
+    // make sure the boards are fully loaded before sending
+    ListBoardsService.eagerLoad(boards);
+
     send(new ProtocolMessage(MessageCode.GET_BOARDS, boards));
   }
 }

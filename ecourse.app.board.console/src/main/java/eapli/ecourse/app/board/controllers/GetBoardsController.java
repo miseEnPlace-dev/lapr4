@@ -1,7 +1,6 @@
 package eapli.ecourse.app.board.controllers;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import javax.json.Json;

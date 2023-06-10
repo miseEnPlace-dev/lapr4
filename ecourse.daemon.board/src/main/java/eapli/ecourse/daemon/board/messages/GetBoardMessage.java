@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
-import org.hibernate.Hibernate;
+import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
@@ -50,9 +50,7 @@ public class GetBoardMessage extends Message {
 
     // make sure the board is fully loaded before sending
     BoardDTO boardDto = b.get().toDto();
-    Hibernate.initialize(boardDto.getRows());
-    Hibernate.initialize(boardDto.getColumns());
-    Hibernate.initialize(boardDto.getPermissions());
+    ListBoardsService.eagerLoad(boardDto);
 
     send(new ProtocolMessage(MessageCode.GET_BOARD, boardDto));
   }

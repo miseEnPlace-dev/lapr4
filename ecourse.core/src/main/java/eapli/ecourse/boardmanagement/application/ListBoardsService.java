@@ -2,6 +2,7 @@ package eapli.ecourse.boardmanagement.application;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.hibernate.Hibernate;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
@@ -34,6 +35,16 @@ public class ListBoardsService {
   public Iterable<BoardDTO> userWritableBoards(Username username) {
     Iterable<Board> boards = boardRepo.findAllActiveBoardsWithUserWritePermission(username);
     return toDto(boards);
+  }
+
+  public static void eagerLoad(BoardDTO boardDto) {
+    Hibernate.initialize(boardDto.getRows());
+    Hibernate.initialize(boardDto.getColumns());
+    Hibernate.initialize(boardDto.getPermissions());
+  }
+
+  public static void eagerLoad(Iterable<BoardDTO> boards) {
+    boards.forEach(ListBoardsService::eagerLoad);
   }
 
   private Iterable<BoardDTO> toDto(Iterable<Board> list) {
