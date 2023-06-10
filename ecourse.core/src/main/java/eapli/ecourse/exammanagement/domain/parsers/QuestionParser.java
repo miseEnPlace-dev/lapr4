@@ -46,7 +46,7 @@ public class QuestionParser extends Parser {
 		return new String[] {
 			null, "'numerical'", "'multiple-choice'", "'short-answer'", "'true-false'", 
 			"'matching'", "'missing-words'", "';'", null, null, null, "'@start-question'", 
-			"'@end-question'", "'@type'", "'@question-body'", "'@correct-answers'", 
+			"'@end-question'", "'@type'", "'@question-body'", "'@start-correct-answers'", 
 			"'@correct-answer'", "'@end-correct-answers'", "'@accepted-error'", "'@feedback'", 
 			"'@start-options'", "'@end-options'", "'@option'", "'@score'", "'@start-matching'", 
 			"'@end-matching'", "'@match'", "'true'", "'false'"

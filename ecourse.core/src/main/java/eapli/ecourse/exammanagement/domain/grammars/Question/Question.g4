@@ -75,7 +75,7 @@ START_QUESTION:									'@start-question';
 END_QUESTION:										'@end-question';
 TYPE:														'@type';
 QUESTION_BODY:									'@question-body';
-START_CORRECT_ANSWERS_SECTION:	'@correct-answers';
+START_CORRECT_ANSWERS_SECTION:	'@start-correct-answers';
 CORRECT_ANSWER:									'@correct-answer';
 END_CORRECT_ANSWERS_SECTION:		'@end-correct-answers';
 ACCEPTED_ERROR:									'@accepted-error';
