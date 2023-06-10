@@ -1,6 +1,6 @@
 package eapli.ecourse.persistence.impl.jpa;
 
-import java.util.Optional;
+import javax.persistence.TypedQuery;
 
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.postitmanagement.domain.PostIt;
@@ -23,6 +23,17 @@ public class JpaPostItRepository extends JpaAutoTxRepository<PostIt, PostItID, P
   @Override
   public Iterable<PostIt> findAllByBoardId(BoardID boardId) {
     return match("e.board.id = :boardId", "boardId", boardId);
+  }
+
+  @Override
+  public Iterable<PostIt> findLatestVersionOfBoard(BoardID boardId) {
+    TypedQuery<PostIt> query = createQuery(
+        "SELECT p FROM PostIt p WHERE p.board.id = :boardId AND p NOT IN (SELECT previous FROM PostIt p2 WHERE p2.board.id = :boardId)",
+        PostIt.class);
+
+    query.setParameter("boardId", boardId);
+
+    return query.getResultList();
   }
 
 }

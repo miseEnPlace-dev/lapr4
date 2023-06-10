@@ -1,8 +1,5 @@
 package eapli.ecourse.postitmanagement.application;
 
-import java.util.List;
-
-import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
@@ -20,6 +17,15 @@ public class PostItService {
     this.postItRepository = postItRepository;
   }
 
+  public boolean isCellAvailable(BoardID id, int x, int y) {
+    Iterable<PostIt> postIts = postItRepository.findAllByBoardId(id);
+
+    postIts = postItRepository.findLatestVersionOfBoard(id);
+
+    return !this.existsPostIt(postIts, x, y);
+
+  }
+
   public PostItDTO ofIdentity(PostItID id) {
     PostIt p = postItRepository.ofIdentity(id).orElseThrow(
         () -> new IllegalArgumentException("There is no post-it with the given id: " + id));
@@ -30,19 +36,6 @@ public class PostItService {
   public boolean existsPostIt(BoardID id, int x, int y) {
     // TODO
     return false;
-  }
-
-  private Iterable<PostIt> getLatestVersionOfBoard(Board board) {
-
-    List<PostIt> postIts = (List<PostIt>) postItRepository.findAllByBoardId(board.identity());
-
-    for (PostIt p : postIts) {
-      if (postIts.contains(p)) {
-        postIts.remove(p);
-      }
-    }
-
-    return postIts;
   }
 
   private boolean existsPostIt(Iterable<PostIt> postIts, int x, int y) {

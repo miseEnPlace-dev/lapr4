@@ -1,5 +1,7 @@
 package eapli.ecourse.postitmanagement.domain;
 
+import java.util.Calendar;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -38,6 +40,9 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   @Column(nullable = false)
   private PostItState state;
+
+  @Column(nullable = false)
+  private Calendar createAt;
 
   /**
    * cascade = CascadeType.NONE as the board is part of another aggregate
@@ -88,6 +93,7 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.board = board;
     this.owner = owner;
     this.previous = previous;
+    this.createAt = Calendar.getInstance();
   }
 
   public SystemUser owner() {
@@ -112,6 +118,10 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   public PostIt previous() {
     return this.previous;
+  }
+
+  public Calendar createAt() {
+    return this.createAt;
   }
 
   @Override
