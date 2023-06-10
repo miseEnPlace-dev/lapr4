@@ -43,21 +43,12 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
   }
 
   @Override
-<<<<<<< HEAD
-  public Iterable<Board> listActiveBoardsThatUserCanWrite(SystemUser user) {
-    TypedQuery<Board> query = createQuery(
-        "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE b.owner = :user OR b.permissions IN (SELECT p FROM UserPermission p WHERE p.user = :user AND p.type = 'WRITE')",
-        Board.class);
-
-    query.setParameter("user", user);
-=======
   public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
     TypedQuery<Board> query = createQuery(
         "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE b.archivedAt IS NULL AND (b.owner.username = :username OR :username IN (SELECT p.username FROM b.permissions p WHERE p.user.username = :username AND p.type = 'WRITE'))",
         Board.class);
 
     query.setParameter("username", username);
->>>>>>> e12282d
 
     return query.getResultList();
   }
