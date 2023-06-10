@@ -6,7 +6,6 @@ import eapli.ecourse.app.board.controllers.ViewBoardController;
 import eapli.ecourse.common.board.HttpServer;
 import eapli.ecourse.common.board.http.Router;
 import eapli.ecourse.common.board.http.StaticMiddleware;
-import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 
 public class BoardHttpServer {
   private static final int HTTP_SERVER_PORT = 8080;
@@ -23,7 +22,7 @@ public class BoardHttpServer {
     router.get("/api", new ApiController());
 
     router.get("/api/session", new GetSessionController());
-    router.get("/api/board", new ViewBoardController(PersistenceContext.repositories().boards()));
+    router.get("/api/board/:id", new ViewBoardController());
 
     // create the http server
     HttpServer httpServer = new HttpServer(HTTP_SERVER_PORT, router);
