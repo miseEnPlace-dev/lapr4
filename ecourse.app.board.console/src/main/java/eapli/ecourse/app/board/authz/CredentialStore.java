@@ -6,11 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.common.board.TcpClient;
-import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.infrastructure.authz.CredentialHandler;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 
 public class CredentialStore {
   private final static Logger LOGGER = LogManager.getLogger(CredentialStore.class);

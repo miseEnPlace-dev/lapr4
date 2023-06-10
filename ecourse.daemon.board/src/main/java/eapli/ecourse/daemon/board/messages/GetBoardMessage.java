@@ -9,11 +9,11 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
-import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class GetBoardMessage extends Message {

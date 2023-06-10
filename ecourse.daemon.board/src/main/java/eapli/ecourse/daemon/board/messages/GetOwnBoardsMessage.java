@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.net.Socket;
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.dto.UserDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 /**

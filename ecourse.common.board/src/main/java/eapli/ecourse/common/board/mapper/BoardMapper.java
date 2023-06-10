@@ -7,7 +7,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.dto.UserDTO;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 
 public class BoardMapper {
   public static JsonObject toJson(BoardDTO board) {

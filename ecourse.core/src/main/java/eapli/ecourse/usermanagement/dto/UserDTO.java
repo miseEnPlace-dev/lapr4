@@ -1,4 +1,4 @@
-package eapli.ecourse.common.board.dto;
+package eapli.ecourse.usermanagement.dto;
 
 import java.io.Serializable;
 import java.util.Collection;

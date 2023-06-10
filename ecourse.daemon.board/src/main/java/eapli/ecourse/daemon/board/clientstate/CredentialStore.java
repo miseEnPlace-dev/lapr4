@@ -1,6 +1,6 @@
 package eapli.ecourse.daemon.board.clientstate;
 
-import eapli.ecourse.common.board.dto.UserDTO;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class CredentialStore {
