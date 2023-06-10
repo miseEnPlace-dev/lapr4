@@ -1,7 +1,7 @@
 package eapli.ecourse.app.board.console.presentation;
 
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.common.board.dto.UserDTO;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class SessionInfoUI extends AbstractUI {
