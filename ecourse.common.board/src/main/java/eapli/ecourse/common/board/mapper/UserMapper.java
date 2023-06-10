@@ -7,7 +7,7 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonString;
 import javax.json.JsonValue.ValueType;
-import eapli.ecourse.common.board.dto.UserDTO;
+import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 
 public class UserMapper {
