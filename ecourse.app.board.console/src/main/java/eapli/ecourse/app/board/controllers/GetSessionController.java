@@ -7,6 +7,7 @@ import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.common.board.http.Request;
 import eapli.ecourse.common.board.http.Response;
 import eapli.ecourse.common.board.http.RouteController;
+import eapli.ecourse.common.board.mapper.UserMapper;
 
 public class GetSessionController implements RouteController {
   private CredentialStore auth = BoardBackend.getInstance().getCredentialStore();
@@ -14,7 +15,7 @@ public class GetSessionController implements RouteController {
   @Override
   public void handle(Request req, Response res) {
     if (auth.getUser().isPresent()) {
-      res.json(auth.getUser().get().toJson());
+      res.json(UserMapper.toJson(auth.getUser().get()));
     } else {
       JsonObjectBuilder json = Json.createObjectBuilder().add("message", "Unauthorized");
       res.status(401).json(json.build());

@@ -8,7 +8,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import javax.json.JsonObject;
+import javax.json.JsonStructure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,7 +61,7 @@ public class Response {
     }
   }
 
-  public void json(JsonObject jsonObject) {
+  public void json(JsonStructure jsonObject) {
     setContentType(ContentTypes.JSON);
 
     try {

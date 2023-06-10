@@ -37,8 +37,6 @@ public class GetOwnBoardsMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    listBoardsService.userBoards(username);
-
     Iterable<BoardDTO> boards = listBoardsService.userBoards(username);
 
     send(new ProtocolMessage(MessageCode.GET_OWN_BOARDS, boards));
