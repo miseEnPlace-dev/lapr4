@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
+import eapli.ecourse.app.common.console.util.ConsoleConstrainedReader;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
@@ -50,15 +51,17 @@ public class CreateExamUI extends AbstractUI {
     }
 
     Time startTime = Time.valueOf(
-        Console.readCalendar("Enter the start date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
+        ConsoleConstrainedReader.readNonPastCalendar("Enter the start date/time for the exam (dd/mm/yyyy hh:mm): ",
+            "dd/MM/yyyy HH:mm"));
 
     Time endTime = Time.valueOf(
-        Console.readCalendar("Enter the end date/time for the exam (dd/mm/yyyy hh:mm): ", "dd/MM/yyyy HH:mm"));
+        ConsoleConstrainedReader.readNonPastCalendar("Enter the end date/time for the exam (dd/mm/yyyy hh:mm): ",
+            "dd/MM/yyyy HH:mm"));
 
     try {
       this.ctrl.createExam(selectedCourse, startTime, endTime);
     } catch (Exception ex) {
-      System.out.println("\n\nAn error occurred while creating the exam.");
+      System.out.println("\n\nAn error occurred while creating the exam: " + ex.getMessage());
       return false;
     }
 
