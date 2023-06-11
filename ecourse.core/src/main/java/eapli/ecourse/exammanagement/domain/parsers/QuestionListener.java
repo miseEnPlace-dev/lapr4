@@ -1,4 +1,4 @@
-// Generated from /home/drew/Faculdade/LAPR4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.g4 by ANTLR 4.9.2
+// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -167,6 +167,16 @@ public interface QuestionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOption(QuestionParser.OptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link QuestionParser#missingWordsOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterMissingWordsOption(QuestionParser.MissingWordsOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link QuestionParser#missingWordsOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitMissingWordsOption(QuestionParser.MissingWordsOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link QuestionParser#match}.
 	 * @param ctx the parse tree

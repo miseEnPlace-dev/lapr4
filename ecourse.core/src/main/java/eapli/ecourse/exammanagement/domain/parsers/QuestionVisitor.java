@@ -1,4 +1,4 @@
-// Generated from /home/drew/Faculdade/LAPR4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.g4 by ANTLR 4.9.2
+// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Question/Question.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -106,6 +106,12 @@ public interface QuestionVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOption(QuestionParser.OptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link QuestionParser#missingWordsOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMissingWordsOption(QuestionParser.MissingWordsOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link QuestionParser#match}.
 	 * @param ctx the parse tree

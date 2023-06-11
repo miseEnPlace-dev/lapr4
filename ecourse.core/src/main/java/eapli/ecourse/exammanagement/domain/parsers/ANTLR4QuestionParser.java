@@ -36,4 +36,17 @@ public class ANTLR4QuestionParser implements GrammarParser<List<Question>> {
     QuestionBuilderVisitor eval = new QuestionBuilderVisitor();
     return (List<Question>) eval.visit(tree);
   }
+
+  public List<Question> parseEvaluationExamQuestionsFromString(String str) throws ParseException {
+    QuestionLexer lexer = new QuestionLexer(CharStreams.fromString(str));
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    QuestionParser parser = new QuestionParser(tokens);
+    ParseTree tree = parser.start();
+
+    if (parser.getNumberOfSyntaxErrors() > 0)
+      throw new ParseException();
+
+    QuestionBuilderVisitor eval = new QuestionBuilderVisitor(true);
+    return (List<Question>) eval.visit(tree);
+  }
 }

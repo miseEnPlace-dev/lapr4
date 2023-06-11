@@ -10,7 +10,7 @@
 
         @start-question
             @type short-answer;
-            @score 1.24;
+            @score 14;
             @question-body "Como descreve a forma de um círculo?";
             @start-correct-answers
               @correct-answer "Assim" 0.5;

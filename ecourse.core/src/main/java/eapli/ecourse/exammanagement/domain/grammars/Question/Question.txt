@@ -98,9 +98,9 @@
   @end-correct-answers;
 
   @start-options
-    @option 1 "coisa";
-    @option 2 "pizza";
-    @option 3 "outra coisa";
-    @option 4 "outra pizza";
+    @option "coisa";
+    @option "pizza";
+    @option "outra coisa";
+    @option "outra pizza";
   @end-options;
 @end-question;

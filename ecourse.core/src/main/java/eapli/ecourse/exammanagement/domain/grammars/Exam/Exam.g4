@@ -58,25 +58,27 @@ matchingQuestion:
 
 missingWordsQuestion:
 	'missing-words' EOI score? body feedback? START_CORRECT_ANSWERS_SECTION missingWordsCorrectAnswer+
-		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION option+ END_OPTIONS_SECTION EOI;
+		END_CORRECT_ANSWERS_SECTION EOI START_OPTIONS_SECTION missingWordsOption+ END_OPTIONS_SECTION
+		EOI;
 
 body: QUESTION_BODY STRING EOI;
 
 feedback: FEEDBACK STRING EOI;
 
-score: SCORE REAL_NUMBER EOI;
+score: SCORE NUMBER EOI;
 
-shortAnswerCorrectAnswer: CORRECT_ANSWER STRING REAL_NUMBER EOI;
+shortAnswerCorrectAnswer: CORRECT_ANSWER STRING NUMBER EOI;
 
 multipleChoiceCorrectAnswer:
-	CORRECT_ANSWER NUMBER (REAL_NUMBER)? EOI
-	| CORRECT_ANSWER NUMBER EOI;
+	CORRECT_ANSWER NUMBER (NUMBER)? EOI;
 
-numericalCorrectAnswer: CORRECT_ANSWER REAL_NUMBER EOI;
+numericalCorrectAnswer: CORRECT_ANSWER NUMBER EOI;
 
-numericalAcceptedError: ACCEPTED_ERROR REAL_NUMBER EOI;
+numericalAcceptedError: ACCEPTED_ERROR NUMBER EOI;
 
 option: OPTION NUMBER STRING (STRING)? EOI;
+
+missingWordsOption: OPTION STRING EOI;
 
 match: MATCH NUMBER STRING EOI;
 
@@ -123,8 +125,9 @@ FALSE:													'false';
 // Feedback/Grade type
 FDB_GRD_TYPE: 'none' | 'on-submit' | 'after-closing';
 
-NUMBER:				[0-9]+;
-REAL_NUMBER:	[0-9]+ ('.' [0-9]+)?;
+NUMBER:				REAL_NUMBER | INTEGER;
+REAL_NUMBER:	[0-9]+ '.' [0-9]+;
+INTEGER:			[0-9]+;
 IDENTIFIER:		[a-zA-Z][a-zA-Z0-9_]*;
 
 // Skip spaces, tabs and newlines

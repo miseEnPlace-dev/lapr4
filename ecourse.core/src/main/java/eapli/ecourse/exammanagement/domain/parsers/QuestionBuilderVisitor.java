@@ -3,6 +3,11 @@ package eapli.ecourse.exammanagement.domain.parsers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.Token;
+
+import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Feedback;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
@@ -22,6 +27,16 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   private double real;
   private boolean bool;
 
+  private boolean mandatoryScore;
+
+  public QuestionBuilderVisitor(boolean mandatoryScore) {
+    this.mandatoryScore = mandatoryScore;
+  }
+
+  public QuestionBuilderVisitor() {
+    this.mandatoryScore = false;
+  }
+
   private String extractString(String s) {
     StringBuilder sb = new StringBuilder();
     for (int i = 1; i < s.length() - 1; i++)
@@ -29,13 +44,11 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
     return sb.toString();
   }
 
-  /*
-   * private void raiseError(ParserRuleContext ctx, String msg) {
-   * Token token = ctx.getStart();
-   * int lineNo = token.getLine();
-   * throw new ParseException(lineNo, msg);
-   * }
-   */
+  private void raiseError(ParserRuleContext ctx, String msg) {
+    Token token = ctx.getStart();
+    int lineNo = token.getLine();
+    throw new ParseException(lineNo, msg);
+  }
 
   @Override
   public List<Question> visitStart(QuestionParser.StartContext ctx) {
@@ -46,8 +59,12 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx) {
     this.question = new MatchingQuestion(QuestionType.FORMATIVE);
-    if (ctx.score() != null)
+
+    if (mandatoryScore && ctx.score() == null)
+      raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
+    else if (ctx.score() != null)
       visit(ctx.score());
+
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -92,8 +109,12 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx) {
     this.question = new NumericalQuestion(QuestionType.FORMATIVE);
-    if (ctx.score() != null)
+
+    if (mandatoryScore && ctx.score() == null)
+      raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
+    else if (ctx.score() != null)
       visit(ctx.score());
+
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -112,8 +133,13 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx) {
     this.question = new MultipleChoiceQuestion(QuestionType.FORMATIVE);
-    if (ctx.score() != null)
+
+    if (mandatoryScore && ctx.score() == null)
+      raiseError(ctx,
+          "Some question does not contain the score attribute. Specify a score for all questions using the @score tag.");
+    else if (ctx.score() != null)
       visit(ctx.score());
+
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -121,13 +147,13 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
     MultipleChoiceQuestion q = (MultipleChoiceQuestion) this.question;
 
     ctx.multipleChoiceCorrectAnswer().forEach(a -> {
-      String id = a.NUMBER().getText();
+      String id = a.NUMBER(0).getText();
 
       double grade = 0;
-      if (a.REAL_NUMBER() == null)
+      if (a.NUMBER(1) == null)
         grade = 1;
       else
-        grade = Double.parseDouble(a.REAL_NUMBER().getText());
+        grade = Double.parseDouble(a.NUMBER(1).getText());
 
       QuestionIdentifier identifier = QuestionIdentifier.valueOf(id);
 
@@ -156,8 +182,12 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx) {
     this.question = new ShortAnswerQuestion(QuestionType.FORMATIVE);
-    if (ctx.score() != null)
+
+    if (mandatoryScore && ctx.score() == null)
+      raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
+    else if (ctx.score() != null)
       visit(ctx.score());
+
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -166,7 +196,7 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
     ctx.shortAnswerCorrectAnswer().forEach(a -> {
       String answer = extractString(a.STRING().getText());
-      double grade = Double.parseDouble(a.REAL_NUMBER().getText());
+      double grade = Double.parseDouble(a.NUMBER().getText());
 
       q.addCorrectAnswer(answer, grade);
     });
@@ -178,8 +208,12 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx) {
     this.question = new TrueFalseQuestion(QuestionType.FORMATIVE);
-    if (ctx.score() != null)
+
+    if (mandatoryScore && ctx.score() == null)
+      raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
+    else if (ctx.score() != null)
       visit(ctx.score());
+
     visit(ctx.body());
     if (ctx.feedback() != null)
       visit(ctx.feedback());
@@ -196,18 +230,29 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
   @Override
   public List<Question> visitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx) {
     this.question = new MissingWordsQuestion(QuestionType.FORMATIVE);
-    if (ctx.score() != null)
+
+    if (mandatoryScore && ctx.score() == null)
+      raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
+    else if (ctx.score() != null)
       visit(ctx.score());
+
     visit(ctx.body());
+
     if (ctx.feedback() != null)
       visit(ctx.feedback());
 
     MissingWordsQuestion q = (MissingWordsQuestion) this.question;
 
-    // ctx.missingWordsCorrectAnswer().STRING().forEach(s -> {
-    // String missingWord = extractString(s.getText());
-    // q.addMissingWord(missingWord);
-    // });
+    ctx.missingWordsCorrectAnswer().forEach(a -> {
+      String missingWord = extractString(a.STRING().getText());
+      q.addMissingWord(missingWord);
+    });
+
+    ctx.missingWordsOption().forEach(o -> {
+      String option = extractString(o.STRING().getText());
+
+      q.addOption(option);
+    });
 
     questions.add(q);
     return questions;
@@ -224,7 +269,7 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitScore(QuestionParser.ScoreContext ctx) {
-    double score = Double.parseDouble(ctx.REAL_NUMBER().getText());
+    double score = Double.parseDouble(ctx.NUMBER().getText());
 
     ExamScore s = ExamScore.valueOf(score);
     this.question.changeScore(s);
@@ -242,13 +287,13 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitNumericalCorrectAnswer(QuestionParser.NumericalCorrectAnswerContext ctx) {
-    this.real = Double.parseDouble(ctx.REAL_NUMBER().getText());
+    this.real = Double.parseDouble(ctx.NUMBER().getText());
     return null;
   }
 
   @Override
   public List<Question> visitNumericalAcceptedError(QuestionParser.NumericalAcceptedErrorContext ctx) {
-    this.real = Double.parseDouble(ctx.REAL_NUMBER().getText());
+    this.real = Double.parseDouble(ctx.NUMBER().getText());
     return null;
   }
 

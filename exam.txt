@@ -4,12 +4,13 @@
     @feedback none;
     @grade on-submit;
 
-    @start-section
+    @start-section section27;
       @title "First Section";
       @description "This is the first section.";
 
       @start-question
         @type short-answer;
+        @score 12;
         @question-body "Como descreve a forma de um círculo?";
         @start-correct-answers
           @correct-answer "Assim" 0.5;

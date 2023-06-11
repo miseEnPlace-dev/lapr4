@@ -164,7 +164,7 @@ public class ExamBuilderVisitor extends ExamBaseVisitor<EvaluationExamBuilder> {
 
   @Override
   public EvaluationExamBuilder visitQuestions(ExamParser.QuestionsContext ctx) {
-    questions = questionParser.parseFromString(ctx.getText().toString());
+    questions = questionParser.parseEvaluationExamQuestionsFromString(ctx.getText().toString());
 
     for (Question q : questions)
       this.examScore += q.score().value();
