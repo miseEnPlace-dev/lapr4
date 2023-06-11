@@ -11,7 +11,7 @@ public class GenerateStructureFormativeExamService {
     this.formativeExam = formativeExam;
   }
 
-  public String generateStructureFile() {
+  public String generateStructureString() {
     StringBuilder sb = new StringBuilder();
 
     sb.append(buildStartExam());

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -18,9 +20,11 @@ import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.exammanagement.application.GenerateStructureFormativeExamService;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
+import eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion;
 import eapli.ecourse.questionmanagement.domain.NumericalQuestion;
 import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.domain.QuestionBody;
+import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.QuestionType;
 import eapli.ecourse.questionmanagement.domain.TrueFalseQuestion;
 import eapli.ecourse.teachermanagement.domain.Acronym;
@@ -60,6 +64,22 @@ public class GenerateStructureFormativeExamServiceTest {
 
   private FormativeExam exam;
 
+  private void addCorrectAnswerMultipleChoiceQuestion(MultipleChoiceQuestion question) {
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    Double weight = 1.0;
+    question.addCorrectAnswer(identifier, weight);
+    Map<QuestionIdentifier, Double> expected = new HashMap<>();
+    expected.put(identifier, weight);
+  }
+
+  private void addOptionMultipleChoiceQuestion(MultipleChoiceQuestion question) {
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    String option = "Paris";
+    question.addOption(identifier, option);
+    Map<QuestionIdentifier, String> expected = new HashMap<>();
+    expected.put(identifier, option);
+  }
+
   @Test
   public void ensureIsPossibleToCreateFormativeExamString() {
     Course course = getDummyCourse();
@@ -85,7 +105,7 @@ public class GenerateStructureFormativeExamServiceTest {
     sections.add(section);
 
     GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
-    String struct = service.generateStructureFile();
+    String struct = service.generateStructureString();
     System.out.println(struct);
   }
 
@@ -116,7 +136,75 @@ public class GenerateStructureFormativeExamServiceTest {
     String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
     GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
-    String struct = service.generateStructureFile();
+    String struct = service.generateStructureString();
+
+    assertEquals(examStruct, struct);
+  }
+
+  @Test
+  public void ensureFormativeExamStringIsCorrectWithMultipleSections() {
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("1");
+    ExamTitle title = ExamTitle.valueOf("Test Exam");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    QuestionBody body = QuestionBody.valueOf("This is a test question");
+    QuestionType type = QuestionType.FORMATIVE;
+
+    TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion(body, type, false);
+    NumericalQuestion numericalQuestion = new NumericalQuestion(body, type, 1, 0.5);
+    SectionTitle sectionTitle = SectionTitle.valueOf("Section title");
+    SectionIdentifier id = SectionIdentifier.valueOf("id");
+    SectionDescription des = SectionDescription.valueOf("description");
+
+    Collection<Question> questions = new ArrayList<>();
+    questions.add(trueFalseQuestion);
+    questions.add(numericalQuestion);
+
+    FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
+    sections.add(section);
+    sections.add(section);
+
+    String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
+
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    String struct = service.generateStructureString();
+
+    assertEquals(examStruct, struct);
+  }
+
+  @Test
+  public void ensureFormativeExamStringIsCorrectWithMultipleQuestions() {
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("1");
+    ExamTitle title = ExamTitle.valueOf("Test Exam");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    QuestionBody body = QuestionBody.valueOf("This is a test question");
+    QuestionType type = QuestionType.FORMATIVE;
+
+    MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(body, type);
+    addCorrectAnswerMultipleChoiceQuestion(multipleChoiceQuestion);
+    addOptionMultipleChoiceQuestion(multipleChoiceQuestion);
+
+    SectionTitle sectionTitle = SectionTitle.valueOf("Section title");
+    SectionIdentifier id = SectionIdentifier.valueOf("id");
+    SectionDescription des = SectionDescription.valueOf("description");
+
+    Collection<Question> questions = new ArrayList<>();
+    questions.add(multipleChoiceQuestion);
+
+    FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
+
+    sections.add(section);
+
+    String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@start-correct-answers@correct-answer A 1.0;@end-correct-answers;@start-options@option A \"Paris\";@end-options;@end-question;@end-section;@end-exam;";
+
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+
+    String struct = service.generateStructureString();
 
     assertEquals(examStruct, struct);
   }
