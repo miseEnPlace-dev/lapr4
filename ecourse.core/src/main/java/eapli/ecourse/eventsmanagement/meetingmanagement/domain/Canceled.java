@@ -5,10 +5,8 @@ import java.util.Calendar;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
-import lombok.EqualsAndHashCode;
 
 @Embeddable
-@EqualsAndHashCode
 public class Canceled implements ValueObject, Comparable<Canceled> {
   private static final long serialVersionUID = 1L;
 

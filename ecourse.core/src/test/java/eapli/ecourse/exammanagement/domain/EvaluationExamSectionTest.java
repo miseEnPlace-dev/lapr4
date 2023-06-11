@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamSection;
-import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.questionmanagement.domain.Question;
 
 public class EvaluationExamSectionTest {

@@ -3,10 +3,8 @@ package eapli.ecourse.postitmanagement.domain;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
-import lombok.EqualsAndHashCode;
 
 @Embeddable
-@EqualsAndHashCode
 public class Coordinates implements ValueObject {
 
   Integer x, y;

@@ -31,7 +31,7 @@ public class ToggleCourseStatusControllerTest {
   @Mock
   private AuthorizationService authz;
 
-  private ListCourseService listCourseService;
+  // private ListCourseService listCourseService;
   private ToggleCourseStatusController toggleCourseStatusController;
 
   private CourseDTO getDummyCourseDTO() {
@@ -51,7 +51,7 @@ public class ToggleCourseStatusControllerTest {
   @Before
   public void setup() {
     MockitoAnnotations.openMocks(this);
-    listCourseService = new ListCourseService(courseRepository);
+    // listCourseService = new ListCourseService(courseRepository);
     toggleCourseStatusController = new ToggleCourseStatusController(courseRepository, authz);
   }
 
@@ -94,7 +94,7 @@ public class ToggleCourseStatusControllerTest {
     when(courseRepository.ofIdentity(d.getCode())).thenReturn(Optional.of(course));
     assertTrue(course.state().isClosed());
 
-    assertThrows(IllegalStateException.class, ()->toggleCourseStatusController.toggleToPreviousCourseStatus(d));
+    assertThrows(IllegalStateException.class, () -> toggleCourseStatusController.toggleToPreviousCourseStatus(d));
 
   }
 }

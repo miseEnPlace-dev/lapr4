@@ -11,7 +11,6 @@ import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4ExamParser;
-import eapli.ecourse.exammanagement.domain.parsers.GrammarParser;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -70,6 +69,9 @@ public class CreateEvaluationExamController {
     builder.withTeacher(teacher).withCourse(course).withStartTime(startTime).withEndTime(endTime);
 
     EvaluationExam exam = builder.build();
+
+    if (examRepository.ofIdentity(exam.identity()).isPresent())
+      throw new IllegalStateException("An exam with the same identifier already exists.");
 
     examRepository.save(exam);
   }

@@ -10,7 +10,6 @@ import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepos
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
-import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;

@@ -2,8 +2,6 @@ package eapli.ecourse.persistence.impl.jpa;
 
 import javax.persistence.TypedQuery;
 
-import org.hibernate.annotations.QueryHints;
-
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;

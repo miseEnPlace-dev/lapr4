@@ -9,9 +9,8 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.domain.Enrolment;
-import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
-import eapli.ecourse.studentmanagement.application.StudentService;
+// import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.dto.StudentDTO;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -21,14 +20,14 @@ public class BulkEnrolmentService {
   private final StudentRepository studentRepository;
   private final CourseRepository courseRepository;
   private final EnrolmentRepository enrolmentRepository;
-  private final StudentService studentService;
+  // private final StudentService studentService;
 
   public BulkEnrolmentService(StudentRepository studentRepository, CourseRepository courseRepository,
       EnrolmentRepository enrolmentRepository) {
     this.studentRepository = studentRepository;
     this.courseRepository = courseRepository;
     this.enrolmentRepository = enrolmentRepository;
-    this.studentService = new StudentService();
+    // this.studentService = new StudentService();
   }
 
   private Iterable<StudentDTO> getStudentsFromFile(final String filePath) throws IOException {
