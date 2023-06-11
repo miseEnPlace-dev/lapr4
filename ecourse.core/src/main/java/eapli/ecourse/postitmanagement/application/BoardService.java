@@ -17,9 +17,7 @@ public class BoardService {
   }
 
   public boolean isCellAvailable(BoardID id, int x, int y) {
-    Iterable<PostIt> postIts = postItRepository.findAllByBoardId(id);
-
-    postIts = postItRepository.findLatestVersionOfBoard(id);
+    Iterable<PostIt> postIts = postItRepository.findLatestVersionOfBoard(id);
 
     return !this.existsPostIt(postIts, x, y);
   }
