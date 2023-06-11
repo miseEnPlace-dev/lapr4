@@ -85,7 +85,7 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 
 ### 4.3. Applied Patterns
 
-- **Strategy**: This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them.
+- **Strategy**: This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them. Using the service `GenerateStructureFormativeExamService`, it returns a string with the structure of the exam, and the parser can parse it, without having to know the details of each type of question.
 
 ### 4.4. Tests
 
@@ -98,14 +98,37 @@ _Note: This are some simplified versions of the tests for readability purposes._
 public void ensureIsPossibleToCreateFormativeExamString() {}
 ```
 
-## 5. Implementation
-
-### 5.1. Controller
-
-- Relevant implementation details
+**Test 2:** Ensure it is possible to generate structure of a formative exam string with multiple questions
 
 ```java
+@Test
+public void ensureIsPossibleToCreateFormativeExamStringWithMultipleQuestions() {}
+```
 
+**Test 3:** Ensure it is possible to generate structure of a formative exam string with multiple sections
+
+```java
+@Test
+public void ensureIsPossibleToCreateFormativeExamStringWithMultipleSections() {}
+```
+
+## 5. Implementation
+
+### 5.1. Generate structure of a formative exam string service
+
+```java
+public String generateStructureString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(buildStartExam());
+    sb.append(buildDescriptionExam());
+    sb.append(buildFeedbackExam());
+    sb.append(buildGradeExam());
+    sb.append(buildSections());
+    sb.append(buildEndExam());
+
+    return sb.toString();
+  }
 ```
 
 ## 6. Integration & Demonstration

@@ -24,17 +24,17 @@ public class GenerateStructureFormativeExamService {
     return sb.toString();
   }
 
-  private String buildGradeExam() {
-    StringBuilder sb = new StringBuilder();
+  // private String buildGradeExam() {
+  // StringBuilder sb = new StringBuilder();
 
-    return sb.append("@grade on-submit").toString();
-  }
+  // return sb.append("@grade on-submit").toString();
+  // }
 
-  private String buildFeedbackExam() {
-    StringBuilder sb = new StringBuilder();
+  // private String buildFeedbackExam() {
+  // StringBuilder sb = new StringBuilder();
 
-    return sb.append("@feedback none;").toString();
-  }
+  // return sb.append("@feedback none;").toString();
+  // }
 
   private String buildDescriptionExam() {
     return "@description \"" + formativeExam.description() + "\";";
