@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 
@@ -26,7 +28,11 @@ public class EvaluationExamSection implements DomainEntity<SectionIdentifier> {
   @Version
   private Long version;
 
-  @EmbeddedId
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+
+  @Column(nullable = false)
   private SectionIdentifier identifier;
 
   @Column(nullable = false)
