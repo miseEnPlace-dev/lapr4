@@ -84,24 +84,42 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```java
 @Test
-public void ensureItsPossibleToCreateInvite() {
-}
+public void ensureItsPossibleToCreateInvite() {}
 ```
 
 **Test 2:** Ensure meeting can be accepted
 
 ```java
 @Test
-public void ensureItsPossibleToAcceptInvite() {
-}
+public void ensureItsPossibleToAcceptInvite() {}
 ```
 
 **Test 3:** Ensure meeting can be rejected
 
 ```java
 @Test
-public void ensureItsPossibleToRejectInvite() {
-}
+public void ensureItsPossibleToRejectInvite() {}
+```
+
+**Test 4:** Ensure users invited to a meeting can be listed
+
+```java
+@Test
+public void ensureUsersInvitedToMeetingAreCorrect() {}
+```
+
+**Test 5:** Ensure meeting details are correct
+
+```java
+@Test
+public void ensureMeetingDetailsAreCorrect() {}
+```
+
+**Test 6:** Ensure invite status are correct
+
+```java
+@Test
+public void ensureInviteStatusAreCorrect() {}
 ```
 
 ## 5. Implementation

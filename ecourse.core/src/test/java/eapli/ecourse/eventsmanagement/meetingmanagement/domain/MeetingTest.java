@@ -154,7 +154,7 @@ public class MeetingTest {
   }
 
   @Test
-  public void ensureToDTOIsWorking() {
+  public void ensureToDtoIsWorking() {
     Meeting meeting = getDummyMeeting();
     MeetingDTO dto = meeting.toDto();
     assertEquals(meeting.identity(), dto.getId());
