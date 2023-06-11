@@ -1,5 +1,7 @@
 package eapli.ecourse.app.common.console.util;
 
+import java.util.Calendar;
+
 import eapli.framework.io.util.Console;
 
 /**
@@ -39,6 +41,20 @@ public final class ConsoleConstrainedReader {
       input = Console.readInteger("\n" + message);
       if (input <= 0) {
         System.out.println("Invalid input. Please enter a positive number.");
+      }
+    }
+    return input;
+  }
+
+  public static Calendar readNonPastCalendar(String message, String format) {
+    Calendar input = null;
+    boolean valid = false;
+    while (!valid) {
+      input = Console.readCalendar("\n" + message, format);
+      if (Calendar.getInstance().compareTo(input) > 0) {
+        System.out.println("Invalid date. Please enter a date/time in the future.");
+      } else {
+        valid = true;
       }
     }
     return input;
