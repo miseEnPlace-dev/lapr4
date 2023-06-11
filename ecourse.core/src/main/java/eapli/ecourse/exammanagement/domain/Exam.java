@@ -24,14 +24,11 @@ import eapli.framework.validations.Preconditions;
 @Entity
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Exam implements AggregateRoot<ExamCode> {
+public abstract class Exam implements AggregateRoot<ExamIdentifier> {
   private static final long serialVersionUID = 1L;
 
   @Version
   private Long version;
-
-  @EmbeddedId
-  private ExamCode code;
 
   @ManyToOne
   private Course course;
@@ -43,7 +40,7 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   @Column(nullable = true)
   private String fileContent;
 
-  @Column(nullable = false)
+  @EmbeddedId
   private ExamIdentifier identifier;
 
   @Column(nullable = false)
@@ -69,7 +66,6 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
       ExamDescription description, ExamScore score, String fileContent) {
     Preconditions.noneNull(course, teacher, identifier, title, description);
 
-    this.code = ExamCode.newID();
     this.course = course;
     this.teacher = teacher;
     this.identifier = identifier;
@@ -84,7 +80,6 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
       ExamDescription description, ExamScore score) {
     Preconditions.noneNull(course, teacher, identifier, title, description);
 
-    this.code = ExamCode.newID();
     this.course = course;
     this.teacher = teacher;
     this.identifier = identifier;
@@ -96,8 +91,8 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
   }
 
   @Override
-  public ExamCode identity() {
-    return this.code;
+  public ExamIdentifier identity() {
+    return this.identifier;
   }
 
   public Teacher teacher() {
@@ -134,13 +129,9 @@ public abstract class Exam implements AggregateRoot<ExamCode> {
     this.state.changeToPublished();
   }
 
-  public ExamIdentifier identifier() {
-    return this.identifier;
-  }
-
   @Override
   public String toString() {
-    return "Exam [code=" + code + ", course=" + course + ", description=" + description + ", identifier=" + identifier
+    return "Exam [course=" + course + ", description=" + description + ", identifier=" + identifier
         + ", state=" + state + ", teacher=" + teacher + ", title=" + title + "]";
   }
 }

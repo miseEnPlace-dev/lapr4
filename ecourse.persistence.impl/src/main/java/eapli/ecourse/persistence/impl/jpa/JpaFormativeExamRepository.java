@@ -5,21 +5,21 @@ import javax.persistence.TypedQuery;
 import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
-import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-public class JpaFormativeExamRepository extends JpaAutoTxRepository<FormativeExam, ExamCode, ExamCode>
+public class JpaFormativeExamRepository extends JpaAutoTxRepository<FormativeExam, ExamIdentifier, ExamIdentifier>
     implements FormativeExamRepository {
   public JpaFormativeExamRepository(final TransactionalContext autoTx) {
-    super(autoTx, "code");
+    super(autoTx, "identifier");
   }
 
   public JpaFormativeExamRepository(final String puname) {
-    super(puname, Application.settings().extendedPersistenceProperties(), "code");
+    super(puname, Application.settings().extendedPersistenceProperties(), "identifier");
   }
 
   @Override

@@ -40,7 +40,7 @@ public class FormativeExam extends Exam {
   private Long version;
 
   public FormativeExamDTO toDto() {
-    return new FormativeExamDTO(identity(), title(), course(), teacher(), identifier(), description(), state());
+    return new FormativeExamDTO(identity(), title(), course(), teacher(), description(), state());
   }
 
   public Collection<FormativeExamSection> sections() {
@@ -58,7 +58,7 @@ public class FormativeExam extends Exam {
 
     return that.identity().equals(this.identity()) && that.title().equals(this.title())
         && that.course().equals(this.course()) && that.teacher().equals(this.teacher())
-        && that.identifier().equals(this.identifier()) && that.description().equals(this.description())
+        && that.description().equals(this.description())
         && that.state().equals(this.state());
   }
 }

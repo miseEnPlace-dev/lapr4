@@ -2,13 +2,13 @@ package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
-import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class InMemoryFormativeExamRepository extends InMemoryDomainRepository<FormativeExam, ExamCode>
+public class InMemoryFormativeExamRepository extends InMemoryDomainRepository<FormativeExam, ExamIdentifier>
     implements FormativeExamRepository {
 
   static {

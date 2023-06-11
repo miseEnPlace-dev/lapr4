@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FormativeExamDTO {
-  private ExamCode code;
+  private ExamIdentifier identifier;
   private ExamTitle title;
   private Course course;
   private Teacher teacher;
-  private ExamIdentifier identifier;
   private ExamDescription description;
   private ExamState state;
 }

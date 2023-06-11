@@ -86,7 +86,7 @@ public class FormativeExamTest {
     exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, score, sections);
 
     assertEquals(course, exam.course());
-    assertEquals(identifier, exam.identifier());
+    assertEquals(identifier, exam.identity());
     assertEquals(title, exam.title());
     assertEquals(description, exam.description());
     assertEquals(sections, exam.sections());
@@ -177,7 +177,7 @@ public class FormativeExamTest {
     FormativeExamDTO dto = exam.toDto();
 
     assertEquals(exam.course(), dto.getCourse());
-    assertEquals(exam.identifier(), dto.getIdentifier());
+    assertEquals(exam.identity(), dto.getIdentifier());
     assertEquals(exam.title(), dto.getTitle());
     assertEquals(exam.description(), dto.getDescription());
     assertEquals(exam.state(), dto.getState());

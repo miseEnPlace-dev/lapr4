@@ -1,8 +1,7 @@
 package eapli.ecourse.exammanagement.application;
 
-
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
@@ -18,8 +17,8 @@ public class FormativeExamListService {
     this.repository = formativeExamRepository;
   }
 
-  public Optional<FormativeExam> findExamByCode(final ExamCode code) {
-    return repository.ofIdentity(code);
+  public Optional<FormativeExam> findExamByCode(final ExamIdentifier identifier) {
+    return repository.ofIdentity(identifier);
   }
 
   public Iterable<FormativeExamDTO> findAllCourseExams(Course course) {
@@ -30,7 +29,7 @@ public class FormativeExamListService {
 
   private Iterable<FormativeExamDTO> convertToDto(Iterable<FormativeExam> exams) {
     return StreamSupport.stream(exams.spliterator(), true)
-      .map(FormativeExam::toDto)
-      .collect(Collectors.toUnmodifiableList());
+        .map(FormativeExam::toDto)
+        .collect(Collectors.toUnmodifiableList());
   }
 }

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
@@ -18,8 +18,8 @@ public class EvaluationExamListService {
     this.examRepository = examRepository;
   }
 
-  public Optional<EvaluationExam> findExamByCode(final ExamCode code) {
-    return examRepository.ofIdentity(code);
+  public Optional<EvaluationExam> findExamByCode(final ExamIdentifier identifier) {
+    return examRepository.ofIdentity(identifier);
   }
 
   public Iterable<EvaluationExamDTO> listAllCourseExams(Course course) {

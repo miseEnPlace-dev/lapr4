@@ -11,27 +11,27 @@ import eapli.ecourse.Application;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamCode, ExamCode>
+public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationExam, ExamIdentifier, ExamIdentifier>
     implements EvaluationExamRepository {
   public JpaEvaluationExamRepository(final TransactionalContext autoTx) {
-    super(autoTx, "code");
+    super(autoTx, "identifier");
   }
 
   public JpaEvaluationExamRepository(final String puname) {
-    super(puname, Application.settings().extendedPersistenceProperties(), "code");
+    super(puname, Application.settings().extendedPersistenceProperties(), "identifier");
   }
 
-  public Optional<EvaluationExam> findByCode(final ExamCode code) {
+  public Optional<EvaluationExam> findByCode(final ExamIdentifier identifier) {
     final Map<String, Object> params = new HashMap<>();
-    params.put("code", code);
-    return matchOne("e.code=:code", params);
+    params.put("identifier", identifier);
+    return matchOne("e.identifier=:identifier", params);
   }
 
   @Override
@@ -52,10 +52,11 @@ public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationE
     final Calendar currentDate = Calendar.getInstance();
 
     return match("e.course = :course AND e.startTime < :startTime", "course", course, "startTime",
-      Time.valueOf(currentDate));
+        Time.valueOf(currentDate));
   }
 
-  public Iterable<EvaluationExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code, MecanographicNumber number) {
+  public Iterable<EvaluationExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code,
+      MecanographicNumber number) {
     final TypedQuery<EvaluationExam> query = entityManager().createQuery(
         "SELECT e FROM EvaluationExam e WHERE e NOT IN (SELECT a.exam FROM ExamAnswer a WHERE a.student = :number) AND e.course.code = :code",
         EvaluationExam.class);

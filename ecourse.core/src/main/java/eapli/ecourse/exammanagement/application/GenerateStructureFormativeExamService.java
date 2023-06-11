@@ -87,7 +87,7 @@ public class GenerateStructureFormativeExamService {
 
   private String buildStartExam() {
     StringBuilder sb = new StringBuilder();
-    sb.append("@start-exam " + formativeExam.identifier() + ";");
+    sb.append("@start-exam " + formativeExam.identity() + ";");
     return sb.toString();
   }
 

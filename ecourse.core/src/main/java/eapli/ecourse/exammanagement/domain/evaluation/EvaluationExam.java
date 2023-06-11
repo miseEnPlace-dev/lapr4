@@ -98,7 +98,7 @@ public class EvaluationExam extends Exam {
   }
 
   public EvaluationExamDTO toDto() {
-    return new EvaluationExamDTO(identity(), title(), course(), teacher(), startTime, endTime, identifier(),
+    return new EvaluationExamDTO(identity(), title(), course(), teacher(), startTime, endTime,
         description(), state());
   }
 

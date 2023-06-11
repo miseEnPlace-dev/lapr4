@@ -6,21 +6,21 @@ import java.util.Optional;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.domain.ExamCode;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class InMemoryEvaluationExamRepository extends InMemoryDomainRepository<EvaluationExam, ExamCode>
+public class InMemoryEvaluationExamRepository extends InMemoryDomainRepository<EvaluationExam, ExamIdentifier>
     implements EvaluationExamRepository {
 
   static {
     InMemoryInitializer.init();
   }
 
-  public Optional<EvaluationExam> findByCode(final ExamCode examCode) {
-    return Optional.of(data().get(examCode));
+  public Optional<EvaluationExam> findByCode(final ExamIdentifier identifier) {
+    return Optional.of(data().get(identifier));
   }
 
   @Override
@@ -42,7 +42,8 @@ public class InMemoryEvaluationExamRepository extends InMemoryDomainRepository<E
     return match(e -> e.course().equals(course) && e.startTime().compareTo(Time.valueOf(currentDate)) < 0);
   }
 
-  public Iterable<EvaluationExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code, MecanographicNumber number) {
+  public Iterable<EvaluationExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code,
+      MecanographicNumber number) {
     throw new UnsupportedOperationException();
   }
 }

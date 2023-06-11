@@ -68,12 +68,12 @@ public class ListCourseExamGradesController {
   }
 
   public Iterable<AnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
-    return answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getCode()).orElseThrow(),
+    return answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
         studentsInCourse(examDTO.getCourse()));
   }
 
   public Iterable<AnswerDTO> formativeExamGrades(FormativeExamDTO examDTO) {
-    return answerService.listExamGrades(formativeService.findExamByCode(examDTO.getCode()).orElseThrow(),
+    return answerService.listExamGrades(formativeService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
         studentsInCourse(examDTO.getCourse()));
   }
 
