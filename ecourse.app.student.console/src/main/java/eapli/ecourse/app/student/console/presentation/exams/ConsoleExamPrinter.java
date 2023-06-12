@@ -15,7 +15,7 @@ import eapli.ecourse.questionmanagement.domain.QuestionBody;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.io.util.Console;
 
-public class ConsoleQuestionPrinter implements ExamPrinter {
+public class ConsoleExamPrinter implements ExamPrinter {
   public void printExamHeader(final String title, final String description) {
     System.out.println("EXAM " + title.toUpperCase() + "\n" + description);
   }
