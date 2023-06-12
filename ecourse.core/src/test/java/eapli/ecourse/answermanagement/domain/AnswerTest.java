@@ -86,7 +86,8 @@ public class AnswerTest {
     id = AnswerId.valueOf("123");
     student = getNewDummyStudent();
     exam = dummyExam();
-    answer = new Answer(id, student, exam);
+    ExamScore score = ExamScore.valueOf(.2);
+    answer = new Answer(id, student, exam, score);
   }
 
   @Test
@@ -106,7 +107,7 @@ public class AnswerTest {
 
   @Test
   public void testSameAs() {
-    Answer other = new Answer(id, student, exam);
+    Answer other = new Answer(id, student, exam, ExamScore.valueOf(.2));
     assertTrue(answer.sameAs(other));
   }
 }

@@ -1,5 +1,8 @@
 package eapli.ecourse.exammanagement.application;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import eapli.ecourse.answermanagement.application.ListExamAnswerService;
 import eapli.ecourse.answermanagement.dto.AnswerDTO;
 import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
@@ -22,9 +25,6 @@ import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class ListCourseExamGradesController {
 
   private final EvaluationExamListService evaluationService;
@@ -45,7 +45,7 @@ public class ListCourseExamGradesController {
     this.authz = authz;
     this.courseService = new ListCourseService(courseRepository);
     this.teacherRepository = teacherRepository;
-    this.answerService = new ListExamAnswerService(answerRepository, evaluationRepository, formativeRepository);
+    this.answerService = new ListExamAnswerService(answerRepository, evaluationRepository);
     this.enrolmentService = new ListEnrolmentService(enrolmentRepository);
     this.studentService = new StudentService();
   }
@@ -80,9 +80,9 @@ public class ListCourseExamGradesController {
   private Collection<Student> studentsInCourse(Course course) {
     Collection<Student> students = new ArrayList<>();
 
-    Iterable<EnrolmentDTO> enrolments = enrolmentService.listStudentsEnrolled(course.code());
+    Iterable<EnrolmentDTO> enrollments = enrolmentService.listStudentsEnrolled(course.code());
 
-    enrolments.forEach(
+    enrollments.forEach(
         e -> students.add(studentService.findStudentUserByMecNumber(e.getStudentNumber().toString()).orElseThrow()));
     return students;
   }

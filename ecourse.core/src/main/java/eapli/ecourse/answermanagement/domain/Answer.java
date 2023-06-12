@@ -1,5 +1,7 @@
 package eapli.ecourse.answermanagement.domain;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -25,16 +27,23 @@ public class Answer implements AggregateRoot<AnswerId> {
   @ManyToOne
   private Exam exam;
 
-  public Answer(final Student student, final Exam exam) {
+  @Column
+  private Calendar takenAt;
+
+  public Answer(final Student student, final Exam exam, final ExamScore score) {
     this.id = AnswerId.newID();
     this.student = student;
     this.exam = exam;
+    this.score = score;
+    this.takenAt = Calendar.getInstance();
   }
 
-  public Answer(final AnswerId id, final Student student, final Exam exam) {
+  public Answer(final AnswerId id, final Student student, final Exam exam, final ExamScore score) {
     this.id = id;
     this.student = student;
     this.exam = exam;
+    this.score = score;
+    this.takenAt = Calendar.getInstance();
   }
 
   protected Answer() {
@@ -70,9 +79,12 @@ public class Answer implements AggregateRoot<AnswerId> {
     return score;
   }
 
+  public void changeScore(ExamScore score) {
+    this.score = score;
+  }
+
   public AnswerDTO toDto() {
     return new AnswerDTO(student.identity().toString(), student.user().name().toString(), exam.title().toString(),
-        exam.type(),
-        score().toString());
+        score().toString(), takenAt);
   }
 }

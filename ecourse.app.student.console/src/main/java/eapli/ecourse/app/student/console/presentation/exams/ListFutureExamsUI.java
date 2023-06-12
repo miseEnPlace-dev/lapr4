@@ -21,15 +21,14 @@ public class ListFutureExamsUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-
     Iterable<CourseDTO> studentCourses = ctrl.listStudentCourses();
     if (!studentCourses.iterator().hasNext()) {
       System.out.println("Not enrolled in any course");
       return false;
     }
 
-    new CourseHeader().printHeader();
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>("", studentCourses, new CoursePrinter());
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), studentCourses,
+        new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
     if (selected == null)
@@ -41,8 +40,8 @@ public class ListFutureExamsUI extends AbstractUI {
       return false;
     }
 
-    new EvaluationExamHeader().printHeader();
-    ListWidget<EvaluationExamDTO> list = new ListWidget<>("", courseFutureExams, new EvaluationExamPrinter());
+    ListWidget<EvaluationExamDTO> list = new ListWidget<>(new EvaluationExamHeader().header(), courseFutureExams,
+        new EvaluationExamPrinter());
     list.show();
 
     return false;

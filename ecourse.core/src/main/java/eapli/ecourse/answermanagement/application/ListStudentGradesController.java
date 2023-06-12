@@ -6,7 +6,6 @@ import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -21,14 +20,13 @@ public class ListStudentGradesController {
   private final ListExamAnswerService listExamAnswerService;
 
   public ListStudentGradesController(EnrolmentRepository enrolmentRepository, ExamAnswerRepository examAnswerRepository,
-      StudentRepository studentRepository, FormativeExamRepository formativeExamRepository,
-      EvaluationExamRepository evaluationExamRepository, AuthorizationService authenticationService) {
+      StudentRepository studentRepository,
+      EvaluationExamRepository evaluationExamRepository, AuthorizationService authorizationService) {
     this.studentRepository = studentRepository;
-    this.authz = authenticationService;
+    this.authz = authorizationService;
 
     this.listEnrolmentService = new ListEnrolmentService(enrolmentRepository);
-    this.listExamAnswerService = new ListExamAnswerService(examAnswerRepository, evaluationExamRepository,
-        formativeExamRepository);
+    this.listExamAnswerService = new ListExamAnswerService(examAnswerRepository, evaluationExamRepository);
   }
 
   private Student getAuthenticatedStudent() {

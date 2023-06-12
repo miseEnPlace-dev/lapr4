@@ -35,9 +35,8 @@
     <class>eapli.ecourse.boardmanagement.domain.UserPermission</class>
     <class>eapli.ecourse.postitmanagement.domain.Coordinates</class>
     <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
-    <class>eapli.ecourse.postitmanagement.domain.PostItID</class>
-    <class>eapli.ecourse.postitmanagement.domain.PostItState</class>
-    <class>eapli.ecourse.postitmanagement.domain.PostItTitle</class>
+    <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
+    <class>eapli.ecourse.answermanagement.domain.Answer</class>
 
 
     <properties>
@@ -104,6 +103,10 @@
     <class>eapli.ecourse.boardmanagement.domain.BoardRow</class>
     <class>eapli.ecourse.boardmanagement.domain.BoardColumn</class>
     <class>eapli.ecourse.boardmanagement.domain.UserPermission</class>
+    <class>eapli.ecourse.postitmanagement.domain.Coordinates</class>
+    <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
+    <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
+    <class>eapli.ecourse.answermanagement.domain.Answer</class>
 
     <properties>
       <property name="javax.persistence.jdbc.driver"

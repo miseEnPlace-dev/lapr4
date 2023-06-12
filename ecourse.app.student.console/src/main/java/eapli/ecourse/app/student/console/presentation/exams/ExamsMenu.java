@@ -1,7 +1,8 @@
 package eapli.ecourse.app.student.console.presentation.exams;
 
-import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.Actions;
+import eapli.framework.actions.menu.Menu;
+import eapli.framework.presentation.console.ShowMessageAction;
 
 public class ExamsMenu {
   private static final int VIEW_FUTURE_EXAMS_OPTION = 1;
@@ -17,8 +18,8 @@ public class ExamsMenu {
 
     menu.addItem(VIEW_FUTURE_EXAMS_OPTION, "View Future Exams", new ListFutureExamsUI()::show);
     menu.addItem(LIST_GRADES_OPTION, "List Grades", new ListStudentGradesUI()::show);
-    // menu.addItem(TAKE_EVAL_EXAM_OPTION, "Take Evaluation Exam", );
-    // menu.addItem(TAKE_FORM_EXAM_OPTION, "Take Formative Exam", );
+    menu.addItem(TAKE_EVAL_EXAM_OPTION, "Take Evaluation Exam", new ShowMessageAction("Not implemented yet!"));
+    menu.addItem(TAKE_FORM_EXAM_OPTION, "Take Formative Exam", new ShowMessageAction("Not implemented yet!"));
     menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
 
     return menu;

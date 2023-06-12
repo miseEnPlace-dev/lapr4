@@ -737,11 +737,6 @@ video {
   border-top-width: 2px;
 }
 
-.border-gray-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-
 .border-slate-200 {
   --tw-border-opacity: 1;
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
@@ -820,11 +815,6 @@ video {
   background-color: transparent;
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-yellow-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
@@ -891,18 +881,9 @@ video {
   line-height: 2.5rem;
 }
 
-.text-\[11px\] {
-  font-size: 11px;
-}
-
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .text-xl {
@@ -929,11 +910,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .shadow-lg {
@@ -1122,11 +1098,6 @@ video {
   border-width: 2px;
 }
 
-.focus\:border-slate-700:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(51 65 85 / var(--tw-border-opacity));
-}
-
 .focus\:border-slate-200:focus {
   --tw-border-opacity: 1;
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
@@ -1190,11 +1161,6 @@ video {
   line-height: 1.25;
 }
 
-.peer:focus ~ .peer-focus\:text-pink-500 {
-  --tw-text-opacity: 1;
-  color: rgb(236 72 153 / var(--tw-text-opacity));
-}
-
 .peer:focus ~ .peer-focus\:text-slate-200 {
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity));
@@ -1208,12 +1174,6 @@ video {
 .peer:focus ~ .peer-focus\:before\:border-t-2::before {
   content: var(--tw-content);
   border-top-width: 2px;
-}
-
-.peer:focus ~ .peer-focus\:before\:border-pink-500::before {
-  content: var(--tw-content);
-  --tw-border-opacity: 1;
-  border-color: rgb(236 72 153 / var(--tw-border-opacity));
 }
 
 .peer:focus ~ .peer-focus\:before\:border-slate-200::before {
@@ -1230,12 +1190,6 @@ video {
 .peer:focus ~ .peer-focus\:after\:border-t-2::after {
   content: var(--tw-content);
   border-top-width: 2px;
-}
-
-.peer:focus ~ .peer-focus\:after\:border-pink-500::after {
-  content: var(--tw-content);
-  --tw-border-opacity: 1;
-  border-color: rgb(236 72 153 / var(--tw-border-opacity));
 }
 
 .peer:focus ~ .peer-focus\:after\:border-slate-200::after {
