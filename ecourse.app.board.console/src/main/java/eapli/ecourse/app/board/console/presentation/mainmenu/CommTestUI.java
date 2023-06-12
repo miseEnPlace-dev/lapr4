@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.console.presentation;
+package eapli.ecourse.app.board.console.presentation.mainmenu;
 
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +11,7 @@ import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class CommTestUI extends AbstractUI {
-  private static final Logger LOGGER = LogManager.getLogger(CommTestUI.class);
+  private static Logger logger = LogManager.getLogger(CommTestUI.class);
 
   @Override
   protected boolean doShow() {
@@ -27,7 +27,7 @@ public class CommTestUI extends AbstractUI {
 
       System.out.printf("Communication test successful. Round-trip time: %f ms\n", ms);
     } catch (IOException | UnsupportedVersionException e) {
-      LOGGER.error("Error sending COMMTEST message", e);
+      logger.error("Error sending COMMTEST message", e);
     }
 
     return false;

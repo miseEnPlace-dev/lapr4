@@ -1,6 +1,15 @@
 package eapli.ecourse.app.board.console.presentation;
 
+import java.util.Optional;
 import eapli.ecourse.Application;
+import eapli.ecourse.app.board.console.presentation.mainmenu.ArchiveBoardUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.CommTestUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.CreatePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.SessionInfoUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.ShareBoardUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.UndoPostItChangeUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.ViewBoardHistoryUI;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.actions.menu.Menu;
@@ -18,8 +27,14 @@ public class MainMenu extends AbstractUI {
 
   private static final int EXIT_OPTION = 0;
 
-  private static final int COMMTEST_OPTION = 1;
-  private static final int SHARE_BOARD_OPTION = 2;
+  private static final int SHARE_BOARD_OPTION = 1;
+  private static final int CREATE_POST_IT_OPTION = 2;
+  private static final int CHANGE_POST_IT_OPTION = 3;
+  private static final int UNDO_POST_IT_CHANGE_OPTION = 4;
+  private static final int VIEW_BOARD_HISTORY_OPTION = 5;
+  private static final int ARCHIVE_BOARD_OPTION = 6;
+
+  private static final int COMMTEST_OPTION = 8;
   private static final int SESSION_INFO_OPTION = 9;
 
   private final Menu menu;
@@ -53,15 +68,27 @@ public class MainMenu extends AbstractUI {
 
   @Override
   public String headline() {
-    UserDTO user = BoardBackend.getInstance().getCredentialStore().getUser().get();
-    return "Welcome, " + user.getFullName();
+    Optional<UserDTO> user = BoardBackend.getInstance().getCredentialStore().getUser();
+
+    if (!user.isPresent())
+      return "Anonymous";
+
+    return "Welcome, " + user.get().getFullName();
   }
 
   private Menu buildMainMenu() {
     final Menu mainMenu = new Menu();
 
-    mainMenu.addItem(COMMTEST_OPTION, "Send COMMTEST", new CommTestUI()::show);
     mainMenu.addItem(SHARE_BOARD_OPTION, "Share Board", new ShareBoardUI()::show);
+    mainMenu.addItem(CREATE_POST_IT_OPTION, "Create Post-It", new CreatePostItUI()::show);
+    mainMenu.addItem(CHANGE_POST_IT_OPTION, "Change Post-It", new ChangePostItUI()::show);
+    mainMenu.addItem(UNDO_POST_IT_CHANGE_OPTION, "Undo Last Post-It Change",
+        new UndoPostItChangeUI()::show);
+    mainMenu.addItem(VIEW_BOARD_HISTORY_OPTION, "View Board History",
+        new ViewBoardHistoryUI()::show);
+    mainMenu.addItem(ARCHIVE_BOARD_OPTION, "Archive Board", new ArchiveBoardUI()::show);
+
+    mainMenu.addItem(COMMTEST_OPTION, "Send COMMTEST", new CommTestUI()::show);
     mainMenu.addItem(SESSION_INFO_OPTION, "Session Info", new SessionInfoUI()::show);
 
     if (!Application.settings().isMenuLayoutHorizontal()) {

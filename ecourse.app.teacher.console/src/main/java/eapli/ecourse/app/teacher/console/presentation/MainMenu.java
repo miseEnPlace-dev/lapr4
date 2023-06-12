@@ -62,8 +62,8 @@ public class MainMenu extends AbstractUI {
 
   @Override
   public String headline() {
-    return authz.session().map(s -> "Client [ @" + s.authenticatedUser().identity() + " ]")
-        .orElse("Client [ ==Anonymous== ]");
+    return authz.session().map(s -> "Teacher [ @" + s.authenticatedUser().identity() + " ]")
+        .orElse("Teacher App [ ==Anonymous== ]");
   }
 
   private Menu buildMainMenu() {
@@ -77,13 +77,8 @@ public class MainMenu extends AbstractUI {
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
     mainMenu.addSubMenu(MEETINGS, new MeetingsMenu().buildMenu());
 
-    if (!Application.settings().isMenuLayoutHorizontal()) {
+    if (!Application.settings().isMenuLayoutHorizontal())
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-    }
-
-    if (!Application.settings().isMenuLayoutHorizontal()) {
-      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-    }
 
     mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 

@@ -1,7 +1,9 @@
 package eapli.ecourse.app.student.console.presentation.exams;
 
+import eapli.ecourse.Application;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
+import eapli.framework.actions.menu.MenuItem;
 
 public class ExamsMenu {
   private static final int VIEW_FUTURE_EXAMS_OPTION = 1;
@@ -12,6 +14,8 @@ public class ExamsMenu {
 
   private static final String RETURN = "Return ";
 
+  private static final String SEPARATOR_LABEL = "--------------";
+
   public Menu buildMenu() {
     final Menu menu = new Menu("Exams >");
 
@@ -19,6 +23,10 @@ public class ExamsMenu {
     menu.addItem(LIST_GRADES_OPTION, "List Grades", new ListStudentGradesUI()::show);
     menu.addItem(TAKE_EVAL_EXAM_OPTION, "Take Evaluation Exam", new TakeEvaluationExamUI()::show);
     menu.addItem(TAKE_FORM_EXAM_OPTION, "Take Formative Exam", new TakeFormativeExamUI()::show);
+
+    if (!Application.settings().isMenuLayoutHorizontal())
+      menu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+
     menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
 
     return menu;
