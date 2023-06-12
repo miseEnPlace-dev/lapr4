@@ -7,18 +7,28 @@ participant ":System" as system
 activate student
 
 student -> system : Asks to take an exam
-system -> student : Asks the file path where the exam is defined
-student -> system : Enters the file path
+
+activate system
+
+system -> student : Lists all courses that the current\nstudent is enrolled in and asks to select one
+student -> system : Selects a course
+
+system -> student : Lists all exams that are open for the\nselected course and asks to select one
+student -> system : Selects an exam
+
 loop for each question
-system -> student : Shows the question content
-student -> system : Enters the answer
-end
-opt if grade is defined to be shown at end of exam
-system -> student : Shows final total grade of the exam
-end
-opt if feedback is defined to be shown at end of exam
-system -> student : Shows final feedback of exam
-end
-system -> student : Informs operation success
+  system -> student : Shows a question and asks to answer it
+  student -> system : Answers the question
+end loop
+
+opt if feedback show option is enabled
+  system -> student : Shows feedback
+end opt
+opt if grade show option is enabled
+  system -> student : Shows grade
+end opt
+
+deactivate system
+deactivate student
 
 @enduml
