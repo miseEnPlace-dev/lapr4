@@ -51,10 +51,10 @@ public final class ConsoleConstrainedReader {
     boolean valid = false;
     while (!valid) {
       input = Console.readCalendar("\n" + message, format);
-      if (Calendar.getInstance().compareTo(input) > 0) {
-        System.out.println("Invalid date. Please enter a date/time in the future.");
-      } else {
+      if (input.after(Calendar.getInstance())) {
         valid = true;
+      } else {
+        System.out.println("Invalid date. Please enter a date/time in the future.");
       }
     }
     return input;

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import eapli.ecourse.app.common.console.presentation.authz.SystemUserPrinter;
+import eapli.ecourse.app.common.console.util.ConsoleConstrainedReader;
 import eapli.ecourse.app.common.console.util.MultipleSelectorWidget;
 import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
@@ -28,24 +29,13 @@ public class ScheduleMeetingUI extends AbstractUI {
   protected boolean doShow() {
     Calendar time;
 
-    do {
-      time = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
-      if (time == null) {
-        System.out.println("Invalid date. Please enter a valid date.");
-      }
-    } while (time.before(Calendar.getInstance()));
-
-    Integer duration = 0;
+    time = ConsoleConstrainedReader.readNonPastCalendar("\nMeeting Time (dd-mm-yyyy) HH:mm):", "dd-MM-yyyy HH:mm");
 
     Time meetingTime = Time.valueOf(time);
-    while (duration <= 0) {
-      duration = Console.readInteger("\nDuration (minutes): ");
-      if (duration <= 0) {
-        System.out.println("Invalid duration. Please enter a valid duration.");
-      }
-    }
 
-    Duration meetingDuration = Duration.valueOf(duration);
+    int durationInt = ConsoleConstrainedReader.readPositiveInteger("\nDuration (minutes):");
+
+    Duration meetingDuration = Duration.valueOf(durationInt);
 
     List<SystemUser> allUsers = this.ctrl.getUsers();
 
