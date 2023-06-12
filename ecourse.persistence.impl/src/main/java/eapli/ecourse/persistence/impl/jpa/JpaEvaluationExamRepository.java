@@ -58,7 +58,7 @@ public class JpaEvaluationExamRepository extends JpaAutoTxRepository<EvaluationE
   public Iterable<EvaluationExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code,
       MecanographicNumber number) {
     final TypedQuery<EvaluationExam> query = entityManager().createQuery(
-        "SELECT e FROM EvaluationExam e WHERE e NOT IN (SELECT a.exam FROM Answer a WHERE a.student = :number) AND e.course.code = :code",
+        "SELECT e FROM EvaluationExam e WHERE e NOT IN (SELECT a.exam FROM Answer a WHERE a.student.mecanographicNumber = :number) AND e.course.code = :code",
         EvaluationExam.class);
     query.setParameter("code", code);
     query.setParameter("number", number);

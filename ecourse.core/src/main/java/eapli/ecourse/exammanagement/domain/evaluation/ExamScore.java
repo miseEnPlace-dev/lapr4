@@ -42,7 +42,7 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
    */
   @Override
   public String toString() {
-    return Double.toString(this.score);
+    return String.format(".2f", this.score);
   }
 
   public Double value() {

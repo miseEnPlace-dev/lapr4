@@ -35,7 +35,9 @@ public class ListExamAnswerService {
     Collection<EvaluationExam> evaluationExams = (Collection<EvaluationExam>) evaluationExamRepository
         .findAllCourseExamsWithNoAnswersFromStudent(code, student.identity());
 
-    result.addAll(createNotTakenExams(student, evaluationExams));
+    Collection<AnswerDTO> notTakenExams = createNotTakenExams(student, evaluationExams);
+    if (!notTakenExams.isEmpty())
+      result.addAll(notTakenExams);
 
     return result;
   }
