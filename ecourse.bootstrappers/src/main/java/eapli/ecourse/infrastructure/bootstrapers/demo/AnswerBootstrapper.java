@@ -5,7 +5,7 @@ import java.util.List;
 
 import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.answermanagement.domain.AnswerId;
-import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
@@ -32,17 +32,17 @@ import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.actions.Action;
 
 public class AnswerBootstrapper implements Action {
-  private ExamAnswerRepository answerRepo = PersistenceContext.repositories().answers();
+  private AnswerRepository answerRepo = PersistenceContext.repositories().answers();
   private QuestionRepository questionRepo = PersistenceContext.repositories().questions();
   private FormativeExamRepository examRepo = PersistenceContext.repositories().formativeExams();
 
   @Override
   public boolean execute() {
-    Course course = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("4444")).get();
+    Course course = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("2222")).get();
     Teacher teacher = PersistenceContext.repositories().teachers().ofIdentity(TaxPayerNumber.valueOf("987654321"))
         .get();
     Student student = PersistenceContext.repositories().students()
-        .ofIdentity(MecanographicNumber.valueOf("123456789"))
+        .ofIdentity(MecanographicNumber.valueOf("987654321"))
         .get();
     List<FormativeExamSection> sections = new ArrayList<>();
     List<Question> questions = new ArrayList<>();

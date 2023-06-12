@@ -1,7 +1,7 @@
 package eapli.ecourse.answermanagement.application;
 
 import eapli.ecourse.answermanagement.dto.AnswerDTO;
-import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
@@ -19,7 +19,7 @@ public class ListStudentGradesController {
   private final ListEnrolmentService listEnrolmentService;
   private final ListExamAnswerService listExamAnswerService;
 
-  public ListStudentGradesController(EnrolmentRepository enrolmentRepository, ExamAnswerRepository examAnswerRepository,
+  public ListStudentGradesController(EnrolmentRepository enrolmentRepository, AnswerRepository examAnswerRepository,
       StudentRepository studentRepository,
       EvaluationExamRepository evaluationExamRepository, AuthorizationService authorizationService) {
     this.studentRepository = studentRepository;

@@ -7,7 +7,7 @@ import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.DomainRepository;
 
-public interface ExamAnswerRepository extends DomainRepository<AnswerId, Answer> {
+public interface AnswerRepository extends DomainRepository<AnswerId, Answer> {
   /**
    * Finds all exam answers with the given student mecanographic number and course
    * code.
