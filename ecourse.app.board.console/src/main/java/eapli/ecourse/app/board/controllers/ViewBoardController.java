@@ -1,10 +1,13 @@
 package eapli.ecourse.app.board.controllers;
 
 import java.io.IOException;
+
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.app.board.lib.BoardBackend;
@@ -40,8 +43,7 @@ public class ViewBoardController implements RouteController {
     }
 
     try {
-      ProtocolMessage response =
-          client.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD, boardId));
+      ProtocolMessage response = client.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD, boardId));
 
       if (response.getCode().equals(MessageCode.ERR))
         throw new UnsuccessfulRequestException(response);
@@ -49,7 +51,6 @@ public class ViewBoardController implements RouteController {
       BoardDTO board = (BoardDTO) response.getPayloadAsObject();
 
       res.json(BoardMapper.toJson(board));
-
     } catch (UnsuccessfulRequestException e) {
       JsonObjectBuilder json = Json.createObjectBuilder().add("message", e.getMessage());
       res.status(400).json(json.build());

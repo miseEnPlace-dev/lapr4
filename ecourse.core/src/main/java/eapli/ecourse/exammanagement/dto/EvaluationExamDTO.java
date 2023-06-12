@@ -25,4 +25,5 @@ public class EvaluationExamDTO {
   private Time endTime;
   private ExamDescription description;
   private ExamState state;
+  private String fileContent;
 }

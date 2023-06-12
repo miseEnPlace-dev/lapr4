@@ -119,6 +119,10 @@ public abstract class Exam implements AggregateRoot<ExamIdentifier> {
     return this.score;
   }
 
+  public String fileContent() {
+    return this.fileContent;
+  }
+
   public abstract boolean sameAs(Object other);
 
   public Course course() {

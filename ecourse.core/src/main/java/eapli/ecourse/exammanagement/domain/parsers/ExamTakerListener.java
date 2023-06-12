@@ -1,5 +1,6 @@
 package eapli.ecourse.exammanagement.domain.parsers;
 
+import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.domain.parsers.ExamParser.PropertiesContext;
 
@@ -7,6 +8,9 @@ public class ExamTakerListener extends ExamBaseListener {
   private final ExamPrinter printer;
 
   public ExamTakerListener(ExamPrinter printer) {
+    if (printer == null)
+      throw new IllegalArgumentException("Printer cannot be null!");
+
     this.printer = printer;
   }
 
@@ -29,6 +33,10 @@ public class ExamTakerListener extends ExamBaseListener {
     else
       // Entering in the Section Header...
       printer.printSectionHeader(title, description);
+  }
+
+  public Answer getAnswer() {
+    return null;
   }
 
   private String extractString(String s) {
