@@ -1,0 +1,108 @@
+@startuml US3007_CD
+
+interface BoardRepository {
+  {abstract} findAllActiveBoardsWithUserWritePermission()
+}
+
+interface PostItRepository {
+  {abstract} findLastestPostItsCreatedByUser(boardId, username)
+  {abstract} findLatestVersionOfBoard(boardId)
+  {abstract} save(postIt)
+}
+
+class ListBoardService {
+  - boardRepository
+
+  + ListBoardService(boardRepository)
+
+  + userWritableBoards(username)
+}
+
+class ListPostItService {
+  - boardRepository
+  - postItRepository
+
+  + userUpdatablePostIts(boardId, username)
+
+  + userWritableBoards(username)
+}
+
+class BoardService {
+  - boardRepository
+  - postItRepository
+
+  + BoardService(boardRepository)
+
+  + isCellAvailable(BoardID id, int x, int y)
+  + existsPostIt(latestPostIts, x, y)
+}
+
+class ChangePostItUI {}
+
+class ChangePostItController {
+  - boardRepository
+  - postItRepository
+
+  + ChangePostItController(boardRepository, postItRepository)
+
+  + listUserWritableBoards()
+  + listBoardPostItsCreatedByUser(boardId)
+  + validateCoordinates(boardID, x, y)
+  + updatePostIt(boardId, postItId, x, y, title)
+  + savePostIt(postIt)
+}
+
+class PostIt {
+  - title
+  - coordinates
+  - user
+  - board
+  - state
+
+  - createdAt
+  - isLatest
+
+  + update(title, x, y)
+}
+
+class PostItDTO {
+  + toDto()
+}
+
+class BoardDTOParser {
+  + toDto()
+}
+
+class Board {
+}
+
+
+class BoardDTO {
+  + toDto()
+}
+
+class BoardDTOParser {
+  + toDto()
+}
+
+
+ChangePostItUI ..> ChangePostItController
+ChangePostItController --> ListBoardService
+ChangePostItController --> BoardService
+ChangePostItController --> ListPostItService
+
+ListBoardService ..> Board
+ListBoardService --> BoardRepository
+BoardService --> PostItRepository
+ListPostItService --> PostItRepository
+
+BoardService ..> PostIt
+ListPostItService ..> PostIt
+BoardService ..> Board
+BoardDTOParser ..> BoardDTO
+BoardDTOParser ..> Board
+
+PostItDTOParser ..> PostItDTO
+PostItDTOParser ..> PostIt
+
+@enduml

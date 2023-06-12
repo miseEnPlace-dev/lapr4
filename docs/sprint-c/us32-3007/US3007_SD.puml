@@ -1,8 +1,8 @@
-@startuml US3006_SD
+@startuml US3007_SD
 autonumber
 
 actor "User" as M
-participant "CreatePostItUI" as UI <<presentation>>
+participant "ChangePostItUI" as UI <<presentation>>
 participant "ChangePostItController" as CTRL <<application>>
 participant "ListBoardService" as LBSRV <<service>>
 participant "ListPostItService" as LPSRV <<service>>
@@ -25,11 +25,11 @@ activate CTRL
 CTRL -> LBSRV : new(boardRepository)
 activate LBSRV
 deactivate LBSRV
-UI -> CTRL : listBoardsThatUserCanWrite()
+UI -> CTRL : listUserWritableBoards()
 
-CTRL -> LBSRV : listActiveBoardsThatUserCanWrite(userId)
+CTRL -> LBSRV : userWritableBoards(username)
 activate LBSRV
-LBSRV -> BREP : findActiveBoardsThatUserCanWrite(userId)
+LBSRV -> BREP : findAllActiveBoardsWithUserWritePermission(username)
 activate BREP
 BREP --> LBSRV : boards
 deactivate BREP
@@ -57,7 +57,11 @@ activate UI
 UI -> CTRL : listBoardPostItsCreatedByUser(boardId)
 activate CTRL
 
-CTRL -> LPSRV : findLastestPostItsCreatedByUser(boardId, username)
+CTRL -> LPSRV : new(postItRepository)
+activate LPSRV
+deactivate LPSRV
+
+CTRL -> LPSRV : userUpdatablePostIts(boardId, username)
 activate LPSRV
 LPSRV -> PREP : findLastestPostItsCreatedByUser(boardId, username)
 activate PREP
@@ -92,11 +96,11 @@ M -> UI : selects the post-it coordinates
 activate UI
 UI -> CTRL : validateCoordinates(boardId, x, y)
 activate CTRL
-CTRL -> BSRV : new(boardRepository, postItRepository)
+CTRL -> BSRV : new(postItRepository)
 activate BSRV
 deactivate BSRV
 
-CTRL -> BSRV : existsPostIt(boardId, x, y)
+CTRL -> BSRV : isCellAvailable(BoardID id, int x, int y)
 activate BSRV
 BSRV -> PREP : latestPostIts = \nfindLatestVersionOfBoard(boardId)
 activate PREP
@@ -125,11 +129,7 @@ CTRL -> P : newPostIt = update(title, x, y)
 activate P
 deactivate P
 
-CTRL -> P : containsOfIdentity()
-activate P
-deactivate P
-
-CTRL -> CTRL : savePostIt()
+CTRL -> CTRL : savePostIt(postIt)
 activate CTRL
 CTRL -> PREP : savePostIt()
 activate PREP

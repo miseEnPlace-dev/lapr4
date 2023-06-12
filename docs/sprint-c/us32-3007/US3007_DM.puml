@@ -1,4 +1,4 @@
-@startuml US3006_DM
+@startuml US3007_DM
 
 skinparam classAttributeIconSize 0
 hide empty attributes
