@@ -42,7 +42,7 @@ public class PostIt implements AggregateRoot<PostItID> {
   private PostItState state;
 
   @Column(nullable = false)
-  private Calendar createAt;
+  private Calendar createdAt;
 
   @Column(nullable = false)
   private boolean isLatest;
@@ -81,6 +81,7 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.state = new PostItState();
     this.board = board;
     this.owner = owner;
+    this.createdAt = Calendar.getInstance();
     this.previous = null;
     this.isLatest = true;
   }
@@ -97,7 +98,7 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.board = board;
     this.owner = owner;
     this.previous = previous;
-    this.createAt = Calendar.getInstance();
+    this.createdAt = Calendar.getInstance();
     this.isLatest = true;
   }
 
@@ -125,8 +126,8 @@ public class PostIt implements AggregateRoot<PostItID> {
     return this.previous;
   }
 
-  public Calendar createAt() {
-    return this.createAt;
+  public Calendar createdAt() {
+    return this.createdAt;
   }
 
   public boolean isLatest() {

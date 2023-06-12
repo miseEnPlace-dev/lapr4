@@ -7,7 +7,6 @@ public class StudentPrinter implements Visitor<StudentDTO> {
   @Override
   public void visit(final StudentDTO visitee) {
     System.out.printf("%-15s%-20s%-30s%-30s", visitee.getMecanographicNumber(),
-        visitee.getUsername(),
-        visitee.getName().firstName(), visitee.getName().lastName());
+        visitee.getUsername(), visitee.getName().firstName(), visitee.getName().lastName());
   }
 }

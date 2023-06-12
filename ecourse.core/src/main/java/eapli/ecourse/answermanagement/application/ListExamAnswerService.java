@@ -47,9 +47,8 @@ public class ListExamAnswerService {
     Collection<AnswerDTO> result = (Collection<AnswerDTO>) convertToDTO(answers);
 
     Set<Student> studentWhoAnswered = new HashSet<>();
-    for (Answer examAnswer : answers) {
+    for (Answer examAnswer : answers)
       studentWhoAnswered.add(examAnswer.student());
-    }
 
     for (Student student : studentsInCourse) {
       if (!studentWhoAnswered.contains(student))
@@ -65,7 +64,7 @@ public class ListExamAnswerService {
 
     for (Exam exam : exams) {
       AnswerDTO dto = new AnswerDTO(student.identity().toString(), student.user().name().toString(),
-          exam.title().toString(), "N/a", null);
+          exam.title().toString(), null, null);
       examAnswers.add(dto);
     }
 
