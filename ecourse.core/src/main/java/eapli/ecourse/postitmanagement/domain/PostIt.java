@@ -129,7 +129,7 @@ public class PostIt implements AggregateRoot<PostItID> {
     return this.createAt;
   }
 
-  public Calendar isLatest() {
+  public boolean isLatest() {
     return this.isLatest();
   }
 

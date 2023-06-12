@@ -16,7 +16,7 @@ public class InMemoryPostItRepository extends InMemoryDomainRepository<PostIt, P
 
   @Override
   public Iterable<PostIt> findLatestVersionOfBoard(BoardID boardId) {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return match(e -> e.board().identity().equals(boardId) && e.isLatest());
   }
 
 }
