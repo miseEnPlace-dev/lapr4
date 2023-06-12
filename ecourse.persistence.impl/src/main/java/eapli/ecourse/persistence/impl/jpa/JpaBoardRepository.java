@@ -21,7 +21,7 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
   public Iterable<Board> findAllBoardsCreatedByUser(Username username) {
     TypedQuery<Board> query = createQuery(
-        "SELECT b FROM Board b LEFT JOIN b.permissions WHERE b.owner.username = :username",
+        "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions WHERE b.owner.username = :username",
         Board.class);
 
     query.setParameter("username", username);
@@ -31,9 +31,10 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
 
   public Iterable<Board> findAllBoardsAccessibleByUser(Username username) {
     TypedQuery<Board> query = createQuery(
-        "SELECT DISTINCT b FROM Board b WHERE :username IN (SELECT username FROM b.permissions p) OR b.owner.username = :username",
+        "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions p WHERE :username = p.user.username OR b.owner.username = :username",
         Board.class);
 
+    query.setParameter("username", username);
     query.setParameter("username", username);
 
     return query.getResultList();
@@ -42,32 +43,26 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
   @Override
   public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
     TypedQuery<Board> query = createQuery(
-        "SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE b.archivedAt IS NULL AND (b.owner.username = :username OR :username IN (SELECT p.username FROM b.permissions p WHERE p.user.username = :username AND p.type = 'WRITE'))",
+        "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions p WHERE (:username = p.user.username AND p.permissionType = 'WRITE' OR b.owner.username = :username) AND b.archived IS NULL",
         Board.class);
 
+    query.setParameter("username", username);
     query.setParameter("username", username);
 
     return query.getResultList();
   }
 
-  // we are using this function to send the boards to the shared board app when
-  // the user asks for
-  // the boards he owns. we send a list of BoardDTO serialized - the problem is
-  // that when
-  // retrieving the boards from the database, jpa creates a proxy for the Board
-  // entity (the
-  // default behavior for loading lists is lazy loading which we don't want here
-  // since the client
-  // does not have access to the database). we could have made the default
-  // behavior eager loading
-  // but that would impact the performance of the app, so we will force the
-  // loading of the lists
+  // we are using this function to send the boards to the shared board app when the user asks for
+  // the boards he owns. we send a list of BoardDTO serialized - the problem is that when
+  // retrieving the boards from the database, jpa creates a proxy for the Board entity (the
+  // default behavior for loading lists is lazy loading which we don't want here since the client
+  // does not have access to the database). we could have made the default behavior eager loading
+  // but that would impact the performance of the app, so we will force the loading of the lists
   // here.
 
   // Reference: https://stackoverflow.com/a/51055523/15339625
 
-  // SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE
-  // b.owner.username = :username
+  // SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.permissions WHERE b.owner.username = :username
   // SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.rows WHERE b in :boards
   // SELECT DISTINCT b FROM Board b LEFT JOIN FETCH b.columns WHERE b in :boards
 
