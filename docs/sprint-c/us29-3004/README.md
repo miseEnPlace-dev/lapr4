@@ -55,11 +55,11 @@ The user who owns the board shares it with another user, giving him the appropri
 
 #### 3.1.1. Other scenarios
 
-- Recipient user does not exist
+- Recipient user does not exist:
 
 The system notifies the user that the recipient user does not exist.
 
-- Recipient user already has permissions to the board
+- Recipient user already has permissions to the board:
 
 The system notifies the user that the recipient user already has permissions to the board and asks if it is his desire to update them.
 

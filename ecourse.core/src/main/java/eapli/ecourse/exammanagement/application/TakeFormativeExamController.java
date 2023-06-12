@@ -5,7 +5,8 @@ import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4ExamParser;
-import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
+import eapli.ecourse.exammanagement.dto.FormativeExamRequestDTO;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -19,19 +20,23 @@ public class TakeFormativeExamController {
   private final AuthorizationService authz;
   private final StudentRepository studentRepository;
   private final CourseRepository courseRepository;
+  private final FormativeExamRequestRepository formativeExamRequestRepository;
   private final ANTLR4ExamParser parser;
+  private final ListFormativeExamRequestService service;
 
   private Student student;
 
   private EvaluationExamBuilder builder;
 
   public TakeFormativeExamController(final AuthorizationService authz, final StudentRepository studentRepository,
-      final CourseRepository courseRepository) {
+      final CourseRepository courseRepository, final FormativeExamRequestRepository formativeExamRequestRepository) {
     this.authz = authz;
     this.studentRepository = studentRepository;
     this.courseRepository = courseRepository;
     this.listCourseService = new ListCourseService(courseRepository);
     this.parser = new ANTLR4ExamParser();
+    this.formativeExamRequestRepository = formativeExamRequestRepository;
+    this.service = new ListFormativeExamRequestService(courseRepository, formativeExamRequestRepository);
   }
 
   public void setCurrentAuthenticatedStudent() {
@@ -47,4 +52,8 @@ public class TakeFormativeExamController {
     return listCourseService.listInProgressCoursesThatStudentIsEnrolled(student);
   }
 
+  public Iterable<FormativeExamRequestDTO> listFormativeExamsRequest(CourseDTO courseDTO) {
+
+    return service.findAllRequestByCourse(courseDTO.getCode());
+  }
 }

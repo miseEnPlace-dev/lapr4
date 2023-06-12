@@ -10,10 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
+import eapli.ecourse.exammanagement.dto.FormativeExamRequestDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import lombok.EqualsAndHashCode;
 
@@ -36,6 +38,9 @@ public class FormativeExamRequest implements AggregateRoot<ExamIdentifier> {
 
   @Column(nullable = false)
   private ExamScore score;
+
+  @Column(nullable = false)
+  private Course course;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<FormativeExamSectionRequest> sections;
@@ -86,5 +91,9 @@ public class FormativeExamRequest implements AggregateRoot<ExamIdentifier> {
   @Override
   public ExamIdentifier identity() {
     return identifier;
+  }
+
+  public FormativeExamRequestDTO toDto() {
+    return new FormativeExamRequestDTO(identifier, title, description);
   }
 }

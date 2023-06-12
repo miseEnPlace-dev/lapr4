@@ -59,4 +59,17 @@ public final class ConsoleConstrainedReader {
     }
     return input;
   }
+
+  public static int readMecanographic(String message) {
+    int input = -1;
+
+    while (input < 0 || input > 999999999 || input < 100000000) {
+      input = Console.readInteger("\n" + message);
+      if (input < 0 || input > 999999999 || input < 100000000) {
+        System.out.println("Invalid input. Please enter a mecanographic number with 9 digits.");
+      }
+    }
+
+    return input;
+  }
 }
