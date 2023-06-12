@@ -40,9 +40,11 @@ public class ListStudentGradesUI extends AbstractUI {
       return false;
     }
 
+    System.out.println("\n");
     ListWidget<AnswerDTO> list = new ListWidget<>(new AnswerHeader().header(), studentAnswers,
         new AnswerPrinter());
     list.show();
+    System.out.println("\n");
 
     return false;
   }

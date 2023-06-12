@@ -15,6 +15,7 @@ public class AnswerDTO {
   private String studentNumber;
   private String studentName;
   private String examTitle;
+  private String course;
   private String score;
   private Calendar takenAt;
 }

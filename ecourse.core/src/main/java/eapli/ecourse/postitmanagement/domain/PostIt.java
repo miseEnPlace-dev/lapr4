@@ -72,7 +72,6 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
       final SystemUser owner) {
-
     Preconditions.noneNull(title, coordinates, board, owner);
 
     this.id = PostItID.newID();
@@ -88,7 +87,6 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   private PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
       final SystemUser owner, final PostIt previous) {
-
     Preconditions.noneNull(title, coordinates, board, owner);
 
     this.id = PostItID.newID();
