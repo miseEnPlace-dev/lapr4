@@ -53,6 +53,9 @@ class PostIt {
   - board
   - state
 
+  - createdAt
+  - isLatest
+
   + toDto()
 }
 
