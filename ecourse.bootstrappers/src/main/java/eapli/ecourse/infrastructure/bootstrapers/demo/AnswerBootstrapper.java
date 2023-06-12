@@ -56,9 +56,9 @@ public class AnswerBootstrapper implements Action {
         ExamDescription.valueOf("description"), ExamScore.valueOf(.2), sections);
 
     Exam e = examRepo.save(exam);
-    Answer answer = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(.2));
+    Answer answer = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(60.0));
     answerRepo.save(answer);
-    Answer a = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(1.0));
+    Answer a = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(99.0));
     answerRepo.save(a);
     return false;
   }

@@ -10,8 +10,8 @@ public class AnswerPrinter implements Visitor<AnswerDTO> {
   public void visit(final AnswerDTO visitee) {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-    System.out.printf("%-12s%-20s%-20s%-20s%-6s%-16s", visitee.getStudentNumber(), visitee.getStudentName(),
-        visitee.getExamTitle(), visitee.getClass(), visitee.getScore() == null ? "N/a" : visitee.getScore(),
+    System.out.printf("%-15s%-15s%-15s%-12s%-8s%-16s", visitee.getStudentNumber(), visitee.getStudentName(),
+        visitee.getExamTitle(), visitee.getCourse(), visitee.getScore() == null ? "N/a" : visitee.getScore(),
         visitee.getTakenAt() == null ? "N/a"
             : formatter.format(visitee.getTakenAt().getTime()));
   }

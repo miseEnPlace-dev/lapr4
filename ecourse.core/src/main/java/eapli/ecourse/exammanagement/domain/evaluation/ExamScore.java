@@ -32,6 +32,9 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
   }
 
   public static ExamScore valueOf(final Double score) {
+    if (score < 0)
+      throw new IllegalArgumentException("Score must be positive");
+
     return new ExamScore(score);
   }
 
@@ -42,7 +45,7 @@ public class ExamScore implements ValueObject, Comparable<ExamScore> {
    */
   @Override
   public String toString() {
-    return String.format(".2f", this.score);
+    return String.format("%.2f", this.score);
   }
 
   public Double value() {
