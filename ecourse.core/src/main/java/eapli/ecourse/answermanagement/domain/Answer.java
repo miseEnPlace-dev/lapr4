@@ -27,7 +27,7 @@ public class Answer implements AggregateRoot<AnswerId> {
   @ManyToOne
   private Exam exam;
 
-  @Column
+  @Column(nullable = false)
   private Calendar takenAt;
 
   public Answer(final Student student, final Exam exam, final ExamScore score) {

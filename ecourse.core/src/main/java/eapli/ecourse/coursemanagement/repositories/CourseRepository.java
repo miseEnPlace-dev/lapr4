@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
+import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.DomainRepository;
 
@@ -49,6 +50,14 @@ public interface CourseRepository extends DomainRepository<CourseCode, Course> {
    * @return
    */
   public Iterable<Course> findAllInProgressLecturedByTeacher(Teacher teacher);
+
+  /**
+   * Returns the courses that are in progress, in which the given student is
+   * enrolled
+   *
+   * @return
+   */
+  public Iterable<Course> findAllInProgressThatStudentIsEnrolled(Student student);
 
   /**
    * Returns the courses that are not closed

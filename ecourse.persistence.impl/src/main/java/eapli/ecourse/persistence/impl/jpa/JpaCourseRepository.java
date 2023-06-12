@@ -12,6 +12,7 @@ import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.domain.CourseEnrolmentState;
 import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -54,6 +55,15 @@ class JpaCourseRepository extends JpaAutoTxRepository<Course, CourseCode, Course
         Course.class);
     query.setParameter("number", teacher.taxPayerNumber());
     query.setParameter("number", teacher.taxPayerNumber());
+    return query.getResultList();
+  }
+
+  @Override
+  public Iterable<Course> findAllInProgressThatStudentIsEnrolled(Student student) {
+    final TypedQuery<Course> query = entityManager().createQuery(
+        "SELECT course FROM Enrolment e WHERE e.student.mecanographicNumber = :number AND e.course.courseState = 'IN_PROGRESS'",
+        Course.class);
+    query.setParameter("number", student.mecanographicNumber());
     return query.getResultList();
   }
 

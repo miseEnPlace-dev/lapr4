@@ -8,6 +8,7 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
+import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 
 public class ListCourseService {
@@ -16,7 +17,6 @@ public class ListCourseService {
   public ListCourseService(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
   }
-
 
   public Optional<Course> findCourseByCourseCode(final CourseCode code) {
     return courseRepository.ofIdentity(code);
@@ -44,6 +44,11 @@ public class ListCourseService {
 
   public Iterable<CourseDTO> listInProgressCourses() {
     final Iterable<Course> courses = courseRepository.findAllInProgress();
+    return convertToDto(courses);
+  }
+
+  public Iterable<CourseDTO> listInProgressCoursesThatStudentIsEnrolled(Student student) {
+    final Iterable<Course> courses = courseRepository.findAllInProgressThatStudentIsEnrolled(student);
     return convertToDto(courses);
   }
 
