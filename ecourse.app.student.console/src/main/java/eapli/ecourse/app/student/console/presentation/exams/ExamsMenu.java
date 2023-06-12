@@ -18,7 +18,7 @@ public class ExamsMenu {
 
     menu.addItem(VIEW_FUTURE_EXAMS_OPTION, "View Future Exams", new ListFutureExamsUI()::show);
     menu.addItem(LIST_GRADES_OPTION, "List Grades", new ListStudentGradesUI()::show);
-    menu.addItem(TAKE_EVAL_EXAM_OPTION, "Take Evaluation Exam", new ShowMessageAction("Not implemented yet!"));
+    menu.addItem(TAKE_EVAL_EXAM_OPTION, "Take Evaluation Exam", new TakeEvaluationExamUI()::show);
     menu.addItem(TAKE_FORM_EXAM_OPTION, "Take Formative Exam", new ShowMessageAction("Not implemented yet!"));
     menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
 
