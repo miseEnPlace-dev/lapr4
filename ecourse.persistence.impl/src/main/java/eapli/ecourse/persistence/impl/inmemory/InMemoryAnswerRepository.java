@@ -2,14 +2,14 @@ package eapli.ecourse.persistence.impl.inmemory;
 
 import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.answermanagement.domain.AnswerId;
-import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class InMemoryExamAnswerRepository extends InMemoryDomainRepository<Answer, AnswerId>
-    implements ExamAnswerRepository {
+public class InMemoryAnswerRepository extends InMemoryDomainRepository<Answer, AnswerId>
+    implements AnswerRepository {
 
   static {
     InMemoryInitializer.init();

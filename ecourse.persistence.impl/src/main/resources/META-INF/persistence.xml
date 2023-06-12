@@ -35,7 +35,6 @@
     <class>eapli.ecourse.boardmanagement.domain.UserPermission</class>
     <class>eapli.ecourse.postitmanagement.domain.Coordinates</class>
     <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
-    <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
     <class>eapli.ecourse.answermanagement.domain.Answer</class>
 
 
@@ -104,7 +103,6 @@
     <class>eapli.ecourse.boardmanagement.domain.BoardColumn</class>
     <class>eapli.ecourse.boardmanagement.domain.UserPermission</class>
     <class>eapli.ecourse.postitmanagement.domain.Coordinates</class>
-    <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
     <class>eapli.ecourse.postitmanagement.domain.PostIt</class>
     <class>eapli.ecourse.answermanagement.domain.Answer</class>
 
