@@ -5,25 +5,25 @@ actor Student as "Student"
 actor System as "System"
 
 activate Student
+activate System
 
 Student -> System : The Student requests to take an formative exam
-activate System
 
 System --> Student : The System asks to select a course
-deactivate System
 
 Student -> System : The Student selects a course
-activate System
+
+System --> Student : The System asks to select an exam
+
+Student -> System : The Student selects an exam
 
 System --> Student : The System presents the exam to the Student
-deactivate System
 
 Student -> System : The Student answers the questions and submits the exam
-activate System
 
 System --> Student : The System calculates the grade and feedback of the exam
-deactivate System
 
+deactivate System
 deactivate Student
 
 @enduml
