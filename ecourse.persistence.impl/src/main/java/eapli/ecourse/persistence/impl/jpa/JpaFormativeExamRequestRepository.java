@@ -1,12 +1,11 @@
 package eapli.ecourse.persistence.impl.jpa;
 
-import java.util.Map;
 import java.util.Optional;
 
-import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
-import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteID;
+import javax.persistence.TypedQuery;
+
+import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
-import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -22,5 +21,15 @@ public class JpaFormativeExamRequestRepository
 
   public JpaFormativeExamRequestRepository(final String puname) {
     super(puname, "id");
+  }
+
+  @Override
+  public Iterable<FormativeExamRequest> findAllFormativeRequestByCourse(Optional<Course> course) {
+    TypedQuery<FormativeExamRequest> query = createQuery(
+        "SELECT f FROM FormativeExamRequest f WHERE f.course = :course", FormativeExamRequest.class);
+
+    query.setParameter("course", course);
+
+    return query.getResultList();
   }
 }

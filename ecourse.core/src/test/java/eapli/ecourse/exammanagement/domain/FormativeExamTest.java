@@ -21,7 +21,6 @@ import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
-import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.teachermanagement.domain.Acronym;
 import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
@@ -170,17 +169,4 @@ public class FormativeExamTest {
     assertFalse(exam.sameAs(null));
   }
 
-  @Test
-  public void ensureFormativeExamToDtoIsWorking() {
-    exam = dummyExam();
-
-    FormativeExamDTO dto = exam.toDto();
-
-    assertEquals(exam.course(), dto.getCourse());
-    assertEquals(exam.identity(), dto.getIdentifier());
-    assertEquals(exam.title(), dto.getTitle());
-    assertEquals(exam.description(), dto.getDescription());
-    assertEquals(exam.state(), dto.getState());
-    assertEquals(exam.teacher(), dto.getTeacher());
-  }
 }

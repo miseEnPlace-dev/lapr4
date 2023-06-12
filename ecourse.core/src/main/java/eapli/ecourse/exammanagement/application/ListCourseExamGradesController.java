@@ -14,7 +14,7 @@ import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
-import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
+import eapli.ecourse.exammanagement.dto.FormativeExamRequestDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
