@@ -10,7 +10,7 @@ public class InvitePrinter implements Visitor<InviteDTO> {
   public void visit(final InviteDTO visitee) {
     String timeString = String.format("%02d:%02d", visitee.getTime().hour(), visitee.getTime().minute());
 
-    System.out.printf("%-7s%-10s%-10s%-5s",
+    System.out.printf("%-10s%-10s%-10s%-5s",
         visitee.getMeeting().scheduledBy().username(),
         visitee.getStatus().toString(),
         timeString,
