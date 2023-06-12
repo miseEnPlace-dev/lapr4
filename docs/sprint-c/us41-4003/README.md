@@ -90,32 +90,28 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```java
 @Test
-public void ensureItsPossibleToAcceptAMeetingInvite() {
-}
+public void ensureItsPossibleToAcceptAMeetingInvite() {}
 ```
 
 **Test 2:** Ensure its possible to reject a meeting invite
 
 ```java
 @Test
-public void ensureItsPossibleToRejectAMeetingInvite() {
-}
+public void ensureItsPossibleToRejectAMeetingInvite() {}
 ```
 
 **Test 3:** Ensure its not possible to accept a meeting invite that is not pending
 
 ```java
 @Test
-public void ensureItsNotPossibleToAcceptAMeetingInviteThatIsNotPending() {
-}
+public void ensureItsNotPossibleToAcceptAMeetingInviteThatIsNotPending() {}
 ```
 
 **Test 4:** Ensure its not possible to reject a meeting invite that is not pending
 
 ```java
 @Test
-public void ensureItsNotPossibleToRejectAMeetingInviteThatIsNotPending() {
-}
+public void ensureItsNotPossibleToRejectAMeetingInviteThatIsNotPending() {}
 ```
 
 ## 5. Implementation

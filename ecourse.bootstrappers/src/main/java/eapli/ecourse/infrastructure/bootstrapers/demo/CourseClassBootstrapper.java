@@ -3,12 +3,12 @@ package eapli.ecourse.infrastructure.bootstrapers.demo;
 import java.util.Calendar;
 
 import eapli.ecourse.coursemanagement.domain.Course;
-import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.CourseClass;
+import eapli.ecourse.eventsmanagement.classmanagement.application.ScheduleClassController;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.DayInWeek;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.Hours;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.WeekDay;
-import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
+import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.teachermanagement.domain.Acronym;
 import eapli.ecourse.teachermanagement.domain.BirthDate;
 import eapli.ecourse.teachermanagement.domain.TaxPayerNumber;
@@ -21,6 +21,10 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
 public class CourseClassBootstrapper extends CourseBootstrapperBase implements Action {
+
+  private ScheduleClassController controller = new ScheduleClassController(
+      PersistenceContext.repositories().classes(), PersistenceContext.repositories().courses(),
+      PersistenceContext.repositories().teachers());
 
   @Override
   public boolean execute() {
@@ -35,13 +39,12 @@ public class CourseClassBootstrapper extends CourseBootstrapperBase implements A
     Course course = createOpenCourse("123456789", "test", "test", 0, 100, teacher.toDto());
 
     try {
-      new CourseClass(DayInWeek.valueOf(WeekDay.MONDAY), Duration.valueOf(50),
-          Hours.valueOf(Calendar.getInstance()), course, teacher);
+      controller.createClass(course.code(), 120, DayInWeek.valueOf(WeekDay.MONDAY),
+          Hours.valueOf(Calendar.getInstance()));
     } catch (final Exception e) {
       System.out.println("Exception: " + e.getMessage());
     }
 
     return true;
   }
-
 }
