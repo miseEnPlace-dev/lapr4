@@ -32,7 +32,11 @@ public class MeetingBootstrapper extends UsersBootstrapperBase implements Action
     Username username = Username.valueOf("user1");
     SystemUser user = AuthzRegistry.userService().userOfIdentity(username).orElseThrow(IllegalStateException::new);
 
-    controller.scheduleMeeting(user, Time.valueOf(Calendar.getInstance()), Duration.valueOf(120), users);
+    try {
+      controller.scheduleMeeting(user, Time.valueOf(Calendar.getInstance()), Duration.valueOf(120), users);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
 
     return true;
 
