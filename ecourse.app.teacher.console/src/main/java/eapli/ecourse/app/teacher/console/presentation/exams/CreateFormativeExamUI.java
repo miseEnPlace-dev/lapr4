@@ -15,9 +15,8 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateFormativeExamUI extends AbstractUI {
   private CreateFormativeExamController ctrl = new CreateFormativeExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().formativeExams(),
-      PersistenceContext.repositories().courses(),
-      PersistenceContext.repositories().questions());
+      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().courses(),
+      PersistenceContext.repositories().questions(), PersistenceContext.repositories().formativeExamRequests());
 
   @Override
   protected boolean doShow() {

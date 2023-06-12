@@ -9,7 +9,7 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.Extraor
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
@@ -169,16 +169,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public FormativeExamRepository formativeExams() {
-    return new JpaFormativeExamRepository(Application.settings().persistenceUnitName());
-  }
-
-  @Override
-  public FormativeExamRepository formativeExams(TransactionalContext autoTx) {
-    return new JpaFormativeExamRepository(autoTx);
-  }
-
-  @Override
   public AnswerRepository answers() {
     return new JpaAnswerRepository(Application.settings().persistenceUnitName());
   }
@@ -196,5 +186,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public PostItRepository postIts(TransactionalContext autoTx) {
     return new JpaPostItRepository(autoTx);
+  }
+
+  @Override
+  public FormativeExamRequestRepository formativeExamRequests() {
+    return new JpaFormativeExamRequestRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public FormativeExamRequestRepository formativeExamsRequest(TransactionalContext autoTx) {
+    return new JpaFormativeExamRequestRepository(autoTx);
   }
 }

@@ -9,7 +9,7 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.Extraor
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.studentmanagement.repositories.SignupRequestRepository;
@@ -151,16 +151,6 @@ public interface RepositoryFactory {
    *
    * @return
    */
-  FormativeExamRepository formativeExams();
-
-  FormativeExamRepository formativeExams(TransactionalContext autoTx);
-
-  /**
-   *
-   * repository will be created in auto transaction mode
-   *
-   * @return
-   */
   EnrolmentRepository enrollments();
 
   EnrolmentRepository enrollments(TransactionalContext autoTx);
@@ -204,4 +194,14 @@ public interface RepositoryFactory {
   PostItRepository postIts();
 
   PostItRepository postIts(TransactionalContext autoTx);
+
+  /**
+   *
+   * repository will be created in auto transaction mode
+   *
+   * @return
+   */
+  FormativeExamRequestRepository formativeExamRequests();
+
+  FormativeExamRequestRepository formativeExamsRequest(TransactionalContext autoTx);
 }

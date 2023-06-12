@@ -1,15 +1,11 @@
 package eapli.ecourse.app.student.console.presentation.exams;
 
-import java.io.IOException;
-
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.util.ConsoleConstrainedReader;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.eventsmanagement.domain.Time;
-import eapli.ecourse.exammanagement.application.CreateEvaluationExamController;
 import eapli.ecourse.exammanagement.application.TakeEvaluationExamController;
-import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;

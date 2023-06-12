@@ -9,9 +9,8 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
-import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 
@@ -25,15 +24,12 @@ public class ListCourseExamsController {
 
   private final EvaluationExamListService evaluationExamService;
 
-  private final FormativeExamListService formativeExamService;
-
   public ListCourseExamsController(AuthorizationService authz, CourseRepository courseRepository,
-                                   EvaluationExamRepository examRepository, FormativeExamRepository formativeExamRepository) {
+      EvaluationExamRepository examRepository, FormativeExamRequestRepository formativeExamRepository) {
     this.authz = authz;
     this.courseRepository = courseRepository;
     this.service = new ListCourseService(courseRepository);
     this.evaluationExamService = new EvaluationExamListService(examRepository);
-    this.formativeExamService = new FormativeExamListService(formativeExamRepository);
   }
 
   public Iterable<CourseDTO> listOpenInProgressCourses() {
@@ -55,11 +51,5 @@ public class ListCourseExamsController {
       throw new IllegalArgumentException("There is no Course with the given code");
 
     return evaluationExamService.listAllCourseExams(course.get());
-  }
-
-
-  public Iterable<FormativeExamDTO> listCourseFormativeExams(CourseDTO courseDTO) {
-    Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
-    return formativeExamService.findAllCourseExams(course);
   }
 }

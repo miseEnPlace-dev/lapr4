@@ -16,7 +16,7 @@ import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -37,7 +37,7 @@ public class ListCourseExamGradesController {
   private final StudentService studentService;
 
   public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-      FormativeExamRepository formativeRepository, CourseRepository courseRepository,
+      FormativeExamRequestRepository formativeRepository, CourseRepository courseRepository,
       TeacherRepository teacherRepository, AnswerRepository answerRepository,
       EnrolmentRepository enrolmentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
@@ -63,17 +63,8 @@ public class ListCourseExamGradesController {
         .listAllPastCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
   }
 
-  public Iterable<FormativeExamDTO> courseFormativeExams(CourseDTO course) {
-    return formativeService.findAllCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
-  }
-
   public Iterable<AnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
     return answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
-        studentsInCourse(examDTO.getCourse()));
-  }
-
-  public Iterable<AnswerDTO> formativeExamGrades(FormativeExamDTO examDTO) {
-    return answerService.listExamGrades(formativeService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
         studentsInCourse(examDTO.getCourse()));
   }
 

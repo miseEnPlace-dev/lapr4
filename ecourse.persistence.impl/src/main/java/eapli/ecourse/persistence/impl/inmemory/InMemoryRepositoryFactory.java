@@ -9,7 +9,7 @@ import eapli.ecourse.eventsmanagement.courseclassmanagement.repositories.Extraor
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.InviteRepository;
 import eapli.ecourse.eventsmanagement.meetingmanagement.repositories.MeetingRepository;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.infrastructure.bootstrapers.ECourseBootstrapper;
 import eapli.ecourse.infrastructure.persistence.RepositoryFactory;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
@@ -169,16 +169,6 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public FormativeExamRepository formativeExams() {
-    return formativeExams(null);
-  }
-
-  @Override
-  public FormativeExamRepository formativeExams(TransactionalContext autoTx) {
-    return new InMemoryFormativeExamRepository();
-  }
-
-  @Override
   public AnswerRepository answers() {
     return answers(null);
   }
@@ -196,5 +186,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
   @Override
   public PostItRepository postIts(final TransactionalContext autoTx) {
     return new InMemoryPostItRepository();
+  }
+
+  @Override
+  public FormativeExamRequestRepository formativeExamRequests() {
+    return formativeExamsRequest(null);
+  }
+
+  @Override
+  public FormativeExamRequestRepository formativeExamsRequest(TransactionalContext autoTx) {
+    return new InMemoryFormativeExamRequestRepository();
   }
 }

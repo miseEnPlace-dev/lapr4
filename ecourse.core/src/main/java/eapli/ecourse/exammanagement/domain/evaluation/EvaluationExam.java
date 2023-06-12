@@ -49,10 +49,21 @@ public class EvaluationExam extends Exam {
 
   public EvaluationExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
       ExamDescription description, String fileContent, Collection<EvaluationExamSection> sections, Time startTime,
-      Time endTime,
-      ExamInfo feedbackInfo,
-      ExamInfo gradeInfo, ExamScore score) {
+      Time endTime, ExamInfo feedbackInfo, ExamInfo gradeInfo, ExamScore score) {
     super(course, teacher, identifier, title, description, score, fileContent);
+
+    Preconditions.noneNull(feedbackInfo, gradeInfo, startTime, endTime, score, sections);
+
+    this.feedbackInfo = feedbackInfo;
+    this.gradeInfo = gradeInfo;
+    this.sections = sections;
+    setDates(startTime, endTime);
+  }
+
+  public EvaluationExam(Course course, Teacher teacher, ExamIdentifier identifier, ExamTitle title,
+      ExamDescription description, Collection<EvaluationExamSection> sections, Time startTime,
+      Time endTime, ExamInfo feedbackInfo, ExamInfo gradeInfo, ExamScore score) {
+    super(course, teacher, identifier, title, description, score);
 
     Preconditions.noneNull(feedbackInfo, gradeInfo, startTime, endTime, score, sections);
 
