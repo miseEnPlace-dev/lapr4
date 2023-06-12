@@ -3,6 +3,7 @@ package eapli.ecourse.infrastructure.bootstrapers.demo;
 import java.util.Calendar;
 
 import eapli.ecourse.coursemanagement.domain.Course;
+import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.eventsmanagement.classmanagement.application.ScheduleClassController;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.DayInWeek;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.Hours;
@@ -36,10 +37,10 @@ public class CourseClassBootstrapper extends CourseBootstrapperBase implements A
     Teacher teacher = new Teacher(user, TaxPayerNumber.valueOf("123456789"), Acronym.valueOf("OMS"),
         BirthDate.valueOf(Calendar.getInstance()));
 
-    Course course = createOpenCourse("123456789", "test", "test", 0, 100, teacher.toDto());
+    CourseDTO course = createOpenCourse("123456789", "test", "test", 0, 100, teacher.toDto());
 
     try {
-      controller.createClass(course.code(), 120, DayInWeek.valueOf(WeekDay.MONDAY),
+      controller.createClass(course.getCode(), 120, DayInWeek.valueOf(WeekDay.MONDAY),
           Hours.valueOf(Calendar.getInstance()));
     } catch (final Exception e) {
       System.out.println("Exception: " + e.getMessage());
