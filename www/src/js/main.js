@@ -1,23 +1,23 @@
 const RETRY_TIMEOUT = 5000;
-const ERROR_TIMEOUT = 100;
+const ERROR_TIMEOUT = 200;
 const REFRESH_TIMEOUT = 2000;
 const MAX_TIMEOUT = 15000;
 
-const retry = () => {
-  boardContainer.innerHTML = "Server timeout, still trying...";
-  boardContainer.className = "text-red-500 text-8xl";
-  setTimeout(getData, ERROR_TIMEOUT);
-};
+function getData() {
+  const boardContainer = document.querySelector("#board-selector");
 
-const error = () => {
-  boardContainer.innerHTML = "No server reply, still trying...";
-  boardContainer.className = "text-red-500 text-8xl";
-  setTimeout(getData, RETRY_TIMEOUT);
-};
+  const retry = () => {
+    boardContainer.innerHTML = "Server timeout, still trying...";
+    boardContainer.className = "text-red-500 text-8xl";
+    setTimeout(getData, ERROR_TIMEOUT);
+  };
 
-const boardContainer = document.querySelector("#board");
+  const error = () => {
+    boardContainer.innerHTML = "No server reply, still trying...";
+    boardContainer.className = "text-red-500 text-8xl";
+    setTimeout(getData, RETRY_TIMEOUT);
+  };
 
-function getData(boardId) {
   const request = new XMLHttpRequest();
   request.ontimeout = retry();
   request.onerror = error();
@@ -25,30 +25,13 @@ function getData(boardId) {
 
   request.onload = () => {
     const response = this.response;
+    console.log(response);
 
     // boardContainer.innerHTML = "Success!";
     boardContainer.className = "text-black";
     setTimeout(getData, REFRESH_TIMEOUT);
   };
 
-  request.open("GET", `/api/board/${boardId}`, true);
-  request.send();
-}
-
-function selectBoard() {
-  const request = new XMLHttpRequest();
-  request.ontimeout = retry();
-  request.onerror = error();
-  request.timeout = MAX_TIMEOUT;
-
-  request.onload = () => {
-    const response = this.response;
-
-    // boardContainer.innerHTML = "Success!";
-    boardContainer.className = "text-black";
-    setTimeout(getData, REFRESH_TIMEOUT);
-  };
-
-  request.open("GET", `/api/board`, true);
+  //request.open("GET", `/api/board`, true);
   request.send();
 }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./dist/output.css" rel="stylesheet" />
+    <title>🔴 View Live Board</title>
+    <script src="js/board.js"></script>
+  </head>
+  <body>
+    <nav class="flex items-center justify-between mx-8 my-4">
+      <div>
+        <h2 class="text-3xl font-black">Shared Board</h2>
+        <h3 class="text-2xl ">Board name</h3>
+      </div>
+      <div class="flex items-center justify-end gap-x-4">
+        <h3 class="text-xl font-bold">Welcome, User1!</h3>
+        <div class="h-10 w-10 bg-gray-400 rounded-full"></div>
+      </div>
+    </nav>
+
+    <main class="flex items-center justify-center my-8">
+      <table id="board" class="shadow-lg">
+        <tr>
+          <th
+            class="text-center py-6 text-2xl font-bold"></th>
+          <th
+            class="border-x-2 border-b-2 text-center py-6 text-2xl font-bold">TODO</th>
+          <th
+            class="border-x-2 border-b-2 text-center py-6 text-2xl font-bold ">Doing</th>
+          <th
+            class="border-l-2 border-b-2 text-center py-6 text-2xl font-bold">Done</th>
+        </tr>
+        <tr>
+          <td
+            class="text-center border-y-2 border-r-2 w-72 text-2xl font-bold">High
+            priority</td>
+          <td class=" h-52 w-72 border">
+            <article
+              id="post-it-1"
+              class=" mx-4 flex flex-col p-4 rounded-lg relative bg-slate-600">
+              <h3 class="text-xl font-bold">Post it</h3>
+              <div class="flex items-center justify-between">
+                <button
+                  id="colorpicker-button"
+                  class="items-center text-center w-6 h-6 rounded-full rotate-90 bg-slate-500"
+                  onclick="toggleColorPicker()">&gt;</button>
+                <div class="flex gap-x-4 items-center justify-center">
+                  <h3>User1</h3>
+                  <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+                </div>
+              </div>
+              <div id="colorpicker"
+                class="items-center flex justify-around absolute -bottom-8 bg-slate-700 px-4 py-2 gap-x-2 rounded-lg transition-opacity duration-100"
+                style="opacity: 0;">
+                <button onclick="changeColor('bg-red-600', 'post-it-1')"
+                  class="bg-red-500 h-5 w-5 rounded-full"></button>
+                <button onclick="changeColor('bg-green-600', 'post-it-1')"
+                  class="bg-green-500 h-5 w-5 rounded-full"></button>
+                <button onclick="changeColor('bg-blue-600', 'post-it-1')"
+                  class="bg-blue-500 h-5 w-5 rounded-full"></button>
+                <button onclick="changeColor('bg-purple-600', 'post-it-1')"
+                  class="bg-purple-500 h-5 w-5 rounded-full"></button>
+                <button onclick="changeColor('bg-yellow-600', 'post-it-1')"
+                  class="bg-yellow-500 h-5 w-5 rounded-full"></button>
+                <button onclick="changeColor('bg-slate-600', 'post-it-1')"
+                  class="bg-slate-600 h-5 w-5 rounded-full"></button>
+              </div>
+            </article>
+          </td>
+          <td class="h-52 w-72 border"></td>
+          <td class="h-52 w-72 border-y-2 border-l-2"></td>
+        </tr>
+        <tr>
+          <td
+            class="border-y-2 border-r-2 text-center h-32 w-72 text-2xl font-bold">Medium
+            Priority</td>
+          <td class=" h-52 w-72 border"></td>
+          <td class=" h-52 w-72 border"></td>
+          <td class=" h-52 w-72 border-y-2 border-l-2"></td>
+        </tr>
+        <tr>
+          <td
+            class="border-t-2 border-r-2 text-center h-32 w-72 text-2xl font-bold">Low
+            Priority</td>
+          <td class=" h-52 w-72 border-t-2 border-x-2"></td>
+          <td class=" h-52 w-72 border-t-2 border-x-2"></td>
+          <td class=" h-52 w-72 border-t-2 border-l-2"></td>
+        </tr>
+      </table>
+    </main>
+
+    <script src="js/colorpicker.js"></script>
+  </body>
+</html>

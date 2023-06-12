@@ -23,8 +23,8 @@ public class BoardHttpServer {
     router.get("/api", new ApiController());
 
     router.get("/api/session", new GetSessionController());
-    router.get("/api/boards/:id", new ViewBoardController());
-    router.get("/api/boards", new GetBoardsController());
+    router.get("/api/board/:id", new ViewBoardController());
+    router.get("/api/board", new GetBoardsController());
 
     // create the http server
     HttpServer httpServer = new HttpServer(HTTP_SERVER_PORT, router);
