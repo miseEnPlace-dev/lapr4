@@ -1,6 +1,6 @@
 package eapli.ecourse.infrastructure.persistence;
 
-import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
@@ -191,9 +191,9 @@ public interface RepositoryFactory {
    *
    * @return
    */
-  ExamAnswerRepository answers();
+  AnswerRepository answers();
 
-  ExamAnswerRepository answers(TransactionalContext autoTx);
+  AnswerRepository answers(TransactionalContext autoTx);
 
   /**
    *

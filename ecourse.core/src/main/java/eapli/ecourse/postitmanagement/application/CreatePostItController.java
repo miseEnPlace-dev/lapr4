@@ -57,7 +57,7 @@ public class CreatePostItController {
     PostItTitle postItTile = PostItTitle.valueOf(title);
     Coordinates coordinates = Coordinates.valueOf(x, y);
 
-    PostIt postIt = new PostIt(postItTile, coordinates, board, user, null);
+    PostIt postIt = new PostIt(postItTile, coordinates, board, user);
 
     save(postIt);
   }

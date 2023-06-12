@@ -8,7 +8,7 @@ import java.util.stream.StreamSupport;
 
 import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.answermanagement.dto.AnswerDTO;
-import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
@@ -16,10 +16,10 @@ import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 
 public class ListExamAnswerService {
-  private final ExamAnswerRepository examAnswerRepository;
+  private final AnswerRepository examAnswerRepository;
   private final EvaluationExamRepository evaluationExamRepository;
 
-  public ListExamAnswerService(ExamAnswerRepository examAnswerRepository,
+  public ListExamAnswerService(AnswerRepository examAnswerRepository,
       EvaluationExamRepository evaluationExamRepository) {
     this.examAnswerRepository = examAnswerRepository;
     this.evaluationExamRepository = evaluationExamRepository;

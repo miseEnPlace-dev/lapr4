@@ -44,6 +44,9 @@ public class PostIt implements AggregateRoot<PostItID> {
   @Column(nullable = false)
   private Calendar createAt;
 
+  @Column(nullable = false)
+  private boolean isLatest;
+
   /**
    * cascade = CascadeType.NONE as the board is part of another aggregate
    */
@@ -79,9 +82,10 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.board = board;
     this.owner = owner;
     this.previous = null;
+    this.isLatest = true;
   }
 
-  public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
+  private PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
       final SystemUser owner, final PostIt previous) {
 
     Preconditions.noneNull(title, coordinates, board, owner);
@@ -94,6 +98,7 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.owner = owner;
     this.previous = previous;
     this.createAt = Calendar.getInstance();
+    this.isLatest = true;
   }
 
   public SystemUser owner() {
@@ -122,6 +127,10 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   public Calendar createAt() {
     return this.createAt;
+  }
+
+  public boolean isLatest() {
+    return this.isLatest();
   }
 
   @Override

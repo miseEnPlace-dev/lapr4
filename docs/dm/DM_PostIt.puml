@@ -24,6 +24,7 @@ entity User <<entity>> <<root>> {
 
 entity PostIt <<entity>> <<root>>{
   - createdAt
+  - isLatest
 }
 
 class Title <<(V,#FF8B40) value object>> {}

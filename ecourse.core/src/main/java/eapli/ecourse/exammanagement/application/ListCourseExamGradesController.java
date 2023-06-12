@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import eapli.ecourse.answermanagement.application.ListExamAnswerService;
 import eapli.ecourse.answermanagement.dto.AnswerDTO;
-import eapli.ecourse.answermanagement.repositories.ExamAnswerRepository;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -38,7 +38,7 @@ public class ListCourseExamGradesController {
 
   public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
       FormativeExamRepository formativeRepository, CourseRepository courseRepository,
-      TeacherRepository teacherRepository, ExamAnswerRepository answerRepository,
+      TeacherRepository teacherRepository, AnswerRepository answerRepository,
       EnrolmentRepository enrolmentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
     this.formativeService = new FormativeExamListService(formativeRepository);
