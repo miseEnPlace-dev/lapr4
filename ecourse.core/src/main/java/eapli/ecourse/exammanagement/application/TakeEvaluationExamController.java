@@ -5,6 +5,7 @@ import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4ExamParser;
+import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
@@ -16,6 +17,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 @UseCaseController
 public class TakeEvaluationExamController {
   private final ListCourseService listCourseService;
+  private final EvaluationExamListService examListService;
   private final AuthorizationService authz;
   private final StudentRepository studentRepository;
   private final CourseRepository courseRepository;
@@ -33,6 +35,7 @@ public class TakeEvaluationExamController {
     this.examRepository = examRepository;
     this.courseRepository = courseRepository;
     this.listCourseService = new ListCourseService(courseRepository);
+    this.examListService = new EvaluationExamListService(examRepository);
     this.parser = new ANTLR4ExamParser();
   }
 
@@ -47,5 +50,11 @@ public class TakeEvaluationExamController {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
     setCurrentAuthenticatedStudent();
     return listCourseService.listInProgressCoursesThatStudentIsEnrolled(student);
+  }
+
+  public Iterable<EvaluationExamDTO> listOpenExamsForCourse(CourseDTO course) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
+    setCurrentAuthenticatedStudent();
+    return examListService.listAllFutureCourseExams(courseRepository.ofIdentity(course.getCode()).orElseThrow());
   }
 }

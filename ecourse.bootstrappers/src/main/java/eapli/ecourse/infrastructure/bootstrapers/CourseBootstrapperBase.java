@@ -26,22 +26,23 @@ public class CourseBootstrapperBase {
   private final AssignTeacherToCourseController assignTeacherToCourseController = new AssignTeacherToCourseController(
       PersistenceContext.repositories().teachers(), PersistenceContext.repositories().courses());
 
-  public void createClosedCourse(final String code, final String title, final String description, final int min,
+  public CourseDTO createClosedCourse(final String code, final String title, final String description, final int min,
       final int max, final TeacherDTO teacher) {
     try {
-      createCourseCtrl.createCourse(code, title, description, min, max, teacher);
+      return createCourseCtrl.createCourse(code, title, description, min, max, teacher).toDto();
     } catch (final Exception e) {
       LOGGER.warn("Assuming {} already exists (activate trace log for details)", code);
       LOGGER.trace("Assuming existing record", e);
     }
+    return null;
   }
 
-  public Course createOpenCourse(final String code, final String title, final String description, final int min,
+  public CourseDTO createOpenCourse(final String code, final String title, final String description, final int min,
       final int max, final TeacherDTO teacher) {
     try {
       Course c = createCourseCtrl.createCourse(code, title, description, min, max, teacher);
       toggleCourseStatusCtrl.toggleToNextCourseStatus(c.toDto());
-      return c;
+      return c.toDto();
 
     } catch (final Exception e) {
       LOGGER.warn("Assuming {} already exists (activate trace log for details)", code);
