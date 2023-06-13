@@ -1,0 +1,134 @@
+@startuml US2006_SD
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Teacher" as T
+
+participant "ListCourseExamGradesUI" as UI <<presentation>>
+participant "ListCourseExamGradesController" as CTRL <<controller>>
+
+participant "EvaluationExamListService" as E_E_Service <<service>>
+participant "ListCourseService" as C_Service <<service>>
+participant "Course" as Course <<domain>>
+participant "CourseDTO" as CourseDTO <<dto>>
+participant "EvaluationExam" as Exam <<domain>>
+participant "EvaluationExamDTO" as ExamDTO <<dto>>
+participant "ListExamAnswerService" as E_A_Service <<service>>
+participant "ExamAnswer" as  Answer <<domain>>
+participant "ExamAnswerDTO" as  AnswerDTO <<dto>>
+participant "AuthorizationService" as Authz <<service>>
+
+database TeacherRepository as TR <<repository>>
+database EvaluationExamRepository as ER <<repository>>
+database CourseRepository as CR <<repository>>
+database ExamAnswerRepository as EAR <<repository>>
+
+activate T
+T -> UI: requests to see a list of exam grades of his/her courses
+activate UI
+UI -> CTRL: courses = teacherCourses()
+activate CTRL
+CTRL -> Authz: authenticatedUser = loggedInUserWithPermissions()
+activate Authz
+deactivate Authz
+CTRL -> TR: teacher = findByUsername(authenticatedUser.username())
+activate TR
+deactivate TR
+CTRL -> C_Service: courses = listInProgressCoursesThatTeacherLectures(teacher)
+activate C_Service
+C_Service -> CR: courses = findAllInProgressLecturedByTeacher(teacher)
+activate CR
+deactivate CR
+
+loop for each course
+    C_Service -> Course : toDTO(course)
+    activate Course
+    Course -> CourseDTO : new
+    deactivate C_Service
+    deactivate Course
+end loop
+
+deactivate CTRL
+UI --> T: displays the courses that teacher's lectures
+deactivate UI
+
+T -> UI: chooses the desired course
+activate UI
+
+UI -> UI: courseDTO = select(courses, index)
+
+UI -> CTRL: evaluationExams = courseEvaluation(courseDTO)
+activate CTRL
+CTRL -> C_Service: course = findCourseByCourseCode(courseDTO.code())
+activate C_Service
+C_Service -> CR: ofIdentity(courseDTO.code())
+
+activate CR
+
+deactivate CR
+deactivate C_Service
+CTRL -> E_E_Service: evaluationExams = listAllPastCourseExams(course)
+activate E_E_Service
+E_E_Service -> ER: evaluationExams = findAllPastCourseExams(course)
+
+activate ER
+deactivate ER
+
+loop for each exam
+    E_E_Service -> Exam : toDTO(course)
+    activate Exam
+    Exam -> ExamDTO : new
+    deactivate E_E_Service
+    deactivate Exam
+end loop
+
+deactivate E_E_Service
+deactivate CTRL
+
+UI --> T: displays all the evaluation exams of the chosen course
+deactivate UI
+T -> UI: selects the desired exam
+activate UI
+
+UI -> UI: examDTO = select(evaluationExams, index)
+UI -> CTRL: grades = evaluationExamGrades(examDTO)
+activate CTRL
+
+CTRL -> E_E_Service: exam = findByExamCode(examDTO.getIdentifier())
+
+activate E_E_Service
+deactivate E_E_Service
+CTRL -> CTRL: students = studentsInCourse(examDTO.course())
+CTRL -> E_A_Service: grades = listExamGrades(exam, students)
+activate E_A_Service
+E_A_Service -> EAR: answers = findAllWithExam(exam)
+activate EAR
+deactivate EAR
+
+loop for each answer
+    E_A_Service -> E_A_Service: studentsWhoAnswered = add(answer.student())
+end loop
+
+loop for each answer
+    E_A_Service -> Answer : answerDTO = toDTO(answer)
+    activate Answer
+    Answer -> AnswerDTO : new
+    deactivate Answer
+    E_A_Service -> E_A_Service : grades = add(answerDTO)
+end loop
+
+loop for each studentInCourse
+    alt if !studentsWhoAnswered.contains(studentInCourse)
+      E_A_Service -> AnswerDTO : answerDTO = new(student.identity(), student.user().name(), exam.title(), exam.course().title(), null, null))
+      E_A_Service -> E_A_Service : grades = add(answerDTO)
+    end if
+end loop
+
+deactivate E_A_Service
+deactivate CTRL
+UI --> T: displays all course student's grades for the chosen exam
+deactivate UI
+
+
+@enduml

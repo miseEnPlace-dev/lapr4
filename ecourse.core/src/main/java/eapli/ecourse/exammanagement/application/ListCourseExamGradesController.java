@@ -28,7 +28,6 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 public class ListCourseExamGradesController {
 
   private final EvaluationExamListService evaluationService;
-  private final FormativeExamListService formativeService;
   private final AuthorizationService authz;
   private final ListCourseService courseService;
   private final TeacherRepository teacherRepository;
@@ -36,12 +35,10 @@ public class ListCourseExamGradesController {
   private final ListEnrolmentService enrolmentService;
   private final StudentService studentService;
 
-  public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-      FormativeExamRequestRepository formativeRepository, CourseRepository courseRepository,
+  public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository, CourseRepository courseRepository,
       TeacherRepository teacherRepository, AnswerRepository answerRepository,
       EnrolmentRepository enrolmentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
-    this.formativeService = new FormativeExamListService(formativeRepository);
     this.authz = authz;
     this.courseService = new ListCourseService(courseRepository);
     this.teacherRepository = teacherRepository;
