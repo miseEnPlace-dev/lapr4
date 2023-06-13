@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -63,7 +64,12 @@ public class PostIt implements AggregateRoot<PostItID> {
   @ManyToOne(optional = false, cascade = CascadeType.ALL)
   private SystemUser owner;
 
-  @Column(nullable = true)
+  /**
+   * cascade = CascadeType.NONE as the user is part of another aggregate
+   */
+  @XmlElement
+  @JsonProperty
+  @OneToOne(optional = true, cascade = CascadeType.ALL)
   private PostIt previous;
 
   protected PostIt() {
