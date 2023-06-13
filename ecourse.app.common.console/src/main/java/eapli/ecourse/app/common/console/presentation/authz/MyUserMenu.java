@@ -1,5 +1,6 @@
 package eapli.ecourse.app.common.console.presentation.authz;
 
+import eapli.ecourse.Application;
 import eapli.ecourse.infrastructure.authz.AuthenticationCredentialHandler;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -11,6 +12,8 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
 public class MyUserMenu extends Menu {
 
   private static final String MENU_TITLE = "My account >";
+
+  private static final String SEPARATOR_LABEL = "--------------";
 
   private static final int EXIT_OPTION = 0;
 
@@ -41,6 +44,9 @@ public class MyUserMenu extends Menu {
       addItem(MenuItem.of(LOGIN_OPTION, "Login",
           new LoginUI(new AuthenticationCredentialHandler(), onlyWithThis)::show));
     }
+
+    if (!Application.settings().isMenuLayoutHorizontal())
+      addItem(MenuItem.separator(SEPARATOR_LABEL));
 
     addItem(MenuItem.of(EXIT_OPTION, "Return ", Actions.SUCCESS));
   }

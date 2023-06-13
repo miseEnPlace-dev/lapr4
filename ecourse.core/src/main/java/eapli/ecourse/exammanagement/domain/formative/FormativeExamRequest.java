@@ -46,11 +46,13 @@ public class FormativeExamRequest implements AggregateRoot<ExamIdentifier> {
   private List<FormativeExamSectionRequest> sections;
 
   public FormativeExamRequest(ExamIdentifier identifier, ExamTitle title, ExamDescription description, ExamScore score,
-      List<FormativeExamSectionRequest> sections) {
+      List<FormativeExamSectionRequest> sections, Course course) {
     this.identifier = identifier;
     this.title = title;
     this.description = description;
     this.sections = sections;
+    this.score = score;
+    this.course = course;
   }
 
   public ExamIdentifier identifier() {

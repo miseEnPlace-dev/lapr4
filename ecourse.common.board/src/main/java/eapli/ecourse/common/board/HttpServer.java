@@ -3,6 +3,7 @@ package eapli.ecourse.common.board;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import eapli.ecourse.common.board.http.HttpClientHandler;
 import eapli.ecourse.common.board.http.Router;
 
@@ -33,7 +34,7 @@ public class HttpServer implements Runnable {
 
     while (!tcpSocket.isClosed()) {
       try {
-        // establish the tcp conenction by accepting it
+        // establish the tcp connection by accepting it
         socket = tcpSocket.accept();
 
         // create a new client handler

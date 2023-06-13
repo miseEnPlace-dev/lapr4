@@ -9,6 +9,8 @@ import eapli.ecourse.app.student.console.presentation.exams.ExamsMenu;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.ShowMessageAction;
 import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
@@ -34,6 +36,8 @@ class MainMenu extends StudentBaseUI {
   // SETTINGS
   private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
 
+  private final AuthorizationService authz = AuthzRegistry.authorizationService();
+
   @Override
   public boolean show() {
     drawFormTitle();
@@ -51,6 +55,12 @@ class MainMenu extends StudentBaseUI {
     return renderer.render();
   }
 
+  @Override
+  public String headline() {
+    return authz.session().map(s -> "Student [ @" + s.authenticatedUser().identity() + " ]")
+        .orElse("Student App [ ==Anonymous== ]");
+  }
+
   private MenuRenderer getRenderer(final Menu menu) {
     final MenuRenderer theRenderer;
     if (Application.settings().isMenuLayoutHorizontal())
@@ -63,9 +73,6 @@ class MainMenu extends StudentBaseUI {
 
   private Menu buildMainMenu() {
     final Menu mainMenu = new Menu();
-
-    if (!Application.settings().isMenuLayoutHorizontal())
-      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
     final Menu myUserMenu = new MyUserMenu();
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
@@ -91,6 +98,10 @@ class MainMenu extends StudentBaseUI {
 
     menu.addItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
         new ShowMessageAction(NOT_IMPLEMENTED_YET));
+
+    if (!Application.settings().isMenuLayoutHorizontal())
+      menu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+
     menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
 
     return menu;

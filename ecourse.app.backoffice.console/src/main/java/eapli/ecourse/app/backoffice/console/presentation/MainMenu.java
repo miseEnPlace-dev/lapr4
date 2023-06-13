@@ -34,9 +34,9 @@ public class MainMenu extends AbstractUI {
   private static final int USERS_OPTION = 2;
   private static final int COURSES_OPTION = 3;
   private static final int ENROLLMENTS_OPTION = 4;
-  private static final int SETTINGS_OPTION = 5;
+  private static final int SETTINGS_OPTION = 7;
   private static final int CREATE_BOARD_OPTION = 6;
-  private static final int MEETINGS_OPTION = 7;
+  private static final int MEETINGS_OPTION = 5;
   private static final int SOMETHING_OPTION = 8;
 
   private static final String SEPARATOR_LABEL = "--------------";
@@ -67,9 +67,8 @@ public class MainMenu extends AbstractUI {
 
   @Override
   public String headline() {
-
-    return authz.session().map(s -> "eCOURSE [ @" + s.authenticatedUser().identity() + " ]")
-        .orElse("eCOURSE [ ==Anonymous== ]");
+    return authz.session().map(s -> "Manager [ @" + s.authenticatedUser().identity() + " ]")
+        .orElse("Manager App [ ==Anonymous== ]");
   }
 
   private Menu buildMainMenu() {
@@ -78,9 +77,6 @@ public class MainMenu extends AbstractUI {
     final Menu myUserMenu = new MyUserMenu();
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
-    if (!Application.settings().isMenuLayoutHorizontal())
-      mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-
     if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
       final Menu usersMenu = new UsersMenu().buildUsersMenu();
       mainMenu.addSubMenu(USERS_OPTION, usersMenu);
@@ -88,16 +84,16 @@ public class MainMenu extends AbstractUI {
       mainMenu.addSubMenu(COURSES_OPTION, coursesMenu);
       final Menu enrollmentsMenu = new EnrollmentsMenu().buildEnrolmentsMenu();
       mainMenu.addSubMenu(ENROLLMENTS_OPTION, enrollmentsMenu);
-      final Menu settingsMenu = buildAdminSettingsMenu();
-      mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
       final Menu meetingsMenu = new MeetingsMenu().buildMenu();
       mainMenu.addSubMenu(MEETINGS_OPTION, meetingsMenu);
+      mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
+      final Menu settingsMenu = buildAdminSettingsMenu();
+      mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
 
     if (!Application.settings().isMenuLayoutHorizontal())
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 
-    mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
     mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
     return mainMenu;
@@ -107,18 +103,12 @@ public class MainMenu extends AbstractUI {
     final Menu menu = new Menu("Settings >");
 
     menu.addItem(SOMETHING_OPTION, "Test", new ShowMessageAction("Not implemented yet"));
+
+    if (!Application.settings().isMenuLayoutHorizontal())
+      menu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+
     menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
     return menu;
   }
-
-  // private Menu buildManagerMenu() {
-  // final Menu menu = new Menu("Manager >");
-
-  // // menu.addItem(..., "...", ...);
-
-  // menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
-  // return menu;
-  // }
 }

@@ -19,11 +19,9 @@ import eapli.framework.presentation.console.SelectWidget;
 public class ListCourseExamGradesUI extends AbstractUI {
 
   private final ListCourseExamGradesController ctrl = new ListCourseExamGradesController(
-      AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().evaluationExams(), PersistenceContext.repositories().formativeExamRequests(),
-      PersistenceContext.repositories().courses(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().answers(),
-      PersistenceContext.repositories().enrollments());
+      AuthzRegistry.authorizationService(), PersistenceContext.repositories().evaluationExams(),
+    PersistenceContext.repositories().courses(), PersistenceContext.repositories().teachers(),
+    PersistenceContext.repositories().answers(), PersistenceContext.repositories().enrollments());
 
   @Override
   protected boolean doShow() {
@@ -34,15 +32,12 @@ public class ListCourseExamGradesUI extends AbstractUI {
       return false;
     }
 
-    new CourseHeader().printHeader();
-    SelectWidget<CourseDTO> selectCourse = new SelectWidget<>("", courses, new CoursePrinter());
+    SelectWidget<CourseDTO> selectCourse = new SelectWidget<>(new CourseHeader().header(), courses, new CoursePrinter());
     selectCourse.show();
     final CourseDTO selected = selectCourse.selectedElement();
 
     if (selected == null)
       return false;
-
-    Iterable<AnswerDTO> grades;
 
     Iterable<EvaluationExamDTO> exams = ctrl.courseEvaluationExams(selected);
     if (!exams.iterator().hasNext()) {
@@ -55,7 +50,7 @@ public class ListCourseExamGradesUI extends AbstractUI {
     selectExam.show();
     final EvaluationExamDTO exam = selectExam.selectedElement();
 
-    grades = ctrl.evaluationExamGrades(exam);
+    Iterable<AnswerDTO> grades = ctrl.evaluationExamGrades(exam);
 
     ListWidget<AnswerDTO> gradesList = new ListWidget<>(new AnswerHeader().header(), grades,
         new AnswerPrinter());

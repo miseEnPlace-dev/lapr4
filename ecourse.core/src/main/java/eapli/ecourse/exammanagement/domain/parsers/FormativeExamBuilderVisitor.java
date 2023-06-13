@@ -18,10 +18,12 @@ import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequestBuilder;
 
 public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {
   private FormativeExamRequestBuilder builder;
   private FormativeExamSectionRequest section;
+  private FormativeExamSectionRequestBuilder sectionBuilder;
   private List<FormativeExamSectionRequest> sections;
 
   @Override
@@ -127,12 +129,17 @@ public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<Format
 
   @Override
   public FormativeExamRequestBuilder visitSection(FormativeExamParser.SectionContext ctx) {
-    section = new FormativeExamSectionRequest();
+    sectionBuilder = new FormativeExamSectionRequestBuilder();
 
     visit(ctx.startSection());
     visit(ctx.header());
     visit(ctx.numberOfQuestions());
     visit(ctx.questionsType());
+
+    sectionBuilder.withNumberOfQuestions(section.numberOfQuestions());
+    sectionBuilder.withQuestionsType(section.questionsType());
+
+    sections.add(sectionBuilder.build());
 
     return builder;
   }

@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.console.presentation;
+package eapli.ecourse.app.board.console.presentation.mainmenu;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ShareBoardUI extends AbstractUI {
-  private static final Logger LOGGER = LogManager.getLogger(ShareBoardUI.class);
+  private static Logger logger = LogManager.getLogger(ShareBoardUI.class);
 
   private ShareBoardController ctrl = new ShareBoardController();
 
@@ -80,7 +80,7 @@ public class ShareBoardUI extends AbstractUI {
 
     } catch (ClassNotFoundException | IOException | UnsupportedVersionException
         | UnsuccessfulRequestException | IllegalArgumentException e) {
-      LOGGER.error("Error trying to share a board", e);
+      logger.error("Error trying to share a board", e);
     }
 
     return false;

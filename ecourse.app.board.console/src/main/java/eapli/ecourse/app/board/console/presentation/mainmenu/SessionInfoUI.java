@@ -1,4 +1,4 @@
-package eapli.ecourse.app.board.console.presentation;
+package eapli.ecourse.app.board.console.presentation.mainmenu;
 
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.usermanagement.dto.UserDTO;
