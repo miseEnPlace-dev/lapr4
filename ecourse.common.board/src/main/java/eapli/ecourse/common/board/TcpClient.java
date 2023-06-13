@@ -23,23 +23,20 @@ public class TcpClient {
 
   private final Logger logger = LogManager.getLogger(TcpClient.class);
 
-  public TcpClient() {}
+  public TcpClient() {
+  }
 
   public void connect(String hostname, int port, boolean secure)
       throws UnknownHostException, IOException {
     // connect to a tcp server
     if (secure) {
-      socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(hostname, port);
-
-      ((SSLSocket) socket)
-          .setEnabledCipherSuites(new String[] {"TLS_DHE_DSS_WITH_AES_256_CBC_SHA256"});
-      ((SSLSocket) socket).setEnabledProtocols(new String[] {"TLSv1.2"});
+      socket = SSLSocketFactory.getDefault().createSocket(hostname, port);
 
       SSLParameters sslParams = new SSLParameters();
       sslParams.setEndpointIdentificationAlgorithm("HTTPS");
       ((SSLSocket) socket).setSSLParameters(sslParams);
 
-      ((SSLSocket) socket).startHandshake();
+      // ((SSLSocket) socket).startHandshake();
     } else {
       socket = new Socket(hostname, port);
     }

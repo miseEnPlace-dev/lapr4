@@ -1,11 +1,14 @@
 package eapli.ecourse.app.board.console;
 
 import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import eapli.ecourse.AppSettings;
+import eapli.ecourse.app.board.console.presentation.MainMenu;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.app.board.lib.BoardHttpServer;
-import eapli.ecourse.app.board.console.presentation.MainMenu;
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
 import eapli.ecourse.app.common.console.presentation.authz.LoginUI;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
@@ -20,7 +23,8 @@ public class App extends ECourseBaseApplication {
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
-  private App() {}
+  private App() {
+  }
 
   public static void main(final String[] args) {
     new App().run(args);
@@ -29,11 +33,11 @@ public class App extends ECourseBaseApplication {
   @Override
   protected void doMain(String[] args) {
     BoardBackend boardBackend = BoardBackend.getInstance();
+    boolean isSecure = new AppSettings().isSSLEnabled();
 
     // connect to the board server
     try {
-      // ? the secure flag enables ssl, it should be enabled
-      boardBackend.connect(BOARD_SERVER_HOST, BOARD_SERVER_PORT, false);
+      boardBackend.connect(BOARD_SERVER_HOST, BOARD_SERVER_PORT, isSecure);
     } catch (IOException e) {
       LOGGER.error("Error connecting to the Shared Board Server", e);
       return;
@@ -43,8 +47,7 @@ public class App extends ECourseBaseApplication {
 
     if (logged) {
       // start the board http server
-      // ? the secure flag enables ssl, it should be enabled
-      BoardHttpServer.run(false);
+      BoardHttpServer.run(isSecure);
 
       // next ui
       (new MainMenu()).mainLoop();
@@ -62,8 +65,10 @@ public class App extends ECourseBaseApplication {
   }
 
   @Override
-  protected void doSetupEventHandlers(EventDispatcher dispatcher) {}
+  protected void doSetupEventHandlers(EventDispatcher dispatcher) {
+  }
 
   @Override
-  protected void configureAuthz() {}
+  protected void configureAuthz() {
+  }
 }

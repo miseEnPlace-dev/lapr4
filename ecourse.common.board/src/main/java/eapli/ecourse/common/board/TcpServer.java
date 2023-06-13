@@ -3,6 +3,7 @@ package eapli.ecourse.common.board;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 
@@ -23,9 +24,11 @@ public class TcpServer {
     Socket socket;
 
     try {
-      if (this.secure)
-        tcpSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
-      else
+      if (this.secure) {
+        tcpSocket = SSLServerSocketFactory.getDefault().createServerSocket(port);
+        SSLServerSocket sslListener = (SSLServerSocket) tcpSocket;
+        sslListener.setNeedClientAuth(true);
+      } else
         tcpSocket = new ServerSocket(port);
     } catch (IOException e) {
       System.out.println("Error creating the tcp socket");
