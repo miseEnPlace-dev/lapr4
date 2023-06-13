@@ -1,7 +1,9 @@
 package eapli.ecourse.app.common.console.presentation.meeting;
 
+import eapli.ecourse.Application;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
+import eapli.framework.actions.menu.MenuItem;
 
 public class MeetingsMenu {
   private static final int SCHEDULE_MEETING = 1;
@@ -12,6 +14,8 @@ public class MeetingsMenu {
 
   private static final String RETURN = "Return ";
 
+  private static final String SEPARATOR_LABEL = "--------------";
+
   public Menu buildMenu() {
     final Menu menu = new Menu("Meetings >");
 
@@ -19,6 +23,10 @@ public class MeetingsMenu {
     menu.addItem(LIST_MEETINGS, "List Meetings", new ListMeetingUI()::show);
     menu.addItem(CHECK_INVITES, "Accept or Reject invite", new MeetingResponseUI()::show);
     menu.addItem(CANCEL_MEETING, "Cancel a Meeting", new CancelMeetingUI()::show);
+
+    if (!Application.settings().isMenuLayoutHorizontal())
+      menu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+
     menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
 
     return menu;

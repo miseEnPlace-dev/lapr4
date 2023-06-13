@@ -58,7 +58,7 @@ public class FormativeExamService {
       Collection<Question> questions = buildSection(sectionRequest.numberOfQuestions(), sectionRequest.questionsType(),
           course);
 
-      final FormativeExamSection section = new FormativeExamSection(sectionRequest.identifier(), sectionRequest.title(),
+      final FormativeExamSection section = new FormativeExamSection(sectionRequest.identity(), sectionRequest.title(),
           sectionRequest.description(),
           questions);
 
