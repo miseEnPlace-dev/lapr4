@@ -3,17 +3,19 @@ package eapli.ecourse.common.board.http;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.SSLSocket;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class HttpClientHandler implements Runnable {
-  private Socket client;
+  private SSLSocket client;
   private Router router;
 
-  public HttpClientHandler(Socket client, Router router) {
+  public HttpClientHandler(SSLSocket client, Router router) {
     this.client = client;
     this.router = router;
   }
@@ -21,6 +23,7 @@ public class HttpClientHandler implements Runnable {
   @Override
   public void run() {
     try {
+      client.startHandshake();
       // create a data input stream to read from the client
       DataInputStream input = new DataInputStream(client.getInputStream());
 

@@ -2,15 +2,17 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
+
+import javax.net.ssl.SSLSocket;
+
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
 public abstract class Message {
   protected ProtocolMessage protocolMessage;
   private DataOutputStream output;
-  private Socket socket;
+  private SSLSocket socket;
 
-  public Message(ProtocolMessage message, DataOutputStream output, Socket socket) {
+  public Message(ProtocolMessage message, DataOutputStream output, SSLSocket socket) {
     this.protocolMessage = message;
     this.output = output;
   }

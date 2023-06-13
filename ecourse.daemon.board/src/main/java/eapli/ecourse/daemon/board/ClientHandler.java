@@ -3,11 +3,14 @@ package eapli.ecourse.daemon.board;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.SSLSocket;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
@@ -27,7 +30,7 @@ import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 
 public class ClientHandler implements Runnable {
-  private Socket client;
+  private SSLSocket client;
 
   // define here the handler for the pretended message code
   private final static Map<MessageCode, Class<? extends Message>> MESSAGE_MAP = new HashMap<>() {
@@ -54,7 +57,7 @@ public class ClientHandler implements Runnable {
 
   private final Logger logger = LogManager.getLogger(ClientHandler.class);
 
-  public ClientHandler(Socket socket) {
+  public ClientHandler(SSLSocket socket) {
     this.client = socket;
   }
 
@@ -115,7 +118,7 @@ public class ClientHandler implements Runnable {
     } else {
       try {
         handleMessage = clazz
-            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class)
+            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, SSLSocket.class)
             .newInstance(message, output, this.client);
       } catch (Exception e) {
         logger.error("\n[Client Handler Thread] Error", e);

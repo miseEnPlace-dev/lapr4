@@ -2,8 +2,10 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Optional;
+
+import javax.net.ssl.SSLSocket;
+
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
@@ -16,7 +18,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class AuthMessage extends Message {
-  public AuthMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
+  public AuthMessage(ProtocolMessage protocolMessage, DataOutputStream output, SSLSocket socket) {
     super(protocolMessage, output, socket);
   }
 
