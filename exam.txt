@@ -1,22 +1,71 @@
-@start-exam example_exam;
-    @title "Example Exam";
-    @description "This is an example of a Exam.";
-    @feedback none;
+@start-exam bddad_epoca_normal;
+    @title "Exame BDDAD - Época Normal";
+    @description "Este exame tem um peso de 50% da nota final de BDDAD.\nReleia todas as questões antes de submeter.\nBoa sorte!"
+    @feedback on-submit;
     @grade on-submit;
 
-    @start-section section27;
-      @title "First Section";
-      @description "This is the first section.";
+    @start-section seccao1;
+      @title "1 - Dependências Funcionais";
+      @description "Considere a relação R(A,B,C,D,E,F,G,H) com as seguintes dependências funcionais:\nA → BCD\nAD → E\nEFG → H\nF → GH";
 
       @start-question
         @type short-answer;
-        @score 12;
-        @question-body "Como descreve a forma de um círculo?";
+        @score 20;
+        @question-body "Existe uma chave mínima para R. Qual é?";
+        @feedback "Devia ter ido às teóricas!"
         @start-correct-answers
-          @correct-answer "Assim" 0.5;
-          @correct-answer "Assado" 0.2;
-          @correct-answer "de Outra maneira" 0.1;
+          @correct-answer "A,F" 1
+          @correct-answer "A, F" 1
+          @correct-answer "a,f" 1
+          @correct-answer "a, f" 1
         @end-correct-answers;
+      @end-question;
+
+      @start-question
+        @type multiple-choice;
+        @score 30;
+        @question-body "Qual das dependências que pode ser retirada sem alterar a chave?"
+        @feedback "Devia ter ido às teóricas!"
+        @correct-answer 3;
+
+        @start-options
+          @option 1 "A → BCD";
+          @option 2 "AD → E";
+          @option 3 "EFG → H";
+          @option 4 "F → GH";
+        @end-options;
+      @end-question;
+    @end-section;
+
+    @start-section seccao2;
+      @title "2 - Transações";
+
+      @start-question
+        @type true-false;
+        @question-body "As transações são um mecanismo que garante a consistência dos dados contidos numa BD.";
+        @score 20;
+        @feedback "Devia ter ido às teóricas!"
+        @correct-answer true;
+      @end-question;
+
+      @start-question
+        @type missing-words;
+        @question-body "Complete a seguinte frase:\n Para começar uma transação, utilizo a instrução __. Para descartar as alterações de uma transação, utilizo a instrução __.";
+        @score 30;
+        @feedback "Devia ter ido às teóricas!"
+
+        @start-correct-answers
+          @correct-answer "SET TRANSACTION";
+          @correct-answer "ROLLBACK";
+        @end-correct-answers;
+
+        @start-options
+          @option "COMMIT";
+          @option "ROLLBACK";
+          @option "SAVEPOINT";
+          @option "SET TRANSACTION";
+          @option "ROLLBACK TO SAVEPOINT";
+        @end-options;
       @end-question;
     @end-section;
 @end-exam;
