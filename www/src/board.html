@@ -8,7 +8,7 @@
     <script src="js/board.js"></script>
   </head>
   <body
-    class="font-poppins h-screen bg-slate-800 text-white"
+    class="font-poppins h-screen dark:bg-slate-800 dark:text-white bg-white text-black"
     onload="getData()">
     <nav class="flex items-center justify-between mx-8 my-4">
       <div>
@@ -16,6 +16,7 @@
         <h3 id="board-name" class="text-2xl"></h3>
       </div>
       <div class="flex items-center justify-end gap-x-4">
+        <button id="dark-mode-btn" class="h-12 w-12 border rounded-lg"></button>
         <h3 id="user" class="text-xl font-bold"></h3>
         <div class="h-10 w-10 bg-gray-400 rounded-full"></div>
       </div>
@@ -58,5 +59,6 @@
     </main>
 
     <script src="js/colorpicker.js"></script>
+    <script src="js/dark-mode.js"></script>
   </body>
 </html>
