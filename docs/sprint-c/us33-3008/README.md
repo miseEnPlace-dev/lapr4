@@ -55,7 +55,7 @@ The user is able to undo the last change in a post-it and it is reflected in the
 
 #### 3.1.1. Other scenarios
 
-- The post-it does not have previous changes
+- The post-it does not have previous changes:
 
 A user will be unable to undo the last change in a post-it if the post-it does not have previous changes.
 
