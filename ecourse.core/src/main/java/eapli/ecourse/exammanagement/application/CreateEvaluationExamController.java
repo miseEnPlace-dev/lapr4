@@ -73,6 +73,7 @@ public class CreateEvaluationExamController {
     if (examRepository.ofIdentity(exam.identity()).isPresent())
       throw new IllegalStateException("An exam with the same identifier already exists.");
 
+    exam.publish();
     examRepository.save(exam);
   }
 }

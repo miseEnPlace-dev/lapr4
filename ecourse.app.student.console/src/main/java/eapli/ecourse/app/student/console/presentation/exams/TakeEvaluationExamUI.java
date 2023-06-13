@@ -51,7 +51,7 @@ public class TakeEvaluationExamUI extends AbstractUI {
     final Iterable<CourseDTO> courses = this.ctrl.listInProgressCoursesOfAuthenticatedStudent();
 
     if (!courses.iterator().hasNext()) {
-      System.out.println("There are no courses in progress available to you. Please contact the administrator");
+      System.out.println("\nThere are no courses in progress available to you. Please contact the administrator");
       return null;
     }
 
@@ -71,15 +71,16 @@ public class TakeEvaluationExamUI extends AbstractUI {
     final Iterable<EvaluationExamDTO> exams = this.ctrl.listOpenExamsForCourse(course);
 
     if (!exams.iterator().hasNext()) {
-      System.out.println("There are no currently open exams for the selected course.");
+      System.out.println("\nThere are no currently open exams for the selected course.");
       return null;
     }
 
-    System.out.println("Select the exam you want to take:");
+    System.out.println("\nSelect the exam you want to take:");
     final SelectWidget<EvaluationExamDTO> selector = new SelectWidget<>(new EvaluationExamHeader().header(), exams,
         new EvaluationExamPrinter());
     selector.show();
     final EvaluationExamDTO selectedExam = selector.selectedElement();
+    System.out.println("");
 
     if (selectedExam == null)
       return null;

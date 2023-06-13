@@ -83,6 +83,8 @@ public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<Format
     if (ctx.getParent().getStart().getText().equals("@start-exam")) {
       String[] requiredProps = {
           "title",
+          "feedback",
+          "score"
       };
 
       Arrays.asList(requiredProps).forEach(p -> {

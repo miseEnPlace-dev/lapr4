@@ -107,6 +107,14 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.isLatest = true;
   }
 
+  public PostIt update(final PostItTitle t, final Coordinates c) {
+    Preconditions.noneNull(t, c);
+
+    this.isLatest = false;
+
+    return new PostIt(t, c, this.board, this.owner, this);
+  }
+
   public SystemUser owner() {
     return this.owner;
   }

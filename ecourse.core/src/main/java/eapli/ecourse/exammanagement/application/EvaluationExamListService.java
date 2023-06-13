@@ -32,6 +32,11 @@ public class EvaluationExamListService {
     return convertToDto(types);
   }
 
+  public Iterable<EvaluationExamDTO> listAllOpenCourseExams(Course course) {
+    final Iterable<EvaluationExam> types = examRepository.findAllOpenCourseExams(course);
+    return convertToDto(types);
+  }
+
   public Iterable<EvaluationExamDTO> listAllPastCourseExams(Course course) {
     final Iterable<EvaluationExam> types = examRepository.findAllPastCourseExams(course);
     return convertToDto(types);

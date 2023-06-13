@@ -49,6 +49,8 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
         190, t);
     CourseDTO scomp = courseBootstrapperBase.createInProgressCourse("5555", "SCOMP", "Sistemas de Computadores", 0, 100,
         t);
+    courseBootstrapperBase.createInProgressCourse("8787", "BDDAD", "Bases de Dados", 0, 100,
+        amm);
     courseBootstrapperBase.createInProgressCourse("9876", "ARQCP", "Arquitetura de Computadores", 0, 100, t);
     courseBootstrapperBase.assignTeacherToCourse(lprog, t);
     courseBootstrapperBase.assignTeacherToCourse(scomp, oms);
