@@ -46,6 +46,12 @@ To build the project, you first need to set all six properties files, located un
 
 > 💡 You can simply run `./properties.sh` (Linux/MacOS) or `properties.bat` (Windows) to automatically create the properties files.
 
+## Usage
+
+Default: `./properties.sh`: Creates the properties files with the default values (if the file exists it will not be overwritten)
+`-c or --clean`: Overrides the existing properties files with the default values
+`-h or --help`: Shows the help message
+
 Then, execute the following script:
 
 - On Linux/MacOS: `./rebuild-all.sh`

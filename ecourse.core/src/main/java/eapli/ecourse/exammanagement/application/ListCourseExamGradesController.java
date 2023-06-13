@@ -14,9 +14,8 @@ import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
-import eapli.ecourse.exammanagement.dto.FormativeExamRequestDTO;
+import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -35,7 +34,8 @@ public class ListCourseExamGradesController {
   private final ListEnrolmentService enrolmentService;
   private final StudentService studentService;
 
-  public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository, CourseRepository courseRepository,
+  public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
+      CourseRepository courseRepository,
       TeacherRepository teacherRepository, AnswerRepository answerRepository,
       EnrolmentRepository enrolmentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);

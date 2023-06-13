@@ -21,7 +21,7 @@ function getData() {
     const data = JSON.parse(request.responseText);
 
     for (const board of data)
-      boardSelector.innerHTML += `<option value=${board.id} class="bg-slate-600 h-12 text-md">${board.title}</option>`;
+      boardSelector.innerHTML += `<option value=${board.id} class="dark:bg-slate-600 bg-slate-200 h-12 text-md">${board.title}</option>`;
   };
 
   request.ontimeout = () => {
