@@ -71,9 +71,9 @@ public class MainMenu extends AbstractUI {
     Optional<UserDTO> user = BoardBackend.getInstance().getCredentialStore().getUser();
 
     if (!user.isPresent())
-      return "Anonymous";
+      return "Shared Board App [ ==Anonymous== ]";
 
-    return "Welcome, " + user.get().getFullName();
+    return "Shared Board App [ @" + user.get().getUsername() + " ]";
   }
 
   private Menu buildMainMenu() {
