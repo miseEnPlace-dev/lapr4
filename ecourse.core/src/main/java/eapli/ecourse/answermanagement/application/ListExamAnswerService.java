@@ -46,18 +46,19 @@ public class ListExamAnswerService {
 
     Collection<Answer> answers = (Collection<Answer>) examAnswerRepository.findAllWithExam(exam);
 
-    Collection<AnswerDTO> result = (Collection<AnswerDTO>) convertToDTO(answers);
+    Collection<AnswerDTO> result = new ArrayList<>((Collection<? extends AnswerDTO>) convertToDTO(answers));
 
     Set<Student> studentWhoAnswered = new HashSet<>();
+
     for (Answer examAnswer : answers)
       studentWhoAnswered.add(examAnswer.student());
 
-    for (Student student : studentsInCourse) {
-      if (!studentWhoAnswered.contains(student))
-        result
-            .add(new AnswerDTO(student.identity().toString(), student.user().name().toString(), exam.title().toString(),
-                exam.course().title().toString(), null, null));
 
+    for (Student student : studentsInCourse) {
+      if (!studentWhoAnswered.contains(student)) {
+        result.add(new AnswerDTO(student.identity().toString(), student.user().name().toString(),
+          exam.title().toString(), exam.course().title().toString(), null, null));
+      }
     }
 
     return result;
