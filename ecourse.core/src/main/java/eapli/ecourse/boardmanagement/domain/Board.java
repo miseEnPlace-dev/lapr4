@@ -1,5 +1,6 @@
 package eapli.ecourse.boardmanagement.domain;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -168,5 +169,12 @@ public class Board implements AggregateRoot<BoardID> {
 
   public boolean isArchived() {
     return this.archived != null;
+  }
+
+  public void toggleArchive() {
+    if (!isArchived())
+      this.archived = new Archived(Calendar.getInstance());
+    else
+      this.archived = null;
   }
 }
