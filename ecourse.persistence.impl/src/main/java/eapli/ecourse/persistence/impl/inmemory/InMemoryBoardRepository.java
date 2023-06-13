@@ -14,17 +14,17 @@ public class InMemoryBoardRepository extends InMemoryDomainRepository<Board, Boa
   }
 
   @Override
-  public Iterable<Board> findAllBoardsCreatedByUser(Username username) {
+  public Iterable<Board> findAllOwnedByUser(Username username) {
     return match(e -> e.owner().username().equals(username));
   }
 
   @Override
-  public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
+  public Iterable<Board> findAllActiveWithUserWritePermission(Username username) {
     return match(e -> e.canWrite(username) && !e.isArchived());
   }
 
   @Override
-  public Iterable<Board> findAllBoardsAccessibleByUser(Username username) {
+  public Iterable<Board> findAllAccessibleByUser(Username username) {
     return match(e -> e.participates(username));
   }
 }

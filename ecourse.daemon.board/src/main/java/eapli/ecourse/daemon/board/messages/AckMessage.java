@@ -1,13 +1,12 @@
 package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
-
-import javax.net.ssl.SSLSocket;
+import java.net.Socket;
 
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
 public class AckMessage extends Message {
-  public AckMessage(ProtocolMessage protocolMessage, DataOutputStream output, SSLSocket socket) {
+  public AckMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
     super(protocolMessage, output, socket);
   }
 

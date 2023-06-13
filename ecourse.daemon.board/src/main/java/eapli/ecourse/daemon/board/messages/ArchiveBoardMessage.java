@@ -4,11 +4,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
-
-import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
-import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -17,12 +14,17 @@ import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
-public class GetBoardMessage extends Message {
-  private BoardRepository boardRepo;
+/**
+ * Archive a board.
+ */
+public class ArchiveBoardMessage extends Message {
+  private final BoardRepository boardRepository;
 
-  public GetBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
+  public ArchiveBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket) {
     super(protocolMessage, output, socket);
-    this.boardRepo = PersistenceContext.repositories().boards();
+
+    this.boardRepository = PersistenceContext.repositories().boards();
   }
 
   @Override
@@ -33,26 +35,33 @@ public class GetBoardMessage extends Message {
     if (!clientState.getCredentialStore().isAuthenticated())
       return;
 
-    UserDTO user = clientState.getCredentialStore().getUser();
-    Username username = Username.valueOf(user.getUsername());
+    String boardId = protocolMessage.getStringifiedPayload();
 
-    Optional<Board> b =
-        boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
+    if (boardId == null) {
+      send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+      return;
+    }
+
+    Optional<Board> b = boardRepository.ofIdentity(BoardID.valueOf(boardId));
 
     if (b.isEmpty()) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));
       return;
     }
 
-    if (!b.get().participates(username)) {
-      send(new ProtocolMessage(MessageCode.ERR, "Forbidden"));
+    Board board = b.get();
+
+    UserDTO user = clientState.getCredentialStore().getUser();
+    Username username = Username.valueOf(user.getUsername());
+
+    if (!board.owner().username().equals(username)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
       return;
     }
 
-    // make sure the board is fully loaded before sending
-    BoardDTO boardDto = b.get().toDto();
-    ListBoardsService.eagerLoad(boardDto);
+    board.toggleArchive();
+    boardRepository.save(board);
 
-    send(new ProtocolMessage(MessageCode.GET_BOARD, boardDto));
+    send(new ProtocolMessage(MessageCode.ARCHIVE_BOARD));
   }
 }

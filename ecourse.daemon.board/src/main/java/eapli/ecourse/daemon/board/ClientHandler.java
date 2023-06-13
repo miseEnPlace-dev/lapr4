@@ -3,10 +3,9 @@ package eapli.ecourse.daemon.board;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.net.ssl.SSLSocket;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +14,7 @@ import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.daemon.board.messages.AckMessage;
+import eapli.ecourse.daemon.board.messages.ArchiveBoardMessage;
 import eapli.ecourse.daemon.board.messages.AuthMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
@@ -31,7 +31,7 @@ import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
 
 public class ClientHandler implements Runnable {
-  private SSLSocket client;
+  private Socket client;
 
   // define here the handler for the pretended message code
   private final static Map<MessageCode, Class<? extends Message>> MESSAGE_MAP = new HashMap<>() {
@@ -48,7 +48,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_USER_PERMISSIONS, GetUserPermissionsMessage.class);
       // put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
-      // put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
+      put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
       // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
@@ -58,7 +58,7 @@ public class ClientHandler implements Runnable {
 
   private final Logger logger = LogManager.getLogger(ClientHandler.class);
 
-  public ClientHandler(SSLSocket socket) {
+  public ClientHandler(Socket socket) {
     this.client = socket;
   }
 
@@ -119,7 +119,7 @@ public class ClientHandler implements Runnable {
     } else {
       try {
         handleMessage = clazz
-            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, SSLSocket.class)
+            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class)
             .newInstance(message, output, this.client);
       } catch (Exception e) {
         logger.error("\n[Client Handler Thread] Error", e);

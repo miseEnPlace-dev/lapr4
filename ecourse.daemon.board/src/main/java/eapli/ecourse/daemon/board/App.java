@@ -1,5 +1,6 @@
 package eapli.ecourse.daemon.board;
 
+import eapli.ecourse.AppSettings;
 import eapli.ecourse.common.board.TcpServer;
 import eapli.ecourse.infrastructure.auth.PasswordEncoderContext;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -20,8 +21,10 @@ public class App {
   public static void main(String[] args) {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
         PasswordEncoderContext.passwordHash());
+    boolean isSecure = new AppSettings().isSSLEnabled();
 
-    TcpServer server = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class);
+    // ? the secure flag enables ssl, it should be enabled
+    TcpServer server = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class, isSecure);
     server.run();
   }
 }

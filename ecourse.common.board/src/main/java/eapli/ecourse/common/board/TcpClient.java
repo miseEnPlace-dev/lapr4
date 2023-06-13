@@ -3,6 +3,7 @@ package eapli.ecourse.common.board;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.net.ssl.SSLParameters;
@@ -16,7 +17,7 @@ import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class TcpClient {
-  private SSLSocket socket;
+  private Socket socket;
   private DataInputStream input;
   private DataOutputStream output;
 
@@ -25,23 +26,23 @@ public class TcpClient {
   public TcpClient() {
   }
 
-  public void connect(String hostname, int port) throws UnknownHostException, IOException {
-
+  public void connect(String hostname, int port, boolean secure)
+      throws UnknownHostException, IOException {
     // connect to a tcp server
-    socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(hostname, port);
+    if (secure) {
+      socket = SSLSocketFactory.getDefault().createSocket(hostname, port);
 
-    ((SSLSocket) socket).setEnabledCipherSuites(
-        new String[] { "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256" });
-    ((SSLSocket) socket).setEnabledProtocols(
-        new String[] { "TLSv1.2" });
+      SSLParameters sslParams = new SSLParameters();
+      sslParams.setEndpointIdentificationAlgorithm("HTTPS");
+      ((SSLSocket) socket).setSSLParameters(sslParams);
 
-    logger.debug("Connected to server!");
+      // ((SSLSocket) socket).startHandshake();
+    } else {
+      socket = new Socket(hostname, port);
+    }
 
-    SSLParameters sslParams = new SSLParameters();
-    sslParams.setEndpointIdentificationAlgorithm("HTTPS");
-    ((SSLSocket) socket).setSSLParameters(sslParams);
+    logger.debug("Connected to the server!");
 
-    socket.startHandshake();
     // create a data input stream to read from the client
     input = new DataInputStream(socket.getInputStream());
 

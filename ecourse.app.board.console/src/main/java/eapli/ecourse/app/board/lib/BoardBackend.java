@@ -23,8 +23,9 @@ public class BoardBackend {
   }
 
   // connect to the backend
-  public void connect(String host, int port) throws UnknownHostException, IOException {
-    tcpClient.connect(host, port);
+  public void connect(String host, int port, boolean secure)
+      throws UnknownHostException, IOException {
+    tcpClient.connect(host, port, secure);
   }
 
   // singleton

@@ -28,13 +28,13 @@ public class JpaPostItRepository extends JpaAutoTxRepository<PostIt, PostItID, P
   }
 
   @Override
-  public Iterable<PostIt> findLatestVersionOfBoard(BoardID boardId) {
+  public Iterable<PostIt> findLatestByBoardId(BoardID boardId) {
     return match("e.board.id = :boardId AND e.isLatest = true AND e.state = 'ACTIVE'", "boardId",
         boardId);
   }
 
   @Override
-  public Iterable<PostIt> findLatestPostItsCreatedByUser(BoardID boardId, Username username) {
+  public Iterable<PostIt> findLatestFromUserByBoardId(BoardID boardId, Username username) {
     Map<String, Object> params = new HashMap<>();
     params.put("boardId", boardId);
     params.put("username", username);

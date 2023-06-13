@@ -12,7 +12,7 @@ public class BoardHttpServer {
   private static final int HTTP_SERVER_PORT = 8080;
   private static final String WWW_PATH = "www/src";
 
-  public static void run() {
+  public static void run(boolean secure) {
     // create the router
     Router router = new Router();
 
@@ -27,7 +27,7 @@ public class BoardHttpServer {
     router.get("/api/board", new GetBoardsController());
 
     // create the http server
-    HttpServer httpServer = new HttpServer(HTTP_SERVER_PORT, router);
+    HttpServer httpServer = new HttpServer(HTTP_SERVER_PORT, router, secure);
     Thread httpServerThread = new Thread(httpServer);
 
     httpServerThread.start();

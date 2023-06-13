@@ -8,7 +8,15 @@ activate U
 
 U -> SYS : wants to undo the last action of a post-it
 activate SYS
-SYS --> U : informs the operation success
+SYS --> U : list all board where the user has write access to
+deactivate SYS
+U -> SYS : selects a board
+activate SYS
+SYS --> U : lists the post-its of the board
+deactivate SYS
+U -> SYS : selects a post-it
+activate SYS
+SYS --> U : informs the success of the operation
 deactivate SYS
 
 deactivate U

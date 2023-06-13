@@ -28,7 +28,7 @@ public class ListPostItService {
   }
 
   public Iterable<PostItDTO> latestOfBoard(BoardID boardId) {
-    Iterable<PostIt> list = postItRepository.findLatestVersionOfBoard(boardId);
+    Iterable<PostIt> list = postItRepository.findLatestByBoardId(boardId);
     return toDto(list);
   }
 

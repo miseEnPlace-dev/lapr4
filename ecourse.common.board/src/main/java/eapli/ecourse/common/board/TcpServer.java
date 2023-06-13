@@ -1,42 +1,50 @@
 package eapli.ecourse.common.board;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
-import javax.net.ssl.SSLSocket;
 
 public class TcpServer {
   private int port;
   private Class<? extends Runnable> handlerClass;
+  private boolean secure;
 
-  public TcpServer(int port, Class<? extends Runnable> handler) {
+  public TcpServer(int port, Class<? extends Runnable> handler, boolean secure) {
     this.port = port;
     this.handlerClass = handler;
+    this.secure = secure;
   }
 
   public void run() {
     // create a tcp socket and listen to the defined port
-    SSLServerSocket tcpSocket;
-    SSLSocket socket;
+    ServerSocket tcpSocket;
+    Socket socket;
 
     try {
-      tcpSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
+      if (this.secure) {
+        tcpSocket = SSLServerSocketFactory.getDefault().createServerSocket(port);
+        SSLServerSocket sslListener = (SSLServerSocket) tcpSocket;
+        sslListener.setNeedClientAuth(true);
+      } else
+        tcpSocket = new ServerSocket(port);
     } catch (IOException e) {
       System.out.println("Error creating the tcp socket");
       e.printStackTrace();
       return;
     }
 
-    System.out.printf("[TCP Server] Listening on port %d!\n", port);
+    System.out.printf("[TCP%s Server] Listening on port %d!\n", " SSL", port);
 
     while (!tcpSocket.isClosed()) {
       try {
         // establish the tcp connection by accepting it
-        socket = (SSLSocket) tcpSocket.accept();
+        socket = tcpSocket.accept();
 
         // create a new client handler
-        Runnable handler = handlerClass.getConstructor(SSLSocket.class).newInstance(socket);
+        Runnable handler = handlerClass.getConstructor(Socket.class).newInstance(socket);
 
         // create a new thread to handle the client
         Thread clientHandler = new Thread(handler);
