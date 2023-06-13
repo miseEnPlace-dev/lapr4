@@ -52,7 +52,7 @@ public class GetBoardPostItsMessage extends Message {
       return;
     }
 
-    Iterable<PostItDTO> list = listPostItsSvc.ofBoard(b.get().identity());
+    Iterable<PostItDTO> list = listPostItsSvc.latestOfBoard(b.get().identity());
 
     send(new ProtocolMessage(MessageCode.GET_BOARD_POSTITS, list));
   }

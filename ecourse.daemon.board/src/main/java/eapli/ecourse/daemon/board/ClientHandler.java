@@ -25,6 +25,7 @@ import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
+import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
 
 public class ClientHandler implements Runnable {
   private Socket client;
@@ -47,7 +48,7 @@ public class ClientHandler implements Runnable {
       // put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
       // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
-      // put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
+      put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
       put(MessageCode.GET_BOARD_POSTITS, GetBoardPostItsMessage.class);
     }
   };
