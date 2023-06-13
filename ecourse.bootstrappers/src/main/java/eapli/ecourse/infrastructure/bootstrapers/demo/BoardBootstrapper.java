@@ -48,6 +48,7 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     map.put("High", 1);
     map.put("Medium", 2);
     map.put("Low", 3);
+    map.put("Very Low", 4);
 
     return map;
   }
