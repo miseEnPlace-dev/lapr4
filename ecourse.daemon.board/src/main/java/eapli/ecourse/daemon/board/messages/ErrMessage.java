@@ -2,13 +2,12 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import javax.net.ssl.SSLSocket;
+import java.net.Socket;
 
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
 public class ErrMessage extends Message {
-  public ErrMessage(ProtocolMessage protocolMessage, DataOutputStream output, SSLSocket socket) {
+  public ErrMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
     super(protocolMessage, output, socket);
   }
 

@@ -2,19 +2,17 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import javax.net.ssl.SSLSocket;
-
+import java.net.Socket;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
 public class BadRequestMessage extends Message {
-  public BadRequestMessage(DataOutputStream output, SSLSocket socket) {
+  public BadRequestMessage(DataOutputStream output, Socket socket) {
     super(null, output, socket);
   }
 
   public BadRequestMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      SSLSocket socket) {
+      Socket socket) {
     super(protocolMessage, output, socket);
   }
 

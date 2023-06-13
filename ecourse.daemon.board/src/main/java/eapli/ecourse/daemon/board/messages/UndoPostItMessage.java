@@ -2,9 +2,8 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Optional;
-
-import javax.net.ssl.SSLSocket;
 
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -25,7 +24,7 @@ public class UndoPostItMessage extends Message {
   private final PostItRepository postItRepository;
 
   public UndoPostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      SSLSocket socket) {
+      Socket socket) {
     super(protocolMessage, output, socket);
 
     this.ctx = PersistenceContext.repositories().newTransactionalContext();

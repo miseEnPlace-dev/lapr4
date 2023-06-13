@@ -9,8 +9,7 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 /**
  * Shared Board Server.
  *
- * This application holds a TCP server used to communicate with the Shared Board
- * App by using the
+ * This application holds a TCP server used to communicate with the Shared Board App by using the
  * defined protocol.
  */
 public class App {
@@ -21,7 +20,8 @@ public class App {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
         PasswordEncoderContext.passwordHash());
 
-    TcpServer server = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class);
+    // ? the secure flag enables ssl, it should be enabled
+    TcpServer server = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class, false);
     server.run();
   }
 }

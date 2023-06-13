@@ -2,9 +2,8 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Optional;
-
-import javax.net.ssl.SSLSocket;
 
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
@@ -23,7 +22,7 @@ public class GetBoardPostItsMessage extends Message {
   private ListPostItService listPostItsSvc;
 
   public GetBoardPostItsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      SSLSocket socket) {
+      Socket socket) {
     super(protocolMessage, output, socket);
 
     this.boardRepo = PersistenceContext.repositories().boards();
@@ -41,7 +40,8 @@ public class GetBoardPostItsMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    Optional<Board> b = boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
+    Optional<Board> b =
+        boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
 
     if (b.isEmpty()) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));

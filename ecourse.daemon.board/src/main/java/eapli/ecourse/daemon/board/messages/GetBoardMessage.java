@@ -2,9 +2,8 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Optional;
-
-import javax.net.ssl.SSLSocket;
 
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.domain.Board;
@@ -21,7 +20,7 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
 public class GetBoardMessage extends Message {
   private BoardRepository boardRepo;
 
-  public GetBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, SSLSocket socket) {
+  public GetBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
     super(protocolMessage, output, socket);
     this.boardRepo = PersistenceContext.repositories().boards();
   }
@@ -37,7 +36,8 @@ public class GetBoardMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    Optional<Board> b = boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
+    Optional<Board> b =
+        boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
 
     if (b.isEmpty()) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));

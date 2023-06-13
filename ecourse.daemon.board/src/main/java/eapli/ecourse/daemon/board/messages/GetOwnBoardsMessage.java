@@ -2,8 +2,7 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import javax.net.ssl.SSLSocket;
+import java.net.Socket;
 
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
@@ -21,7 +20,7 @@ public class GetOwnBoardsMessage extends Message {
   private ListBoardsService listBoardsService;
 
   public GetOwnBoardsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      SSLSocket socket) {
+      Socket socket) {
     super(protocolMessage, output, socket);
     this.listBoardsService = new ListBoardsService(PersistenceContext.repositories().boards());
   }

@@ -32,7 +32,8 @@ public class App extends ECourseBaseApplication {
 
     // connect to the board server
     try {
-      boardBackend.connect(BOARD_SERVER_HOST, BOARD_SERVER_PORT);
+      // ? the secure flag enables ssl, it should be enabled
+      boardBackend.connect(BOARD_SERVER_HOST, BOARD_SERVER_PORT, false);
     } catch (IOException e) {
       LOGGER.error("Error connecting to the Shared Board Server", e);
       return;
@@ -42,7 +43,8 @@ public class App extends ECourseBaseApplication {
 
     if (logged) {
       // start the board http server
-      BoardHttpServer.run();
+      // ? the secure flag enables ssl, it should be enabled
+      BoardHttpServer.run(false);
 
       // next ui
       (new MainMenu()).mainLoop();

@@ -2,11 +2,11 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import javax.json.JsonObject;
-import javax.net.ssl.SSLSocket;
 
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
@@ -30,7 +30,7 @@ public class GetUserPermissionsMessage extends Message {
   private final UserManagementService userSvc;
 
   public GetUserPermissionsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      SSLSocket socket) {
+      Socket socket) {
     super(protocolMessage, output, socket);
 
     this.boardRepository = PersistenceContext.repositories().boards();
@@ -63,7 +63,8 @@ public class GetUserPermissionsMessage extends Message {
     }
 
     // only the board owner can get the permissions of other users
-    Username authenticatedUsername = Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
+    Username authenticatedUsername =
+        Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
 
     if (!board.get().owner().hasIdentity(authenticatedUsername)) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
