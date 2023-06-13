@@ -14,37 +14,45 @@ import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.questionmanagement.domain.QuestionBody;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.framework.io.util.Console;
+import eapli.framework.presentation.console.AbstractUI;
 
-public class ConsoleExamPrinter implements ExamPrinter {
+public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
   public void printExamHeader(final String title, final String description) {
-    System.out.println("EXAM " + title.toUpperCase() + "\n" + description);
+    drawFormTitle(title);
+    System.out.println(description);
+    System.out.println("");
   }
 
   public void printSectionHeader(final String title, final String description) {
-    System.out.println(title.toUpperCase() + "\n" + description);
+    drawFormSeparator(title);
+    System.out.println(description);
+    System.out.println("");
   }
 
   public void printFeedback(final String feedback) {
     System.out.println("Feedback: " + feedback);
   }
 
-  public void printFinalScore(final int studentScore, final int examScore) {
-    System.out.println("Well done!\nYour score: " + studentScore + " out of " + examScore + ".");
+  public void printFinalScore(final Double studentScore, final Double examScore) {
+    System.out.println("Exam finished! Well done!\nYour score: " + studentScore + " out of " + examScore + ".");
   }
 
-  public Double getNumericalQuestionAnswer(final QuestionBody body) {
+  public Double getNumericalQuestionAnswer(final QuestionBody body, final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     return Console.readDouble("Enter your answer: ");
   }
 
-  public String getShortAnswerQuestionAnswer(final QuestionBody body) {
+  public String getShortAnswerQuestionAnswer(final QuestionBody body, final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     return Console.readLine("Enter your answer: ");
   }
 
-  public boolean getTrueFalseQuestionAnswer(final QuestionBody body) {
+  public boolean getTrueFalseQuestionAnswer(final QuestionBody body, final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     System.out.print("\n1 - True\n2 - False\nSelect an option: ");
@@ -54,7 +62,8 @@ public class ConsoleExamPrinter implements ExamPrinter {
   }
 
   public Set<QuestionIdentifier> getMultipleChoiceMultipleQuestionAnswer(final QuestionBody body,
-      final Map<QuestionIdentifier, String> options) {
+      final Map<QuestionIdentifier, String> options, final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     Set<QuestionIdentifier> selected = new HashSet<>();
@@ -82,7 +91,8 @@ public class ConsoleExamPrinter implements ExamPrinter {
   }
 
   public QuestionIdentifier getMultipleChoiceSingleQuestionAnswer(final QuestionBody body,
-      final Map<QuestionIdentifier, String> options) {
+      final Map<QuestionIdentifier, String> options, final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     Set<Entry<QuestionIdentifier, String>> opts = options.entrySet();
@@ -113,7 +123,9 @@ public class ConsoleExamPrinter implements ExamPrinter {
   }
 
   public Map<QuestionIdentifier, QuestionIdentifier> getMatchingQuestionAnswer(final QuestionBody body,
-      final Map<QuestionIdentifier, String> options, final Map<QuestionIdentifier, String> matches) {
+      final Map<QuestionIdentifier, String> options, final Map<QuestionIdentifier, String> matches,
+      final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     Map<QuestionIdentifier, QuestionIdentifier> selected = new HashMap<>();
@@ -151,11 +163,26 @@ public class ConsoleExamPrinter implements ExamPrinter {
     return selected;
   }
 
-  public List<String> getMissingWordsQuestionAnswer(final QuestionBody body) {
+  public List<String> getMissingWordsQuestionAnswer(final QuestionBody body, final Double score) {
+    System.out.print("[" + score + " points] ");
     System.out.println(body);
 
     String words = Console.readLine("Enter the missing words, separated by a semi-column: ");
 
     return Arrays.asList(words.split(";"));
+  }
+
+  public boolean doShow() {
+    return false;
+  }
+
+  public String headline() {
+    return null;
+  }
+
+  private void drawFormSeparator(final String title) {
+    final String titleBorder = SEPARATOR.substring(0, 2) + " " + title + " "
+        + SEPARATOR.substring(4 + title.length());
+    System.out.println(titleBorder);
   }
 }

@@ -14,22 +14,22 @@ public interface ExamPrinter {
 
   public void printFeedback(final String feedback);
 
-  public void printFinalScore(final int studentScore, final int examScore);
+  public void printFinalScore(final Double studentScore, final Double examScore);
 
-  public Double getNumericalQuestionAnswer(final QuestionBody body);
+  public Double getNumericalQuestionAnswer(final QuestionBody body, final Double score);
 
-  public String getShortAnswerQuestionAnswer(final QuestionBody body);
+  public String getShortAnswerQuestionAnswer(final QuestionBody body, final Double score);
 
-  public boolean getTrueFalseQuestionAnswer(final QuestionBody body);
+  public boolean getTrueFalseQuestionAnswer(final QuestionBody body, final Double score);
 
   public Set<QuestionIdentifier> getMultipleChoiceMultipleQuestionAnswer(final QuestionBody body,
-      final Map<QuestionIdentifier, String> options);
+      final Map<QuestionIdentifier, String> options, final Double score);
 
   public QuestionIdentifier getMultipleChoiceSingleQuestionAnswer(final QuestionBody body,
-      final Map<QuestionIdentifier, String> options);
+      final Map<QuestionIdentifier, String> options, final Double score);
 
   public Map<QuestionIdentifier, QuestionIdentifier> getMatchingQuestionAnswer(final QuestionBody body,
-      final Map<QuestionIdentifier, String> options, final Map<QuestionIdentifier, String> matches);
+      final Map<QuestionIdentifier, String> options, final Map<QuestionIdentifier, String> matches, final Double score);
 
-  public List<String> getMissingWordsQuestionAnswer(final QuestionBody body);
+  public List<String> getMissingWordsQuestionAnswer(final QuestionBody body, final Double score);
 }
