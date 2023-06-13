@@ -2,9 +2,7 @@ package eapli.ecourse.postitmanagement.application;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
-import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
@@ -25,6 +23,11 @@ public class ListPostItService {
 
   public Iterable<PostItDTO> ofBoard(BoardID boardId) {
     Iterable<PostIt> list = postItRepository.findAllByBoardId(boardId);
+    return toDto(list);
+  }
+
+  public Iterable<PostItDTO> latestOfBoard(BoardID boardId) {
+    Iterable<PostIt> list = postItRepository.findLatestByBoardId(boardId);
     return toDto(list);
   }
 

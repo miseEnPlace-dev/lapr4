@@ -24,8 +24,8 @@ public class JpaPostItRepository extends JpaAutoTxRepository<PostIt, PostItID, P
   }
 
   @Override
-  public Iterable<PostIt> findLatestVersionOfBoard(BoardID boardId) {
-    return match("e.board.id = :boardId AND e.isLatest = true", "boardId", boardId);
+  public Iterable<PostIt> findLatestByBoardId(BoardID boardId) {
+    return match("e.board.id = :boardId AND e.isLatest = true AND e.state = 'ACTIVE'", "boardId",
+        boardId);
   }
-
 }
