@@ -11,7 +11,7 @@ import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"board_id", "columnNumber"})})
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "board_id", "columnNumber" }) })
 public class BoardColumn implements DomainEntity<Integer> {
 
   private static final long serialVersionUID = 1L;
@@ -26,6 +26,7 @@ public class BoardColumn implements DomainEntity<Integer> {
   @Column
   private BoardTitle title;
 
+  @Column
   private Integer columnNumber;
 
   @Column(name = "board_id")

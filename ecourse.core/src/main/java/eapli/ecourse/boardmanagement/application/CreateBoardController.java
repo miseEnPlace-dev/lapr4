@@ -1,7 +1,9 @@
 package eapli.ecourse.boardmanagement.application;
 
 import java.util.Map;
+import java.util.Properties;
 
+import eapli.ecourse.Application;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardBuilder;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
@@ -52,5 +54,13 @@ public class CreateBoardController {
       throw new IllegalArgumentException("Board cannot be null.");
 
     return boardRepo.save(board);
+  }
+
+  public int boardMaxColumns() {
+    return Application.settings().boardMaxColumns();
+  }
+
+  public int boardMaxRows() {
+    return Application.settings().boardMaxRows();
   }
 }
