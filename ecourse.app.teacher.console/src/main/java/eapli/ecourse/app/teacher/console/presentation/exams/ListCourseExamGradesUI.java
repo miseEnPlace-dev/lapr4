@@ -45,14 +45,14 @@ public class ListCourseExamGradesUI extends AbstractUI {
       return false;
     }
 
-    SelectWidget<EvaluationExamDTO> selectExam = new SelectWidget<>(new EvaluationExamHeader().header(), exams,
+    SelectWidget<EvaluationExamDTO> selectExam = new SelectWidget<>("\n"+ new EvaluationExamHeader().header(), exams,
         new EvaluationExamPrinter());
     selectExam.show();
     final EvaluationExamDTO exam = selectExam.selectedElement();
 
     Iterable<AnswerDTO> grades = ctrl.evaluationExamGrades(exam);
 
-    ListWidget<AnswerDTO> gradesList = new ListWidget<>(new AnswerHeader().header(), grades,
+    ListWidget<AnswerDTO> gradesList = new ListWidget<>("\n"+ new AnswerHeader().header(), grades,
         new AnswerPrinter());
     gradesList.show();
 
