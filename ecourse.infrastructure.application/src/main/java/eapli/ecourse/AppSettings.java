@@ -79,13 +79,6 @@ public class AppSettings {
     return applicationProperties.getProperty(SSL_KEYSTORE_PASS_KEY);
   }
 
-  public void setSSLTrustStore(String fileName, String keystore) {
-    applicationProperties.setProperty("javax.net.ssl.trustStore", fileName);
-    applicationProperties.setProperty("javax.net.ssl.trustStorePassword", keystore);
-    applicationProperties.setProperty("javax.net.ssl.keyStore", fileName);
-    applicationProperties.setProperty("javax.net.ssl.keyStorePassword", keystore);
-  }
-
   public String repositoryFactory() {
     return applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
   }

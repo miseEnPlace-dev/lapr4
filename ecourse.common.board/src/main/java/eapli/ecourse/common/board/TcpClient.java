@@ -2,17 +2,16 @@ package eapli.ecourse.common.board;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import javax.net.ssl.SSLParameters;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.AppSettings;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
@@ -21,28 +20,28 @@ public class TcpClient {
   private DataInputStream input;
   private DataOutputStream output;
 
-  private final AppSettings settings = new AppSettings();
-
-  private final String TRUSTED_STORE = settings.sslClientTrustedStore();
-  private final String STORE_PATH = "ecourse.common.board/src/main/resources/" + TRUSTED_STORE;
-  private final String KEYSTORE_PASS = settings.sslKeystorePassword();
-
   private final Logger logger = LogManager.getLogger(TcpClient.class);
 
   public TcpClient() {
   }
 
   public void connect(String hostname, int port) throws UnknownHostException, IOException {
-    final String fileName = new File(STORE_PATH).getAbsolutePath();
-
-    settings.setSSLTrustStore(fileName, KEYSTORE_PASS);
 
     // connect to a tcp server
     socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(hostname, port);
 
-    logger.debug("Connected to server!");
-    socket.startHandshake();
+    ((SSLSocket) socket).setEnabledCipherSuites(
+        new String[] { "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256" });
+    ((SSLSocket) socket).setEnabledProtocols(
+        new String[] { "TLSv1.2" });
 
+    logger.debug("Connected to server!");
+
+    SSLParameters sslParams = new SSLParameters();
+    sslParams.setEndpointIdentificationAlgorithm("HTTPS");
+    ((SSLSocket) socket).setSSLParameters(sslParams);
+
+    socket.startHandshake();
     // create a data input stream to read from the client
     input = new DataInputStream(socket.getInputStream());
 
