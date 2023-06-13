@@ -24,7 +24,7 @@ public class Coordinates implements ValueObject {
 
   @Override
   public String toString() {
-    return "X = " + x + ", Y = " + y;
+    return "(" + x + ", " + y + ")";
   }
 
   @Override
