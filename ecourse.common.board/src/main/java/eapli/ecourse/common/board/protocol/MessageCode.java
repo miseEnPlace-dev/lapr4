@@ -7,8 +7,8 @@ public enum MessageCode {
   COMMTEST((byte) 0), DISCONN((byte) 1), ACK((byte) 2), ERR((byte) 3), AUTH((byte) 4), GET_BOARDS(
       (byte) 5), GET_OWN_BOARDS((byte) 6), GET_WRITABLE_BOARDS((byte) 7), GET_BOARD(
           (byte) 8), GET_USER_PERMISSIONS((byte) 9), GET_BOARD_HISTORY((byte) 10), SHARE_BOARD(
-              (byte) 11), ARCHIVE_BOARD((byte) 12), CREATE_POSTIT(
-                  (byte) 13), EDIT_POSTIT((byte) 14), UNDO_POSTIT((byte) 15);
+              (byte) 11), ARCHIVE_BOARD((byte) 12), CREATE_POSTIT((byte) 13), EDIT_POSTIT(
+                  (byte) 14), UNDO_POSTIT((byte) 15), GET_BOARD_POSTITS((byte) 16);
 
   private static final Map<Byte, MessageCode> CODES = new HashMap<>();
 
