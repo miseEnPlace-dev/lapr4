@@ -5,34 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./dist/output.css" rel="stylesheet" />
     <title>Shared Board</title>
-    <script src="js/main.js"></script>
   </head>
   <body
     class="font-poppins h-screen bg-slate-800 text-white"
     onload="getData()">
     <nav class="flex items-center justify-between mx-8 my-4">
-      <div>
-        <h2 class="text-3xl font-black">Shared Board</h2>
-        <h3 class="text-2xl">Board name</h3>
-      </div>
+      <div></div>
       <div class="flex items-center justify-end gap-x-4">
-        <h3 class="text-xl font-bold">Welcome, User1!</h3>
+        <h3 id="user" class="text-xl font-bold"></h3>
         <div class="h-10 w-10 bg-gray-400 rounded-full"></div>
       </div>
     </nav>
 
-    <div class="w-full h-[80vh] flex items-center justify-center">
+    <div id="container" class="w-full h-[80vh] flex items-center justify-center">
       <div
         class="relative flex flex-col items-center gap-y-6 h-12 w-72 min-w-[200px]">
         <select
           id="board-selector"
           aria-placeholder="Select a element"
           class="peer h-full w-full rounded-md border border-slate-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-red-500 focus:border-2 focus:border-slate-200 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50">
-          <option disabled value="board-id-1" class="bg-slate-600">-- Select a
+          <option selected="selected" disabled value="board-id-1"
+            class="bg-slate-600">-- Select a
             element --</option>
-          <option value="board-id-1" class="bg-slate-600 h-12 text-md">Board 1</option>
+          <!-- <option value="board-id-1" class="bg-slate-600 h-12 text-md">Board 1</option>
           <option value="board-id-2" class="bg-slate-600 h-12 text-md">Board 2</option>
-          <option value="board-id-3" class="bg-slate-600 h-12 text-md">Board 3</option>
+          <option value="board-id-3" class="bg-slate-600 h-12 text-md">Board 3</option> -->
         </select>
         <label
           class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-md font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-slate-200 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-slate-200 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-slate-200 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -40,10 +37,12 @@
         </label>
         <button
           type="button"
+          id="confirm-button"
           class="mx-auto rounded bg-slate-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 hover:drop-shadow-xl focus:bg-primary-600 focus:drop-shadow-lg focus:outline-none focus:ring-0 active:bg-primary-700 active:drop-shadow-lg">
           Confirm
         </button>
       </div>
     </div>
+    <script src="js/main.js"></script>
   </body>
 </html>
