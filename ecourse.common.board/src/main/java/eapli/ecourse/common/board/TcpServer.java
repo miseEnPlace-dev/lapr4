@@ -1,23 +1,14 @@
 package eapli.ecourse.common.board;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
 
-import eapli.ecourse.AppSettings;
-
 public class TcpServer {
   private int port;
   private Class<? extends Runnable> handlerClass;
-
-  private final AppSettings settings = new AppSettings();
-
-  private final String TRUSTED_STORE = settings.sslServerTrustedStore();
-  private final String STORE_PATH = "ecourse.common.board/src/main/resources/" + TRUSTED_STORE;
-  private final String KEYSTORE_PASS = settings.sslKeystorePassword();
 
   public TcpServer(int port, Class<? extends Runnable> handler) {
     this.port = port;
@@ -30,10 +21,6 @@ public class TcpServer {
     SSLSocket socket;
 
     try {
-      final String fileName = new File(STORE_PATH).getAbsolutePath();
-
-      settings.setSSLTrustStore(fileName, KEYSTORE_PASS);
-
       tcpSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
     } catch (IOException e) {
       System.out.println("Error creating the tcp socket");
