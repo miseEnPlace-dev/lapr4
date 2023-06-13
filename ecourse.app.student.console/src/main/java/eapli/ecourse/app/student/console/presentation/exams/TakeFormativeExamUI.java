@@ -2,11 +2,11 @@ package eapli.ecourse.app.student.console.presentation.exams;
 
 import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.app.common.console.presentation.exam.FormativeExamRequestHeader;
-import eapli.ecourse.app.common.console.presentation.exam.FormativeExamRequestPrinter;
+import eapli.ecourse.app.common.console.presentation.exam.FormativeExamHeader;
+import eapli.ecourse.app.common.console.presentation.exam.FormativeExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.TakeFormativeExamController;
-import eapli.ecourse.exammanagement.dto.FormativeExamRequestDTO;
+import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
@@ -16,7 +16,7 @@ public class TakeFormativeExamUI extends AbstractUI {
 
   private TakeFormativeExamController ctrl = new TakeFormativeExamController(AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().students(), PersistenceContext.repositories().courses(),
-      PersistenceContext.repositories().formativeExamRequests());
+      PersistenceContext.repositories().formativeExams());
 
   @Override
   public boolean doShow() {
@@ -36,7 +36,7 @@ public class TakeFormativeExamUI extends AbstractUI {
     if (selectedCourse == null)
       return false;
 
-    final Iterable<FormativeExamRequestDTO> formativeRequests = this.ctrl.listFormativeExamsRequest(selectedCourse);
+    final Iterable<FormativeExamDTO> formativeRequests = null;
 
     if (!formativeRequests.iterator().hasNext()) {
       System.out.println("There are no defined structures of formative exams in this Course.");
@@ -44,11 +44,11 @@ public class TakeFormativeExamUI extends AbstractUI {
     }
 
     System.out.println("Select a formative exam you want to take:");
-    final SelectWidget<FormativeExamRequestDTO> selectorF = new SelectWidget<>(
-        new FormativeExamRequestHeader().header(),
-        formativeRequests, new FormativeExamRequestPrinter());
+    final SelectWidget<FormativeExamDTO> selectorF = new SelectWidget<>(
+        new FormativeExamHeader().header(),
+        formativeRequests, new FormativeExamPrinter());
     selectorF.show();
-    final FormativeExamRequestDTO selectedFormativeExamRequest = selectorF.selectedElement();
+    final FormativeExamDTO selectedFormativeExamRequest = selectorF.selectedElement();
 
     if (selectedFormativeExamRequest == null)
       return false;

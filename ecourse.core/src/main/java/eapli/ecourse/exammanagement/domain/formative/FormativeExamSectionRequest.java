@@ -1,40 +1,18 @@
 package eapli.ecourse.exammanagement.domain.formative;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
-
 import eapli.ecourse.exammanagement.domain.SectionDescription;
 import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
-import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
-@Entity
-public class FormativeExamSectionRequest implements DomainEntity<SectionIdentifier> {
-  private static final long serialVersionUID = 1L;
-
-  @Version
-  private Long version;
-
-  @Id
+public class FormativeExamSectionRequest {
   private SectionIdentifier identifier;
-
-  @Column(nullable = false)
   private SectionTitle title;
-
-  @Column(nullable = false)
   private SectionDescription description;
-
-  @Column(nullable = false)
   private Integer numberOfQuestions;
-
-  @Column(nullable = false)
   private String questionsType;
 
-  protected FormativeExamSectionRequest() {
-    // for ORM only
+  public FormativeExamSectionRequest() {
   }
 
   public FormativeExamSectionRequest(SectionIdentifier identifier, SectionTitle title, SectionDescription description,
@@ -49,7 +27,7 @@ public class FormativeExamSectionRequest implements DomainEntity<SectionIdentifi
     this.questionsType = questionsType;
   }
 
-  public SectionIdentifier identity() {
+  public SectionIdentifier identifier() {
     return identifier;
   }
 
@@ -92,21 +70,5 @@ public class FormativeExamSectionRequest implements DomainEntity<SectionIdentifi
   public void changeQuestionsType(String questionsType) {
     Preconditions.noneNull(questionsType);
     this.questionsType = questionsType;
-  }
-
-  @Override
-  public boolean sameAs(Object other) {
-    if (!(other instanceof FormativeExamSectionRequest)) {
-      return false;
-    }
-
-    final FormativeExamSectionRequest that = (FormativeExamSectionRequest) other;
-    if (this == that) {
-      return true;
-    }
-
-    return identity().equals(that.identity()) && title().equals(that.title())
-        && description().equals(that.description()) && numberOfQuestions().equals(that.numberOfQuestions())
-        && questionsType().equals(that.questionsType());
   }
 }

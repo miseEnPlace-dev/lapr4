@@ -14,6 +14,7 @@ import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
+import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 
 @Entity
@@ -55,5 +56,10 @@ public class FormativeExam extends Exam {
         && that.course().equals(this.course()) && that.teacher().equals(this.teacher())
         && that.description().equals(this.description())
         && that.state().equals(this.state());
+  }
+
+  public FormativeExamDTO toDto() {
+    return new FormativeExamDTO(this.identity(), this.title(), this.description(), this.course(), this.score(),
+        this.teacher(), this.state());
   }
 }
