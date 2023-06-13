@@ -1,6 +1,7 @@
 package eapli.ecourse.postitmanagement.dto;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostItID;
@@ -26,4 +27,6 @@ public class PostItDTO implements Serializable {
   private BoardDTO board;
   private UserDTO owner;
   private PostItDTO previous;
+  private Calendar createdAt;
+  private boolean isLatest;
 }
