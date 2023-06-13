@@ -17,6 +17,7 @@ import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -30,19 +31,18 @@ public class ListCourseExamGradesController {
   private final TeacherRepository teacherRepository;
   private final ListExamAnswerService answerService;
   private final ListEnrolmentService enrolmentService;
-  private final StudentService studentService;
+  private final StudentRepository studentRepository;
 
   public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-      CourseRepository courseRepository,
-      TeacherRepository teacherRepository, AnswerRepository answerRepository,
-      EnrolmentRepository enrolmentRepository) {
+      CourseRepository courseRepository, TeacherRepository teacherRepository, AnswerRepository answerRepository,
+      EnrolmentRepository enrolmentRepository, StudentRepository studentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
     this.authz = authz;
     this.courseService = new ListCourseService(courseRepository);
     this.teacherRepository = teacherRepository;
     this.answerService = new ListExamAnswerService(answerRepository, evaluationRepository);
     this.enrolmentService = new ListEnrolmentService(enrolmentRepository);
-    this.studentService = new StudentService();
+    this.studentRepository = studentRepository;
   }
 
   public Iterable<CourseDTO> teacherCourses() {
@@ -69,7 +69,7 @@ public class ListCourseExamGradesController {
     Iterable<EnrolmentDTO> enrollments = enrolmentService.listStudentsEnrolled(course.code());
 
     enrollments.forEach(
-        e -> students.add(studentService.findStudentUserByMecNumber(e.getStudentNumber().toString()).orElseThrow()));
+        e -> students.add(studentRepository.findByMecanographicNumber(e.getStudentNumber()).orElseThrow()));
     return students;
   }
 }

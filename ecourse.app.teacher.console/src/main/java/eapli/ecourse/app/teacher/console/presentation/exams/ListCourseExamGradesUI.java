@@ -21,7 +21,8 @@ public class ListCourseExamGradesUI extends AbstractUI {
   private final ListCourseExamGradesController ctrl = new ListCourseExamGradesController(
       AuthzRegistry.authorizationService(), PersistenceContext.repositories().evaluationExams(),
     PersistenceContext.repositories().courses(), PersistenceContext.repositories().teachers(),
-    PersistenceContext.repositories().answers(), PersistenceContext.repositories().enrollments());
+    PersistenceContext.repositories().answers(), PersistenceContext.repositories().enrollments(),
+    PersistenceContext.repositories().students());
 
   @Override
   protected boolean doShow() {
