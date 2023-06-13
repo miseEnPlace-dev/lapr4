@@ -58,7 +58,7 @@ public class TakeEvaluationExamController {
   public Iterable<EvaluationExamDTO> listOpenExamsForCourse(CourseDTO course) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
     setCurrentAuthenticatedStudent();
-    return examListService.listAllFutureCourseExams(courseRepository.ofIdentity(course.getCode()).orElseThrow());
+    return examListService.listAllOpenCourseExams(courseRepository.ofIdentity(course.getCode()).orElseThrow());
   }
 
   public void parseExam(final String str, ExamPrinter printer) throws ParseException {

@@ -21,8 +21,7 @@ import eapli.framework.infrastructure.authz.repositories.impl.jpa.JpaAutoTxUserR
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 /**
- * The repository factory for JPA repositories. This is the concrete factory in
- * the Abstract Factory
+ * The repository factory for JPA repositories. This is the concrete factory in the Abstract Factory
  * (GoF) pattern.
  *
  * @author Nuno on 21/03/16.
@@ -179,16 +178,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   }
 
   @Override
-  public PostItRepository postIts() {
-    return new JpaPostItRepository(Application.settings().persistenceUnitName());
-  }
-
-  @Override
-  public PostItRepository postIts(TransactionalContext autoTx) {
-    return new JpaPostItRepository(autoTx);
-  }
-
-  @Override
   public FormativeExamRepository formativeExams() {
     return new JpaFormativeExamRepository(Application.settings().persistenceUnitName());
   }
@@ -196,5 +185,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
   @Override
   public FormativeExamRepository formativeExams(TransactionalContext autoTx) {
     return new JpaFormativeExamRepository(autoTx);
+  }
+
+  @Override
+  public PostItRepository postIts() {
+    return new JpaPostItRepository(Application.settings().persistenceUnitName());
+  }
+
+  @Override
+  public PostItRepository postIts(TransactionalContext autoTx) {
+    return new JpaPostItRepository(autoTx);
   }
 }

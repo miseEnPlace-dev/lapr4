@@ -1,67 +1,75 @@
 package eapli.ecourse.postitmanagement.application;
 
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
-import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostIt;
+import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.domain.PostItTitle;
+import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
-import eapli.framework.validations.Preconditions;
 
 @UseCaseController
-public class CreatePostItController {
+public class ChangePostItController {
 
   BoardRepository boardRepository;
   PostItRepository postItRepository;
   AuthorizationService authzService;
 
   ListBoardsService lstBoardsService;
+  ListPostItService lstPostItService;
   BoardService boardService;
 
-  public CreatePostItController(BoardRepository boardRepository, PostItRepository postItRepository,
+  public ChangePostItController(BoardRepository boardRepository, PostItRepository postItRepository,
       AuthorizationService authzService) {
-    Preconditions.noneNull(boardRepository, postItRepository, authzService);
-
     this.boardRepository = boardRepository;
     this.postItRepository = postItRepository;
     this.authzService = authzService;
-
-    lstBoardsService = new ListBoardsService(boardRepository);
-    boardService = new BoardService(boardRepository, postItRepository);
   }
 
-  public Iterable<BoardDTO> listBoardsThatUserCanWrite() {
+  public Iterable<BoardDTO> listUserWritableBoards() {
+    lstBoardsService = new ListBoardsService(boardRepository);
+
     SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
         ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
     return lstBoardsService.userWritableBoards(user.username());
   }
 
-  public boolean validateCoordinates(BoardID boardID, int x, int y) {
-    return boardService.isCellAvailable(boardID, x, y);
-  }
+  public Iterable<PostItDTO> listBoardPostItsCreatedByUser(BoardID boardID) {
+    lstPostItService = new ListPostItService(postItRepository);
 
-  public PostIt createPostIt(BoardID boardID, int x, int y, String title) {
     SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
         ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
-    Board board = boardRepository.ofIdentity(boardID).orElseThrow();
+    return lstPostItService.userUpdatablePostIts(boardID, user.username());
+  }
 
-    PostItTitle postItTile = PostItTitle.valueOf(title);
+  public boolean validateCoordinates(BoardID boardID, int x, int y) {
+    boardService = new BoardService(boardRepository, postItRepository);
+
+    return boardService.isCellAvailable(boardID, x, y);
+  }
+
+  public PostIt changePostIt(PostItID postItID, String title, int x, int y) {
+
+    PostIt p = postItRepository.ofIdentity(postItID).orElseThrow();
+
+    PostItTitle postItTitle = PostItTitle.valueOf(title);
     Coordinates coordinates = Coordinates.valueOf(x, y);
 
-    PostIt postIt = new PostIt(postItTile, coordinates, board, user);
+    PostIt newPostIt = p.update(postItTitle, coordinates);
 
-    save(postIt);
+    save(p);
+    save(newPostIt);
 
-    return postIt;
+    return newPostIt;
   }
 
   private void save(PostIt postIt) {

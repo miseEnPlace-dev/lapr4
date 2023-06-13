@@ -25,9 +25,14 @@ public class AppSettings {
   private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
   private static final String USE_EVENTFUL_CONTROLLERS = "UseEventfulControllers";
   private static final String PASSWORD_ENCODER_KEY = "auth.passwordEncoder";
+<<<<<<< HEAD
   private static final String SSL_CLIENT_TRUSTED_STORE_KEY = "ssl.client.trusted_store";
   private static final String SSL_SERVER_TRUSTED_STORE_KEY = "ssl.server.trusted_store";
   private static final String SSL_KEYSTORE_PASS_KEY = "ssl.keystore_pass";
+=======
+  private static final String BOARD_MAX_ROWS_KEY = "board.maxRows";
+  private static final String BOARD_MAX_COLUMNS_KEY = "board.maxColumns";
+>>>>>>> 8f8adc17c2ac2135ebeeacabe8a9eea66aee5058
 
   private final Properties applicationProperties = new Properties();
 
@@ -92,6 +97,17 @@ public class AppSettings {
     return applicationProperties.getProperty(PASSWORD_ENCODER_KEY);
   }
 
+<<<<<<< HEAD
+=======
+  public Integer boardMaxRows() {
+    return Integer.parseInt(applicationProperties.getProperty(BOARD_MAX_ROWS_KEY));
+  }
+
+  public Integer boardMaxColumns() {
+    return Integer.parseInt(applicationProperties.getProperty(BOARD_MAX_COLUMNS_KEY));
+  }
+
+>>>>>>> 8f8adc17c2ac2135ebeeacabe8a9eea66aee5058
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public Map extendedPersistenceProperties() {
     final Map ret = new HashMap();

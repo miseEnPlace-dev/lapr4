@@ -25,6 +25,14 @@ public interface EvaluationExamRepository extends DomainRepository<ExamIdentifie
   Iterable<EvaluationExam> findAllFutureCourseExams(Course course);
 
   /**
+   * Returns all future exams of the given course.
+   *
+   * @param course
+   * @return
+   */
+  Iterable<EvaluationExam> findAllOpenCourseExams(Course course);
+
+  /**
    * Returns all past exams of the given course.
    *
    * @param course

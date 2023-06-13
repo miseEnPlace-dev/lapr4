@@ -26,21 +26,26 @@ public class CreateBoardUI extends AbstractUI {
     Map<String, Integer> rows = new HashMap<>();
 
     System.out.println("Add rows: ");
+
+    int maxRows = this.ctrl.boardMaxRows();
+    int i = 1;
     do {
-      String rowName = Console.readLine("Enter the name of the row: ");
-      int rowNumber = Console.readInteger("Enter the number of the row: ");
-      rows.put(rowName, rowNumber);
-    } while (Console.readLine("Do you want to add other a Row? (Y/N)").toUpperCase().equals("Y"));
+      String rowName = Console.readLine("Enter the name of the row " + i + ": ");
+      rows.put(rowName, i);
+      i++;
+    } while (i <= maxRows && Console.readLine("Do you want to add other a Row? (Y/N)").toUpperCase().equals("Y"));
 
     Map<String, Integer> columns = new HashMap<>();
 
     System.out.println("Add columns: ");
 
+    int maxColumns = this.ctrl.boardMaxColumns();
+    i = 1;
     do {
-      String columnName = Console.readLine("Enter the name of the column: ");
-      int columnNumber = Console.readInteger("Enter the number of the column: ");
-      columns.put(columnName, columnNumber);
-    } while (Console.readLine("Do you want to add other a Column? (Y/N)").toUpperCase().equals("Y"));
+      String columnName = Console.readLine("Enter the name of the column " + i + ": ");
+      columns.put(columnName, i);
+      i++;
+    } while (i <= maxColumns && Console.readLine("Do you want to add other a Column? (Y/N)").toUpperCase().equals("Y"));
 
     final Iterable<SystemUser> users = this.ctrl.listAllUsers();
 
@@ -73,11 +78,13 @@ public class CreateBoardUI extends AbstractUI {
 
     try {
       this.ctrl.createBoard(title, permissions, columns, rows);
-      System.out.println("\nBoard successfully created");
     } catch (Exception e) {
       System.out.println("Error creating board: " + e.getMessage());
+      Console.readLine("Press Enter to continue...");
+      return true;
     }
 
+    System.out.println("\nBoard successfully created");
     Console.readLine("Press Enter to continue...");
 
     return false;

@@ -9,7 +9,9 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.ecourse.postitmanagement.application.ChangePostItController;
 import eapli.ecourse.postitmanagement.application.CreatePostItController;
+import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -59,8 +61,14 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
 
     Board b = ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
 
-    ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1");
-    ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2");
+    PostIt p1 = ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1");
+    PostIt p2 = ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2");
+
+    ChangePostItController c = new ChangePostItController(
+        PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
+        AuthzRegistry.authorizationService());
+
+    c.changePostIt(p2.identity(), "PostIt2.1", 2, 2);
 
     return true;
   }
