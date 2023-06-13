@@ -39,6 +39,7 @@ The communication protocol message codes are described in the following table:
 | 13   | `CREATE_POSTIT`        | Used to create a post-it in a specific board.                                                                                                                                                                                                                                                          |
 | 14   | `EDIT_POSTIT`          | Used to edit a post-it.                                                                                                                                                                                                                                                                                |
 | 15   | `UNDO_POSTIT`          | Used to undo the last change in a post-it.                                                                                                                                                                                                                                                             |
+| 16   | `GET_BOARD_POSTITS`    | Used to get the post-its of a board.                                                                                                                                                                                                                                                                   |
 
 ## Authentication Request
 

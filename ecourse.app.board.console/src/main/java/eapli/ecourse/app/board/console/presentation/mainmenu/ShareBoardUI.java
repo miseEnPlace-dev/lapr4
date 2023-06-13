@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.application.ShareBoardController;
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
-import eapli.ecourse.app.common.console.presentation.board.BoardHeader;
 import eapli.ecourse.app.common.console.presentation.board.BoardPrinter;
 import eapli.ecourse.app.common.console.presentation.board.UserPermissionHeader;
 import eapli.ecourse.app.common.console.presentation.board.UserPermissionPrinter;
@@ -35,9 +34,10 @@ public class ShareBoardUI extends AbstractUI {
 
       System.out.println("Boards you own:\n");
 
-      new BoardHeader().printHeader();
+      BoardPrinter printer = new BoardPrinter();
+      printer.printHeader();
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, new BoardPrinter());
+      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
       selector.show();
 
       final BoardDTO selected = selector.selectedElement();

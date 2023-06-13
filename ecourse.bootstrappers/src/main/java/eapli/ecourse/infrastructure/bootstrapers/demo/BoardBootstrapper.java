@@ -1,6 +1,7 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import eapli.ecourse.boardmanagement.application.CreateBoardController;
@@ -35,7 +36,7 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   }
 
   private Map<String, Integer> getColumns() {
-    Map<String, Integer> map = new HashMap<>();
+    Map<String, Integer> map = new LinkedHashMap<>();
     map.put("To Do", 1);
     map.put("Doing", 2);
     map.put("Done", 3);
@@ -44,10 +45,11 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   }
 
   private Map<String, Integer> getRows() {
-    Map<String, Integer> map = new HashMap<>();
+    Map<String, Integer> map = new LinkedHashMap<>();
     map.put("High", 1);
     map.put("Medium", 2);
     map.put("Low", 3);
+    map.put("Very Low", 4);
 
     return map;
   }

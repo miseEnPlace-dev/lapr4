@@ -8,22 +8,23 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import eapli.ecourse.common.board.protocol.MessageCode;
+import eapli.ecourse.common.board.protocol.ProtocolMessage;
+import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.daemon.board.messages.AckMessage;
 import eapli.ecourse.daemon.board.messages.AuthMessage;
+import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardMessage;
+import eapli.ecourse.daemon.board.messages.GetBoardPostItsMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
-import eapli.ecourse.daemon.board.messages.BadRequestMessage;
-import eapli.ecourse.common.board.protocol.MessageCode;
-import eapli.ecourse.common.board.protocol.ProtocolMessage;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class ClientHandler implements Runnable {
   private Socket client;
@@ -47,6 +48,7 @@ public class ClientHandler implements Runnable {
       // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
       // put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
+      put(MessageCode.GET_BOARD_POSTITS, GetBoardPostItsMessage.class);
     }
   };
 
