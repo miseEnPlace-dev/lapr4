@@ -50,7 +50,7 @@
       "request": "launch",
       "mainClass": "eapli.ecourse.daemon.board.App",
       "projectName": "daemon.board",
-      "args": [
+      "vmArgs": [
         "-Djavax.net.ssl.keyStore=serverkeystore.jks",
         "-Djavax.net.ssl.keyStorePassword=password",
         "-Djavax.net.ssl.trustStore=clienttruststore.jks",
@@ -63,7 +63,7 @@
       "request": "launch",
       "mainClass": "eapli.ecourse.app.board.console.App",
       "projectName": "app.board.console",
-      "args": [
+      "vmArgs": [
         "-Djavax.net.ssl.keyStore=serverkeystore.jks",
         "-Djavax.net.ssl.keyStorePassword=password",
         "-Djavax.net.ssl.trustStore=clienttruststore.jks",
