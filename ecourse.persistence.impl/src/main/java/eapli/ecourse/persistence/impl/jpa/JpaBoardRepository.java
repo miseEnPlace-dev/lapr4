@@ -19,7 +19,7 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
     super(puName, "id");
   }
 
-  public Iterable<Board> findAllBoardsCreatedByUser(Username username) {
+  public Iterable<Board> findAllOwnedByUser(Username username) {
     TypedQuery<Board> query = createQuery(
         "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions WHERE b.owner.username = :username",
         Board.class);
@@ -29,7 +29,7 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
     return query.getResultList();
   }
 
-  public Iterable<Board> findAllBoardsAccessibleByUser(Username username) {
+  public Iterable<Board> findAllAccessibleByUser(Username username) {
     TypedQuery<Board> query = createQuery(
         "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions p WHERE :username = p.user.username OR b.owner.username = :username",
         Board.class);
@@ -41,7 +41,7 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
   }
 
   @Override
-  public Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username username) {
+  public Iterable<Board> findAllActiveWithUserWritePermission(Username username) {
     TypedQuery<Board> query = createQuery(
         "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions p WHERE (:username = p.user.username AND p.permissionType = 'WRITE' OR b.owner.username = :username) AND b.archived IS NULL",
         Board.class);

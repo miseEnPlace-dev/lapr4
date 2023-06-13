@@ -10,8 +10,8 @@ public interface PostItRepository extends DomainRepository<PostItID, PostIt> {
 
   public Iterable<PostIt> findAllByBoardId(BoardID boardId);
 
-  public Iterable<PostIt> findLatestVersionOfBoard(BoardID boardId);
+  public Iterable<PostIt> findLatestByBoardId(BoardID boardId);
 
-  public Iterable<PostIt> findLatestPostItsCreatedByUser(BoardID boardId, Username username);
+  public Iterable<PostIt> findLatestFromUserByBoardId(BoardID boardId, Username username);
 
 }
