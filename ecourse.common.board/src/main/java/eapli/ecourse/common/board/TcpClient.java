@@ -2,28 +2,46 @@ package eapli.ecourse.common.board;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import eapli.ecourse.AppSettings;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class TcpClient {
-  private Socket socket;
+  private SSLSocket socket;
   private DataInputStream input;
   private DataOutputStream output;
 
+  private final AppSettings settings = new AppSettings();
+
+  private final String TRUSTED_STORE = settings.sslClientTrustedStore();
+  private final String STORE_PATH = "ecourse.common.board/src/main/resources/" + TRUSTED_STORE;
+  private final String KEYSTORE_PASS = settings.sslKeystorePassword();
+
   private final Logger logger = LogManager.getLogger(TcpClient.class);
 
-  public TcpClient() {}
+  public TcpClient() {
+  }
 
   public void connect(String hostname, int port) throws UnknownHostException, IOException {
+    final String fileName = new File(STORE_PATH).getAbsolutePath();
+
+    settings.setSSLTrustStore(fileName, KEYSTORE_PASS);
+
     // connect to a tcp server
-    socket = new Socket(hostname, port);
+    socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(hostname, port);
 
     logger.debug("Connected to server!");
+    socket.startHandshake();
 
     // create a data input stream to read from the client
     input = new DataInputStream(socket.getInputStream());

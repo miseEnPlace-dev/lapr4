@@ -25,6 +25,9 @@ public class AppSettings {
   private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
   private static final String USE_EVENTFUL_CONTROLLERS = "UseEventfulControllers";
   private static final String PASSWORD_ENCODER_KEY = "auth.passwordEncoder";
+  private static final String SSL_CLIENT_TRUSTED_STORE_KEY = "ssl.client.trusted_store";
+  private static final String SSL_SERVER_TRUSTED_STORE_KEY = "ssl.server.trusted_store";
+  private static final String SSL_KEYSTORE_PASS_KEY = "ssl.keystore_pass";
   private static final String BOARD_MAX_ROWS_KEY = "board.maxRows";
   private static final String BOARD_MAX_COLUMNS_KEY = "board.maxColumns";
 
@@ -62,6 +65,25 @@ public class AppSettings {
 
   public String persistenceUnitName() {
     return applicationProperties.getProperty(PERSISTENCE_UNIT_KEY);
+  }
+
+  public String sslClientTrustedStore() {
+    return applicationProperties.getProperty(SSL_CLIENT_TRUSTED_STORE_KEY);
+  }
+
+  public String sslServerTrustedStore() {
+    return applicationProperties.getProperty(SSL_SERVER_TRUSTED_STORE_KEY);
+  }
+
+  public String sslKeystorePassword() {
+    return applicationProperties.getProperty(SSL_KEYSTORE_PASS_KEY);
+  }
+
+  public void setSSLTrustStore(String fileName, String keystore) {
+    applicationProperties.setProperty("javax.net.ssl.trustStore", fileName);
+    applicationProperties.setProperty("javax.net.ssl.trustStorePassword", keystore);
+    applicationProperties.setProperty("javax.net.ssl.keyStore", fileName);
+    applicationProperties.setProperty("javax.net.ssl.keyStorePassword", keystore);
   }
 
   public String repositoryFactory() {
