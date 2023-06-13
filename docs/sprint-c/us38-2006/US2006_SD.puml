@@ -120,7 +120,10 @@ end loop
 
 loop for each studentInCourse
     alt if !studentsWhoAnswered.contains(studentInCourse)
-      E_A_Service -> AnswerDTO : answerDTO = new(student.identity(), student.user().name(), exam.title(), exam.course().title(), null, null))
+      E_A_Service -> AnswerDTO : answerDTO = new
+      note right
+        This exam answers are marked as grade N/a
+      end note
       E_A_Service -> E_A_Service : grades = add(answerDTO)
     end if
 end loop
