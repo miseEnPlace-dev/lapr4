@@ -2,7 +2,6 @@ package eapli.ecourse.exammanagement.domain.formative;
 
 import java.util.List;
 
-import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
@@ -18,7 +17,6 @@ public class FormativeExamRequestBuilder implements DomainFactory<FormativeExamR
   private ExamDescription description;
   private List<FormativeExamSectionRequest> sections;
   private ExamScore score;
-  private Course course;
 
   public FormativeExamRequestBuilder withIdentifier(ExamIdentifier identifier) {
     this.identifier = identifier;
@@ -45,18 +43,13 @@ public class FormativeExamRequestBuilder implements DomainFactory<FormativeExamR
     return this;
   }
 
-  public FormativeExamRequestBuilder withCourse(Course course) {
-    this.course = course;
-    return this;
-  }
-
   private FormativeExamRequest buildOrThrow() {
     if (examRequest != null)
       return examRequest;
 
     Preconditions.noneNull(identifier, title, description, sections);
 
-    examRequest = new FormativeExamRequest(identifier, title, description, score, sections, course);
+    examRequest = new FormativeExamRequest(identifier, title, description, score, sections);
     return examRequest;
   }
 

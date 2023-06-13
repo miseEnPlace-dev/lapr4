@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
@@ -22,7 +21,6 @@ public class FormativeExamRequestTest {
   private ExamDescription description;
   private ExamScore score;
   private List<FormativeExamSectionRequest> sections;
-  private Course course;
 
   @Before
   public void setUp() {
@@ -40,7 +38,7 @@ public class FormativeExamRequestTest {
         sectionDescription,
         numberOfQuestions, questionsType);
     sections.add(sectionRequest);
-    request = new FormativeExamRequest(identifier, title, description, score, sections, course);
+    request = new FormativeExamRequest(identifier, title, description, score, sections);
   }
 
   @Test
@@ -65,19 +63,20 @@ public class FormativeExamRequestTest {
 
   @Test
   public void testSameAs() {
-    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections, course);
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title,
+        description, score, sections);
     assertTrue(request.sameAs(other));
   }
 
   @Test
   public void testEquals() {
-    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections, course);
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
     assertEquals(request, other);
   }
 
   @Test
   public void testHashCode() {
-    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections, course);
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
     assertEquals(request.hashCode(), other.hashCode());
   }
 

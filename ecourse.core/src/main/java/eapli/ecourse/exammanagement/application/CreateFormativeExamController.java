@@ -8,10 +8,12 @@ import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4FormativeExamParser;
-import eapli.ecourse.exammanagement.repositories.FormativeExamRequestRepository;
+import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.questionmanagement.repositories.QuestionRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
@@ -23,7 +25,7 @@ public class CreateFormativeExamController {
   private final AuthorizationService authz;
   private final TeacherRepository teacherRepository;
   private final CourseRepository courseRepository;
-  private final FormativeExamRequestRepository formativeExamRequestRepository;
+  private final FormativeExamRepository examRepository;
 
   private final ListCourseService listCourseService;
   private final FormativeExamService examService;
@@ -35,16 +37,16 @@ public class CreateFormativeExamController {
 
   public CreateFormativeExamController(final AuthorizationService authz, final TeacherRepository teacherRepository,
       final CourseRepository courseRepository, final QuestionRepository questionRepository,
-      final FormativeExamRequestRepository formativeExamRequestRepository) {
+      final FormativeExamRepository formativeExamRepository) {
     this.authz = authz;
     this.teacherRepository = teacherRepository;
     this.courseRepository = courseRepository;
+    this.examRepository = formativeExamRepository;
 
     this.listCourseService = new ListCourseService(courseRepository);
     this.examService = new FormativeExamService(questionRepository);
 
     this.parser = new ANTLR4FormativeExamParser();
-    this.formativeExamRequestRepository = formativeExamRequestRepository;
   }
 
   public void setCurrentAuthenticatedTeacher() {
@@ -66,12 +68,20 @@ public class CreateFormativeExamController {
     builder = parser.parseFromFile(filePath);
   }
 
-  public void createExam(CourseDTO courseDto) {
+  public FormativeExam createExam(CourseDTO courseDto) {
     setCurrentAuthenticatedTeacher();
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
     FormativeExamRequest request = builder.build();
+    try {
+      Collection<FormativeExamSection> sections = examService.buildSections(request, courseDto);
 
-    formativeExamRequestRepository.save(request);
+      FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
+          request.description(), request.score(), sections);
+
+      return examRepository.save(exam);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid exam request. Have you created questions for this course?");
+    }
   }
 }

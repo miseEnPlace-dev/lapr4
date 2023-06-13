@@ -25,7 +25,7 @@ public class FormativeExamSectionRequestTest {
   public void testChangeIdentifier() {
     SectionIdentifier newIdentifier = SectionIdentifier.valueOf("2");
     request.changeIdentifier(newIdentifier);
-    assertEquals(newIdentifier, request.identity());
+    assertEquals(newIdentifier, request.identifier());
   }
 
   @Test
