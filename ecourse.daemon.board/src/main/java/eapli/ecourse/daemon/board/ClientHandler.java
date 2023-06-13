@@ -14,6 +14,7 @@ import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.daemon.board.messages.AckMessage;
+import eapli.ecourse.daemon.board.messages.ArchiveBoardMessage;
 import eapli.ecourse.daemon.board.messages.AuthMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
@@ -47,7 +48,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_USER_PERMISSIONS, GetUserPermissionsMessage.class);
       // put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
-      // put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
+      put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
       // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
