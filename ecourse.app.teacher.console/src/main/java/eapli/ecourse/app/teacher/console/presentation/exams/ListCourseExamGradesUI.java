@@ -29,20 +29,20 @@ public class ListCourseExamGradesUI extends AbstractUI {
 
     Iterable<CourseDTO> courses = ctrl.teacherCourses();
     if (!courses.iterator().hasNext()) {
-      System.out.println("No courses available to you.");
+      System.out.println("\nNo courses available to you.");
       return false;
     }
 
     SelectWidget<CourseDTO> selectCourse = new SelectWidget<>(new CourseHeader().header(), courses, new CoursePrinter());
     selectCourse.show();
-    final CourseDTO selected = selectCourse.selectedElement();
+    final CourseDTO course = selectCourse.selectedElement();
 
-    if (selected == null)
+    if (course == null)
       return false;
 
-    Iterable<EvaluationExamDTO> exams = ctrl.courseEvaluationExams(selected);
+    Iterable<EvaluationExamDTO> exams = ctrl.courseEvaluationExams(course);
     if (!exams.iterator().hasNext()) {
-      System.out.println("There are no evaluation exams with grades");
+      System.out.println("\nThere are no evaluated exams in " + course.getTitle().toString());
       return false;
     }
 

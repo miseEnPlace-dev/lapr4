@@ -70,10 +70,8 @@ public class AnswerBootstrapper implements Action {
     Exam e2 = examRepo.save(exam2);
     Answer answer = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(60.0));
     Answer a = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(99.0));
-    Answer answer2 = new Answer(AnswerId.newID(), student, e2, ExamScore.valueOf(50.0));
     Answer a2 = new Answer(AnswerId.newID(), student, e2, ExamScore.valueOf(77.0));
     answerRepo.save(answer);
-    answerRepo.save(answer2);
     answerRepo.save(a);
     answerRepo.save(a2);
 
