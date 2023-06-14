@@ -31,6 +31,11 @@ public class ListPostItService {
     return toDto(list);
   }
 
+  public Iterable<PostItDTO> boardHistory(BoardID boardId) {
+    Iterable<PostIt> list = postItRepository.findAllPostItsOrderedByDate(boardId);
+    return toDto(list);
+  }
+
   private Iterable<PostItDTO> toDto(Iterable<PostIt> list) {
     return StreamSupport.stream(list.spliterator(), true).map(PostIt::toDto)
         .collect(Collectors.toUnmodifiableList());
