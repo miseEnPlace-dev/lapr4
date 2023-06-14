@@ -12,6 +12,7 @@ import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
 
 public class ANTLR4ExamParser implements GrammarParser<EvaluationExamBuilder> {
+
   public EvaluationExamBuilder parseFromFile(String path) throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(path));
     CommonTokenStream tokens = new CommonTokenStream(lexer);

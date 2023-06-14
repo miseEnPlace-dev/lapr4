@@ -1,6 +1,7 @@
 package eapli.ecourse.exammanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.exammanagement.application.GenerateStructureFormativeExamService;
+import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
@@ -274,7 +276,7 @@ public class GenerateStructureFormativeExamServiceTest {
   }
 
   @Test
-  public void ensureTest() {
+  public void ensureGeneratedStringFromExamPassesTheParser() {
     Course course = getDummyCourse();
     ExamIdentifier identifier = ExamIdentifier.valueOf("exam");
     ExamTitle title = ExamTitle.valueOf("Test Exam");
@@ -334,6 +336,11 @@ public class GenerateStructureFormativeExamServiceTest {
 
     System.out.println(struct);
 
-    parser.parseFromString(struct);
+    try {
+      parser.parseFromString(struct);
+    } catch (ParseException e) {
+      fail();
+    }
   }
+
 }
