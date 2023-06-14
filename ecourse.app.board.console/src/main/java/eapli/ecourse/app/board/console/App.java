@@ -14,13 +14,6 @@ import eapli.ecourse.app.common.console.presentation.authz.LoginUI;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 
 public class App extends ECourseBaseApplication {
-  // move to properties
-  private static final String BOARD_SERVER_HOST = "localhost";
-  private static final int BOARD_SERVER_PORT = 9999;
-
-  // private static final String BOARD_SERVER_HOST = "vsgate-s3.dei.isep.ipp.pt";
-  // private static final int BOARD_SERVER_PORT = 11058;
-
   private final static Logger LOGGER = LogManager.getLogger(App.class);
 
   /**
@@ -35,11 +28,16 @@ public class App extends ECourseBaseApplication {
   @Override
   protected void doMain(String[] args) {
     BoardBackend boardBackend = BoardBackend.getInstance();
-    boolean isSecure = new AppSettings().isSSLEnabled();
+
+    AppSettings appSettings = new AppSettings();
+
+    boolean isSecure = appSettings.isSSLEnabled();
+    String host = appSettings.boardServerHost();
+    Integer port = appSettings.boardServerPort();
 
     // connect to the board server
     try {
-      boardBackend.connect(BOARD_SERVER_HOST, BOARD_SERVER_PORT, isSecure);
+      boardBackend.connect(host, port, isSecure);
     } catch (IOException e) {
       LOGGER.error("Error connecting to the Shared Board Server", e);
       return;

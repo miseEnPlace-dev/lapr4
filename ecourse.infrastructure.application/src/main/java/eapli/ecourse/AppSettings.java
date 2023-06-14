@@ -22,12 +22,15 @@ public class AppSettings {
   private static final String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
   private static final String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
   private static final String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
-  private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
+  private static final String SCHEMA_GENERATION_KEY =
+      "javax.persistence.schema-generation.database.action";
   private static final String USE_EVENTFUL_CONTROLLERS = "UseEventfulControllers";
   private static final String PASSWORD_ENCODER_KEY = "auth.passwordEncoder";
   private static final String SSL_ENABLE_KEY = "board.ssl.enabled";
   private static final String BOARD_MAX_ROWS_KEY = "board.maxRows";
   private static final String BOARD_MAX_COLUMNS_KEY = "board.maxColumns";
+  private static final String BOARD_SERVER_HOST_KEY = "board.server.host";
+  private static final String BOARD_SERVER_PORT_KEY = "board.server.port";
 
   private final Properties applicationProperties = new Properties();
 
@@ -36,7 +39,8 @@ public class AppSettings {
   }
 
   private void loadProperties() {
-    try (InputStream propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE)) {
+    try (InputStream propertiesStream =
+        this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE)) {
       if (propertiesStream == null) {
         throw new FileNotFoundException(
             "Property file '" + PROPERTIES_RESOURCE + "' not found in the classpath");
@@ -69,6 +73,14 @@ public class AppSettings {
     return applicationProperties.getProperty(SSL_ENABLE_KEY).equals("true");
   }
 
+  public String boardServerHost() {
+    return applicationProperties.getProperty(BOARD_SERVER_HOST_KEY);
+  }
+
+  public Integer boardServerPort() {
+    return Integer.parseInt(applicationProperties.getProperty(BOARD_SERVER_PORT_KEY));
+  }
+
   public String repositoryFactory() {
     return applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
   }
@@ -85,7 +97,7 @@ public class AppSettings {
     return Integer.parseInt(applicationProperties.getProperty(BOARD_MAX_COLUMNS_KEY));
   }
 
-  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public Map extendedPersistenceProperties() {
     final Map ret = new HashMap();
     ret.put(SCHEMA_GENERATION_KEY, applicationProperties.getProperty(SCHEMA_GENERATION_KEY));

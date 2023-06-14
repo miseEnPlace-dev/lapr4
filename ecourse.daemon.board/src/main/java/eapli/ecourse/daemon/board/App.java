@@ -14,17 +14,16 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
  * defined protocol.
  */
 public class App {
-  // move to properties
-  private static final int BOARD_SERVER_PORT = 9999;
-  // private static final int BOARD_SERVER_PORT = 2227;
-
   public static void main(String[] args) {
     AuthzRegistry.configure(PersistenceContext.repositories().users(), new ClientPasswordPolicy(),
         PasswordEncoderContext.passwordHash());
-    boolean isSecure = new AppSettings().isSSLEnabled();
 
-    // ? the secure flag enables ssl, it should be enabled
-    TcpServer server = new TcpServer(BOARD_SERVER_PORT, ClientHandler.class, isSecure);
+    AppSettings appSettings = new AppSettings();
+
+    boolean isSecure = appSettings.isSSLEnabled();
+    Integer port = appSettings.boardServerPort();
+
+    TcpServer server = new TcpServer(port, ClientHandler.class, isSecure);
     server.run();
   }
 }
