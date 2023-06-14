@@ -59,7 +59,7 @@ missingWordsOption: OPTION STRING EOI;
 
 match: MATCH NUMBER STRING EOI;
 
-matchingCorrectAnswer: CORRECT_ANSWER NUMBER NUMBER EOI;
+matchingCorrectAnswer: CORRECT_ANSWER NUMBER '-' NUMBER EOI;
 
 missingWordsCorrectAnswer: CORRECT_ANSWER STRING EOI;
 
