@@ -20,35 +20,36 @@ import eapli.ecourse.exammanagement.domain.SectionTitle;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequestBuilder;
 
 public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<FormativeExamRequestBuilder> {
-  private FormativeExamRequestBuilder builder;
-  private FormativeExamSectionRequest section;
+  private FormativeExamRequestBuilder examBuilder;
+  private FormativeExamSectionRequestBuilder sectionBuilder;
   private List<FormativeExamSectionRequest> sections;
 
   @Override
   public FormativeExamRequestBuilder visitStart(FormativeExamParser.StartContext ctx) {
     visit(ctx.exam());
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitExam(FormativeExamParser.ExamContext ctx) {
-    builder = new FormativeExamRequestBuilder();
+    examBuilder = new FormativeExamRequestBuilder();
 
     visit(ctx.startExam());
     visit(ctx.header());
     visit(ctx.sections());
 
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitStartExam(FormativeExamParser.StartExamContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     ExamIdentifier identifier = ExamIdentifier.valueOf(str);
-    builder.withIdentifier(identifier);
-    return builder;
+    examBuilder.withIdentifier(identifier);
+    return examBuilder;
   }
 
   /**
@@ -131,78 +132,81 @@ public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<Format
       initializeSection(properties);
     }
 
-    return builder;
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitSections(FormativeExamParser.SectionsContext ctx) {
     sections = new ArrayList<FormativeExamSectionRequest>();
     visitChildren(ctx);
-    builder.withSections(sections);
-    return builder;
+    examBuilder.withSections(sections);
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitSection(FormativeExamParser.SectionContext ctx) {
-    section = new FormativeExamSectionRequest();
+    sectionBuilder = new FormativeExamSectionRequestBuilder();
 
     visit(ctx.startSection());
     visit(ctx.header());
     visit(ctx.numberOfQuestions());
     visit(ctx.questionsType());
 
-    return builder;
+    sections.add(sectionBuilder.build());
+
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitNumberOfQuestions(FormativeExamParser.NumberOfQuestionsContext ctx) {
     int numberOfQuestions = Integer.parseInt(ctx.NUMBER().getText());
-    section.changeNumberOfQuestions(numberOfQuestions);
-    return builder;
+    sectionBuilder.withNumberOfQuestions(numberOfQuestions);
+
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitQuestionsType(FormativeExamParser.QuestionsTypeContext ctx) {
     String str = ctx.getChild(1).getText();
-    section.changeQuestionsType(str);
-    sections.add(section);
-    return builder;
+    sectionBuilder.withQuestionsType(str);
+    return examBuilder;
   }
 
   @Override
   public FormativeExamRequestBuilder visitStartSection(FormativeExamParser.StartSectionContext ctx) {
     String str = ctx.IDENTIFIER().getText();
     SectionIdentifier identifier = SectionIdentifier.valueOf(str);
-    section.changeIdentifier(identifier);
-    return builder;
+    sectionBuilder.withIdentifier(identifier);
+    return examBuilder;
   }
 
   private void initializeExam(Map<String, Object> properties) {
     ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
-    builder.withTitle(title);
+    examBuilder.withTitle(title);
     ExamScore score = ExamScore.valueOf(Double.parseDouble(properties.get("score").toString()));
-    builder.withScore(score);
+    examBuilder.withScore(score);
     ExamInfo gradeInfo = ExamInfo.convert(properties.get("grade").toString());
-    builder.withGradeInfo(gradeInfo);
+    examBuilder.withGradeInfo(gradeInfo);
 
     if (properties.containsKey("description")) {
       ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());
-      builder.withDescription(description);
+      examBuilder.withDescription(description);
     } else {
-      builder.withDescription(ExamDescription.valueOf(""));
+      examBuilder.withDescription(ExamDescription.valueOf(""));
     }
   }
 
   private void initializeSection(Map<String, Object> properties) {
     SectionTitle title = SectionTitle.valueOf(properties.get("title").toString());
-    section.changeTitle(title);
+    sectionBuilder.withTitle(title);
 
     if (properties.containsKey("description")) {
       SectionDescription description = SectionDescription.valueOf(properties.get("description").toString());
-      section.changeDescription(description);
+      sectionBuilder.withDescription(description);
+    } else {
+      sectionBuilder.withDescription(SectionDescription.valueOf(""));
     }
 
-    sections.add(section);
   }
 
   private String extractString(String s) {
