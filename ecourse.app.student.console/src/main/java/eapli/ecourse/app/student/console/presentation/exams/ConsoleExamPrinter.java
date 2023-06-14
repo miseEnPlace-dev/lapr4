@@ -15,6 +15,8 @@ import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
+  private static final String QUESTION_SEPARATOR = "................................................................................";
+
   public void printExamHeader(final String title, final String description) {
     drawFormTitle(title);
     printString(description);
@@ -33,7 +35,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
 
   public void printIncorrectAnswer() {
     System.out.println("\nSorry, your answer is incorrect :(\n");
-    Console.readLine("Press Enter to show the next question...");
+    Console.readLine("Press Enter to continue...");
   }
 
   public void printIncorrectAnswer(final String feedback) {
@@ -41,16 +43,17 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
     System.out.print("Feedback: ");
     printString(feedback);
     System.out.println("");
-    Console.readLine("Press Enter to show the next question...");
+    Console.readLine("Press Enter to continue...");
   }
 
   public void printFinalScore(final Double studentScore, final Double examScore) {
-    drawFormSeparator("Exam Finished!");
+    drawFormTitle("Exam Finished!");
     System.out.println("\nWell done!\nYour score: " + String.format("%.2f", studentScore) + " out of "
         + String.format("%.2f", examScore) + ".");
   }
 
   public Double getNumericalQuestionAnswer(final String body, final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -59,6 +62,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
   }
 
   public String getShortAnswerQuestionAnswer(final String body, final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -67,6 +71,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
   }
 
   public boolean getTrueFalseQuestionAnswer(final String body, final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -80,6 +85,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
 
   public Set<String> getMultipleChoiceMultipleQuestionAnswer(final String body,
       final Map<String, String> options, final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -110,6 +116,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
 
   public String getMultipleChoiceSingleQuestionAnswer(final String body,
       final Map<String, String> options, final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -124,9 +131,9 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
     System.out.println("");
     int selectedIndex = Console.readOption(1, options.size(), 0);
 
-    Entry<String, String> selectedOption = fromIndex(opts, selectedIndex - 1);
+    Entry<String, String> selectedOption = fromIndex(opts, selectedIndex);
 
-    return addOne(selectedOption.getKey());
+    return selectedOption.getKey();
   }
 
   private <T> T fromIndex(Iterable<T> source, int index) {
@@ -140,14 +147,10 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
     return elem;
   }
 
-  private String addOne(String integer) {
-    int i = Integer.parseInt(integer);
-    return String.valueOf(i + 1);
-  }
-
   public Map<String, String> getMatchingQuestionAnswer(final String body,
       final Map<String, String> options, final Map<String, String> matches,
       final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -161,21 +164,30 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
       Iterator<Entry<String, String>> opts = optionsEntries.iterator();
       Iterator<Entry<String, String>> mts = matchesEntries.iterator();
 
+      // System.out.println("\nSelect the correct match:\n");
+      System.out.printf("\n%-28s%-28s%n", "Options", "Matches");
       for (int i = 0; i < maxSize; i++) {
-        System.out.println("\nSelect the correct match:\n");
-        System.out.printf("%-25s%-25s%n", "Option", "Match");
-
-        String optionString = String.format("%d. %s", i + 1, opts.next().getValue());
-        String matchString = String.format("%d. %s", i + 1, mts.next().getValue());
-        System.out.printf("%-25s%-25s%n", optionString, matchString);
+        String optionString;
+        String matchString;
+        if (i < options.size())
+          optionString = String.format("%d. %s", i + 1, opts.next().getValue());
+        else
+          optionString = "";
+        if (i < matches.size())
+          matchString = String.format("%d. %s", i + 1, mts.next().getValue());
+        else
+          matchString = "";
+        System.out.printf("%-28s%-28s%n", optionString, matchString);
       }
-      System.out.println("\n0. Submit answer");
 
+      System.out.println("\nSelect one of the options.");
       int option = Console.readOption(1, optionsEntries.size(), 0);
+      System.out
+          .println("Now, select the match for " + fromIndex(optionsEntries, option).getValue() + ".");
       int match = Console.readOption(1, matchesEntries.size(), 0);
 
-      Entry<String, String> selectedOption = fromIndex(optionsEntries, option - 1);
-      Entry<String, String> selectedMatch = fromIndex(matchesEntries, match - 1);
+      Entry<String, String> selectedOption = fromIndex(optionsEntries, option);
+      Entry<String, String> selectedMatch = fromIndex(matchesEntries, match);
 
       selected.put(selectedOption.getKey(), selectedMatch.getKey());
 
@@ -187,6 +199,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
   }
 
   public List<String> getMissingWordsQuestionAnswer(final String body, final List<String> options, final Double score) {
+    drawQuestionSeparator();
     System.out.print("\n[" + String.format("%.2f", score) + " points] ");
     printString(body);
 
@@ -214,6 +227,11 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
     final String titleBorder = SEPARATOR.substring(0, 2) + " " + title + " "
         + SEPARATOR.substring(4 + title.length());
     System.out.println(titleBorder);
+  }
+
+  private void drawQuestionSeparator() {
+    System.out.println("");
+    System.out.println(QUESTION_SEPARATOR);
   }
 
   private void printString(final String str) {
