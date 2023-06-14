@@ -114,9 +114,9 @@
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
       <property name="javax.persistence.jdbc.url"
-        value="jdbc:mariadb://172.17.0.3:3306/ecourse?createDatabaseIfNotExist=true" />
-      <property name="javax.persistence.jdbc.user" value="root" />
-      <property name="javax.persistence.jdbc.password" value="docker" />
+        value="jdbc:mariadb://127.0.0.1:2223/ecourse?createDatabaseIfNotExist=true" />
+      <property name="javax.persistence.jdbc.user" value="user" />
+      <property name="javax.persistence.jdbc.password" value="password" />
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
 
       <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect" />
