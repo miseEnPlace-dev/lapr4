@@ -24,17 +24,17 @@ activate UI
   activate CTRL
     CTRL -> BOARDSRV : listBoardService = new(boardRepository)
     activate BOARDSRV
-    deactivate BOARDSRV
+    ' deactivate BOARDSRV
 
     CTRL -> USRSRV : usrService = new(userRepository)
     activate USRSRV
-    deactivate USRSRV
-  deactivate CTRL
+    ' deactivate USRSRV
+  ' deactivate CTRL
 
   UI -> CTRL : listUserBoards()
-  activate CTRL
+  ' activate CTRL
     CTRL -> BOARDSRV : userBoards(user)
-    activate BOARDSRV
+    ' activate BOARDSRV
       BOARDSRV -> BOARDREP : findAllBoardsCreatedByUser(user)
       activate BOARDREP
          BOARDSRV <-- BOARDREP : boards
@@ -46,30 +46,30 @@ activate UI
           B -> BDTO : new()
           activate BDTO
           deactivate BDTO
-        deactivate B
+        ' deactivate B
       end loop
 
       CTRL <-- BOARDSRV : boards
     deactivate BOARDSRV
     UI <-- CTRL : boards
-  deactivate CTRL
+  ' deactivate CTRL
 
   U <-- UI : asks to select a board
-deactivate UI
+' deactivate UI
 
 U -> UI : selects a board
-activate UI
+' activate UI
   UI <-- U : asks to enter the username of the user to share the board with
-deactivate UI
+' deactivate UI
 
 U -> UI : enters the desired username
-activate UI
+' activate UI
 
   UI -> CTRL : userPermission(boardDto, username)
-  activate CTRL
+  ' activate CTRL
 
     CTRL -> USRSRV : user = usrService.userOfIdentity(username)
-    activate USRSRV
+    ' activate USRSRV
 
       USRSRV -> USERREP : ofIdentity(username)
       activate USERREP
@@ -85,8 +85,8 @@ activate UI
     deactivate BOARDREP
 
     CTRL -> B : permissions(user)
-    activate B
-      B -> PERM
+    ' activate B
+      B -> PERM : permissions(user)
       activate PERM
         B <-- PERM : permissions
       deactivate PERM
@@ -99,19 +99,19 @@ activate UI
     deactivate PERMDTO
 
     UI <-- CTRL : permissionsDto
-  deactivate CTRL
+  ' deactivate CTRL
 
   U <-- UI : shows the current user permissions
-deactivate UI
+' deactivate UI
 
 U -> UI : selects the desired permissions
-activate UI
+' activate UI
   UI -> CTRL : updateUserPermissions(boardDto, username, permission)
-  activate CTRL
+  ' activate CTRL
     CTRL -> PERM : update(user, permission)
     activate PERM
     deactivate PERM
-  deactivate CTRL
+  ' deactivate CTRL
 
   U <-- UI : informs operation success
 deactivate UI

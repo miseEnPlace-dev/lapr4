@@ -104,6 +104,22 @@
       <version>1.18.24</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- MariaDB SQL Server Driver -->
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>3.1.4</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- PostgreSQL Server Driver -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.6.0</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>

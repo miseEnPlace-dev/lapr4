@@ -24,7 +24,7 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
    *
    * @return an iterable list of boards which the user owns
    */
-  Iterable<Board> findAllBoardsCreatedByUser(Username user);
+  Iterable<Board> findAllOwnedByUser(Username user);
 
   /**
    * Returns the boards the user has write permissions to.
@@ -32,7 +32,7 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
    * @param user
    * @return boards
    */
-  Iterable<Board> findAllActiveBoardsWithUserWritePermission(Username user);
+  Iterable<Board> findAllActiveWithUserWritePermission(Username user);
 
   /**
    * Returns the boards the user can access to.
@@ -40,5 +40,5 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
    * @param username
    * @return boards
    */
-  Iterable<Board> findAllBoardsAccessibleByUser(Username username);
+  Iterable<Board> findAllAccessibleByUser(Username username);
 }

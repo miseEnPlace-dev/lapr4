@@ -36,14 +36,15 @@ public class TakeFormativeExamUI extends AbstractUI {
     if (selectedCourse == null)
       return false;
 
-    final Iterable<FormativeExamDTO> formativeRequests = null;
+    final Iterable<FormativeExamDTO> formativeRequests = this.ctrl.listFormativeExams(selectedCourse);
 
     if (!formativeRequests.iterator().hasNext()) {
-      System.out.println("There are no defined structures of formative exams in this Course.");
+      System.out.println(
+          "\nThere are no defined structures of formative exams in this Course. Please contact the administrator");
       return false;
     }
 
-    System.out.println("Select a formative exam you want to take:");
+    System.out.println("\nSelect a formative exam you want to take:");
     final SelectWidget<FormativeExamDTO> selectorF = new SelectWidget<>(
         new FormativeExamHeader().header(),
         formativeRequests, new FormativeExamPrinter());

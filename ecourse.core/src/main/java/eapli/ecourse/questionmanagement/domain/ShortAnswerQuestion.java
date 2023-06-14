@@ -69,4 +69,9 @@ public class ShortAnswerQuestion extends Question {
 
     return sb.toString();
   }
+
+  @Override
+  public String typeQuestion() {
+    return "short-answer";
+  }
 }

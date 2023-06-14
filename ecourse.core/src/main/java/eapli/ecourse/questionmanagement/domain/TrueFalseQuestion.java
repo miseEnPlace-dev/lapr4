@@ -45,6 +45,10 @@ public class TrueFalseQuestion extends Question {
         && this.correctAnswer == that.correctAnswer;
   }
 
+  public String typeQuestion() {
+    return "true-false";
+  }
+
   @Override
   public String getQuestionStructure(Question q) {
     TrueFalseQuestion question = (TrueFalseQuestion) q;

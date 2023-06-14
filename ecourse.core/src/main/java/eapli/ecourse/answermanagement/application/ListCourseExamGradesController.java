@@ -1,4 +1,4 @@
-package eapli.ecourse.exammanagement.application;
+package eapli.ecourse.answermanagement.application;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,11 +13,12 @@ import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.enrolmentmanagement.application.ListEnrolmentService;
 import eapli.ecourse.enrolmentmanagement.dto.EnrolmentDTO;
 import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
+import eapli.ecourse.exammanagement.application.EvaluationExamListService;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
-import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
+import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.repositories.TeacherRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
@@ -25,26 +26,24 @@ import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class ListCourseExamGradesController {
-
   private final EvaluationExamListService evaluationService;
   private final AuthorizationService authz;
   private final ListCourseService courseService;
   private final TeacherRepository teacherRepository;
   private final ListExamAnswerService answerService;
   private final ListEnrolmentService enrolmentService;
-  private final StudentService studentService;
+  private final StudentRepository studentRepository;
 
   public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-      CourseRepository courseRepository,
-      TeacherRepository teacherRepository, AnswerRepository answerRepository,
-      EnrolmentRepository enrolmentRepository) {
+      CourseRepository courseRepository, TeacherRepository teacherRepository, AnswerRepository answerRepository,
+      EnrolmentRepository enrolmentRepository, StudentRepository studentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
     this.authz = authz;
     this.courseService = new ListCourseService(courseRepository);
     this.teacherRepository = teacherRepository;
     this.answerService = new ListExamAnswerService(answerRepository, evaluationRepository);
     this.enrolmentService = new ListEnrolmentService(enrolmentRepository);
-    this.studentService = new StudentService();
+    this.studentRepository = studentRepository;
   }
 
   public Iterable<CourseDTO> teacherCourses() {
@@ -71,7 +70,7 @@ public class ListCourseExamGradesController {
     Iterable<EnrolmentDTO> enrollments = enrolmentService.listStudentsEnrolled(course.code());
 
     enrollments.forEach(
-        e -> students.add(studentService.findStudentUserByMecNumber(e.getStudentNumber().toString()).orElseThrow()));
+        e -> students.add(studentRepository.findByMecanographicNumber(e.getStudentNumber()).orElseThrow()));
     return students;
   }
 }

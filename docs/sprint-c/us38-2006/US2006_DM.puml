@@ -1,0 +1,66 @@
+@startuml US2006_DM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Exam" {
+  entity Exam
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+}
+
+entity Teacher <<entity>> <<root>> {
+}
+
+entity Course <<entity>> <<root>> {
+}
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Question" {
+  entity Question
+}
+
+entity Question <<entity>> <<root>> {
+}
+
+package "<<aggregate>> ExamAnswer" {
+  entity ExamAnswer
+
+  class Grade
+
+  entity AnswerToQuestion
+  class Answer
+  class Score
+}
+
+entity ExamAnswer <<entity>> <<root>> {}
+
+class Grade <<(V,#FF8B40) value object>> {}
+class Answer <<(V,#FF8B40) value object>> {}
+class Score <<(V,#FF8B40) value object>> {}
+
+entity Exam <<entity>> <<root>> {}
+entity AnswerToQuestion <<entity>> {}
+
+ExamAnswer --> "1" Student : has
+ExamAnswer --> "1" Exam : is for
+AnswerToQuestion --> "0..1" Grade : has
+
+AnswerToQuestion --> "1" Question : is for
+AnswerToQuestion *-- "1" Answer
+AnswerToQuestion *-- "1" Score
+
+ExamAnswer *-- "1..*" AnswerToQuestion
+
+Exam ---> "1" Course : is from
+Course ---> "1..*" Teacher : has
+
+@enduml

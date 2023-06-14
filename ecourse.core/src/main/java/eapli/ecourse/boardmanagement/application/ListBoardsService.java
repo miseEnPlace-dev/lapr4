@@ -23,17 +23,17 @@ public class ListBoardsService {
   }
 
   public Iterable<BoardDTO> userBoards(Username username) {
-    final Iterable<Board> boardsList = boardRepo.findAllBoardsCreatedByUser(username);
+    final Iterable<Board> boardsList = boardRepo.findAllOwnedByUser(username);
     return toDto(boardsList);
   }
 
   public Iterable<BoardDTO> userAccessibleBoards(Username username) {
-    final Iterable<Board> boardsList = boardRepo.findAllBoardsAccessibleByUser(username);
+    final Iterable<Board> boardsList = boardRepo.findAllAccessibleByUser(username);
     return toDto(boardsList);
   }
 
   public Iterable<BoardDTO> userWritableBoards(Username username) {
-    Iterable<Board> boards = boardRepo.findAllActiveBoardsWithUserWritePermission(username);
+    Iterable<Board> boards = boardRepo.findAllActiveWithUserWritePermission(username);
     return toDto(boards);
   }
 

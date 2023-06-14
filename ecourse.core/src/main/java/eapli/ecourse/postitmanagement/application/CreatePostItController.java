@@ -48,7 +48,7 @@ public class CreatePostItController {
     return boardService.isCellAvailable(boardID, x, y);
   }
 
-  public void createPostIt(BoardID boardID, int x, int y, String title) {
+  public PostIt createPostIt(BoardID boardID, int x, int y, String title) {
     SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
         ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
@@ -60,6 +60,8 @@ public class CreatePostItController {
     PostIt postIt = new PostIt(postItTile, coordinates, board, user);
 
     save(postIt);
+
+    return postIt;
   }
 
   private void save(PostIt postIt) {

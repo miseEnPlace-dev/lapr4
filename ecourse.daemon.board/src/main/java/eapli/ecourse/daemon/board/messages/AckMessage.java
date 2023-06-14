@@ -2,6 +2,7 @@ package eapli.ecourse.daemon.board.messages;
 
 import java.io.DataOutputStream;
 import java.net.Socket;
+
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
 public class AckMessage extends Message {

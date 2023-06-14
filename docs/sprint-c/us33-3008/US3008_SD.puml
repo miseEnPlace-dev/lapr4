@@ -1,3 +1,116 @@
 @startuml US3008_SD
+autonumber
+
+actor "User" as U
+participant "ShareBoardUI" as UI <<presentation>>
+participant "ShareBoardController" as CTRL <<application>>
+participant "ListBoardsService" as BOARDSVC <<service>>
+participant "ListPostItsService" as POSTITSVC <<service>>
+participant "UserManagementService" as USRSVC <<service>>
+participant "Board" as B <<domain>>
+participant "PostIt" as P <<domain>>
+participant "BoardDTO" as BDTO <<dto>>
+participant "PostItDTO" as PDTO <<dto>>
+
+database BoardRepository as BOARDREP <<repository>>
+database PostItRepository as POSTITREP <<repository>>
+
+U -> UI : wants to undo the last change of a post-it
+activate UI
+  UI -> CTRL : new()
+  activate CTRL
+    CTRL -> BOARDSVC : listBoardService = new(boardRepository)
+    activate BOARDSVC
+    deactivate BOARDSVC
+
+    CTRL -> USRSVC : usrService = new(userRepository)
+    activate USRSVC
+    deactivate USRSVC
+  deactivate CTRL
+
+  UI -> CTRL : listUserWritableBoards()
+  activate CTRL
+    CTRL -> BOARDSVC : userBoards(user)
+    activate BOARDSVC
+      BOARDSVC -> BOARDREP : findAllUserWritableBoards(user)
+      activate BOARDREP
+         BOARDSVC <-- BOARDREP : boards
+      deactivate BOARDREP
+
+      loop for each board
+        BOARDSVC -> B : toDTO(course)
+        activate B
+          B -> BDTO : new()
+          activate BDTO
+          deactivate BDTO
+        deactivate B
+      end loop
+
+      CTRL <-- BOARDSVC : boards
+    deactivate BOARDSVC
+    UI <-- CTRL : boards
+  deactivate CTRL
+
+  U <-- UI : asks to select a board
+deactivate UI
+
+U -> UI : selects a board
+activate UI
+  UI -> CTRL : listLatestBoardPostIts(boardDto)
+  activate CTRL
+    CTRL -> POSTITSVC : latestOfBoard(boardId)
+    activate POSTITSVC
+      POSTITSVC -> POSTITREP : findLatestByBoardId(boardId)
+      activate POSTITREP
+        POSTITSVC <-- POSTITREP : postIts
+      deactivate POSTITREP
+
+      loop for each post-it
+        POSTITSVC -> P : toDTO(postIt)
+        activate P
+          P -> PDTO : new()
+          activate PDTO
+          deactivate PDTO
+        deactivate P
+      end loop
+
+      CTRL <-- POSTITSVC : postIts
+    deactivate POSTITSVC
+
+    UI <-- CTRL : postIts
+  deactivate CTRL
+
+  U <-- UI : asks to select a post-it
+deactivate UI
+
+U -> UI : selects a post-it
+activate UI
+  U <-- UI : asks to confirm the action
+deactivate UI
+
+U -> UI : confirms the action
+activate UI
+  UI -> CTRL : undoPostItChange(postItDto)
+  activate CTRL
+    CTRL -> POSTITREP : ofIdentity(postItDto.id)
+    activate POSTITREP
+      CTRL <-- POSTITREP : postIt
+    deactivate POSTITREP
+
+    CTRL -> P : getPrevious().toggleIsLatest()
+    activate P
+    deactivate P
+
+    CTRL -> P : delete()
+    activate P
+    deactivate P
+
+    UI <-- CTRL : previousPostItDto
+  deactivate CTRL
+
+  U <-- UI : informs the success of the operation
+deactivate UI
+
+deactivate U
 
 @enduml

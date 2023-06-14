@@ -5,11 +5,11 @@ import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.framework.visitor.Visitor;
 
 public class PostItPrinter implements Visitor<PostItDTO> {
-  private String format = "%-38s%-15s%-15s%-15s%-8s%-9s%-9s%-18s";
+  private String format = "%-38s%-15s%-15s%-15s%-8s%-9s%-9s%-11s%-18s";
 
   public String header() {
     return String.format("#  " + format, "ID", "Title", "Board", "Owner", "State", "Pos.",
-        "Latest?", "Created At");
+        "Latest?", "Has Prev?", "Created At");
   }
 
   public void printHeader() {
@@ -22,6 +22,7 @@ public class PostItPrinter implements Visitor<PostItDTO> {
 
     System.out.printf(format, visitee.getId(), visitee.getTitle(), visitee.getBoard().getTitle(),
         visitee.getOwner().getUsername(), visitee.getState(), visitee.getCoordinates(),
-        visitee.isLatest() ? "Yes" : "No", formatter.format(visitee.getCreatedAt().getTime()));
+        visitee.isLatest() ? "Yes" : "No", visitee.getPrevious() == null ? "No" : "Yes",
+        formatter.format(visitee.getCreatedAt().getTime()));
   }
 }

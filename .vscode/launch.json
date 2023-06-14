@@ -49,14 +49,26 @@
       "name": "Shared Board Server",
       "request": "launch",
       "mainClass": "eapli.ecourse.daemon.board.App",
-      "projectName": "daemon.board"
+      "projectName": "daemon.board",
+      "vmArgs": [
+        "-Djavax.net.ssl.keyStore=serverkeystore.jks",
+        "-Djavax.net.ssl.keyStorePassword=password",
+        "-Djavax.net.ssl.trustStore=clienttruststore.jks",
+        "-Djavax.net.ssl.trustStorePassword=password"
+      ]
     },
     {
       "type": "java",
       "name": "Shared Board App",
       "request": "launch",
       "mainClass": "eapli.ecourse.app.board.console.App",
-      "projectName": "app.board.console"
+      "projectName": "app.board.console",
+      "vmArgs": [
+        "-Djavax.net.ssl.keyStore=serverkeystore.jks",
+        "-Djavax.net.ssl.keyStorePassword=password",
+        "-Djavax.net.ssl.trustStore=clienttruststore.jks",
+        "-Djavax.net.ssl.trustStorePassword=password"
+      ]
     },
     {
       "type": "java",

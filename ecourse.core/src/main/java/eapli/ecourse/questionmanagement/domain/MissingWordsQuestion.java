@@ -83,4 +83,9 @@ public class MissingWordsQuestion extends Question {
 
     return sb.toString();
   }
+
+  @Override
+  public String typeQuestion() {
+    return "missing-words";
+  }
 }

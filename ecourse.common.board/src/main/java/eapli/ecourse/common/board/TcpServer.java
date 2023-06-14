@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+
 public class TcpServer {
   private int port;
   private Class<? extends Runnable> handlerClass;
+  private boolean secure;
 
-  public TcpServer(int port, Class<? extends Runnable> handler) {
+  public TcpServer(int port, Class<? extends Runnable> handler, boolean secure) {
     this.port = port;
     this.handlerClass = handler;
+    this.secure = secure;
   }
 
   public void run() {
@@ -19,18 +24,23 @@ public class TcpServer {
     Socket socket;
 
     try {
-      tcpSocket = new ServerSocket(port);
+      if (this.secure) {
+        tcpSocket = SSLServerSocketFactory.getDefault().createServerSocket(port);
+        SSLServerSocket sslListener = (SSLServerSocket) tcpSocket;
+        sslListener.setNeedClientAuth(true);
+      } else
+        tcpSocket = new ServerSocket(port);
     } catch (IOException e) {
       System.out.println("Error creating the tcp socket");
       e.printStackTrace();
       return;
     }
 
-    System.out.printf("[TCP Server] Listening on port %d!\n", port);
+    System.out.printf("[TCP%s Server] Listening on port %d!\n", " SSL", port);
 
     while (!tcpSocket.isClosed()) {
       try {
-        // establish the tcp conenction by accepting it
+        // establish the tcp connection by accepting it
         socket = tcpSocket.accept();
 
         // create a new client handler

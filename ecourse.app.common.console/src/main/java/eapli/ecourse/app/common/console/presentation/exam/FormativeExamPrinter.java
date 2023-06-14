@@ -7,8 +7,7 @@ public class FormativeExamPrinter implements Visitor<FormativeExamDTO> {
   @Override
   public void visit(final FormativeExamDTO visitee) {
 
-    System.out.printf(" %-22s%-8s%-10s%-18s%-35s%-10s", visitee.getTitle(),
-        visitee.getCourse().title(), visitee.getTeacher().acronym(), visitee.getIdentifier(),
-        visitee.getDescription(), visitee.getState());
+    System.out.printf(" %-22s%-8s%-10s%-35s%-10s", visitee.getTitle(),
+        visitee.getCourse().title(), visitee.getTeacher().acronym(), visitee.getDescription(), visitee.getState());
   }
 }

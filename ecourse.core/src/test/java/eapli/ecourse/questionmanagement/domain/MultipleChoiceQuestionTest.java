@@ -20,7 +20,7 @@ public class MultipleChoiceQuestionTest {
 
   @Test
   public void testAddCorrectAnswer() {
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
     Double weight = 1.0;
     question.addCorrectAnswer(identifier, weight);
     Map<QuestionIdentifier, Double> expected = new HashMap<>();
@@ -30,7 +30,7 @@ public class MultipleChoiceQuestionTest {
 
   @Test
   public void testAddOption() {
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
     String option = "Paris";
     question.addOption(identifier, option);
     Map<QuestionIdentifier, String> expected = new HashMap<>();
@@ -40,7 +40,7 @@ public class MultipleChoiceQuestionTest {
 
   @Test
   public void testAddFeedback() {
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
     Feedback feedback = Feedback.valueOf("This is feedback");
     question.addFeedback(identifier, feedback);
     Map<QuestionIdentifier, Feedback> expected = new HashMap<>();

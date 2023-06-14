@@ -78,6 +78,11 @@ public class QuestionTest {
       public String getQuestionStructure(Question question) {
         return null;
       }
+
+      @Override
+      public String typeQuestion() {
+        return "";
+      }
     };
     assertEquals(body, question.body());
     assertEquals(type, question.type());
@@ -97,6 +102,11 @@ public class QuestionTest {
       public String getQuestionStructure(Question question) {
         return null;
       }
+
+      @Override
+      public String typeQuestion() {
+        return "";
+      }
     };
     assertEquals(type, question.type());
   }
@@ -112,6 +122,11 @@ public class QuestionTest {
       @Override
       public String getQuestionStructure(Question question) {
         return null;
+      }
+
+      @Override
+      public String typeQuestion() {
+        return "";
       }
     };
     assertEquals(body, question.body());
@@ -130,6 +145,11 @@ public class QuestionTest {
       public String getQuestionStructure(Question question) {
         return null;
       }
+
+      @Override
+      public String typeQuestion() {
+        return "";
+      }
     };
     QuestionBody newBody = QuestionBody.valueOf("New Question Body");
     question.changeBody(newBody);
@@ -147,6 +167,11 @@ public class QuestionTest {
       @Override
       public String getQuestionStructure(Question question) {
         return null;
+      }
+
+      @Override
+      public String typeQuestion() {
+        return "";
       }
     };
     Feedback newFeedback = Feedback.valueOf("new feedback");
