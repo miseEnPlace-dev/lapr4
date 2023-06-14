@@ -14,9 +14,9 @@ on:
         default: "master"
 
 jobs:
-  deploymeny:
+  deployment:
     runs-on: ubuntu-latest
-    environment: staging
+    environment: Staging
 
     steps:
       - uses: actions/checkout@v3
@@ -37,25 +37,16 @@ jobs:
       - name: Build with Maven
         run: mvn dependency:copy-dependencies package --file pom.xml
 
-      - name: Copy Bootstrap
+      - name: Copy Files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: "ecourse.app.bootstrap/app.bootstrap-1.0.0.jar,ecourse.app.bootstrap/target/dependency/*"
-          target: "~/deploy/bootstrap"
-
-      - name: Copy Shared Board Server
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "ecourse.daemon.board/target/daemon.board-1.0.0.jar,ecourse.daemon.board/target/dependency/*,deploy.sh"
+          source: "ecourse.app.bootstrap/target/*,ecourse.daemon.board/target/dependency/*,deploy.sh"
           target: "~/deploy"
+          overwrite: true
 
       - name: Deploy Server
         uses: appleboy/ssh-action@v0.1.10

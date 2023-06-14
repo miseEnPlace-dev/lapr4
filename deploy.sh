@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-export ECOURSE_BOOTSTRAP=bootstrap/app.bootstrap-1.0.0.jar:bootstrap/dependency/*;
+export ECOURSE_BOOTSTRAP=ecourse.app.bootstrap/target/app.bootstrap-1.0.0.jar:ecourse.app.bootstrap/target/dependency/*;
 
 java -cp $ECOURSE_BOOTSTRAP eapli.ecourse.app.bootstrap.ECourseBootstrap -bootstrap:demo # -smoke:basic -smoke:e2e
 
-export ECOURSE_CP=daemon.board-1.0.0.jar:dependency/*;
+export ECOURSE_CP=ecourse.daemon.board/target/daemon.board-1.0.0.jar:ecourse.daemon.board/target/dependency/*;
 
 java -Djavax.net.ssl.keyStore=serverkeystore.jks \
     -Djavax.net.ssl.keyStorePassword=password \
