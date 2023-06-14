@@ -1,7 +1,8 @@
-@start-exam exame_de_lprog;
+@start-exam exame;
     @title "Exame Nº1";
     @description "";
     @feedback on-submit;
+    @grade on-submit;
     @score 100;
 
     @start-section section1;

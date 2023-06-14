@@ -65,10 +65,10 @@
   @feedback "General feedback";
 
   @start-correct-answers
-    @correct-answer 1 2;
-    @correct-answer 2 4;
-    @correct-answer 3 5;
-    @correct-answer 4 1;
+    @correct-answer 1 - 2;
+    @correct-answer 2 - 4;
+    @correct-answer 3 - 5;
+    @correct-answer 4 - 1;
   @end-correct-answers;
 
   @start-options
