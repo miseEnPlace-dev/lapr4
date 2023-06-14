@@ -1,9 +1,12 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import eapli.ecourse.boardmanagement.application.CreateBoardController;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
@@ -18,6 +21,10 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
+  private static Logger logger = LogManager.getLogger(BoardBootstrapper.class);
+
+  private final String IMAGE_PATH = "p1.png";
+
   private CreateBoardController ctrl =
       new CreateBoardController(PersistenceContext.repositories().boards(),
           AuthzRegistry.userService(), AuthzRegistry.authorizationService());
@@ -64,8 +71,14 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     Board b = ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
 
     try {
+      String path = null;
+
       ClassLoader classLoader = getClass().getClassLoader();
-      String path = classLoader.getResource("p1.png").getPath();
+      URL resource = classLoader.getResource(IMAGE_PATH);
+      if (resource != null)
+        path = resource.getPath();
+      else
+        logger.warn("File {} not found", IMAGE_PATH);
 
       ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null, path);
     } catch (IOException e) {
