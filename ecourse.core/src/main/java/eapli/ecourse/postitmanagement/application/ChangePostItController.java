@@ -6,7 +6,9 @@ import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostIt;
+import eapli.ecourse.postitmanagement.domain.PostItDescription;
 import eapli.ecourse.postitmanagement.domain.PostItID;
+import eapli.ecourse.postitmanagement.domain.PostItImage;
 import eapli.ecourse.postitmanagement.domain.PostItTitle;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
@@ -59,14 +61,51 @@ public class ChangePostItController {
     return boardService.isCellAvailable(boardID, x, y);
   }
 
-  public PostIt changePostIt(PostItID postItID, String title, int x, int y) {
+  public PostIt changePostIt(PostItID postItID, String title, Integer x, Integer y, String description,
+      String image) {
+
+    // nothing to update
+    if (title == null && description == null && image == null && x == 0 && y == 0)
+      return null;
 
     PostIt p = postItRepository.ofIdentity(postItID).orElseThrow();
 
-    PostItTitle postItTitle = PostItTitle.valueOf(title);
-    Coordinates coordinates = Coordinates.valueOf(x, y);
+    PostItTitle postItTitle;
+    Coordinates coordinates;
+    PostItDescription postItDescription;
+    PostItImage postItImage;
 
-    PostIt newPostIt = p.update(postItTitle, coordinates);
+    // if null, keep the same
+    if (title == null)
+      postItTitle = p.title();
+    else
+      postItTitle = PostItTitle.valueOf(title);
+
+    // if null, keep the same
+    if (x == null && y == null)
+      coordinates = p.coordinates();
+    else
+      coordinates = Coordinates.valueOf(x, y);
+
+    // if null, keep the same
+    // if empty, delete
+    if (description == null)
+      postItDescription = p.description();
+    else if (description.equals(""))
+      postItDescription = null;
+    else
+      postItDescription = PostItDescription.valueOf(description);
+
+    // if null, keep the same
+    // if empty, delete
+    if (image == null)
+      postItImage = p.image();
+    else if (image.equals(""))
+      postItImage = null;
+    else
+      postItImage = PostItImage.valueOf(image);
+
+    PostIt newPostIt = p.update(postItTitle, coordinates, postItDescription, postItImage);
 
     save(p);
     save(newPostIt);

@@ -69,7 +69,9 @@ trueFalseCorrectAnswer: CORRECT_ANSWER (TRUE | FALSE) EOI;
 EOI: ';';
 
 // Chars wrapped in double quotes, allowing escaped quotes and backslash
-STRING: '"' ( '\\' [\\"] | ~[\\"])* '"';
+STRING:
+	'"' ('\\' [\\"] | ~[\\"])* '"'
+	| '"' ( '\\' [\\n] | ~[\\"])* '"';
 
 NUMBER:				REAL_NUMBER | INTEGER;
 REAL_NUMBER:	[0-9]+ '.' [0-9]+;
@@ -97,5 +99,5 @@ FALSE:													'false';
 // Skip spaces, tabs and newlines
 WS: [ \t\n\r]+ -> skip;
 
-// Skip comments
+// Skip comments wowww
 COMMENT: '//' ~[\r\n]* -> skip;

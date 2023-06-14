@@ -1,6 +1,6 @@
-@start-exam bddad_epoca_normal;
+@start-exam bddad_epoca_normal3;
     @title "Exame BDDAD - Época Normal";
-    @description "Este exame tem um peso de 50% da nota final de BDDAD.\nReleia todas as questões antes de submeter.\nBoa sorte!"
+    @description "Este exame tem um peso de 50% da nota final de BDDAD.\nReleia todas as questões antes de submeter.\nBoa sorte!";
     @feedback on-submit;
     @grade on-submit;
 
@@ -12,20 +12,29 @@
         @type short-answer;
         @score 20;
         @question-body "Existe uma chave mínima para R. Qual é?";
-        @feedback "Devia ter ido às teóricas!"
+        @feedback "Devia ter ido às teóricas de dependências funcionais!";
         @start-correct-answers
-          @correct-answer "A,F" 1
-          @correct-answer "A, F" 1
-          @correct-answer "a,f" 1
-          @correct-answer "a, f" 1
+          @correct-answer "A,F" 1;
+          @correct-answer "A, F" 1;
+          @correct-answer "a,f" 1;
+          @correct-answer "a, f" 1;
         @end-correct-answers;
+      @end-question;
+
+      @start-question
+        @type numerical;
+        @score 100;
+        @question-body "Qual é a área de um círculo com raio 1.2?";
+        // Este também
+        @correct-answer 4.52;
+        @accepted-error 0.01;
       @end-question;
 
       @start-question
         @type multiple-choice;
         @score 30;
-        @question-body "Qual das dependências que pode ser retirada sem alterar a chave?"
-        @feedback "Devia ter ido às teóricas!"
+        @question-body "Qual das dependências pode ser retirada sem alterar a chave?";
+        @feedback "Devia ter ido às teóricas de dependências funcionais!";
         @correct-answer 3;
 
         @start-options
@@ -42,17 +51,17 @@
 
       @start-question
         @type true-false;
-        @question-body "As transações são um mecanismo que garante a consistência dos dados contidos numa BD.";
         @score 20;
-        @feedback "Devia ter ido às teóricas!"
+        @question-body "As transações são um mecanismo que garante a consistência dos dados contidos numa BD.";
+        @feedback "Devia ter ido às teóricas de transações!";
         @correct-answer true;
       @end-question;
 
       @start-question
         @type missing-words;
-        @question-body "Complete a seguinte frase:\n Para começar uma transação, utilizo a instrução __. Para descartar as alterações de uma transação, utilizo a instrução __.";
         @score 30;
-        @feedback "Devia ter ido às teóricas!"
+        @question-body "Complete a seguinte frase:\nPara começar uma transação, utilizo a instrução __. Para descartar as alterações de uma transação, utilizo a instrução __.";
+        @feedback "Devia ter ido às teóricas de transações!";
 
         @start-correct-answers
           @correct-answer "SET TRANSACTION";
@@ -66,6 +75,35 @@
           @option "SET TRANSACTION";
           @option "ROLLBACK TO SAVEPOINT";
         @end-options;
+      @end-question;
+
+      @start-question
+        @type matching;
+        @score 100;
+        @question-body "Associe cada conceito à sua definição.";
+        @feedback "General feedback";
+
+        @start-correct-answers
+          @correct-answer 1 2;
+          @correct-answer 2 4;
+          @correct-answer 3 5;
+          @correct-answer 4 1;
+        @end-correct-answers;
+
+        @start-options
+          @option 1 "COMMIT";
+          @option 2 "ROLLBACK TO SAVEPOINT";
+          @option 3 "3";
+          @option 4 "4";
+        @end-options;
+
+        @start-matching
+          @match 1 "1";
+          @match 2 "2";
+          @match 3 "3";
+          @match 4 "4";
+          @match 5 "5";
+        @end-matching;
       @end-question;
     @end-section;
 @end-exam;
