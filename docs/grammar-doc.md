@@ -33,6 +33,16 @@
 
       - [2.2. Example](#22-example)
 
+    - [3. Formative Exam](#3-formative-exam)
+
+      - [3.1. Structure](#31-Structure)
+
+        - [3.1.1. Exam Structure](#311-exam-structure)
+        - [3.1.2. Header](#312-header)
+        - [3.1.3. Sections](#313-sections)
+
+      - [3.2. Example](#32-example)
+
 ## Introduction
 
 This document describes the grammar used to define the Questions to be used in Exams, as well as the grammar defined in the Exams. As required, there are 6 types of questions:
@@ -254,3 +264,46 @@ Each option is defined using the keyword **"@option"** followed by the identifie
 ### 2.2. Example
 
 You can check a practical example of an Exam [here](../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/Exam/Exam.txt).
+
+## 3. Formative Exam
+
+All the files defining formative exams must follow the following structure:
+
+```txt
+@start-exam
+  @title "<title>";
+  @description "<description>";
+  @feedback none|on-submit;
+  @grade on-submit;
+  @score <score>;
+
+  @start-section
+    {@title "<title>";}
+    {@description "<description>";}
+    {@number-of-questions <number>;}
+    {@questions-type <type>;}
+  @end-section;
+
+@end-exam
+```
+
+**Note:** The score must be a real number with a maximum of 2 decimal places between 0 and 100.
+
+### 3.1. Structure
+
+#### 3.1.1 Exam Structure:
+
+The exam starts with the keyword **"@start-exam"** followed by an identifier and ends with the keyword **"@end-exam"**.
+
+#### 3.1.2 Header:
+
+The header section provides information about the exam, such as the title, description, feedback type, grading type and score.
+
+#### 3.1.3 Sections:
+
+Each section begins with the keyword **"@start-section"** followed by an identifier and ends with **"@end-section"**.
+Sections contain the number of questions and the type of questions.
+
+### 3.2. Example
+
+You can check a practical example of a Formative Exam [here](../ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.txt).
