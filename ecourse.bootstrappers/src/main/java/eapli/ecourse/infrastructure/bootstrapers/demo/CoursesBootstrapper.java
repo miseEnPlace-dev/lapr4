@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import eapli.ecourse.coursemanagement.application.ToggleCourseEnrolmentStateController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.infrastructure.bootstrapers.CourseBootstrapperBase;
 import eapli.ecourse.infrastructure.bootstrapers.UsersBootstrapperBase;
@@ -15,13 +16,16 @@ import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.ecourse.teachermanagement.dto.TeacherDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.actions.Action;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class CoursesBootstrapper extends UsersBootstrapperBase implements Action {
-  CourseBootstrapperBase courseBootstrapperBase = new CourseBootstrapperBase();
+  private CourseBootstrapperBase courseBootstrapperBase = new CourseBootstrapperBase();
+  private ToggleCourseEnrolmentStateController toggleCourseEnrolmentStateController = new ToggleCourseEnrolmentStateController(
+      PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService());
 
-  private TeacherDTO registerDummyTeacher(final String username, final String password, final String firstName,
+  private TeacherDTO registerTeacher(final String username, final String password, final String firstName,
       final String lastName, final String email, final String taxPayerNumber, final String acronym) {
     final Set<Role> roles = new HashSet<>();
     roles.add(ClientRoles.TEACHER);
@@ -37,10 +41,10 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
 
   @Override
   public boolean execute() {
-    TeacherDTO t = registerDummyTeacher("teacher1", "Password1", "John", "Doe", "john@doe.com", "109123456", "JOD");
-    TeacherDTO oms = registerDummyTeacher("oms", "Password1", "Orlando", "Sousa", "oms@isep.ipp.pt", "212345678",
+    TeacherDTO t = registerTeacher("teacher1", "Password1", "John", "Doe", "john@doe.com", "109123456", "JOD");
+    TeacherDTO oms = registerTeacher("oms", "Password1", "Orlando", "Sousa", "oms@isep.ipp.pt", "212345678",
         "OMS");
-    TeacherDTO amm = registerDummyTeacher("amm", "Password1", "Ângelo", "Martins", "amm@isep.ipp.pt", "312345678",
+    TeacherDTO amm = registerTeacher("amm", "Password1", "Ângelo", "Martins", "amm@isep.ipp.pt", "312345678",
         "AMM");
     CourseDTO lapr4 = courseBootstrapperBase.createOpenCourse("1234", "LAPR4", "Laboratório/Projeto IV", 1, 20, t);
     courseBootstrapperBase.createClosedCourse("4321", "ESINF", "Estruturas de Informação ", 5, 80, t);
@@ -56,6 +60,9 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
     courseBootstrapperBase.assignTeacherToCourse(scomp, oms);
     courseBootstrapperBase.assignTeacherToCourse(lapr4, amm);
     courseBootstrapperBase.assignTeacherToCourse(eapli, amm);
+
+    toggleCourseEnrolmentStateController.toggleEnrolmentState(lapr4);
+    toggleCourseEnrolmentStateController.toggleEnrolmentState(eapli);
     return true;
   }
 
