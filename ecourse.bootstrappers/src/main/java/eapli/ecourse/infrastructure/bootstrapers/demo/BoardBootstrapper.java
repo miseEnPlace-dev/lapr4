@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import eapli.ecourse.boardmanagement.application.CreateBoardController;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
@@ -19,18 +18,19 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
-  private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
-      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
+  private CreateBoardController ctrl =
+      new CreateBoardController(PersistenceContext.repositories().boards(),
+          AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
   private CreatePostItController ctrlPostIt = new CreatePostItController(
       PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
       AuthzRegistry.authorizationService(), new ImageEncoderService());
 
   private Map<SystemUser, PermissionType> getPermissions() {
-    SystemUser u1 = registerTeacher("user3", "Password1", "firstName", "lastName", "email@ddd.com", "abc", "12345678",
-        "01/01/2000");
-    SystemUser u2 = registerTeacher("user4", "Password1", "firstName", "lastName", "email@ddd.com", "cbo", "12345679",
-        "01/01/2000");
+    SystemUser u1 = registerTeacher("user3", "Password1", "firstName", "lastName", "email@ddd.com",
+        "abc", "12345678", "01/01/2000");
+    SystemUser u2 = registerTeacher("user4", "Password1", "firstName", "lastName", "email@ddd.com",
+        "cbo", "12345679", "01/01/2000");
 
     Map<SystemUser, PermissionType> map = new HashMap<>();
     map.put(u1, new PermissionType(PermissionType.Type.READ));
@@ -64,8 +64,10 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     Board b = ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
 
     try {
-      PostIt p1 = ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null,
-          "ecourse.bootstrappers/src/main/java/eapli/ecourse/infrastructure/bootstrapers/demo/assets/p1.png");
+      ClassLoader classLoader = getClass().getClassLoader();
+      String path = classLoader.getResource("p1.png").getPath();
+
+      PostIt p1 = ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null, path);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -77,9 +79,9 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
       e.printStackTrace();
     }
 
-    ChangePostItController c = new ChangePostItController(
-        PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
-        AuthzRegistry.authorizationService());
+    ChangePostItController c =
+        new ChangePostItController(PersistenceContext.repositories().boards(),
+            PersistenceContext.repositories().postIts(), AuthzRegistry.authorizationService());
 
     c.changePostIt(p2.identity(), "PostIt2.1", 2, 2, "Description updated", null);
 
