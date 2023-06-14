@@ -88,6 +88,11 @@ public class MultipleChoiceQuestion extends Question {
   }
 
   @Override
+  public String typeQuestion() {
+    return "multiple-choice";
+  }
+
+  @Override
   public String getQuestionStructure(Question q) {
     MultipleChoiceQuestion question = (MultipleChoiceQuestion) q;
     StringBuilder sb = new StringBuilder();

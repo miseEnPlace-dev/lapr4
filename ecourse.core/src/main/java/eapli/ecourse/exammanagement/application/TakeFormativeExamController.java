@@ -22,6 +22,7 @@ public class TakeFormativeExamController {
   private final CourseRepository courseRepository;
   private final FormativeExamRepository formativeExamRepository;
   private final ANTLR4ExamParser parser;
+  private final FormativeExamListService service;
 
   private Student student;
 
@@ -35,6 +36,7 @@ public class TakeFormativeExamController {
     this.listCourseService = new ListCourseService(courseRepository);
     this.parser = new ANTLR4ExamParser();
     this.formativeExamRepository = formativeExamRepository;
+    this.service = new FormativeExamListService(formativeExamRepository);
   }
 
   public void setCurrentAuthenticatedStudent() {
@@ -50,9 +52,8 @@ public class TakeFormativeExamController {
     return listCourseService.listInProgressCoursesThatStudentIsEnrolled(student);
   }
 
-  // public Iterable<FormativeExamDTO> listFormativeExamsRequest(CourseDTO
-  // courseDTO) {
+  public Iterable<FormativeExamDTO> listFormativeExams(CourseDTO courseDTO) {
 
-  // return service.findAllRequestByCourse(courseDTO.getCode());
-  // }
+    return service.findAllCourseExams(courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow());
+  }
 }

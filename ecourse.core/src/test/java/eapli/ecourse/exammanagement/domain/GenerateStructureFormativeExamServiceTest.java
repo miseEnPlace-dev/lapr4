@@ -18,14 +18,20 @@ import eapli.ecourse.coursemanagement.domain.CourseState;
 import eapli.ecourse.coursemanagement.domain.CourseTitle;
 import eapli.ecourse.coursemanagement.domain.EnrolmentLimits;
 import eapli.ecourse.exammanagement.application.GenerateStructureFormativeExamService;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSection;
+import eapli.ecourse.exammanagement.domain.parsers.ANTLR4ExamParser;
+import eapli.ecourse.questionmanagement.domain.Feedback;
+import eapli.ecourse.questionmanagement.domain.MatchingQuestion;
+import eapli.ecourse.questionmanagement.domain.MissingWordsQuestion;
 import eapli.ecourse.questionmanagement.domain.MultipleChoiceQuestion;
 import eapli.ecourse.questionmanagement.domain.NumericalQuestion;
 import eapli.ecourse.questionmanagement.domain.Question;
 import eapli.ecourse.questionmanagement.domain.QuestionBody;
 import eapli.ecourse.questionmanagement.domain.QuestionIdentifier;
 import eapli.ecourse.questionmanagement.domain.QuestionType;
+import eapli.ecourse.questionmanagement.domain.ShortAnswerQuestion;
 import eapli.ecourse.questionmanagement.domain.TrueFalseQuestion;
 import eapli.ecourse.teachermanagement.domain.Acronym;
 import eapli.ecourse.teachermanagement.domain.BirthDate;
@@ -64,8 +70,10 @@ public class GenerateStructureFormativeExamServiceTest {
 
   private FormativeExam exam;
 
+  // MultipleChoiceQuestion
+
   private void addCorrectAnswerMultipleChoiceQuestion(MultipleChoiceQuestion question) {
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
     Double weight = 1.0;
     question.addCorrectAnswer(identifier, weight);
     Map<QuestionIdentifier, Double> expected = new HashMap<>();
@@ -73,11 +81,59 @@ public class GenerateStructureFormativeExamServiceTest {
   }
 
   private void addOptionMultipleChoiceQuestion(MultipleChoiceQuestion question) {
-    QuestionIdentifier identifier = QuestionIdentifier.valueOf("A");
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
     String option = "Paris";
     question.addOption(identifier, option);
     Map<QuestionIdentifier, String> expected = new HashMap<>();
     expected.put(identifier, option);
+  }
+
+  // ShortAnswerQuestion
+
+  private void addCorrectAnswerShortAnswer(ShortAnswerQuestion question) {
+    String correctAnswer = "Lisbon";
+    Double grade = 1.0;
+    question.addCorrectAnswer(correctAnswer, grade);
+    Map<String, Double> expected = new HashMap<>();
+    expected.put(correctAnswer, grade);
+  }
+
+  // MissingWordsQuestion
+
+  private void addMissingWord(MissingWordsQuestion question) {
+    String missingWord = "Lisbon";
+    question.addMissingWord(missingWord);
+  }
+
+  private void addOptionMissingWord(MissingWordsQuestion question) {
+    String option = "Euro";
+    question.addOption(option);
+  }
+
+  // MatchingQuestion
+
+  private void addCorrectMatch(MatchingQuestion question) {
+    String option = "1";
+    String match = "1";
+    question.addCorrectMatch(option, match);
+  }
+
+  private void addMatch(MatchingQuestion question) {
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
+    String match = "France";
+    question.addMatch(identifier, match);
+  }
+
+  private void addMatchOption(MatchingQuestion question) {
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
+    String option = "France";
+    question.addOption(identifier, option);
+  }
+
+  private void addFeedbackMatch(MatchingQuestion question) {
+    QuestionIdentifier identifier = QuestionIdentifier.valueOf("1");
+    Feedback feedback = Feedback.valueOf("This is feedback");
+    question.addFeedback(identifier, feedback);
   }
 
   @Test
@@ -148,7 +204,8 @@ public class GenerateStructureFormativeExamServiceTest {
     ExamTitle title = ExamTitle.valueOf("Test Exam");
     ExamDescription description = ExamDescription.valueOf("This is a test exam");
     Collection<FormativeExamSection> sections = new ArrayList<>();
-    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null,
+        sections);
     QuestionBody body = QuestionBody.valueOf("This is a test question");
     QuestionType type = QuestionType.FORMATIVE;
 
@@ -207,5 +264,72 @@ public class GenerateStructureFormativeExamServiceTest {
     String struct = service.generateStructureString();
 
     assertEquals(examStruct, struct);
+  }
+
+  @Test
+  public void ensureTest() {
+    Course course = getDummyCourse();
+    ExamIdentifier identifier = ExamIdentifier.valueOf("exam");
+    ExamTitle title = ExamTitle.valueOf("Test Exam");
+    ExamDescription description = ExamDescription.valueOf("This is a test exam");
+    Collection<FormativeExamSection> sections = new ArrayList<>();
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, ExamScore.valueOf(100d),
+        sections);
+    QuestionBody body = QuestionBody.valueOf("This is a test question");
+    QuestionType type = QuestionType.FORMATIVE;
+
+    TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion(body, type, false);
+
+    NumericalQuestion numericalQuestion = new NumericalQuestion(body, type, 1, 0.5);
+
+    MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(body, type);
+    addCorrectAnswerMultipleChoiceQuestion(multipleChoiceQuestion);
+    addOptionMultipleChoiceQuestion(multipleChoiceQuestion);
+
+    ShortAnswerQuestion shortAnswerQuestion = new ShortAnswerQuestion(
+        new QuestionBody("What is the capital of Portugal?"), QuestionType.FORMATIVE);
+    addCorrectAnswerShortAnswer(shortAnswerQuestion);
+
+    MissingWordsQuestion missingWordsQuestion = new MissingWordsQuestion(
+        new QuestionBody("The capital of Portugal is ___. The currency used in Portugal is the ___."),
+        QuestionType.FORMATIVE);
+    addMissingWord(missingWordsQuestion);
+    addOptionMissingWord(missingWordsQuestion);
+
+    // MatchingQuestion matchingQuestion = new MatchingQuestion(
+    // new QuestionBody("Match the following countries with their capitals:"),
+    // QuestionType.FORMATIVE);
+    // addMatch(matchingQuestion);
+    // addMatchOption(matchingQuestion);
+    // addCorrectMatch(matchingQuestion);
+    // addFeedbackMatch(matchingQuestion);
+
+    SectionTitle sectionTitle = SectionTitle.valueOf("Section title");
+    SectionIdentifier id = SectionIdentifier.valueOf("id");
+    SectionDescription des = SectionDescription.valueOf("description");
+
+    Collection<Question> questions = new ArrayList<>();
+    questions.add(trueFalseQuestion);
+    questions.add(numericalQuestion);
+    questions.add(multipleChoiceQuestion);
+    questions.add(shortAnswerQuestion);
+    questions.add(missingWordsQuestion);
+    // questions.add(matchingQuestion);
+
+    FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
+    sections.add(section);
+
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    String struct = service.generateStructureString();
+
+    ANTLR4ExamParser parser = new ANTLR4ExamParser();
+
+    System.out.println(struct);
+
+    try {
+      parser.parseFromString(struct);
+    } catch (IllegalArgumentException ex) {
+      System.out.println(ex.getMessage());
+    }
   }
 }

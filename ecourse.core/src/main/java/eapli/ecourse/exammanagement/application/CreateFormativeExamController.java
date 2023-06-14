@@ -79,6 +79,8 @@ public class CreateFormativeExamController {
       FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
           request.description(), request.score(), sections);
 
+      exam.publish();
+
       return examRepository.save(exam);
     } catch (Exception e) {
       throw new IllegalArgumentException("Invalid exam request. Have you created questions for this course?");
