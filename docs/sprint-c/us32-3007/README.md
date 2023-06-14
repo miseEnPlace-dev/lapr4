@@ -48,14 +48,16 @@
 
 ## 3. Analysis
 
+### 3.1. Conditions
+
 - User must have write permissions to update a post-it.
 - If the post-it is moved, it should be moved to a cell that is not occupied by another post-it.
 
-### 3.3. System Sequence Diagram
+### 3.2. System Sequence Diagram
 
 ![US3006_SSD](out/US3006_SSD.svg)
 
-### 3.4. Partial Domain Model
+### 3.3. Partial Domain Model
 
 ![US3006_DM](out/US3006_DM.svg)
 

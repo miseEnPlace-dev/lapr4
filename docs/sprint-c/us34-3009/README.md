@@ -11,61 +11,57 @@
 
 ## 1. Context
 
-- XXX
+- This is the first time this task is assigned to be developed. This is a new functionality that allows user to view the board history.
 
 ## 2. Requirements
 
-### "XXX"
+### "View Board History - A user views a history of updates in a board"
 
 ## 2.1. Client Specifications
 
-- XXX
+- The system should maintain an history/log of all the updates in the board.
 
 ## 2.2. Client Clarifications
 
-- XXX
+> [**Question:** Should someone be able to see the logs of a board?](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=22229)
+>
+> **Answer**: "If a user as read access to the board he can view the history. Logs are important for FRB06 and FRB07."
 
 ## 2.3. Functional Requirements
 
-- XXX
+- **FRB04** View Board History - A user views a history of updates in a board
 
 ## 2.4. Acceptance Criteria
 
-- XXX
+- This functional part of the system has very specific technical requirements, particularly some concerns about synchronization problems.
+- In fact, several clients will try to concurrently update boards.
+- As such, the solution design and implementation must be based on threads, condition variables and mutexes. Specific requirements will be provided in SCOMP.
 
 ---
 
 ## 3. Analysis
 
-### 3.1. Main success scenario
+### 3.1. Conditions
 
-- XXX
+- User must have read/write permissions or be the owner to view the history of a board.
 
-### 3.2. Conditions
+### 3.2. System Sequence Diagram
 
-- XXX
+![US3009_SSD](out/US3009_SSD.svg)
 
-### 3.3. System Sequence Diagram
+### 3.3. Partial Domain Model
 
-![USXXX_SSD](out/USXXX_SSD.svg)
-
-### 3.4. Sequence Diagram (Simplified)
-
-![USXXX_SD](out/USXXX_SD.svg)
-
-### 3.5. Partial Domain Model
-
-![USXXX_DM](out/USXXX_DM.svg)
+![US3009_DM](out/US3009_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Functionality Realization
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US3009_SD](out/US3009_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US3009_CD](out/US3009_CD.svg)
 
 ### 4.3. Applied Patterns
 
@@ -93,7 +89,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US3009_DEMO](out/US3009_DEMO.svg)
 
 ## 7. Observations
 
