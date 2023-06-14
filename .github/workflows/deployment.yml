@@ -46,7 +46,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "ecourse.app.bootstrap/target/*,ecourse.daemon.board/target/dependency/*,deploy.sh"
           target: "~/deploy"
-          overwrite: true
+          rm: true
 
       - name: Deploy Server
         uses: appleboy/ssh-action@v0.1.10
