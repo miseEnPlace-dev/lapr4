@@ -2,7 +2,7 @@
 
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10490917&assignment_repo_type=AssignmentRepo)
 
-```
+```txt
         ,-----.
  ,---. '  .--./ ,---. ,--.,--.,--.--. ,---.  ,---.
 | .-. :|  |    | .-. ||  ||  ||  .--'(  .-' | .-. :
@@ -46,7 +46,7 @@ To build the project, you first need to set all six properties files, located un
 
 > 💡 You can simply run `./properties.sh` (Linux/MacOS) or `properties.bat` (Windows) to automatically create the properties files.
 
-## Usage
+### Usage
 
 Default: `./properties.sh`: Creates the properties files with the default values (if the file exists it will not be overwritten)
 `-c or --clean`: Overrides the existing properties files with the default values
@@ -67,10 +67,28 @@ To execute the tests, just execute the following command:
 
 > ️️️️⚠️ Before running the project, you need to build the project. Follow the instructions described in section [3 - How to Build](#3-how-to-build).
 
-First, start the H2 database. For that, **open a new terminal** and execute the following script:
+### Database Setup
 
-- On Linux/MacOS: `./h2.sh`
-- On Windows: `h2.bat`
+The most straightforward way to run a local database is to use the provided script `h2.sh` (Linux/MacOS) or `h2.bat` (Windows).
+This script starts an H2 database instance with a configuration that connects with the app out-of-the-box.
+
+Although, you may want to connect to a different database or an existing one.
+We already provided different persistence unit configurations in the `persistence.xml` file.
+You can use them by changing the `persistence.persistenceUnit` property in the `application.properties` file of the app.
+
+> ⚠️ Do not forget to use the correct url/credentials for the database you want to connect to, as well as the driver. The app comes with the H2, MariaDB & PostgreSQL drivers. If you want to use a different database, you will need to add the correct dependency to the `pom.xml` file and [build](#3-how-to-build) the app again.
+
+If you have Docker installed, you can run the following commands to start a PostgreSQL or a MariaDB database locally with the pre-configured persistence units:
+
+```bashmariadb
+# persistence unit: eapli.eCoursePU_mariadb
+docker run --name mariadb-lapr4 -p 3306:3306 -e MARIADB_ROOT_PASSWORD=docker -d -t mariadb
+
+# persistence unit: eapli.eCoursePU_postgresql
+docker run --name postgres-lapr4 -p 5432:5432 -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -d postgres
+```
+
+### Running the App
 
 For the board app a server is needed. For that, **open a new terminal** and execute the following script:
 
@@ -83,21 +101,20 @@ In order to have the needed data for executing the app, you need to run the boot
 - On Linux/MacOS: `./run-bootstrap.sh`
 - On Windows: `run-bootstrap.bat`
 
+> ⚠️ Only run the bootstrap if you are connecting to a newly created database!
+
 You are now ready to run the app. Simply execute the script of the app you want to run:
 
-- For the User app, execute the following script:
-  - On Linux/MacOS: `./run-user.sh`
-  - On Windows: `run-user.bat`
+- For the Student app, execute the following script:
+  - On Linux/MacOS: `./run-student.sh`
+  - On Windows: `run-student.bat`
+- For the Teacher app, execute the following script:
+  - On Linux/MacOS: `./run-teacher.sh`
+  - On Windows: `run-teacher.bat`
 - For the Backoffice app, execute the following script:
   - On Linux/MacOS: `./run-backoffice.sh`
   - On Windows: `run-backoffice.bat`
-- For the teacher app, execute the following script:
-  - On Linux/MacOS: `./run-teacher.sh`
-  - On Windows: `run-teacher.bat`
-- For the manager app, execute the following script:
-  - On Linux/MacOS: `./run-manager.sh`
-  - On Windows: `run-manager.bat`
-- For the board app, execute the following script:
+- For the Board app, execute the following script:
   - On Linux/MacOS: `./run-board-app.sh`
   - On Windows: `run-board-app.bat`
 
