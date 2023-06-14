@@ -18,13 +18,15 @@ public class App extends ECourseBaseApplication {
   private static final String BOARD_SERVER_HOST = "localhost";
   private static final int BOARD_SERVER_PORT = 9999;
 
+  // private static final String BOARD_SERVER_HOST = "vsgate-s3.dei.isep.ipp.pt";
+  // private static final int BOARD_SERVER_PORT = 11058;
+
   private final static Logger LOGGER = LogManager.getLogger(App.class);
 
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
-  private App() {
-  }
+  private App() {}
 
   public static void main(final String[] args) {
     new App().run(args);
@@ -65,10 +67,8 @@ public class App extends ECourseBaseApplication {
   }
 
   @Override
-  protected void doSetupEventHandlers(EventDispatcher dispatcher) {
-  }
+  protected void doSetupEventHandlers(EventDispatcher dispatcher) {}
 
   @Override
-  protected void configureAuthz() {
-  }
+  protected void configureAuthz() {}
 }
