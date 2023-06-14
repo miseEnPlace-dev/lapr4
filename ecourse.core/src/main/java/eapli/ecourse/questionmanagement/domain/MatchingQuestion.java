@@ -22,7 +22,7 @@ public class MatchingQuestion extends Question {
   // the same key and value type
 
   @ElementCollection
-  @CollectionTable(name = "match")
+  @CollectionTable(name = "matchQuestionIdValue")
   @MapKeyColumn(name = "matchIdentifier")
   @Column(name = "matchValue")
   private Map<QuestionIdentifier, String> matches;
@@ -113,8 +113,7 @@ public class MatchingQuestion extends Question {
 
     sb.append("@start-correct-answers");
     for (Map.Entry<String, String> entry : matchingQuestion.correctMatches.entrySet()) {
-      sb.append("@correct-answer " + entry.getKey() + "-"
-          + entry.getValue() + ";");
+      sb.append("@correct-answer " + entry.getKey() + "-" + entry.getValue() + ";");
     }
     sb.append("@end-correct-answers;");
 
