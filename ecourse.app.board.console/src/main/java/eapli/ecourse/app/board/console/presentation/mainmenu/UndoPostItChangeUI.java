@@ -68,7 +68,7 @@ public class UndoPostItChangeUI extends AbstractUI {
         return false;
       }
 
-      System.out.println("\nPreviewing the previous Post-It version:\n");
+      System.out.println("\nPreviewing the previous Post-It version:");
 
       printPostIt(selectedPostIt.getPrevious());
 
