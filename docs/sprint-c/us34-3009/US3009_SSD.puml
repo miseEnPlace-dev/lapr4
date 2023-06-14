@@ -1,0 +1,21 @@
+@startuml US3009_SSD
+
+autonumber
+
+actor U as "User"
+
+activate U
+
+U -> ":System" : asks to view board history
+activate ":System"
+
+":System" --> U : asks to select the board
+deactivate ":System"
+
+U -> ":System" : selects the board
+activate ":System"
+
+":System" --> U : shows the board history
+deactivate ":System"
+
+@enduml
