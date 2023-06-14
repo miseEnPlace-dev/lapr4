@@ -23,11 +23,4 @@ public class InMemoryClassRepository extends InMemoryDomainRepository<CourseClas
   public Iterable<CourseClass> findAllScheduledByTeacherTaxPayerNumber(TaxPayerNumber number) {
     return match(e -> e.scheduledBy().taxPayerNumber().equals(number));
   }
-
-  // @Override
-  // public Iterable<Class> findAllActive() {
-  // // TODO Auto-generated method stub
-  // throw new UnsupportedOperationException("Unimplemented method
-  // 'findAllActive'");
-  // }
 }

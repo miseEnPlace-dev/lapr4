@@ -2,7 +2,6 @@ package eapli.ecourse.infrastructure.bootstrapers.demo;
 
 import java.util.Calendar;
 
-import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.eventsmanagement.classmanagement.application.ScheduleClassController;
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.DayInWeek;
@@ -30,9 +29,10 @@ public class CourseClassBootstrapper extends CourseBootstrapperBase implements A
   @Override
   public boolean execute() {
 
-    final SystemUserBuilder userBuilder = new SystemUserBuilder(new NilPasswordPolicy(), new PlainTextEncoder());
-    SystemUser user = userBuilder.with("username", "duMMy1", "dummy", "dummy", "a@b.ro").withRoles(ClientRoles.STUDENT)
-        .build();
+    final SystemUserBuilder userBuilder =
+        new SystemUserBuilder(new NilPasswordPolicy(), new PlainTextEncoder());
+    SystemUser user = userBuilder.with("username", "duMMy1", "dummy", "dummy", "a@b.ro")
+        .withRoles(ClientRoles.STUDENT).build();
 
     Teacher teacher = new Teacher(user, TaxPayerNumber.valueOf("123456789"), Acronym.valueOf("OMS"),
         BirthDate.valueOf(Calendar.getInstance()));

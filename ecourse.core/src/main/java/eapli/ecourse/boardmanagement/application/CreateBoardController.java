@@ -1,7 +1,6 @@
 package eapli.ecourse.boardmanagement.application;
 
 import java.util.Map;
-import java.util.Properties;
 
 import eapli.ecourse.Application;
 import eapli.ecourse.boardmanagement.domain.Board;
@@ -22,7 +21,8 @@ public class CreateBoardController {
   private UserManagementService userSvc;
   private AuthorizationService authz;
 
-  public CreateBoardController(BoardRepository boardRepo, UserManagementService userSvc, AuthorizationService authz) {
+  public CreateBoardController(BoardRepository boardRepo, UserManagementService userSvc,
+      AuthorizationService authz) {
     this.boardRepo = boardRepo;
     this.userSvc = userSvc;
     this.authz = authz;
@@ -33,8 +33,8 @@ public class CreateBoardController {
 
     Preconditions.noneNull(title, columns, rows);
 
-    SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.MANAGER,
-        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
+    SystemUser user = authz.loggedinUserWithPermissions(ClientRoles.MANAGER, ClientRoles.POWER_USER,
+        ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
     Board board = new BoardBuilder().withTitle(title).withUser(user).withPermissions(permissions)
         .withColumns(columns).withRows(rows).build();

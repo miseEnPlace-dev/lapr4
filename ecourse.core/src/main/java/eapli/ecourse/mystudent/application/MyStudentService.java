@@ -25,7 +25,6 @@ public class MyStudentService {
   public Student me() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.STUDENT);
 
-    // TODO cache the client user object
     final Optional<Student> me = clientUsersRepo.findByUsername(myUser().identity());
 
     return me.orElseThrow(IllegalStateException::new);

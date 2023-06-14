@@ -9,7 +9,7 @@ public class LogoutAction implements Action {
 
   @Override
   public boolean execute() {
-    // TODO call controller to execute logout
+    // call controller to execute logout
     return false;
   }
 }

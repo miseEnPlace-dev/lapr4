@@ -3,7 +3,6 @@ package eapli.ecourse.answermanagement.application;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import eapli.ecourse.answermanagement.application.ListExamAnswerService;
 import eapli.ecourse.answermanagement.dto.AnswerDTO;
 import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.application.ListCourseService;
@@ -16,7 +15,6 @@ import eapli.ecourse.enrolmentmanagement.repositories.EnrolmentRepository;
 import eapli.ecourse.exammanagement.application.EvaluationExamListService;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
-import eapli.ecourse.studentmanagement.application.StudentService;
 import eapli.ecourse.studentmanagement.domain.Student;
 import eapli.ecourse.studentmanagement.repositories.StudentRepository;
 import eapli.ecourse.teachermanagement.domain.Teacher;
@@ -34,8 +32,9 @@ public class ListCourseExamGradesController {
   private final ListEnrolmentService enrolmentService;
   private final StudentRepository studentRepository;
 
-  public ListCourseExamGradesController(AuthorizationService authz, EvaluationExamRepository evaluationRepository,
-      CourseRepository courseRepository, TeacherRepository teacherRepository, AnswerRepository answerRepository,
+  public ListCourseExamGradesController(AuthorizationService authz,
+      EvaluationExamRepository evaluationRepository, CourseRepository courseRepository,
+      TeacherRepository teacherRepository, AnswerRepository answerRepository,
       EnrolmentRepository enrolmentRepository, StudentRepository studentRepository) {
     this.evaluationService = new EvaluationExamListService(evaluationRepository);
     this.authz = authz;
@@ -55,12 +54,13 @@ public class ListCourseExamGradesController {
   }
 
   public Iterable<EvaluationExamDTO> courseEvaluationExams(CourseDTO course) {
-    return evaluationService
-        .listAllPastCourseExams(courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
+    return evaluationService.listAllPastCourseExams(
+        courseService.findCourseByCourseCode(course.getCode()).orElseThrow());
   }
 
   public Iterable<AnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
-    return answerService.listExamGrades(evaluationService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
+    return answerService.listExamGrades(
+        evaluationService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
         studentsInCourse(examDTO.getCourse()));
   }
 
@@ -69,8 +69,8 @@ public class ListCourseExamGradesController {
 
     Iterable<EnrolmentDTO> enrollments = enrolmentService.listStudentsEnrolled(course.code());
 
-    enrollments.forEach(
-        e -> students.add(studentRepository.findByMecanographicNumber(e.getStudentNumber()).orElseThrow()));
+    enrollments.forEach(e -> students
+        .add(studentRepository.findByMecanographicNumber(e.getStudentNumber()).orElseThrow()));
     return students;
   }
 }

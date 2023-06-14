@@ -7,10 +7,8 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
-import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItBuilder;
-import eapli.ecourse.postitmanagement.domain.PostItTitle;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
@@ -53,15 +51,15 @@ public class CreatePostItController {
     return boardService.isCellAvailable(boardID, x, y);
   }
 
-  public PostIt createPostIt(BoardID boardID, int x, int y, String title, String description, String imagePath)
-      throws IOException {
+  public PostIt createPostIt(BoardID boardID, int x, int y, String title, String description,
+      String imagePath) throws IOException {
     SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
         ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
     Board board = boardRepository.ofIdentity(boardID).orElseThrow();
 
-    PostItBuilder builder = new PostItBuilder().withBoard(board).withCoordinates(x, y)
-        .withTitle(title).withUser(user);
+    PostItBuilder builder =
+        new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
 
     if (description != null) {
       builder.withDescription(description);

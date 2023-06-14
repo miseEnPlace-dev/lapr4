@@ -9,7 +9,8 @@ public class GenerateStructureFormativeExamService {
   private FormativeExam formativeExam;
   private ExamScore examScore;
 
-  public GenerateStructureFormativeExamService(final FormativeExam formativeExam, final ExamScore examScore) {
+  public GenerateStructureFormativeExamService(final FormativeExam formativeExam,
+      final ExamScore examScore) {
     this.formativeExam = formativeExam;
     this.examScore = examScore;
   }
@@ -116,7 +117,7 @@ public class GenerateStructureFormativeExamService {
     int nQuestions = 0;
 
     for (FormativeExamSection section : formativeExam.sections())
-      for (Question question : section.questions()) {
+      while (section.questions().iterator().hasNext()) {
         nQuestions++;
       }
 

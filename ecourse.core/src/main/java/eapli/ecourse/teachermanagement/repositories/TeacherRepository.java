@@ -7,10 +7,6 @@ import eapli.ecourse.teachermanagement.domain.Teacher;
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
-/**
- * TODO: not completed yet
- *
- */
 public interface TeacherRepository extends DomainRepository<TaxPayerNumber, Teacher> {
   /**
    * Returns the teacher with the given username.

@@ -16,8 +16,7 @@ public final class ECourseTeacherApp extends ECourseBaseApplication {
   /**
    * Empty constructor is private to avoid instantiation of this class.
    */
-  private ECourseTeacherApp() {
-  }
+  private ECourseTeacherApp() {}
 
   public static void main(final String[] args) {
     System.out.println();
@@ -48,7 +47,7 @@ public final class ECourseTeacherApp extends ECourseBaseApplication {
 
   @Override
   protected void doSetupEventHandlers(EventDispatcher dispatcher) {
-    // TODO setup event handlers for your app
+    // setup here event handlers for your app
   }
 
   @Override

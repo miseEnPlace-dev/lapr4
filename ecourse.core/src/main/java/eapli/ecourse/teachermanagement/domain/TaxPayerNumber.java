@@ -3,9 +3,6 @@ package eapli.ecourse.teachermanagement.domain;
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.strings.util.StringPredicates;
 
-/**
- * TODO: to be completed
- */
 public class TaxPayerNumber implements ValueObject, Comparable<TaxPayerNumber> {
   private static final long serialVersionUID = 1L;
 
@@ -13,7 +10,8 @@ public class TaxPayerNumber implements ValueObject, Comparable<TaxPayerNumber> {
 
   protected TaxPayerNumber(final String taxPayerNumber) {
     if (StringPredicates.isNullOrEmpty(taxPayerNumber))
-      throw new IllegalArgumentException("Tax payer number Number should neither be null nor empty");
+      throw new IllegalArgumentException(
+          "Tax payer number Number should neither be null nor empty");
 
     // TODO validate invariants, i.e., tax payer number number regular expression
     this.number = taxPayerNumber;

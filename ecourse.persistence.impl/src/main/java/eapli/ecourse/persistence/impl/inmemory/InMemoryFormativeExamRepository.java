@@ -1,8 +1,5 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
-import java.nio.channels.UnsupportedAddressTypeException;
-import java.util.Optional;
-
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
@@ -11,8 +8,8 @@ import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class InMemoryFormativeExamRepository extends InMemoryDomainRepository<FormativeExam, ExamIdentifier>
-    implements FormativeExamRepository {
+public class InMemoryFormativeExamRepository extends
+    InMemoryDomainRepository<FormativeExam, ExamIdentifier> implements FormativeExamRepository {
 
   static {
     InMemoryInitializer.init();

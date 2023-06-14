@@ -83,8 +83,8 @@ public abstract class ECourseBaseApplication {
   }
 
   protected void configurePubSub() {
-    // TODO use a factory/registry to obtain the pub/sub engine
-    /*
+    // use a factory/registry to obtain the pub/sub engine
+    /**
      * SimplePersistentPubSub.configure(PersistenceContext.repositories(). eventRecord(),
      * PersistenceContext.repositories().eventConsumption(),
      * Application.settings().getProperty("eapli.framework.pubsub.instanceKey"),

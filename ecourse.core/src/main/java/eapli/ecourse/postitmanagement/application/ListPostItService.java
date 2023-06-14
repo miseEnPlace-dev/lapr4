@@ -7,7 +7,6 @@ import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
-import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class ListPostItService {
   private final PostItRepository postItRepository;

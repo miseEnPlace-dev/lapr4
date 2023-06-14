@@ -17,7 +17,6 @@ public class CourseTitle implements ValueObject {
     if (StringPredicates.isNullOrEmpty(courseTitle))
       throw new IllegalArgumentException("Course Title should neither be null nor empty");
 
-    // TODO: course title validation
     this.title = courseTitle;
   }
 

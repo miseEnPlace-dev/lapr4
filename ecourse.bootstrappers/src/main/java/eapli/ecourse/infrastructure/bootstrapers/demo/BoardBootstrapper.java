@@ -67,7 +67,7 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
       ClassLoader classLoader = getClass().getClassLoader();
       String path = classLoader.getResource("p1.png").getPath();
 
-      PostIt p1 = ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null, path);
+      ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null, path);
     } catch (IOException e) {
       e.printStackTrace();
     }

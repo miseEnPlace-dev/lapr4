@@ -5,7 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
-import javax.net.ssl.SSLSocket;
 
 import eapli.ecourse.common.board.http.HttpClientHandler;
 import eapli.ecourse.common.board.http.Router;

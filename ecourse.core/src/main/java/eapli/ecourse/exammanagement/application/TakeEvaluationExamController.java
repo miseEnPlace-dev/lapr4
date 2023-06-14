@@ -1,7 +1,5 @@
 package eapli.ecourse.exammanagement.application;
 
-import java.io.IOException;
-
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -31,8 +29,9 @@ public class TakeEvaluationExamController {
 
   private EvaluationExamBuilder builder;
 
-  public TakeEvaluationExamController(final AuthorizationService authz, final StudentRepository studentRepository,
-      final EvaluationExamRepository examRepository, final CourseRepository courseRepository) {
+  public TakeEvaluationExamController(final AuthorizationService authz,
+      final StudentRepository studentRepository, final EvaluationExamRepository examRepository,
+      final CourseRepository courseRepository) {
     this.authz = authz;
     this.studentRepository = studentRepository;
     this.examRepository = examRepository;
@@ -44,7 +43,8 @@ public class TakeEvaluationExamController {
 
   public void setCurrentAuthenticatedStudent() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
-    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+    SystemUser authenticatedUser =
+        authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
 
     student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
   }
@@ -58,7 +58,8 @@ public class TakeEvaluationExamController {
   public Iterable<EvaluationExamDTO> listOpenExamsForCourse(CourseDTO course) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
     setCurrentAuthenticatedStudent();
-    return examListService.listAllOpenCourseExams(courseRepository.ofIdentity(course.getCode()).orElseThrow());
+    return examListService
+        .listAllOpenCourseExams(courseRepository.ofIdentity(course.getCode()).orElseThrow());
   }
 
   public void parseExam(final String str, ExamPrinter printer) throws ParseException {
