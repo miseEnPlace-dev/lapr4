@@ -105,6 +105,12 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.11.0</version>
+    </dependency>
     <!-- MariaDB SQL Server Driver -->
     <dependency>
       <groupId>org.mariadb.jdbc</groupId>

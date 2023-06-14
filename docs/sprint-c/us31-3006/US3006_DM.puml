@@ -12,6 +12,8 @@ package "<<aggregate>> PostIt" {
   class Title
   class State
   class Coordinates
+  class Description
+  class Image
 }
 
 package "<<aggregate>> User" {
@@ -30,6 +32,9 @@ class Title <<(V,#FF8B40) value object>> {}
 
 class State <<(V,#FF8B40) value object>> {}
 class Coordinates <<(V,#FF8B40) value object>> {}
+class Description <<(V,#FF8B40) value object>> {}
+class Image <<(V,#FF8B40) value object>> {}
+
 
 note left of State
   ACTIVE
@@ -48,6 +53,8 @@ PostIt --> "1" State : has
 
 PostIt ---> "1" Board : belongs to
 PostIt --> "0..1" PostIt : previous
+PostIt --> "0..1" Description : has
+PostIt --> "0..1" Image : has
 PostIt --> "1" Coordinates : has
 PostIt ---> "1" User : is owned by
 

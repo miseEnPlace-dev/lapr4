@@ -1,8 +1,8 @@
-# Project eCourse ![CI](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-22-23-19/actions/workflows/maven.yml/badge.svg)
+# Project eCourse ![CI](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-22-23-19/actions/workflows/maven.yml/badge.svg) ![Deployment](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-22-23-19/actions/workflows/deployment.yml/badge.svg)
 
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10490917&assignment_repo_type=AssignmentRepo)
 
-```txt
+```text
         ,-----.
  ,---. '  .--./ ,---. ,--.,--.,--.--. ,---.  ,---.
 | .-. :|  |    | .-. ||  ||  ||  .--'(  .-' | .-. :
@@ -119,15 +119,21 @@ You are now ready to run the app. Simply execute the script of the app you want 
   - On Linux/MacOS: `./run-board-app.sh`
   - On Windows: `run-board-app.bat`
 
-## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
+## 6. Deploy to a Remote Machine
 
-📝 _To Do_
+This repository has a pipeline in GitHub Actions that automatically deploys the app to a remote machine. The pipeline is triggered when a commit is pushed to the `master` branch.
+
+To configure it, you need to add the following secrets to the repository:
+
+- `SSH_HOST`: The host of the remote machine
+- `SSH_USER`: The user to connect to the remote machine via SSH
+- `SSH_PASSWORD`: The user's password
+- `SSH_PORT`: The port to connect to the remote machine
 
 Staging instance:
 
 - DB URL: `jdbc:mariadb://vsgate-s1.dei.isep.ipp.pt:11058/ecourse`
 - DB User: `user`
-- DB Password: `aTjORxJPsQMfe*A3`
 - Board Server: `vsgate-s3.dei.isep.ipp.pt:11058`
 
 ## 7. How to Generate PlantUML Diagrams

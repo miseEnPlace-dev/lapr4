@@ -36,7 +36,7 @@ public class TcpServer {
       return;
     }
 
-    System.out.printf("[TCP%s Server] Listening on port %d!\n", " SSL", port);
+    System.out.printf("[TCP%s Server] Listening on port %d!\n", this.secure ? " SSL" : "", port);
 
     while (!tcpSocket.isClosed()) {
       try {
