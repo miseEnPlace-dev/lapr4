@@ -161,7 +161,8 @@ public class GenerateStructureFormativeExamServiceTest {
     FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
     sections.add(section);
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
     System.out.println(struct);
   }
@@ -193,7 +194,8 @@ public class GenerateStructureFormativeExamServiceTest {
 
     String expected = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback on-submit;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 50.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 50.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
 
     assertEquals(expected, struct);
@@ -227,7 +229,8 @@ public class GenerateStructureFormativeExamServiceTest {
 
     String expected = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback on-submit;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
 
     assertEquals(expected, struct);
@@ -262,7 +265,8 @@ public class GenerateStructureFormativeExamServiceTest {
 
     String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback on-submit;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type multiple-choice;@score 100.0;@question-body \"This is a test question\";@start-correct-answers@correct-answer 1 1.0;@end-correct-answers;@start-options@option 1 \"Paris\";@end-options;@end-question;@end-section;@end-exam;";
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
 
     String expected = service.generateStructureString();
 
@@ -322,7 +326,8 @@ public class GenerateStructureFormativeExamServiceTest {
     FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
     sections.add(section);
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
 
     ANTLR4ExamParser parser = new ANTLR4ExamParser();

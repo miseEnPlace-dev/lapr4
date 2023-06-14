@@ -118,6 +118,16 @@ public interface FormativeExamListener extends ParseTreeListener {
 	 */
 	void exitFeedback(FormativeExamParser.FeedbackContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormativeExamParser#grade}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrade(FormativeExamParser.GradeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormativeExamParser#grade}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrade(FormativeExamParser.GradeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormativeExamParser#score}.
 	 * @param ctx the parse tree
 	 */

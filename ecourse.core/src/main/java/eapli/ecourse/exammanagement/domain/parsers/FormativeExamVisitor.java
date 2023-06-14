@@ -77,6 +77,12 @@ public interface FormativeExamVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFeedback(FormativeExamParser.FeedbackContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link FormativeExamParser#grade}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrade(FormativeExamParser.GradeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link FormativeExamParser#score}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -1,5 +1,7 @@
 package eapli.ecourse.exammanagement.repositories;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
@@ -22,4 +24,6 @@ public interface FormativeExamRepository extends DomainRepository<ExamIdentifier
    */
   Iterable<FormativeExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode courseCode,
       MecanographicNumber mecanographicNumber);
+
+  FormativeExam findByIdentifier(ExamIdentifier identifier);
 }

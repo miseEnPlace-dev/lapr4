@@ -1,10 +1,13 @@
 package eapli.ecourse.exammanagement.application;
 
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4TakeExamParser;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
@@ -62,5 +65,9 @@ public class TakeFormativeExamController {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
     setCurrentAuthenticatedStudent();
     parser.parseFromString(str, printer);
+  }
+
+  public FormativeExam getFormativeExamSelected(FormativeExamDTO dto) {
+    return formativeExamRepository.findByIdentifier(dto.getIdentifier());
   }
 }

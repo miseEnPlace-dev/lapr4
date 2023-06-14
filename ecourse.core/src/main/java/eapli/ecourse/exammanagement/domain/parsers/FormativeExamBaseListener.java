@@ -148,6 +148,18 @@ public class FormativeExamBaseListener implements FormativeExamListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGrade(FormativeExamParser.GradeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrade(FormativeExamParser.GradeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterScore(FormativeExamParser.ScoreContext ctx) { }
 	/**
 	 * {@inheritDoc}
