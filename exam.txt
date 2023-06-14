@@ -1,17 +1,17 @@
-@start-exam bddad_epoca_normal3;
+@start-exam bddad_epoca_normal5;
     @title "Exame BDDAD - Época Normal";
-    @description "Este exame tem um peso de 50% da nota final de BDDAD.\nReleia todas as questões antes de submeter.\nBoa sorte!";
+    @description "Este exame tem um peso de 50% na sua nota final de BDDAD.\nReleia todas as questões antes de submeter.\nBoa sorte!";
     @feedback on-submit;
     @grade on-submit;
 
-    @start-section seccao1;
+    @start-section dependencias_funcionais;
       @title "1 - Dependências Funcionais";
       @description "Considere a relação R(A,B,C,D,E,F,G,H) com as seguintes dependências funcionais:\nA → BCD\nAD → E\nEFG → H\nF → GH";
 
       @start-question
         @type short-answer;
         @score 20;
-        @question-body "Existe uma chave mínima para R. Qual é?";
+        @question-body "Existe apenas uma chave mínima para R. Qual?";
         @feedback "Devia ter ido às teóricas de dependências funcionais!";
         @start-correct-answers
           @correct-answer "A,F" 1;
@@ -22,17 +22,8 @@
       @end-question;
 
       @start-question
-        @type numerical;
-        @score 100;
-        @question-body "Qual é a área de um círculo com raio 1.2?";
-        // Este também
-        @correct-answer 4.52;
-        @accepted-error 0.01;
-      @end-question;
-
-      @start-question
         @type multiple-choice;
-        @score 30;
+        @score 20;
         @question-body "Qual das dependências pode ser retirada sem alterar a chave?";
         @feedback "Devia ter ido às teóricas de dependências funcionais!";
         @correct-answer 3;
@@ -44,14 +35,23 @@
           @option 4 "F → GH";
         @end-options;
       @end-question;
+
+      @start-question
+        @type numerical;
+        @score 10;
+        @question-body "A quantas perguntas teve de responder até agora?";
+        @feedback "Devia ter estado atento ao número de perguntas!";
+        @correct-answer 2;
+        @accepted-error 0;
+      @end-question;
     @end-section;
 
-    @start-section seccao2;
+    @start-section transacoes;
       @title "2 - Transações";
 
       @start-question
         @type true-false;
-        @score 20;
+        @score 5;
         @question-body "As transações são um mecanismo que garante a consistência dos dados contidos numa BD.";
         @feedback "Devia ter ido às teóricas de transações!";
         @correct-answer true;
@@ -59,7 +59,7 @@
 
       @start-question
         @type missing-words;
-        @score 30;
+        @score 20;
         @question-body "Complete a seguinte frase:\nPara começar uma transação, utilizo a instrução __. Para descartar as alterações de uma transação, utilizo a instrução __.";
         @feedback "Devia ter ido às teóricas de transações!";
 
@@ -79,30 +79,30 @@
 
       @start-question
         @type matching;
-        @score 100;
+        @score 25;
         @question-body "Associe cada conceito à sua definição.";
         @feedback "General feedback";
 
         @start-correct-answers
-          @correct-answer 1 2;
-          @correct-answer 2 4;
-          @correct-answer 3 5;
-          @correct-answer 4 1;
+          @correct-answer 1 - 3;
+          @correct-answer 2 - 5;
+          @correct-answer 3 - 2;
+          @correct-answer 4 - 1;
         @end-correct-answers;
 
         @start-options
           @option 1 "COMMIT";
           @option 2 "ROLLBACK TO SAVEPOINT";
-          @option 3 "3";
-          @option 4 "4";
+          @option 3 "SAVEPOINT";
+          @option 4 "ROLLBACK";
         @end-options;
 
         @start-matching
-          @match 1 "1";
-          @match 2 "2";
-          @match 3 "3";
-          @match 4 "4";
-          @match 5 "5";
+          @match 1 "Permite descartar todas as alterações efetuadas numa transação.";
+          @match 2 "Permite criar um ponto de recuperação numa transação.";
+          @match 3 "Permite efetuar a confirmação das alterações efetuadas numa transação.";
+          @match 4 "Permite iniciar uma transação.";
+          @match 5 "Permite descartar as alterações efetuadas numa transação até um determinado ponto de recuperação.";
         @end-matching;
       @end-question;
     @end-section;
