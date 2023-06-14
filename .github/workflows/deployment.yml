@@ -58,4 +58,4 @@ jobs:
           script: |
             cd ~/deploy
             killall java
-            ./deploy.sh &
+            ./deploy.sh
