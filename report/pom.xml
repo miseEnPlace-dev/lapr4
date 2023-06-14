@@ -29,6 +29,11 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
+      <artifactId>app.board.console</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eapli.ecourse</groupId>
       <artifactId>app.bootstrap</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
@@ -39,12 +44,12 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>app.teacher.console</artifactId>
+      <artifactId>app.student.console</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
-      <artifactId>app.student.console</artifactId>
+      <artifactId>app.teacher.console</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
@@ -54,7 +59,17 @@
     </dependency>
     <dependency>
       <groupId>eapli.ecourse</groupId>
+      <artifactId>common.board</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eapli.ecourse</groupId>
       <artifactId>core</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eapli.ecourse</groupId>
+      <artifactId>daemon.board</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
