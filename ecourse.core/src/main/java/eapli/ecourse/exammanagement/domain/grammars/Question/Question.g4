@@ -99,5 +99,5 @@ FALSE:													'false';
 // Skip spaces, tabs and newlines
 WS: [ \t\n\r]+ -> skip;
 
-// Skip comments
+// Skip comments wowww
 COMMENT: '//' ~[\r\n]* -> skip;
