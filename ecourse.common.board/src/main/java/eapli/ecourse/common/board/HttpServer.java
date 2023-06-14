@@ -43,7 +43,7 @@ public class HttpServer implements Runnable {
     while (!tcpSocket.isClosed()) {
       try {
         // establish the tcp connection by accepting it
-        socket = (SSLSocket) tcpSocket.accept();
+        socket = tcpSocket.accept();
 
         // create a new client handler
         HttpClientHandler handler = new HttpClientHandler(socket, this.router, this.secure);
