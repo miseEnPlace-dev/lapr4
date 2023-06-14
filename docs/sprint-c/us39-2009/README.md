@@ -112,6 +112,13 @@ public void ensureIsPossibleToCreateFormativeExamStringWithMultipleQuestions() {
 public void ensureIsPossibleToCreateFormativeExamStringWithMultipleSections() {}
 ```
 
+**Test 4:** ensureGeneratedStringFromExamPassesTheParser
+
+```java
+@Test
+public void ensureGeneratedStringFromExamPassesTheParser() {}
+```
+
 ## 5. Implementation
 
 ### 5.1. Generate structure of a formative exam string service
@@ -121,10 +128,11 @@ public String generateStructureString() {
     StringBuilder sb = new StringBuilder();
 
     sb.append(buildStartExam());
-    sb.append(buildDescriptionExam());
-    sb.append(buildFeedbackExam());
-    sb.append(buildGradeExam());
-    sb.append(buildSections());
+    sb.append(buildHeaderExam());
+
+    double score = getScorePerQuestion();
+
+    sb.append(buildSections(score));
     sb.append(buildEndExam());
 
     return sb.toString();
@@ -133,7 +141,8 @@ public String generateStructureString() {
 
 ## 6. Integration & Demonstration
 
-![US2009_DEMO](out/US2009_DEMO.svg)
+![US2009_DEMO2](US2009_DEMO2.png)
+![US2009_DEMO](US2009_DEMO.png)
 
 ## 7. Observations
 
