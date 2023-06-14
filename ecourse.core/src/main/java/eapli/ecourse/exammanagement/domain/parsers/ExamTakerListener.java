@@ -12,6 +12,8 @@ import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.parsers.ExamParser.PropertiesContext;
 
 public class ExamTakerListener extends ExamBaseListener {
+  private final Double DOUBLE_ACCEPTABLE_ERROR = 0.00000000001d;
+
   private boolean feedbackOn;
   private boolean gradeOn;
   private final ExamPrinter printer;
@@ -32,12 +34,15 @@ public class ExamTakerListener extends ExamBaseListener {
     String title = null, description = null;
 
     for (PropertiesContext prop : ctx.properties()) {
+      // Get exam's title and description
       if (prop.title() != null) {
         title = extractString(prop.title().STRING().getText());
       }
       if (prop.description() != null) {
         description = extractString(prop.description().STRING().getText());
       }
+
+      // Check if grade and feedback should be shown
       if (prop.grade() != null && prop.grade().FDB_GRD_TYPE().getText().equals("on-submit"))
         gradeOn = true;
       else if (prop.grade() != null && prop.grade().FDB_GRD_TYPE().getText().equals("none"))
@@ -50,10 +55,10 @@ public class ExamTakerListener extends ExamBaseListener {
     }
 
     if (ctx.getParent().getStart().getText().equals("@start-exam"))
-      // Entering in the Exam Header...
+      // Printing the Exam Header...
       printer.printExamHeader(title, description);
     else
-      // Entering in the Section Header...
+      // Printing the Section Header...
       printer.printSectionHeader(title, description);
 
   }
@@ -82,7 +87,7 @@ public class ExamTakerListener extends ExamBaseListener {
         questionScore);
 
     // Check if student's answer is correct
-    if (Math.abs(correctAnswer - studentAnswer) <= acceptedError)
+    if (Math.abs(correctAnswer - studentAnswer) - acceptedError <= DOUBLE_ACCEPTABLE_ERROR)
       showFeedback(true, questionScore);
     else
       showFeedback(false, feedback);
@@ -253,13 +258,60 @@ public class ExamTakerListener extends ExamBaseListener {
   }
 
   @Override
+  public void enterMatchingQuestion(ExamParser.MatchingQuestionContext ctx) {
+    // Get question's score and increment exam's total score
+    Double questionScore = Double.parseDouble(ctx.score().NUMBER().getText());
+    incrementExamScore(questionScore);
+
+    // Get feedback (if present)
+    String feedback;
+    if (ctx.feedback() != null)
+      feedback = extractString(ctx.feedback().STRING().getText());
+    else
+      feedback = null;
+
+    // Map correct matches
+    Map<String, String> correctMatches = new HashMap<>();
+    ctx.matchingCorrectAnswer().forEach(a -> {
+      String matchIdentifier = a.NUMBER(0).getText();
+      String optionIdentifier = a.NUMBER(1).getText();
+
+      correctMatches.put(matchIdentifier, optionIdentifier);
+    });
+
+    // Map options
+    Map<String, String> options = new HashMap<>();
+    ctx.option().forEach(o -> {
+      options.put(o.NUMBER().getText(), extractString(o.STRING(0).getText()));
+    });
+
+    // Map matches
+    Map<String, String> matches = new HashMap<>();
+    ctx.match().forEach(m -> {
+      matches.put(m.NUMBER().getText(), extractString(m.STRING().getText()));
+    });
+
+    // Print question and get student's answer
+    Map<String, String> studentMatches = printer.getMatchingQuestionAnswer(extractString(ctx.body().STRING().getText()),
+        options, matches,
+        questionScore);
+
+    // Check if student's answer is correct
+    if (correctMatches.equals(studentMatches))
+      showFeedback(true, questionScore);
+    else
+      showFeedback(false, feedback);
+  }
+
+  @Override
   public void exitExam(ExamParser.ExamContext ctx) {
+    // Print final score, if needed
     if (gradeOn)
       printer.printFinalScore(studentScore, examScore);
   }
 
   public ExamScore getStudentsScore() {
-    return null;
+    return ExamScore.valueOf(studentScore);
   }
 
   private String extractString(String s) {
@@ -277,15 +329,15 @@ public class ExamTakerListener extends ExamBaseListener {
     examScore += score;
   }
 
-  private void showFeedback(boolean isCorrect, Object... args) {
+  private void showFeedback(boolean isCorrect, Object arg) {
     if (isCorrect) {
-      // args[0] acts as student's score
-      incrementStudentScore((Double) args[0]);
+      // arg acts as student's score
+      incrementStudentScore((Double) arg);
       printer.printCorrectAnswer();
     } else {
-      // args[0] acts as feedback
-      if ((String) args[0] != null && feedbackOn)
-        printer.printIncorrectAnswer((String) args[0]);
+      // arg acts as feedback
+      if ((String) arg != null && feedbackOn)
+        printer.printIncorrectAnswer((String) arg);
       else
         printer.printIncorrectAnswer();
     }
