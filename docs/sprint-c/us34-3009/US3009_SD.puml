@@ -1,0 +1,89 @@
+@startuml US3009_SD
+autonumber
+
+actor "User" as M
+participant "ViewBoardHistoryUI" as UI <<presentation>>
+participant "ViewBoardHistoryController" as CTRL <<application>>
+participant "ListBoardService" as LBSRV <<service>>
+participant "ListPostItService" as LPSRV <<service>>
+participant "Board" as B <<domain>>
+participant "PostIt" as P <<domain>>
+participant "BoardDTO" as BDTO <<dto>>
+participant "PostItDTO" as PDTO <<dto>>
+
+database BoardRepository as BREP <<repository>>
+database PostItRepository as PREP <<repository>>
+
+activate M
+
+M -> UI : asks to view board history
+activate UI
+
+UI -> CTRL : new(boardRepository, postItRepository)
+activate CTRL
+CTRL -> LBSRV : new(boardRepository)
+activate LBSRV
+deactivate LBSRV
+UI -> CTRL : listUserAccessibleBoards()
+
+CTRL -> LBSRV : userAccessibleBoards(username)
+activate LBSRV
+LBSRV -> BREP : findAllAccessibleByUser(username)
+activate BREP
+BREP --> LBSRV : boards
+deactivate BREP
+
+loop for each board
+  LBSRV -> B : toDTO(board)
+  activate B
+  B -> BDTO : new()
+  activate BDTO
+  deactivate BDTO
+  deactivate B
+end loop
+
+LBSRV --> CTRL : boards
+deactivate LBSRV
+CTRL --> UI : boards
+deactivate CTRL
+
+UI --> M : asks to select the board
+deactivate UI
+
+M -> UI : selects the board
+activate UI
+
+UI -> CTRL : listBoardHistory(boardId)
+activate CTRL
+
+CTRL -> LPSRV : new(postItRepository)
+activate LPSRV
+deactivate LPSRV
+
+CTRL -> LPSRV : boardHistory(boardId)
+activate LPSRV
+LPSRV -> PREP : findAllPostItsOrderedByDate(boardId)
+activate PREP
+PREP --> LPSRV : postIts
+deactivate PREP
+
+loop for each postIt
+  LPSRV -> P : toDTO(postIt)
+  activate P
+  P -> PDTO : new()
+  activate PDTO
+  deactivate PDTO
+  deactivate P
+end loop
+
+LPSRV --> CTRL : postIts
+deactivate LPSRV
+CTRL --> UI : postIts
+deactivate CTRL
+
+UI --> M : shows the board history
+deactivate UI
+
+deactivate M
+
+@enduml
