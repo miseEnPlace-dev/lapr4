@@ -93,8 +93,11 @@ trueFalseCorrectAnswer: CORRECT_ANSWER (TRUE | FALSE) EOI;
 // End of instruction
 EOI: ';';
 
-// Chars wrapped in double quotes, allowing escaped quotes and backslash
-STRING: '"' ( '\\' [\\"] | ~[\\"])* '"';
+// Chars wrapped in double quotes, allowing escaped double quotes, backslashes and newlines
+STRING:
+	'"' ('\\' [\\"] | ~[\\"])* '"'
+	| '"' ( '\\' [\\n] | ~[\\"])* '"';
+// STRING: '"' ( '\\' [\\"] | ~[\\"])* '"';
 
 START_EXAM:											'@start-exam';
 END_EXAM:												'@end-exam';

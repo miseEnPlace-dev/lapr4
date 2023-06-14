@@ -9,12 +9,11 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.exammanagement.application.ExamPrinter;
-// import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-// import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 
-public class ANTLR4TakeExamParser implements GrammarParser<Answer> {
-  public Answer parseFromFile(String path) throws IOException, ParseException {
+public class ANTLR4TakeExamParser implements GrammarParser<ExamScore> {
+  public ExamScore parseFromFile(String path) throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(path));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     ExamParser parser = new ExamParser(tokens);
@@ -27,10 +26,10 @@ public class ANTLR4TakeExamParser implements GrammarParser<Answer> {
     ExamTakerListener listener = new ExamTakerListener(null);
     walker.walk(listener, tree);
 
-    return listener.getAnswer();
+    return listener.getStudentsScore();
   }
 
-  public Answer parseFromFile(String path, ExamPrinter printer) throws IOException, ParseException {
+  public ExamScore parseFromFile(String path, ExamPrinter printer) throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(path));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     ExamParser parser = new ExamParser(tokens);
@@ -43,10 +42,10 @@ public class ANTLR4TakeExamParser implements GrammarParser<Answer> {
     ExamTakerListener listener = new ExamTakerListener(printer);
     walker.walk(listener, tree);
 
-    return listener.getAnswer();
+    return listener.getStudentsScore();
   }
 
-  public Answer parseFromString(String str) throws ParseException {
+  public ExamScore parseFromString(String str) throws ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromString(str));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     ExamParser parser = new ExamParser(tokens);
@@ -59,10 +58,10 @@ public class ANTLR4TakeExamParser implements GrammarParser<Answer> {
     ExamTakerListener listener = new ExamTakerListener(null);
     walker.walk(listener, tree);
 
-    return listener.getAnswer();
+    return listener.getStudentsScore();
   }
 
-  public Answer parseFromString(String str, ExamPrinter printer) throws ParseException {
+  public ExamScore parseFromString(String str, ExamPrinter printer) throws ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromString(str));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     ExamParser parser = new ExamParser(tokens);
@@ -75,6 +74,6 @@ public class ANTLR4TakeExamParser implements GrammarParser<Answer> {
     ExamTakerListener listener = new ExamTakerListener(printer);
     walker.walk(listener, tree);
 
-    return listener.getAnswer();
+    return listener.getStudentsScore();
   }
 }
