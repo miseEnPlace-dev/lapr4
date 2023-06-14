@@ -1,4 +1,4 @@
-// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
+// Generated from /home/drew/Faculdade/LAPR4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -117,6 +117,16 @@ public interface FormativeExamListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFeedback(FormativeExamParser.FeedbackContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormativeExamParser#grade}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrade(FormativeExamParser.GradeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormativeExamParser#grade}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrade(FormativeExamParser.GradeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormativeExamParser#score}.
 	 * @param ctx the parse tree

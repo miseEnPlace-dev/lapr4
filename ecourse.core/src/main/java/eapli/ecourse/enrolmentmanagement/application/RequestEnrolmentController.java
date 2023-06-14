@@ -68,6 +68,8 @@ public class RequestEnrolmentController {
     Course course = courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow();
     Enrolment enrolment = new Enrolment(student, course);
 
+    if (course.enrolmentState().isClosed())
+      throw new IllegalStateException("Enrolment is closed");
     if (isEnrolled(courseDTO, student))
       throw new IllegalStateException("You are already enrolled in this course");
 

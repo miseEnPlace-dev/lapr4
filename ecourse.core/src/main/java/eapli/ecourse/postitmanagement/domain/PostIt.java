@@ -254,6 +254,10 @@ public class PostIt implements AggregateRoot<PostItID> {
     this.state = new PostItState(State.DELETED);
   }
 
+  public void toggleIsLatest() {
+    this.isLatest = !this.isLatest;
+  }
+
   public boolean isActive() {
     return this.state.isActive();
   }

@@ -9,7 +9,7 @@ section:
 	startSection header numberOfQuestions questionsType endSection;
 
 header:							properties+;
-properties:					title | description | feedback | score;
+properties:					title | description | feedback | grade | score;
 numberOfQuestions:	NUMBER_OF_QUESTIONS NUMBER EOI;
 questionsType:
 	QUESTIONS_TYPE (
@@ -24,6 +24,7 @@ questionsType:
 title:				TITLE STRING EOI;
 description:	DESCRIPTION STRING EOI;
 feedback:			FEEDBACK FDB_GRD_TYPE EOI;
+grade:				GRADE FDB_GRD_TYPE EOI;
 score:				SCORE NUMBER EOI;
 
 startExam:	START_EXAM IDENTIFIER EOI;
@@ -50,6 +51,7 @@ END_SECTION:					'@end-section';
 NUMBER_OF_QUESTIONS:	'@number-of-questions';
 QUESTIONS_TYPE:				'@questions-type';
 SCORE:								'@score';
+GRADE:								'@grade';
 
 // Feedback/Grade type
 FDB_GRD_TYPE: 'none' | 'on-submit' | 'after-closing';

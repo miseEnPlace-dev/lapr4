@@ -2,10 +2,14 @@ package eapli.ecourse.questionmanagement.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 @Entity
 public class NumericalQuestion extends Question {
   private static final long serialVersionUID = 1L;
+
+  @Transient
+  private final String typeQuestion = "numerical";
 
   @Column(nullable = false)
   private Double correctAnswer;
@@ -56,6 +60,10 @@ public class NumericalQuestion extends Question {
 
     return this.body().equals(that.body()) && this.type().equals(that.type())
         && this.correctAnswer.equals(that.correctAnswer) && this.acceptedError.equals(that.acceptedError);
+  }
+
+  public String typeQuestion() {
+    return this.typeQuestion;
   }
 
   @Override

@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
+
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
@@ -52,7 +53,7 @@ public class GetBoardPostItsMessage extends Message {
       return;
     }
 
-    Iterable<PostItDTO> list = listPostItsSvc.ofBoard(b.get().identity());
+    Iterable<PostItDTO> list = listPostItsSvc.latestOfBoard(b.get().identity());
 
     send(new ProtocolMessage(MessageCode.GET_BOARD_POSTITS, list));
   }

@@ -9,27 +9,25 @@
 
 ---
 
-## 1. Requirements
+## 1. Context
+
+This is the first time this task is assigned to be developed. This is a new functionality that is needed to create new exams, using a specific language defined by the team.
+
+---
+
+## 2. Requirements
 
 ### "As Teacher, I want to create/update automatic formative exams."
 
-## 1.1. Client Specifications
+## 2.1. Client Specifications
 
-<!-- TODO -->
+- "**Teachers** can create exams."
+- "An exam is related to a specific **course**."
+- "It has a unique **title** and a small **description**."
+- "Exams have also a **open** and a **close date**. The open date is the time when students can start to take the exam. The close date is the deadline for students to submit the exam."
+- "The system must provide a **language** to support the specification and "execution" of exams. The language must support the **design** of the exam layout and its questions as well as **solutions**, **feedback** and **grading**."
 
-- "The platform should support the activities of the major actors of a course, mainly teachers, students and managers."
-- "The Admin app is used by managers to manage courses, users and enrollment of students."
-- "A course may be open or closed."
-- "A course has also a small textual descriptions of its contents."
-- "Courses may have a minimum and a maximum number of enrolled students."
-- "The usual workflow related to the course can be illustrated as follows:
-  event create (-> state close) -> event open (-> state open) -> event open enrollments (-> state
-  enroll) -> event close enrollments (-> state in progress) -> event close (-> state closed")
-  v
-
-## 1.2. Client Clarifications
-
-<!-- TODO -->
+## 2.2. Client Clarifications
 
 > [**Question 2**](../../client-clarifications.md#question-2): As for the exam, is the title written in the exam the same as its unique title to identify?
 > \
@@ -39,13 +37,15 @@
 > \
 > **Answer**: "There is no "database" of questions (no identity)"
 
-## 1.3. Functional Requirements
+## 2.3. Functional Requirements
 
 > **FRE01** Create Exam - A Teacher creates a new exam. This includes the specification of the exam (i.e., its structure, in accordance with a grammar for exams that is used to validate the specification of the exam).
 
+## 2.4. Non-Functional Requirements
+
 > **NFR09** Exam Language - The support for exams (its design, feedback and grading) must follow specific technical requirements, specified in LPROG. The ANTLR tool should be used (<https://www.antlr.org/>).
 
-## 1.4. Acceptance Criteria
+## 2.5. Acceptance Criteria
 
 > **AC.1**: The specification of formative exams is similar to regular exams, but the user specifies the type of questions to be inserted in the sections instead of the specific questions.
 
@@ -59,92 +59,37 @@
 
 ---
 
-## 2. Analysis
+## 3. Analysis
 
-### 2.1. Main success scenario
+### 3.1. Input and Output Data
 
-<!-- TODO -->
+#### Input
 
-1. Warehouse Employee requires the configuration of an AGV available in the Warehouse.
-2. The System asks for information related to the AGV
-3. Warehouse Employee enters the information.
-4. The System reports the success of the operation.
+- Exam Structure (Text file)
 
-### 2.2. Conditions
+#### Output
 
-<!-- TODO -->
-
-The registration information of the new category is persisted/saved in the system.
-
-### 2.3. System Sequence Diagram
-
-![US1006_SSD](out/US1006_SSD.svg)
-
-### 2.4. Sequence Diagram (Simplified)
-
-![US1006_SD](out/US1006_SD.svg)
-
-### 2.5. Partial Domain Model
-
-![US1006_DM](out/US1006_DM.svg)
-
----
-
-## 3. Design
-
-### 3.1. Functionality Realization
-
-![US1006_SD](out/US1006_SD.svg)
-
-### 3.2. Class Diagram
-
-![US1006_CD](out/US1006_CD.svg)
-
-### 3.3. Applied Patterns
-
-<!-- TODO -->
-
-- xxx
-
-### 3.4. Tests
-
-<!-- TODO -->
-
-**Test 1:** xxx
-
-```java
-  @Test
-  private void test1() {
-    assetTrue(true);
-  }
-```
-
----
+- Success or error messages (from parser)
 
 ## 4. Implementation
 
-### 4.1. Controller
-
-<!-- TODO -->
-
-- Relevant implementation details
+- Parser from a file
 
 ```java
-  private void sample() {
-    return true;
+  public FormativeExamRequestBuilder parseFromFile(String filePath) throws IOException, ParseException {
+    FormativeExamLexer lexer = new FormativeExamLexer(CharStreams.fromFileName(filePath));
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    FormativeExamParser parser = new FormativeExamParser(tokens);
+    ParseTree tree = parser.start();
+
+    if (parser.getNumberOfSyntaxErrors() > 0)
+      throw new ParseException();
+
+    FormativeExamBuilderVisitor eval = new FormativeExamBuilderVisitor();
+    return (FormativeExamRequestBuilder) eval.visit(tree);
   }
 ```
 
----
-
-## 5. Integration & Demonstration
-
-<!-- TODO -->
-
-![US1006_DEMO](assets/US1006_DEMO.png)
-
-## 6. Observations
-
-<!-- TODO -->
+## 5. Observations
 
 N/a

@@ -42,6 +42,7 @@ public class AnswerBootstrapper implements Action {
   @Override
   public boolean execute() {
     Course course = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("2222")).get();
+    Course lprog = PersistenceContext.repositories().courses().ofIdentity(CourseCode.valueOf("4444")).get();
     Teacher teacher = PersistenceContext.repositories().teachers().ofIdentity(TaxPayerNumber.valueOf("987654321"))
         .get();
     Student student = PersistenceContext.repositories().students()
@@ -54,16 +55,26 @@ public class AnswerBootstrapper implements Action {
 
     sections.add(new EvaluationExamSection(SectionIdentifier.valueOf("section 1"),
         SectionTitle.valueOf("section 1 title"), SectionDescription.valueOf("section 1 description"), questions));
+
     EvaluationExam exam = new EvaluationExam(course, teacher, ExamIdentifier.valueOf("12345"),
         ExamTitle.valueOf("Exam title"), ExamDescription.valueOf("description"), sections,
         Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.ON_SUBMIT,
         ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
 
+    EvaluationExam exam2 = new EvaluationExam(lprog, teacher, ExamIdentifier.valueOf("11111"),
+      ExamTitle.valueOf("Test Exam"), ExamDescription.valueOf("description"), sections,
+      Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.ON_SUBMIT,
+      ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
+
     Exam e = examRepo.save(exam);
+    Exam e2 = examRepo.save(exam2);
     Answer answer = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(60.0));
-    answerRepo.save(answer);
     Answer a = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(99.0));
+    Answer a2 = new Answer(AnswerId.newID(), student, e2, ExamScore.valueOf(77.0));
+    answerRepo.save(answer);
     answerRepo.save(a);
+    answerRepo.save(a2);
+
     return false;
   }
 }

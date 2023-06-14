@@ -1,4 +1,4 @@
-// Generated from /home/russo/isep/lapr4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
+// Generated from /home/drew/Faculdade/LAPR4/sem4pi-22-23-19/ecourse.core/src/main/java/eapli/ecourse/exammanagement/domain/grammars/FormativeExam/FormativeExam.g4 by ANTLR 4.9.2
 package eapli.ecourse.exammanagement.domain.parsers;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -19,18 +19,20 @@ public class FormativeExamParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, EOI=7, STRING=8, START_EXAM=9, 
 		END_EXAM=10, TITLE=11, DESCRIPTION=12, FEEDBACK=13, START_SECTION=14, 
-		END_SECTION=15, NUMBER_OF_QUESTIONS=16, QUESTIONS_TYPE=17, SCORE=18, FDB_GRD_TYPE=19, 
-		NUMBER=20, REAL_NUMBER=21, INTEGER=22, IDENTIFIER=23, WS=24, COMMENT=25;
+		END_SECTION=15, NUMBER_OF_QUESTIONS=16, QUESTIONS_TYPE=17, SCORE=18, GRADE=19, 
+		FDB_GRD_TYPE=20, NUMBER=21, REAL_NUMBER=22, INTEGER=23, IDENTIFIER=24, 
+		WS=25, COMMENT=26;
 	public static final int
 		RULE_start = 0, RULE_exam = 1, RULE_sections = 2, RULE_section = 3, RULE_header = 4, 
 		RULE_properties = 5, RULE_numberOfQuestions = 6, RULE_questionsType = 7, 
-		RULE_title = 8, RULE_description = 9, RULE_feedback = 10, RULE_score = 11, 
-		RULE_startExam = 12, RULE_endExam = 13, RULE_startSection = 14, RULE_endSection = 15;
+		RULE_title = 8, RULE_description = 9, RULE_feedback = 10, RULE_grade = 11, 
+		RULE_score = 12, RULE_startExam = 13, RULE_endExam = 14, RULE_startSection = 15, 
+		RULE_endSection = 16;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"start", "exam", "sections", "section", "header", "properties", "numberOfQuestions", 
-			"questionsType", "title", "description", "feedback", "score", "startExam", 
-			"endExam", "startSection", "endSection"
+			"questionsType", "title", "description", "feedback", "grade", "score", 
+			"startExam", "endExam", "startSection", "endSection"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -40,7 +42,7 @@ public class FormativeExamParser extends Parser {
 			null, "'numerical'", "'short-answer'", "'multiple-choice'", "'true-false'", 
 			"'matching'", "'missing-words'", "';'", null, "'@start-exam'", "'@end-exam'", 
 			"'@title'", "'@description'", "'@feedback'", "'@start-section'", "'@end-section'", 
-			"'@number-of-questions'", "'@questions-type'", "'@score'"
+			"'@number-of-questions'", "'@questions-type'", "'@score'", "'@grade'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -48,8 +50,8 @@ public class FormativeExamParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, "EOI", "STRING", "START_EXAM", 
 			"END_EXAM", "TITLE", "DESCRIPTION", "FEEDBACK", "START_SECTION", "END_SECTION", 
-			"NUMBER_OF_QUESTIONS", "QUESTIONS_TYPE", "SCORE", "FDB_GRD_TYPE", "NUMBER", 
-			"REAL_NUMBER", "INTEGER", "IDENTIFIER", "WS", "COMMENT"
+			"NUMBER_OF_QUESTIONS", "QUESTIONS_TYPE", "SCORE", "GRADE", "FDB_GRD_TYPE", 
+			"NUMBER", "REAL_NUMBER", "INTEGER", "IDENTIFIER", "WS", "COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -132,7 +134,7 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
+			setState(34);
 			exam();
 			}
 		}
@@ -185,13 +187,13 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
-			startExam();
-			setState(35);
-			header();
 			setState(36);
-			sections();
+			startExam();
 			setState(37);
+			header();
+			setState(38);
+			sections();
+			setState(39);
 			endExam();
 			}
 		}
@@ -239,17 +241,17 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40); 
+			setState(42); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(39);
+				setState(41);
 				section();
 				}
 				}
-				setState(42); 
+				setState(44); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==START_SECTION );
@@ -307,15 +309,15 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44);
-			startSection();
-			setState(45);
-			header();
 			setState(46);
-			numberOfQuestions();
+			startSection();
 			setState(47);
-			questionsType();
+			header();
 			setState(48);
+			numberOfQuestions();
+			setState(49);
+			questionsType();
+			setState(50);
 			endSection();
 			}
 		}
@@ -363,20 +365,20 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51); 
+			setState(53); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(50);
+				setState(52);
 				properties();
 				}
 				}
-				setState(53); 
+				setState(55); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TITLE) | (1L << DESCRIPTION) | (1L << FEEDBACK) | (1L << SCORE))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TITLE) | (1L << DESCRIPTION) | (1L << FEEDBACK) | (1L << SCORE) | (1L << GRADE))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -399,6 +401,9 @@ public class FormativeExamParser extends Parser {
 		}
 		public FeedbackContext feedback() {
 			return getRuleContext(FeedbackContext.class,0);
+		}
+		public GradeContext grade() {
+			return getRuleContext(GradeContext.class,0);
 		}
 		public ScoreContext score() {
 			return getRuleContext(ScoreContext.class,0);
@@ -426,34 +431,41 @@ public class FormativeExamParser extends Parser {
 		PropertiesContext _localctx = new PropertiesContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_properties);
 		try {
-			setState(59);
+			setState(62);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TITLE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(55);
+				setState(57);
 				title();
 				}
 				break;
 			case DESCRIPTION:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(56);
+				setState(58);
 				description();
 				}
 				break;
 			case FEEDBACK:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(57);
+				setState(59);
 				feedback();
 				}
 				break;
-			case SCORE:
+			case GRADE:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(58);
+				setState(60);
+				grade();
+				}
+				break;
+			case SCORE:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(61);
 				score();
 				}
 				break;
@@ -501,11 +513,11 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
+			setState(64);
 			match(NUMBER_OF_QUESTIONS);
-			setState(62);
+			setState(65);
 			match(NUMBER);
-			setState(63);
+			setState(66);
 			match(EOI);
 			}
 		}
@@ -549,9 +561,9 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65);
+			setState(68);
 			match(QUESTIONS_TYPE);
-			setState(66);
+			setState(69);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -561,7 +573,7 @@ public class FormativeExamParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(67);
+			setState(70);
 			match(EOI);
 			}
 		}
@@ -605,11 +617,11 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(69);
+			setState(72);
 			match(TITLE);
-			setState(70);
+			setState(73);
 			match(STRING);
-			setState(71);
+			setState(74);
 			match(EOI);
 			}
 		}
@@ -653,11 +665,11 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(73);
+			setState(76);
 			match(DESCRIPTION);
-			setState(74);
+			setState(77);
 			match(STRING);
-			setState(75);
+			setState(78);
 			match(EOI);
 			}
 		}
@@ -701,11 +713,59 @@ public class FormativeExamParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
+			setState(80);
 			match(FEEDBACK);
-			setState(78);
+			setState(81);
 			match(FDB_GRD_TYPE);
-			setState(79);
+			setState(82);
+			match(EOI);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class GradeContext extends ParserRuleContext {
+		public TerminalNode GRADE() { return getToken(FormativeExamParser.GRADE, 0); }
+		public TerminalNode FDB_GRD_TYPE() { return getToken(FormativeExamParser.FDB_GRD_TYPE, 0); }
+		public TerminalNode EOI() { return getToken(FormativeExamParser.EOI, 0); }
+		public GradeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_grade; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FormativeExamListener ) ((FormativeExamListener)listener).enterGrade(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FormativeExamListener ) ((FormativeExamListener)listener).exitGrade(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FormativeExamVisitor ) return ((FormativeExamVisitor<? extends T>)visitor).visitGrade(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final GradeContext grade() throws RecognitionException {
+		GradeContext _localctx = new GradeContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_grade);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(84);
+			match(GRADE);
+			setState(85);
+			match(FDB_GRD_TYPE);
+			setState(86);
 			match(EOI);
 			}
 		}
@@ -745,15 +805,15 @@ public class FormativeExamParser extends Parser {
 
 	public final ScoreContext score() throws RecognitionException {
 		ScoreContext _localctx = new ScoreContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_score);
+		enterRule(_localctx, 24, RULE_score);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(81);
+			setState(88);
 			match(SCORE);
-			setState(82);
+			setState(89);
 			match(NUMBER);
-			setState(83);
+			setState(90);
 			match(EOI);
 			}
 		}
@@ -793,15 +853,15 @@ public class FormativeExamParser extends Parser {
 
 	public final StartExamContext startExam() throws RecognitionException {
 		StartExamContext _localctx = new StartExamContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_startExam);
+		enterRule(_localctx, 26, RULE_startExam);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(92);
 			match(START_EXAM);
-			setState(86);
+			setState(93);
 			match(IDENTIFIER);
-			setState(87);
+			setState(94);
 			match(EOI);
 			}
 		}
@@ -840,13 +900,13 @@ public class FormativeExamParser extends Parser {
 
 	public final EndExamContext endExam() throws RecognitionException {
 		EndExamContext _localctx = new EndExamContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_endExam);
+		enterRule(_localctx, 28, RULE_endExam);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(89);
+			setState(96);
 			match(END_EXAM);
-			setState(90);
+			setState(97);
 			match(EOI);
 			}
 		}
@@ -886,15 +946,15 @@ public class FormativeExamParser extends Parser {
 
 	public final StartSectionContext startSection() throws RecognitionException {
 		StartSectionContext _localctx = new StartSectionContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_startSection);
+		enterRule(_localctx, 30, RULE_startSection);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(99);
 			match(START_SECTION);
-			setState(93);
+			setState(100);
 			match(IDENTIFIER);
-			setState(94);
+			setState(101);
 			match(EOI);
 			}
 		}
@@ -933,13 +993,13 @@ public class FormativeExamParser extends Parser {
 
 	public final EndSectionContext endSection() throws RecognitionException {
 		EndSectionContext _localctx = new EndSectionContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_endSection);
+		enterRule(_localctx, 32, RULE_endSection);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(96);
+			setState(103);
 			match(END_SECTION);
-			setState(97);
+			setState(104);
 			match(EOI);
 			}
 		}
@@ -955,29 +1015,30 @@ public class FormativeExamParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\33f\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34m\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2\3\3\3\3"+
-		"\3\3\3\3\3\3\3\4\6\4+\n\4\r\4\16\4,\3\5\3\5\3\5\3\5\3\5\3\5\3\6\6\6\66"+
-		"\n\6\r\6\16\6\67\3\7\3\7\3\7\3\7\5\7>\n\7\3\b\3\b\3\b\3\b\3\t\3\t\3\t"+
-		"\3\t\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3"+
-		"\r\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\21\3\21\3"+
-		"\21\3\21\2\2\22\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \2\3\3\2\3\b\2"+
-		"Z\2\"\3\2\2\2\4$\3\2\2\2\6*\3\2\2\2\b.\3\2\2\2\n\65\3\2\2\2\f=\3\2\2\2"+
-		"\16?\3\2\2\2\20C\3\2\2\2\22G\3\2\2\2\24K\3\2\2\2\26O\3\2\2\2\30S\3\2\2"+
-		"\2\32W\3\2\2\2\34[\3\2\2\2\36^\3\2\2\2 b\3\2\2\2\"#\5\4\3\2#\3\3\2\2\2"+
-		"$%\5\32\16\2%&\5\n\6\2&\'\5\6\4\2\'(\5\34\17\2(\5\3\2\2\2)+\5\b\5\2*)"+
-		"\3\2\2\2+,\3\2\2\2,*\3\2\2\2,-\3\2\2\2-\7\3\2\2\2./\5\36\20\2/\60\5\n"+
-		"\6\2\60\61\5\16\b\2\61\62\5\20\t\2\62\63\5 \21\2\63\t\3\2\2\2\64\66\5"+
-		"\f\7\2\65\64\3\2\2\2\66\67\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28\13\3\2\2"+
-		"\29>\5\22\n\2:>\5\24\13\2;>\5\26\f\2<>\5\30\r\2=9\3\2\2\2=:\3\2\2\2=;"+
-		"\3\2\2\2=<\3\2\2\2>\r\3\2\2\2?@\7\22\2\2@A\7\26\2\2AB\7\t\2\2B\17\3\2"+
-		"\2\2CD\7\23\2\2DE\t\2\2\2EF\7\t\2\2F\21\3\2\2\2GH\7\r\2\2HI\7\n\2\2IJ"+
-		"\7\t\2\2J\23\3\2\2\2KL\7\16\2\2LM\7\n\2\2MN\7\t\2\2N\25\3\2\2\2OP\7\17"+
-		"\2\2PQ\7\25\2\2QR\7\t\2\2R\27\3\2\2\2ST\7\24\2\2TU\7\26\2\2UV\7\t\2\2"+
-		"V\31\3\2\2\2WX\7\13\2\2XY\7\31\2\2YZ\7\t\2\2Z\33\3\2\2\2[\\\7\f\2\2\\"+
-		"]\7\t\2\2]\35\3\2\2\2^_\7\20\2\2_`\7\31\2\2`a\7\t\2\2a\37\3\2\2\2bc\7"+
-		"\21\2\2cd\7\t\2\2d!\3\2\2\2\5,\67=";
+		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\3\2\3"+
+		"\2\3\3\3\3\3\3\3\3\3\3\3\4\6\4-\n\4\r\4\16\4.\3\5\3\5\3\5\3\5\3\5\3\5"+
+		"\3\6\6\68\n\6\r\6\16\69\3\7\3\7\3\7\3\7\3\7\5\7A\n\7\3\b\3\b\3\b\3\b\3"+
+		"\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\r"+
+		"\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3"+
+		"\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24"+
+		"\26\30\32\34\36 \"\2\3\3\2\3\b\2a\2$\3\2\2\2\4&\3\2\2\2\6,\3\2\2\2\b\60"+
+		"\3\2\2\2\n\67\3\2\2\2\f@\3\2\2\2\16B\3\2\2\2\20F\3\2\2\2\22J\3\2\2\2\24"+
+		"N\3\2\2\2\26R\3\2\2\2\30V\3\2\2\2\32Z\3\2\2\2\34^\3\2\2\2\36b\3\2\2\2"+
+		" e\3\2\2\2\"i\3\2\2\2$%\5\4\3\2%\3\3\2\2\2&\'\5\34\17\2\'(\5\n\6\2()\5"+
+		"\6\4\2)*\5\36\20\2*\5\3\2\2\2+-\5\b\5\2,+\3\2\2\2-.\3\2\2\2.,\3\2\2\2"+
+		"./\3\2\2\2/\7\3\2\2\2\60\61\5 \21\2\61\62\5\n\6\2\62\63\5\16\b\2\63\64"+
+		"\5\20\t\2\64\65\5\"\22\2\65\t\3\2\2\2\668\5\f\7\2\67\66\3\2\2\289\3\2"+
+		"\2\29\67\3\2\2\29:\3\2\2\2:\13\3\2\2\2;A\5\22\n\2<A\5\24\13\2=A\5\26\f"+
+		"\2>A\5\30\r\2?A\5\32\16\2@;\3\2\2\2@<\3\2\2\2@=\3\2\2\2@>\3\2\2\2@?\3"+
+		"\2\2\2A\r\3\2\2\2BC\7\22\2\2CD\7\27\2\2DE\7\t\2\2E\17\3\2\2\2FG\7\23\2"+
+		"\2GH\t\2\2\2HI\7\t\2\2I\21\3\2\2\2JK\7\r\2\2KL\7\n\2\2LM\7\t\2\2M\23\3"+
+		"\2\2\2NO\7\16\2\2OP\7\n\2\2PQ\7\t\2\2Q\25\3\2\2\2RS\7\17\2\2ST\7\26\2"+
+		"\2TU\7\t\2\2U\27\3\2\2\2VW\7\25\2\2WX\7\26\2\2XY\7\t\2\2Y\31\3\2\2\2Z"+
+		"[\7\24\2\2[\\\7\27\2\2\\]\7\t\2\2]\33\3\2\2\2^_\7\13\2\2_`\7\32\2\2`a"+
+		"\7\t\2\2a\35\3\2\2\2bc\7\f\2\2cd\7\t\2\2d\37\3\2\2\2ef\7\20\2\2fg\7\32"+
+		"\2\2gh\7\t\2\2h!\3\2\2\2ij\7\21\2\2jk\7\t\2\2k#\3\2\2\2\5.9@";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

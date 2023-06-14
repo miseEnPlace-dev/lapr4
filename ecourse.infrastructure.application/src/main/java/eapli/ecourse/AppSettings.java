@@ -25,6 +25,7 @@ public class AppSettings {
   private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
   private static final String USE_EVENTFUL_CONTROLLERS = "UseEventfulControllers";
   private static final String PASSWORD_ENCODER_KEY = "auth.passwordEncoder";
+  private static final String SSL_ENABLE_KEY = "board.ssl.enabled";
   private static final String BOARD_MAX_ROWS_KEY = "board.maxRows";
   private static final String BOARD_MAX_COLUMNS_KEY = "board.maxColumns";
 
@@ -62,6 +63,10 @@ public class AppSettings {
 
   public String persistenceUnitName() {
     return applicationProperties.getProperty(PERSISTENCE_UNIT_KEY);
+  }
+
+  public boolean isSSLEnabled() {
+    return applicationProperties.getProperty(SSL_ENABLE_KEY).equals("true");
   }
 
   public String repositoryFactory() {

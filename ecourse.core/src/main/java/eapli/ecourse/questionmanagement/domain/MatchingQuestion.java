@@ -113,23 +113,28 @@ public class MatchingQuestion extends Question {
 
     sb.append("@start-correct-answers");
     for (Map.Entry<String, String> entry : matchingQuestion.correctMatches.entrySet()) {
-      sb.append("@correct-answer" + entry.getKey() + " "
+      sb.append("@correct-answer " + entry.getKey() + "-"
           + entry.getValue() + ";");
     }
     sb.append("@end-correct-answers;");
 
     sb.append("@start-options");
     for (Map.Entry<QuestionIdentifier, String> entry : matchingQuestion.options.entrySet()) {
-      sb.append("@option" + entry.getKey() + "  \"" + entry.getValue() + "\";");
+      sb.append("@option " + entry.getKey() + " \"" + entry.getValue() + "\";");
     }
     sb.append("@end-options;");
 
     sb.append("@start-matching");
     for (Map.Entry<QuestionIdentifier, String> entry : matchingQuestion.matches.entrySet()) {
-      sb.append("@match" + entry.getKey() + "  \"" + entry.getValue() + "\";");
+      sb.append("@match " + entry.getKey() + " \"" + entry.getValue() + "\";");
     }
     sb.append("@end-matching;");
 
     return sb.toString();
+  }
+
+  @Override
+  public String typeQuestion() {
+    return "matching";
   }
 }

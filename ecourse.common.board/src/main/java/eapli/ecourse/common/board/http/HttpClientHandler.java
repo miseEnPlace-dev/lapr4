@@ -6,21 +6,29 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.SSLSocket;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class HttpClientHandler implements Runnable {
   private Socket client;
   private Router router;
+  private boolean secure;
 
-  public HttpClientHandler(Socket client, Router router) {
+  public HttpClientHandler(Socket client, Router router, boolean secure) {
     this.client = client;
     this.router = router;
+    this.secure = secure;
   }
 
   @Override
   public void run() {
     try {
+      if (secure)
+        ((SSLSocket) client).startHandshake();
+
       // create a data input stream to read from the client
       DataInputStream input = new DataInputStream(client.getInputStream());
 
@@ -47,7 +55,8 @@ public class HttpClientHandler implements Runnable {
       output.close();
       input.close();
     } catch (IOException e) {
-      System.out.println("[HTTP Client Handler Thread] Error: " + e.getMessage());
+      System.out.printf("[HTTP%s Client Handler Thread] Error: %s\n", this.secure ? "S" : "",
+          e.getMessage());
       e.printStackTrace();
     }
   }

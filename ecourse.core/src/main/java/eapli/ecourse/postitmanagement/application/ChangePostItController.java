@@ -50,7 +50,9 @@ public class ChangePostItController {
     SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
         ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
 
-    return lstPostItService.userUpdatablePostIts(boardID, user.username());
+    // return lstPostItService.userUpdatablePostIts(boardID, user.username());
+    // TODO
+    return null;
   }
 
   public boolean validateCoordinates(BoardID boardID, int x, int y) {

@@ -1,3 +1,100 @@
 @startuml US3008_CD
 
+class UndoPostItChangeUI {}
+
+class UndoPostItChangeController {
+  - AuthorizationService authz
+  - UserManagementService userService
+  - ListBoardsService listBoardsService
+  - BoardRepository boardRepo
+
+  + UndoPostItChangeController(BoardRepository)
+
+  + listUserWritableBoards()
+  + listBoardPostIts(board)
+  + undoPostItChange(postIt)
+}
+
+class AuthorizationService {
+  + session()
+}
+
+class UserSession {
+  + authenticatedUser()
+}
+
+class SystemUser {
+  + username
+}
+
+class UserManagementService {
+  + allUsers()
+}
+
+class ListBoardsService {
+  + findUserWritableBoards(username)
+}
+
+class ListPostItsService {
+  + findLatestByBoardId(boardId)
+}
+
+class PersistenceContext {
+  + repositories()
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface BoardRepository {
+  + findUserWritableBoards(username)
+}
+
+interface PostItRepository {
+  + findLatestByBoardId(boardId)
+}
+
+class PostIt {
+  - id
+  - title
+  - state
+  - coordinates
+  - createdAt
+  - owner
+  - previous
+  - isLatest
+}
+
+class Board {
+  - id
+  - title
+  - archived
+  - createdAt
+  - owner
+  - permissions
+  - rows
+  - columns
+}
+
+UndoPostItChangeUI ..> UndoPostItChangeController
+
+UndoPostItChangeController --> AuthorizationService
+UndoPostItChangeController --> UserManagementService
+UndoPostItChangeController --> ListPostItsService
+UndoPostItChangeController --> ListBoardsService
+UndoPostItChangeController ..> PersistenceContext
+UndoPostItChangeController ..> PostIt
+UndoPostItChangeController ..> Board
+
+AuthorizationService ..> UserSession
+
+UserSession ..> SystemUser
+UserManagementService ..> SystemUser
+
+PersistenceContext ..> RepositoryFactory
+
+RepositoryFactory ..> BoardRepository
+RepositoryFactory ..> PostItRepository
+
 @enduml

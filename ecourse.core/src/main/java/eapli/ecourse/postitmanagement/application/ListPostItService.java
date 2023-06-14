@@ -27,8 +27,8 @@ public class ListPostItService {
     return toDto(list);
   }
 
-  public Iterable<PostItDTO> userUpdatablePostIts(BoardID boardId, Username username) {
-    Iterable<PostIt> list = postItRepository.findLatestPostItsCreatedByUser(boardId, username);
+  public Iterable<PostItDTO> latestOfBoard(BoardID boardId) {
+    Iterable<PostIt> list = postItRepository.findLatestByBoardId(boardId);
     return toDto(list);
   }
 

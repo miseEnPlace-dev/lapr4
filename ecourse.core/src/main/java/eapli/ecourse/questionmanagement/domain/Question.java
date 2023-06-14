@@ -117,4 +117,6 @@ public abstract class Question implements AggregateRoot<QuestionCode> {
   public abstract boolean sameAs(Object other);
 
   public abstract String getQuestionStructure(Question question);
+
+  public abstract String typeQuestion();
 }
