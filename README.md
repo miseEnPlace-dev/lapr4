@@ -72,23 +72,30 @@ To execute the tests, just execute the following command:
 The most straightforward way to run a local database is to use the provided script `h2.sh` (Linux/MacOS) or `h2.bat` (Windows).
 This script starts an H2 database instance with a configuration that connects with the app out-of-the-box.
 
-Although, you may want to connect to a different database or an existing one.
-We already provided different persistence unit configurations in the `persistence.xml` file.
+Although, you may want to connect to a different database or to an existing one.
+We provided different persistence unit configurations in the `persistence.xml` file.
 You can use them by changing the `persistence.persistenceUnit` property in the `application.properties` file of the app.
 
-> ⚠️ Do not forget to use the correct url/credentials for the database you want to connect to, as well as the driver. The app comes with the H2, MariaDB & PostgreSQL drivers. If you want to use a different database, you will need to add the correct dependency to the `pom.xml` file and [build](#3-how-to-build) the app again.
+> ⚠️ Do not forget to use the correct url/credentials for the database you want to connect to, as well as the driver. The app comes with the H2, MariaDB & PostgreSQL drivers; if you want to use a different database, you will need to add the correct driver dependency to the `pom.xml` file, add a persistence unit configuration and [build](#3-how-to-build) the app again.
 
 If you have Docker installed, you can run the following commands to start a PostgreSQL or a MariaDB database locally with the pre-configured persistence units:
 
 ```bashmariadb
 # persistence unit: eapli.eCoursePU_mariadb
-docker run --name mariadb-lapr4 -p 3306:3306 -e MARIADB_ROOT_PASSWORD=docker -d -t mariadb
+docker run --name mariadb-ecourse -p 3306:3306 -e MARIADB_ROOT_PASSWORD=docker -d -t mariadb
 
 # persistence unit: eapli.eCoursePU_postgresql
-docker run --name postgres-lapr4 -p 5432:5432 -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -d postgres
+docker run --name postgres-ecourse -p 5432:5432 -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -d postgres
 ```
 
 ### Running the App
+
+In order to have the needed data for executing the app, you need to run the bootstrap script. For that, execute the following script:
+
+- On Linux/MacOS: `./run-bootstrap.sh`
+- On Windows: `run-bootstrap.bat`
+
+> ⚠️ Only run the bootstrap if you are connecting to a newly created database!
 
 For the board app a server is needed. For that, **open a new terminal** and execute the following script:
 
@@ -96,12 +103,6 @@ For the board app a server is needed. For that, **open a new terminal** and exec
 - On Windows: `run-board-server.bat`
 
 Leave this terminal open and running. Go back to the terminal where you executed the build script and continue with the next steps.
-In order to have the needed data for executing the app, you need to run the bootstrap script. For that, execute the following script:
-
-- On Linux/MacOS: `./run-bootstrap.sh`
-- On Windows: `run-bootstrap.bat`
-
-> ⚠️ Only run the bootstrap if you are connecting to a newly created database!
 
 You are now ready to run the app. Simply execute the script of the app you want to run:
 
@@ -121,6 +122,13 @@ You are now ready to run the app. Simply execute the script of the app you want 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
 📝 _To Do_
+
+Staging instance:
+
+- DB URL: `jdbc:mariadb://vsgate-s1.dei.isep.ipp.pt:11058/ecourse`
+- DB User: `user`
+- DB Password: `aTjORxJPsQMfe*A3`
+- Board Server: `vsgate-s3.dei.isep.ipp.pt:11058`
 
 ## 7. How to Generate PlantUML Diagrams
 
