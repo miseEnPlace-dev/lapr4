@@ -6,7 +6,7 @@ java -cp $ECOURSE_BOOTSTRAP eapli.ecourse.app.bootstrap.ECourseBootstrap -bootst
 
 export ECOURSE_CP=ecourse.daemon.board/target/daemon.board-1.0.0.jar:ecourse.daemon.board/target/dependency/*;
 
-setsid -Djavax.net.ssl.keyStore=serverkeystore.jks \
+setsid java -Djavax.net.ssl.keyStore=serverkeystore.jks \
     -Djavax.net.ssl.keyStorePassword=password \
     -Djavax.net.ssl.trustStore=clienttruststore.jks \
     -Djavax.net.ssl.trustStorePassword=password \
