@@ -143,7 +143,8 @@ public class GenerateStructureFormativeExamServiceTest {
     ExamTitle title = ExamTitle.valueOf("Test Exam");
     ExamDescription description = ExamDescription.valueOf("This is a test exam");
     Collection<FormativeExamSection> sections = new ArrayList<>();
-    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, ExamScore.valueOf(100d),
+        sections);
     QuestionBody body = QuestionBody.valueOf("This is a test question");
     QuestionType type = QuestionType.FORMATIVE;
 
@@ -172,7 +173,8 @@ public class GenerateStructureFormativeExamServiceTest {
     ExamTitle title = ExamTitle.valueOf("Test Exam");
     ExamDescription description = ExamDescription.valueOf("This is a test exam");
     Collection<FormativeExamSection> sections = new ArrayList<>();
-    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, ExamScore.valueOf(100d),
+        sections);
     QuestionBody body = QuestionBody.valueOf("This is a test question");
     QuestionType type = QuestionType.FORMATIVE;
 
@@ -189,7 +191,7 @@ public class GenerateStructureFormativeExamServiceTest {
     FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
     sections.add(section);
 
-    String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
+    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback none;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 50.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 50.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
     GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
     String struct = service.generateStructureString();
@@ -204,7 +206,7 @@ public class GenerateStructureFormativeExamServiceTest {
     ExamTitle title = ExamTitle.valueOf("Test Exam");
     ExamDescription description = ExamDescription.valueOf("This is a test exam");
     Collection<FormativeExamSection> sections = new ArrayList<>();
-    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null,
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, ExamScore.valueOf(100d),
         sections);
     QuestionBody body = QuestionBody.valueOf("This is a test question");
     QuestionType type = QuestionType.FORMATIVE;
@@ -223,7 +225,7 @@ public class GenerateStructureFormativeExamServiceTest {
     sections.add(section);
     sections.add(section);
 
-    String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
+    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback none;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
     GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
     String struct = service.generateStructureString();
@@ -238,7 +240,8 @@ public class GenerateStructureFormativeExamServiceTest {
     ExamTitle title = ExamTitle.valueOf("Test Exam");
     ExamDescription description = ExamDescription.valueOf("This is a test exam");
     Collection<FormativeExamSection> sections = new ArrayList<>();
-    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, null, sections);
+    exam = new FormativeExam(course, getDummyTeacher(), identifier, title, description, ExamScore.valueOf(100d),
+        sections);
     QuestionBody body = QuestionBody.valueOf("This is a test question");
     QuestionType type = QuestionType.FORMATIVE;
 
@@ -257,7 +260,7 @@ public class GenerateStructureFormativeExamServiceTest {
 
     sections.add(section);
 
-    String examStruct = "@start-exam 1;@description \"This is a test exam\";@start-section id;@title \"Section title\";@description \"description\";@start-question@question-body \"This is a test question\";@start-correct-answers@correct-answer A 1.0;@end-correct-answers;@start-options@option A \"Paris\";@end-options;@end-question;@end-section;@end-exam;";
+    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback none;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type multiple-choice;@score 100.0;@question-body \"This is a test question\";@start-correct-answers@correct-answer 1 1.0;@end-correct-answers;@start-options@option 1 \"Paris\";@end-options;@end-question;@end-section;@end-exam;";
 
     GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
 
