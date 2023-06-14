@@ -117,9 +117,7 @@ public class GenerateStructureFormativeExamService {
     int nQuestions = 0;
 
     for (FormativeExamSection section : formativeExam.sections())
-      while (section.questions().iterator().hasNext()) {
-        nQuestions++;
-      }
+      nQuestions += section.questions().size();
 
     double result = Math.round((this.examScore.value() / nQuestions) * 100);
 
