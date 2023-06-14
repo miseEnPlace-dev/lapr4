@@ -94,6 +94,13 @@ public class FormativeExamBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitGrade(FormativeExamParser.GradeContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitScore(FormativeExamParser.ScoreContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

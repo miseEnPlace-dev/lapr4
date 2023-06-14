@@ -21,6 +21,7 @@ public class FormativeExamRequestTest {
   private ExamDescription description;
   private ExamScore score;
   private List<FormativeExamSectionRequest> sections;
+  private ExamInfo gradeInfo;
 
   @Before
   public void setUp() {
@@ -38,7 +39,9 @@ public class FormativeExamRequestTest {
         sectionDescription,
         numberOfQuestions, questionsType);
     sections.add(sectionRequest);
-    request = new FormativeExamRequest(identifier, title, description, score, sections);
+    gradeInfo = (ExamInfo.ON_SUBMIT);
+    request = new FormativeExamRequest(identifier, title, description, score,
+        sections, gradeInfo);
   }
 
   @Test
@@ -64,19 +67,21 @@ public class FormativeExamRequestTest {
   @Test
   public void testSameAs() {
     FormativeExamRequest other = new FormativeExamRequest(identifier, title,
-        description, score, sections);
+        description, score, sections, gradeInfo);
     assertTrue(request.sameAs(other));
   }
 
   @Test
   public void testEquals() {
-    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title,
+        description, score, sections, gradeInfo);
     assertEquals(request, other);
   }
 
   @Test
   public void testHashCode() {
-    FormativeExamRequest other = new FormativeExamRequest(identifier, title, description, score, sections);
+    FormativeExamRequest other = new FormativeExamRequest(identifier, title,
+        description, score, sections, gradeInfo);
     assertEquals(request.hashCode(), other.hashCode());
   }
 

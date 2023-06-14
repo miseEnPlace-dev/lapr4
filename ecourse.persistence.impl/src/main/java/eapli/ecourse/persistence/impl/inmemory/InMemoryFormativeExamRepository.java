@@ -1,5 +1,8 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
+import java.nio.channels.UnsupportedAddressTypeException;
+import java.util.Optional;
+
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
@@ -23,6 +26,11 @@ public class InMemoryFormativeExamRepository extends InMemoryDomainRepository<Fo
   @Override
   public Iterable<FormativeExam> findAllCourseExamsWithNoAnswersFromStudent(CourseCode code,
       MecanographicNumber number) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public FormativeExam findByIdentifier(ExamIdentifier examIdentifier) {
     throw new UnsupportedOperationException();
   }
 }

@@ -9,9 +9,9 @@ public class GenerateStructureFormativeExamService {
   private FormativeExam formativeExam;
   private ExamScore examScore;
 
-  public GenerateStructureFormativeExamService(final FormativeExam formativeExam) {
+  public GenerateStructureFormativeExamService(final FormativeExam formativeExam, final ExamScore examScore) {
     this.formativeExam = formativeExam;
-    this.examScore = formativeExam.score();
+    this.examScore = examScore;
   }
 
   public String generateStructureString() {

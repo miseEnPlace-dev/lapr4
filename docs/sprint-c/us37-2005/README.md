@@ -85,8 +85,6 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ### 4.4. Tests
 
-_Note: This are some simplified versions of the tests for readability purposes._
-
 **Test 1:** Ensure a student cannot check grade of a class that he is not enrolled in (throws exception).
 **Test 2:** Ensure a student can check his grade of a class that he is enrolled in.
 **Test 3:** Ensure a student can check his grade of a class that he is enrolled in, even if he has not taken any exams yet (returns empty list).
@@ -102,7 +100,6 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
   private Student getAuthenticatedStudent() {
     SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
-
     return studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
   }
 
@@ -123,7 +120,13 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![US2005_DEMO](out/US2005_DEMO.svg)
+### 6.1. Success Scenario
+
+![US2005_DEMO](US2005_DEMO.png)
+
+### 6.2. Failure Scenario
+
+![US2005_DEMO_FAIL](US2005_DEMO_FAIL.png)
 
 ## 7. Observations
 
