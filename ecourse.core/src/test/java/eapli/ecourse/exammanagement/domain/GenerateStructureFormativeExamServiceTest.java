@@ -161,7 +161,8 @@ public class GenerateStructureFormativeExamServiceTest {
     FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
     sections.add(section);
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
     System.out.println(struct);
   }
@@ -191,12 +192,13 @@ public class GenerateStructureFormativeExamServiceTest {
     FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
     sections.add(section);
 
-    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback none;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 50.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 50.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
+    String expected = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback on-submit;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 50.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 50.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
 
-    assertEquals(examStruct, struct);
+    assertEquals(expected, struct);
   }
 
   @Test
@@ -225,12 +227,13 @@ public class GenerateStructureFormativeExamServiceTest {
     sections.add(section);
     sections.add(section);
 
-    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback none;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
+    String expected = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback on-submit;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@start-section id;@title \"Section title\";@description \"description\";@start-question@type true-false;@score 25.0;@question-body \"This is a test question\";@correct-answer false;@end-question;@start-question@type numerical;@score 25.0;@question-body \"This is a test question\";@correct-answer1.0;@accepted-error0.5;@end-question;@end-section;@end-exam;";
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
 
-    assertEquals(examStruct, struct);
+    assertEquals(expected, struct);
   }
 
   @Test
@@ -260,13 +263,14 @@ public class GenerateStructureFormativeExamServiceTest {
 
     sections.add(section);
 
-    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback none;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type multiple-choice;@score 100.0;@question-body \"This is a test question\";@start-correct-answers@correct-answer 1 1.0;@end-correct-answers;@start-options@option 1 \"Paris\";@end-options;@end-question;@end-section;@end-exam;";
+    String examStruct = "@start-exam 1;@title \"Test Exam\";@description \"This is a test exam\";@feedback on-submit;@grade on-submit;@start-section id;@title \"Section title\";@description \"description\";@start-question@type multiple-choice;@score 100.0;@question-body \"This is a test question\";@start-correct-answers@correct-answer 1 1.0;@end-correct-answers;@start-options@option 1 \"Paris\";@end-options;@end-question;@end-section;@end-exam;";
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
 
-    String struct = service.generateStructureString();
+    String expected = service.generateStructureString();
 
-    assertEquals(examStruct, struct);
+    assertEquals(examStruct, expected);
   }
 
   @Test
@@ -299,13 +303,13 @@ public class GenerateStructureFormativeExamServiceTest {
     addMissingWord(missingWordsQuestion);
     addOptionMissingWord(missingWordsQuestion);
 
-    // MatchingQuestion matchingQuestion = new MatchingQuestion(
-    // new QuestionBody("Match the following countries with their capitals:"),
-    // QuestionType.FORMATIVE);
-    // addMatch(matchingQuestion);
-    // addMatchOption(matchingQuestion);
-    // addCorrectMatch(matchingQuestion);
-    // addFeedbackMatch(matchingQuestion);
+    MatchingQuestion matchingQuestion = new MatchingQuestion(
+        new QuestionBody("Match the following countries with their capitals"),
+        QuestionType.FORMATIVE);
+    addMatch(matchingQuestion);
+    addMatchOption(matchingQuestion);
+    addCorrectMatch(matchingQuestion);
+    addFeedbackMatch(matchingQuestion);
 
     SectionTitle sectionTitle = SectionTitle.valueOf("Section title");
     SectionIdentifier id = SectionIdentifier.valueOf("id");
@@ -317,22 +321,19 @@ public class GenerateStructureFormativeExamServiceTest {
     questions.add(multipleChoiceQuestion);
     questions.add(shortAnswerQuestion);
     questions.add(missingWordsQuestion);
-    // questions.add(matchingQuestion);
+    questions.add(matchingQuestion);
 
     FormativeExamSection section = new FormativeExamSection(id, sectionTitle, des, questions);
     sections.add(section);
 
-    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam);
+    GenerateStructureFormativeExamService service = new GenerateStructureFormativeExamService(exam,
+        ExamScore.valueOf(100d));
     String struct = service.generateStructureString();
 
     ANTLR4ExamParser parser = new ANTLR4ExamParser();
 
     System.out.println(struct);
 
-    try {
-      parser.parseFromString(struct);
-    } catch (IllegalArgumentException ex) {
-      System.out.println(ex.getMessage());
-    }
+    parser.parseFromString(struct);
   }
 }

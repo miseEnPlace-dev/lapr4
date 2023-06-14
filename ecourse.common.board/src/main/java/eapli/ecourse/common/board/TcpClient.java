@@ -36,7 +36,7 @@ public class TcpClient {
       sslParams.setEndpointIdentificationAlgorithm("HTTPS");
       ((SSLSocket) socket).setSSLParameters(sslParams);
 
-      // ((SSLSocket) socket).startHandshake();
+      ((SSLSocket) socket).startHandshake();
     } else {
       socket = new Socket(hostname, port);
     }

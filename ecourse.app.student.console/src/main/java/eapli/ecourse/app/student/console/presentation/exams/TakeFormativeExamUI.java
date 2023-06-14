@@ -5,7 +5,10 @@ import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.exam.FormativeExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.FormativeExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
+import eapli.ecourse.exammanagement.application.GenerateStructureFormativeExamService;
 import eapli.ecourse.exammanagement.application.TakeFormativeExamController;
+import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -17,6 +20,8 @@ public class TakeFormativeExamUI extends AbstractUI {
   private TakeFormativeExamController ctrl = new TakeFormativeExamController(AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().students(), PersistenceContext.repositories().courses(),
       PersistenceContext.repositories().formativeExams());
+
+  private GenerateStructureFormativeExamService service;
 
   @Override
   public boolean doShow() {
@@ -54,7 +59,19 @@ public class TakeFormativeExamUI extends AbstractUI {
     if (selectedFormativeExamRequest == null)
       return false;
 
+    FormativeExam examSelected = this.ctrl.getFormativeExamSelected(selectedFormativeExamRequest);
+
+    service = new GenerateStructureFormativeExamService(examSelected, examSelected.score());
+
+    try {
+      this.ctrl.parseExam(service.generateStructureString(), new ConsoleExamPrinter());
+    } catch (ParseException ex) {
+      System.out.println(ex.getMessage());
+      return false;
+    }
+
     return false;
+
   }
 
   @Override

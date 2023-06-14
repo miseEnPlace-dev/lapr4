@@ -12,10 +12,12 @@ import org.antlr.v4.runtime.Token;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
 import eapli.ecourse.exammanagement.domain.ExamIdentifier;
+import eapli.ecourse.exammanagement.domain.ExamInfo;
 import eapli.ecourse.exammanagement.domain.ExamTitle;
 import eapli.ecourse.exammanagement.domain.SectionDescription;
 import eapli.ecourse.exammanagement.domain.SectionIdentifier;
 import eapli.ecourse.exammanagement.domain.SectionTitle;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamSectionRequest;
 
@@ -78,12 +80,25 @@ public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<Format
 
         properties.put("feedback", p.feedback().FDB_GRD_TYPE().getText());
       }
+      if (p.grade() != null) {
+        if (properties.containsKey("grade"))
+          raiseError(p, "grade already defined");
+
+        properties.put("grade", p.grade().FDB_GRD_TYPE().getText());
+      }
+      if (p.score() != null) {
+        if (properties.containsKey("score"))
+          raiseError(p, "score already defined");
+
+        properties.put("score", p.score().NUMBER());
+      }
     });
 
     if (ctx.getParent().getStart().getText().equals("@start-exam")) {
       String[] requiredProps = {
           "title",
           "feedback",
+          "grade",
           "score"
       };
 
@@ -165,6 +180,10 @@ public class FormativeExamBuilderVisitor extends FormativeExamBaseVisitor<Format
   private void initializeExam(Map<String, Object> properties) {
     ExamTitle title = ExamTitle.valueOf(properties.get("title").toString());
     builder.withTitle(title);
+    ExamScore score = ExamScore.valueOf(Double.parseDouble(properties.get("score").toString()));
+    builder.withScore(score);
+    ExamInfo gradeInfo = ExamInfo.convert(properties.get("grade").toString());
+    builder.withGradeInfo(gradeInfo);
 
     if (properties.containsKey("description")) {
       ExamDescription description = ExamDescription.valueOf(properties.get("description").toString());

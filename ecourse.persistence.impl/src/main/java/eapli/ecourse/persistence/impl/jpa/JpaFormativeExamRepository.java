@@ -37,4 +37,14 @@ public class JpaFormativeExamRepository extends JpaAutoTxRepository<FormativeExa
     query.setParameter("number", number);
     return query.getResultList();
   }
+
+  @Override
+  public FormativeExam findByIdentifier(ExamIdentifier identifier) {
+    final TypedQuery<FormativeExam> query = entityManager().createQuery(
+        "SELECT e FROM FormativeExam e WHERE e.identifier = :identifier", FormativeExam.class);
+
+    query.setParameter("identifier", identifier);
+
+    return query.getSingleResult();
+  }
 }
