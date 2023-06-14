@@ -1,0 +1,80 @@
+@startuml US3009_CD
+
+interface BoardRepository {
+  {abstract} findAllActiveBoardsWithUserWritePermission()
+}
+
+interface PostItRepository {
+  {abstract} findLastestPostItsCreatedByUser(boardId, username)
+  {abstract} findLatestVersionOfBoard(boardId)
+  {abstract} save(postIt)
+}
+
+class ListBoardService {
+  - boardRepository
+
+  + ListBoardService(boardRepository)
+
+  + userAccessibleBoards(username)
+}
+
+class ListPostItService {
+  - postItRepository
+
+  + ListPostItService(postItRepository)
+
+  + boardHistory(boardId)
+}
+
+class ViewBoardHistoryUI {}
+
+class ViewBoardHistoryController {
+  - boardRepository
+  - postItRepository
+
+  + ViewBoardHistoryController(boardRepository, postItRepository)
+
+  + listUserAccessibleBoards()
+  + listBoardId(boardId)
+}
+
+class PostIt {
+}
+
+class PostItDTO {
+  + toDto()
+}
+
+class BoardDTOParser {
+  + toDto()
+}
+
+class Board {
+}
+
+
+class BoardDTO {
+  + toDto()
+}
+
+class BoardDTOParser {
+  + toDto()
+}
+
+
+ViewBoardHistoryUI ..> ViewBoardHistoryController
+ViewBoardHistoryController --> ListBoardService
+ViewBoardHistoryController --> ListPostItService
+
+ListBoardService ..> Board
+ListBoardService --> BoardRepository
+ListPostItService --> PostItRepository
+
+ListPostItService ..> PostIt
+BoardDTOParser ..> BoardDTO
+BoardDTOParser ..> Board
+
+PostItDTOParser ..> PostItDTO
+PostItDTOParser ..> PostIt
+
+@enduml
