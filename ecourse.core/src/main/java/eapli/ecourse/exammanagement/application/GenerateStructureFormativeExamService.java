@@ -37,7 +37,7 @@ public class GenerateStructureFormativeExamService {
   private String buildFeedbackExam() {
     StringBuilder sb = new StringBuilder();
 
-    return sb.append("@feedback none;").toString();
+    return sb.append("@feedback on-submit;").toString();
   }
 
   private Object buildHeaderExam() {
@@ -120,7 +120,9 @@ public class GenerateStructureFormativeExamService {
         nQuestions++;
       }
 
-    return this.examScore.value() / nQuestions;
+    double result = Math.round((this.examScore.value() / nQuestions) * 100);
+
+    return result / 100;
   }
 
 }
