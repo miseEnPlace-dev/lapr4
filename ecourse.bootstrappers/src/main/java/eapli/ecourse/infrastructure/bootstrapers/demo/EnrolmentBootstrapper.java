@@ -1,6 +1,6 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
-import eapli.ecourse.coursemanagement.application.ToggleCourseEnrolmentStateController;
+import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.enrolmentmanagement.application.RequestEnrolmentController;
 import eapli.ecourse.enrolmentmanagement.application.RespondCourseApplicationController;
@@ -14,7 +14,7 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Action {
 
-  private final RespondCourseApplicationController respondeCtrl = new RespondCourseApplicationController(
+  private final RespondCourseApplicationController respondCtrl = new RespondCourseApplicationController(
       PersistenceContext.repositories().courses(), PersistenceContext.repositories().enrollments(),
       AuthzRegistry.authorizationService());
 
@@ -23,23 +23,22 @@ public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Acti
       PersistenceContext.repositories().students(),
       AuthzRegistry.authorizationService());
 
-  private final ToggleCourseEnrolmentStateController toggleCtrl = new ToggleCourseEnrolmentStateController(
-      PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService());
-
   @Override
   public boolean execute() {
-    CourseDTO closedForEnrolmentCourseDto = toggleCtrl.listNotClosedCourses().iterator().next();
-
-    CourseDTO openForEnrolmentCourseDto = toggleCtrl.toggleEnrolmentState(closedForEnrolmentCourseDto);
+    CourseDTO course = PersistenceContext.repositories().courses()
+        .ofIdentity(CourseCode.valueOf("2222")).get().toDto();
 
     Username username = Username.valueOf("user1");
     SystemUser user = AuthzRegistry.userService().userOfIdentity(username).orElseThrow(IllegalStateException::new);
 
-    requestCtrl.requestEnrolment(openForEnrolmentCourseDto, user);
+    requestCtrl.requestEnrolment(course, user);
 
-    EnrolmentDTO enrolmentDTO = respondeCtrl.listPendingCourseApplications(openForEnrolmentCourseDto).iterator().next();
+    EnrolmentDTO enrolmentDTO = respondCtrl.listPendingCourseApplications(course).iterator().next();
+    respondCtrl.accept(enrolmentDTO);
 
-    respondeCtrl.accept(enrolmentDTO);
+    CourseDTO other = PersistenceContext.repositories().courses()
+        .ofIdentity(CourseCode.valueOf("1234")).get().toDto();
+    requestCtrl.requestEnrolment(other, user);
 
     return true;
   }
