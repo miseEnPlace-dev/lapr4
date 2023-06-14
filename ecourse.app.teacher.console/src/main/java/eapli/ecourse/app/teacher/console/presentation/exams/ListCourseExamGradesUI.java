@@ -8,7 +8,7 @@ import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
-import eapli.ecourse.exammanagement.application.ListCourseExamGradesController;
+import eapli.ecourse.answermanagement.application.ListCourseExamGradesController;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
