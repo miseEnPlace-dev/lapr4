@@ -1,5 +1,5 @@
-@start-exam exame18;
-    @title "Exame Nº19";
+@start-exam exame20;
+    @title "Exame Nº20";
     @description "";
     @feedback on-submit;
     @grade on-submit;
@@ -16,7 +16,7 @@
         @title "Expressões regulares.";
         @description "Secção de escolha múltipla 2.";
         @number-of-questions 1;
-        @questions-type multiple-choice;
+        @questions-type missing-words;
     @end-section;
 
 @end-exam;
