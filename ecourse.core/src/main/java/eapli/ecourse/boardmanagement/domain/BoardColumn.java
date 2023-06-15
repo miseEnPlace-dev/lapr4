@@ -48,6 +48,10 @@ public class BoardColumn implements DomainEntity<Integer> {
     return this.title;
   }
 
+  public Integer columnNumber() {
+    return this.columnNumber;
+  }
+
   @Override
   public Integer identity() {
     return this.columnNumber;
