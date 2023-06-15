@@ -6,17 +6,21 @@ This document describes the SCOMP part of the project related to Java concurrenc
 
 ## Threads
 
-- Foram criadas threads para dar handle a cada cliente que se liga ao servidor da shared board; implementamos a classe Runnable à ClientHandler. A classe TcpServer, ao aceitar uma ligação de um cliente, cria uma instancia desta classe, cria uma instancia da classe Thread que recebe no seu construtor a instancia aanteriormente criada e chama o metodo start() da thread; este metodo retorna imediatamente (a thread continua a correr) e o servidor consegue assim esperar por mais ligações de clientes
+For the Shared Board, a TCP server was created that listens for connections from clients. When a client is accepted, a new thread is created to handle that client. This thread is responsible for reading the client's requests and sending the appropriate responses.
+
+The TCP server is implemented in the `TcpServer` class. The `TcpServer` class has a `start()` method that creates a `ServerSocket` and listens for connections. The `ClientHandler` class implements the `Runnable` interface. When the `TcpServer` accepts a connection from a client, it creates a new `Thread` instance that receives the `ClientHandler` instance in its constructor and calls the `start()` method of the thread. This method returns immediately (the thread continues to run) and the server can thus wait for more client connections.
 
 ## Local Objects
 
-- Para guardar a sessão de utilizador de cada cliente cada thread cria uma instancia da classe ClientState usando a classe ThreadLocal que cria um objeto do tipo ClientState. as threads são multiplos "contextos" a correr no mesmo espaço de memória que têm uma stack separada das outras, no entanto a heap continua a ser partilha. Como todos os objetos são guardados na heap que é partilhada entre todas as threads, foi necessário usar a classe ThreadLocal, fazendo com que cada thread tenha a sua instancia da classe ClientState
+To save the user session on each client's thread, each thread creates an instance of the class `ClientState` using the `ThreadLocal` class. Threads are multiple "contexts" executing in the same memory space. Each Thread has its own stack, but the heap is shared between all threads. As all objects are stored in the heap (which is shared), we needed to use `ThreadLocal` to create a `ClientState` instance so that each thread has its own instance of this class.
 
 ## Race Conditions
 
-- Race Conditions: foi implementado um contador de clientes que estão online. de modo a prevenir race conditions (duas threads diferentes tentam incrementar/decrementar o mesmo contador ao mesmo tempo), foi feita sincronização entre threads ao mudar o valor do contador. A classe SafeOnlineCounter implementa os métodos increment(), decrement() e getCount(). todas estas 3 classes usam a keyword synchronized, que faz com que quando o método é executado, o java use um lock interno específico a este objeto. Cada thread, ao chamar o método, tenta obter o lock. Caso outra thread já tenha obtido o lock, a thread espera com que este lock seja libertado. Este lock só pode ser obtido por uma thread de cada vez. O lock é obtido antes do método correr e libertado após a execução do mesmo.
+We implemented an online client counter to count the number of clients connected to the Shared Board Server. To prevent race conditions (two different threads trying to increment/decrement the same counter at the same time), synchronization between threads is required. The class `SafeOnlineCounter` implements the `increment()`, `decrement()` & `getCount()` methods. These 3 classes use the keyword `synchronized`, which basically means that when the method is executed, Java uses an internal lock specific to that object. Each thread, when calling the method, tries to obtain the lock; if another thread has already obtained the lock, the thread waits for this lock to be released. This lock can only be obtained by one thread at a time. The lock is obtained before the method runs and released after the method is executed.
 
 ## Thread Signaling
+
+<!-- TODO -->
 
 De 3 em 3 clientes print, ....
 
