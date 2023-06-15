@@ -212,10 +212,10 @@ public class ExamTakerListener extends ExamBaseListener {
           questionScore);
 
       // Check if student's answer is correct
-      if (correctAnswers.containsAll(studentAnswers))
-        showFeedback(true, questionScore);
-      else
+      if (!correctAnswers.containsAll(studentAnswers) || studentAnswers.size() == 0)
         showFeedback(false, feedback);
+      else
+        showFeedback(true, questionScore);
     }
   }
 
