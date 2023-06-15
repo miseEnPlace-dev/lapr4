@@ -229,6 +229,13 @@
             <exclude>**/presentation/**/*</exclude>
             <exclude>**/events/*</exclude>
             <exclude>**/application/*</exclude>
+            <exclude>**/controllers/*</exclude>
+            <exclude>**/lib/*</exclude>
+            <exclude>**/authz/*</exclude>
+            <exclude>**/board/**/*</exclude>
+            <exclude>**/http/*</exclude>
+            <exclude>**/mapper/*</exclude>
+            <exclude>**/protocol/*</exclude>
             <exclude>**/persistence/impl/**/*</exclude>
           </excludes>
         </configuration>
