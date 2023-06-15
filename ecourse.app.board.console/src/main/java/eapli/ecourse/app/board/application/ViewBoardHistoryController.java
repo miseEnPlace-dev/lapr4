@@ -1,46 +1,52 @@
 package eapli.ecourse.app.board.application;
 
-import eapli.ecourse.boardmanagement.application.ListBoardsService;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.boardmanagement.repositories.BoardRepository;
-import eapli.ecourse.postitmanagement.application.ListPostItService;
+import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.common.board.protocol.MessageCode;
+import eapli.ecourse.common.board.protocol.ProtocolMessage;
+import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
-import eapli.ecourse.postitmanagement.repositories.PostItRepository;
-import eapli.ecourse.usermanagement.domain.ClientRoles;
-import eapli.framework.application.UseCaseController;
-import eapli.framework.infrastructure.authz.application.AuthorizationService;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
-@UseCaseController
 public class ViewBoardHistoryController {
+  private TcpClient server;
 
-  BoardRepository boardRepository;
-  PostItRepository postItRepository;
-  AuthorizationService authzService;
-
-  ListBoardsService listBoardsService;
-  ListPostItService listPostItService;
-
-  public ViewBoardHistoryController(BoardRepository boardRepository, PostItRepository postItRepository,
-      AuthorizationService authzService) {
-    this.boardRepository = boardRepository;
-    this.postItRepository = postItRepository;
-    this.authzService = authzService;
-
-    this.listBoardsService = new ListBoardsService(boardRepository);
-    this.listPostItService = new ListPostItService(postItRepository);
+  public ViewBoardHistoryController() {
+    this.server = BoardBackend.getInstance().getTcpClient();
   }
 
-  public Iterable<BoardDTO> listUserAccessibleBoards() {
-    SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
-        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
+  public Iterable<BoardDTO> listUserAccessibleBoards() throws IOException,
+      UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
+    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_BOARDS));
 
-    return listBoardsService.userAccessibleBoards(user.identity());
+    if (response.getCode().equals(MessageCode.ERR))
+      throw new UnsuccessfulRequestException(response);
+    Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
+
+    List<BoardDTO> result = StreamSupport.stream(obj.spliterator(), true).map(BoardDTO.class::cast)
+        .collect(Collectors.toUnmodifiableList());
+
+    return result;
   }
 
-  public Iterable<PostItDTO> listBoardHistory(BoardID boardID) {
-    return listPostItService.boardHistory(boardID);
+  public Iterable<PostItDTO> listBoardHistory(BoardDTO board) throws IOException,
+      UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
+    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD_HISTORY,
+        board.getId().toString()));
+
+    if (response.getCode().equals(MessageCode.ERR))
+      throw new UnsuccessfulRequestException(response);
+    Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
+
+    List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true).map(PostItDTO.class::cast)
+        .collect(Collectors.toUnmodifiableList());
+
+    return result;
   }
 
 }

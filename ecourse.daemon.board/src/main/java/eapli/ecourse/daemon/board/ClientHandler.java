@@ -20,6 +20,7 @@ import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
+import eapli.ecourse.daemon.board.messages.GetBoardHistoryMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardPostItsMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
@@ -46,7 +47,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_WRITABLE_BOARDS, GetWritableBoardsMessage.class);
       put(MessageCode.GET_BOARD, GetBoardMessage.class);
       put(MessageCode.GET_USER_PERMISSIONS, GetUserPermissionsMessage.class);
-      // put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
+      put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
       put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
       // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
