@@ -58,11 +58,7 @@ This is the first time this task is assigned to be developed. This is a new func
 
 ![US2006_SSD](out/US2006_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
-
-![US2006_SD](out/US2006_SD.svg)
-
-### 3.5. Partial Domain Model
+### 3.4. Partial Domain Model
 
 ![US2006_DM](out/US2006_DM.svg)
 
