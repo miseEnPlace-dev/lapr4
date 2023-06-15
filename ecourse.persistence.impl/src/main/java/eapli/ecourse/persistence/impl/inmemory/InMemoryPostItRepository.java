@@ -1,5 +1,7 @@
 package eapli.ecourse.persistence.impl.inmemory;
 
+import java.util.List;
+
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
@@ -24,5 +26,14 @@ public class InMemoryPostItRepository extends InMemoryDomainRepository<PostIt, P
   public Iterable<PostIt> findLatestFromUserByBoardId(BoardID boardId, Username username) {
     return match(e -> e.board().identity().equals(boardId) && e.isLatest()
         && e.owner().identity().equals(username) && e.isLatest());
+  }
+
+  @Override
+  public Iterable<PostIt> findAllPostItsOrderedByDate(BoardID boardId) {
+    List<PostIt> postIts = (List<PostIt>) match(e -> e.board().identity().equals(boardId));
+
+    postIts.sort((p1, p2) -> p2.createdAt().compareTo(p1.createdAt()));
+
+    return postIts;
   }
 }
