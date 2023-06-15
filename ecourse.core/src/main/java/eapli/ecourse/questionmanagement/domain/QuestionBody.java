@@ -1,6 +1,7 @@
 package eapli.ecourse.questionmanagement.domain;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Lob;
 
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.Preconditions;
@@ -9,6 +10,7 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 @EqualsAndHashCode
 public class QuestionBody implements ValueObject {
+  @Lob
   private String body;
 
   public QuestionBody(final String questionBody) {

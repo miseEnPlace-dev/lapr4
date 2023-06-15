@@ -17,7 +17,7 @@ import eapli.framework.presentation.console.SelectWidget;
 public class TakeEvaluationExamUI extends AbstractUI {
   private TakeEvaluationExamController ctrl = new TakeEvaluationExamController(AuthzRegistry.authorizationService(),
       PersistenceContext.repositories().students(), PersistenceContext.repositories().evaluationExams(),
-      PersistenceContext.repositories().courses());
+      PersistenceContext.repositories().courses(), PersistenceContext.repositories().answers());
 
   @Override
   protected boolean doShow() {
@@ -29,12 +29,21 @@ public class TakeEvaluationExamUI extends AbstractUI {
     if ((exam = selectExam(course)) == null)
       return false;
 
+    if (this.ctrl.hasTakenExam(exam)) {
+      System.out.println("\nYou have already taken this exam! Only one attempt is allowed.");
+      Console.readLine("Press Enter to go back to main menu...");
+      return false;
+    }
+
     try {
       this.ctrl.parseExam(exam.getFileContent(), new ConsoleExamPrinter());
     } catch (ParseException ex) {
       System.out.println(ex.getMessage());
+      Console.readLine("Press Enter to go back to main menu...");
       return false;
     }
+
+    this.ctrl.saveAnswer(exam);
 
     System.out.println("\n\nExam taken successfully.");
     Console.readLine("Press Enter to go back to main menu...");
@@ -44,7 +53,7 @@ public class TakeEvaluationExamUI extends AbstractUI {
 
   @Override
   public String headline() {
-    return "Create Exam";
+    return "Take Evaluation Exam";
   }
 
   private CourseDTO selectCourse() {

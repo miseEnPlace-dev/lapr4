@@ -22,6 +22,14 @@ public class Coordinates implements ValueObject {
     return new Coordinates(x, y);
   }
 
+  public Integer getX() {
+    return x;
+  }
+
+  public Integer getY() {
+    return y;
+  }
+
   @Override
   public String toString() {
     return "(" + x + ", " + y + ")";

@@ -40,6 +40,23 @@ public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Acti
         .ofIdentity(CourseCode.valueOf("1234")).get().toDto();
     requestCtrl.requestEnrolment(other, user);
 
+    CourseDTO lprog = PersistenceContext.repositories().courses()
+        .ofIdentity(CourseCode.valueOf("4444")).get().toDto();
+    CourseDTO bddad = PersistenceContext.repositories().courses()
+        .ofIdentity(CourseCode.valueOf("8787")).get().toDto();
+
+    Username russo = Username.valueOf("tomas.russo");
+    SystemUser userRusso = AuthzRegistry.userService().userOfIdentity(russo).orElseThrow(IllegalStateException::new);
+
+    requestCtrl.requestEnrolment(lprog, userRusso);
+    requestCtrl.requestEnrolment(bddad, userRusso);
+
+    EnrolmentDTO lprogEnr = respondCtrl.listPendingCourseApplications(lprog).iterator().next();
+    respondCtrl.accept(lprogEnr);
+
+    EnrolmentDTO bddadEnr = respondCtrl.listPendingCourseApplications(bddad).iterator().next();
+    respondCtrl.accept(bddadEnr);
+
     return true;
   }
 

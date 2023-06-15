@@ -1,0 +1,115 @@
+@start-exam lprog_epoca_normal;
+    @title "Exame LPROG - Época Normal";
+    @description "Este exame tem um peso de 50% na sua nota final de LPROG.\nReleia todas as questões antes de submeter.\nBoa sorte!";
+    @feedback on-submit;
+    @grade on-submit;
+
+    @start-section expressoes_regulares;
+      @title "1 - Expressões Regulares";
+      @description "Considere a seguinte expressão regular: (a|b)*abb";
+
+      @start-question
+        @type multiple-choice;
+        @score 20;
+        @question-body "Qual das seguintes palavras é aceite pela expressão regular?";
+        @feedback "Devia ter ido às teóricas de expressões regulares!";
+
+        @start-correct-answers
+          @correct-answer 2;
+          @correct-answer 5;
+        @end-correct-answers;
+
+        @start-options
+          @option 1 "abab";
+          @option 2 "abaaabb";
+          @option 3 "abba";
+          @option 4 "abbb";
+          @option 5 "bbabb";
+        @end-options;
+      @end-question;
+
+      @start-question
+        @type numerical;
+        @score 10;
+        @question-body "Quantos estados tem o autómato finito determinístico equivalente à expressão regular anterior?";
+        @feedback "Devia ter ido às teóricas de expressões regulares!";
+        @correct-answer 4;
+        @accepted-error 0;
+      @end-question;
+
+      @start-question
+        @type short-answer;
+        @score 20;
+        @question-body "Escreva uma expressão regular que aceite todas as palavras que comecem pela letra a e terminem pela letra b.\nConsidere o alfabeto {a, b}.";
+        @feedback "Devia ter ido às teóricas de expressões regulares!";
+        @start-correct-answers
+          @correct-answer "a(b|a)*b" 1;
+          @correct-answer "a(a|b)*b" 1;
+          @correct-answer "a[ab]*b" 1;
+        @end-correct-answers;
+      @end-question;
+    @end-section;
+
+    @start-section gramaticas;
+      @title "2 - Gramáticas";
+
+      @start-question
+        @type true-false;
+        @score 5;
+        @question-body "Uma gramática é ambígua se existir mais do que uma árvore de derivação para uma dada frase.";
+        @feedback "Devia ter ido às teóricas de gramáticas!";
+        @correct-answer true;
+      @end-question;
+
+      @start-question
+        @type missing-words;
+        @score 20;
+        @question-body "Complete a seguinte frase:\nAs gramáticas do tipo 3 são chamadas de gramáticas __. Estas gramáticas dizem-se lineares à __, se as suas produções forem da forma A → a, A → aB ou A → ε.\nAs gramáticas do tipo 2 são __ do contexto. Já as gramáticas do tipo 1 são __ do contexto.";
+        @feedback "Devia ter ido às teóricas de gramáticas!";
+
+        @start-correct-answers
+          @correct-answer "regulares";
+          @correct-answer "direita";
+          @correct-answer "independentes";
+          @correct-answer "dependentes";
+        @end-correct-answers;
+
+        @start-options
+          @option "livres";
+          @option "esquerda";
+          @option "dependentes";
+          @option "independentes";
+          @option "regulares";
+          @option "contexto";
+          @option "direita";
+          @option "restritivas";
+        @end-options;
+      @end-question;
+
+      @start-question
+        @type matching;
+        @score 25;
+        @question-body "Associe cada conceito à sua definição.";
+        @feedback "Devia ter ido às teóricas de gramáticas!";
+
+        @start-correct-answers
+          @correct-answer 1-4;
+          @correct-answer 2-1;
+          @correct-answer 3-2;
+        @end-correct-answers;
+
+        @start-options
+          @option 1 "Analisador semântico";
+          @option 2 "Analisador sintático";
+          @option 3 "Analisador léxico";
+        @end-options;
+
+        @start-matching
+          @match 1 "Verifica se uma determinada sequencia de tokens é válida para a gramática.";
+          @match 2 "Agrupa sequências de caracteres em tokens.";
+          @match 3 "Gera uma gramática válida para a frase.";
+          @match 4 "Verifica se a frase tem significado para o contexto da linguagem.";
+        @end-matching;
+      @end-question;
+    @end-section;
+@end-exam;

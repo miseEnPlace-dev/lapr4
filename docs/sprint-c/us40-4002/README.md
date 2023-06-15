@@ -53,11 +53,7 @@
 
 ![US4002_SSD](out/US4002_SSD.svg)
 
-### 3.4. Sequence Diagram (Simplified)
-
-![US4002_SD](out/US4002_SD.svg)
-
-### 3.5. Partial Domain Model
+### 3.4. Partial Domain Model
 
 ![US4002_DM](out/US4002_DM.svg)
 
@@ -83,11 +79,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```java
   @Test
-  public void ensureItsPossibleToCancelMeeting() {
-    Meeting meeting = getDummyMeeting();
-    meeting.cancel();
-    assertNotNull(meeting.canceledAt());
-  }
+  public void ensureItsPossibleToCancelMeeting() {}
 ```
 
 ## 5. Implementation

@@ -34,13 +34,14 @@ public class UndoPostItChangeController {
     return result;
   }
 
-  public Iterable<PostItDTO> listLatestBoardPostIts(BoardDTO board) throws IOException,
+  public Iterable<PostItDTO> listLatestBoardPostItsByUser(BoardDTO board) throws IOException,
       UnsupportedVersionException, UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.GET_BOARD_POSTITS, board.getId().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.GET_POSTITS_BOARD, board.getId().toString()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
+
     Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
 
     List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true)
@@ -49,8 +50,8 @@ public class UndoPostItChangeController {
     return result;
   }
 
-  public void undoPostItChange(PostItDTO postIt)
-      throws IOException, UnsupportedVersionException, UnsuccessfulRequestException {
+  public void undoPostItChange(PostItDTO postIt) throws IOException, UnsupportedVersionException,
+      UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response =
         server.sendRecv(new ProtocolMessage(MessageCode.UNDO_POSTIT, postIt.getId().toString()));
 

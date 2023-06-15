@@ -153,6 +153,12 @@ public class Board implements AggregateRoot<BoardID> {
         this.columns);
   }
 
+  /**
+   * Checks if the user has write permission to the board.
+   *
+   * @param username
+   * @return true if the user has write permission to the board, false otherwise
+   */
   public boolean canWrite(Username username) {
     if (this.owner().username().equals(username))
       return true;
@@ -160,6 +166,12 @@ public class Board implements AggregateRoot<BoardID> {
     return permissions.stream().anyMatch(p -> p.canWrite(username));
   }
 
+  /**
+   * Checks if the user has at least read permission to the board.
+   *
+   * @param username
+   * @return true if the user has at least read permission to the board, false otherwise
+   */
   public boolean participates(Username username) {
     if (this.owner().username().equals(username))
       return true;

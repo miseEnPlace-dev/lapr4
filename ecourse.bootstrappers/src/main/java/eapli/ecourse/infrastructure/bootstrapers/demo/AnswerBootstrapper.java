@@ -9,6 +9,7 @@ import eapli.ecourse.answermanagement.domain.AnswerId;
 import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
+import eapli.ecourse.eventsmanagement.domain.Duration;
 import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.exammanagement.domain.Exam;
 import eapli.ecourse.exammanagement.domain.ExamDescription;
@@ -62,18 +63,36 @@ public class AnswerBootstrapper implements Action {
         ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
 
     EvaluationExam exam2 = new EvaluationExam(lprog, teacher, ExamIdentifier.valueOf("11111"),
-      ExamTitle.valueOf("Test Exam"), ExamDescription.valueOf("description"), sections,
-      Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.ON_SUBMIT,
-      ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
+        ExamTitle.valueOf("Test Exam 2"), ExamDescription.valueOf("description"), sections,
+        Time.valueOf(Calendar.getInstance()), Time.valueOf(Calendar.getInstance()), ExamInfo.ON_SUBMIT,
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
+
+    EvaluationExam exam3 = new EvaluationExam(course, teacher, ExamIdentifier.valueOf("22222"),
+        ExamTitle.valueOf("Test Exam 3"), ExamDescription.valueOf("description"), sections,
+        Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 60)),
+        Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 40)), ExamInfo.ON_SUBMIT,
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
+
+    EvaluationExam exam4 = new EvaluationExam(course, teacher, ExamIdentifier.valueOf("22222"),
+        ExamTitle.valueOf("Test Exam 4"), ExamDescription.valueOf("description"), sections,
+        Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 60)),
+        Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 40)), ExamInfo.ON_SUBMIT,
+        ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
 
     Exam e = examRepo.save(exam);
     Exam e2 = examRepo.save(exam2);
+    Exam e3 = examRepo.save(exam3);
+    examRepo.save(exam4);
+
     Answer answer = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(60.0));
-    Answer a = new Answer(AnswerId.newID(), student, e, ExamScore.valueOf(99.0));
-    Answer a2 = new Answer(AnswerId.newID(), student, e2, ExamScore.valueOf(77.0));
+    Answer a = new Answer(AnswerId.newID(), student, e3, ExamScore.valueOf(99.0));
+    Answer a2 = new Answer(AnswerId.newID(), student, e2, ExamScore.valueOf(92.0));
+    Answer a3 = new Answer(AnswerId.newID(), student, e2, ExamScore.valueOf(77.0));
+
     answerRepo.save(answer);
     answerRepo.save(a);
     answerRepo.save(a2);
+    answerRepo.save(a3);
 
     return false;
   }

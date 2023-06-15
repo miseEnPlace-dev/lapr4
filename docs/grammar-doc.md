@@ -45,17 +45,9 @@
 
 ## Introduction
 
-This document describes the grammar used to define the Questions to be used in Exams, as well as the grammar defined in the Exams. As required, there are 6 types of questions:
+This document describes what was developed in the scope of the LPROG project for the 2nd year in Engineering Informatics at ISEP. It was asked to develop grammar's to define Exam's to be used in the eCourse platform. To solve this problem we defined three grammars, one for the Questions to be used in Exams, one for the Evaluation Exams themselves and the other for the Formative Exams. As the grammar for the Questions is the base of the grammar for the Exams, we will start by describing the first one.
 
-- Numerical
-- Short Answer
-- True/False
-- Multiple Choice (Multiple Answers)
-- Multiple Choice (Single Answer)
-- Matching
-- Select Missing Words
-
-The grammar was defined using the [ANTLR](https://www.antlr.org/) tool. ANTLR is a powerful parser generator for reading, processing, executing, or translating structured text or binary files. It's widely used to build languages, tools, and frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees.
+**Note:** The grammar was defined using the [ANTLR](https://www.antlr.org/) tool, using both Visitor's and Listener's.
 
 ## Grammar
 
@@ -68,7 +60,9 @@ To make the understanding easier we will use the following notation:
 - | - or
 - {} - repeatable.
 
-### 1.1 Question Grammar
+## 1. Question Grammar
+
+### 1.1 Question Structure
 
 All the files defining questions to be used in exams must follow the following structure:
 
@@ -80,7 +74,7 @@ All the files defining questions to be used in exams must follow the following s
 @end-question;
 ```
 
-This is the base structure. As there are many question types and each one has its own structure, we will define the structure of each one of them.
+This is the base structure. As there are 6 different types of questions and each one has its own structure, we will define the structure of each one of them.
 
 #### 1.1.1. Numerical
 
@@ -183,8 +177,7 @@ This is the base structure. As there are many question types and each one has it
 In this case the question body must have the placeholder for the missing words using '\_\_' (double underscore).
 _E.g. "A \_\_ é um lugar onde se pode comer \_\_."_
 
-In the correct answer section the words must be in the same order as they appear in the question body and must be placed inside double quotes separated by a space.
-_E.g. "restaurante" "bem";_
+In the correct answer section the words must be in the same order as the placeholders in the question body.
 
 **Note:** The number of correct answers must be equal to the number of placeholders.
 
@@ -192,7 +185,9 @@ _E.g. "restaurante" "bem";_
 @start-question
   @type missing-words
   @question-body "<question-body>";
-  @correct-answer {"<word>" };
+  @start-correct-answers
+    @correct-answer {"<word>" };
+  @end-correct-answers;
 
   @start-options
     {@option <value>;}
@@ -226,10 +221,6 @@ All the files defining exams must follow the following structure:
 @end-exam;
 ```
 
-**Note:** The score must be a real number with a maximum of 2 decimal places between 0 and 1.
-
-**Note 2:** The sum of the scores specified in the `@correct-answers` section must be 1.
-
 ### 2.1. Structure
 
 #### 2.1.1 Exam Structure:
@@ -249,7 +240,7 @@ Sections contains a set of one or more questions.
 
 #### 2.1.4 Questions:
 
-The questions section is defined using the keyword **"@start-questions"** followed by a list of questions and ends with the keyword **"@end-questions"**. To see more in detail the structure of each question type, please check the [Question Grammar](#11-question-grammar).
+The questions section is defined using the keyword **"@start-question"** followed by a question and ends with the keyword **"@end-question"**. To see more in detail the structure of each question type, please check the [Question Grammar](#11-question-grammar).
 
 #### 2.1.5 Correct Answers:
 
@@ -273,7 +264,7 @@ All the files defining formative exams must follow the following structure:
 @start-exam
   @title "<title>";
   @description "<description>";
-  @feedback none|on-submit;
+  @feedback on-submit;
   @grade on-submit;
   @score <score>;
 
@@ -287,8 +278,6 @@ All the files defining formative exams must follow the following structure:
 @end-exam
 ```
 
-**Note:** The score must be a real number with a maximum of 2 decimal places between 0 and 100.
-
 ### 3.1. Structure
 
 #### 3.1.1 Exam Structure:
@@ -298,6 +287,7 @@ The exam starts with the keyword **"@start-exam"** followed by an identifier and
 #### 3.1.2 Header:
 
 The header section provides information about the exam, such as the title, description, feedback type, grading type and score.
+It includes properties such as **"@title"**, **"@description"**, **"@feedback"**, **"@score"** and **"@grade"**.
 
 #### 3.1.3 Sections:
 

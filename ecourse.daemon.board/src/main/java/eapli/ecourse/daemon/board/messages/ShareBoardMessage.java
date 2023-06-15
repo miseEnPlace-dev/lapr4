@@ -3,18 +3,15 @@ package eapli.ecourse.daemon.board.messages;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 import javax.json.JsonObject;
-
-import eapli.ecourse.boardmanagement.domain.Board;
+import eapli.ecourse.boardmanagement.application.ShareBoardController;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
-import eapli.ecourse.boardmanagement.domain.UserPermission;
+import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
@@ -32,6 +29,7 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
 public class ShareBoardMessage extends Message {
   private final BoardRepository boardRepository;
   private final UserManagementService userSvc;
+  private final ShareBoardController ctrl;
 
   private static final Map<String, PermissionType> permissionMap = new HashMap<>() {
     {
@@ -46,6 +44,7 @@ public class ShareBoardMessage extends Message {
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.userSvc = AuthzRegistry.userService();
+    this.ctrl = new ShareBoardController(boardRepository, userSvc);
   }
 
   @Override
@@ -58,45 +57,52 @@ public class ShareBoardMessage extends Message {
 
     JsonObject json = protocolMessage.getPayloadAsJson();
 
-    String boardId = json.getString("boardId");
-    String username = json.getString("username");
+    String boardIdStr = json.getString("boardId");
+    String usernameStr = json.getString("username");
     String newPermissionStr = json.getString("permission");
 
-    if (boardId == null || username == null || newPermissionStr == null) {
+    if (boardIdStr == null || usernameStr == null || newPermissionStr == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }
 
-    if (!boardRepository.ofIdentity(BoardID.valueOf(boardId)).isPresent()) {
+    BoardID boardId = BoardID.valueOf(boardIdStr);
+    Username authUsername =
+        Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
+
+    // verify if the board with the given id exists
+    if (!ctrl.boardExists(boardId)) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));
       return;
     }
 
-    Board board = boardRepository.ofIdentity(BoardID.valueOf(boardId)).get();
-
     // only the board owner can do this action
-    Username authenticatedUsername =
-        Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
-
-    if (!board.owner().hasIdentity(authenticatedUsername)) {
+    // check if the authenticated user is the owner of the board
+    if (!ctrl.isBoardOwner(boardId, authUsername)) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
       return;
     }
 
-    Optional<SystemUser> user = userSvc.userOfIdentity(Username.valueOf(username));
+    // verify if the user with the given username exists
+    Optional<SystemUser> user = userSvc.userOfIdentity(Username.valueOf(usernameStr));
 
     if (!user.isPresent()) {
       send(new ProtocolMessage(MessageCode.ERR, "User not found"));
       return;
     }
 
-    UserPermission userPermission = StreamSupport.stream(board.permissions().spliterator(), true)
-        .filter(p -> p.user().equals(user.get())).findFirst().orElse(null);
+    Username username = Username.valueOf(usernameStr);
 
+    // check if the user is owner of the board
+    if (ctrl.isBoardOwner(boardId, username)) {
+      send(new ProtocolMessage(MessageCode.ERR, "User is the owner of the board"));
+      return;
+    }
+
+    // update the permission
     if (newPermissionStr.equals("none")) {
       // remove the permission
-      board.permissions().remove(userPermission);
-      board = boardRepository.save(board);
+      ctrl.removePermission(boardId, username);
       send(new ProtocolMessage(MessageCode.SHARE_BOARD, (Object) null));
       return;
     }
@@ -108,30 +114,14 @@ public class ShareBoardMessage extends Message {
       return;
     }
 
-    if (userPermission == null) {
-      Calendar createdAt = Calendar.getInstance();
-      board.permissions().add(new UserPermission(createdAt, createdAt, newPermission, user.get()));
-    } else {
-      // modify the existing permission
-      if (userPermission.permissionType().isRead()
-          && newPermissionStr.toUpperCase().equals(PermissionType.Type.WRITE.name())) {
-        userPermission.permissionType().changeToWrite();
-      } else if (userPermission.permissionType().isWrite()
-          && newPermissionStr.toUpperCase().equals(PermissionType.Type.READ.name())) {
-        userPermission.permissionType().changeToRead();
-      }
-    }
+    // get current permission
+    UserPermissionDTO userPermission = ctrl.getUserPermission(boardId, username);
 
-    board = boardRepository.save(board);
+    if (userPermission == null)
+      userPermission = ctrl.addPermission(boardId, username, newPermission);
+    else
+      userPermission = ctrl.updatePermission(boardId, username, newPermission);
 
-    UserPermission permission = StreamSupport.stream(board.permissions().spliterator(), true)
-        .filter(p -> p.user().equals(user.get())).findFirst().orElse(null);
-
-    if (permission == null) {
-      send(new ProtocolMessage(MessageCode.ERR, "Failed to share board"));
-      return;
-    }
-
-    send(new ProtocolMessage(MessageCode.SHARE_BOARD, permission.toDto()));
+    send(new ProtocolMessage(MessageCode.SHARE_BOARD, userPermission));
   }
 }

@@ -5,6 +5,7 @@ import eapli.ecourse.answermanagement.domain.AnswerId;
 import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
@@ -23,5 +24,9 @@ public class InMemoryAnswerRepository extends InMemoryDomainRepository<Answer, A
 
   public Iterable<Answer> findAllWithExam(Exam exam) {
     return match(e -> e.exam().equals(exam));
+  }
+
+  public Iterable<Answer> findAllWithStudentAndExam(MecanographicNumber number, ExamIdentifier identifier) {
+    return match(e -> e.student().identity().equals(number) && e.exam().identity().equals(identifier));
   }
 }

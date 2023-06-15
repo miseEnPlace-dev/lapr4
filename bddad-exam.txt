@@ -1,4 +1,4 @@
-@start-exam bddad_epoca_normal5;
+@start-exam bddad_epoca_normal;
     @title "Exame BDDAD - Época Normal";
     @description "Este exame tem um peso de 50% na sua nota final de BDDAD.\nReleia todas as questões antes de submeter.\nBoa sorte!";
     @feedback on-submit;
@@ -81,7 +81,7 @@
         @type matching;
         @score 25;
         @question-body "Associe cada conceito à sua definição.";
-        @feedback "General feedback";
+        @feedback "Devia ter ido às teóricas de transações!";
 
         @start-correct-answers
           @correct-answer 1 - 3;

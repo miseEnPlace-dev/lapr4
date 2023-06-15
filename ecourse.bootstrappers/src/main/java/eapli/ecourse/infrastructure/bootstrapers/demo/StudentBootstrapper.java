@@ -44,6 +44,12 @@ public class StudentBootstrapper implements Action {
         "john@smith.com", "987654321");
     signupAndApprove(TestDataConstants.USER_TEST2, TestDataConstants.PASSWORD1, "Mary", "Smith",
         "mary@smith.com", "123456789");
+    signupAndApprove("tomas.lopes", "Password1", "Tomás", "Lopes", "tomas.lopes@nei-isep.org", "123789456");
+    signupAndApprove("tomas.russo", "Password1", "Tomás", "Russo", "tomas.russo@nei-isep.org", "123321231");
+    signupAndApprove("carlos.lopes", "Password1", "Carlos", "Lopes", "carlos.lopes@nei-isep.org", "989787656");
+    signupAndApprove("ricardo.moreira", "Password1", "Ricardo", "Moreira", "ricardo.moreira@nei-isep.org", "909878787");
+    signupAndApprove("andre.barros", "Password1", "André", "Barros", "andre.barros@nei-isep.org", "656767767");
+    signupAndApprove("goncalo.lima", "Password1", "Gonçalo", "Lima", "goncalo.lima@gmail.com", "834567654");
     // make a bunch of signups but leave them for approval so the backoffice user
     // will aprove them
     signup("isep111", TestDataConstants.PASSWORD1, "John", "Smith One", "john1@smith.com",

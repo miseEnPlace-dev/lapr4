@@ -1,10 +1,13 @@
 package eapli.ecourse.exammanagement.application;
 
+import eapli.ecourse.answermanagement.domain.Answer;
+import eapli.ecourse.answermanagement.repositories.AnswerRepository;
 import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
-import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExamBuilder;
+import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4TakeExamParser;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
@@ -22,20 +25,21 @@ public class TakeEvaluationExamController {
   private final AuthorizationService authz;
   private final StudentRepository studentRepository;
   private final CourseRepository courseRepository;
+  private final AnswerRepository answerRepository;
   private final EvaluationExamRepository examRepository;
   private final ANTLR4TakeExamParser parser;
 
   private Student student;
-
-  private EvaluationExamBuilder builder;
+  private ExamScore studentsScore;
 
   public TakeEvaluationExamController(final AuthorizationService authz,
       final StudentRepository studentRepository, final EvaluationExamRepository examRepository,
-      final CourseRepository courseRepository) {
+      final CourseRepository courseRepository, final AnswerRepository answerRepository) {
     this.authz = authz;
     this.studentRepository = studentRepository;
-    this.examRepository = examRepository;
     this.courseRepository = courseRepository;
+    this.answerRepository = answerRepository;
+    this.examRepository = examRepository;
     this.listCourseService = new ListCourseService(courseRepository);
     this.examListService = new EvaluationExamListService(examRepository);
     this.parser = new ANTLR4TakeExamParser();
@@ -43,8 +47,7 @@ public class TakeEvaluationExamController {
 
   public void setCurrentAuthenticatedStudent() {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
-    SystemUser authenticatedUser =
-        authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
+    SystemUser authenticatedUser = authz.loggedinUserWithPermissions(ClientRoles.STUDENT).orElseThrow();
 
     student = studentRepository.findByUsername(authenticatedUser.username()).orElseThrow();
   }
@@ -62,9 +65,24 @@ public class TakeEvaluationExamController {
         .listAllOpenCourseExams(courseRepository.ofIdentity(course.getCode()).orElseThrow());
   }
 
+  public boolean hasTakenExam(EvaluationExamDTO exam) {
+    authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
+    if (answerRepository.findAllWithStudentAndExam(student.identity(), exam.getIdentifier()).iterator().hasNext())
+      return true;
+    return false;
+  }
+
   public void parseExam(final String str, ExamPrinter printer) throws ParseException {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.STUDENT);
     setCurrentAuthenticatedStudent();
-    parser.parseFromString(str, printer);
+    studentsScore = parser.parseFromString(str, printer);
+  }
+
+  public void saveAnswer(EvaluationExamDTO exam) {
+    EvaluationExam evaluationExam = examRepository.ofIdentity(exam.getIdentifier()).orElseThrow();
+
+    Answer answer = new Answer(student, evaluationExam, studentsScore);
+
+    answerRepository.save(answer);
   }
 }
