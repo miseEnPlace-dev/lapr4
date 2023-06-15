@@ -4,6 +4,7 @@ import eapli.ecourse.answermanagement.domain.Answer;
 import eapli.ecourse.answermanagement.domain.AnswerId;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.exammanagement.domain.Exam;
+import eapli.ecourse.exammanagement.domain.ExamIdentifier;
 import eapli.ecourse.studentmanagement.domain.MecanographicNumber;
 import eapli.framework.domain.repositories.DomainRepository;
 
@@ -19,4 +20,6 @@ public interface AnswerRepository extends DomainRepository<AnswerId, Answer> {
   Iterable<Answer> findAllWithStudentMecanographicNumberAndCourseCode(MecanographicNumber number, CourseCode code);
 
   Iterable<Answer> findAllWithExam(Exam exam);
+
+  Iterable<Answer> findAllWithStudentAndExam(MecanographicNumber number, ExamIdentifier identifier);
 }

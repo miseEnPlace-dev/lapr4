@@ -108,10 +108,24 @@ public void ensureTotalScoreIsCorrect() {
 
 ### 5.1. Controller
 
-- Relevant implementation details
+- Exam parser using ANTLR4 listeners.
 
 ```java
-// TODO
+public ExamScore parseFromString(String str, ExamPrinter printer) throws ParseException {
+    ExamLexer lexer = new ExamLexer(CharStreams.fromString(str));
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    ExamParser parser = new ExamParser(tokens);
+    ParseTree tree = parser.start();
+
+    if (parser.getNumberOfSyntaxErrors() > 0)
+      throw new ParseException();
+
+    ParseTreeWalker walker = new ParseTreeWalker();
+    ExamTakerListener listener = new ExamTakerListener(printer);
+    walker.walk(listener, tree);
+
+    return listener.getStudentsScore();
+}
 ```
 
 ---

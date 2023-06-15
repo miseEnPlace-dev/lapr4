@@ -13,10 +13,9 @@ import eapli.framework.actions.menu.MenuItem;
 public class ExamMenu {
   private static final int ADD_QUESTIONS_OPTION = 1;
   private static final int CREATE_EXAM_OPTION = 2;
-  private static final int LIST_COURSE_EXAMS = 3;
-
-  private static final int LIST_COURSE_EXAM_GRADES = 4;
-  private static final int CREATE_FORMATIVE_EXAM = 5;
+  private static final int CREATE_FORMATIVE_EXAM = 3;
+  private static final int LIST_COURSE_EXAMS = 4;
+  private static final int LIST_COURSE_EXAM_GRADES = 5;
 
   private static final int RETURN_OPTION = 0;
   private static final String RETURN = "Return ";
@@ -27,11 +26,11 @@ public class ExamMenu {
     final Menu menu = new Menu("Exams >");
 
     menu.addItem(ADD_QUESTIONS_OPTION, "Add Formative Questions", new AddQuestionsUI()::show);
-    menu.addItem(CREATE_EXAM_OPTION, "Create Exam", new CreateExamUI()::show);
+    menu.addItem(CREATE_EXAM_OPTION, "Create Evaluation Exam", new CreateExamUI()::show);
+    menu.addItem(CREATE_FORMATIVE_EXAM, "Create Formative Exam", new CreateFormativeExamUI()::show);
     menu.addItem(LIST_COURSE_EXAMS, "List Course Exams", new ListCourseExamsUI()::show);
     menu.addItem(LIST_COURSE_EXAM_GRADES, "List Course Exam Grades",
         new ListCourseExamGradesUI()::show);
-    menu.addItem(CREATE_FORMATIVE_EXAM, "Create Formative Exam", new CreateFormativeExamUI()::show);
 
     if (!Application.settings().isMenuLayoutHorizontal())
       menu.addItem(MenuItem.separator(SEPARATOR_LABEL));
