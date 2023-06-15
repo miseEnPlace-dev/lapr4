@@ -90,6 +90,28 @@ U -> UI : selects a post-it
 
 U -> UI : confirms the action
 ' activate UI
+  UI -> CTRL : canEditPostIt(postItDto)
+  ' activate CTRL
+    CTRL -> POSTITREP : ofIdentity(postItDto.id)
+    ' activate POSTITREP
+      CTRL <-- POSTITREP : postIt
+    deactivate POSTITREP
+
+    opt user is creator of post-it and has write permission to the board
+      CTRL -> B : canWrite(user)
+      activate B
+      deactivate B
+
+      CTRL -> P : owner()
+      activate P
+      deactivate P
+
+    else user is owner of the board
+      CTRL -> B : owner()
+      activate B
+      deactivate B
+    end
+
   UI -> CTRL : undoPostItChange(postItDto)
   ' activate CTRL
     CTRL -> POSTITREP : ofIdentity(postItDto.id)
