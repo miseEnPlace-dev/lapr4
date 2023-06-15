@@ -57,6 +57,11 @@ public class ListCourseService {
     return convertToDto(courses);
   }
 
+  public Iterable<CourseDTO> listNotClosedCoursesThatTeacherLectures(Teacher teacher) {
+    final Iterable<Course> courses = courseRepository.findNotClosedCoursesThatTeacherLectures(teacher);
+    return convertToDto(courses);
+  }
+
   public Iterable<CourseDTO> listNotFinishedCourses() {
     final Iterable<Course> courses = courseRepository.findAllNotFinished();
     return convertToDto(courses);

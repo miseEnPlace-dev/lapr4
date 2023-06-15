@@ -83,7 +83,8 @@ public class CreateFormativeExamController {
 
       return examRepository.save(exam);
     } catch (Exception e) {
-      throw new IllegalArgumentException("Invalid exam request. Have you created questions for this course?");
+      throw new IllegalArgumentException(
+          "Invalid exam request. Have you created questions for this course? Or have you created enough questions for this exam?");
     }
   }
 }

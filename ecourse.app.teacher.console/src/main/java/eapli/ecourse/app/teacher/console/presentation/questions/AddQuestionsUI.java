@@ -12,7 +12,8 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class AddQuestionsUI extends AbstractUI {
   AddQuestionsController ctrl = new AddQuestionsController(PersistenceContext.repositories().questions(),
-      PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService());
+      PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService(),
+      PersistenceContext.repositories().teachers());
 
   @Override
   protected boolean doShow() {
@@ -24,6 +25,11 @@ public class AddQuestionsUI extends AbstractUI {
     final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
+
+    if (selected == null) {
+      System.out.println("\n\nNo questions added!");
+      return false;
+    }
 
     try {
       ctrl.addQuestionsFromFile(fileName, selected);

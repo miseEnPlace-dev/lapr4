@@ -19,7 +19,7 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 public class QuestionsBootstrapper implements Action {
   private final AddQuestionsController controller = new AddQuestionsController(
       PersistenceContext.repositories().questions(), PersistenceContext.repositories().courses(),
-      AuthzRegistry.authorizationService());
+      AuthzRegistry.authorizationService(), PersistenceContext.repositories().teachers());
 
   private Course course;
 

@@ -8,7 +8,7 @@
     @start-section section1;
         @title "Expressões regulares.";
         @description "Secção de escolha múltipla.";
-        @number-of-questions 2;
+        @number-of-questions 1;
         @questions-type multiple-choice;
     @end-section;
 
