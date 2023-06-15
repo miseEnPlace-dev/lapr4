@@ -55,6 +55,7 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
         t);
     CourseDTO bddad = courseBootstrapperBase.createInProgressCourse("8787", "BDDAD", "Bases de Dados", 0, 100,
         amm);
+    registerTeacher("bpm", "Password1", "Bertil", "Marques", "bpm@isep.ipp.pt", "252998765", "BPM");
     courseBootstrapperBase.createInProgressCourse("9876", "ARQCP", "Arquitetura de Computadores", 0, 100, t);
     courseBootstrapperBase.assignTeacherToCourse(lprog, t);
     courseBootstrapperBase.assignTeacherToCourse(scomp, oms);
