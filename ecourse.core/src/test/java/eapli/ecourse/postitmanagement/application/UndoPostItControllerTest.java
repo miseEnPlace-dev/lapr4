@@ -4,8 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import eapli.ecourse.boardmanagement.domain.Board;
@@ -14,12 +12,11 @@ import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class UndoPostItControllerTest extends PostItControllerBaseTest {
-  private UndoPostItController ctrl;
   private PostItRepository postItRepository;
 
   @Before
   public void setup() {
-    this.ctrl = new UndoPostItController(null, postItRepository);
+    new UndoPostItController(null, postItRepository);
   }
 
   @Test
