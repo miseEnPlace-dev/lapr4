@@ -65,9 +65,23 @@ The assignment of tasks (requirements/user stories/use cases) during the project
 
 ### Sprint C
 
-| Student Nr. | Task |
-| ----------- | ---- |
-| ----        | ---  |
+| Student Nr. | Task                                          |
+| ----------- | --------------------------------------------- |
+| 1211285     | [US 29 [3004]](sprint-c/us29-3004/README.md)] |
+| 1211289     | [US 30 [3005]](sprint-c/us30-3005/README.md)] |
+| 1211277     | [US 31 [3006]](sprint-c/us31-3006/README.md)] |
+| 1211277     | [US 32 [3007]](sprint-c/us32-3007/README.md)] |
+| 1211285     | [US 33 [3008]](sprint-c/us33-3008/README.md)] |
+| 1211277     | [US 34 [3009]](sprint-c/us34-3009/README.md)] |
+| 1211350     | [US 35 [3010]](sprint-c/us35-3010/README.md)] |
+| 1211288     | [US 36 [2004]](sprint-c/us36-2004/README.md)] |
+| 1211289     | [US 37 [2005]](sprint-c/us37-2005/README.md)] |
+| 1211288     | [US 38 [2006]](sprint-c/us38-2006/README.md)] |
+| 1211299     | [US 39 [2009]](sprint-c/us39-2009/README.md)] |
+| 1211350     | [US 40 [4002]](sprint-c/us40-4002/README.md)] |
+| 1211299     | [US 41 [4003]](sprint-c/us41-4003/README.md)] |
+| 1211299     | [US 42 [4004]](sprint-c/us42-4004/README.md)] |
+| All         | [US 43 [5002]](sprint-c/us43-5002/README.md)] |
 
 ## 4. Team Rules
 
