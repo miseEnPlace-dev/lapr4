@@ -2,7 +2,9 @@ package eapli.ecourse.exammanagement.application;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequest;
@@ -41,28 +43,39 @@ public class FormativeExamService {
     return sb.toString() + "Question";
   }
 
-  private Collection<Question> buildSection(int numberOfQuestions, String questionsType, CourseDTO course) {
-    final String sanitizedType = sanitizeType(questionsType);
-    final Collection<Question> questionsFromType = (Collection<Question>) questionRepository.findWithTypeFromCourse(
-        sanitizedType, course.getCode());
+  private Collection<Question> buildSectionQuestions(int numberOfQuestions, String questionsType,
+      Collection<Question> questionsFromType) {
+
     if (questionsFromType.size() < numberOfQuestions)
       throw new IllegalArgumentException(
-          "Not enough questions of type " + questionsType + " in course " + course.getCode() + ".");
+          "Not enough questions of type " + questionsType);
 
     return getRandomQuestions(numberOfQuestions, (List<Question>) questionsFromType);
   }
 
   public Collection<FormativeExamSection> buildSections(FormativeExamRequest request, CourseDTO course) {
+    Map<String, Collection<Question>> questionsByType = new HashMap<>();
+
     List<FormativeExamSection> sections = new ArrayList<>();
+
+    Collection<Question> questionsFromType;
+
     for (FormativeExamSectionRequest sectionRequest : request.sections()) {
-      Collection<Question> questions = buildSection(sectionRequest.numberOfQuestions(), sectionRequest.questionsType(),
-          course);
+      final String sanitizedType = sanitizeType(sectionRequest.questionsType());
+      questionsFromType = (Collection<Question>) questionRepository.findWithTypeFromCourse(sanitizedType,
+          course.getCode());
 
-      final FormativeExamSection section = new FormativeExamSection(sectionRequest.identifier(), sectionRequest.title(),
-          sectionRequest.description(),
-          questions);
+      if (questionsByType.get(sanitizedType) == null)
+        questionsByType.put(sanitizedType, questionsFromType);
 
-      sections.add(section);
+    }
+
+    for (FormativeExamSectionRequest sectionRequest : request.sections()) {
+      final Collection<Question> sectionQuestions = buildSectionQuestions(sectionRequest.numberOfQuestions(),
+          sectionRequest.questionsType(), questionsByType.get(sanitizeType(sectionRequest.questionsType())));
+
+      sections.add(new FormativeExamSection(sectionRequest.identifier(), sectionRequest.title(),
+          sectionRequest.description(), sectionQuestions));
     }
 
     return sections;
