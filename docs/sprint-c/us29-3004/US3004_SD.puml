@@ -59,10 +59,47 @@ activate UI
 
 U -> UI : selects a board
 ' activate UI
-  UI <-- U : asks to enter the username of the user to share the board with
+  U <-- UI : asks to enter the username of the user to share the board with
 ' deactivate UI
 
 U -> UI : enters the desired username
+' activate UI
+  UI -> CTRL : getUserPermission(boardId, username)
+  ' activate CTRL
+    CTRL -> USRSRV : user = usrService.userOfIdentity(username)
+    ' activate USRSRV
+      USRSRV -> USERREP : ofIdentity(username)
+      activate USERREP
+        USRSRV <-- USERREP : user
+      deactivate USERREP
+      CTRL <-- USRSRV : user
+    deactivate USRSRV
+
+    CTRL -> BOARDREP : board = boardRepository.ofIdentity(boardId)
+    activate BOARDREP
+      CTRL <-- BOARDREP : board
+    deactivate BOARDREP
+
+    CTRL -> B : permissions(user)
+    ' activate B
+      B -> PERM : permissions(user)
+      activate PERM
+        B <-- PERM : permissions
+      deactivate PERM
+      CTRL <-- B : permissions
+    deactivate B
+
+    CTRL -> PERMDTO : toDTO()
+    activate PERMDTO
+      CTRL <-- PERMDTO : permissionsDto
+    deactivate PERMDTO
+
+    UI <-- CTRL : permissionsDto
+
+  U <-- UI : asks to select the desired permission
+' deactivate UI
+
+U -> UI : selects the permission
 ' activate UI
 
   UI -> CTRL : userPermission(boardDto, username)
