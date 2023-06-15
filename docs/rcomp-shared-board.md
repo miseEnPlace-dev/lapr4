@@ -1,5 +1,9 @@
 # RCOMP - Shared Board
 
+## Introduction
+
+This document describes the RCOMP part of the project related to the Shared Board communication infrastructure.
+
 ## Shared Board Protocol
 
 - A TCP connection is established between the client and the server;
