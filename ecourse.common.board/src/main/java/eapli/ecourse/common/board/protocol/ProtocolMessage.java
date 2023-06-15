@@ -14,6 +14,7 @@ import javax.json.JsonReader;
 public class ProtocolMessage {
   private static final byte PROTOCOL_VERSION = 1;
   private static final byte METADATA_LENGTH = 4;
+  private static final int MAX_PAYLOAD_LENGTH = 256 * 256 - 1; // (2^8) ^ 2 - 1 = max number
 
   // metadata
   private byte protocolVersion;
@@ -74,7 +75,7 @@ public class ProtocolMessage {
   }
 
   public static ProtocolMessage fromDataStream(DataInputStream input)
-      throws IOException, UnsupportedVersionException {
+      throws IOException, UnsupportedVersionException, ClassNotFoundException {
     // according to the protocol message format, the first 4 bytes
     // are the header of the message (metadata)
     byte[] metadata = new byte[METADATA_LENGTH];
@@ -100,10 +101,87 @@ public class ProtocolMessage {
     // read the payload
     byte[] payload = input.readNBytes(payloadLength);
 
+    /**
+     * The payload may exceed (2^8)^2 - 1 bytes, the maximum supported by the protocol. In this
+     * case, the payload is split into multiple messages. The first message contains the full length
+     * of the original message in the payload as an int. The following messages contain the payload
+     * of the original message split into chunks of at most 256 * 257 bytes.
+     */
+    if (code.equals(MessageCode.SPLIT)) {
+      ProtocolMessage leader = new ProtocolMessage(protocolVersion, code, payload, payloadLength);
+      int fullLength = (int) leader.getPayloadAsObject();
+
+      int readLength = 0;
+      byte[] readPayload = new byte[0];
+
+      ProtocolMessage next = null;
+
+      do {
+        // get the next message
+        next = ProtocolMessage.fromDataStream(input);
+
+        // update the read length
+        readLength += next.getPayloadLength();
+
+        byte[] nextPayload = next.getPayload();
+
+        // concat the next payload to the read payload
+        byte[] newReadPayload = new byte[readPayload.length + nextPayload.length];
+
+        System.arraycopy(readPayload, 0, newReadPayload, 0, readPayload.length);
+        System.arraycopy(nextPayload, 0, newReadPayload, readPayload.length, nextPayload.length);
+
+        readPayload = newReadPayload;
+      } while (readLength < fullLength);
+
+      return new ProtocolMessage(protocolVersion, next.getCode(), readPayload, readLength);
+    }
+
     return new ProtocolMessage(protocolVersion, code, payload, payloadLength);
   }
 
-  public byte[] toByteStream() {
+  public byte[] toByteStream() throws IOException {
+    /**
+     * The payload may exceed (2^8)^2 - 1 bytes, the maximum supported by the protocol. In this
+     * case, we will need to split the payload into multiple messages.
+     */
+    if (this.payloadLength > MAX_PAYLOAD_LENGTH) {
+      // inform the counterpart the message is split, sending the total length
+      ProtocolMessage leader = new ProtocolMessage(MessageCode.SPLIT, this.payloadLength);
+
+      int completed = 0;
+      byte[] result = leader.toByteStream();
+
+      // split the payload into chunks and build a message for each chunk
+      do {
+        int nextPayloadLength = this.payloadLength - completed;
+
+        if (nextPayloadLength > MAX_PAYLOAD_LENGTH)
+          nextPayloadLength = MAX_PAYLOAD_LENGTH;
+
+        // get the chunk of the payload
+        byte[] nextPayload = new byte[nextPayloadLength];
+        System.arraycopy(this.payload, completed, nextPayload, 0, nextPayloadLength);
+
+        // create a message with this chunk of the payload
+        ProtocolMessage next = new ProtocolMessage(code, nextPayload);
+
+        // concatenate the message to the result
+        int messageLength = nextPayloadLength + METADATA_LENGTH;
+        byte[] newResult = new byte[result.length + messageLength];
+
+        System.arraycopy(result, 0, newResult, 0, result.length);
+        System.arraycopy(next.toByteStream(), 0, newResult, result.length, messageLength);
+
+        result = newResult;
+
+        // update completed
+        completed += nextPayloadLength;
+      } while (completed < this.payloadLength);
+
+      return result;
+    }
+
     byte[] result = new byte[this.payloadLength + METADATA_LENGTH];
 
     // version

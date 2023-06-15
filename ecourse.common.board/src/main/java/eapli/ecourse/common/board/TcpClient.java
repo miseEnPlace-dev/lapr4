@@ -23,8 +23,7 @@ public class TcpClient {
 
   private final Logger logger = LogManager.getLogger(TcpClient.class);
 
-  public TcpClient() {
-  }
+  public TcpClient() {}
 
   public void connect(String hostname, int port, boolean secure)
       throws UnknownHostException, IOException {
@@ -54,12 +53,13 @@ public class TcpClient {
     output.write(msg.toByteStream());
   }
 
-  public ProtocolMessage receive() throws IOException, UnsupportedVersionException {
+  public ProtocolMessage receive()
+      throws IOException, UnsupportedVersionException, ClassNotFoundException {
     return ProtocolMessage.fromDataStream(input);
   }
 
   public ProtocolMessage sendRecv(ProtocolMessage msg)
-      throws IOException, UnsupportedVersionException {
+      throws IOException, UnsupportedVersionException, ClassNotFoundException {
     send(msg);
     return receive();
   }

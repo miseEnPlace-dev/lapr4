@@ -1,5 +1,5 @@
-@start-exam exame16;
-    @title "Exame Nº15";
+@start-exam exame20;
+    @title "Exame Nº20";
     @description "";
     @feedback on-submit;
     @grade on-submit;
@@ -14,16 +14,9 @@
 
     @start-section section2;
         @title "Expressões regulares.";
-        @description "Secção de numerical";
+        @description "Secção de escolha múltipla 2.";
         @number-of-questions 1;
-        @questions-type numerical;
-    @end-section;
-
-    @start-section section3;
-        @title "Expressões regulares.";
-        @description "Secção de short-answer";
-        @number-of-questions 1;
-        @questions-type short-answer;
+        @questions-type missing-words;
     @end-section;
 
 @end-exam;

@@ -20,11 +20,13 @@ import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
+import eapli.ecourse.daemon.board.messages.GetBoardHistoryMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardMessage;
-import eapli.ecourse.daemon.board.messages.GetBoardPostItsMessage;
+import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOnlineCountMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
+import eapli.ecourse.daemon.board.messages.GetOwnPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
 import eapli.ecourse.daemon.board.messages.Message;
@@ -41,18 +43,24 @@ public class ClientHandler implements Runnable {
       put(MessageCode.COMMTEST, CommTestMessage.class);
       put(MessageCode.DISCONN, DisconnMessage.class);
       put(MessageCode.ERR, ErrMessage.class);
+
+      // board
       put(MessageCode.GET_BOARDS, GetBoardsMessage.class);
       put(MessageCode.GET_OWN_BOARDS, GetOwnBoardsMessage.class);
       put(MessageCode.GET_WRITABLE_BOARDS, GetWritableBoardsMessage.class);
       put(MessageCode.GET_BOARD, GetBoardMessage.class);
       put(MessageCode.GET_USER_PERMISSIONS, GetUserPermissionsMessage.class);
-      // put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       put(MessageCode.SHARE_BOARD, ShareBoardMessage.class);
       put(MessageCode.ARCHIVE_BOARD, ArchiveBoardMessage.class);
+
+      // post-its
+      put(MessageCode.GET_POSTITS_BOARD, GetPostItsBoardMessage.class);
+      put(MessageCode.GET_OWN_POSTITS_BOARD, GetOwnPostItsBoardMessage.class);
+      put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
-      put(MessageCode.GET_BOARD_POSTITS, GetBoardPostItsMessage.class);
+
       put(MessageCode.GET_ONLINE_COUNT, GetOnlineCountMessage.class);
     }
   };
@@ -112,7 +120,7 @@ public class ClientHandler implements Runnable {
 
       output.close();
       input.close();
-    } catch (IOException e) {
+    } catch (IOException | ClassNotFoundException e) {
       logger.error("\n[Client Handler Thread] Error", e);
     }
 

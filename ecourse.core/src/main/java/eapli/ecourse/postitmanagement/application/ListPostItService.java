@@ -7,6 +7,7 @@ import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class ListPostItService {
   private final PostItRepository postItRepository;
@@ -31,8 +32,18 @@ public class ListPostItService {
     return toDto(list);
   }
 
+  public Iterable<PostItDTO> latestOfBoardByUser(BoardID boardId, Username username) {
+    Iterable<PostIt> list = postItRepository.findLatestFromUserByBoardId(boardId, username);
+    return toDto(list);
+  }
+
   public Iterable<PostItDTO> boardHistory(BoardID boardId) {
     Iterable<PostIt> list = postItRepository.findAllPostItsOrderedByDate(boardId);
+    return toDto(list);
+  }
+
+  public Iterable<PostItDTO> userUpdatablePostIts(BoardID boardId, Username username) {
+    Iterable<PostIt> list = postItRepository.findLatestFromUserByBoardId(boardId, username);
     return toDto(list);
   }
 

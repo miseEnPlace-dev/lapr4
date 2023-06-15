@@ -1,7 +1,7 @@
 package eapli.ecourse.postitmanagement.application;
 
 import java.io.IOException;
-
+import java.util.Base64;
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
@@ -77,6 +77,37 @@ public class CreatePostItController {
 
     return postIt;
   }
+
+  /**
+   * Used to bootstrap
+   */
+  public PostIt createPostIt(BoardID boardID, int x, int y, String title, String description,
+      byte[] image) throws IOException {
+    SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
+        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
+
+    Board board = boardRepository.ofIdentity(boardID).orElseThrow();
+
+    PostItBuilder builder =
+        new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
+
+    if (description != null) {
+      builder.withDescription(description);
+    }
+
+    if (image != null) {
+      String encodedImage = new String(Base64.getEncoder().encodeToString(image));
+
+      builder.withImage(encodedImage);
+    }
+
+    PostIt postIt = builder.build();
+
+    save(postIt);
+
+    return postIt;
+  }
+
 
   private void save(PostIt postIt) {
     postItRepository.save(postIt);

@@ -73,18 +73,17 @@ public class CreateFormativeExamController {
     Course course = courseRepository.ofIdentity(courseDto.getCode()).orElseThrow();
 
     FormativeExamRequest request = builder.build();
-    try {
-      Collection<FormativeExamSection> sections = examService.buildSections(request, courseDto);
+    Collection<FormativeExamSection> sections = examService.buildSections(request, courseDto);
 
-      FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
-          request.description(), request.score(), sections);
-
-      exam.publish();
-
-      return examRepository.save(exam);
-    } catch (Exception e) {
+    if (examRepository.containsOfIdentity(request.identifier()))
       throw new IllegalArgumentException(
-          "Invalid exam request. Have you created questions for this course? Or have you created enough questions for this exam?");
-    }
+          String.format("Exam with identifier %s already exists", request.identifier()));
+
+    FormativeExam exam = new FormativeExam(course, teacher, request.identifier(), request.title(),
+        request.description(), request.score(), sections);
+
+    exam.publish();
+
+    return examRepository.save(exam);
   }
 }

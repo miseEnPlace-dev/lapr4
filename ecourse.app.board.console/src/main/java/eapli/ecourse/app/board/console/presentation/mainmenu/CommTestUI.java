@@ -26,7 +26,7 @@ public class CommTestUI extends AbstractUI {
       float ms = elapsed / 1000000f;
 
       System.out.printf("Communication test successful. Round-trip time: %f ms\n", ms);
-    } catch (IOException | UnsupportedVersionException e) {
+    } catch (IOException | UnsupportedVersionException | ClassNotFoundException e) {
       logger.error("Error sending COMMTEST message", e);
     }
 
