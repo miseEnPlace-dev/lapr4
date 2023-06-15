@@ -91,7 +91,9 @@ The system notifies the user that the recipient user already has permissions to 
 
 ### 4.3. Applied Patterns
 
-- XXX
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the boards. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of System Users to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
@@ -107,13 +109,10 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ### 5.1. Controller
 
-- Relevant implementation details
-
 ```java
-public ShareBoardController(BoardRepository boardRepo) {
-  this.authz = AuthzRegistry.authorizationService();
-  this.userService = AuthzRegistry.userService();
-  this.listBoardsService = new ListBoardsService(boardRepo);
+public ShareBoardController(BoardRepository boardRepository, UserManagementService userSvc) {
+  this.boardRepository = boardRepository;
+  this.userSvc = userSvc;
 }
 ```
 
@@ -123,4 +122,4 @@ public ShareBoardController(BoardRepository boardRepo) {
 
 ## 7. Observations
 
-- N/a
+- This US was implemented using specific requirements provided in RCOMP & SCOMP.
