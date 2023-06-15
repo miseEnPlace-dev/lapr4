@@ -52,6 +52,14 @@ public interface CourseRepository extends DomainRepository<CourseCode, Course> {
   public Iterable<Course> findAllInProgressLecturedByTeacher(Teacher teacher);
 
   /**
+   *
+   * @param student
+   * @return
+   */
+
+  public Iterable<Course> findNotClosedCoursesThatTeacherLectures(Teacher teacher);
+
+  /**
    * Returns the courses that are in progress, in which the given student is
    * enrolled
    *

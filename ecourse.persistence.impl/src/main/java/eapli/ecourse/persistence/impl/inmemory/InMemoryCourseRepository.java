@@ -47,6 +47,11 @@ public class InMemoryCourseRepository extends
   }
 
   @Override
+  public Iterable<Course> findNotClosedCoursesThatTeacherLectures(Teacher teacher) {
+    return match(e -> !e.state().isClosed() && (e.teachers().contains(teacher) | e.teacherInCharge().equals(teacher)));
+  }
+
+  @Override
   public Iterable<Course> findAllInProgressThatStudentIsEnrolled(Student student) {
     throw new UnsupportedOperationException("Not supported yet.");
   }

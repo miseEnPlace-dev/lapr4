@@ -83,4 +83,14 @@ class JpaCourseRepository extends JpaAutoTxRepository<Course, CourseCode, Course
     params.put("code", code);
     return matchOne("e.code=:code", params);
   }
+
+  @Override
+  public Iterable<Course> findNotClosedCoursesThatTeacherLectures(Teacher teacher) {
+    final TypedQuery<Course> query = entityManager().createQuery(
+        "SELECT c FROM Course c JOIN c.teachers t WHERE (t.taxPayerNumber = :number OR c.teacherInCharge.taxPayerNumber = :number) AND c.courseState <> 'CLOSED'",
+        Course.class);
+    query.setParameter("number", teacher.taxPayerNumber());
+    query.setParameter("number", teacher.taxPayerNumber());
+    return query.getResultList();
+  }
 }
