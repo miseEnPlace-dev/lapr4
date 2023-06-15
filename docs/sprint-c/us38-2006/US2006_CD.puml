@@ -1,0 +1,182 @@
+@startuml US2006_CD
+'https://plantuml.com/class-diagram
+
+class ListCourseExamGradesUI {
+
+}
+
+class ListCourseExamGradesController {
+- authorizationService
+- enrolmentService
+- studentRepository
+- listCourseService
+- evaluationExamListService
+- listExamAnswerService
+
++ ListCourseExamGradesController(authorizationService, meetingRepository,
+inviteRepository)
+
++ teacherCourses()
++ courseEvaluationExams(courseDTO)
++ evaluationExamGrades(examDTO)
+- studentsInCourse(course)
+}
+
+class Answer {
+- studentNumber;
+- studentName;
+- examTitle;
+- course;
+- score;
+- takenAt;
+}
+
+class AnswerDTO {
+- studentNumber;
+- studentName;
+- examTitle;
+- course;
+- score;
+- takenAt;
+}
+
+interface AnswerRepository {
++ findAllWithExam(exam)
+}
+
+class ListExamAnswerService
+{
+- answerRepository
+
++ ListExamAnswerService(answerRepository)
++ listExamGrades(exam)
+}
+
+class ListCourseService {
+- courseRepository
+
++ ListCourseService(courseRepository)
++ findCourseByCourseCode(courseCode)
++ listInProgressCoursesThatTeacherLectures(teacher)
+}
+
+interface CourseRepository {
+  + findAllInProgressLecturedByTeacher(teacher)
+}
+
+
+class Course {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+class CourseDTO {
+  - code
+  - title
+  - description
+  - enrolmentLimits
+  - courseState
+  - courseEnrolmentState
+  - createdAt
+}
+
+interface EvaluationExamRepository {
++ findAllCourseExams(course)
+}
+
+
+class EvaluationExamListService {
+- examRepository
+
++ EvaluationExamListService(examRepository)
++ findExamByCode(examCode)
++ listAllCourseExams(course)
+}
+
+class EvaluationExamDTO {
+- code
+- title
+- course
+- teacher
+- startTime
+- endTime
+- identifier
+- description
+- state
+}
+
+class EvaluationExam {
+- code
+- title
+- course
+- teacher
+- startTime
+- endTime
+- identifier
+- description
+- state
++ toDto()
+}
+
+class EnrolmentService {
+- enrolmentRepository
+
+
++ EnrolmentService(enrolmentRepository)
++ listStudentsEnrolled(courseCode)
+}
+
+interface EnrolmentRepository {
++ findCourseAccepted(courseCode)
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+interface StudentRepository {
+  + findByMecanographicNumber(studentNumber)
+}
+
+
+class PersistenceContext {
+  - repositories()
+}
+
+ListCourseExamGradesUI ..> ListCourseExamGradesController
+ListCourseExamGradesUI ..> PersistenceContext
+PersistenceContext ..> RepositoryFactory
+
+RepositoryFactory --> AnswerRepository
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> EvaluationExamRepository
+RepositoryFactory --> EnrolmentRepository
+RepositoryFactory --> StudentRepository
+
+ListCourseExamGradesController ---> ListCourseService
+ListCourseExamGradesController ---> ListExamAnswerService
+ListCourseExamGradesController ---> EvaluationExamListService
+ListCourseExamGradesController ---> EnrolmentService
+ListCourseExamGradesController ---> StudentRepository
+
+EvaluationExamListService ..> EvaluationExam
+EvaluationExamListService ..> EvaluationExamDTO
+EvaluationExamListService ..> EvaluationExamRepository
+
+
+EnrolmentService ..> EnrolmentRepository
+
+ListCourseService ..> Course
+ListCourseService ..> CourseDTO
+ListCourseService ..> CourseRepository
+
+ListExamAnswerService .> Answer
+ListExamAnswerService ..> AnswerDTO
+ListExamAnswerService ..> AnswerRepository
+
+@enduml
