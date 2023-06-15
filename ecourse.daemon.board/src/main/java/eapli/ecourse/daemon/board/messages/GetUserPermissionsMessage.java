@@ -67,7 +67,7 @@ public class GetUserPermissionsMessage extends Message {
     Username authenticatedUsername =
         Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
 
-    if (!board.get().owner().hasIdentity(authenticatedUsername)) {
+    if (!board.get().participates(authenticatedUsername)) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
       return;
     }

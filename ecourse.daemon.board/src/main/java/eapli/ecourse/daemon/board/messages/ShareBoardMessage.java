@@ -90,6 +90,12 @@ public class ShareBoardMessage extends Message {
       return;
     }
 
+    // check if the user is owner of the board
+    if (board.owner().hasIdentity(user.get().identity())) {
+      send(new ProtocolMessage(MessageCode.ERR, "User is the owner of the board"));
+      return;
+    }
+
     UserPermission userPermission = StreamSupport.stream(board.permissions().spliterator(), true)
         .filter(p -> p.user().equals(user.get())).findFirst().orElse(null);
 
