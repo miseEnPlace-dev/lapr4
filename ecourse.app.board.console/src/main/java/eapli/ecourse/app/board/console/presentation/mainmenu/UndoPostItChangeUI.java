@@ -25,7 +25,8 @@ public class UndoPostItChangeUI extends AbstractUI {
       Iterable<BoardDTO> boards = ctrl.listUserWritableBoards();
 
       if (!boards.iterator().hasNext()) {
-        System.out.println("You don't own any board.");
+        System.out.println("You don't have write permission to any board.");
+        Console.readLine("\nPress ENTER to continue...");
         return false;
       }
 
@@ -42,14 +43,16 @@ public class UndoPostItChangeUI extends AbstractUI {
       if (selectedBoard == null)
         return false;
 
-      Iterable<PostItDTO> postIts = ctrl.listLatestBoardPostIts(selectedBoard);
+      // TODO CHANGE to own post-its
+      Iterable<PostItDTO> postIts = ctrl.listLatestBoardPostItsByUser(selectedBoard);
 
       if (!postIts.iterator().hasNext()) {
-        System.out.println("This board does not contain any post-it.");
+        System.out.println("You don't own any post-it in this board.");
+        Console.readLine("\nPress ENTER to continue...");
         return false;
       }
 
-      System.out.println("\nBoard Post-Its:\n");
+      System.out.println("\nYour Post-Its:\n");
 
       PostItPrinter postItPrinter = new PostItPrinter();
       postItPrinter.printHeader();
@@ -62,6 +65,7 @@ public class UndoPostItChangeUI extends AbstractUI {
       if (selectedPostIt == null)
         return false;
 
+      // TODO reselect post-it
       if (selectedPostIt.getPrevious() == null) {
         System.out.println("\nThis post-it does not have any previous version.");
         Console.readLine("\nPress ENTER to continue...");
@@ -72,7 +76,7 @@ public class UndoPostItChangeUI extends AbstractUI {
 
       printPostIt(selectedPostIt.getPrevious());
 
-      String answer = Console.readLine("\nDo you want to undo this change? (y/n)");
+      String answer = Console.readLine("\nDo you want to undo this change? (y/N)");
 
       if (!answer.equalsIgnoreCase("y"))
         return false;

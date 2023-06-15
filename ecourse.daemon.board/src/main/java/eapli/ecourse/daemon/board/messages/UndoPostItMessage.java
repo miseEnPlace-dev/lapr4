@@ -58,7 +58,9 @@ public class UndoPostItMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    if (!postIt.board().canWrite(username)) {
+    // check if is owner of the post-it and has write permission to the board or is board's owner
+    if (!(postIt.board().canWrite(username) && postIt.owner().hasIdentity(username))
+        && !postIt.board().owner().hasIdentity(username)) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
       return;
     }

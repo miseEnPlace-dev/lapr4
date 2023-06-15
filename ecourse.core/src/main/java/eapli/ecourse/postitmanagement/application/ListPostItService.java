@@ -32,6 +32,11 @@ public class ListPostItService {
     return toDto(list);
   }
 
+  public Iterable<PostItDTO> latestOfBoardByUser(BoardID boardId, Username username) {
+    Iterable<PostIt> list = postItRepository.findLatestFromUserByBoardId(boardId, username);
+    return toDto(list);
+  }
+
   public Iterable<PostItDTO> boardHistory(BoardID boardId) {
     Iterable<PostIt> list = postItRepository.findAllPostItsOrderedByDate(boardId);
     return toDto(list);
@@ -46,5 +51,4 @@ public class ListPostItService {
     return StreamSupport.stream(list.spliterator(), true).map(PostIt::toDto)
         .collect(Collectors.toUnmodifiableList());
   }
-
 }
