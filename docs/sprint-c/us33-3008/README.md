@@ -85,32 +85,64 @@ A user will be unable to undo the last change in a post-it if the post-it does n
 
 ### 4.3. Applied Patterns
 
-- XXX
+- **Dependency Injection:** This is used in the controller and in the services. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the post-its. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of System Users to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** Test if Post-It exists.
 
 ```java
+@Test
+public void testPostItExists() { ... }
+```
 
+**Test 2:** Test if Post-It does not exist.
+
+```java
+@Test
+public void testPostItDoesNotExist() { ... }
+```
+
+**Test 3:** Test if Post-It does not exist.
+
+```java
+@Test
+public void testCanEditPostItAsOwner() { ... }
+```
+
+**Test 4:** Test if Post-It does not exist.
+
+```java
+@Test
+public void testCanEditPostItAsBoardOwner() { ... }
+```
+
+**Test 5:** Test if Post-It does not exist.
+
+```java
+@Test
+public void testCannotEditPostIt() { ... }
 ```
 
 ## 5. Implementation
 
 ### 5.1. Controller
 
-- Relevant implementation details
-
 ```java
-
+public UndoPostItController(TransactionalContext ctx, PostItRepository postItRepository) {
+  this.ctx = ctx;
+  this.postItRepository = postItRepository;
+}
 ```
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US3008_DEMO](out/US3008_DEMO.svg)
 
 ## 7. Observations
 
-- N/a
+- This US was implemented using specific requirements provided in RCOMP & SCOMP.

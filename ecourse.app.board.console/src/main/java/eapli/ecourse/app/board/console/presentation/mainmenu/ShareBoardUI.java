@@ -45,9 +45,26 @@ public class ShareBoardUI extends AbstractUI {
       if (selected == null)
         return false;
 
-      String username =
-          Console.readLine("\nInsert the username of the user you want to share the board with: ");
-      UserPermissionDTO permission = ctrl.userPermissions(selected, username);
+      UserPermissionDTO permission = null;
+      String username = "";
+      boolean error;
+
+      do {
+        error = false;
+
+        username = Console
+            .readLine("\nInsert the username of the user you want to share the board with: ");
+        try {
+          permission = ctrl.userPermissions(selected, username);
+        } catch (UnsuccessfulRequestException e) {
+          error = true;
+          System.out.println("\n" + e.getMessage());
+          String option = Console.readLine("\nDo you want to try with a different user? (Y/n) ");
+
+          if (option.equalsIgnoreCase("n"))
+            return false;
+        }
+      } while (error);
 
       if (permission == null)
         System.out.printf("\nThe user %s doesn't have any permission on the board.\n", username);

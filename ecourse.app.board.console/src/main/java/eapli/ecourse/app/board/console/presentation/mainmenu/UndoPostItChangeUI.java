@@ -43,7 +43,6 @@ public class UndoPostItChangeUI extends AbstractUI {
       if (selectedBoard == null)
         return false;
 
-      // TODO CHANGE to own post-its
       Iterable<PostItDTO> postIts = ctrl.listLatestBoardPostItsByUser(selectedBoard);
 
       if (!postIts.iterator().hasNext()) {

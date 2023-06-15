@@ -18,6 +18,7 @@ import eapli.ecourse.daemon.board.messages.ArchiveBoardMessage;
 import eapli.ecourse.daemon.board.messages.AuthMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
+import eapli.ecourse.daemon.board.messages.CreatePostItMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardHistoryMessage;
@@ -32,6 +33,7 @@ import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
+import eapli.ecourse.daemon.board.messages.IsCellAvailableMessage;
 
 public class ClientHandler implements Runnable {
 
@@ -57,11 +59,12 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_POSTITS_BOARD, GetPostItsBoardMessage.class);
       put(MessageCode.GET_OWN_POSTITS_BOARD, GetOwnPostItsBoardMessage.class);
       put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
-      // put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
+      put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
 
       put(MessageCode.GET_ONLINE_COUNT, GetOnlineCountMessage.class);
+      put(MessageCode.IS_CELL_AVAILABLE, IsCellAvailableMessage.class);
     }
   };
 
