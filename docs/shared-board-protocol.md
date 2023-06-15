@@ -40,6 +40,7 @@ The communication protocol message codes are described in the following table:
 | 14   | `EDIT_POSTIT`          | Used to edit a post-it.                                                                                                                                                                                                                                                                                |
 | 15   | `UNDO_POSTIT`          | Used to undo the last change in a post-it.                                                                                                                                                                                                                                                             |
 | 16   | `GET_BOARD_POSTITS`    | Used to get the post-its of a board.                                                                                                                                                                                                                                                                   |
+| 16   | `GET_ONLINE_COUNT`     | Used to get the number of clients currently connected to the server.                                                                                                                                                                                                                                   |
 
 ## Authentication Request
 
