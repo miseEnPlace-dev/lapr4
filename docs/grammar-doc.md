@@ -68,7 +68,9 @@ To make the understanding easier we will use the following notation:
 - | - or
 - {} - repeatable.
 
-### 1.1 Question Grammar
+## 1. Question Grammar
+
+### 1.1 Question Structure
 
 All the files defining questions to be used in exams must follow the following structure:
 
@@ -298,6 +300,7 @@ The exam starts with the keyword **"@start-exam"** followed by an identifier and
 #### 3.1.2 Header:
 
 The header section provides information about the exam, such as the title, description, feedback type, grading type and score.
+It includes properties such as **"@title"**, **"@description"**, **"@feedback"**, **"@score"** and **"@grade"**.
 
 #### 3.1.3 Sections:
 
