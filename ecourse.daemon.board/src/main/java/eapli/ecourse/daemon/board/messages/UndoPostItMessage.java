@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
-
+import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
@@ -23,9 +23,9 @@ public class UndoPostItMessage extends Message {
   private final TransactionalContext ctx;
   private final PostItRepository postItRepository;
 
-  public UndoPostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket) {
-    super(protocolMessage, output, socket);
+  public UndoPostItMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
+      SafeOnlineCounter onlineCounter) {
+    super(protocolMessage, output, socket, onlineCounter);
 
     this.ctx = PersistenceContext.repositories().newTransactionalContext();
     this.postItRepository = PersistenceContext.repositories().postIts(this.ctx);

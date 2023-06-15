@@ -16,6 +16,7 @@ import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.boardmanagement.domain.UserPermission;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
@@ -39,9 +40,9 @@ public class ShareBoardMessage extends Message {
     }
   };
 
-  public ShareBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket) {
-    super(protocolMessage, output, socket);
+  public ShareBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
+      SafeOnlineCounter onlineCounter) {
+    super(protocolMessage, output, socket, onlineCounter);
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.userSvc = AuthzRegistry.userService();

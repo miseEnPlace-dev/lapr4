@@ -11,11 +11,13 @@ public class TcpServer {
   private int port;
   private Class<? extends Runnable> handlerClass;
   private boolean secure;
+  private SafeOnlineCounter onlineCounter;
 
   public TcpServer(int port, Class<? extends Runnable> handler, boolean secure) {
     this.port = port;
     this.handlerClass = handler;
     this.secure = secure;
+    this.onlineCounter = new SafeOnlineCounter();
   }
 
   public void run() {
@@ -44,7 +46,9 @@ public class TcpServer {
         socket = tcpSocket.accept();
 
         // create a new client handler
-        Runnable handler = handlerClass.getConstructor(Socket.class).newInstance(socket);
+        // ? we are sharing the counter with the handler so that he can increment it
+        Runnable handler = handlerClass.getConstructor(Socket.class, SafeOnlineCounter.class)
+            .newInstance(socket, this.onlineCounter);
 
         // create a new thread to handle the client
         Thread clientHandler = new Thread(handler);

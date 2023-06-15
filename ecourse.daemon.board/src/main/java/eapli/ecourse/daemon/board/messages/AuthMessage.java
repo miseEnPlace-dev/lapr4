@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
-
+import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
@@ -17,8 +17,9 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class AuthMessage extends Message {
-  public AuthMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket) {
-    super(protocolMessage, output, socket);
+  public AuthMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
+      SafeOnlineCounter onlineCounter) {
+    super(protocolMessage, output, socket, onlineCounter);
   }
 
   @Override

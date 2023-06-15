@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
@@ -23,6 +23,7 @@ import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardPostItsMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
+import eapli.ecourse.daemon.board.messages.GetOnlineCountMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
@@ -31,9 +32,8 @@ import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
 
 public class ClientHandler implements Runnable {
-  private Socket client;
 
-  // define here the handler for the pretended message code
+  // ? define here the handler for the pretended message code
   private final static Map<MessageCode, Class<? extends Message>> MESSAGE_MAP = new HashMap<>() {
     {
       put(MessageCode.ACK, AckMessage.class);
@@ -53,13 +53,18 @@ public class ClientHandler implements Runnable {
       // put(MessageCode.EDIT_POSTIT, EditPostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
       put(MessageCode.GET_BOARD_POSTITS, GetBoardPostItsMessage.class);
+      put(MessageCode.GET_ONLINE_COUNT, GetOnlineCountMessage.class);
     }
   };
 
   private final Logger logger = LogManager.getLogger(ClientHandler.class);
 
-  public ClientHandler(Socket socket) {
+  private Socket client;
+  private SafeOnlineCounter onlineCounter;
+
+  public ClientHandler(Socket socket, SafeOnlineCounter onlineCounter) {
     this.client = socket;
+    this.onlineCounter = onlineCounter;
   }
 
   @Override
@@ -67,6 +72,9 @@ public class ClientHandler implements Runnable {
     try {
       logger.debug("[Client Handler Thread] Connected to "
           + client.getInetAddress().getHostAddress() + " port " + client.getPort() + "!");
+
+      // safely increment the online counter
+      this.onlineCounter.increment();
 
       // in udp applications, each send must match one receive in the
       // counterpart and the number of bytes transported by each datagram is
@@ -107,6 +115,9 @@ public class ClientHandler implements Runnable {
     } catch (IOException e) {
       logger.error("\n[Client Handler Thread] Error", e);
     }
+
+    // safely decrement the online counter
+    this.onlineCounter.decrement();
   }
 
   private void processMessage(ProtocolMessage message, DataOutputStream output) throws IOException {
@@ -119,8 +130,9 @@ public class ClientHandler implements Runnable {
     } else {
       try {
         handleMessage = clazz
-            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class)
-            .newInstance(message, output, this.client);
+            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class,
+                SafeOnlineCounter.class)
+            .newInstance(message, output, this.client, this.onlineCounter);
       } catch (Exception e) {
         logger.error("\n[Client Handler Thread] Error", e);
         return;

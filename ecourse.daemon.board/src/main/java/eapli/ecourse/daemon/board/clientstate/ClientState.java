@@ -12,6 +12,8 @@ public class ClientState {
   }
 
   // singleton thread-local instance
+  // each thread will create its own instance of ClientState
+  // therefore the clientState it thread safe
   private static final ThreadLocal<ClientState> _localStorage = new ThreadLocal<ClientState>() {
     protected ClientState initialValue() {
       return new ClientState();

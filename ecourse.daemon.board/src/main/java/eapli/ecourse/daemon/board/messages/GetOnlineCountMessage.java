@@ -7,18 +7,16 @@ import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 
-public class BadRequestMessage extends Message {
-  public BadRequestMessage(DataOutputStream output, Socket socket) {
-    super(null, output, socket, null);
-  }
-
-  public BadRequestMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
+public class GetOnlineCountMessage extends Message {
+  public GetOnlineCountMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket, SafeOnlineCounter onlineCounter) {
     super(protocolMessage, output, socket, onlineCounter);
   }
 
   @Override
   public void handle() throws IOException {
-    super.send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+    long count = onlineCounter.getOnlineCount();
+
+    send(new ProtocolMessage(MessageCode.GET_ONLINE_COUNT, count));
   }
 }

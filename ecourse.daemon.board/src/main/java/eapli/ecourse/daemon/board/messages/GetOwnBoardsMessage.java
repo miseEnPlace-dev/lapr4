@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
@@ -20,8 +21,8 @@ public class GetOwnBoardsMessage extends Message {
   private ListBoardsService listBoardsService;
 
   public GetOwnBoardsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket) {
-    super(protocolMessage, output, socket);
+      Socket socket, SafeOnlineCounter onlineCounter) {
+    super(protocolMessage, output, socket, onlineCounter);
     this.listBoardsService = new ListBoardsService(PersistenceContext.repositories().boards());
   }
 
