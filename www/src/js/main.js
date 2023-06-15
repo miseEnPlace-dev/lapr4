@@ -39,6 +39,15 @@ function getData() {
   request.timeout = MAX_TIMEOUT;
   request.send(null);
 
+  getAuthenticatedUser();
+  getOnlineUsers();
+
+  authRequest.open("GET", "/api/session", true);
+  authRequest.timeout = MAX_TIMEOUT;
+  authRequest.send(null);
+}
+
+function getAuthenticatedUser() {
   /** @type XMLHttpRequest */
   let authRequest;
 
@@ -58,19 +67,52 @@ function getData() {
   };
 
   authRequest.ontimeout = () => {
-    boardContainer.innerHTML = "Server timeout, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
+    username.innerHTML = "Server timeout, still trying...";
+    username.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   authRequest.onerror = () => {
-    boardContainer.innerHTML = "No server reply, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
+    username.innerHTML = "No server reply, still trying...";
+    username.className = "text-red-500 text-8xl";
+    setTimeout(getData, RETRY_TIMEOUT);
+  };
+}
+
+function getOnlineUsers() {
+  /** @type XMLHttpRequest */
+  let onlineUsersRequest;
+
+  try {
+    onlineUsersRequest = new XMLHttpRequest();
+  } catch (error) {
+    throw new Error("Could not create HTTP Request object.");
+  }
+
+  const online = document.querySelector("#online");
+
+  onlineUsersRequest.onload = () => {
+    /** @type {{online: number}} */
+    const data = JSON.parse(onlineUsersRequest.responseText);
+
+    console.log(data);
+    online.innerHTML = `Currently active: ${data.online}`;
+    setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
+  };
+
+  onlineUsersRequest.ontimeout = () => {
+    online.innerHTML = "Server timeout, still trying...";
+    online.className = "text-red-500 text-8xl";
+    setTimeout(getData, ERROR_TIMEOUT);
+  };
+  onlineUsersRequest.onerror = () => {
+    online.innerHTML = "No server reply, still trying...";
+    online.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
-  authRequest.open("GET", "/api/session", true);
-  authRequest.timeout = MAX_TIMEOUT;
-  authRequest.send(null);
+  onlineUsersRequest.open("GET", "/api/online", true);
+  onlineUsersRequest.timeout = MAX_TIMEOUT;
+  onlineUsersRequest.send(null);
 }
 
 const button = document.querySelector("#confirm-button");
@@ -78,5 +120,6 @@ button.addEventListener("click", (e) => {
   e.preventDefault();
   const boardSelector = document.querySelector("#board-selector");
   const boardName = boardSelector.options[boardSelector.selectedIndex].value;
-  window.location.href = `/board.html?board=${boardName}`;
+  if (boardName === "") return alert("Please select a board.");
+  else window.location.href = `/board.html?board=${boardName}`;
 });

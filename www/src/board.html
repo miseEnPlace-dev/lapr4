@@ -7,7 +7,7 @@
     <title>🔴 View Live Board</title>
   </head>
   <body
-    class="font-poppins h-screen dark:bg-slate-800 dark:text-white bg-white text-black transition-all duration-300 ease-in-out"
+    class="font-poppins max-h-screen dark:bg-slate-800 dark:text-white bg-white text-black transition-all duration-300 ease-in-out"
     onload="getData()">
     <nav class="flex items-center justify-between mx-8 my-4">
       <div>
@@ -21,6 +21,7 @@
         <div class="h-10 w-10 bg-gray-400 rounded-full"></div>
       </div>
     </nav>
+    <h4 id="online" class="absolute right-8 bottom-8 text-xl font-thin"></h4>
 
     <div class="absolute h-52"></div> <!-- Workaround to generate class -->
 

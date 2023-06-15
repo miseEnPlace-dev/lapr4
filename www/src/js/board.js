@@ -73,6 +73,8 @@ function getData() {
 
       boardTable.appendChild(tr);
     }
+
+    setTimeout(getData, REFRESH_TIMEOUT);
   };
 
   request.ontimeout = () => {
@@ -91,6 +93,11 @@ function getData() {
   request.timeout = MAX_TIMEOUT;
   request.send(null);
 
+  getAuthenticatedUser();
+  getOnlineUsers();
+}
+
+function getAuthenticatedUser() {
   /** @type XMLHttpRequest */
   let authRequest;
 
@@ -123,4 +130,41 @@ function getData() {
   authRequest.open("GET", "/api/session", true);
   authRequest.timeout = MAX_TIMEOUT;
   authRequest.send(null);
+}
+
+function getOnlineUsers() {
+  /** @type XMLHttpRequest */
+  let onlineUsersRequest;
+
+  try {
+    onlineUsersRequest = new XMLHttpRequest();
+  } catch (error) {
+    throw new Error("Could not create HTTP Request object.");
+  }
+
+  const online = document.querySelector("#online");
+
+  onlineUsersRequest.onload = () => {
+    /** @type {{online: number}} */
+    const data = JSON.parse(onlineUsersRequest.responseText);
+
+    console.log(data);
+    online.innerHTML = `Currently active: ${data.online}`;
+    setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
+  };
+
+  onlineUsersRequest.ontimeout = () => {
+    online.innerHTML = "Server timeout, still trying...";
+    online.className = "text-red-500 text-8xl";
+    setTimeout(getData, ERROR_TIMEOUT);
+  };
+  onlineUsersRequest.onerror = () => {
+    online.innerHTML = "No server reply, still trying...";
+    online.className = "text-red-500 text-8xl";
+    setTimeout(getData, RETRY_TIMEOUT);
+  };
+
+  onlineUsersRequest.open("GET", "/api/online", true);
+  onlineUsersRequest.timeout = MAX_TIMEOUT;
+  onlineUsersRequest.send(null);
 }
