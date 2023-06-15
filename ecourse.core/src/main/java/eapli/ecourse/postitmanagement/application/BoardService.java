@@ -1,6 +1,9 @@
 package eapli.ecourse.postitmanagement.application;
 
+import eapli.ecourse.boardmanagement.domain.Board;
+import eapli.ecourse.boardmanagement.domain.BoardColumn;
 import eapli.ecourse.boardmanagement.domain.BoardID;
+import eapli.ecourse.boardmanagement.domain.BoardRow;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostIt;
@@ -17,6 +20,9 @@ public class BoardService {
   }
 
   public boolean isCellAvailable(BoardID id, int x, int y) {
+    if (!checkCellExists(id, x, y))
+      return false;
+
     Iterable<PostIt> postIts = postItRepository.findLatestByBoardId(id);
 
     return !this.existsPostIt(postIts, x, y);
@@ -31,6 +37,29 @@ public class BoardService {
     }
 
     return false;
+  }
+
+  private boolean checkCellExists(BoardID id, int x, int y) {
+    Board b = boardRepository.ofIdentity(id).orElseThrow();
+    boolean result = false;
+
+    for (BoardRow r : b.rows()) {
+      if (r.rowNumber() == x) {
+        result = true;
+        break;
+      }
+    }
+    if (!result)
+      return false;
+
+    for (BoardColumn c : b.columns()) {
+      if (c.columnNumber() == y) {
+        return true;
+      }
+    }
+
+    return false;
+
   }
 
 }
