@@ -3,24 +3,33 @@ const ERROR_TIMEOUT = 2000;
 const REFRESH_TIMEOUT = 2000;
 const MAX_TIMEOUT = 15000;
 
+const id = window.location.search.split("=")[1];
+const error = document.querySelector("#error");
+const boardName = document.querySelector("#board-name");
+const boardTable = document.querySelector("#board");
+
 function getData() {
+  updateBoard();
+  getAuthenticatedUser();
+  getOnlineUsers();
+}
+
+function updateBoard() {
   /** @type XMLHttpRequest */
   let request;
 
   try {
     request = new XMLHttpRequest();
-  } catch (error) {
+  } catch (e) {
     throw new Error("Could not create HTTP request object.");
   }
-
-  const boardContainer = document.querySelector("#container");
-  const boardName = document.querySelector("#board-name");
-  const boardTable = document.querySelector("#board");
 
   request.onload = () => {
     /** @type {{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}} */
     const data = JSON.parse(request.responseText);
     boardName.innerHTML = data.title;
+
+    boardTable.innerHTML = "";
 
     const { columns, rows } = data;
 
@@ -52,7 +61,6 @@ function getData() {
 
       th.innerHTML = row.title;
       th.className = "text-center py-6 text-2xl font-bold h-52 w-72";
-      console.log({ i, th });
       if (i !== rows.length - 1) th.className += " border-b-2";
 
       tr.appendChild(th);
@@ -73,28 +81,23 @@ function getData() {
 
       boardTable.appendChild(tr);
     }
-
-    setTimeout(getData, REFRESH_TIMEOUT);
+    setTimeout(updateBoard, REFRESH_TIMEOUT);
   };
 
   request.ontimeout = () => {
-    boardContainer.innerHTML = "Server timeout, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
-    setTimeout(getData, ERROR_TIMEOUT);
+    error.innerHTML = "Server timeout, still trying...";
+    error.className = "text-red-500 text-8xl";
+    setTimeout(updateBoard, ERROR_TIMEOUT);
   };
   request.onerror = () => {
-    boardContainer.innerHTML = "No server reply, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
-    setTimeout(getData, RETRY_TIMEOUT);
+    error.innerHTML = "No server reply, still trying...";
+    error.className = "text-red-500 text-8xl";
+    setTimeout(updateBoard, RETRY_TIMEOUT);
   };
 
-  const id = window.location.search.split("=")[1];
   request.open("GET", `/api/board/${id}`, true);
   request.timeout = MAX_TIMEOUT;
   request.send(null);
-
-  getAuthenticatedUser();
-  getOnlineUsers();
 }
 
 function getAuthenticatedUser() {
@@ -117,13 +120,13 @@ function getAuthenticatedUser() {
   };
 
   authRequest.ontimeout = () => {
-    boardContainer.innerHTML = "Server timeout, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
+    error.innerHTML = "Server timeout, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   authRequest.onerror = () => {
-    boardContainer.innerHTML = "No server reply, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
+    error.innerHTML = "No server reply, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
@@ -148,19 +151,18 @@ function getOnlineUsers() {
     /** @type {{online: number}} */
     const data = JSON.parse(onlineUsersRequest.responseText);
 
-    console.log(data);
     online.innerHTML = `Currently active: ${data.online}`;
     setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
   };
 
   onlineUsersRequest.ontimeout = () => {
-    online.innerHTML = "Server timeout, still trying...";
-    online.className = "text-red-500 text-8xl";
+    error.innerHTML = "Server timeout, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   onlineUsersRequest.onerror = () => {
-    online.innerHTML = "No server reply, still trying...";
-    online.className = "text-red-500 text-8xl";
+    error.innerHTML = "No server reply, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 

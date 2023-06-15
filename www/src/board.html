@@ -21,9 +21,11 @@
         <div class="h-10 w-10 bg-gray-400 rounded-full"></div>
       </div>
     </nav>
-    <h4 id="online" class="absolute right-8 bottom-8 text-xl font-thin"></h4>
+    <h4 id="online" class="fixed right-8 bottom-8 text-xl font-thin"></h4>
 
-    <div class="absolute h-52"></div> <!-- Workaround to generate class -->
+    <!-- Workaround to generate class -->
+    <div id="error"
+      class="absolute h-52 hidden border-2 border-x-2 border-b-2 border-r-2 border-l-2 border-t-2 "></div>
 
     <main class="flex items-center justify-center my-8">
       <table id="board" class="mb-24">

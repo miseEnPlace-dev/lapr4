@@ -1,6 +1,7 @@
 package eapli.ecourse.common.board;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.net.ssl.SSLServerSocket;
@@ -23,19 +24,25 @@ public class HttpServer implements Runnable {
   @Override
   public void run() {
     // create a tcp socket and listen to the defined port
-    ServerSocket tcpSocket;
+    ServerSocket tcpSocket = null;
     Socket socket;
 
-    try {
-      if (secure)
-        tcpSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
-      else
-        tcpSocket = new ServerSocket(port);
-    } catch (IOException e) {
-      System.out.println("Error creating the tcp socket");
-      e.printStackTrace();
-      return;
-    }
+    do {
+      try {
+        if (secure)
+          tcpSocket =
+              (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
+        else
+          tcpSocket = new ServerSocket(port);
+      } catch (BindException e) {
+        // try another port
+        this.port++;
+      } catch (IOException e) {
+        System.out.println("Error creating the tcp socket");
+        e.printStackTrace();
+        return;
+      }
+    } while (tcpSocket == null);
 
     System.out.printf("[HTTP%s Server] Listening on port %d!\n", this.secure ? "S" : "", port);
 
