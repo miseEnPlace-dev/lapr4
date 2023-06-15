@@ -47,7 +47,7 @@
 ### 3.2. Conditions
 
 - The user must be authenticated and authorized to perform the operation.
-- The user must have scheduled at least one meeting.
+- The user must have at least one scheduled meeting.
 
 ### 3.3. System Sequence Diagram
 
@@ -70,6 +70,8 @@
 ### 4.3. Applied Patterns
 
 - **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the meetings and invites. This is done to reduce coupling and to allow the use of the repository in other parts of the application.
+- **Service:** This is used to provide a list of meetings to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
@@ -78,8 +80,12 @@ _Note: This are some simplified versions of the tests for readability purposes._
 **Test 1:** Ensure its possible to cancel a meeting
 
 ```java
-  @Test
-  public void ensureItsPossibleToCancelMeeting() {}
+@Test
+public void ensureItsPossibleToCancelMeeting() {
+    Meeting meeting = getDummyMeeting();
+    meeting.cancel();
+    assertNotNull(meeting.canceledAt());
+}
 ```
 
 ## 5. Implementation
@@ -91,21 +97,21 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ```java
 public Iterable<MeetingDTO> listNotCanceledScheduledMeetings() {
     return this.service.notCanceledMeetingsScheduledBy(getAuthenticatedUser());
-  }
+}
 
-  public void cancelMeeting(MeetingDTO meetingDTO) {
+public void cancelMeeting(MeetingDTO meetingDTO) {
     Meeting meeting = meetingRepository.ofIdentity(meetingDTO.getId()).orElseThrow();
     meeting.cancel();
     meetingRepository.save(meeting);
 
     Iterable<Invite> invites = inviteRepository.findByMeetingID(meetingDTO.getId());
     invites.forEach(inviteRepository::remove);
-  }
+}
 
-  public SystemUser getAuthenticatedUser() {
+public SystemUser getAuthenticatedUser() {
     return authz.loggedinUserWithPermissions(ClientRoles.TEACHER, ClientRoles.MANAGER, ClientRoles.STUDENT)
         .orElseThrow(IllegalStateException::new);
-  }
+}
 ```
 
 ## 6. Integration & Demonstration

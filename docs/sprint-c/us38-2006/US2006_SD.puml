@@ -99,8 +99,8 @@ CTRL -> E_E_Service: exam = findByExamCode(examDTO.getIdentifier())
 
 activate E_E_Service
 deactivate E_E_Service
-CTRL -> CTRL: students = studentsInCourse(examDTO.course())
-CTRL -> E_A_Service: grades = listExamGrades(exam, students)
+CTRL -> CTRL: courseStudents = studentsInCourse(examDTO.course())
+CTRL -> E_A_Service: grades = listExamGrades(exam, courseStudents)
 activate E_A_Service
 E_A_Service -> EAR: answers = findAllWithExam(exam)
 activate EAR
@@ -118,8 +118,8 @@ loop for each answer
     E_A_Service -> E_A_Service : grades = add(answerDTO)
 end loop
 
-loop for each studentInCourse
-    alt if !studentsWhoAnswered.contains(studentInCourse)
+loop for each courseStudent
+    alt if !studentsWhoAnswered.contains(courseStudent)
       E_A_Service -> AnswerDTO : answerDTO = new
       note right
         This exam answers are marked as grade N/a

@@ -13,11 +13,9 @@ class ListCourseExamGradesController {
 - evaluationExamListService
 - listExamAnswerService
 
-+ ListCourseExamGradesController(authorizationService, meetingRepository,
-inviteRepository)
++ ListCourseExamGradesController(authorizationService, evaluationRepository, courseRepository,
+ teacherRepository, answerRepository, enrolmentRepository, studentRepository)
 
-+ teacherCourses()
-+ courseEvaluationExams(courseDTO)
 + evaluationExamGrades(examDTO)
 - studentsInCourse(course)
 }
@@ -29,6 +27,8 @@ class Answer {
 - course;
 - score;
 - takenAt;
+
++ toDto()
 }
 
 class AnswerDTO {
@@ -49,6 +49,7 @@ class ListExamAnswerService
 - answerRepository
 
 + ListExamAnswerService(answerRepository)
+
 + listExamGrades(exam)
 }
 
@@ -56,6 +57,7 @@ class ListCourseService {
 - courseRepository
 
 + ListCourseService(courseRepository)
+
 + findCourseByCourseCode(courseCode)
 + listInProgressCoursesThatTeacherLectures(teacher)
 }
@@ -73,6 +75,8 @@ class Course {
   - courseState
   - courseEnrolmentState
   - createdAt
+
+  + toDto()
 }
 
 class CourseDTO {
@@ -94,6 +98,7 @@ class EvaluationExamListService {
 - examRepository
 
 + EvaluationExamListService(examRepository)
+
 + findExamByCode(examCode)
 + listAllCourseExams(course)
 }
@@ -128,6 +133,7 @@ class EnrolmentService {
 
 
 + EnrolmentService(enrolmentRepository)
+
 + listStudentsEnrolled(courseCode)
 }
 
