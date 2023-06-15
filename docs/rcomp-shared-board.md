@@ -79,9 +79,9 @@ To use the deployment, read the [Deployment Guide](../README.md#6-deploy-to-a-re
 
 ## References
 
-[Integrative Project Application Protocol](https://moodle.isep.ipp.pt/pluginfile.php/294514/mod_resource/content/1/RCOMP-2022-2023-integrative-project-application-protocol.pdf)
-[TP 8 - Berkeley Sockets in Java (UDP)](https://moodle.isep.ipp.pt/pluginfile.php/282301/mod_resource/content/4/TP08.pdf)
-[TP 9 - Berkeley Socket Java & C API (TCP)](https://moodle.isep.ipp.pt/pluginfile.php/282302/mod_resource/content/6/TP09.pdf)
-[TP 10 - Web Services, Simple HTTP Server in C](https://moodle.isep.ipp.pt/pluginfile.php/282303/mod_resource/content/6/TP10.pdf)
-[TP 11 - SSL Programming in C](https://moodle.isep.ipp.pt/pluginfile.php/282304/mod_resource/content/7/TP11.pdf)
-[ISEP's DEI Virtual Servers Private Cloud Documentation](https://vs-gate.dei.isep.ipp.pt:10124/overview.html)
+- [Integrative Project Application Protocol](https://moodle.isep.ipp.pt/pluginfile.php/294514/mod_resource/content/1/RCOMP-2022-2023-integrative-project-application-protocol.pdf)
+- [TP 8 - Berkeley Sockets in Java (UDP)](https://moodle.isep.ipp.pt/pluginfile.php/282301/mod_resource/content/4/TP08.pdf)
+- [TP 9 - Berkeley Socket Java & C API (TCP)](https://moodle.isep.ipp.pt/pluginfile.php/282302/mod_resource/content/6/TP09.pdf)
+- [TP 10 - Web Services, Simple HTTP Server in C](https://moodle.isep.ipp.pt/pluginfile.php/282303/mod_resource/content/6/TP10.pdf)
+- [TP 11 - SSL Programming in C](https://moodle.isep.ipp.pt/pluginfile.php/282304/mod_resource/content/7/TP11.pdf)
+- [ISEP's DEI Virtual Servers Private Cloud Documentation](https://vs-gate.dei.isep.ipp.pt:10124/overview.html)
