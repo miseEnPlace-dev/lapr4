@@ -269,6 +269,6 @@ public class PostIt implements AggregateRoot<PostItID> {
   public PostItDTO toDto() {
     return new PostItDTO(this.id, this.title, this.coordinates, this.state, this.board.toDto(),
         UserDTO.from(this.owner), this.previous == null ? null : this.previous.toDto(),
-        this.createdAt, this.isLatest);
+        this.createdAt, this.isLatest, this.description, this.image);
   }
 }
