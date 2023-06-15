@@ -2,6 +2,7 @@ package eapli.ecourse.eventsmanagement.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import javax.persistence.Embeddable;
 
 import eapli.ecourse.eventsmanagement.courseclassmanagement.domain.DayInWeek;
@@ -54,6 +55,14 @@ public class Time implements ValueObject, Comparable<Time> {
     Calendar calendar = (Calendar) time.clone();
     calendar.add(Calendar.HOUR_OF_DAY, duration.hour());
     calendar.add(Calendar.MINUTE, duration.minute());
+
+    return Time.valueOf(calendar);
+  }
+
+  public Time subtractDuration(Duration duration) {
+    Calendar calendar = (Calendar) time.clone();
+    calendar.add(Calendar.HOUR_OF_DAY, -duration.hour());
+    calendar.add(Calendar.MINUTE, -duration.minute());
 
     return Time.valueOf(calendar);
   }

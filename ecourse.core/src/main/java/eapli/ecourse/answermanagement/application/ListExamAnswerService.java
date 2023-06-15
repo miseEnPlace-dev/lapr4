@@ -3,6 +3,7 @@ package eapli.ecourse.answermanagement.application;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
@@ -25,25 +26,24 @@ public class ListExamAnswerService {
     this.evaluationExamRepository = evaluationExamRepository;
   }
 
-  public Collection<AnswerDTO> listStudentGrades(Student student, CourseCode code) {
+  public List<AnswerDTO> listStudentGrades(Student student, CourseCode code) {
     Collection<Answer> answers = (Collection<Answer>) examAnswerRepository
-        .findAllWithStudentMecanographicNumberAndCourseCode(
-            student.identity(), code);
+        .findAllWithStudentMecanographicNumberAndCourseCode(student.identity(), code);
 
-    Collection<AnswerDTO> result = (Collection<AnswerDTO>) convertToDTO(answers);
+    List<AnswerDTO> result = (List<AnswerDTO>) convertToDTO(answers);
 
     Collection<EvaluationExam> evaluationExams = (Collection<EvaluationExam>) evaluationExamRepository
         .findAllCourseExamsWithNoAnswersFromStudent(code, student.identity());
 
     Collection<AnswerDTO> notTakenExams = createNotTakenExams(student, evaluationExams);
     if (!notTakenExams.isEmpty())
-      result.addAll(notTakenExams);
+      for (AnswerDTO a : notTakenExams)
+        result.add(a);
 
     return result;
   }
 
   public Collection<AnswerDTO> listExamGrades(Exam exam, Collection<Student> studentsInCourse) {
-
     Collection<Answer> answers = (Collection<Answer>) examAnswerRepository.findAllWithExam(exam);
 
     Collection<AnswerDTO> result = new ArrayList<>((Collection<? extends AnswerDTO>) convertToDTO(answers));
@@ -53,11 +53,10 @@ public class ListExamAnswerService {
     for (Answer examAnswer : answers)
       studentWhoAnswered.add(examAnswer.student());
 
-
     for (Student student : studentsInCourse) {
       if (!studentWhoAnswered.contains(student)) {
         result.add(new AnswerDTO(student.identity().toString(), student.user().name().toString(),
-          exam.title().toString(), exam.course().title().toString(), null, null));
+            exam.title().toString(), exam.course().title().toString(), null, null));
       }
     }
 
@@ -79,6 +78,6 @@ public class ListExamAnswerService {
   private Iterable<AnswerDTO> convertToDTO(Iterable<Answer> answers) {
     return StreamSupport.stream(answers.spliterator(), true)
         .map(Answer::toDto)
-        .collect(java.util.stream.Collectors.toUnmodifiableList());
+        .collect(java.util.stream.Collectors.toList());
   }
 }
