@@ -5,19 +5,17 @@ actor User as "User"
 actor System as "System"
 
 activate User
+activate System
 
 User -> System : asks to check list of meetings
-activate System
 
 System --> User : shows list
-deactivate System
 
 User -> System : selects meeting
-activate System
 
 System --> User : shows list of participants and their status
-deactivate System
 
+deactivate System
 deactivate User
 
 
