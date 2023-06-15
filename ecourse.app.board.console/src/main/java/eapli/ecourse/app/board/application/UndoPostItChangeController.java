@@ -37,7 +37,7 @@ public class UndoPostItChangeController {
   public Iterable<PostItDTO> listLatestBoardPostItsByUser(BoardDTO board) throws IOException,
       UnsupportedVersionException, UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.GET_BOARD_POSTITS, board.getId().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.GET_POSTITS_BOARD, board.getId().toString()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

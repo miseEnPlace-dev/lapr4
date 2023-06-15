@@ -78,7 +78,7 @@ public class ViewBoardController implements RouteController {
   private Iterable<PostItDTO> listLatestBoardPostIts(BoardDTO board) throws IOException,
       UnsupportedVersionException, UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response = client
-        .sendRecv(new ProtocolMessage(MessageCode.GET_BOARD_POSTITS, board.getId().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.GET_POSTITS_BOARD, board.getId().toString()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

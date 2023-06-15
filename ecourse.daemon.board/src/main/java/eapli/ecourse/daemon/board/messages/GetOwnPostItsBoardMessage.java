@@ -18,11 +18,11 @@ import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
-public class GetBoardOwnPostItsMessage extends Message {
+public class GetOwnPostItsBoardMessage extends Message {
   private BoardRepository boardRepo;
   private ListPostItService listPostItsSvc;
 
-  public GetBoardOwnPostItsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+  public GetOwnPostItsBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output,
       Socket socket, SafeOnlineCounter onlineCounter) {
     super(protocolMessage, output, socket, onlineCounter);
 
@@ -56,6 +56,6 @@ public class GetBoardOwnPostItsMessage extends Message {
 
     Iterable<PostItDTO> list = listPostItsSvc.latestOfBoardByUser(b.get().identity(), username);
 
-    send(new ProtocolMessage(MessageCode.GET_BOARD_OWN_POSTITS, list));
+    send(new ProtocolMessage(MessageCode.GET_OWN_POSTITS_BOARD, list));
   }
 }
