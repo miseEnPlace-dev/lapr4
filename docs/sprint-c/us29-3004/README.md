@@ -99,10 +99,32 @@ The system notifies the user that the recipient user already has permissions to 
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** Test if board exists.
 
 ```java
+@Test
+public void testBoardExists() { ... }
+```
 
+**Test 2:** Test if board does not exist.
+
+```java
+@Test
+public void testBoardDoesNotExists() { ... }
+```
+
+**Test 3:** Test if user participates in the board.
+
+```java
+@Test
+public void testIsBoardParticipant() { ... }
+```
+
+**Test 4:** Test if user does not participate in the board.
+
+```java
+@Test
+public void testIsNotBoardParticipant() { ... }
 ```
 
 ## 5. Implementation
