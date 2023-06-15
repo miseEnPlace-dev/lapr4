@@ -56,15 +56,23 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
     CourseDTO bddad = courseBootstrapperBase.createInProgressCourse("8787", "BDDAD", "Bases de Dados", 0, 100,
         amm);
     registerTeacher("bpm", "Password1", "Bertil", "Marques", "bpm@isep.ipp.pt", "252998765", "BPM");
+    TeacherDTO jsm = registerTeacher("jsm", "Password1", "José", "Marinho", "jsm@isep.ipp.pt", "252789121", "JSM");
+    TeacherDTO nfe = registerTeacher("nfe", "Password1", "Nuno", "Escudeiro", "nfe@isep.ipp.pt", "123667878", "NFE");
+    TeacherDTO mrp = registerTeacher("mrp", "Password1", "Maria João", "Raposo", "mrp@isep.ipp.pt", "676890098", "MRP");
     courseBootstrapperBase.createInProgressCourse("9876", "ARQCP", "Arquitetura de Computadores", 0, 100, t);
     courseBootstrapperBase.assignTeacherToCourse(lprog, t);
     courseBootstrapperBase.assignTeacherToCourse(scomp, oms);
     courseBootstrapperBase.assignTeacherToCourse(lapr4, amm);
     courseBootstrapperBase.assignTeacherToCourse(eapli, amm);
     courseBootstrapperBase.assignTeacherToCourse(bddad, amm);
+    courseBootstrapperBase.assignTeacherToCourse(lapr4, mrp);
+    courseBootstrapperBase.assignTeacherToCourse(eapli, nfe);
+    courseBootstrapperBase.assignTeacherToCourse(lprog, jsm);
 
     toggleCourseEnrolmentStateController.toggleEnrolmentState(lapr4);
     toggleCourseEnrolmentStateController.toggleEnrolmentState(eapli);
+    toggleCourseEnrolmentStateController.toggleEnrolmentState(lprog);
+    toggleCourseEnrolmentStateController.toggleEnrolmentState(bddad);
     return true;
   }
 
