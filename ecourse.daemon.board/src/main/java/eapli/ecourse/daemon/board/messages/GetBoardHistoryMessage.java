@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
 
-import org.aspectj.weaver.Position;
-import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
-
 import eapli.ecourse.boardmanagement.application.ViewBoardHistoryController;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
@@ -31,8 +28,8 @@ public class GetBoardHistoryMessage extends Message {
   private BoardRepository boardRepository;
   private PostItRepository postItRepository;
 
-  public GetBoardHistoryMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
+  public GetBoardHistoryMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket, SafeOnlineCounter onlineCounter) {
     super(protocolMessage, output, socket, onlineCounter);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
