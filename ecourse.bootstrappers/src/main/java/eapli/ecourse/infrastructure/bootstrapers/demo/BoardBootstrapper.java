@@ -1,10 +1,11 @@
 package eapli.ecourse.infrastructure.bootstrapers.demo;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,10 +25,11 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   private static Logger logger = LogManager.getLogger(BoardBootstrapper.class);
 
-  private final String IMAGE_PATH = "ecourse.bootstrappers/src/main/resources/_p1.png";
+  private final String IMAGE_PATH = "_p1.png";
 
-  private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
-      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
+  private CreateBoardController ctrl =
+      new CreateBoardController(PersistenceContext.repositories().boards(),
+          AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
   private CreatePostItController ctrlPostIt = new CreatePostItController(
       PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
@@ -69,23 +71,38 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
   public boolean execute() {
     Board b = ctrl.createBoard("example", getPermissions(), getColumns(), getRows());
 
+    String path = null;
+
+    ClassLoader classLoader = getClass().getClassLoader();
+    InputStream resource = classLoader.getResourceAsStream(IMAGE_PATH);
+
+    byte[] image = null;
+
     try {
-      ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null, IMAGE_PATH);
+      if (resource != null) {
+        // read the file and convert it to base64
+        image = IOUtils.toByteArray(resource);
+      } else
+        logger.warn("Image {} not found", IMAGE_PATH);
+
+      ctrlPostIt.createPostIt(b.identity(), 1, 2, "PostIt1", null, image);
     } catch (IOException e) {
       e.printStackTrace();
     }
 
     try {
-      ctrlPostIt.createPostIt(b.identity(), 2, 3, "PostIt4", "Some very big descriptive description!", IMAGE_PATH);
+      ctrlPostIt.createPostIt(b.identity(), 2, 3, "PostIt4",
+          "Some very big descriptive description!", path);
     } catch (IOException e) {
       e.printStackTrace();
     }
 
     try {
-      PostIt p2 = ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2", "Description", null);
+      PostIt p2 = ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2", "Description", image);
 
-      ChangePostItController c = new ChangePostItController(PersistenceContext.repositories().boards(),
-          PersistenceContext.repositories().postIts(), AuthzRegistry.authorizationService());
+      ChangePostItController c =
+          new ChangePostItController(PersistenceContext.repositories().boards(),
+              PersistenceContext.repositories().postIts(), AuthzRegistry.authorizationService());
 
       c.changePostIt(p2.identity(), "PostIt2.1", 2, 2, "Description updated", null);
     } catch (IOException e) {
