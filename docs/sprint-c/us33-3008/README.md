@@ -63,6 +63,7 @@ A user will be unable to undo the last change in a post-it if the post-it does n
 
 - The user must be authenticated in order to perform this action.
 - The user must have write permission in the board.
+- The user must be owner of the post-it.
 
 ### 3.3. System Sequence Diagram
 

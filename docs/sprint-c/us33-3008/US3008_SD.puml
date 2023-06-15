@@ -21,17 +21,17 @@ activate UI
   activate CTRL
     CTRL -> BOARDSVC : listBoardService = new(boardRepository)
     activate BOARDSVC
-    deactivate BOARDSVC
+    ' deactivate BOARDSVC
 
     CTRL -> USRSVC : usrService = new(userRepository)
     activate USRSVC
     deactivate USRSVC
-  deactivate CTRL
+  ' deactivate CTRL
 
   UI -> CTRL : listUserWritableBoards()
-  activate CTRL
+  ' activate CTRL
     CTRL -> BOARDSVC : userBoards(user)
-    activate BOARDSVC
+    ' activate BOARDSVC
       BOARDSVC -> BOARDREP : findAllUserWritableBoards(user)
       activate BOARDREP
          BOARDSVC <-- BOARDREP : boards
@@ -49,21 +49,21 @@ activate UI
       CTRL <-- BOARDSVC : boards
     deactivate BOARDSVC
     UI <-- CTRL : boards
-  deactivate CTRL
+  ' deactivate CTRL
 
   U <-- UI : asks to select a board
-deactivate UI
+' deactivate UI
 
 U -> UI : selects a board
-activate UI
-  UI -> CTRL : listLatestBoardPostIts(boardDto)
-  activate CTRL
-    CTRL -> POSTITSVC : latestOfBoard(boardId)
+' activate UI
+  UI -> CTRL : listLatestBoardPostItsFromUser(boardDto)
+  ' activate CTRL
+    CTRL -> POSTITSVC : latestOfBoardFromUser(boardId, username)
     activate POSTITSVC
-      POSTITSVC -> POSTITREP : findLatestByBoardId(boardId)
+      POSTITSVC -> POSTITREP : findLatestFromUserByBoardId(boardId, username)
       activate POSTITREP
         POSTITSVC <-- POSTITREP : postIts
-      deactivate POSTITREP
+      ' deactivate POSTITREP
 
       loop for each post-it
         POSTITSVC -> P : toDTO(postIt)
@@ -78,31 +78,31 @@ activate UI
     deactivate POSTITSVC
 
     UI <-- CTRL : postIts
-  deactivate CTRL
+  ' deactivate CTRL
 
   U <-- UI : asks to select a post-it
-deactivate UI
+' deactivate UI
 
 U -> UI : selects a post-it
-activate UI
+' activate UI
   U <-- UI : asks to confirm the action
-deactivate UI
+' deactivate UI
 
 U -> UI : confirms the action
-activate UI
+' activate UI
   UI -> CTRL : undoPostItChange(postItDto)
-  activate CTRL
+  ' activate CTRL
     CTRL -> POSTITREP : ofIdentity(postItDto.id)
-    activate POSTITREP
+    ' activate POSTITREP
       CTRL <-- POSTITREP : postIt
     deactivate POSTITREP
 
     CTRL -> P : getPrevious().toggleIsLatest()
     activate P
-    deactivate P
+    ' deactivate P
 
     CTRL -> P : delete()
-    activate P
+    ' activate P
     deactivate P
 
     UI <-- CTRL : previousPostItDto
