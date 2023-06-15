@@ -25,7 +25,7 @@ public class InMemoryPostItRepository extends InMemoryDomainRepository<PostIt, P
   @Override
   public Iterable<PostIt> findLatestFromUserByBoardId(BoardID boardId, Username username) {
     return match(e -> e.board().identity().equals(boardId) && e.isLatest()
-        && e.owner().identity().equals(username) && e.isLatest());
+        && e.owner().identity().equals(username) && e.isActive());
   }
 
   @Override
