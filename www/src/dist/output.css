@@ -560,10 +560,6 @@ video {
   pointer-events: none;
 }
 
-.static {
-  position: static;
-}
-
 .fixed {
   position: fixed;
 }
@@ -574,10 +570,6 @@ video {
 
 .relative {
   position: relative;
-}
-
-.sticky {
-  position: sticky;
 }
 
 .-bottom-8 {
@@ -602,10 +594,6 @@ video {
 
 .right-8 {
   right: 2rem;
-}
-
-.top-24 {
-  top: 6rem;
 }
 
 .mx-4 {
