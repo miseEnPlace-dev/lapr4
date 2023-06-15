@@ -41,6 +41,7 @@ public class UndoPostItChangeController {
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
+
     Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
 
     List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true)
@@ -49,8 +50,8 @@ public class UndoPostItChangeController {
     return result;
   }
 
-  public void undoPostItChange(PostItDTO postIt)
-      throws IOException, UnsupportedVersionException, UnsuccessfulRequestException {
+  public void undoPostItChange(PostItDTO postIt) throws IOException, UnsupportedVersionException,
+      UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response =
         server.sendRecv(new ProtocolMessage(MessageCode.UNDO_POSTIT, postIt.getId().toString()));
 

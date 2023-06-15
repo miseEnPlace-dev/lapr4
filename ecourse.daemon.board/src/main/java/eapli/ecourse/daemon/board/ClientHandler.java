@@ -113,7 +113,7 @@ public class ClientHandler implements Runnable {
 
       output.close();
       input.close();
-    } catch (IOException e) {
+    } catch (IOException | ClassNotFoundException e) {
       logger.error("\n[Client Handler Thread] Error", e);
     }
 

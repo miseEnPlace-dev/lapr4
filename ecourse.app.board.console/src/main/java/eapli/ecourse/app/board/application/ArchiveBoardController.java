@@ -32,8 +32,8 @@ public class ArchiveBoardController {
     return result;
   }
 
-  public void archiveBoard(BoardDTO boardDto)
-      throws IOException, UnsupportedVersionException, UnsuccessfulRequestException {
+  public void archiveBoard(BoardDTO boardDto) throws IOException, UnsupportedVersionException,
+      UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response = server
         .sendRecv(new ProtocolMessage(MessageCode.ARCHIVE_BOARD, boardDto.getId().toString()));
 
