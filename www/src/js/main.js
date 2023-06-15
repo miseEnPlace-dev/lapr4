@@ -3,6 +3,9 @@ const ERROR_TIMEOUT = 2000;
 const REFRESH_TIMEOUT = 2000;
 const MAX_TIMEOUT = 15000;
 
+const error = document.querySelector("#error");
+const boardSelector = document.querySelector("#board-selector");
+
 function getData() {
   /** @type XMLHttpRequest */
   let request;
@@ -13,9 +16,6 @@ function getData() {
     throw new Error("Could not create HTTP request object.");
   }
 
-  const boardContainer = document.querySelector("#container");
-  const boardSelector = document.querySelector("#board-selector");
-
   request.onload = () => {
     /** @type {{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
     const data = JSON.parse(request.responseText);
@@ -25,13 +25,13 @@ function getData() {
   };
 
   request.ontimeout = () => {
-    boardContainer.innerHTML = "Server timeout, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
+    error.innerHTML = "Server timeout, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   request.onerror = () => {
-    boardContainer.innerHTML = "No server reply, still trying...";
-    boardContainer.className = "text-red-500 text-8xl";
+    error.innerHTML = "No server reply, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
@@ -41,10 +41,6 @@ function getData() {
 
   getAuthenticatedUser();
   getOnlineUsers();
-
-  authRequest.open("GET", "/api/session", true);
-  authRequest.timeout = MAX_TIMEOUT;
-  authRequest.send(null);
 }
 
 function getAuthenticatedUser() {
@@ -67,15 +63,19 @@ function getAuthenticatedUser() {
   };
 
   authRequest.ontimeout = () => {
-    username.innerHTML = "Server timeout, still trying...";
-    username.className = "text-red-500 text-8xl";
+    error.innerHTML = "Server timeout, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   authRequest.onerror = () => {
-    username.innerHTML = "No server reply, still trying...";
-    username.className = "text-red-500 text-8xl";
+    error.innerHTML = "No server reply, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
+
+  authRequest.open("GET", "/api/session", true);
+  authRequest.timeout = MAX_TIMEOUT;
+  authRequest.send(null);
 }
 
 function getOnlineUsers() {
@@ -94,19 +94,18 @@ function getOnlineUsers() {
     /** @type {{online: number}} */
     const data = JSON.parse(onlineUsersRequest.responseText);
 
-    console.log(data);
     online.innerHTML = `Currently active: ${data.online}`;
     setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
   };
 
   onlineUsersRequest.ontimeout = () => {
-    online.innerHTML = "Server timeout, still trying...";
-    online.className = "text-red-500 text-8xl";
+    error.innerHTML = "Server timeout, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   onlineUsersRequest.onerror = () => {
-    online.innerHTML = "No server reply, still trying...";
-    online.className = "text-red-500 text-8xl";
+    error.innerHTML = "No server reply, still trying...";
+    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
