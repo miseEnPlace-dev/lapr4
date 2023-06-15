@@ -81,7 +81,7 @@
         @type matching;
         @score 25;
         @question-body "Associe cada conceito à sua definição.";
-        @feedback "General feedback";
+        @feedback "Devia ter ido às teóricas de transações!";
 
         @start-correct-answers
           @correct-answer 1 - 3;
