@@ -74,28 +74,6 @@ activate EXREP
 EXREP --> ESRV : examAnswers
 deactivate EXREP
 
-loop for each examAnswer
-  ESRV -> E : toDTO(examAnswer)
-  activate E
-  E -> EDTO : new
-  deactivate E
-end loop
-
-ESRV -> FEXAMREP : findAllCourseExamsWithNoAnswersFromStudent(selectedCourse.identity(), student.identity())
-activate FEXAMREP
-FEXAMREP --> ESRV : formativeExams
-deactivate FEXAMREP
-
-loop for each exam
-  ESRV -> EDTO : new
-end loop
-
-note right
-  This exam answers are marked as grade N/a
-end note
-
-ESRV -> ESRV : examAnswers.addAll(formativeExams)
-
 ESRV -> EEXAMREP : findAllCourseExamsWithNoAnswersFromStudent(selectedCourse.identity(), student.identity())
 activate EEXAMREP
 EEXAMREP --> ESRV : evaluationExams
@@ -104,6 +82,10 @@ deactivate EEXAMREP
 loop for each exam
   ESRV -> EDTO : new
 end loop
+
+note right
+  This exam answers are marked as grade N/a
+end note
 
 ESRV -> ESRV : examAnswers.addAll(evaluationExams)
 

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;

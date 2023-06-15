@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,9 +28,8 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
 
   private final String IMAGE_PATH = "_p1.png";
 
-  private CreateBoardController ctrl =
-      new CreateBoardController(PersistenceContext.repositories().boards(),
-          AuthzRegistry.userService(), AuthzRegistry.authorizationService());
+  private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
+      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
   private CreatePostItController ctrlPostIt = new CreatePostItController(
       PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
@@ -100,9 +100,8 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     try {
       PostIt p2 = ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2", "Description", image);
 
-      ChangePostItController c =
-          new ChangePostItController(PersistenceContext.repositories().boards(),
-              PersistenceContext.repositories().postIts(), AuthzRegistry.authorizationService());
+      ChangePostItController c = new ChangePostItController(PersistenceContext.repositories().boards(),
+          PersistenceContext.repositories().postIts(), AuthzRegistry.authorizationService());
 
       c.changePostIt(p2.identity(), "PostIt2.1", 2, 2, "Description updated", null);
     } catch (IOException e) {

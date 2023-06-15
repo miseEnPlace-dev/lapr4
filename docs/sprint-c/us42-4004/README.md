@@ -19,9 +19,7 @@ This is a new feature that allows users to view a list of participants in a meet
 
 ## 2.1. Client Specifications
 
-- Classes and meetings are events that happen in some time and have a duration. They also have
-  participants. However there is no concept of location related to classes and meetings. They do
-  not take place in a specific location and "nothing" happens at the time of the event.
+- Classes and meetings are events that happen in some time and have a duration. They also have participants.However there is no concept of location related to classes and meetings. They do not take place in a specific location and "nothing" happens at the time of the event.
 
 ## 2.2. Client Clarifications
 
