@@ -11,13 +11,13 @@ public class SafeOnlineCounter {
 
   public synchronized void increment() {
     this.count++;
-    if (count % 3 == 0)
+    if (count != 0 && count % 3 == 0)
       shared.write(getOnlineCount());
   }
 
   public synchronized void decrement() {
     this.count--;
-    if (count % 3 == 0)
+    if (count != 0 && count % 3 == 0)
       shared.write(getOnlineCount());
   }
 
