@@ -1,4 +1,4 @@
-@startuml US3004_DM
+@startuml US2005_DM
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
@@ -19,6 +19,16 @@ package "<<aggregate>> Board" {
   entity UserPermission
 
   class PermissionType
+}
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+
+  class PostItTitle
+  class State
+  class Coordinates
+  class Description
+  class Image
 }
 
 package "<<aggregate>> PostIt" {
@@ -47,6 +57,15 @@ entity Row <<entity>> {
 }
 
 class Title <<(V,#FF8B40) value object>> {}
+
+
+class Title <<(V,#FF8B40) value object>> {}
+class PostItTitle <<(V,#FF8B40) value object>> {}
+
+class State <<(V,#FF8B40) value object>> {}
+class Coordinates <<(V,#FF8B40) value object>> {}
+class Description <<(V,#FF8B40) value object>> {}
+class Image <<(V,#FF8B40) value object>> {}
 
 class Archived <<(V,#FF8B40) value object>> {
   - archivedAt
@@ -80,7 +99,14 @@ Column --> "1" Title : is identified by
 Board --> "1" User : is owned by
 Board --> "0..1" Archived : is
 
-PostIt --> "1" Board : belongs to
+PostIt *- PostItTitle
+PostIt --> "1" State : has
+
+PostIt ---> "1" Board : belongs to
 PostIt --> "0..1" PostIt : previous
+PostIt --> "0..1" Description : has
+PostIt --> "0..1" Image : has
+PostIt --> "1" Coordinates : has
+PostIt ---> "1" User : is owned by
 
 @enduml
