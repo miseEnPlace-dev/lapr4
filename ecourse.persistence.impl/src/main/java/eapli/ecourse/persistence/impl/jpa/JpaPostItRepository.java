@@ -46,8 +46,7 @@ public class JpaPostItRepository extends JpaAutoTxRepository<PostIt, PostItID, P
 
   @Override
   public Iterable<PostIt> findAllPostItsOrderedByDate(BoardID boardId) {
-    return match("e.board.id = :boardId ORDER BY e.createdAt DESC", "boardId",
-        boardId);
+    return match("e.board.id = :boardId ORDER BY e.createdAt DESC", "boardId", boardId);
   }
 
 }

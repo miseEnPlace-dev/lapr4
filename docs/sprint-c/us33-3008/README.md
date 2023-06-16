@@ -91,41 +91,57 @@ A user will be unable to undo the last change in a post-it if the post-it does n
 
 ### 4.4. Tests
 
-_Note: This are some simplified versions of the tests for readability purposes._
+> ️️💡 These tests are simplified versions for readability purposes.
+>
+> [Click here](/ecourse.core/src/test/java/eapli/ecourse/postitmanagement/application/UndoPostItControllerTest.java) to see the full code.
 
-**Test 1:** Test if Post-It exists.
+**Test 1:** Test if a Post-It exists.
 
 ```java
 @Test
 public void testPostItExists() { ... }
 ```
 
-**Test 2:** Test if Post-It does not exist.
+**Test 2:** Test if a Post-It does not exist.
 
 ```java
 @Test
 public void testPostItDoesNotExist() { ... }
 ```
 
-**Test 3:** Test if Post-It does not exist.
+**Test 3:** Test if a Post-It can be edited by its owner.
 
 ```java
 @Test
 public void testCanEditPostItAsOwner() { ... }
 ```
 
-**Test 4:** Test if Post-It does not exist.
-
-```java
-@Test
-public void testCanEditPostItAsBoardOwner() { ... }
-```
-
-**Test 5:** Test if Post-It does not exist.
+**Test 4:** Test if a Post-It cannot be edited by another user.
 
 ```java
 @Test
 public void testCannotEditPostIt() { ... }
+```
+
+**Test 5:** Test if undoing a Post-It works.
+
+```java
+@Test
+public void testUndoPostIt() { ... }
+```
+
+**Test 6:** Test if undoing a Post-It that is not the latest fails.
+
+```java
+@Test
+public void testUndoNotLatestPostIt() { ... }
+```
+
+**Test 7:** Test if undoing a Post-It that does not have a previous version fails.
+
+```java
+@Test
+public void testPreviousPostItDoesNotExistWhenUndoing() { ... }
 ```
 
 ## 5. Implementation
