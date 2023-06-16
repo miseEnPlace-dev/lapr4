@@ -1,0 +1,84 @@
+@startuml US2004_CD
+
+class TakeEvaluationExamUI {}
+
+class TakeEvaluationExamController {
+- authorizationService
+- courseRepository
+- studentRepository
+- evaluationExamRepository
+
++ TakeEvaluationExamController(authorizationService, courseRepository, studentRepository, evaluationExamRepository)
+
++ setCurrentAuthenticatedStudent()
++ listInProgressCoursesOfAuthenticatedStudent()
++ listEvaluationExams(courseDTO)
++ parseExam(string, printer)
++ getEvaluationExamSelected(evaluationExamDTO)
+}
+
+class ANTLR4TakeExamParser {
+
+  + parseFromFile(string)
+  + parseFromFile(string, printer)
+  + parseFromString(string)
+  + parseFromString(string, printer)
+}
+
+class ListCourseService {
+- courseRepository
+
++ ListCourseService(courseRepository)
+
++ findCourseByCourseCode(courseCode)
+}
+
+class EvaluationExamListService {
+- evaluationExamRepository
+
++ EnrolmentService(evaluationExamRepository)
+
++ findAllCourseExams(courseCode)
+}
+
+interface EvaluationExamRepository {
+  + findByIdentifier(evaluationExamDTO)
+}
+
+interface CourseRepository {
+  + ofIdentity(courseCode)
+}
+
+interface StudentRepository {
+  + findByUsername(username)
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+TakeEvaluationExamUI ..> TakeEvaluationExamController
+TakeEvaluationExamUI ..> PersistenceContext
+PersistenceContext ..> RepositoryFactory
+
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> EvaluationExamRepository
+RepositoryFactory --> StudentRepository
+
+TakeEvaluationExamController --> ANTLR4TakeExamParser
+TakeEvaluationExamController --> ListCourseService
+TakeEvaluationExamController --> EvaluationExamListService
+TakeEvaluationExamController --> EvaluationExamRepository
+TakeEvaluationExamController --> CourseRepository
+TakeEvaluationExamController --> StudentRepository
+
+ListCourseService --> CourseRepository
+
+EvaluationExamListService --> EvaluationExamRepository
+
+
+@enduml

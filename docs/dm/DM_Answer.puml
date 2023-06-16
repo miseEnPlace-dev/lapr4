@@ -1,0 +1,38 @@
+@startuml DM-ANSWER
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> EvaluationExam" {
+  entity EvaluationExam
+}
+
+package "<<aggregate>> Student" {
+  entity Student
+}
+
+entity Student <<entity>> <<root>> {
+}
+
+package "<<aggregate>> Answer" {
+  entity Answer
+
+  class Score
+}
+
+entity Answer <<entity>> <<root>> {}
+
+class Score <<(V,#FF8B40) value object>> {}
+
+entity EvaluationExam <<entity>> <<root>> {}
+
+Answer --> "1" Student : has
+Answer --> "1" EvaluationExam : is for
+
+Answer --> "1" Score : has
+
+@enduml
