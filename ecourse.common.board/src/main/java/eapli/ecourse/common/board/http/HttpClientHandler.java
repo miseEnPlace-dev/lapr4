@@ -47,7 +47,7 @@ public class HttpClientHandler implements Runnable {
       logger.debug(method + " " + path);
 
       // create the request and response objects
-      Request req = new Request(method, path, address, headers);
+      Request req = new Request(method, path, address, headers, input);
       Response res = new Response(output);
 
       this.router.handle(req, res);
