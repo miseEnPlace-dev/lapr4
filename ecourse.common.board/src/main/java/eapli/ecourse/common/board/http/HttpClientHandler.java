@@ -47,7 +47,7 @@ public class HttpClientHandler implements Runnable {
       logger.debug(method + " " + path);
 
       // create the request and response objects
-      Request req = new Request(method, path, address, headers);
+      Request req = new Request(method, path, address, headers, input);
       Response res = new Response(output);
 
       this.router.handle(req, res);
@@ -55,9 +55,13 @@ public class HttpClientHandler implements Runnable {
       output.close();
       input.close();
     } catch (IOException e) {
-      System.out.printf("[HTTP%s Client Handler Thread] Error: %s\n", this.secure ? "S" : "",
-          e.getMessage());
-      e.printStackTrace();
+      // ? Don't print the stack trace, just log the error
+      /*
+       * System.out.printf("[HTTP%s Client Handler Thread] Error: %s\n", this.secure ?
+       * "S" : "",
+       * e.getMessage());
+       * e.printStackTrace();
+       */
     }
   }
 
@@ -69,7 +73,7 @@ public class HttpClientHandler implements Runnable {
    */
   private static List<String> readHeaders(DataInputStream input) throws IOException {
     List<String> headers = new ArrayList<>();
-    String line;
+    String line = "";
 
     do {
       line = "";
