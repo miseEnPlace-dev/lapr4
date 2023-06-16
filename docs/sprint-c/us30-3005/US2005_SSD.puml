@@ -1,0 +1,21 @@
+@startuml US3005_SSD
+autonumber
+
+actor "User" as U
+participant "System" as SYS
+
+activate U
+
+U -> SYS : asks to view board in real time
+activate SYS
+SYS --> U : lists all of the boards the user has access to
+deactivate SYS
+
+U -> SYS : selects the desired board
+activate SYS
+SYS --> U : shows real time updates of the board
+deactivate SYS
+
+deactivate U
+
+@enduml
