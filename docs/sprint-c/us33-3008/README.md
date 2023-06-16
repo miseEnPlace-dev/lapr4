@@ -141,7 +141,17 @@ public UndoPostItController(TransactionalContext ctx, PostItRepository postItRep
 
 ## 6. Integration & Demonstration
 
-![US3008_DEMO](out/US3008_DEMO.svg)
+- Success cenario:
+
+![US3008_DEMO](US3008_DEMO.png)
+
+- User does not have write permission to any board:
+
+![US3008_DEMO2](US3008_DEMO2.png)
+
+- Post-it does not have previous changes:
+
+![US3008_DEMO3](US3008_DEMO3.png)
 
 ## 7. Observations
 
