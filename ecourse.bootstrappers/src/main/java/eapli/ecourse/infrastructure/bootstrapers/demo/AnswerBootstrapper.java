@@ -73,7 +73,7 @@ public class AnswerBootstrapper implements Action {
         Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 40)), ExamInfo.ON_SUBMIT,
         ExamInfo.AFTER_CLOSING, ExamScore.valueOf(100.0));
 
-    EvaluationExam exam4 = new EvaluationExam(course, teacher, ExamIdentifier.valueOf("22222"),
+    EvaluationExam exam4 = new EvaluationExam(course, teacher, ExamIdentifier.valueOf("444"),
         ExamTitle.valueOf("Test Exam 4"), ExamDescription.valueOf("description"), sections,
         Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 60)),
         Time.valueOf(Calendar.getInstance()).subtractDuration(Duration.valueOf(60 * 24 * 40)), ExamInfo.ON_SUBMIT,
