@@ -57,7 +57,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitMatchingQuestion(QuestionParser.MatchingQuestionContext ctx) {
-    this.question = new MatchingQuestion(QuestionType.FORMATIVE);
+    if (mandatoryScore)
+      this.question = new MatchingQuestion(QuestionType.REGULAR);
+    else
+      this.question = new MatchingQuestion(QuestionType.FORMATIVE);
 
     if (mandatoryScore && ctx.score() == null)
       raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
@@ -107,7 +110,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitNumericalQuestion(QuestionParser.NumericalQuestionContext ctx) {
-    this.question = new NumericalQuestion(QuestionType.FORMATIVE);
+    if (mandatoryScore)
+      this.question = new NumericalQuestion(QuestionType.REGULAR);
+    else
+      this.question = new NumericalQuestion(QuestionType.FORMATIVE);
 
     if (mandatoryScore && ctx.score() == null)
       raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
@@ -131,7 +137,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitMultipleChoiceQuestion(QuestionParser.MultipleChoiceQuestionContext ctx) {
-    this.question = new MultipleChoiceQuestion(QuestionType.FORMATIVE);
+    if (mandatoryScore)
+      this.question = new MultipleChoiceQuestion(QuestionType.REGULAR);
+    else
+      this.question = new MultipleChoiceQuestion(QuestionType.FORMATIVE);
 
     if (mandatoryScore && ctx.score() == null)
       raiseError(ctx,
@@ -180,7 +189,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitShortAnswerQuestion(QuestionParser.ShortAnswerQuestionContext ctx) {
-    this.question = new ShortAnswerQuestion(QuestionType.FORMATIVE);
+    if (mandatoryScore)
+      this.question = new ShortAnswerQuestion(QuestionType.REGULAR);
+    else
+      this.question = new ShortAnswerQuestion(QuestionType.FORMATIVE);
 
     if (mandatoryScore && ctx.score() == null)
       raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
@@ -206,7 +218,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitTrueFalseQuestion(QuestionParser.TrueFalseQuestionContext ctx) {
-    this.question = new TrueFalseQuestion(QuestionType.FORMATIVE);
+    if (mandatoryScore)
+      this.question = new TrueFalseQuestion(QuestionType.REGULAR);
+    else
+      this.question = new TrueFalseQuestion(QuestionType.FORMATIVE);
 
     if (mandatoryScore && ctx.score() == null)
       raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
@@ -228,7 +243,10 @@ public class QuestionBuilderVisitor extends QuestionBaseVisitor<List<Question>> 
 
   @Override
   public List<Question> visitMissingWordsQuestion(QuestionParser.MissingWordsQuestionContext ctx) {
-    this.question = new MissingWordsQuestion(QuestionType.FORMATIVE);
+    if (mandatoryScore)
+      this.question = new MissingWordsQuestion(QuestionType.REGULAR);
+    else
+      this.question = new MissingWordsQuestion(QuestionType.FORMATIVE);
 
     if (mandatoryScore && ctx.score() == null)
       raiseError(ctx, "The question does not contain the score attribute. Specify a score using the @score tag.");
