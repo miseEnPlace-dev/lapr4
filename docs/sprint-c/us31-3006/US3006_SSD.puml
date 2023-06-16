@@ -21,10 +21,10 @@ deactivate ":System"
 U -> ":System" :  selects the post-it coordinates
 activate ":System"
 
-":System" --> U : asks to enter the title of the post-it
+":System" --> U : asks to enter the title, description and image of the post-it
 deactivate ":System"
 
-U -> ":System" :  enters the title of the post-it
+U -> ":System" :  enters the requested data
 activate ":System"
 
 ":System" --> U : informs operation suscess
