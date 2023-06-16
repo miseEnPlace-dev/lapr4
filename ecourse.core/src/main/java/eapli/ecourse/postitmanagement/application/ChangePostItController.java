@@ -78,9 +78,6 @@ public class ChangePostItController {
     else
       coordinates = Coordinates.valueOf(x, y);
 
-    if (!validateCoordinates(p.board().identity(), coordinates.getX(), coordinates.getY()))
-      throw new IllegalArgumentException("Invalid coordinates!");
-
     // if null, keep the same
     // if empty, delete
     if (description == null)

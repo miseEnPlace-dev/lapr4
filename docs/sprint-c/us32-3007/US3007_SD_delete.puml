@@ -1,4 +1,4 @@
-@startuml US3007_SD
+@startuml US3007_SD_delete
 autonumber
 
 actor "User" as M
@@ -7,7 +7,6 @@ participant "ChangePostItController" as CTRL <<application>>
 participant "ListBoardService" as LBSRV <<service>>
 participant "ListPostItService" as LPSRV <<service>>
 participant "BoardService" as BSRV <<service>>
-participant "ImageEncoderService" as IESRV <<service>>
 participant "Board" as B <<domain>>
 participant "PostIt" as P <<domain>>
 participant "BoardDTO" as BDTO <<dto>>
@@ -95,63 +94,23 @@ deactivate UI
 
 M -> UI : selects the post-it coordinates
 activate UI
-UI -> CTRL : validateCoordinates(boardId, x, y)
+UI -> CTRL : delete(postItId)
 activate CTRL
-CTRL -> BSRV : new(postItRepository)
-activate BSRV
-deactivate BSRV
-
-CTRL -> BSRV : isCellAvailable(BoardID id, int x, int y)
-activate BSRV
-BSRV -> PREP : findLatestVersionOfBoard(boardId)
+CTRL -> PREP : findById(postItId)
 activate PREP
-PREP --> BSRV : postIts
+PREP --> CTRL : postIt
 deactivate PREP
 
-BSRV -> BSRV : existsPostIt(latestPostIts, x, y)
-activate BSRV
-deactivate BSRV
-
-BSRV --> CTRL : true
-deactivate BSRV
-CTRL --> UI : true
-deactivate CTRL
-
-UI --> M :  asks to enter the title, description and image path of the post-it
-deactivate UI
-
-M --> UI : enters requested data
-activate UI
-
-UI -> CTRL : updatePostIt(boardId, postItId, x, y, title, description, imagePath)
-activate CTRL
-
-CTRL -> IESRV : new()
-activate IESRV
-deactivate IESRV
-
-CTRL -> IESRV : encodeImage(imagePath)
-activate IESRV
-deactivate IESRV
-
-CTRL -> P : newPostIt = update(title, x, y, description, encodedImage)
+CTRL -> P : delete()
 activate P
 deactivate P
 
-CTRL -> CTRL : savePostIt(postIt)
+CTRL -> CTRL : save(postIt)
 activate CTRL
-CTRL -> PREP : savePostIt()
+CTRL -> PREP : save(postIt)
 activate PREP
 deactivate PREP
 deactivate CTRL
-
-
-CTRL --> UI : success
-deactivate CTRL
-
-UI --> M : informs operation success
-deactivate UI
-
 
 
 

@@ -18,6 +18,7 @@ import eapli.ecourse.daemon.board.messages.AckMessage;
 import eapli.ecourse.daemon.board.messages.ArchiveBoardMessage;
 import eapli.ecourse.daemon.board.messages.AuthMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
+import eapli.ecourse.daemon.board.messages.ChangePostItMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
 import eapli.ecourse.daemon.board.messages.CreatePostItMessage;
 import eapli.ecourse.daemon.board.messages.DeletePostItMessage;
@@ -62,7 +63,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_OWN_POSTITS_BOARD, GetOwnPostItsBoardMessage.class);
       put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
       put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
-      put(MessageCode.CHANGE_POSTIT, DeletePostItMessage.class);
+      put(MessageCode.CHANGE_POSTIT, ChangePostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
       put(MessageCode.IS_CELL_AVAILABLE, IsCellAvailableMessage.class);
       put(MessageCode.DELETE_POSTIT, DeletePostItMessage.class);

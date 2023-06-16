@@ -12,12 +12,13 @@ public class TcpServer {
   private Class<? extends Runnable> handlerClass;
   private boolean secure;
   private SafeOnlineCounter onlineCounter;
+  private OnlineSafeShared onlineShared = new OnlineSafeShared();
 
   public TcpServer(int port, Class<? extends Runnable> handler, boolean secure) {
     this.port = port;
     this.handlerClass = handler;
     this.secure = secure;
-    this.onlineCounter = new SafeOnlineCounter();
+    this.onlineCounter = new SafeOnlineCounter(onlineShared);
   }
 
   public void run() {
@@ -39,6 +40,9 @@ public class TcpServer {
     }
 
     System.out.printf("[TCP%s Server] Listening on port %d!\n", this.secure ? " SSL" : "", port);
+
+    Thread onlineCounterThread = new Thread(new OnlineCheckerHandler(onlineShared));
+    onlineCounterThread.start();
 
     while (!tcpSocket.isClosed()) {
       try {

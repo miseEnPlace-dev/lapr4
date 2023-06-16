@@ -38,6 +38,9 @@ public class UndoPostItController {
     PostIt postIt = postItRepository.ofIdentity(postItId).orElseThrow();
     PostIt previous = postIt.previous();
 
+    if (previous == null)
+      throw new IllegalStateException("Post-It has no previous version");
+
     previous.toggleIsLatest();
 
     ctx.beginTransaction();
