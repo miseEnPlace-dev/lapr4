@@ -140,7 +140,11 @@ public ShareBoardController(BoardRepository boardRepository, UserManagementServi
 
 ## 6. Integration & Demonstration
 
-![US3004_DEMO](out/US3004_DEMO.svg)
+![US3004_DEMO](US3004_DEMO.png)
+
+- Entered user does not exist:
+
+![US3004_DEMO2](US3004_DEMO2.png)
 
 ## 7. Observations
 
