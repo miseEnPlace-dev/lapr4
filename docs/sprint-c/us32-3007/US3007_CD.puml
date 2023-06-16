@@ -5,7 +5,7 @@ interface BoardRepository {
 }
 
 interface PostItRepository {
-  {abstract} findLastestPostItsCreatedByUser(boardId, username)
+  {abstract} findLatestFromUserByBoardId(boardId, username)
   {abstract} findLatestVersionOfBoard(boardId)
   {abstract} save(postIt)
 }
@@ -19,12 +19,15 @@ class ListBoardService {
 }
 
 class ListPostItService {
-  - boardRepository
   - postItRepository
 
-  + userUpdatablePostIts(boardId, username)
+  + ListPostItService(postItRepository)
 
-  + userWritableBoards(username)
+  + userUpdatablePostIts(boardId, username)
+}
+
+class ImageEncoderService {
+  + encodeImage(imagePath)
 }
 
 class BoardService {
@@ -33,7 +36,8 @@ class BoardService {
 
   + BoardService(boardRepository)
 
-  + isCellAvailable(BoardID id, int x, int y)
+  + isCellAvailable(boardId, x, y)
+  + checkCellExists(boardId, x, y)
   + existsPostIt(latestPostIts, x, y)
 }
 
@@ -47,8 +51,8 @@ class ChangePostItController {
 
   + listUserWritableBoards()
   + listBoardPostItsCreatedByUser(boardId)
-  + validateCoordinates(boardID, x, y)
-  + updatePostIt(boardId, postItId, x, y, title)
+  + validateCoordinates(boardId, x, y)
+  + updatePostIt(boardId, postItId, x, y, title, description, imagePath)
   + savePostIt(postIt)
 }
 
@@ -58,11 +62,13 @@ class PostIt {
   - user
   - board
   - state
-
   - createdAt
   - isLatest
+  - description
+  - image
 
-  + update(title, x, y)
+  + update(title, x, y, description, encodedImage)
+  + delete()
 }
 
 class PostItDTO {
@@ -90,6 +96,7 @@ ChangePostItUI ..> ChangePostItController
 ChangePostItController --> ListBoardService
 ChangePostItController --> BoardService
 ChangePostItController --> ListPostItService
+ChangePostItController --> ImageEncoderService
 
 ListBoardService ..> Board
 ListBoardService --> BoardRepository

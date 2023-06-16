@@ -7,6 +7,7 @@ participant "ChangePostItController" as CTRL <<application>>
 participant "ListBoardService" as LBSRV <<service>>
 participant "ListPostItService" as LPSRV <<service>>
 participant "BoardService" as BSRV <<service>>
+participant "ImageEncoderService" as IESRV <<service>>
 participant "Board" as B <<domain>>
 participant "PostIt" as P <<domain>>
 participant "BoardDTO" as BDTO <<dto>>
@@ -63,7 +64,7 @@ deactivate LPSRV
 
 CTRL -> LPSRV : userUpdatablePostIts(boardId, username)
 activate LPSRV
-LPSRV -> PREP : findLastestPostItsCreatedByUser(boardId, username)
+LPSRV -> PREP : findLatestFromUserByBoardId(boardId, username)
 activate PREP
 PREP --> LPSRV : postIts
 deactivate PREP
@@ -82,10 +83,10 @@ deactivate LPSRV
 CTRL --> UI : postIts
 deactivate CTRL
 
-UI --> M : asks to select the board
+UI --> M : asks to select the post-it
 deactivate UI
 
-M -> UI : selects the board
+M -> UI : selects the post-it
 activate UI
 
 
@@ -102,7 +103,7 @@ deactivate BSRV
 
 CTRL -> BSRV : isCellAvailable(BoardID id, int x, int y)
 activate BSRV
-BSRV -> PREP : latestPostIts = \nfindLatestVersionOfBoard(boardId)
+BSRV -> PREP : findLatestVersionOfBoard(boardId)
 activate PREP
 PREP --> BSRV : postIts
 deactivate PREP
@@ -111,21 +112,29 @@ BSRV -> BSRV : existsPostIt(latestPostIts, x, y)
 activate BSRV
 deactivate BSRV
 
-BSRV --> CTRL : false
+BSRV --> CTRL : true
 deactivate BSRV
 CTRL --> UI : true
 deactivate CTRL
 
-UI --> M :  asks to enter the title of the post-it
+UI --> M :  asks to enter the title, description and image path of the post-it
 deactivate UI
 
-M --> UI : enters the title of the post-it
+M --> UI : enters requested data
 activate UI
 
-UI -> CTRL : updatePostIt(boardId, postItId, x, y, title)
+UI -> CTRL : updatePostIt(boardId, postItId, x, y, title, description, imagePath)
 activate CTRL
 
-CTRL -> P : newPostIt = update(title, x, y)
+CTRL -> IESRV : new()
+activate IESRV
+deactivate IESRV
+
+CTRL -> IESRV : encodeImage(imagePath)
+activate IESRV
+deactivate IESRV
+
+CTRL -> P : newPostIt = update(title, x, y, description, encodedImage)
 activate P
 deactivate P
 
