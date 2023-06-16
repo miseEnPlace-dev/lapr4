@@ -48,7 +48,8 @@ The communication protocol message codes are described in the following table:
 | 16   | `CREATE_POSTIT`         | Used to create a post-it in a specific board. The authenticated user must have write permission to the board.                                                                                                                                                                                          |
 | 17   | `EDIT_POSTIT`           | Used to edit a post-it. The authenticated user must be owner of the post-it or the owner of the board.                                                                                                                                                                                                 |
 | 18   | `UNDO_POSTIT`           | Used to undo the last change in a post-it. The authenticated user must be owner of the post-it and have write permission to the board or the owner of the board.                                                                                                                                       |
-| 19   | `GET_ONLINE_COUNT`      | Used to get the number of clients currently connected to the server.                                                                                                                                                                                                                                   |
+| 19   | `IS_CELL_AVAILABLE`     | Used to check if a certain cell does not have a post-it in it. The authenticated user must have at least read permission to the board.                                                                                                                                                                 |
+| 20   | `GET_ONLINE_COUNT`      | Used to get the number of clients currently connected to the server.                                                                                                                                                                                                                                   |
 
 ### Authentication Request
 
@@ -82,12 +83,10 @@ The Shared Board also implements SSL to encrypt the communication between the Sh
 
 ## Cloud Deployment
 
-<!-- TODO -->
-
 ISEP provides to its students a cloud platform where students can deploy Virtual Servers using pre-made templates.
 We deployed the Shared Board Backend & the database on this platform.
 
-Go to the [ISEP's DEI Virtual Servers Private Cloud](https://vs-ctl.dei.isep.ipp.pt/)
+Go to the [ISEP's DEI Virtual Servers Private Cloud](https://vs-ctl.dei.isep.ipp.pt/).
 
 To use the deployment, read the [Deployment Guide](../README.md#6-deploy-to-a-remote-machine) section in the main README.
 
