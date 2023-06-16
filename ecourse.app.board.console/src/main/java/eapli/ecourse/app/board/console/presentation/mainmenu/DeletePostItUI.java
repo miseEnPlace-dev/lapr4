@@ -17,7 +17,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class DeletePostItUI extends AbstractUI {
-  private static Logger logger = LogManager.getLogger(ChangePostItUI.class);
+  private static Logger logger = LogManager.getLogger(DeletePostItUI.class);
 
   private ChangePostItController ctrl = new ChangePostItController();
 
