@@ -2,8 +2,6 @@ package eapli.ecourse.app.backoffice.console.presentation.enrolment;
 
 import java.io.IOException;
 
-
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.enrolmentmanagement.application.StudentsBulkEnrolmentController;
@@ -23,8 +21,8 @@ public class EnrolStudentsInBulkUI extends AbstractUI {
     final Iterable<CourseDTO> courses = this.ctrl.listOpenForEnrolmentCourses();
 
     System.out.println("Select the course where the students will be enrolled:");
-    final SelectWidget<CourseDTO> selector =
-        new SelectWidget<>(new CourseHeader().header(), courses, new CoursePrinter());
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courses,
+        new CoursePrinter());
     selector.show();
     final CourseDTO selectedCourse = selector.selectedElement();
 

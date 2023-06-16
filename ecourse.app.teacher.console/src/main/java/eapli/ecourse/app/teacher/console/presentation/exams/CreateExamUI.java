@@ -2,7 +2,6 @@ package eapli.ecourse.app.teacher.console.presentation.exams;
 
 import java.io.IOException;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.app.common.console.util.ConsoleConstrainedReader;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -30,7 +29,7 @@ public class CreateExamUI extends AbstractUI {
     }
 
     System.out.println("Select the course where the exam will be created:");
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), courses,
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courses,
         new CoursePrinter());
     selector.show();
     final CourseDTO selectedCourse = selector.selectedElement();

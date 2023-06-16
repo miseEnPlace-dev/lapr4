@@ -3,9 +3,7 @@ package eapli.ecourse.app.teacher.console.presentation.exams;
 import java.util.ArrayList;
 import java.util.List;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.ListCourseExamsController;
@@ -31,8 +29,8 @@ public class ListCourseExamsUI extends AbstractUI {
       return false;
     }
 
-    new CourseHeader().printHeader();
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courseList, new CoursePrinter());
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courseList,
+        new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
     if (selected == null)
@@ -45,9 +43,8 @@ public class ListCourseExamsUI extends AbstractUI {
     }
 
     if (evaluationExams.iterator().hasNext()) {
-      new EvaluationExamHeader().printHeader();
-      ListWidget<EvaluationExamDTO> evaluationExamsList = new ListWidget<>("", evaluationExams,
-          new EvaluationExamPrinter());
+      ListWidget<EvaluationExamDTO> evaluationExamsList = new ListWidget<>(new EvaluationExamPrinter().header(),
+          evaluationExams, new EvaluationExamPrinter());
       evaluationExamsList.show();
     } else {
       System.out.println("No evaluation exams in " + selected.getTitle() + "\n");

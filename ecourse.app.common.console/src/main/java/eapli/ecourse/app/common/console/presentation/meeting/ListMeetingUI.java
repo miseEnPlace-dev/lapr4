@@ -22,7 +22,7 @@ public class ListMeetingUI extends AbstractUI {
       return false;
     }
 
-    SelectWidget<MeetingDTO> selector = new SelectWidget<>(new MeetingHeader().header(), meetings,
+    SelectWidget<MeetingDTO> selector = new SelectWidget<>(new MeetingPrinter().header(), meetings,
         new MeetingPrinter());
     selector.show();
     final MeetingDTO selected = selector.selectedElement();

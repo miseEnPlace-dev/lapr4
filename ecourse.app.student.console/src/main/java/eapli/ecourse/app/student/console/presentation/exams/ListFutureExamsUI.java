@@ -1,8 +1,6 @@
 package eapli.ecourse.app.student.console.presentation.exams;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.ListFutureExamsController;
@@ -27,7 +25,7 @@ public class ListFutureExamsUI extends AbstractUI {
       return false;
     }
 
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), studentCourses,
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), studentCourses,
         new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
@@ -40,7 +38,7 @@ public class ListFutureExamsUI extends AbstractUI {
       return false;
     }
 
-    ListWidget<EvaluationExamDTO> list = new ListWidget<>(new EvaluationExamHeader().header(), courseFutureExams,
+    ListWidget<EvaluationExamDTO> list = new ListWidget<>(new EvaluationExamPrinter().header(), courseFutureExams,
         new EvaluationExamPrinter());
     list.show();
 

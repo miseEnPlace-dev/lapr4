@@ -1,8 +1,6 @@
 package eapli.ecourse.app.student.console.presentation.exams;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.app.common.console.presentation.exam.FormativeExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.FormativeExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.GenerateStructureFormativeExamService;
@@ -33,7 +31,7 @@ public class TakeFormativeExamUI extends AbstractUI {
     }
 
     System.out.println("Select the course of the exam you want to take:");
-    final SelectWidget<CourseDTO> selectorC = new SelectWidget<>(new CourseHeader().header(), courses,
+    final SelectWidget<CourseDTO> selectorC = new SelectWidget<>(new CoursePrinter().header(), courses,
         new CoursePrinter());
     selectorC.show();
     final CourseDTO selectedCourse = selectorC.selectedElement();
@@ -51,7 +49,7 @@ public class TakeFormativeExamUI extends AbstractUI {
 
     System.out.println("\nSelect a formative exam you want to take:");
     final SelectWidget<FormativeExamDTO> selectorF = new SelectWidget<>(
-        new FormativeExamHeader().header(),
+        new FormativeExamPrinter().header(),
         formativeRequests, new FormativeExamPrinter());
     selectorF.show();
     final FormativeExamDTO selectedFormativeExamRequest = selectorF.selectedElement();

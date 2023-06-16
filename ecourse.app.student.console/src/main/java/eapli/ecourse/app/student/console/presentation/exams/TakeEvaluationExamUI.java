@@ -1,8 +1,6 @@
 package eapli.ecourse.app.student.console.presentation.exams;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
-import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamHeader;
 import eapli.ecourse.app.common.console.presentation.exam.EvaluationExamPrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.exammanagement.application.TakeEvaluationExamController;
@@ -65,7 +63,7 @@ public class TakeEvaluationExamUI extends AbstractUI {
     }
 
     System.out.println("Select the course of the exam you want to take:");
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), courses,
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courses,
         new CoursePrinter());
     selector.show();
     final CourseDTO selectedCourse = selector.selectedElement();
@@ -85,7 +83,7 @@ public class TakeEvaluationExamUI extends AbstractUI {
     }
 
     System.out.println("\nSelect the exam you want to take:");
-    final SelectWidget<EvaluationExamDTO> selector = new SelectWidget<>(new EvaluationExamHeader().header(), exams,
+    final SelectWidget<EvaluationExamDTO> selector = new SelectWidget<>(new EvaluationExamPrinter().header(), exams,
         new EvaluationExamPrinter());
     selector.show();
     final EvaluationExamDTO selectedExam = selector.selectedElement();

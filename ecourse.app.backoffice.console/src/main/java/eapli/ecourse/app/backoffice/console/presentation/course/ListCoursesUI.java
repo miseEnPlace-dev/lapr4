@@ -1,6 +1,5 @@
 package eapli.ecourse.app.backoffice.console.presentation.course;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.application.ListCoursesController;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
@@ -41,6 +40,6 @@ public class ListCoursesUI extends AbstractListUI<CourseDTO> {
 
   @Override
   protected String listHeader() {
-    return new CourseHeader().header();
+    return new CoursePrinter().header();
   }
 }

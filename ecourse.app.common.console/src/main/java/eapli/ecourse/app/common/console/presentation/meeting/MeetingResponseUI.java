@@ -26,7 +26,7 @@ public class MeetingResponseUI extends AbstractUI {
       return false;
     }
 
-    SelectWidget<InviteDTO> selector = new SelectWidget<>(new InviteHeader().header(), invites,
+    SelectWidget<InviteDTO> selector = new SelectWidget<>(new InvitePrinter().header(), invites,
         new InvitePrinter());
     selector.show();
     final InviteDTO selected = selector.selectedElement();
