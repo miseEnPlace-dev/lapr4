@@ -73,13 +73,26 @@ The following messages will carry the payload divided into chunks.
 The Shared Board App also implements an HTTP server to render a view only page of a board.
 The browser receives static files from the server and can also send AJAX requests to certain endpoints in order to retrieve data from the server.
 
-<!-- TODO -->
+A Router was implemented to handle each HTTP request. The Router will check the request's method and path and call the appropriate controller.
+A Middleware was also implemented to serve static files. The middleware will check if the request's path matches a static file and serve it if it does.
+If the request's path does not match a static file, the Router will be called.
+All `/api` endpoints respond with JSON. These controllers make requests to the Shared Board Server and return the response to the browser.
 
-Inspired by famous frameworks, a Router was implemented to handle each HTTP request and make it easier to develop
+The available endpoints are described in the following table:
+
+| Method | Path             | Description                                                                                                              |
+| ------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `GET`  | `/api`           | Returns a "Hello World" message formatted in JSON.                                                                       |
+| `GET`  | `/api/session`   | Returns the current authenticated user, 401 (Unauthorized) otherwise.                                                    |
+| `GET`  | `/api/board`     | Returns all boards the authenticated user has read permission to.                                                        |
+| `GET`  | `/api/board/:id` | Returns the board and its post-its with the specified id. The authenticated user must have read permission to the board. |
+| `GET`  | `/api/online`    | Returns the number of connected to the Shared Board Server clients.                                                      |
 
 ## SSL
 
 The Shared Board also implements SSL to encrypt the communication between the Shared Board App and the Shared Board Backend, as well as to encrypt the communication between the HTTP server and the browser by using HTTPS.
+
+By using SSL, we ensure that the communication between the client and the server is private and the data integrity is not compromised by a third-party.
 
 ## Cloud Deployment
 
