@@ -14,6 +14,59 @@ function getData() {
   getOnlineUsers();
 }
 
+let postIts = new Map();
+
+function closeModal() {
+  const body = document.querySelector("body");
+  body.className = body.className.replace(" overflow-hidden", "");
+
+  const modalContainer = document.querySelector("#modal-container");
+  const modal = document.querySelector("#modal");
+
+  modalContainer.remove();
+  modal.remove();
+}
+
+function openModal(i, j) {
+  /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }} */
+  const postIt = postIts.get(`${j}-${i}`);
+  const body = document.querySelector("body");
+
+  body.className += " overflow-hidden";
+  modalContainer = document.createElement("div");
+  modalContainer.id = "modal-container";
+  modalContainer.className =
+    "z-30 fixed top-0 left-0 bg-gray-800 opacity-50 w-full h-full";
+
+  const modal = document.createElement("div");
+  modal.id = "modal";
+
+  modal.className =
+    "z-40 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg w-1/2";
+
+  modalContainer.onclick = closeModal;
+
+  modal.innerHTML = `
+    <div class="z-50 flex flex-col gap-y-6 items-center justify-around w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-8">
+      <h1 class="text-3xl font-bold">${postIt.title}</h1>
+      ${
+        postIt.description === "null"
+          ? `<p class="text-xl">${postIt.description}</p>`
+          : ""
+      }
+
+      <div class="flex flex-col items-center justify-center h-1/2">
+        <img src="data:image/png;base64,${
+          postIt.image
+        }" alt="Post-it image" class="w-full h-full">
+      </div>
+    </div>
+`;
+
+  body.appendChild(modal);
+  body.appendChild(modalContainer);
+}
+
 function updateBoard() {
   /** @type XMLHttpRequest */
   let request;
@@ -32,7 +85,16 @@ function updateBoard() {
 
     boardTable.innerHTML = "";
 
-    const { columns, rows } = data;
+    const { postIts: p, columns, rows } = data;
+
+    const postItsMap = new Map();
+    postIts = postItsMap;
+
+    for (const postIt of p)
+      postItsMap.set(
+        `${postIt.coordinates.x - 1}-${postIt.coordinates.y - 1}`,
+        postIt
+      );
 
     const tr = document.createElement("tr");
     const firstTh = document.createElement("th");
@@ -75,22 +137,54 @@ function updateBoard() {
         else if (i === rows.length - 1) td.className += " border-x-2";
         else td.className += " border-b-2 border-x-2";
 
-        td.innerHTML = "";
+        if (postItsMap.has(`${j}-${i}`)) {
+          /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }} */
+          const postIt = postItsMap.get(`${j}-${i}`);
+          const hasContent = postIt.description || postIt.image;
+
+          td.innerHTML = `
+            <button
+              id=${postIt.id}
+              onClick=\"openModal(${i},${j})\"
+              class="w-11/12 mx-auto flex flex-col items-center p-4 rounded-lg relative dark:bg-slate-600 bg-slate-200 ${
+                hasContent &&
+                "hover:brightness-90 transition-all duration-150 cursor-pointer"
+              }">
+              <h3 class="text-xl font-bold">${postIt.title}</h3>
+              <div class="flex items-center justify-between w-full">
+                ${
+                  hasContent
+                    ? "<div class='text-xl brightness-75 dark:brightness-100'>🗒️</div>"
+                    : ""
+                }
+                <div class="flex gap-x-2 items-center w-full justify-end">
+                  <h3 class="text-lg font-thin">${postIt.owner.name}</h3>
+                  <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+                </div>
+              </div>
+            </button>
+          `;
+        } else td.innerHTML = "";
+
         tr.className = "h-52 w-72";
         tr.appendChild(td);
       }
 
       boardTable.appendChild(tr);
     }
+
+    clearTimeout(updateBoard);
     setTimeout(updateBoard, REFRESH_TIMEOUT);
   };
 
   request.ontimeout = () => {
     error.innerHTML = "Server timeout, still trying...";
+    clearTimeout(updateBoard);
     setTimeout(updateBoard, ERROR_TIMEOUT);
   };
   request.onerror = () => {
     error.innerHTML = "No server reply, still trying...";
+    clearTimeout(updateBoard);
     setTimeout(updateBoard, RETRY_TIMEOUT);
   };
 
@@ -120,10 +214,13 @@ function getAuthenticatedUser() {
 
   authRequest.ontimeout = () => {
     error.innerHTML = "Server timeout, still trying...";
+    clearTimeout(updateBoard);
     setTimeout(getData, ERROR_TIMEOUT);
   };
+
   authRequest.onerror = () => {
     error.innerHTML = "No server reply, still trying...";
+    clearTimeout(updateBoard);
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
@@ -149,15 +246,19 @@ function getOnlineUsers() {
     const data = JSON.parse(onlineUsersRequest.responseText);
 
     online.innerHTML = `Currently active: ${data.online}`;
+
+    clearTimeout(updateBoard);
     setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
   };
 
   onlineUsersRequest.ontimeout = () => {
     error.innerHTML = "Server timeout, still trying...";
+    clearTimeout(updateBoard);
     setTimeout(getData, ERROR_TIMEOUT);
   };
   onlineUsersRequest.onerror = () => {
     error.innerHTML = "No server reply, still trying...";
+    clearTimeout(updateBoard);
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
