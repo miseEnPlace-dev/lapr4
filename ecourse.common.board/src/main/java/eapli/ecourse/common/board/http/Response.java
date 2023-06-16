@@ -73,7 +73,9 @@ public class Response {
     }
   }
 
-  // public
+  public DataOutputStream getOutput() {
+    return output;
+  }
 
   public void setContentType(String contentType) {
     this.contentType = contentType;
