@@ -60,8 +60,10 @@ public class TcpClient {
 
   public ProtocolMessage sendRecv(ProtocolMessage msg)
       throws IOException, UnsupportedVersionException, ClassNotFoundException {
-    send(msg);
-    return receive();
+    synchronized (this) {
+      send(msg);
+      return receive();
+    }
   }
 
   public void close() throws IOException {
