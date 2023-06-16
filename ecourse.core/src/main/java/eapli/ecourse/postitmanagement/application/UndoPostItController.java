@@ -29,6 +29,11 @@ public class UndoPostItController {
         || postIt.board().owner().hasIdentity(username);
   }
 
+  public boolean isPostItBoardArchived(PostItID postItID) {
+    PostIt postIt = postItRepository.ofIdentity(postItID).orElseThrow();
+    return postIt.board().isArchived();
+  }
+
   public void undoPostIt(PostItID postItId) {
     PostIt postIt = postItRepository.ofIdentity(postItId).orElseThrow();
     PostIt previous = postIt.previous();

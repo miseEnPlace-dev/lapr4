@@ -63,6 +63,12 @@ public class UndoPostItMessage extends Message {
       return;
     }
 
+    // check if board is archived
+    if (ctrl.isPostItBoardArchived(postItId)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Board is archived"));
+      return;
+    }
+
     ctrl.undoPostIt(postItId);
 
     send(new ProtocolMessage(MessageCode.UNDO_POSTIT));
