@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="531px" preserveAspectRatio="none" style="width:801px;height:531px;background:#FFFFFF;" version="1.1" viewBox="0 0 801 531" width="801px" zoomAndPan="magnify"><defs/><g><!--MD5=[fd3cdda75c3d0de4c885e04e9061848b]
+cluster <<aggregate>> PostIt--><g id="cluster_&lt;&lt;aggregate&gt;&gt; PostIt"><path d="M109,6.294 L255,6.294 A3.75,3.75 0 0 1 257.5,8.794 L264.5,29.0939 L485,29.0939 A2.5,2.5 0 0 1 487.5,31.5939 L487.5,338.794 A2.5,2.5 0 0 1 485,341.294 L109,341.294 A2.5,2.5 0 0 1 106.5,338.794 L106.5,8.794 A2.5,2.5 0 0 1 109,6.294 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="106.5" x2="264.5" y1="29.0939" y2="29.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="145" x="110.5" y="21.2999">&lt;&lt;aggregate&gt;&gt; PostIt</text></g><!--MD5=[597c9b6a35d8038d4b40fd8870ba90aa]
+cluster <<aggregate>> User--><g id="cluster_&lt;&lt;aggregate&gt;&gt; User"><path d="M459,374.294 L596,374.294 A3.75,3.75 0 0 1 598.5,376.794 L605.5,397.0939 L606,397.0939 A2.5,2.5 0 0 1 608.5,399.5939 L608.5,521.794 A2.5,2.5 0 0 1 606,524.294 L459,524.294 A2.5,2.5 0 0 1 456.5,521.794 L456.5,376.794 A2.5,2.5 0 0 1 459,374.294 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="456.5" x2="605.5" y1="397.0939" y2="397.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="136" x="460.5" y="389.2999">&lt;&lt;aggregate&gt;&gt; User</text></g><!--MD5=[8f9545635c96278f6464f1f75fb05986]
+cluster <<aggregate>> Board--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Board"><path d="M635,374.294 L782,374.294 A3.75,3.75 0 0 1 784.5,376.794 L791.5,397.0939 L792,397.0939 A2.5,2.5 0 0 1 794.5,399.5939 L794.5,521.794 A2.5,2.5 0 0 1 792,524.294 L635,524.294 A2.5,2.5 0 0 1 632.5,521.794 L632.5,376.794 A2.5,2.5 0 0 1 635,374.294 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="632.5" x2="791.5" y1="397.0939" y2="397.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="146" x="636.5" y="389.2999">&lt;&lt;aggregate&gt;&gt; Board</text></g><!--MD5=[458552462bbdcbc92793825846cc11c0]
+class PostIt--><g id="elem_PostIt"><rect codeLine="24" fill="#F5F5DC" height="84.0001" id="PostIt" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="147.5" y="61.294"/><ellipse cx="165.65" cy="90.8941" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M164.5094,91.9566 L165.8219,91.9566 L165.8219,92.0034 C165.8219,92.4097 165.8375,92.5659 165.9469,92.7222 C166.1188,92.9722 166.4156,93.1441 166.7281,93.1441 C167.0094,93.1441 167.3063,93.0034 167.4781,92.7847 C167.6031,92.5972 167.65,92.4566 167.65,92.0034 L167.65,90.1597 C167.65,89.8316 167.6344,89.7222 167.5719,89.5503 C167.4625,89.2534 167.1031,89.0034 166.7281,89.0034 C166.4313,89.0034 166.1656,89.1441 165.9938,89.3628 C165.8531,89.5503 165.8219,89.7222 165.8219,90.1597 L165.8219,90.2222 L164.5094,90.2222 L164.5094,88.0503 L168.3531,88.0503 L168.3531,88.8003 C168.3531,89.1909 168.3844,89.3784 168.4938,89.5347 C168.6656,89.7847 168.9625,89.9566 169.275,89.9566 C169.5719,89.9566 169.8375,89.8316 170.025,89.5972 C170.1656,89.4097 170.1969,89.2691 170.1969,88.8003 L170.1969,86.3003 L162.4938,86.3003 C162.0406,86.3003 161.9156,86.3159 161.7438,86.4253 C161.4781,86.5972 161.3063,86.8628 161.3063,87.1753 C161.3063,87.4566 161.4313,87.7222 161.6813,87.8941 C161.8688,88.0191 162.0563,88.0503 162.4938,88.0503 L162.6813,88.0503 L162.6813,94.1441 L162.4938,94.1441 C162.0719,94.1441 161.9156,94.1753 161.7438,94.2691 C161.4781,94.4253 161.3063,94.7066 161.3063,95.0034 C161.3063,95.5816 161.7125,95.8941 162.4938,95.8941 L170.5719,95.8941 L170.5719,93.3628 C170.5719,92.9566 170.5406,92.7847 170.4313,92.6284 C170.2594,92.3628 169.9781,92.2066 169.65,92.2066 C169.3688,92.2066 169.0875,92.3472 168.9,92.5659 C168.7594,92.7534 168.7281,92.9097 168.7281,93.3628 L168.7281,94.1441 L164.5094,94.1441 L164.5094,91.9566 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="178.35" y="79.4941">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="182.35" y="95.6942">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="181.85" y="111.7002">PostIt</text><line style="stroke:#181818;stroke-width:0.5;" x1="148.5" x2="224.5" y1="120.4941" y2="120.4941"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="153.5" y="137.5001">-createdAt</text></g><!--MD5=[90111e5cdc788a7ef73a3273c23dcc2b]
+class Title--><g id="elem_Title"><rect codeLine="28" fill="#F5F5DC" height="43" id="Title" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="108" x="363.5" y="81.794"/><ellipse cx="378.5" cy="103.294" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M378.4063,106.9815 L376.0625,101.7003 L376.2813,101.7003 C376.7031,101.7003 376.875,101.6846 377.0313,101.5909 C377.2969,101.4346 377.4688,101.1221 377.4688,100.8409 C377.4688,100.544 377.3281,100.294 377.0938,100.1221 C376.9219,99.9971 376.7188,99.9503 376.2813,99.9503 L374.0156,99.9503 C373.5938,99.9503 373.4375,99.9971 373.2656,100.0753 C373,100.2471 372.8281,100.5284 372.8281,100.8409 C372.8281,101.1065 372.9688,101.3878 373.2031,101.5596 C373.3906,101.669 373.5625,101.7003 374,101.7003 L377.4531,109.544 L379.2031,109.544 L382.6875,101.7003 C383.0313,101.7003 383.1406,101.7003 383.2969,101.6534 C383.6406,101.544 383.875,101.2003 383.875,100.8409 C383.875,100.544 383.7344,100.294 383.5,100.1221 C383.3281,99.9971 383.125,99.9503 382.6875,99.9503 L380.4375,99.9503 C380.0156,99.9503 379.8438,99.9971 379.6875,100.0753 C379.4219,100.2471 379.25,100.5284 379.25,100.8409 C379.25,101.1065 379.3906,101.3878 379.625,101.5596 C379.8125,101.6846 379.9844,101.7003 380.4375,101.7003 L380.75,101.7003 L378.4063,106.9815 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="80" x="390.5" y="99.9941">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="27" x="417" y="116">Title</text></g><!--MD5=[60d6b92408f98aed8df94d5c6e04aa63]
+class State--><g id="elem_State"><rect codeLine="30" fill="#F5F5DC" height="43" id="State" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="108" x="146.5" y="262.294"/><ellipse cx="161.5" cy="283.794" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M161.4063,287.4815 L159.0625,282.2003 L159.2813,282.2003 C159.7031,282.2003 159.875,282.1846 160.0313,282.0909 C160.2969,281.9346 160.4688,281.6221 160.4688,281.3409 C160.4688,281.044 160.3281,280.794 160.0938,280.6221 C159.9219,280.4971 159.7188,280.4503 159.2813,280.4503 L157.0156,280.4503 C156.5938,280.4503 156.4375,280.4971 156.2656,280.5753 C156,280.7471 155.8281,281.0284 155.8281,281.3409 C155.8281,281.6065 155.9688,281.8878 156.2031,282.0596 C156.3906,282.169 156.5625,282.2003 157,282.2003 L160.4531,290.044 L162.2031,290.044 L165.6875,282.2003 C166.0313,282.2003 166.1406,282.2003 166.2969,282.1534 C166.6406,282.044 166.875,281.7003 166.875,281.3409 C166.875,281.044 166.7344,280.794 166.5,280.6221 C166.3281,280.4971 166.125,280.4503 165.6875,280.4503 L163.4375,280.4503 C163.0156,280.4503 162.8438,280.4971 162.6875,280.5753 C162.4219,280.7471 162.25,281.0284 162.25,281.3409 C162.25,281.6065 162.3906,281.8878 162.625,282.0596 C162.8125,282.1846 162.9844,282.2003 163.4375,282.2003 L163.75,282.2003 L161.4063,287.4815 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="80" x="173.5" y="280.4941">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="197" y="296.5">State</text></g><!--MD5=[f8ed75971b0a6b6896f5b0ea32ec4e3d]
+class Coordinates--><g id="elem_Coordinates"><rect codeLine="31" fill="#F5F5DC" height="43" id="Coordinates" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109" x="338" y="262.294"/><ellipse cx="353" cy="283.794" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M352.9063,287.4815 L350.5625,282.2003 L350.7813,282.2003 C351.2031,282.2003 351.375,282.1846 351.5313,282.0909 C351.7969,281.9346 351.9688,281.6221 351.9688,281.3409 C351.9688,281.044 351.8281,280.794 351.5938,280.6221 C351.4219,280.4971 351.2188,280.4503 350.7813,280.4503 L348.5156,280.4503 C348.0938,280.4503 347.9375,280.4971 347.7656,280.5753 C347.5,280.7471 347.3281,281.0284 347.3281,281.3409 C347.3281,281.6065 347.4688,281.8878 347.7031,282.0596 C347.8906,282.169 348.0625,282.2003 348.5,282.2003 L351.9531,290.044 L353.7031,290.044 L357.1875,282.2003 C357.5313,282.2003 357.6406,282.2003 357.7969,282.1534 C358.1406,282.044 358.375,281.7003 358.375,281.3409 C358.375,281.044 358.2344,280.794 358,280.6221 C357.8281,280.4971 357.625,280.4503 357.1875,280.4503 L354.9375,280.4503 C354.5156,280.4503 354.3438,280.4971 354.1875,280.5753 C353.9219,280.7471 353.75,281.0284 353.75,281.3409 C353.75,281.6065 353.8906,281.8878 354.125,282.0596 C354.3125,282.1846 354.4844,282.2003 354.9375,282.2003 L355.25,282.2003 L352.9063,287.4815 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="80" x="365.5" y="280.4941">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="367" y="296.5">Coordinates</text></g><!--MD5=[3fd616f346a44cd59a91eb10b19e157c]
+class User--><g id="elem_User"><rect codeLine="21" fill="#F5F5DC" height="59.2002" id="User" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="71" x="497" y="429.294"/><ellipse cx="512" cy="458.8941" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M510.8594,459.9566 L512.1719,459.9566 L512.1719,460.0034 C512.1719,460.4097 512.1875,460.5659 512.2969,460.7222 C512.4688,460.9722 512.7656,461.1441 513.0781,461.1441 C513.3594,461.1441 513.6563,461.0034 513.8281,460.7847 C513.9531,460.5972 514,460.4566 514,460.0034 L514,458.1597 C514,457.8316 513.9844,457.7222 513.9219,457.5503 C513.8125,457.2534 513.4531,457.0034 513.0781,457.0034 C512.7813,457.0034 512.5156,457.1441 512.3438,457.3628 C512.2031,457.5503 512.1719,457.7222 512.1719,458.1597 L512.1719,458.2222 L510.8594,458.2222 L510.8594,456.0503 L514.7031,456.0503 L514.7031,456.8003 C514.7031,457.1909 514.7344,457.3784 514.8438,457.5347 C515.0156,457.7847 515.3125,457.9566 515.625,457.9566 C515.9219,457.9566 516.1875,457.8316 516.375,457.5972 C516.5156,457.4097 516.5469,457.2691 516.5469,456.8003 L516.5469,454.3003 L508.8438,454.3003 C508.3906,454.3003 508.2656,454.3159 508.0938,454.4253 C507.8281,454.5972 507.6563,454.8628 507.6563,455.1753 C507.6563,455.4566 507.7813,455.7222 508.0313,455.8941 C508.2188,456.0191 508.4063,456.0503 508.8438,456.0503 L509.0313,456.0503 L509.0313,462.1441 L508.8438,462.1441 C508.4219,462.1441 508.2656,462.1753 508.0938,462.2691 C507.8281,462.4253 507.6563,462.7066 507.6563,463.0034 C507.6563,463.5816 508.0625,463.8941 508.8438,463.8941 L516.9219,463.8941 L516.9219,461.3628 C516.9219,460.9566 516.8906,460.7847 516.7813,460.6284 C516.6094,460.3628 516.3281,460.2066 516,460.2066 C515.7188,460.2066 515.4375,460.3472 515.25,460.5659 C515.1094,460.7534 515.0781,460.9097 515.0781,461.3628 L515.0781,462.1441 L510.8594,462.1441 L510.8594,459.9566 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="524" y="447.4941">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="528" y="463.6942">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="530.5" y="479.7002">User</text></g><!--MD5=[9563755d011c5cec7ec66dc53565a59e]
+class Board--><g id="elem_Board"><rect codeLine="42" fill="#F5F5DC" height="59.2002" id="Board" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="71" x="673" y="429.294"/><ellipse cx="688" cy="458.8941" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M686.8594,459.9566 L688.1719,459.9566 L688.1719,460.0034 C688.1719,460.4097 688.1875,460.5659 688.2969,460.7222 C688.4688,460.9722 688.7656,461.1441 689.0781,461.1441 C689.3594,461.1441 689.6563,461.0034 689.8281,460.7847 C689.9531,460.5972 690,460.4566 690,460.0034 L690,458.1597 C690,457.8316 689.9844,457.7222 689.9219,457.5503 C689.8125,457.2534 689.4531,457.0034 689.0781,457.0034 C688.7813,457.0034 688.5156,457.1441 688.3438,457.3628 C688.2031,457.5503 688.1719,457.7222 688.1719,458.1597 L688.1719,458.2222 L686.8594,458.2222 L686.8594,456.0503 L690.7031,456.0503 L690.7031,456.8003 C690.7031,457.1909 690.7344,457.3784 690.8438,457.5347 C691.0156,457.7847 691.3125,457.9566 691.625,457.9566 C691.9219,457.9566 692.1875,457.8316 692.375,457.5972 C692.5156,457.4097 692.5469,457.2691 692.5469,456.8003 L692.5469,454.3003 L684.8438,454.3003 C684.3906,454.3003 684.2656,454.3159 684.0938,454.4253 C683.8281,454.5972 683.6563,454.8628 683.6563,455.1753 C683.6563,455.4566 683.7813,455.7222 684.0313,455.8941 C684.2188,456.0191 684.4063,456.0503 684.8438,456.0503 L685.0313,456.0503 L685.0313,462.1441 L684.8438,462.1441 C684.4219,462.1441 684.2656,462.1753 684.0938,462.2691 C683.8281,462.4253 683.6563,462.7066 683.6563,463.0034 C683.6563,463.5816 684.0625,463.8941 684.8438,463.8941 L692.9219,463.8941 L692.9219,461.3628 C692.9219,460.9566 692.8906,460.7847 692.7813,460.6284 C692.6094,460.3628 692.3281,460.2066 692,460.2066 C691.7188,460.2066 691.4375,460.3472 691.25,460.5659 C691.1094,460.7534 691.0781,460.9097 691.0781,461.3628 L691.0781,462.1441 L686.8594,462.1441 L686.8594,459.9566 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="700" y="447.4941">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="704" y="463.6942">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="702.5" y="479.7002">Board</text></g><g id="elem_GMN9"><path d="M6,263.194 L6,304.394 A0,0 0 0 0 6,304.394 L87,304.394 A0,0 0 0 0 87,304.394 L87,287.794 L146.68,283.794 L87,279.794 L87,273.194 L77,263.194 L6,263.194 A0,0 0 0 0 6,263.194 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M77,263.194 L77,273.194 L87,273.194 L77,263.194 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="12" y="280.271">ACTIVE</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="12" y="295.871">DELETED</text></g><!--MD5=[440d3d6aeb35c643013e25e258bf5fa5]
+reverse link PostIt to Title--><g id="link_PostIt_Title"><path codeLine="45" d="M225.31,113.054 C262.92,116.584 320.94,116.994 363.21,114.264 " fill="none" id="PostIt-backto-Title" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="225.31,113.054,230.91,117.5972,237.2575,114.1754,231.6575,109.6322,225.31,113.054" style="stroke:#222222;stroke-width:1.0;"/></g><!--MD5=[534848fda8969442a873310fd8738fb9]
+link PostIt to State--><g id="link_PostIt_State"><path codeLine="46" d="M189.71,145.244 C192.39,179.454 196.14,227.214 198.44,256.514 " fill="none" id="PostIt-to-State" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="198.91,261.474,202.2039,252.1923,198.5243,256.4889,194.2277,252.8093,198.91,261.474" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="196.5" y="208.371">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="190.3512" y="250.8167">1</text></g><!--MD5=[bccab53c458f39b9d05cb29ebb056088]
+link PostIt to Board--><g id="link_PostIt_Board"><path codeLine="48" d="M225.38,120.234 C257.38,133.094 304.04,151.294 345.5,165.294 C460.9,204.254 516.18,162.854 608.5,242.294 C664.38,290.374 690.98,376.364 701.94,423.894 " fill="none" id="PostIt-to-Board" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="703.2,428.494,705.1464,418.8394,702.1123,423.6137,697.338,420.5797,703.2,428.494" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="678.5" y="288.371">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="694.055" y="417.6497">1</text></g><!--MD5=[2e589b4200792ea841c56daf157ffb49]
+link PostIt to PostIt--><g id="link_PostIt_PostIt"><path codeLine="49" d="M225.49,86.724 C254.84,80.844 284.5,86.364 284.5,103.294 C284.5,119.104 258.64,124.964 231.33,120.884 " fill="none" id="PostIt-to-PostIt" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="226.49,119.864,234.6561,125.3699,231.4136,120.7345,236.049,117.4921,226.49,119.864" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="290.5" y="107.871">previous</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="233.5793" y="127.0137">0..1</text></g><!--MD5=[86a51b6bc4fdd52eefff86f768d81017]
+link PostIt to Coordinates--><g id="link_PostIt_Coordinates"><path codeLine="50" d="M225.25,137.864 C265.9,173.094 328.79,227.594 364.75,258.754 " fill="none" id="PostIt-to-Coordinates" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="368,262.434,363.8416,253.5061,364.23,259.1496,358.5865,259.538,368,262.434" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="309.5" y="208.371">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="353.7313" y="250.7645">1</text></g><!--MD5=[25d9b082a28b8bc5109cd0b2cdb8138e]
+link PostIt to User--><g id="link_PostIt_User"><path codeLine="51" d="M225.3,119.724 C302.8,150.864 470.9,220.154 488.5,242.294 C530.46,295.064 535.47,377.564 534.54,423.674 " fill="none" id="PostIt-to-User" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#222222" points="534.38,428.654,538.61,419.7598,534.5085,423.6556,530.6127,419.5541,534.38,428.654" style="stroke:#222222;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="530.5" y="288.371">is owned by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="526.9851" y="417.8487">1</text></g><!--MD5=[c84c83dc5b96b6d27c8d631175d1d003]
+@startuml DM-POST-IT
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+
+  class Title
+  class State
+  class Coordinates
+}
+
+package "<<aggregate>> User" {
+  entity User
+}
+
+entity User <<entity>> <<root>> {
+}
+
+entity PostIt <<entity>> <<root>>{
+  - createdAt
+}
+
+class Title <<(V,#FF8B40) value object>> {}
+
+class State <<(V,#FF8B40) value object>> {}
+class Coordinates <<(V,#FF8B40) value object>> {}
+
+note left of State
+  ACTIVE
+  DELETED
+end note
+
+package "<<aggregate>> Board" {
+  entity Board
+}
+
+entity Board <<entity>> <<root>>{
+}
+
+PostIt *- Title
+PostIt - -> "1" State : has
+
+PostIt - - -> "1" Board : belongs to
+PostIt - -> "0..1" PostIt : previous
+PostIt - -> "1" Coordinates : has
+PostIt - - -> "1" User : is owned by
+
+@enduml
+
+@startuml DM-POST-IT
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+
+  class Title
+  class State
+  class Coordinates
+}
+
+package "<<aggregate>> User" {
+  entity User
+}
+
+entity User <<entity>> <<root>> {
+}
+
+entity PostIt <<entity>> <<root>>{
+  - createdAt
+}
+
+class Title <<(V,#FF8B40) value object>> {}
+
+class State <<(V,#FF8B40) value object>> {}
+class Coordinates <<(V,#FF8B40) value object>> {}
+
+note left of State
+  ACTIVE
+  DELETED
+end note
+
+package "<<aggregate>> Board" {
+  entity Board
+}
+
+entity Board <<entity>> <<root>>{
+}
+
+PostIt *- Title
+PostIt - -> "1" State : has
+
+PostIt - - -> "1" Board : belongs to
+PostIt - -> "0..1" PostIt : previous
+PostIt - -> "1" Coordinates : has
+PostIt - - -> "1" User : is owned by
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>
