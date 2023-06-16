@@ -38,10 +38,7 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 
 ## 2.3. Functional Requirements
 
-- **FRE04** Take Exam A Student takes an exam and answer its questions. At the end of
-  the exam, the system should display the feedback and result (i.e., grade) of the exam. The
-  feedback and grade of the exam should be automatically calculated by a parser based on
-  the grammar defined for exams structure
+- **FRE04** Take Exam A Student takes an exam and answer its questions. At the end of the exam, the system should display the feedback and result (i.e., grade) of the exam. The feedback and grade of the exam should be automatically calculated by a parser based on the grammar defined for exams structure
 
 ## 2.4. Acceptance Criteria
 
@@ -86,6 +83,7 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 ### 4.3. Applied Patterns
 
 - **Strategy**: This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them. Using the service `GenerateStructureFormativeExamService`, it returns a string with the structure of the exam, and the parser can parse it, without having to know the details of each type of question.
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
 
 ### 4.4. Tests
 
@@ -136,6 +134,21 @@ public String generateStructureString() {
     sb.append(buildEndExam());
 
     return sb.toString();
+  }
+```
+
+### 5.2. Take formative exam controller
+
+```java
+public TakeFormativeExamController(final AuthorizationService authz, final StudentRepository studentRepository,
+      final CourseRepository courseRepository, final FormativeExamRepository formativeExamRepository) {
+    this.authz = authz;
+    this.studentRepository = studentRepository;
+    this.courseRepository = courseRepository;
+    this.listCourseService = new ListCourseService(courseRepository);
+    this.parser = new ANTLR4TakeExamParser();
+    this.formativeExamRepository = formativeExamRepository;
+    this.service = new FormativeExamListService(formativeExamRepository);
   }
 ```
 

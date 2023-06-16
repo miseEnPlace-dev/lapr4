@@ -34,7 +34,7 @@ The communication protocol message codes are described in the following table:
 | 2    | `ACK`                   | Generic acknowledgment and success response message. Used in response to successful requests. This response contains no data.                                                                                                                                                                          |
 | 3    | `ERR`                   | Error response message. Used in response to unsuccessful requests that caused an error. This response message may carry a human readable phrase explaining the error. If used, the phrase explaining is carried in the `DATA` field as string of ASCII codes, it’s not required to be null terminated. |
 | 4    | `AUTH`                  | User authentication request. Described ahead.                                                                                                                                                                                                                                                          |
-| 5    | `SPLIT`                 | Indicates the original payload has exceeded the maximum size supported by the protocol. The payload of this request indicates the number of the bytes as an int (4 bytes) and the following messages together make the full payload.                                                                   |
+| 5    | `SPLIT`                 | Indicates the original payload has exceeded the maximum size supported by the protocol. The payload of this request indicates the length of the original message payload and the following messages together make the full payload.                                                                    |
 | 6    | `GET_BOARDS`            | Used to get boards which the authenticated user has permission to access.                                                                                                                                                                                                                              |
 | 7    | `GET_OWN_BOARDS`        | Used to get boards which the authenticated user owns.                                                                                                                                                                                                                                                  |
 | 8    | `GET_WRITABLE_BOARDS`   | Used to get boards which the authenticated user has write permission.                                                                                                                                                                                                                                  |
@@ -48,7 +48,8 @@ The communication protocol message codes are described in the following table:
 | 16   | `CREATE_POSTIT`         | Used to create a post-it in a specific board. The authenticated user must have write permission to the board.                                                                                                                                                                                          |
 | 17   | `EDIT_POSTIT`           | Used to edit a post-it. The authenticated user must be owner of the post-it or the owner of the board.                                                                                                                                                                                                 |
 | 18   | `UNDO_POSTIT`           | Used to undo the last change in a post-it. The authenticated user must be owner of the post-it and have write permission to the board or the owner of the board.                                                                                                                                       |
-| 19   | `GET_ONLINE_COUNT`      | Used to get the number of clients currently connected to the server.                                                                                                                                                                                                                                   |
+| 19   | `IS_CELL_AVAILABLE`     | Used to check if a certain cell does not have a post-it in it. The authenticated user must have at least read permission to the board.                                                                                                                                                                 |
+| 20   | `GET_ONLINE_COUNT`      | Used to get the number of clients currently connected to the server.                                                                                                                                                                                                                                   |
 
 ### Authentication Request
 
@@ -72,22 +73,38 @@ The following messages will carry the payload divided into chunks.
 The Shared Board App also implements an HTTP server to render a view only page of a board.
 The browser receives static files from the server and can also send AJAX requests to certain endpoints in order to retrieve data from the server.
 
-<!-- TODO -->
+A Router was implemented to handle each HTTP request. The Router will check the request's method and path and call the appropriate controller.
+A Middleware was also implemented to serve static files. The middleware will check if the request's path matches a static file and serve it if it does.
+If the request's path does not match a static file, the Router will be called.
+All `/api` endpoints respond with JSON. These controllers make requests to the Shared Board Server and return the response to the browser.
 
-Inspired by famous frameworks, a Router was implemented to handle each HTTP request and make it easier to develop
+The available endpoints are described in the following table:
+
+| Method | Path             | Description                                                                                                              |
+| ------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `GET`  | `/api`           | Returns a "Hello World" message formatted in JSON.                                                                       |
+| `GET`  | `/api/session`   | Returns the current authenticated user, 401 (Unauthorized) otherwise.                                                    |
+| `GET`  | `/api/board`     | Returns all boards the authenticated user has read permission to.                                                        |
+| `GET`  | `/api/board/:id` | Returns the board and its post-its with the specified id. The authenticated user must have read permission to the board. |
+| `GET`  | `/api/online`    | Returns the number of connected to the Shared Board Server clients.                                                      |
 
 ## SSL
 
 The Shared Board also implements SSL to encrypt the communication between the Shared Board App and the Shared Board Backend, as well as to encrypt the communication between the HTTP server and the browser by using HTTPS.
 
-## Cloud Deployment
+By using SSL, we ensure that the communication between the client and the server is private and the data integrity is not compromised by a third-party.
 
-<!-- TODO -->
+The certificates used in the SSL implementation are self-signed certificates generated by the the team members and stored in the project file root directory.
+Due to the certificates being self-signed, the browser will warn the user that the connection is not secure.
+
+![SSL Warning](assets/SSL-browser-warning.png)
+
+## Cloud Deployment
 
 ISEP provides to its students a cloud platform where students can deploy Virtual Servers using pre-made templates.
 We deployed the Shared Board Backend & the database on this platform.
 
-Go to the [ISEP's DEI Virtual Servers Private Cloud](https://vs-ctl.dei.isep.ipp.pt/)
+Go to the [ISEP's DEI Virtual Servers Private Cloud](https://vs-ctl.dei.isep.ipp.pt/).
 
 To use the deployment, read the [Deployment Guide](../README.md#6-deploy-to-a-remote-machine) section in the main README.
 

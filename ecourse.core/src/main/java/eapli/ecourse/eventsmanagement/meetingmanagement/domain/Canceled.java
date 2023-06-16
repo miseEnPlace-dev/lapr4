@@ -1,5 +1,6 @@
 package eapli.ecourse.eventsmanagement.meetingmanagement.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Embeddable;
@@ -27,7 +28,9 @@ public class Canceled implements ValueObject, Comparable<Canceled> {
 
   @Override
   public String toString() {
-    return canceledAt.toString();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+    return sdf.format(canceledAt.getTime());
   }
 
   public static Canceled valueOf(Calendar canceledAt) {

@@ -40,13 +40,19 @@ public class ViewBoardHistoryUI extends AbstractUI {
 
       final BoardDTO selected = selector.selectedElement();
 
+      if (selected == null) {
+        System.out.println("\nOperation cancelled by the user.");
+        return false;
+      }
+
       Iterable<PostItDTO> postIts = ctrl.listBoardHistory(selected);
 
       printPostIts(postIts);
 
       Console.readLine("\nPress Enter to continue...");
 
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | UnsuccessfulRequestException e) {
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
+        | UnsuccessfulRequestException e) {
       logger.error("Error trying to view a board", e);
     }
 

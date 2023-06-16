@@ -17,6 +17,8 @@ function getData() {
   }
 
   request.onload = () => {
+    error.innerHTML = "";
+
     /** @type {{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
     const data = JSON.parse(request.responseText);
 
@@ -26,12 +28,10 @@ function getData() {
 
   request.ontimeout = () => {
     error.innerHTML = "Server timeout, still trying...";
-    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   request.onerror = () => {
     error.innerHTML = "No server reply, still trying...";
-    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
@@ -64,12 +64,10 @@ function getAuthenticatedUser() {
 
   authRequest.ontimeout = () => {
     error.innerHTML = "Server timeout, still trying...";
-    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   authRequest.onerror = () => {
     error.innerHTML = "No server reply, still trying...";
-    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 
@@ -100,12 +98,10 @@ function getOnlineUsers() {
 
   onlineUsersRequest.ontimeout = () => {
     error.innerHTML = "Server timeout, still trying...";
-    error.className = "text-red-500 text-8xl";
     setTimeout(getData, ERROR_TIMEOUT);
   };
   onlineUsersRequest.onerror = () => {
     error.innerHTML = "No server reply, still trying...";
-    error.className = "text-red-500 text-8xl";
     setTimeout(getData, RETRY_TIMEOUT);
   };
 

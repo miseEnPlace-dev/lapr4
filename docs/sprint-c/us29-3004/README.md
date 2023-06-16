@@ -99,10 +99,32 @@ The system notifies the user that the recipient user already has permissions to 
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
-**Test 1:** XXX
+**Test 1:** Test if board exists.
 
 ```java
+@Test
+public void testBoardExists() { ... }
+```
 
+**Test 2:** Test if board does not exist.
+
+```java
+@Test
+public void testBoardDoesNotExists() { ... }
+```
+
+**Test 3:** Test if user participates in the board.
+
+```java
+@Test
+public void testIsBoardParticipant() { ... }
+```
+
+**Test 4:** Test if user does not participate in the board.
+
+```java
+@Test
+public void testIsNotBoardParticipant() { ... }
 ```
 
 ## 5. Implementation
@@ -118,7 +140,16 @@ public ShareBoardController(BoardRepository boardRepository, UserManagementServi
 
 ## 6. Integration & Demonstration
 
-![US3004_DEMO](out/US3004_DEMO.svg)
+- Success cenario
+
+![US3004_DEMO](US3004_DEMO.png)
+
+- Entered user does not exist:
+
+![US3004_DEMO2](US3004_DEMO2.png)
+
+- Authenticated user does not own any board:
+- ![US3004_DEMO3](US3004_DEMO3.png)
 
 ## 7. Observations
 

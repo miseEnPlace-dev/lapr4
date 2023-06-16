@@ -43,7 +43,6 @@ public class UndoPostItChangeUI extends AbstractUI {
       if (selectedBoard == null)
         return false;
 
-      // TODO CHANGE to own post-its
       Iterable<PostItDTO> postIts = ctrl.listLatestBoardPostItsByUser(selectedBoard);
 
       if (!postIts.iterator().hasNext()) {
@@ -52,25 +51,33 @@ public class UndoPostItChangeUI extends AbstractUI {
         return false;
       }
 
-      System.out.println("\nYour Post-Its:\n");
+      PostItDTO selectedPostIt = null;
+      String option = "";
 
-      PostItPrinter postItPrinter = new PostItPrinter();
-      postItPrinter.printHeader();
+      do {
+        System.out.println("\nYour Post-Its:\n");
 
-      SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
-      postItSelector.show();
+        PostItPrinter postItPrinter = new PostItPrinter();
+        postItPrinter.printHeader();
 
-      final PostItDTO selectedPostIt = postItSelector.selectedElement();
+        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
+        postItSelector.show();
 
-      if (selectedPostIt == null)
-        return false;
+        selectedPostIt = postItSelector.selectedElement();
 
-      // TODO reselect post-it
-      if (selectedPostIt.getPrevious() == null) {
-        System.out.println("\nThis post-it does not have any previous version.");
-        Console.readLine("\nPress ENTER to continue...");
-        return false;
-      }
+        if (selectedPostIt == null)
+          return false;
+
+        if (selectedPostIt.getPrevious() == null) {
+          System.out.println("\nThis post-it does not have any previous version.");
+          option = Console.readLine("\nDo you want to select another post-it? (Y/n)");
+
+          if (option.equalsIgnoreCase("n")) {
+            System.out.println("\nOperation cancelled by the user.");
+            return false;
+          }
+        }
+      } while (selectedPostIt.getPrevious() == null && !option.equalsIgnoreCase("n"));
 
       System.out.println("\nPreviewing the previous Post-It version:");
 
@@ -78,8 +85,10 @@ public class UndoPostItChangeUI extends AbstractUI {
 
       String answer = Console.readLine("\nDo you want to undo this change? (y/N)");
 
-      if (!answer.equalsIgnoreCase("y"))
+      if (!answer.equalsIgnoreCase("y")) {
+        System.out.println("\nOperation cancelled by the user.");
         return false;
+      }
 
       ctrl.undoPostItChange(selectedPostIt);
 

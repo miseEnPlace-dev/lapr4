@@ -27,6 +27,11 @@ public class ListBoardsService {
     return toDto(boardsList);
   }
 
+  public Iterable<BoardDTO> userActiveBoards(Username username) {
+    final Iterable<Board> boardsList = boardRepo.findAllActiveOwnedByUser(username);
+    return toDto(boardsList);
+  }
+
   public Iterable<BoardDTO> userAccessibleBoards(Username username) {
     final Iterable<Board> boardsList = boardRepo.findAllAccessibleByUser(username);
     return toDto(boardsList);

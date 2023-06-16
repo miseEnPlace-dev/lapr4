@@ -72,11 +72,21 @@ Regarding grades, each question will have points when the answer is correct. If 
 
 ![US2004_DM](out/US2004_DM.svg)
 
----
-
 ## 4. Design
 
-### 4.1. Tests
+<!-- ### 4.1. Functionality Realization -->
+
+<!-- ![US2009_SD](out/US2009_SD.svg) -->
+
+### 4.1. Class Diagram
+
+![US2004_CD](out/US2004_CD.svg)
+
+---
+
+## 5. Design
+
+### 5.1. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
@@ -104,9 +114,9 @@ public void ensureTotalScoreIsCorrect() {
 
 ---
 
-## 5. Implementation
+## 6. Implementation
 
-### 5.1. Controller
+### 6.1. Controller
 
 - Exam parser using ANTLR4 listeners.
 
@@ -130,12 +140,22 @@ public ExamScore parseFromString(String str, ExamPrinter printer) throws ParseEx
 
 ---
 
-## 6. Integration & Demonstration
+## 7. Integration & Demonstration
 
-![US2004_DEMO](out/US2004_DEMO.svg)
+- Select an exam
+
+![US2004_DEMO1](US2004_DEMO1.png)
+
+- Example of Short Answer question
+
+![US2004_DEMO2](US2004_DEMO2.png)
+
+- Example of Missing Words question
+
+![US2004_DEMO3](US2004_DEMO3.png)
 
 ---
 
-## 7. Observations
+## 8. Observations
 
 - N/A

@@ -1,5 +1,6 @@
 package eapli.ecourse.app.common.console.presentation.board;
 
+import eapli.ecourse.app.common.console.util.TableFormatPrinter;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.framework.visitor.Visitor;
 
@@ -17,8 +18,16 @@ public class BoardPrinter implements Visitor<BoardDTO> {
 
   @Override
   public void visit(final BoardDTO visitee) {
-    System.out.printf(format, visitee.getId(), visitee.getTitle(),
-        visitee.getArchived() == null ? "No" : visitee.getArchived(), visitee.getOwner().username(),
-        visitee.getRows().size(), visitee.getColumns().size(), visitee.getPermissions().size());
+    TableFormatPrinter printer = new TableFormatPrinter();
+
+    printer.addColumn(visitee.getId().toString(), 38);
+    printer.addColumn(visitee.getTitle().toString(), 10);
+    printer.addColumn(visitee.getArchived() == null ? "No" : "Yes", 17);
+    printer.addColumn(visitee.getOwner().username().toString(), 12);
+    printer.addColumn(String.valueOf(visitee.getRows().size()), 6);
+    printer.addColumn(String.valueOf(visitee.getColumns().size()), 9);
+    printer.addColumn(String.valueOf(visitee.getPermissions().size()), 17);
+
+    System.out.print(printer.format());
   }
 }

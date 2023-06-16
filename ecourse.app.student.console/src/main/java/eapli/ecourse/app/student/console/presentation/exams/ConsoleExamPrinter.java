@@ -177,7 +177,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
           matchString = String.format("%d. %s", i + 1, mts.next().getValue());
         else
           matchString = "";
-        System.out.printf("%-28s%-28s%n", optionString, matchString);
+        System.out.printf("%-35s%-35s%n", optionString, matchString);
       }
 
       System.out.println("\nSelect one of the options.");

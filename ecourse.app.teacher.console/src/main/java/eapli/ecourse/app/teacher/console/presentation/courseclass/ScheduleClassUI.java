@@ -36,22 +36,32 @@ public class ScheduleClassUI extends AbstractUI {
     if (selectedCourse == null)
       return false;
 
-    int dayOfWeek = Console
-        .readInteger("Enter the day of the week for the class (0 is Sunday - 6 is Saturday): ");
+    int dayOfWeek = -1;
+    DayInWeek day = null;
 
-    DayInWeek day;
-    try {
-      day = DayInWeek.valueOf(dayOfWeek);
-    } catch (IllegalArgumentException e) {
-      System.out.println("Invalid day of the week.");
-      Console.readLine("Press Enter to continue...");
-      return false;
-    }
+    do {
+      dayOfWeek = Console
+          .readInteger("Enter the day of the week for the class (0 is Sunday - 6 is Saturday): ");
+
+      try {
+        day = DayInWeek.valueOf(dayOfWeek);
+      } catch (IllegalArgumentException e) {
+        System.out.println("\nInvalid day of the week.\n");
+      }
+    } while (dayOfWeek < 0 || dayOfWeek > 6);
 
     Calendar hour = Console.readCalendar("Enter the hour for the class (hh:mm): ", "HH:mm");
     Hours hours = Hours.valueOf(hour);
 
-    int duration = Console.readInteger("Enter the duration of the class (in minutes): ");
+    int duration = -1;
+
+    do {
+      duration = Console.readInteger("Enter the duration of the class (in minutes): ");
+
+      if (duration <= 0)
+        System.out.println("\nInvalid duration.\n");
+    
+    } while (duration <= 0);
 
     try {
       ctrl.createClass(selectedCourse.getCode(), duration, day, hours);

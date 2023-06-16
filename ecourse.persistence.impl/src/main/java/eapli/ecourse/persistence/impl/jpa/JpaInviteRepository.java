@@ -1,10 +1,12 @@
 package eapli.ecourse.persistence.impl.jpa;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import eapli.ecourse.Application;
+import eapli.ecourse.eventsmanagement.domain.Time;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.Invite;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteID;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteStatus;
@@ -41,7 +43,8 @@ public class JpaInviteRepository extends JpaAutoTxRepository<Invite, InviteID, I
     Map<String, Object> params = new HashMap<>();
     params.put("username", username);
     params.put("status", new InviteStatus(InviteStatus.Status.PENDING));
-    return match("e.user.username = :username AND e.status = :status", params);
+    params.put("time", Time.valueOf(Calendar.getInstance()));
+    return match("e.user.username = :username AND e.status = :status AND e.meeting.time >= :time", params);
   }
 
   /**

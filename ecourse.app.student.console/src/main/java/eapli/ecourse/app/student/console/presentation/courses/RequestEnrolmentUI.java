@@ -1,6 +1,5 @@
 package eapli.ecourse.app.student.console.presentation.courses;
 
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
@@ -31,8 +30,8 @@ public class RequestEnrolmentUI extends AbstractUI {
       return false;
     }
 
-    new CourseHeader().printHeader();
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courses,
+        new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
 

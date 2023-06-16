@@ -1,0 +1,112 @@
+@startuml US2005_DM
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty attributes
+hide empty methods
+skinparam classBackgroundColor beige
+skinparam ArrowColor #222222
+
+package "<<aggregate>> Board" {
+  entity Board
+
+  class Title
+  entity Column
+  entity Row
+
+  class Archived
+
+  entity UserPermission
+
+  class PermissionType
+}
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+
+  class PostItTitle
+  class State
+  class Coordinates
+  class Description
+  class Image
+}
+
+package "<<aggregate>> PostIt" {
+  entity PostIt
+}
+
+package "<<aggregate>> User" {
+  entity User
+}
+
+entity PostIt <<entity>> <<root>> {
+}
+
+entity User <<entity>> <<root>> {
+}
+
+entity Board <<entity>> <<root>> {
+}
+
+entity Column <<entity>> {
+  - number
+}
+
+entity Row <<entity>> {
+  - number
+}
+
+class Title <<(V,#FF8B40) value object>> {}
+
+
+class Title <<(V,#FF8B40) value object>> {}
+class PostItTitle <<(V,#FF8B40) value object>> {}
+
+class State <<(V,#FF8B40) value object>> {}
+class Coordinates <<(V,#FF8B40) value object>> {}
+class Description <<(V,#FF8B40) value object>> {}
+class Image <<(V,#FF8B40) value object>> {}
+
+class Archived <<(V,#FF8B40) value object>> {
+  - archivedAt
+}
+
+entity UserPermission <<entity>> {
+  -createdAt
+  -updatedAt
+}
+
+class PermissionType <<(V,#FF8B40) value object>> {
+}
+
+note bottom of PermissionType
+  READ
+  WRITE
+end note
+
+Board --> "1" Title : is characterized by
+Board *-- "1..*" Column : has a collection of
+Board *-- "1..*" Row : has a collection of
+Board *-- "0..*" UserPermission : has a collection of
+
+UserPermission --> "1" PermissionType : has
+UserPermission --> "1" User : belongs to
+
+Row --> "1" Title : is identified by
+
+Column --> "1" Title : is identified by
+
+Board --> "1" User : is owned by
+Board --> "0..1" Archived : is
+
+PostIt *- PostItTitle
+PostIt --> "1" State : has
+
+PostIt ---> "1" Board : belongs to
+PostIt --> "0..1" PostIt : previous
+PostIt --> "0..1" Description : has
+PostIt --> "0..1" Image : has
+PostIt --> "1" Coordinates : has
+PostIt ---> "1" User : is owned by
+
+@enduml

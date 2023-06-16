@@ -27,6 +27,13 @@ public interface BoardRepository extends DomainRepository<BoardID, Board> {
   Iterable<Board> findAllOwnedByUser(Username user);
 
   /**
+   * Returns the boards created by a user that are not archived.
+   *
+   * @return an iterable list of boards which the user owns
+   */
+  Iterable<Board> findAllActiveOwnedByUser(Username user);
+
+  /**
    * Returns the boards the user has write permissions to.
    *
    * @param user

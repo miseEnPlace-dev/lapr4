@@ -42,6 +42,11 @@ public class CreatePostItController {
     return lstBoardsService.userWritableBoards(username);
   }
 
+  public boolean isBoardParticipant(BoardID boardId, Username username) {
+    Board board = boardRepository.ofIdentity(boardId).orElseThrow();
+    return board.participates(username);
+  }
+
   public boolean validateCoordinates(BoardID boardID, int x, int y) {
     return boardService.isCellAvailable(boardID, x, y);
   }
@@ -54,8 +59,8 @@ public class CreatePostItController {
 
     Board board = boardRepository.ofIdentity(boardID).orElseThrow();
 
-    PostItBuilder builder = new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title)
-        .withUser(user);
+    PostItBuilder builder =
+        new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
 
     if (description != null) {
       builder.withDescription(description);
@@ -82,7 +87,8 @@ public class CreatePostItController {
 
     Board board = boardRepository.ofIdentity(boardID).orElseThrow();
 
-    PostItBuilder builder = new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
+    PostItBuilder builder =
+        new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
 
     if (description != null) {
       builder.withDescription(description);

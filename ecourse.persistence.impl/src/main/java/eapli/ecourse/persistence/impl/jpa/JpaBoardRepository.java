@@ -29,6 +29,16 @@ public class JpaBoardRepository extends JpaAutoTxRepository<Board, BoardID, Boar
     return query.getResultList();
   }
 
+  public Iterable<Board> findAllActiveOwnedByUser(Username username) {
+    TypedQuery<Board> query = createQuery(
+        "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions WHERE b.owner.username = :username AND b.archived IS NULL",
+        Board.class);
+
+    query.setParameter("username", username);
+
+    return query.getResultList();
+  }
+
   public Iterable<Board> findAllAccessibleByUser(Username username) {
     TypedQuery<Board> query = createQuery(
         "SELECT DISTINCT b FROM Board b LEFT JOIN b.permissions p WHERE :username = p.user.username OR b.owner.username = :username",

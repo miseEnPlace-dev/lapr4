@@ -2,9 +2,7 @@ package eapli.ecourse.app.student.console.presentation.exams;
 
 import eapli.ecourse.answermanagement.application.ListStudentGradesController;
 import eapli.ecourse.answermanagement.dto.AnswerDTO;
-import eapli.ecourse.app.common.console.presentation.answer.AnswerHeader;
 import eapli.ecourse.app.common.console.presentation.answer.AnswerPrinter;
-import eapli.ecourse.app.common.console.presentation.course.CourseHeader;
 import eapli.ecourse.app.common.console.presentation.course.CoursePrinter;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
@@ -27,7 +25,7 @@ public class ListStudentGradesUI extends AbstractUI {
       return false;
     }
 
-    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CourseHeader().header(), studentCourses,
+    final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), studentCourses,
         new CoursePrinter());
     selector.show();
     final CourseDTO selected = selector.selectedElement();
@@ -41,7 +39,7 @@ public class ListStudentGradesUI extends AbstractUI {
     }
 
     System.out.println("\n");
-    ListWidget<AnswerDTO> list = new ListWidget<>(new AnswerHeader().header(), studentAnswers,
+    ListWidget<AnswerDTO> list = new ListWidget<>(new AnswerPrinter().header(), studentAnswers,
         new AnswerPrinter());
     list.show();
     System.out.println("\n");

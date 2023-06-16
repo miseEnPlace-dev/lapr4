@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -18,22 +19,23 @@ import eapli.ecourse.daemon.board.messages.ArchiveBoardMessage;
 import eapli.ecourse.daemon.board.messages.AuthMessage;
 import eapli.ecourse.daemon.board.messages.BadRequestMessage;
 import eapli.ecourse.daemon.board.messages.CommTestMessage;
+import eapli.ecourse.daemon.board.messages.CreatePostItMessage;
 import eapli.ecourse.daemon.board.messages.ChangePostItMessage;
 import eapli.ecourse.daemon.board.messages.DisconnMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardHistoryMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardMessage;
-import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOnlineCountMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnPostItsBoardMessage;
+import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
+import eapli.ecourse.daemon.board.messages.IsCellAvailableMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
-import eapli.ecourse.daemon.board.messages.IsCellAvailableMessage;
 
 public class ClientHandler implements Runnable {
 
@@ -59,12 +61,12 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_POSTITS_BOARD, GetPostItsBoardMessage.class);
       put(MessageCode.GET_OWN_POSTITS_BOARD, GetOwnPostItsBoardMessage.class);
       put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
-      put(MessageCode.CREATE_POSTIT, ChangePostItMessage.class);
+      put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       put(MessageCode.CHANGE_POSTIT, ChangePostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);
+      put(MessageCode.IS_CELL_AVAILABLE, IsCellAvailableMessage.class);
 
       put(MessageCode.GET_ONLINE_COUNT, GetOnlineCountMessage.class);
-      put(MessageCode.IS_CELL_AVAILABLE, IsCellAvailableMessage.class);
     }
   };
 
@@ -124,7 +126,8 @@ public class ClientHandler implements Runnable {
       output.close();
       input.close();
     } catch (IOException | ClassNotFoundException e) {
-      logger.error("\n[Client Handler Thread] Error", e);
+      // ? don't show stack trace to make the app usable
+      // logger.error("\n[Client Handler Thread] Error", e);
     }
 
     // safely decrement the online counter

@@ -41,7 +41,7 @@
 
 ## 2.4. Non Functional Requirements
 
-> **NFR10** Shared Board Architecture This functional part of the system has very specific technical requirements. It must follow a client-server architecture, where a client application is used to access the shared boards that should be implemented in a server. Communications between these two components must follow specific protocol described in a document from RCOMP ("Application Protocol"). Also, the client application can not access the relational database, it can only access the server application. The client app should implement an HTTP server to be able to generate the "views" of the boards. This should be done automatically, without the intervention of the users (i.e., without reload of the web page) by using AJAX.
+> **NFR10** Shared Board Architecture This functional part of the system has very specific technical requirements. It must follow a client-server architecture, where a client application is used to access the shared boards that should be implemented in a server. Communications between these two components must follow specific protocol described in a document from RCOMP ("Application Protocol"). Also, the client application can not access the relational database, it can only access the server application. The client app should implement an HTTP server to be able to generate the "views" of the boards. This should be done automatically, without the intervention of the users (i.e., without reload of the web page) by using AJAX.
 
 ## 2.5. Acceptance Criteria
 
@@ -57,21 +57,21 @@
 
 ### 3.2. System Sequence Diagram
 
-![USXXX_SSD](out/USXXX_SSD.svg)
+![US3005_SSD](out/US3005_SSD.svg)
 
 ### 3.4. Partial Domain Model
 
-![USXXX_DM](out/USXXX_DM.svg)
+![US3005_DM](out/US3005_DM.svg)
 
 ## 4. Design
 
 ### 4.1. Sequence Diagram
 
-![USXXX_SD](out/USXXX_SD.svg)
+![US3005_SD](out/US3005_SD.svg)
 
 ### 4.2. Class Diagram
 
-![USXXX_CD](out/USXXX_CD.svg)
+![US3005_CD](out/US3005_CD.svg)
 
 ### 4.3. Applied Patterns
 
@@ -99,7 +99,7 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ## 6. Integration & Demonstration
 
-![USXXX_DEMO](out/USXXX_DEMO.svg)
+![US3005_DEMO](out/US3005_DEMO.svg)
 
 ## 7. Observations
 

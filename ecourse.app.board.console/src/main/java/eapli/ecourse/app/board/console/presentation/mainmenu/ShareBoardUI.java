@@ -29,25 +29,60 @@ public class ShareBoardUI extends AbstractUI {
 
       if (!boards.iterator().hasNext()) {
         System.out.println("You don't own any board.");
+        Console.readLine("\nPress ENTER to continue...");
         return false;
       }
 
-      System.out.println("Boards you own:\n");
+      BoardDTO selected;
 
-      BoardPrinter printer = new BoardPrinter();
-      printer.printHeader();
+      do {
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
-      selector.show();
+        System.out.println("Boards you own:\n");
 
-      final BoardDTO selected = selector.selectedElement();
+        BoardPrinter printer = new BoardPrinter();
+        printer.printHeader();
 
-      if (selected == null)
-        return false;
+        SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+        selector.show();
 
-      String username =
-          Console.readLine("\nInsert the username of the user you want to share the board with: ");
-      UserPermissionDTO permission = ctrl.userPermissions(selected, username);
+        selected = selector.selectedElement();
+
+        if (selected == null) {
+          System.out.println("\nOperation cancelled by the user.");
+          return false;
+        }
+
+        if (selected.getArchived() != null) {
+          System.out.println("\nYou can't share an archived board.");
+
+          String option = Console.readLine("\nDo you want to try with a different board? (Y/n) ");
+
+          if (option.equalsIgnoreCase("n"))
+            return false;
+        }
+      } while (selected.getArchived() != null);
+
+
+      UserPermissionDTO permission = null;
+      String username = "";
+      boolean error;
+
+      do {
+        error = false;
+
+        username = Console
+            .readLine("\nInsert the username of the user you want to share the board with: ");
+        try {
+          permission = ctrl.userPermissions(selected, username);
+        } catch (UnsuccessfulRequestException e) {
+          error = true;
+          System.out.println("\n" + e.getMessage());
+          String option = Console.readLine("\nDo you want to try with a different user? (Y/n) ");
+
+          if (option.equalsIgnoreCase("n"))
+            return false;
+        }
+      } while (error);
 
       if (permission == null)
         System.out.printf("\nThe user %s doesn't have any permission on the board.\n", username);
