@@ -29,6 +29,7 @@ public class ShareBoardUI extends AbstractUI {
 
       if (!boards.iterator().hasNext()) {
         System.out.println("You don't own any board.");
+        Console.readLine("\nPress ENTER to continue...");
         return false;
       }
 
