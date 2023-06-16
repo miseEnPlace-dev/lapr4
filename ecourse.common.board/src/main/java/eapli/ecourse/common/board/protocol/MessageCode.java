@@ -16,7 +16,8 @@ public enum MessageCode {
       (byte) 15),
   CREATE_POSTIT((byte) 16), CHANGE_POSTIT((byte) 17), UNDO_POSTIT(
       (byte) 18),
-  IS_CELL_AVAILABLE((byte) 19), GET_ONLINE_COUNT((byte) 20);
+  IS_CELL_AVAILABLE((byte) 19), GET_ONLINE_COUNT((byte) 20), DELETE_POSTIT(
+      (byte) 21),;
 
   private static final Map<Byte, MessageCode> CODES = new HashMap<>();
 
