@@ -96,4 +96,15 @@ public class ChangePostItController {
 
   }
 
+  public void deletePostIt(PostItID postItID) throws IOException, UnsupportedVersionException,
+      UnsuccessfulRequestException, ClassNotFoundException {
+
+    ProtocolMessage response = server
+        .sendRecv(new ProtocolMessage(MessageCode.DELETE_POSTIT, postItID.toString()));
+
+    if (response.getCode().equals(MessageCode.ERR))
+      throw new UnsuccessfulRequestException(response);
+
+  }
+
 }
