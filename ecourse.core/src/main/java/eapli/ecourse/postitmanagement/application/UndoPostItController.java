@@ -24,9 +24,9 @@ public class UndoPostItController {
   public boolean canEditPostIt(PostItID postItId, Username username) {
     PostIt postIt = postItRepository.ofIdentity(postItId).orElseThrow();
 
-    // check if is owner of the post-it and has write permission to the board or is board's owner
-    return (postIt.board().canWrite(username) && postIt.owner().hasIdentity(username))
-        || postIt.board().owner().hasIdentity(username);
+    // check if is owner of the post-it and has write permission to the board
+    return (postIt.board().canWrite(username) && postIt.owner().hasIdentity(username));
+    // || postIt.board().owner().hasIdentity(username);
   }
 
   public boolean isPostItBoardArchived(PostItID postItID) {
