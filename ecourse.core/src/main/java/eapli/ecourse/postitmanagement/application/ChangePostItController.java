@@ -111,4 +111,14 @@ public class ChangePostItController {
     postItRepository.save(postIt);
   }
 
+  public PostIt deletePostIt(PostItID postItID) {
+    PostIt p = postItRepository.ofIdentity(postItID).orElseThrow();
+    PostIt newPostIt = p.delete();
+
+    save(p);
+    save(newPostIt);
+
+    return newPostIt;
+  }
+
 }

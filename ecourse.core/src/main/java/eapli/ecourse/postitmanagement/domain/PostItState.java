@@ -10,6 +10,8 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 @EqualsAndHashCode
 public class PostItState implements ValueObject {
+  private static final long serialVersionUID = 1L;
+
   public enum State {
     ACTIVE, DELETED
   }

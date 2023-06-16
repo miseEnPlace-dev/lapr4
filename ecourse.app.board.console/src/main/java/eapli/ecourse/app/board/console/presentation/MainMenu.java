@@ -1,11 +1,12 @@
 package eapli.ecourse.app.board.console.presentation;
 
 import java.util.Optional;
+
 import eapli.ecourse.Application;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ArchiveBoardUI;
-import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.DeletePostItUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.CommTestUI;
-import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.CreatePostItUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.SessionInfoUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ShareBoardUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.UndoPostItChangeUI;
@@ -30,9 +31,10 @@ public class MainMenu extends AbstractUI {
   private static final int SHARE_BOARD_OPTION = 1;
   private static final int CREATE_POST_IT_OPTION = 2;
   private static final int CHANGE_POST_IT_OPTION = 3;
-  private static final int UNDO_POST_IT_CHANGE_OPTION = 4;
-  private static final int VIEW_BOARD_HISTORY_OPTION = 5;
-  private static final int ARCHIVE_BOARD_OPTION = 6;
+  private static final int DELETE_POSTITOPTION = 4;
+  private static final int UNDO_POST_IT_CHANGE_OPTION = 5;
+  private static final int VIEW_BOARD_HISTORY_OPTION = 6;
+  private static final int ARCHIVE_BOARD_OPTION = 7;
 
   private static final int COMMTEST_OPTION = 8;
   private static final int SESSION_INFO_OPTION = 9;
@@ -80,8 +82,9 @@ public class MainMenu extends AbstractUI {
     final Menu mainMenu = new Menu();
 
     mainMenu.addItem(SHARE_BOARD_OPTION, "Share Board", new ShareBoardUI()::show);
-    mainMenu.addItem(CREATE_POST_IT_OPTION, "Create Post-It", new ChangePostItUI()::show);
-    mainMenu.addItem(CHANGE_POST_IT_OPTION, "Change Post-It", new ChangePostItUI()::show);
+    mainMenu.addItem(CREATE_POST_IT_OPTION, "Create Post-It", new CreatePostItUI()::show);
+    mainMenu.addItem(CHANGE_POST_IT_OPTION, "Change Post-It", new DeletePostItUI()::show);
+    mainMenu.addItem(DELETE_POSTITOPTION, "Delete Post-It", new DeletePostItUI()::show);
     mainMenu.addItem(UNDO_POST_IT_CHANGE_OPTION, "Undo Last Post-It Change",
         new UndoPostItChangeUI()::show);
     mainMenu.addItem(VIEW_BOARD_HISTORY_OPTION, "View Board History",

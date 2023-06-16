@@ -179,6 +179,29 @@ public class PostIt implements AggregateRoot<PostItID> {
     return new PostIt(t, c, this.board, this.owner, this, d, i);
   }
 
+  public PostIt delete() {
+    this.isLatest = false;
+
+    return new PostIt(this, new PostItState(State.DELETED));
+  }
+
+  // This constructor is used to create a deleted PostIt
+  private PostIt(PostIt p, PostItState s) {
+    Preconditions.noneNull(p, s);
+
+    this.id = PostItID.newID();
+    this.title = p.title;
+    this.coordinates = p.coordinates;
+    this.state = s;
+    this.board = p.board;
+    this.owner = p.owner;
+    this.previous = p.previous;
+    this.createdAt = p.createdAt;
+    this.isLatest = true;
+    this.description = p.description;
+    this.image = p.image;
+  }
+
   public SystemUser owner() {
     return this.owner;
   }
@@ -248,10 +271,6 @@ public class PostIt implements AggregateRoot<PostItID> {
         && this.coordinates.equals(that.coordinates) && this.identity().equals(that.identity())
         && this.state.equals(that.state) && this.createdAt.equals(that.createdAt)
         && this.isLatest == that.isLatest && this.description.equals(that.description) && this.image.equals(that.image);
-  }
-
-  public void delete() {
-    this.state = new PostItState(State.DELETED);
   }
 
   public void toggleIsLatest() {
