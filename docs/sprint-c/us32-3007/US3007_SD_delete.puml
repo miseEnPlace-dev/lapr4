@@ -1,0 +1,119 @@
+@startuml US3007_SD_delete
+autonumber
+
+actor "User" as M
+participant "ChangePostItUI" as UI <<presentation>>
+participant "ChangePostItController" as CTRL <<application>>
+participant "ListBoardService" as LBSRV <<service>>
+participant "ListPostItService" as LPSRV <<service>>
+participant "BoardService" as BSRV <<service>>
+participant "Board" as B <<domain>>
+participant "PostIt" as P <<domain>>
+participant "BoardDTO" as BDTO <<dto>>
+participant "PostItDTO" as PDTO <<dto>>
+
+database BoardRepository as BREP <<repository>>
+database PostItRepository as PREP <<repository>>
+
+activate M
+
+M -> UI : asks to create a post-it
+activate UI
+
+UI -> CTRL : new(boardRepository, postItRepository)
+activate CTRL
+CTRL -> LBSRV : new(boardRepository)
+activate LBSRV
+deactivate LBSRV
+UI -> CTRL : listUserWritableBoards()
+
+CTRL -> LBSRV : userWritableBoards(username)
+activate LBSRV
+LBSRV -> BREP : findAllActiveBoardsWithUserWritePermission(username)
+activate BREP
+BREP --> LBSRV : boards
+deactivate BREP
+
+loop for each board
+  LBSRV -> B : toDTO(board)
+  activate B
+  B -> BDTO : new()
+  activate BDTO
+  deactivate BDTO
+  deactivate B
+end loop
+
+LBSRV --> CTRL : boards
+deactivate LBSRV
+CTRL --> UI : boards
+deactivate CTRL
+
+UI --> M : asks to select the board
+deactivate UI
+
+M -> UI : selects the board
+activate UI
+
+UI -> CTRL : listBoardPostItsCreatedByUser(boardId)
+activate CTRL
+
+CTRL -> LPSRV : new(postItRepository)
+activate LPSRV
+deactivate LPSRV
+
+CTRL -> LPSRV : userUpdatablePostIts(boardId, username)
+activate LPSRV
+LPSRV -> PREP : findLatestFromUserByBoardId(boardId, username)
+activate PREP
+PREP --> LPSRV : postIts
+deactivate PREP
+
+loop for each postIt
+  LPSRV -> P : toDTO(postIt)
+  activate P
+  P -> PDTO : new()
+  activate PDTO
+  deactivate PDTO
+  deactivate P
+end loop
+
+LPSRV --> CTRL : postIts
+deactivate LPSRV
+CTRL --> UI : postIts
+deactivate CTRL
+
+UI --> M : asks to select the post-it
+deactivate UI
+
+M -> UI : selects the post-it
+activate UI
+
+
+UI --> M : asks to select the post-it coordinates
+deactivate UI
+
+M -> UI : selects the post-it coordinates
+activate UI
+UI -> CTRL : delete(postItId)
+activate CTRL
+CTRL -> PREP : findById(postItId)
+activate PREP
+PREP --> CTRL : postIt
+deactivate PREP
+
+CTRL -> P : delete()
+activate P
+deactivate P
+
+CTRL -> CTRL : save(postIt)
+activate CTRL
+CTRL -> PREP : save(postIt)
+activate PREP
+deactivate PREP
+deactivate CTRL
+
+
+
+deactivate M
+
+@enduml
