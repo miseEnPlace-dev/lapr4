@@ -1,5 +1,7 @@
 package eapli.ecourse.postitmanagement.application;
 
+import java.io.IOException;
+
 import eapli.ecourse.boardmanagement.application.ListBoardsService;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
@@ -12,45 +14,36 @@ import eapli.ecourse.postitmanagement.domain.PostItImage;
 import eapli.ecourse.postitmanagement.domain.PostItTitle;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
-import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.application.UseCaseController;
-import eapli.framework.infrastructure.authz.application.AuthorizationService;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
 @UseCaseController
 public class ChangePostItController {
 
   BoardRepository boardRepository;
   PostItRepository postItRepository;
-  AuthorizationService authzService;
 
   ListBoardsService lstBoardsService;
   ListPostItService lstPostItService;
   BoardService boardService;
+  ImageEncoderService imageEncoderService;
 
-  public ChangePostItController(BoardRepository boardRepository, PostItRepository postItRepository,
-      AuthorizationService authzService) {
+  public ChangePostItController(BoardRepository boardRepository, PostItRepository postItRepository) {
     this.boardRepository = boardRepository;
     this.postItRepository = postItRepository;
-    this.authzService = authzService;
+    this.imageEncoderService = new ImageEncoderService();
   }
 
-  public Iterable<BoardDTO> listUserWritableBoards() {
+  public Iterable<BoardDTO> listUserWritableBoards(Username username) {
     lstBoardsService = new ListBoardsService(boardRepository);
 
-    SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
-        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
-
-    return lstBoardsService.userWritableBoards(user.username());
+    return lstBoardsService.userWritableBoards(username);
   }
 
-  public Iterable<PostItDTO> listBoardPostItsCreatedByUser(BoardID boardID) {
+  public Iterable<PostItDTO> listBoardPostItsCreatedByUser(BoardID boardID, Username username) {
     lstPostItService = new ListPostItService(postItRepository);
 
-    SystemUser user = authzService.loggedinUserWithPermissions(ClientRoles.MANAGER,
-        ClientRoles.POWER_USER, ClientRoles.STUDENT, ClientRoles.TEACHER).orElseThrow();
-
-    return lstPostItService.userUpdatablePostIts(boardID, user.username());
+    return lstPostItService.userUpdatablePostIts(boardID, username);
   }
 
   public boolean validateCoordinates(BoardID boardID, int x, int y) {
@@ -60,7 +53,7 @@ public class ChangePostItController {
   }
 
   public PostIt changePostIt(PostItID postItID, String title, Integer x, Integer y, String description,
-      String image) {
+      String image) throws IOException {
 
     // nothing to update
     if (title == null && description == null && image == null && x == 0 && y == 0)
@@ -85,6 +78,9 @@ public class ChangePostItController {
     else
       coordinates = Coordinates.valueOf(x, y);
 
+    if (!validateCoordinates(p.board().identity(), coordinates.getX(), coordinates.getY()))
+      throw new IllegalArgumentException("Invalid coordinates!");
+
     // if null, keep the same
     // if empty, delete
     if (description == null)
@@ -101,7 +97,7 @@ public class ChangePostItController {
     else if (image.equals(""))
       postItImage = null;
     else
-      postItImage = PostItImage.valueOf(image);
+      postItImage = PostItImage.valueOf(imageEncoderService.encodeImage(image));
 
     PostIt newPostIt = p.update(postItTitle, coordinates, postItDescription, postItImage);
 

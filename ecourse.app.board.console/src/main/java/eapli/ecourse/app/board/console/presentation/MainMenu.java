@@ -5,7 +5,7 @@ import eapli.ecourse.Application;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ArchiveBoardUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.CommTestUI;
-import eapli.ecourse.app.board.console.presentation.mainmenu.CreatePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.SessionInfoUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ShareBoardUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.UndoPostItChangeUI;
@@ -80,7 +80,7 @@ public class MainMenu extends AbstractUI {
     final Menu mainMenu = new Menu();
 
     mainMenu.addItem(SHARE_BOARD_OPTION, "Share Board", new ShareBoardUI()::show);
-    mainMenu.addItem(CREATE_POST_IT_OPTION, "Create Post-It", new CreatePostItUI()::show);
+    mainMenu.addItem(CREATE_POST_IT_OPTION, "Create Post-It", new ChangePostItUI()::show);
     mainMenu.addItem(CHANGE_POST_IT_OPTION, "Change Post-It", new ChangePostItUI()::show);
     mainMenu.addItem(UNDO_POST_IT_CHANGE_OPTION, "Undo Last Post-It Change",
         new UndoPostItChangeUI()::show);
