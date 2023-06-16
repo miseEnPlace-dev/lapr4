@@ -33,18 +33,35 @@ public class ShareBoardUI extends AbstractUI {
         return false;
       }
 
-      System.out.println("Boards you own:\n");
+      BoardDTO selected;
 
-      BoardPrinter printer = new BoardPrinter();
-      printer.printHeader();
+      do {
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
-      selector.show();
+        System.out.println("Boards you own:\n");
 
-      final BoardDTO selected = selector.selectedElement();
+        BoardPrinter printer = new BoardPrinter();
+        printer.printHeader();
 
-      if (selected == null)
-        return false;
+        SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+        selector.show();
+
+        selected = selector.selectedElement();
+
+        if (selected == null) {
+          System.out.println("\nOperation cancelled by the user.");
+          return false;
+        }
+
+        if (selected.getArchived() != null) {
+          System.out.println("\nYou can't share an archived board.");
+
+          String option = Console.readLine("\nDo you want to try with a different board? (Y/n) ");
+
+          if (option.equalsIgnoreCase("n"))
+            return false;
+        }
+      } while (selected.getArchived() != null);
+
 
       UserPermissionDTO permission = null;
       String username = "";

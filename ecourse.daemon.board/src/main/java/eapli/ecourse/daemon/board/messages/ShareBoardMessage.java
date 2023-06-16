@@ -99,6 +99,12 @@ public class ShareBoardMessage extends Message {
       return;
     }
 
+    // check if board is archived
+    if (ctrl.isBoardArchived(boardId)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Board is archived"));
+      return;
+    }
+
     // update the permission
     if (newPermissionStr.equals("none")) {
       // remove the permission

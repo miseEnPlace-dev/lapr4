@@ -40,6 +40,11 @@ public class ShareBoardController {
     return board.owner().hasIdentity(username);
   }
 
+  public boolean isBoardArchived(BoardID boardId) {
+    Board board = boardRepository.ofIdentity(boardId).orElseThrow();
+    return board.isArchived();
+  }
+
   public Iterable<BoardDTO> listOwnActiveBoards(Username username) {
     return listBoardsSvc.userActiveBoards(username);
   }

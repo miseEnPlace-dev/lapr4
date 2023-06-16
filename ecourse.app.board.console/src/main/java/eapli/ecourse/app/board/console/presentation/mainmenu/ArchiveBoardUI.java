@@ -44,7 +44,7 @@ public class ArchiveBoardUI extends AbstractUI {
       System.out.printf("\nThis board is currently %s.\n",
           selected.getArchived() == null ? "NOT archived" : "archived");
 
-      String message = String.format("\nDo you want to %s the board? (y/n)",
+      String message = String.format("\nDo you want to %s the board? (y/N)",
           selected.getArchived() == null ? "archive" : "unarchive");
 
       String answer = Console.readLine(message);
