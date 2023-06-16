@@ -140,11 +140,16 @@ public ShareBoardController(BoardRepository boardRepository, UserManagementServi
 
 ## 6. Integration & Demonstration
 
+- Success cenario
+
 ![US3004_DEMO](US3004_DEMO.png)
 
 - Entered user does not exist:
 
 ![US3004_DEMO2](US3004_DEMO2.png)
+
+- Authenticated user does not own any board:
+- ![US3004_DEMO3](US3004_DEMO3.png)
 
 ## 7. Observations
 
