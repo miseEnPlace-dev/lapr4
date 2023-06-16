@@ -8,6 +8,8 @@ const error = document.querySelector("#error");
 const boardName = document.querySelector("#board-name");
 const boardTable = document.querySelector("#board");
 
+const N_OF_USER_IMAGES = 7;
+
 function getData() {
   updateBoard();
   getAuthenticatedUser();
@@ -25,6 +27,23 @@ function closeModal() {
 
   modalContainer.remove();
   modal.remove();
+}
+
+/** @type {(postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }[])=>Map<string,string>} */
+function assignUserImage(postIts) {
+  /** @type {Map<string, string>} */
+  const userImages = new Map();
+  let i = 1;
+
+  for (const postIt of postIts) {
+    if (!userImages.has(postIt.owner.username))
+      userImages.set(
+        postIt.owner.username,
+        `assets/users/user-${i++ % N_OF_USER_IMAGES}.png`
+      );
+  }
+
+  return userImages;
 }
 
 function openModal(i, j) {
@@ -47,8 +66,8 @@ function openModal(i, j) {
   modalContainer.onclick = closeModal;
 
   modal.innerHTML = `
-    <div class="z-50 flex flex-col gap-y-6 items-center justify-around w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-8">
-      <h1 class="text-3xl font-bold">${postIt.title}</h1>
+    <div class="z-50 flex flex-col gap-y-6 items-center justify-between w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-16">
+      <h1 class="text-3xl font-bold text-center">${postIt.title}</h1>
       ${
         postIt.description === "null"
           ? `<p class="text-xl">${postIt.description}</p>`
@@ -89,6 +108,7 @@ function updateBoard() {
 
     const postItsMap = new Map();
     postIts = postItsMap;
+    const userImages = assignUserImage(p);
 
     for (const postIt of p)
       postItsMap.set(
@@ -145,12 +165,13 @@ function updateBoard() {
           td.innerHTML = `
             <button
               id=${postIt.id}
-              onClick=\"openModal(${i},${j})\"
-              class="w-11/12 mx-auto flex flex-col items-center p-4 rounded-lg relative dark:bg-slate-600 bg-slate-200 ${
-                hasContent &&
-                "hover:brightness-90 transition-all duration-150 cursor-pointer"
+              ${hasContent ? `onClick="openModal(${i},${j})"` : ""}
+              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-slate-200 ${
+                hasContent
+                  ? "hover:brightness-90 transition-all duration-150 cursor-pointer"
+                  : "hover:brightness-100 cursor-default"
               }">
-              <h3 class="text-xl font-bold">${postIt.title}</h3>
+              <h3 class="text-xl font-bold text-center">${postIt.title}</h3>
               <div class="flex items-center justify-between w-full">
                 ${
                   hasContent
@@ -159,7 +180,9 @@ function updateBoard() {
                 }
                 <div class="flex gap-x-2 items-center w-full justify-end">
                   <h3 class="text-lg font-thin">${postIt.owner.name}</h3>
-                  <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+                  <img src=${userImages.get(
+                    postIt.owner.username
+                  )} alt="User Avatar" class="h-8 w-8 bg-gray-400 rounded-full" />
                 </div>
               </div>
             </button>
