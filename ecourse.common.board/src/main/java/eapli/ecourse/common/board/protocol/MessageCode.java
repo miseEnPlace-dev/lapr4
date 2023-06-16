@@ -14,7 +14,7 @@ public enum MessageCode {
       (byte) 13),
   GET_OWN_POSTITS_BOARD((byte) 14), GET_BOARD_HISTORY(
       (byte) 15),
-  CREATE_POSTIT((byte) 16), EDIT_POSTIT(
+  CREATE_POSTIT((byte) 16), CHANGE_POSTIT(
       (byte) 17),
   UNDO_POSTIT((byte) 18), GET_ONLINE_COUNT((byte) 19), IS_CELL_AVAILABLE(
       (byte) 20),;
