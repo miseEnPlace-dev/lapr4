@@ -6,6 +6,7 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.boardmanagement.domain.UserPermission;
+import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.framework.application.UseCaseController;
@@ -17,10 +18,12 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
 public class ShareBoardController {
   private final BoardRepository boardRepository;
   private final UserManagementService userSvc;
+  private final ListBoardsService listBoardsSvc;
 
   public ShareBoardController(BoardRepository boardRepository, UserManagementService userSvc) {
     this.boardRepository = boardRepository;
     this.userSvc = userSvc;
+    this.listBoardsSvc = new ListBoardsService(boardRepository);
   }
 
   public boolean boardExists(BoardID boardId) {
@@ -35,6 +38,10 @@ public class ShareBoardController {
   public boolean isBoardOwner(BoardID boardId, Username username) {
     Board board = boardRepository.ofIdentity(boardId).orElseThrow();
     return board.owner().hasIdentity(username);
+  }
+
+  public Iterable<BoardDTO> listOwnActiveBoards(Username username) {
+    return listBoardsSvc.userActiveBoards(username);
   }
 
   public UserPermissionDTO getUserPermission(BoardID boardId, Username username) {
