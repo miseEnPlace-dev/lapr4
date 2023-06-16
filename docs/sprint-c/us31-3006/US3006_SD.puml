@@ -6,6 +6,7 @@ participant "CreatePostItUI" as UI <<presentation>>
 participant "CreatePostItController" as CTRL <<application>>
 participant "ListBoardService" as LBSRV <<service>>
 participant "BoardService" as BSRV <<service>>
+participant "ImageEncoderService" as IESRV <<service>>
 participant "Board" as B <<domain>>
 participant "PostIt" as P <<domain>>
 participant "BoardDTO" as BDTO <<dto>>
@@ -18,16 +19,16 @@ activate M
 M -> UI : asks to create a post-it
 activate UI
 
-UI -> CTRL : new(boardRepository, postItRepository)
+UI -> CTRL : new(boardRepository, postItRepository, imageEncoderService)
 activate CTRL
 CTRL -> LBSRV : new(boardRepository)
 activate LBSRV
 deactivate LBSRV
 UI -> CTRL : listBoardsThatUserCanWrite()
 
-CTRL -> LBSRV : listActiveBoardsThatUserCanWrite(userId)
+CTRL -> LBSRV : userWritableBoards(userId)
 activate LBSRV
-LBSRV -> BREP : findActiveBoardsThatUserCanWrite(userId)
+LBSRV -> BREP : findAllActiveWithUserWritePermission(userId)
 activate BREP
 BREP --> LBSRV : boards
 deactivate BREP
@@ -63,35 +64,36 @@ CTRL -> BSRV : new(boardRepository, postItRepository)
 activate BSRV
 deactivate BSRV
 
-CTRL -> BSRV : existsPostIt(boardId, x, y)
+CTRL -> BSRV : isCellAvailable(boardId, x, y)
 activate BSRV
-BSRV -> PREP : findAllByBoardId(boardId)
+BSRV -> BSRV : checkCellExists(boardId, x, y)
+activate BSRV
+deactivate BSRV
+BSRV -> PREP : findLatestByBoardId(boardId)
 activate PREP
 PREP --> BSRV : postIts
 deactivate PREP
-BSRV -> BSRV : latestPostIts = \ngetLatestVersionOfBoard(postIts)
+BSRV -> BSRV : existsPostIt(postIts, x, y)
 activate BSRV
 deactivate BSRV
 
-BSRV -> BSRV : existsPostIt(latestPostIts, x, y)
-activate BSRV
-deactivate BSRV
-
-BSRV --> CTRL : false
+BSRV --> CTRL : true
 deactivate BSRV
 CTRL --> UI : true
 deactivate CTRL
 
-UI --> M :  asks to enter the title of the post-it
+UI --> M :  asks to enter the title, description and image of the post-it
 deactivate UI
 
-M --> UI : enters the title of the post-it
+M --> UI : enters the requested data
 activate UI
 
-UI -> CTRL : createPostIt(boardId, x, y, title)
+UI -> CTRL : createPostIt(boardId, x, y, title, description, imagePath)
 activate CTRL
 
-CTRL -> P : new(board, user, title, x, y)
+CTRL -> IESRV : encodeImage(imagePath)
+
+CTRL -> P : new(board, user, title, x, y, description, encodedImage)
 activate P
 deactivate P
 
@@ -99,7 +101,7 @@ CTRL -> P : containsOfIdentity()
 activate P
 deactivate P
 
-CTRL -> CTRL : savePostIt()
+CTRL -> CTRL : savePostIt(postIt)
 activate CTRL
 CTRL -> PREP : savePostIt()
 activate PREP
@@ -112,8 +114,6 @@ deactivate CTRL
 
 UI --> M : informs operation success
 deactivate UI
-
-
 
 
 deactivate M

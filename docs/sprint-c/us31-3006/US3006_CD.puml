@@ -14,7 +14,7 @@ class ListBoardService {
 
   + ListBoardService(boardRepository)
 
-  + listActiveBoardsThatUserCanWrite(userID)
+  + userWritableBoards(userId)
 }
 
 class BoardService {
@@ -22,7 +22,13 @@ class BoardService {
 
   + BoardService(postItRepository)
 
-  + existsPostIt(boardId, x, y)
+  + isCellAvailable(boardId, x, y)
+  + checkCellExists(boardId, x, y)
+  + existsPostIt(postIts, x, y)
+}
+
+class ImageEncoderService{
+  + encodeImage(imagePath)
 }
 
 class CreatePostItUI {}
@@ -34,8 +40,9 @@ class CreatePostItController {
   + CreatePostItController(boardRepository, postItRepository)
 
   + listBoardsThatUserCanWrite()
-  + validateCoordinates(boardID, x, y)
-  + createPostIt(boardId, x, y, title)
+  + validateCoordinates(boardId, x, y)
+  + createPostIt(boardId, x, y, title, description, imagePath)
+  + savePostIt(postIt)
 }
 
 class PostIt {
@@ -44,17 +51,10 @@ class PostIt {
   - user
   - board
   - state
-}
-
-class PostIt {
-  - title
-  - coordinates
-  - user
-  - board
-  - state
-
   - createdAt
   - isLatest
+  - image
+  - description
 
   + toDto()
 }
@@ -75,6 +75,7 @@ class BoardDTOParser {
 CreatePostItUI ..> CreatePostItController
 CreatePostItController --> ListBoardService
 CreatePostItController --> BoardService
+CreatePostItController --> ImageEncoderService
 
 ListBoardService ..> Board
 CreatePostItController --> PostItRepository
