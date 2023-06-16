@@ -102,6 +102,40 @@ public class PostIt implements AggregateRoot<PostItID> {
   }
 
   public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
+      final SystemUser owner, final boolean isLatest) {
+    Preconditions.noneNull(title, coordinates, board, owner);
+
+    this.id = PostItID.newID();
+    this.title = title;
+    this.coordinates = coordinates;
+    this.state = new PostItState();
+    this.board = board;
+    this.owner = owner;
+    this.createdAt = Calendar.getInstance();
+    this.previous = null;
+    this.isLatest = isLatest;
+    this.description = null;
+    this.image = null;
+  }
+
+  public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
+      final SystemUser owner, final boolean isLatest, final PostIt previous) {
+    Preconditions.noneNull(title, coordinates, board, owner, previous);
+
+    this.id = PostItID.newID();
+    this.title = title;
+    this.coordinates = coordinates;
+    this.state = new PostItState();
+    this.board = board;
+    this.owner = owner;
+    this.createdAt = Calendar.getInstance();
+    this.previous = previous;
+    this.isLatest = isLatest;
+    this.description = null;
+    this.image = null;
+  }
+
+  public PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
       final SystemUser owner, final PostItDescription description, final PostItImage image) {
     Preconditions.noneNull(title, coordinates, board, owner);
 
@@ -154,7 +188,8 @@ public class PostIt implements AggregateRoot<PostItID> {
 
   // This constructor is used to create a new PostIt from an existing one
   private PostIt(final PostItTitle title, final Coordinates coordinates, final Board board,
-      final SystemUser owner, final PostIt previous, final PostItDescription description, final PostItImage image) {
+      final SystemUser owner, final PostIt previous, final PostItDescription description,
+      final PostItImage image) {
     Preconditions.noneNull(title, coordinates, board, owner);
 
     this.id = PostItID.newID();
@@ -231,7 +266,7 @@ public class PostIt implements AggregateRoot<PostItID> {
   }
 
   public boolean isLatest() {
-    return this.isLatest();
+    return this.isLatest;
   }
 
   public PostItDescription description() {
@@ -270,7 +305,8 @@ public class PostIt implements AggregateRoot<PostItID> {
         && this.board.identity().equals(that.board.identity()) && this.title.equals(that.title)
         && this.coordinates.equals(that.coordinates) && this.identity().equals(that.identity())
         && this.state.equals(that.state) && this.createdAt.equals(that.createdAt)
-        && this.isLatest == that.isLatest && this.description.equals(that.description) && this.image.equals(that.image);
+        && this.isLatest == that.isLatest && this.description.equals(that.description)
+        && this.image.equals(that.image);
   }
 
   public void toggleIsLatest() {

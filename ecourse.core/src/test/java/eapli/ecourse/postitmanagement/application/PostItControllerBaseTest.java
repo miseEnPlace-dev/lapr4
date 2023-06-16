@@ -73,4 +73,19 @@ public class PostItControllerBaseTest {
     return new PostIt(PostItTitle.valueOf("title2"), Coordinates.valueOf(3, 4), getDummyBoard(),
         getNewDummyUser2());
   }
+
+  public PostIt getDummyPostItWithPrevious() {
+    return new PostIt(PostItTitle.valueOf("title4"), Coordinates.valueOf(5, 2), getDummyBoard(),
+        getNewDummyUser(), true, getDummyPostItNotLatest());
+  }
+
+  public PostIt getDummyPostItNotLatest() {
+    return new PostIt(PostItTitle.valueOf("title3"), Coordinates.valueOf(5, 4), getDummyBoard(),
+        getNewDummyUser(), false);
+  }
+
+  public PostIt getDummyPostItNotLatestWithPrevious() {
+    return new PostIt(PostItTitle.valueOf("title3"), Coordinates.valueOf(5, 4), getDummyBoard(),
+        getNewDummyUser(), false, getDummyPostIt());
+  }
 }
