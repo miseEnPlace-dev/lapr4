@@ -1,0 +1,84 @@
+@startuml US2009_CD
+
+class TakeFormativeExamUI {}
+
+class TakeFormativeExamController {
+- authorizationService
+- courseRepository
+- studentRepository
+- formativeExamRepository
+
++ TakeFormativeExamController(authorizationService, courseRepository, studentRepository, formativeExamRepository)
+
++ setCurrentAuthenticatedStudent()
++ listInProgressCoursesOfAuthenticatedStudent()
++ listFormativeExams(courseDTO)
++ parseExam(string, printer)
++ getFormativeExamSelected(formativeExamDTO)
+}
+
+class ANTLR4TakeExamParser {
+
+  + parseFromFile(string)
+  + parseFromFile(string, printer)
+  + parseFromString(string)
+  + parseFromString(string, printer)
+}
+
+class ListCourseService {
+- courseRepository
+
++ ListCourseService(courseRepository)
+
++ findCourseByCourseCode(courseCode)
+}
+
+class FormativeExamListService {
+- formativeExamRepository
+
++ EnrolmentService(formativeExamRepository)
+
++ findAllCourseExams(courseCode)
+}
+
+interface FormativeExamRepository {
+  + findByIdentifier(formativeExamDTO)
+}
+
+interface CourseRepository {
+  + ofIdentity(courseCode)
+}
+
+interface StudentRepository {
+  + findByUsername(username)
+}
+
+class RepositoryFactory {
+  + RepositoryFactory()
+}
+
+class PersistenceContext {
+  - repositories()
+}
+
+TakeFormativeExamUI ..> TakeFormativeExamController
+TakeFormativeExamUI ..> PersistenceContext
+PersistenceContext ..> RepositoryFactory
+
+RepositoryFactory --> CourseRepository
+RepositoryFactory --> FormativeExamRepository
+RepositoryFactory --> StudentRepository
+
+TakeFormativeExamController --> ANTLR4TakeExamParser
+TakeFormativeExamController --> ListCourseService
+TakeFormativeExamController --> FormativeExamListService
+TakeFormativeExamController --> FormativeExamRepository
+TakeFormativeExamController --> CourseRepository
+TakeFormativeExamController --> StudentRepository
+
+ListCourseService --> CourseRepository
+
+FormativeExamListService --> FormativeExamRepository
+
+
+@enduml

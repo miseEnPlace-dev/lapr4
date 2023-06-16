@@ -55,9 +55,13 @@ public class HttpClientHandler implements Runnable {
       output.close();
       input.close();
     } catch (IOException e) {
-      System.out.printf("[HTTP%s Client Handler Thread] Error: %s\n", this.secure ? "S" : "",
-          e.getMessage());
-      e.printStackTrace();
+      // ? Don't print the stack trace, just log the error
+      /*
+       * System.out.printf("[HTTP%s Client Handler Thread] Error: %s\n", this.secure ?
+       * "S" : "",
+       * e.getMessage());
+       * e.printStackTrace();
+       */
     }
   }
 
@@ -69,7 +73,7 @@ public class HttpClientHandler implements Runnable {
    */
   private static List<String> readHeaders(DataInputStream input) throws IOException {
     List<String> headers = new ArrayList<>();
-    String line;
+    String line = "";
 
     do {
       line = "";

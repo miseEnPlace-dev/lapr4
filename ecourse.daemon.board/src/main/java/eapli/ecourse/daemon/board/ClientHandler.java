@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -24,17 +25,17 @@ import eapli.ecourse.daemon.board.messages.EditPostItMessage;
 import eapli.ecourse.daemon.board.messages.ErrMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardHistoryMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardMessage;
-import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOnlineCountMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnPostItsBoardMessage;
+import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
+import eapli.ecourse.daemon.board.messages.IsCellAvailableMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
-import eapli.ecourse.daemon.board.messages.IsCellAvailableMessage;
 
 public class ClientHandler implements Runnable {
 
@@ -125,7 +126,8 @@ public class ClientHandler implements Runnable {
       output.close();
       input.close();
     } catch (IOException | ClassNotFoundException e) {
-      logger.error("\n[Client Handler Thread] Error", e);
+      // ? don't show stack trace to make the app usable
+      // logger.error("\n[Client Handler Thread] Error", e);
     }
 
     // safely decrement the online counter
