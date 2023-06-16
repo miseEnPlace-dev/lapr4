@@ -39,11 +39,10 @@ public class UndoPostItController {
     PostIt previous = postIt.previous();
 
     previous.toggleIsLatest();
-    postIt.delete();
 
     ctx.beginTransaction();
 
-    postItRepository.save(postIt);
+    postItRepository.delete(postIt);
     postItRepository.save(previous);
 
     ctx.commit();
