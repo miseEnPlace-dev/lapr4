@@ -26,11 +26,11 @@ class MainMenu extends StudentBaseUI {
   private static final int EXIT_OPTION = 0;
 
   // MAIN MENU
-  private static final int MY_USER_OPTION = 1;
-  private static final int COURSES_OPTION = 2;
+  private static final int CREATE_BOARD_OPTION = 1;
+  private static final int EXAMS_MENU_OPTION = 2;
   private static final int MEETINGS_MENU_OPTION = 3;
-  private static final int EXAMS_MENU_OPTION = 4;
-  private static final int CREATE_BOARD_OPTION = 5;
+  private static final int COURSES_OPTION = 4;
+  private static final int MY_USER_OPTION = 5;
   private static final int SETTINGS_OPTION = 6;
 
   // SETTINGS

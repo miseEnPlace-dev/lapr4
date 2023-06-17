@@ -24,10 +24,10 @@ public class MainMenu extends AbstractUI {
 
   private static final int CREATE_BOARD_OPTION = 1;
   private static final int EXAMS_OPTION = 2;
-  private static final int CLASSES_OPTION = 3;
-  private static final int COURSES_OPTION = 4;
-  private static final int MY_USER_OPTION = 5;
-  private static final int MEETINGS = 6;
+  private static final int MEETINGS = 3;
+  private static final int CLASSES_OPTION = 4;
+  private static final int COURSES_OPTION = 5;
+  private static final int MY_USER_OPTION = 6;
 
   private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
