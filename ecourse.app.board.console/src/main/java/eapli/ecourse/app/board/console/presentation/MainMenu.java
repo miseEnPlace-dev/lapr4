@@ -6,6 +6,7 @@ import eapli.ecourse.Application;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ArchiveBoardUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.DeletePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.LogoutUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.CommTestUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.CreatePostItUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.SessionInfoUI;
@@ -99,7 +100,7 @@ public class MainMenu extends AbstractUI {
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
     }
 
-    mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye!"));
+    mainMenu.addItem(EXIT_OPTION, "Logout", new LogoutUI()::show);
 
     return mainMenu;
   }

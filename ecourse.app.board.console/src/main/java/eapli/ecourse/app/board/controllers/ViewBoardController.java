@@ -32,13 +32,13 @@ public class ViewBoardController implements RouteController {
 
   @Override
   public void handle(Request req, Response res) {
-    String boardId = req.getParam("id");
-
     if (auth.getUser().isEmpty()) {
       JsonObjectBuilder response = Json.createObjectBuilder().add("message", "Unauthorized");
       res.status(401).json(response.build());
       return;
     }
+
+    String boardId = req.getParam("id");
 
     try {
       JsonObjectBuilder request = Json.createObjectBuilder().add("boardId", boardId);

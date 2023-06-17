@@ -21,6 +21,10 @@ public class CredentialStore {
     return Optional.ofNullable(this.user);
   }
 
+  public void clear() {
+    this.user = null;
+  }
+
   public final CredentialHandler AUTHENTICATE = (u, p, r) -> {
     BoardBackend boardBackend = BoardBackend.getInstance();
 
