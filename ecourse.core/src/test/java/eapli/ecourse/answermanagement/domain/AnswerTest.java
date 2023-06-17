@@ -9,6 +9,7 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import eapli.ecourse.answermanagement.dto.AnswerDTO;
 import eapli.ecourse.coursemanagement.domain.Course;
 import eapli.ecourse.coursemanagement.domain.CourseCode;
 import eapli.ecourse.coursemanagement.domain.CourseDescription;
@@ -109,5 +110,21 @@ public class AnswerTest {
   public void testSameAs() {
     Answer other = new Answer(id, student, exam, ExamScore.valueOf(.2));
     assertTrue(answer.sameAs(other));
+  }
+
+  @Test
+  public void testChangeScore() {
+    ExamScore newScore = ExamScore.valueOf(90d);
+    answer.changeScore(newScore);
+    assertEquals(newScore, answer.score());
+  }
+
+  @Test
+  public void testToDto() {
+    AnswerDTO dto = answer.toDto();
+    assertEquals(student.identity().toString(), dto.getStudentNumber());
+    assertEquals(student.user().name().toString(), dto.getStudentName());
+    assertEquals(exam.title().toString(), dto.getExamTitle());
+    assertEquals(answer.takenAt(), dto.getTakenAt());
   }
 }

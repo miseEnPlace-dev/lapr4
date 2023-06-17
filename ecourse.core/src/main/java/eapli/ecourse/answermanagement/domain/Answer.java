@@ -79,6 +79,10 @@ public class Answer implements AggregateRoot<AnswerId> {
     return score;
   }
 
+  public Calendar takenAt() {
+    return takenAt;
+  }
+
   public void changeScore(ExamScore score) {
     this.score = score;
   }
