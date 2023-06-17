@@ -40,12 +40,16 @@ public class ScheduleExtraClassUI extends AbstractUI {
       return false;
 
     Collection<StudentDTO> students = ctrl.listStudentsEnrolled(selected);
-    MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("Students:", students,
+    MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("\nStudents:", students,
         new StudentPrinter());
-    Iterable<StudentDTO> selected2 = selector2.selectElements();
 
-    if (selected2 == null)
+    if (!students.iterator().hasNext()) {
+      System.out.println("There are no students enrolled in this course.");
+      Console.readLine("Press Enter to continue...");
       return false;
+    }
+
+    Iterable<StudentDTO> selected2 = selector2.selectElements();
 
     Calendar time = Console.readCalendar("Enter the date and time of the class (dd-MM-yyyy HH:mm): ",
         "dd-MM-yyyy HH:mm");
