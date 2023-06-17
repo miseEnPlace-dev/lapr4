@@ -28,10 +28,8 @@ activate UI
 UI -> CTRL : new(enrolmentRepository, examAnswerRepository, studentRepository, formativeExamRepository, evaluationExamRepository, authorizationService)
 activate CTRL
 CTRL -> SRV : service=new(enrolmentRepository)
-deactivate CTRL
 
 UI -> CTRL : listStudentCourses()
-activate CTRL
 CTRL -> AUTH : loggedinUserWithPermissions()
 activate AUTH
 AUTH --> CTRL : authenticatedUser
@@ -57,16 +55,12 @@ end loop
 SRV --> CTRL : courses
 deactivate SRV
 CTRL --> UI : courses
-deactivate CTRL
 
 UI --> S : lists all of the courses the student is enrolled in
-deactivate UI
 
 S -> UI : selects the desired course
-activate UI
 UI -> UI : selectedCourse = select(courses, index)
 UI -> CTRL : listStudentGrades(selectedCourse)
-activate CTRL
 CTRL -> ESRV : listStudentGrades(selectedCourse)
 activate ESRV
 ESRV -> EXREP : findAllWithStudentMecanographicNumberAndCourseCode(student.identity(), selectedCourse.code())
