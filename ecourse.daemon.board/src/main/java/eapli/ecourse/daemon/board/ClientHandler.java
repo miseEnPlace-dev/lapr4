@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
+import eapli.ecourse.common.board.SafeBoardUpdatesShared;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -80,6 +81,7 @@ public class ClientHandler implements Runnable {
   private Socket client;
   private SafeOnlineCounter onlineCounter;
   private SafeBoardUpdatesCounter boardUpdatesCounter;
+  private SafeBoardUpdatesShared boardUpdatesShared = new SafeBoardUpdatesShared();
 
   public ClientHandler(Socket socket, SafeOnlineCounter onlineCounter,
       SafeBoardUpdatesCounter boardUpdatesCounter) {
@@ -128,6 +130,10 @@ public class ClientHandler implements Runnable {
           (new BadRequestMessage(output, client)).handle();
         }
       }
+
+      boardUpdatesShared.printTotalStats(boardUpdatesCounter.getUpdates(), boardUpdatesCounter.getNumberPostIts(),
+          boardUpdatesCounter.getNumberUpdatesPostIts(), boardUpdatesCounter.getNumberDeletesPostIts(),
+          boardUpdatesCounter.getNumberArchivedBoards());
 
       logger.debug("Connection closed.");
 
