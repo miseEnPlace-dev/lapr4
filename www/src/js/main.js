@@ -134,8 +134,12 @@ function getAuthenticatedUser() {
     /** @type {{username: string, name: string, email: string, roles: string[]}} */
     const data = JSON.parse(authRequest.responseText);
 
-    username.innerHTML = `Welcome, ${data.username}!`;
-    authenticated = data;
+    if (authRequest.status === 401) {
+      username.innerHTML = "Unauthenticated";
+     } else {
+      username.innerHTML = `Welcome, ${data.username}!`;
+      authenticated = data;
+    }
   };
 
   authRequest.ontimeout = () => {
