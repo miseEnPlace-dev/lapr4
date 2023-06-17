@@ -131,8 +131,9 @@ public class ClientHandler implements Runnable {
         }
       }
 
-      boardUpdatesShared.printTotalStats(boardUpdatesCounter.getUpdates(), boardUpdatesCounter.getNumberPostIts(),
-          boardUpdatesCounter.getNumberUpdatesPostIts(), boardUpdatesCounter.getNumberDeletesPostIts(),
+      boardUpdatesShared.printTotalStats(boardUpdatesCounter.getUpdates(),
+          boardUpdatesCounter.getNumberPostIts(), boardUpdatesCounter.getNumberUpdatesPostIts(),
+          boardUpdatesCounter.getNumberDeletesPostIts(),
           boardUpdatesCounter.getNumberArchivedBoards());
 
       logger.debug("Connection closed.");

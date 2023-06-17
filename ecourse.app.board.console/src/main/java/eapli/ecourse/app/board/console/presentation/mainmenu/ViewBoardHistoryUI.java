@@ -55,7 +55,7 @@ public class ViewBoardHistoryUI extends AbstractUI {
 
     } catch (ClassNotFoundException | IOException | UnsupportedVersionException
         | UnsuccessfulRequestException e) {
-      logger.error("Error trying to view a board", e);
+      logger.error("Error trying to view the board history", e);
     }
 
     return false;

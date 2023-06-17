@@ -93,7 +93,7 @@ public class ChangePostItController {
     if (description != null)
       json.add("description", description);
 
-    if (imagePath != null) {
+    if (imagePath != null && !imagePath.isEmpty()) {
       ImageEncoderService encoder = new ImageEncoderService();
 
       try {

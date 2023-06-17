@@ -70,7 +70,7 @@ public class CreatePostItUI extends AbstractUI {
       System.out.println("\nPost-it created successfully.");
     } catch (ClassNotFoundException | IOException | UnsupportedVersionException
         | UnsuccessfulRequestException e) {
-      logger.error("Error trying to view a board", e);
+      logger.error("Error trying to create a post-it", e);
     }
 
     Console.readLine("\nPress Enter to continue...");
