@@ -36,7 +36,6 @@ public class ShareBoardUI extends AbstractUI {
       BoardDTO selected;
 
       do {
-
         System.out.println("Boards you own:\n");
 
         BoardPrinter printer = new BoardPrinter();

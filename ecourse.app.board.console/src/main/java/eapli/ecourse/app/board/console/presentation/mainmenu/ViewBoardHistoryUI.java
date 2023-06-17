@@ -32,6 +32,8 @@ public class ViewBoardHistoryUI extends AbstractUI {
         return false;
       }
 
+      System.out.println("Boards you can access:\n");
+
       BoardPrinter printer = new BoardPrinter();
       printer.printHeader();
 

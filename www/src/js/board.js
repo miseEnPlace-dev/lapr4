@@ -3,6 +3,7 @@ const ERROR_TIMEOUT = 1000;
 const REFRESH_TIMEOUT = 1000;
 const REFRESH_ONLINE_TIMEOUT = 3000;
 const MAX_TIMEOUT = 10000;
+const NO_CHANGE_TIMEOUT = 500;
 
 const id = window.location.search.split("=")[1];
 const error = document.querySelector("#error");
@@ -13,6 +14,9 @@ const userFilter = document.querySelector("#user-filter");
 let authenticatedUser;
 let t;
 let userImages;
+let postIts = new Map();
+let hash;
+let cols, r, p;
 
 const N_OF_USER_IMAGES = 7;
 
@@ -39,7 +43,106 @@ function getData() {
   getOnlineUsers();
 }
 
-let postIts = new Map();
+function refreshPostIts(p, columns, rows) {
+  boardTable.innerHTML = "";
+
+  const postItsMap = new Map();
+  postIts = postItsMap;
+  userImages = assignUserImage(p);
+
+  for (const postIt of p)
+    postItsMap.set(
+      `${postIt.coordinates.x - 1}-${postIt.coordinates.y - 1}`,
+      postIt
+    );
+
+  const tr = document.createElement("tr");
+  const firstTh = document.createElement("th");
+  firstTh.innerHTML = "";
+  firstTh.className =
+    "text-center py-6 text-2xl font-bold w-72 h-52 border-b-2 border-r-2";
+  tr.appendChild(firstTh);
+
+  for (let i = 0; i < columns.length; i++) {
+    const col = columns[i];
+    const th = document.createElement("th");
+    th.innerHTML = col.title;
+
+    th.className = "text-center py-6 text-2xl h-52 w-72 font-bold border-b-2";
+    if (i !== columns.length - 1) th.className += " border-r-2";
+
+    tr.appendChild(th);
+  }
+
+  boardTable.appendChild(tr);
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+
+    th.innerHTML = row.title;
+    th.className = "text-center py-6 text-2xl font-bold h-52 w-72";
+    if (i !== rows.length - 1) th.className += " border-b-2";
+
+    tr.appendChild(th);
+
+    for (let j = 0; j < columns.length; j++) {
+      const td = document.createElement("td");
+      td.className = "text-center py-6 text-2xl font-bold";
+
+      if (j === columns.length - 1 && i === rows.length - 1) continue;
+      else if (j === columns.length - 1) td.className += " border-b-2";
+      else if (i === rows.length - 1) td.className += " border-x-2";
+      else td.className += " border-b-2 border-x-2";
+
+      if (postItsMap.has(`${j}-${i}`)) {
+        /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null }} */
+        const postIt = postItsMap.get(`${j}-${i}`);
+
+        if (
+          (userFilter.checked &&
+            postIt.owner.username === authenticatedUser.username) ||
+          !userFilter.checked
+        ) {
+          const hasContent = postIt.description || postIt.image;
+
+          td.innerHTML = `
+            <button
+              id=${postIt.id}
+              ${hasContent ? `onClick="openModal(${j},${i})"` : ""}
+              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-gray-200 ${
+                hasContent
+                  ? "hover:brightness-90 transition-all duration-150 cursor-pointer"
+                  : "hover:brightness-100 cursor-default"
+              }">
+              <h3 class="text-xl font-bold text-center">${postIt.title}</h3>
+              <div class="flex items-center justify-between w-full">
+                ${
+                  hasContent
+                    ? "<div class='text-xl brightness-75 dark:brightness-100'>🗒️</div>"
+                    : ""
+                }
+                  <div class="flex gap-x-2 items-center w-full justify-end">
+                  <h3 class="text-lg font-thin">${postIt.owner.name}</h3>
+                  <img src=${userImages.get(
+                    postIt.owner.username
+                  )} alt="User Avatar" class="h-8 w-8 bg-gray-400 rounded-full" />
+                    </div>
+                    </div>
+                    </button>
+                    `;
+        } else td.innerHTML = "";
+      }
+
+      tr.className = "h-52 w-72";
+      tr.appendChild(td);
+    }
+
+    boardTable.appendChild(tr);
+  }
+}
 
 function closeModal() {
   const body = document.querySelector("body");
@@ -140,11 +243,20 @@ function updateBoard() {
 
   request.onload = () => {
     clearError();
+    if (request.status === 304) {
+      setTimeout(updateBoard, NO_CHANGE_TIMEOUT);
+      return; // Not modified
+    }
+
     /** @type {{archived: string | null, title: string, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}, postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null}[] }}[]} */
     const data = JSON.parse(request.responseText);
     boardName.innerHTML = `${data.title} <span class="text-sm text-gray-500 dark:text-gray-400">by ${data.owner.name}</span>`;
 
-    const { postIts: p, columns, rows, archived } = data;
+    const { postIts: po, columns, rows, archived, hash: h } = data;
+    hash = h;
+    p = po;
+    cols = columns;
+    r = rows;
 
     if (archived) {
       const archivedContainer = document.getElementById("archived")
@@ -157,104 +269,7 @@ function updateBoard() {
       document.querySelector("body").appendChild(archivedContainer);
     }
 
-    boardTable.innerHTML = "";
-
-    const postItsMap = new Map();
-    postIts = postItsMap;
-    userImages = assignUserImage(p);
-
-    for (const postIt of p)
-      postItsMap.set(
-        `${postIt.coordinates.x - 1}-${postIt.coordinates.y - 1}`,
-        postIt
-      );
-
-    const tr = document.createElement("tr");
-    const firstTh = document.createElement("th");
-    firstTh.innerHTML = "";
-    firstTh.className =
-      "text-center py-6 text-2xl font-bold w-72 h-52 border-b-2 border-r-2";
-    tr.appendChild(firstTh);
-
-    for (let i = 0; i < columns.length; i++) {
-      const col = columns[i];
-      const th = document.createElement("th");
-      th.innerHTML = col.title;
-
-      th.className = "text-center py-6 text-2xl h-52 w-72 font-bold border-b-2";
-      if (i !== columns.length - 1) th.className += " border-r-2";
-
-      tr.appendChild(th);
-    }
-
-    boardTable.appendChild(tr);
-
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i];
-
-      const tr = document.createElement("tr");
-      const th = document.createElement("th");
-
-      th.innerHTML = row.title;
-      th.className = "text-center py-6 text-2xl font-bold h-52 w-72";
-      if (i !== rows.length - 1) th.className += " border-b-2";
-
-      tr.appendChild(th);
-
-      for (let j = 0; j < columns.length; j++) {
-        const td = document.createElement("td");
-        td.className = "text-center py-6 text-2xl font-bold";
-
-        if (j === columns.length - 1 && i === rows.length - 1) continue;
-        else if (j === columns.length - 1) td.className += " border-b-2";
-        else if (i === rows.length - 1) td.className += " border-x-2";
-        else td.className += " border-b-2 border-x-2";
-
-        if (postItsMap.has(`${j}-${i}`)) {
-          /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null }} */
-          const postIt = postItsMap.get(`${j}-${i}`);
-          if (
-            (userFilter.checked &&
-              postIt.owner.username === authenticatedUser.username) ||
-            !userFilter.checked
-          ) {
-            const hasContent = postIt.description || postIt.image;
-
-            td.innerHTML = `
-            <button
-              id=${postIt.id}
-              ${hasContent ? `onClick="openModal(${j},${i})"` : ""}
-              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-gray-200 ${
-                hasContent
-                  ? "hover:brightness-90 transition-all duration-150 cursor-pointer"
-                  : "hover:brightness-100 cursor-default"
-              }">
-              <h3 class="text-xl font-bold text-center">${postIt.title}</h3>
-              <div class="flex items-center justify-between w-full">
-                ${
-                  hasContent
-                    ? "<div class='text-xl brightness-75 dark:brightness-100'>🗒️</div>"
-                    : ""
-                }
-                  <div class="flex gap-x-2 items-center w-full justify-end">
-                  <h3 class="text-lg font-thin">${postIt.owner.name}</h3>
-                  <img src=${userImages.get(
-                    postIt.owner.username
-                  )} alt="User Avatar" class="h-8 w-8 bg-gray-400 rounded-full" />
-                    </div>
-                    </div>
-                    </button>
-                    `;
-          } else td.innerHTML = "";
-        }
-
-        tr.className = "h-52 w-72";
-        tr.appendChild(td);
-      }
-
-      boardTable.appendChild(tr);
-    }
-
+    refreshPostIts(p, columns, rows);
     t = setTimeout(updateBoard, REFRESH_TIMEOUT);
   };
 
@@ -267,7 +282,7 @@ function updateBoard() {
     t = setTimeout(updateBoard, RETRY_TIMEOUT);
   };
 
-  request.open("GET", `/api/board/${id}`, true);
+  request.open("GET", `/api/board/${id}${hash ? `?hash=${hash}` : ""}`, true);
   request.timeout = MAX_TIMEOUT;
   request.send(null);
 }
@@ -348,3 +363,7 @@ function getOnlineUsers() {
   onlineUsersRequest.timeout = MAX_TIMEOUT;
   onlineUsersRequest.send(null);
 }
+
+userFilter.addEventListener("input", () => {
+  refreshPostIts(p, cols, r);
+});
