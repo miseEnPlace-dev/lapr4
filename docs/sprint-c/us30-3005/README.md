@@ -69,56 +69,28 @@
 
 ## 4. Design
 
-### 4.1. Sequence Diagram
-
-![US3005_SD](out/US3005_SD.svg)
-
-### 4.2. Class Diagram
+### 4.1. Class Diagram
 
 ![US3005_CD](out/US3005_CD.svg)
 
-### 4.3. Applied Patterns
-
-- XXX
-
-### 4.4. Tests
-
-_Note: This are some simplified versions of the tests for readability purposes._
-
-**Test 1:** XXX
-
-```java
-
-```
-
-## 5. Implementation
-
-### 5.1. Controller
-
-- Relevant implementation details
-
-```java
-
-```
-
 ---
 
-## 6. Integration & Demonstration
+## 5. Integration & Demonstration
 
-### 6.1. Select Board
+### 5.1. Select Board
 
 ![US3005_DEMO-1](US3005_DEMO-1.png)
 
-### 6.2. View Board
+### 5.2. View Board
 
 ![US3005_DEMO-2](US3005_DEMO-2.png)
 ![US3005_DEMO-3](US3005_DEMO-3.png)
 
-### 6.3. View Post It
+### 5.3. View Post It
 
 ![US3005_DEMO-4](US3005_DEMO-4.png)
 ![US3005_DEMO-5](US3005_DEMO-5.png)
 
-## 7. Observations
+## 6. Observations
 
 - Tailwind CSS will be used to style the application.
