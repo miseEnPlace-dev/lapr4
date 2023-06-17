@@ -48,6 +48,7 @@ public class PostIt implements AggregateRoot<PostItID> {
   @Column(nullable = false)
   private boolean isLatest;
 
+  @Lob
   @Column(nullable = true)
   private PostItDescription description;
 

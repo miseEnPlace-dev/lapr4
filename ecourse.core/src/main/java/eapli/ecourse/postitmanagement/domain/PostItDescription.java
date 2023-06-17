@@ -1,6 +1,7 @@
 package eapli.ecourse.postitmanagement.domain;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Lob;
 
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.strings.util.StringPredicates;
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
 public class PostItDescription implements ValueObject {
   private static final long serialVersionUID = 1L;
 
+  @Lob
   private String description;
 
   private PostItDescription(final String courseDescription) {
