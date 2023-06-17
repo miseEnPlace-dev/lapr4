@@ -302,6 +302,10 @@ function getAuthenticatedUser() {
   const username = document.querySelector("#user");
 
   authRequest.onload = () => {
+    if (authRequest.status === 401) {
+      username.innerHTML = `Unauthenticated`;
+      return;
+    }
     /** @type {{username: string, name: string, email: string, roles: string[]}} */
     const data = JSON.parse(authRequest.responseText);
 

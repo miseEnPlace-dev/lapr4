@@ -74,6 +74,18 @@ function getUserBoards() {
   request.onload = () => {
     clearError();
 
+    if (request.status === 401) {
+      boardSelector.innerHTML = `<option selected="selected" value disabled
+      class="dark:bg-slate-600 bg-slate-200">Please login!</option>`;
+      boardSelector.disabled = true;
+
+      t = setTimeout(getUserBoards, REFRESH_TIMEOUT);
+      return;
+    }
+    boardSelector.innerHTML =
+      '<option selected="selected" value disabled class="dark:bg-slate-600 bg-slate-200">-- Select a board --</option>';
+    boardSelector.disabled = false;
+
     /** @type {{archived: string | null, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
     const data = JSON.parse(request.responseText);
 
@@ -131,15 +143,15 @@ function getAuthenticatedUser() {
   authRequest.onload = () => {
     clearError();
 
-    /** @type {{username: string, name: string, email: string, roles: string[]}} */
-    const data = JSON.parse(authRequest.responseText);
-
     if (authRequest.status === 401) {
       username.innerHTML = "Unauthenticated";
-     } else {
+    } else {
+      /** @type {{username: string, name: string, email: string, roles: string[]}} */
+      const data = JSON.parse(authRequest.responseText);
       username.innerHTML = `Welcome, ${data.username}!`;
       authenticated = data;
     }
+    t = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
   };
 
   authRequest.ontimeout = () => {
@@ -151,6 +163,7 @@ function getAuthenticatedUser() {
     t = setTimeout(getAuthenticatedUser, RETRY_TIMEOUT);
   };
 
+  t = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
   authRequest.open("GET", "/api/session", true);
   authRequest.timeout = MAX_TIMEOUT;
   authRequest.send(null);
