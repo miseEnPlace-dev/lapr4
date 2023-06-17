@@ -73,7 +73,7 @@ public class UndoPostItMessage extends Message {
 
     ctrl.undoPostIt(postItId);
 
-    this.boardUpdatesCounter.increment();
+    this.boardUpdatesCounter.incrementNumberUpdatesPostIts();
 
     send(new ProtocolMessage(MessageCode.UNDO_POSTIT));
   }
