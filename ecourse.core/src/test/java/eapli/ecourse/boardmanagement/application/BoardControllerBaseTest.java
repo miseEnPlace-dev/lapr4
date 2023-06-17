@@ -9,7 +9,6 @@ import eapli.ecourse.boardmanagement.domain.BoardColumn;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.BoardRow;
 import eapli.ecourse.boardmanagement.domain.BoardTitle;
-import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.boardmanagement.domain.UserPermission;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
