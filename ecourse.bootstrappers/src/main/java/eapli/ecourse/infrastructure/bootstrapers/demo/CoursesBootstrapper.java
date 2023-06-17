@@ -73,6 +73,7 @@ public class CoursesBootstrapper extends UsersBootstrapperBase implements Action
     toggleCourseEnrolmentStateController.toggleEnrolmentState(eapli);
     toggleCourseEnrolmentStateController.toggleEnrolmentState(lprog);
     toggleCourseEnrolmentStateController.toggleEnrolmentState(bddad);
+    toggleCourseEnrolmentStateController.toggleEnrolmentState(scomp);
     return true;
   }
 
