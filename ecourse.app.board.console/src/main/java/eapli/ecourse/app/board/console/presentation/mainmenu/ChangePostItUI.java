@@ -114,7 +114,7 @@ public class ChangePostItUI extends AbstractUI {
 
     } catch (ClassNotFoundException | IOException | UnsupportedVersionException
         | UnsuccessfulRequestException e) {
-      logger.error("Error trying to view a board", e);
+      logger.error("Error trying to edit a post-it", e);
     }
 
     Console.readLine("\nPress Enter to continue...");

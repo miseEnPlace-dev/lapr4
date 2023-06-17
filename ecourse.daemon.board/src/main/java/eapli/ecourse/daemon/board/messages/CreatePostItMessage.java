@@ -87,13 +87,25 @@ public class CreatePostItMessage extends Message {
       return;
     }
 
-    String title = payload.asJsonObject().getString("title");
-    String description = payload.asJsonObject().getString("description");
-    String image = payload.asJsonObject().getString("image");
-    Integer x = payload.asJsonObject().getInt("x");
-    Integer y = payload.asJsonObject().getInt("y");
+    String title;
+    String description;
+    String image;
+    Integer x;
+    Integer y;
 
-    if (title == null || x == null || y == null || description == null || image == null) {
+    try {
+      title = payload.asJsonObject().getString("title");
+      description = payload.asJsonObject().getString("description");
+      image = payload.asJsonObject().getString("image");
+      x = payload.asJsonObject().getInt("x");
+      y = payload.asJsonObject().getInt("y");
+
+      if (title == null || x == null || y == null || description == null || image == null) {
+        send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+        return;
+      }
+
+    } catch (NullPointerException e) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }
