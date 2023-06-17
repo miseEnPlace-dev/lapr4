@@ -21,6 +21,7 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
+import eapli.framework.strings.util.StringPredicates;
 
 /**
  * Get the user permissions to a specific board.
@@ -58,13 +59,15 @@ public class GetUserPermissionsMessage extends Message {
     String boardIdStr = json.asJsonObject().getString("boardId");
     String usernameStr = json.asJsonObject().getString("username");
 
-    if (boardIdStr == null || usernameStr == null) {
+    if (boardIdStr == null || usernameStr == null || usernameStr.length() == 0
+        || !StringPredicates.isSingleWord(usernameStr)) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }
 
     BoardID boardId = BoardID.valueOf(boardIdStr);
-    Username authUsername = Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
+    Username authUsername =
+        Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
 
     // verify if the board with the given id exists
     if (!ctrl.boardExists(boardId)) {

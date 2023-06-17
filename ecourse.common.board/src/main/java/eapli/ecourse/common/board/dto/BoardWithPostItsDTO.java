@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonStructure;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.common.board.mapper.BoardMapper;
