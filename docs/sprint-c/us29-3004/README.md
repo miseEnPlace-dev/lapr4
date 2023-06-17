@@ -45,7 +45,7 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 3. Analysis
 
-Multiple clients will try to concurrently update boards, as such, the solution design and implementation must be based on threads, condition variables and mutexes. The client will establish a TCP connection to the server and the communication protocol [described here](../../sprint-b/us24-3001/README.md) will be used.
+Multiple clients will try to concurrently update boards, as such, the solution design and implementation must be based on threads, condition variables and mutexes. The client will establish a TCP connection to the server and the communication protocol [described here](../../rcomp-shared-board.md) will be used.
 
 ![US3004_DesiredSystem](out/US3004_DesiredSystem.svg)
 
@@ -97,7 +97,9 @@ The system notifies the user that the recipient user already has permissions to 
 
 ### 4.4. Tests
 
-_Note: This are some simplified versions of the tests for readability purposes._
+> ️️💡 These tests are simplified versions for readability purposes.
+>
+> [Click here](/ecourse.core/src/test/java/eapli/ecourse/postitmanagement/application/UndoPostItControllerTest.java) to see the full code.
 
 **Test 1:** Test if board exists.
 
@@ -125,6 +127,76 @@ public void testIsBoardParticipant() { ... }
 ```java
 @Test
 public void testIsNotBoardParticipant() { ... }
+```
+
+**Test 5:** Test if user is the board owner.
+
+```java
+@Test
+public void testIsBoardOwner() { ... }
+```
+
+**Test 6:** Test if user is not board owner.
+
+```java
+@Test
+public void testIsNotBoardOwner() { ... }
+```
+
+**Test 7:** Test if board is archived.
+
+```java
+@Test
+public void testIsBoardArchived() { ... }
+```
+
+**Test 8:** Test if board is not archived.
+
+```java
+@Test
+public void () { ... }
+```
+
+**Test 9:** Test if user has permission.
+
+```java
+@Test
+public void testUserHasPermission() { ... }
+```
+
+**Test 10:** Test if user does not have permission.
+
+```java
+@Test
+public void testUserDoesNotHavePermission() { ... }
+```
+
+**Test 11:** Test adding a permission to a board.
+
+```java
+@Test
+public void testAddPermission() { ... }
+```
+
+**Test 12:** Test updating a permission.
+
+```java
+@Test
+public void testUpdatePermission() { ... }
+```
+
+**Test 13:** Test removing a permission.
+
+```java
+@Test
+public void testRemovePermission() { ... }
+```
+
+**Test 14:** Test if passing an unknown entity (not saved in the repository) throws an error in methods.
+
+```java
+@Test
+public void testPassingUnknownEntitiesThrowsError() { ... }
 ```
 
 ## 5. Implementation

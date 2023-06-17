@@ -45,7 +45,7 @@ This is the first time the task is assigned to be developed and is to be complet
 
 ## 3. Analysis
 
-Multiple clients will try to concurrently update boards, as such, the solution design and implementation must be based on threads, condition variables and mutexes. The client will establish a TCP connection to the server and the communication protocol [described here](../../sprint-b/us24-3001/README.md) will be used.
+Multiple clients will try to concurrently update boards, as such, the solution design and implementation must be based on threads, condition variables and mutexes. The client will establish a TCP connection to the server and the communication protocol [described here](../../rcomp-shared-board.md) will be used.
 
 ![US3008_DesiredSystem](out/US3008_DesiredSystem.svg)
 
@@ -93,7 +93,7 @@ A user will be unable to undo the last change in a post-it if the post-it does n
 
 > ️️💡 These tests are simplified versions for readability purposes.
 >
-> [Click here](/ecourse.core/src/test/java/eapli/ecourse/postitmanagement/application/UndoPostItControllerTest.java) to see the full code.
+> [Click here](/ecourse.core/src/test/java/eapli/ecourse/boardmanagement/application/ShareBoardControllerTest.java) to see the full code.
 
 **Test 1:** Test if a Post-It exists.
 
