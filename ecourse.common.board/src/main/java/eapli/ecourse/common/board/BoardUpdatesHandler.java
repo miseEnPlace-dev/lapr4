@@ -11,5 +11,4 @@ public class BoardUpdatesHandler implements Runnable {
   public void run() {
     shared.read();
   }
-
 }
