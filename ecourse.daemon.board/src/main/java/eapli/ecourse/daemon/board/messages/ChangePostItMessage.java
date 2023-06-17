@@ -20,25 +20,29 @@ import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.usermanagement.dto.UserDTO;
+import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class ChangePostItMessage extends Message {
   private CredentialStore credentialStore;
 
+  private TransactionalContext ctx;
   private ChangePostItController ctrl;
 
   private BoardRepository boardRepository;
   private PostItRepository postItRepository;
 
-  public ChangePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
+  public ChangePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket, SafeOnlineCounter onlineCounter) {
     super(protocolMessage, output, socket, onlineCounter);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
 
+    this.ctx = PersistenceContext.repositories().newTransactionalContext();
+
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl = new ChangePostItController(boardRepository, postItRepository);
+    this.ctrl = new ChangePostItController(ctx, boardRepository, postItRepository);
   }
 
   @Override
@@ -74,8 +78,10 @@ public class ChangePostItMessage extends Message {
     }
 
     String title = payload.keySet().contains("title") ? payload.getString("title") : null;
-    String description = payload.keySet().contains("description") ? payload.getString("description") : null;
-    String imagePath = payload.keySet().contains("imagePath") ? payload.getString("imagePath") : null;
+    String description =
+        payload.keySet().contains("description") ? payload.getString("description") : null;
+    String imagePath =
+        payload.keySet().contains("imagePath") ? payload.getString("imagePath") : null;
     Integer x = payload.keySet().contains("x") ? payload.getInt("x") : null;
     Integer y = payload.keySet().contains("y") ? payload.getInt("y") : null;
 
@@ -86,6 +92,12 @@ public class ChangePostItMessage extends Message {
 
     if (!username.equals(p.get().owner().identity())) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
+      return;
+    }
+
+    // ? we should also check if the board is archived
+    if (ctrl.isPostItBoardArchived(p.get().identity())) {
+      send(new ProtocolMessage(MessageCode.ERR, "Board is archived"));
       return;
     }
 
