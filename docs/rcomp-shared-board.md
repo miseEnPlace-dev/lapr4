@@ -93,6 +93,8 @@ The available endpoints are described in the following table:
 
 The "real-time" view of the board is done by pooling the server for updates.
 
+### Not Modified Responses
+
 To prevent sending big payloads every time a request is done, the browser will first fetch the board data.
 This response comes with a hash of the board and its post-its which, in a very basic way, provide a "version number" of the payload.
 
@@ -116,6 +118,8 @@ This way, the browser will only receive the payload when the board or its post-i
 ```
 
 > Example of a board payload.
+
+> [Click here](/ecourse.daemon.board/src/main/java/eapli/ecourse/daemon/board/messages/GetBoardMessage.java) to see the full code
 
 ## SSL
 
