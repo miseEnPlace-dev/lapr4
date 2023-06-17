@@ -40,9 +40,8 @@ public class ChangePostItUI extends AbstractUI {
         System.out.println("Boards you can edit:\n");
 
         BoardPrinter printer = new BoardPrinter();
-        printer.printHeader();
 
-        SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+        SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
         selector.show();
 
         selectedBoard = selector.selectedElement();
@@ -61,9 +60,8 @@ public class ChangePostItUI extends AbstractUI {
         }
 
         PostItPrinter postItPrinter = new PostItPrinter();
-        postItPrinter.printHeader();
 
-        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
+        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>(postItPrinter.header(), postIts, postItPrinter);
         postItSelector.show();
 
         selectedPostIt = postItSelector.selectedElement();

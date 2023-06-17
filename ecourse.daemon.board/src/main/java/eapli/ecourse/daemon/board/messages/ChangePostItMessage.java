@@ -93,12 +93,10 @@ public class ChangePostItMessage extends Message {
     String encodedImage = payload.asJsonObject().keySet().contains("image")
         ? payload.asJsonObject().getString("image")
         : null;
-    Integer x =
-        payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
-    Integer y =
-        payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
+    Integer x = payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
+    Integer y = payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
 
-    if (title == null && x == null && y == null && description == null && encodedImage == null) {
+    if (title == null && x == null && y == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }

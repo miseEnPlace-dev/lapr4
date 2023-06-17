@@ -51,6 +51,11 @@ public class CreatePostItController {
     return boardService.isCellAvailable(boardID, x, y);
   }
 
+  public boolean isBoardArchived(BoardID boardID) {
+    Board board = boardRepository.ofIdentity(boardID).orElseThrow();
+    return board.isArchived();
+  }
+
   public PostIt createPostIt(BoardID boardID, int x, int y, String title, String description,
       String encodedImage, SystemUser user) throws IOException {
 
@@ -59,8 +64,7 @@ public class CreatePostItController {
 
     Board board = boardRepository.ofIdentity(boardID).orElseThrow();
 
-    PostItBuilder builder =
-        new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
+    PostItBuilder builder = new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
 
     if (description != null)
       builder.withDescription(description);
@@ -83,8 +87,7 @@ public class CreatePostItController {
 
     Board board = boardRepository.ofIdentity(boardID).orElseThrow();
 
-    PostItBuilder builder =
-        new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
+    PostItBuilder builder = new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
 
     if (description != null) {
       builder.withDescription(description);

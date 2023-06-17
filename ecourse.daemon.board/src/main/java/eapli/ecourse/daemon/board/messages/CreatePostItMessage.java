@@ -44,8 +44,7 @@ public class CreatePostItMessage extends Message {
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl =
-        new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
+    this.ctrl = new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
     this.userService = AuthzRegistry.userService();
   }
 
@@ -88,19 +87,17 @@ public class CreatePostItMessage extends Message {
     }
 
     String title;
-    String description;
-    String image;
+    String description = null;
+    String image = null;
     Integer x;
     Integer y;
 
     try {
       title = payload.asJsonObject().getString("title");
-      description = payload.asJsonObject().getString("description");
-      image = payload.asJsonObject().getString("image");
       x = payload.asJsonObject().getInt("x");
       y = payload.asJsonObject().getInt("y");
 
-      if (title == null || x == null || y == null || description == null || image == null) {
+      if (title == null || x == null || y == null) {
         send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
         return;
       }
@@ -110,13 +107,25 @@ public class CreatePostItMessage extends Message {
       return;
     }
 
-    if (description.isEmpty())
+    if (payload.asJsonObject().containsKey("description"))
+      description = payload.asJsonObject().getString("description");
+
+    if (payload.asJsonObject().containsKey("image"))
+      image = payload.asJsonObject().getString("image");
+
+    if (description != null && description.isEmpty())
       description = null;
 
-    if (image.isEmpty())
+    if (image != null && image.isEmpty())
       image = null;
 
     SystemUser owner = userService.userOfIdentity(username).orElseThrow();
+
+    // ? we should also check if the board is archived
+    if (ctrl.isBoardArchived(b.get().identity())) {
+      send(new ProtocolMessage(MessageCode.ERR, "Board is archived"));
+      return;
+    }
 
     PostIt postIt = ctrl.createPostIt(board.identity(), x, y, title, description, image, owner);
 
