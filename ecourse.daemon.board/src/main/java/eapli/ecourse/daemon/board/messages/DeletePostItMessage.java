@@ -87,13 +87,9 @@ public class DeletePostItMessage extends Message {
       return;
     }
 
-<<<<<<< HEAD
     this.boardUpdatesCounter.increment();
 
-    send(new ProtocolMessage(MessageCode.CHANGE_POSTIT));
-
-=======
     send(new ProtocolMessage(MessageCode.DELETE_POSTIT));
->>>>>>> 22ee22b2c07e5c7031699c3c5de34311194c8aab
+
   }
 }
