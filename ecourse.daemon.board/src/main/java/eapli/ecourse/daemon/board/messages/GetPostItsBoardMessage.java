@@ -41,8 +41,7 @@ public class GetPostItsBoardMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    Optional<Board> b =
-        boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
+    Optional<Board> b = boardRepo.ofIdentity(BoardID.valueOf(request.getStringifiedPayload()));
 
     if (b.isEmpty()) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));

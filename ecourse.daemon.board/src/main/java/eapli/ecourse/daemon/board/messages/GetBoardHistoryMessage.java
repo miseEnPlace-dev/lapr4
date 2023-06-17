@@ -44,7 +44,7 @@ public class GetBoardHistoryMessage extends Message {
     if (!credentialStore.isAuthenticated())
       return;
 
-    String boardId = protocolMessage.getStringifiedPayload();
+    String boardId = request.getStringifiedPayload();
 
     if (boardId == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

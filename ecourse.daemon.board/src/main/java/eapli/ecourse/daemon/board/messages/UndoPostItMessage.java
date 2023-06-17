@@ -40,7 +40,7 @@ public class UndoPostItMessage extends Message {
     if (!clientState.getCredentialStore().isAuthenticated())
       return;
 
-    String postItIdStr = protocolMessage.getStringifiedPayload();
+    String postItIdStr = request.getStringifiedPayload();
 
     if (postItIdStr == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

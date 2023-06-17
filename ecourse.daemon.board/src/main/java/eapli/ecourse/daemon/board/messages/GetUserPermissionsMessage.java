@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
 
-import javax.json.JsonObject;
+import javax.json.JsonStructure;
+import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.application.ShareBoardController;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
@@ -45,10 +46,16 @@ public class GetUserPermissionsMessage extends Message {
     if (!clientState.getCredentialStore().isAuthenticated())
       return;
 
-    JsonObject json = protocolMessage.getPayloadAsJson();
+    JsonStructure json = request.getPayloadAsJson();
 
-    String boardIdStr = json.getString("boardId");
-    String usernameStr = json.getString("username");
+    // check if json is valid
+    if (json == null || !json.getValueType().equals(ValueType.OBJECT)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+      return;
+    }
+
+    String boardIdStr = json.asJsonObject().getString("boardId");
+    String usernameStr = json.asJsonObject().getString("username");
 
     if (boardIdStr == null || usernameStr == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

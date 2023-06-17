@@ -47,7 +47,7 @@ public class DeletePostItMessage extends Message {
     if (!credentialStore.isAuthenticated())
       return;
 
-    String postItIdStr = protocolMessage.getStringifiedPayload();
+    String postItIdStr = request.getStringifiedPayload();
 
     if (postItIdStr == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

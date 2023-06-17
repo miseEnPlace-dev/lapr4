@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StringReader;
 import javax.json.Json;
-import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonStructure;
 
@@ -236,9 +235,9 @@ public class ProtocolMessage {
     return o;
   }
 
-  public JsonObject getPayloadAsJson() {
+  public JsonStructure getPayloadAsJson() {
     JsonReader reader = Json.createReader(new StringReader(getStringifiedPayload()));
-    JsonObject jsonObject = reader.readObject();
+    JsonStructure jsonObject = reader.readObject();
     reader.close();
     return jsonObject;
   }

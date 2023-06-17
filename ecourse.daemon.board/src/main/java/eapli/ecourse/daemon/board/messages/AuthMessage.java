@@ -33,7 +33,7 @@ public class AuthMessage extends Message {
       return;
     }
 
-    String payload = new String(protocolMessage.getPayload());
+    String payload = new String(request.getPayload());
 
     String fields[] = payload.split("\0");
 

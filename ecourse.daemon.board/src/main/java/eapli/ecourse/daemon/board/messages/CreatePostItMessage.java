@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
 
-import javax.json.JsonObject;
-
+import javax.json.JsonStructure;
+import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
@@ -35,15 +35,16 @@ public class CreatePostItMessage extends Message {
   private PostItRepository postItRepository;
   private UserManagementService userService;
 
-  public CreatePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
+  public CreatePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket, SafeOnlineCounter onlineCounter) {
     super(protocolMessage, output, socket, onlineCounter);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl = new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
+    this.ctrl =
+        new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
     this.userService = AuthzRegistry.userService();
   }
 
@@ -53,9 +54,15 @@ public class CreatePostItMessage extends Message {
     if (!credentialStore.isAuthenticated())
       return;
 
-    JsonObject payload = protocolMessage.getPayloadAsJson();
+    JsonStructure payload = request.getPayloadAsJson();
 
-    String boardId = payload.getString("boardId");
+    // check if json is valid
+    if (payload == null || !payload.getValueType().equals(ValueType.OBJECT)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+      return;
+    }
+
+    String boardId = payload.asJsonObject().getString("boardId");
 
     if (boardId == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
@@ -79,11 +86,11 @@ public class CreatePostItMessage extends Message {
       return;
     }
 
-    String title = payload.getString("title");
-    String description = payload.getString("description");
-    String imagePath = payload.getString("imagePath");
-    Integer x = payload.getInt("x");
-    Integer y = payload.getInt("y");
+    String title = payload.asJsonObject().getString("title");
+    String description = payload.asJsonObject().getString("description");
+    String imagePath = payload.asJsonObject().getString("imagePath");
+    Integer x = payload.asJsonObject().getInt("x");
+    Integer y = payload.asJsonObject().getInt("y");
 
     if (title == null || x == null || y == null || description == null || imagePath == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

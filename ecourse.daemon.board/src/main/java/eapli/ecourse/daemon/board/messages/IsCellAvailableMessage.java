@@ -4,8 +4,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import javax.json.JsonObject;
-
+import javax.json.JsonStructure;
+import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.SafeOnlineCounter;
@@ -44,11 +44,17 @@ public class IsCellAvailableMessage extends Message {
     if (!credentialStore.isAuthenticated())
       return;
 
-    JsonObject json = protocolMessage.getPayloadAsJson();
+    JsonStructure json = request.getPayloadAsJson();
 
-    BoardID boardId = BoardID.valueOf(json.getString("boardId"));
-    Integer x = json.getInt("x");
-    Integer y = json.getInt("y");
+    // check if json is valid
+    if (json == null || !json.getValueType().equals(ValueType.OBJECT)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+      return;
+    }
+
+    BoardID boardId = BoardID.valueOf(json.asJsonObject().getString("boardId"));
+    Integer x = json.asJsonObject().getInt("x");
+    Integer y = json.asJsonObject().getInt("y");
 
     if (boardId == null || x == null || y == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

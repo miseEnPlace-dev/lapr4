@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Optional;
 
-import javax.json.JsonObject;
-
+import javax.json.JsonStructure;
+import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.SafeOnlineCounter;
@@ -51,9 +51,15 @@ public class ChangePostItMessage extends Message {
     if (!credentialStore.isAuthenticated())
       return;
 
-    JsonObject payload = protocolMessage.getPayloadAsJson();
+    JsonStructure payload = request.getPayloadAsJson();
 
-    String postItId = payload.getString("postItId");
+    // check if json is valid
+    if (payload == null || !payload.getValueType().equals(ValueType.OBJECT)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
+      return;
+    }
+
+    String postItId = payload.asJsonObject().getString("postItId");
 
     if (postItId == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
@@ -77,13 +83,19 @@ public class ChangePostItMessage extends Message {
       return;
     }
 
-    String title = payload.keySet().contains("title") ? payload.getString("title") : null;
-    String description =
-        payload.keySet().contains("description") ? payload.getString("description") : null;
-    String imagePath =
-        payload.keySet().contains("imagePath") ? payload.getString("imagePath") : null;
-    Integer x = payload.keySet().contains("x") ? payload.getInt("x") : null;
-    Integer y = payload.keySet().contains("y") ? payload.getInt("y") : null;
+    String title = payload.asJsonObject().keySet().contains("title")
+        ? payload.asJsonObject().getString("title")
+        : null;
+    String description = payload.asJsonObject().keySet().contains("description")
+        ? payload.asJsonObject().getString("description")
+        : null;
+    String imagePath = payload.asJsonObject().keySet().contains("imagePath")
+        ? payload.asJsonObject().getString("imagePath")
+        : null;
+    Integer x =
+        payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
+    Integer y =
+        payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
 
     if (title == null && x == null && y == null && description == null && imagePath == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

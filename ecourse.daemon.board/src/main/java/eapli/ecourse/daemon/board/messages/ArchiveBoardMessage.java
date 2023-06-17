@@ -37,7 +37,7 @@ public class ArchiveBoardMessage extends Message {
     if (!clientState.getCredentialStore().isAuthenticated())
       return;
 
-    String boardIdStr = protocolMessage.getStringifiedPayload();
+    String boardIdStr = request.getStringifiedPayload();
 
     if (boardIdStr == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
