@@ -23,7 +23,8 @@ public class TcpClient {
 
   private final Logger logger = LogManager.getLogger(TcpClient.class);
 
-  public TcpClient() {}
+  public TcpClient() {
+  }
 
   public void connect(String hostname, int port, boolean secure)
       throws UnknownHostException, IOException {

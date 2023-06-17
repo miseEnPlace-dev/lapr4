@@ -5,17 +5,16 @@ public class OnlineSafeShared {
   private boolean signaled = false;
 
   public synchronized void read() {
-    while (true) {
+    while (!signaled) {
       try {
         wait();
-        if (signaled) {
-          System.out.println("There are " + this.number + " clients online!");
-          signaled = false;
-        }
+        System.out.println("There are " + this.number + " clients online!");
       } catch (InterruptedException e) {
         // unused
       }
+      signaled = false;
     }
+
   }
 
   public synchronized void write(long number) {
