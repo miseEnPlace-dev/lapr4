@@ -27,7 +27,8 @@ public class ChangePostItController {
 
   public Iterable<BoardDTO> listUserWritableBoards() throws IOException,
       UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS));
+    ProtocolMessage response =
+        server.sendRecv(new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -41,15 +42,15 @@ public class ChangePostItController {
 
   public Iterable<PostItDTO> listUserUpdatablePostIts(BoardID boardID) throws IOException,
       UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.GET_OWN_POSTITS_BOARD, boardID.toString()));
+    ProtocolMessage response =
+        server.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_POSTITS_BOARD, boardID.toString()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
     Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
 
-    List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true).map(PostItDTO.class::cast)
-        .collect(Collectors.toUnmodifiableList());
+    List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true)
+        .map(PostItDTO.class::cast).collect(Collectors.toUnmodifiableList());
 
     return result;
   }
@@ -62,8 +63,8 @@ public class ChangePostItController {
     json.add("x", x);
     json.add("y", y);
 
-    ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()));
+    ProtocolMessage response =
+        server.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -71,8 +72,9 @@ public class ChangePostItController {
     return (boolean) response.getPayloadAsObject();
   }
 
-  public void changePostIt(PostItID postItID, Integer x, Integer y, String title, String description, String imagePath)
-      throws IOException, UnsupportedVersionException, UnsuccessfulRequestException, ClassNotFoundException {
+  public void changePostIt(PostItID postItID, Integer x, Integer y, String title,
+      String description, String imagePath) throws IOException, UnsupportedVersionException,
+      UnsuccessfulRequestException, ClassNotFoundException {
 
     JsonObjectBuilder json = Json.createObjectBuilder();
     json.add("postItId", postItID.toString());
@@ -88,8 +90,8 @@ public class ChangePostItController {
     if (imagePath != null)
       json.add("imagePath", imagePath);
 
-    ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.CHANGE_POSTIT, json.build()));
+    ProtocolMessage response =
+        server.sendRecv(new ProtocolMessage(MessageCode.CHANGE_POSTIT, json.build()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -99,8 +101,8 @@ public class ChangePostItController {
   public void deletePostIt(PostItID postItID) throws IOException, UnsupportedVersionException,
       UnsuccessfulRequestException, ClassNotFoundException {
 
-    ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.DELETE_POSTIT, postItID.toString()));
+    ProtocolMessage response =
+        server.sendRecv(new ProtocolMessage(MessageCode.DELETE_POSTIT, postItID.toString()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

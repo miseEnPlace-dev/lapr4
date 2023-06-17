@@ -33,37 +33,51 @@ public class DeletePostItUI extends AbstractUI {
         return false;
       }
 
-      BoardPrinter printer = new BoardPrinter();
-      printer.printHeader();
+      BoardDTO selectedBoard = null;
+      PostItDTO selectedPostIt = null;
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
-      selector.show();
+      do {
+        System.out.println("Boards you can edit:\n");
 
-      final BoardDTO selected = selector.selectedElement();
+        BoardPrinter printer = new BoardPrinter();
+        printer.printHeader();
 
-      // POST_ITS
-      Iterable<PostItDTO> postIts = ctrl.listUserUpdatablePostIts(selected.getId());
+        SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+        selector.show();
 
-      if (!postIts.iterator().hasNext()) {
-        System.out.println("You don't have permission to delete any post-it in that board.");
+        selectedBoard = selector.selectedElement();
+
+        // POST_ITS
+        Iterable<PostItDTO> postIts = ctrl.listUserUpdatablePostIts(selectedBoard.getId());
+
+        if (!postIts.iterator().hasNext()) {
+          System.out.println("You don't have permission to delete any post-it in that board.");
+          return false;
+        }
+
+        PostItPrinter postItPrinter = new PostItPrinter();
+        postItPrinter.printHeader();
+
+        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
+        postItSelector.show();
+
+        selectedPostIt = postItSelector.selectedElement();
+      } while (selectedPostIt == null);
+
+      // confirmation
+      if (!Console.readLine("\nAre you sure you want to delete the post-it \""
+          + selectedPostIt.getTitle() + "\"? (y/N)").equalsIgnoreCase("y")) {
+        System.out.println("\nOperation cancelled by the user.");
         return false;
       }
 
-      PostItPrinter postItPrinter = new PostItPrinter();
-      postItPrinter.printHeader();
-
-      SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
-      postItSelector.show();
-
-      final PostItDTO selectedPostIt = postItSelector.selectedElement();
-
       // Delete
-
       ctrl.deletePostIt(selectedPostIt.getId());
 
       System.out.println("\nPost-it deleted successfully.");
 
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | UnsuccessfulRequestException e) {
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
+        | UnsuccessfulRequestException e) {
       logger.error("Error trying to view a board", e);
     }
 

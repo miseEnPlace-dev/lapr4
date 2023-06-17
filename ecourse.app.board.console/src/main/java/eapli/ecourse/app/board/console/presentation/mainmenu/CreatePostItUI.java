@@ -30,6 +30,8 @@ public class CreatePostItUI extends AbstractUI {
         return false;
       }
 
+      System.out.println("Boards you can edit:\n");
+
       BoardPrinter printer = new BoardPrinter();
 
       SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
@@ -37,8 +39,10 @@ public class CreatePostItUI extends AbstractUI {
 
       final BoardDTO selected = selector.selectedElement();
 
-      if (selected == null)
+      if (selected == null) {
+        System.out.println("\nOperation cancelled by the user.");
         return false;
+      }
 
       Integer x, y;
       boolean success = true;
@@ -50,17 +54,22 @@ public class CreatePostItUI extends AbstractUI {
         success = ctrl.validateCoordinates(selected.getId(), x, y);
 
         if (!success)
-          System.out.println("Cell not available. Make sure the cell exists and is free! Try again.");
+          System.out
+              .println("Cell not available. Make sure the cell exists and is free! Try again.");
       } while (!success);
 
       String title = Console.readLine("Write the post-it title: ");
-      String description = Console.readLine("Write the post-it description (Press Enter to skip): ");
+      String description =
+          Console.readLine("Write the post-it description (Press Enter to skip): ");
+
+      // ! the image must be uploaded to the server, you can't just write the path
       String imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
 
       ctrl.createPostIt(selected.getId(), x, y, title, description, imagePath);
 
       System.out.println("\nPost-it created successfully.");
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | UnsuccessfulRequestException e) {
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
+        | UnsuccessfulRequestException e) {
       logger.error("Error trying to view a board", e);
     }
 
