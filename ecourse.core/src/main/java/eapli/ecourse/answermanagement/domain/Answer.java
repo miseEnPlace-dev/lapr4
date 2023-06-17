@@ -86,6 +86,6 @@ public class Answer implements AggregateRoot<AnswerId> {
   public AnswerDTO toDto() {
     return new AnswerDTO(student.identity().toString(), student.user().name().toString(), exam.title().toString(),
         exam.course().title().toString(),
-        score().toString(), takenAt);
+        score().toString(), exam().score().toString(), takenAt);
   }
 }
