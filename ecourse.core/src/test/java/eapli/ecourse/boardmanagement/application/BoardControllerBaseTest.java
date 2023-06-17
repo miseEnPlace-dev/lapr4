@@ -1,12 +1,15 @@
 package eapli.ecourse.boardmanagement.application;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import eapli.ecourse.boardmanagement.domain.Archived;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardColumn;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.BoardRow;
 import eapli.ecourse.boardmanagement.domain.BoardTitle;
+import eapli.ecourse.boardmanagement.domain.PermissionType;
 import eapli.ecourse.boardmanagement.domain.UserPermission;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
@@ -44,5 +47,35 @@ public class BoardControllerBaseTest {
 
     return new Board(new BoardTitle("B01"), permissions, columns, rows, BoardID.newID(),
         getNewDummyUser());
+  }
+
+  public Board getDummyBoard2() {
+    BoardRow row = new BoardRow(new BoardTitle("row2"), 2);
+    List<BoardRow> rows = new ArrayList<BoardRow>();
+    rows.add(row);
+
+    BoardColumn column = new BoardColumn(new BoardTitle("column2"), 2);
+    List<BoardColumn> columns = new ArrayList<BoardColumn>();
+    columns.add(column);
+
+    List<UserPermission> permissions = new ArrayList<UserPermission>();
+
+    return new Board(new BoardTitle("B2"), permissions, columns, rows, BoardID.newID(),
+        getNewDummyUser2());
+  }
+
+  public Board getDummyArchivedBoard() {
+    BoardRow row = new BoardRow(new BoardTitle("1512"), 3);
+    List<BoardRow> rows = new ArrayList<BoardRow>();
+    rows.add(row);
+
+    BoardColumn column = new BoardColumn(new BoardTitle("column3"), 3);
+    List<BoardColumn> columns = new ArrayList<BoardColumn>();
+    columns.add(column);
+
+    List<UserPermission> permissions = new ArrayList<UserPermission>();
+
+    return new Board(new BoardTitle("B03"), permissions, columns, rows, BoardID.newID(),
+        getNewDummyUser(), new Archived(Calendar.getInstance()));
   }
 }
