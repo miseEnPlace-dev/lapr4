@@ -91,6 +91,32 @@ The available endpoints are described in the following table:
 | `GET`  | `/api/board/:id` | Returns the board and its post-its with the specified id. The authenticated user must have read permission to the board. |
 | `GET`  | `/api/online`    | Returns the number of connected to the Shared Board Server clients.                                                      |
 
+The "real-time" view of the board is done by pooling the server for updates.
+
+To prevent sending big payloads every time a request is done, the browser will first fetch the board data.
+This response comes with a hash of the board and its post-its which, in a very basic way, provide a "version number" of the payload.
+
+Subsequent requests send this hash and the server will check if the hash matches the current hash of the board and its post-its.
+If the hash matches, the Shared Board Server will respond with a `NOT_MODIFIED` response, and the HTTP server responds with a `304 Not Modified` status code and no payload.
+
+This way, the browser will only receive the payload when the board or its post-its have been updated, decreasing the amount of data received.
+
+```json
+{
+  id: "df1a16af-7c4e-47f0-9f0f-30ced4fcb475",
+  title: "example",
+  archived: null,
+  owner: {…},
+  permissions: […],
+  rows: […],
+  columns: […],
+  postIts: […],
+  hash: -890914117
+}
+```
+
+> Example of a board payload.
+
 ## SSL
 
 The Shared Board also implements SSL to encrypt the communication between the Shared Board App and the Shared Board Backend, as well as to encrypt the communication between the HTTP server and the browser by using HTTPS.
