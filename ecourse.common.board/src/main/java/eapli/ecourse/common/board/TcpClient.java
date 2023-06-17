@@ -28,7 +28,7 @@ public class TcpClient {
 
   public void connect(String hostname, int port, boolean secure)
       throws UnknownHostException, IOException {
-    // connect to a tcp server
+    // connect to a TCP server
     if (secure) {
       socket = SSLSocketFactory.getDefault().createSocket(hostname, port);
 
@@ -43,10 +43,10 @@ public class TcpClient {
 
     logger.debug("Connected to the server!");
 
-    // create a data input stream to read from the client
+    // create a data input stream to read from the server
     input = new DataInputStream(socket.getInputStream());
 
-    // and a data output stream to write to the client
+    // and a data output stream to write to the server
     output = new DataOutputStream(socket.getOutputStream());
   }
 

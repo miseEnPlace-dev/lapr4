@@ -110,9 +110,12 @@ public class ProtocolMessage {
     byte[] payload = input.readNBytes(payloadLength);
 
     /**
-     * The payload may exceed (2^8)^2 - 1 bytes, the maximum supported by the protocol. In this
-     * case, the payload is split into multiple messages. The first message contains the full length
-     * of the original message in the payload as an int. The following messages contain the payload
+     * The payload may exceed (2^8)^2 - 1 bytes, the maximum supported by the
+     * protocol. In this
+     * case, the payload is split into multiple messages. The first message contains
+     * the full length
+     * of the original message in the payload as an int. The following messages
+     * contain the payload
      * of the original message split into chunks of at most 256 * 257 bytes.
      */
     if (code.equals(MessageCode.SPLIT)) {
@@ -150,7 +153,8 @@ public class ProtocolMessage {
 
   public byte[] toByteStream() throws IOException {
     /**
-     * The payload may exceed (2^8)^2 - 1 bytes, the maximum supported by the protocol. In this
+     * The payload may exceed (2^8)^2 - 1 bytes, the maximum supported by the
+     * protocol. In this
      * case, we will need to split the payload into multiple messages.
      */
     if (this.payloadLength > MAX_PAYLOAD_LENGTH) {

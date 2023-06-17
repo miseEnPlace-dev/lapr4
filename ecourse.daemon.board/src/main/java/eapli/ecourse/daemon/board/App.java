@@ -10,8 +10,8 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 /**
  * Shared Board Server.
  *
- * This application holds a TCP server used to communicate with the Shared Board App by using the
- * defined protocol.
+ * This application holds a TCP server used to communicate with the Shared Board
+ * App by using the defined protocol.
  */
 public class App {
   public static void main(String[] args) {
