@@ -27,7 +27,8 @@ public class RespondCourseApplicationsUI extends AbstractUI {
       return false;
     }
 
-    final SelectWidget<CourseDTO> courseSelector = new SelectWidget<>("Courses:", courses, new CoursePrinter());
+    final SelectWidget<CourseDTO> courseSelector = new SelectWidget<>(new CoursePrinter().header(), courses,
+        new CoursePrinter());
     courseSelector.show();
     final CourseDTO selectedCourse = courseSelector.selectedElement();
 
@@ -39,12 +40,13 @@ public class RespondCourseApplicationsUI extends AbstractUI {
       return false;
     }
 
-    final SelectWidget<EnrolmentDTO> enrolmentSelector = new SelectWidget<>("Applications:", enrolments,
+    System.out.println();
+    final SelectWidget<EnrolmentDTO> enrolmentSelector = new SelectWidget<>(new EnrolmentPrinter().header(), enrolments,
         new EnrolmentPrinter());
     enrolmentSelector.show();
     final EnrolmentDTO selectedEnrolment = enrolmentSelector.selectedElement();
 
-    System.out.println("Respond to the course application:");
+    System.out.println("\nRespond to the course application:");
     System.out.println("1. Accept");
     System.out.println("2. Reject");
     System.out.println("0. Exit");
