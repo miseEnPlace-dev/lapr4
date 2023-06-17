@@ -1,0 +1,90 @@
+@startuml US2005_CD
+'https://plantuml.com/class-diagram
+
+class ListStudentGradesUI {}
+
+class ListStudentGradesController {
+  - studentRepository
+  - authorizationService
+  - listEnrolmentService
+  - listExamAnswerService
+
+  + ListStudentGradesController(enrolmentRepository, answerRepository, studentRepository, evaluationExamRepository, authorizationService)
+
+  - getAuthenticatedStudent()
+
+  + listStudentGrades(courseDto)
+  + listStudentCourses()
+}
+
+class Answer {
+  - studentNumber;
+  - studentName;
+  - examTitle;
+  - course;
+  - score;
+  - takenAt;
+
+  + toDto()
+}
+
+class AnswerDTO {
+  - studentNumber;
+  - studentName;
+  - examTitle;
+  - course;
+  - score;
+  - takenAt;
+}
+
+interface AnswerRepository {
+  + findAllWithStudentMecanographicNumberAndCourseCode(mecanographicNumber,courseCode)
+}
+
+class ListExamAnswerService {
+  - answerRepository
+
+  + ListExamAnswerService(answerRepository)
+
+  + listStudentGrades(student,courseCode)
+}
+
+interface EvaluationExamRepository {
+  + findAllCourseExams(course)
+}
+
+class EnrolmentService {
+  - enrolmentRepository
+
+  + EnrolmentService(enrolmentRepository)
+  + listStudentsEnrolled(courseCode)
+}
+
+interface EnrolmentRepository {
+  + findByStudentMecanographicNumber(mecanographicNumber)
+}
+
+class AuthorizationService {
+  + loggedinUserWithPermissions(roles)
+}
+
+interface StudentRepository {
+  + findByUsername(username)
+}
+
+ListStudentGradesUI ..> ListStudentGradesController
+
+ListStudentGradesController ..> StudentRepository
+ListStudentGradesController --> AuthorizationService
+
+ListStudentGradesController ---> ListExamAnswerService
+ListStudentGradesController ---> EnrolmentService
+
+EnrolmentService ..> EnrolmentRepository
+
+ListExamAnswerService .> Answer
+ListExamAnswerService ..> AnswerDTO
+ListExamAnswerService ..> AnswerRepository
+ListExamAnswerService ..> EvaluationExamRepository
+
+@enduml
