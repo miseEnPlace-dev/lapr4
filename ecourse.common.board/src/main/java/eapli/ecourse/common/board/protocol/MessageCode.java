@@ -5,19 +5,13 @@ import java.util.Map;
 
 public enum MessageCode {
   COMMTEST((byte) 0), DISCONN((byte) 1), ACK((byte) 2), ERR((byte) 3), AUTH((byte) 4), SPLIT(
-      (byte) 5),
-  GET_BOARDS((byte) 6), GET_OWN_BOARDS((byte) 7), GET_WRITABLE_BOARDS(
-      (byte) 8),
-  GET_BOARD((byte) 9), GET_USER_PERMISSIONS((byte) 10), SHARE_BOARD(
-      (byte) 11),
-  ARCHIVE_BOARD((byte) 12), GET_POSTITS_BOARD(
-      (byte) 13),
-  GET_OWN_POSTITS_BOARD((byte) 14), GET_BOARD_HISTORY(
-      (byte) 15),
-  CREATE_POSTIT((byte) 16), CHANGE_POSTIT((byte) 17), UNDO_POSTIT(
-      (byte) 18),
-  IS_CELL_AVAILABLE((byte) 19), GET_ONLINE_COUNT((byte) 20), DELETE_POSTIT(
-      (byte) 21),;
+      (byte) 5), GET_BOARDS((byte) 6), GET_OWN_BOARDS((byte) 7), GET_WRITABLE_BOARDS(
+          (byte) 8), GET_BOARD((byte) 9), GET_USER_PERMISSIONS((byte) 10), SHARE_BOARD(
+              (byte) 11), ARCHIVE_BOARD((byte) 12), GET_POSTITS_BOARD(
+                  (byte) 13), GET_OWN_POSTITS_BOARD((byte) 14), GET_BOARD_HISTORY(
+                      (byte) 15), CREATE_POSTIT((byte) 16), CHANGE_POSTIT((byte) 17), UNDO_POSTIT(
+                          (byte) 18), DELETE_POSTIT(
+                              (byte) 19), IS_CELL_AVAILABLE((byte) 20), GET_ONLINE_COUNT((byte) 21);
 
   private static final Map<Byte, MessageCode> CODES = new HashMap<>();
 

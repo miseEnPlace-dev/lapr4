@@ -91,13 +91,11 @@ public class CreatePostItMessage extends Message {
       return;
     }
 
-    if (description.isEmpty()) {
+    if (description.isEmpty())
       description = null;
-    }
 
-    if (imagePath.isEmpty()) {
+    if (imagePath.isEmpty())
       imagePath = null;
-    }
 
     SystemUser owner = userService.userOfIdentity(username).orElseThrow();
 
@@ -111,6 +109,5 @@ public class CreatePostItMessage extends Message {
     this.boardUpdatesCounter.increment();
 
     send(new ProtocolMessage(MessageCode.CREATE_POSTIT));
-
   }
 }

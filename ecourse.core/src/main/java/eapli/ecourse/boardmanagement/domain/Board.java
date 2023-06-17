@@ -70,6 +70,22 @@ public class Board implements AggregateRoot<BoardID> {
   }
 
   public Board(final BoardTitle title, final List<UserPermission> permissions,
+      final List<BoardColumn> column, final List<BoardRow> row, final BoardID id,
+      final SystemUser user, final Archived archived) {
+
+    // Only mandatory fields are checked
+    Preconditions.noneNull(title, id, column, row, user);
+
+    this.title = title;
+    this.archived = archived;
+    this.permissions = permissions;
+    this.id = id;
+    this.columns = column;
+    this.rows = row;
+    this.owner = user;
+  }
+
+  public Board(final BoardTitle title, final List<UserPermission> permissions,
       final List<BoardColumn> column, final List<BoardRow> row, final SystemUser user) {
 
     // Only mandatory fields are checked
