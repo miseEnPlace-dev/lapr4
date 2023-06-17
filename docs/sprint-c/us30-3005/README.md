@@ -108,11 +108,16 @@ _Note: This are some simplified versions of the tests for readability purposes._
 ### 6.1. Select Board
 
 ![US3005_DEMO-1](US3005_DEMO-1.png)
-![US3005_DEMO-2](US3005_DEMO-2.png)
 
 ### 6.2. View Board
 
+![US3005_DEMO-2](US3005_DEMO-2.png)
 ![US3005_DEMO-3](US3005_DEMO-3.png)
+
+### 6.3. View Post It
+
+![US3005_DEMO-4](US3005_DEMO-4.png)
+![US3005_DEMO-5](US3005_DEMO-5.png)
 
 ## 7. Observations
 
