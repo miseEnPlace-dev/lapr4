@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
+import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.common.board.TcpClient;
@@ -22,14 +24,22 @@ import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 public class GetBoardsController implements RouteController {
   private final static Logger LOGGER = LogManager.getLogger(GetBoardsController.class);
 
+  private CredentialStore auth;
   private TcpClient client;
 
   public GetBoardsController() {
+    this.auth = BoardBackend.getInstance().getCredentialStore();
     this.client = BoardBackend.getInstance().getTcpClient();
   }
 
   @Override
   public void handle(Request req, Response res) {
+    if (auth.getUser().isEmpty()) {
+      JsonObjectBuilder response = Json.createObjectBuilder().add("message", "Unauthorized");
+      res.status(401).json(response.build());
+      return;
+    }
+
     try {
       ProtocolMessage response = client.sendRecv(new ProtocolMessage(MessageCode.GET_BOARDS));
 

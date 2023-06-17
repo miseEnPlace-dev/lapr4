@@ -6,11 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.AppSettings;
-import eapli.ecourse.app.board.console.presentation.MainMenu;
+import eapli.ecourse.app.board.console.presentation.FrontMenu;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.app.board.lib.BoardHttpServer;
 import eapli.ecourse.app.common.console.ECourseBaseApplication;
-import eapli.ecourse.app.common.console.presentation.authz.LoginUI;
 import eapli.framework.infrastructure.pubsub.EventDispatcher;
 
 public class App extends ECourseBaseApplication {
@@ -43,15 +41,7 @@ public class App extends ECourseBaseApplication {
       return;
     }
 
-    final boolean logged = (new LoginUI(boardBackend.getCredentialStore().AUTHENTICATE)).show();
-
-    if (logged) {
-      // start the board http server
-      BoardHttpServer.run(isSecure);
-
-      // next ui
-      (new MainMenu()).mainLoop();
-    }
+    new FrontMenu().mainLoop();
   }
 
   @Override

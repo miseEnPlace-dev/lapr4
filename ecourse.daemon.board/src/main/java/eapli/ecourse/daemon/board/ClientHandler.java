@@ -36,6 +36,7 @@ import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
 import eapli.ecourse.daemon.board.messages.IsCellAvailableMessage;
+import eapli.ecourse.daemon.board.messages.LogoutMessage;
 import eapli.ecourse.daemon.board.messages.Message;
 import eapli.ecourse.daemon.board.messages.ShareBoardMessage;
 import eapli.ecourse.daemon.board.messages.UndoPostItMessage;
@@ -50,6 +51,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.COMMTEST, CommTestMessage.class);
       put(MessageCode.DISCONN, DisconnMessage.class);
       put(MessageCode.ERR, ErrMessage.class);
+      put(MessageCode.LOGOUT, LogoutMessage.class);
 
       // board
       put(MessageCode.GET_BOARDS, GetBoardsMessage.class);
@@ -81,7 +83,8 @@ public class ClientHandler implements Runnable {
   private SafeBoardUpdatesCounter boardUpdatesCounter;
   private SafeBoardUpdatesShared boardUpdatesShared = new SafeBoardUpdatesShared();
 
-  public ClientHandler(Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+  public ClientHandler(Socket socket, SafeOnlineCounter onlineCounter,
+      SafeBoardUpdatesCounter boardUpdatesCounter) {
     this.client = socket;
     this.onlineCounter = onlineCounter;
     this.boardUpdatesCounter = boardUpdatesCounter;
@@ -154,10 +157,9 @@ public class ClientHandler implements Runnable {
       handleMessage = new BadRequestMessage(output, client);
     } else {
       try {
-        handleMessage = clazz
-            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class,
-                SafeOnlineCounter.class, SafeBoardUpdatesCounter.class)
-            .newInstance(message, output, this.client, this.onlineCounter, this.boardUpdatesCounter);
+        handleMessage = clazz.getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class,
+            Socket.class, SafeOnlineCounter.class, SafeBoardUpdatesCounter.class).newInstance(
+                message, output, this.client, this.onlineCounter, this.boardUpdatesCounter);
       } catch (Exception e) {
         logger.error("\n[Client Handler Thread] Error", e);
         return;

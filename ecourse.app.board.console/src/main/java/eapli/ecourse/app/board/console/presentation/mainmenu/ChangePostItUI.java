@@ -73,7 +73,7 @@ public class ChangePostItUI extends AbstractUI {
       Integer x = null, y = null;
       boolean success = true;
 
-      if (Console.readLine("Do you want to change the post-it coordinates? (Y/n): ")
+      if (!Console.readLine("Do you want to change the post-it coordinates? (Y/n): ")
           .equalsIgnoreCase("n"))
         do {
           System.out.println("\nWrite the new post-it coordinates:");
@@ -88,17 +88,17 @@ public class ChangePostItUI extends AbstractUI {
         } while (!success);
 
       String title = null;
-      if (Console.readLine("Do you want to change the post-it title? (Y/n): ")
+      if (!Console.readLine("Do you want to change the post-it title? (Y/n): ")
           .equalsIgnoreCase("n"))
         title = Console.readLine("Write the post-it title: ");
 
       String description = null;
-      if (Console.readLine("Do you want to change the post-it description? (Y/n): ")
+      if (!Console.readLine("Do you want to change the post-it description? (Y/n): ")
           .equalsIgnoreCase("n"))
         description = Console.readLine("Write the post-it description (Press Enter to delete): ");
 
       String imagePath = null;
-      if (Console.readLine("Do you want to change the post-it image? (Y/n): ")
+      if (!Console.readLine("Do you want to change the post-it image? (Y/n): ")
           .equalsIgnoreCase("n"))
         imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
 
