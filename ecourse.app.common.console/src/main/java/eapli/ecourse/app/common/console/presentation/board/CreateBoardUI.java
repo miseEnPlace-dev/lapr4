@@ -33,7 +33,8 @@ public class CreateBoardUI extends AbstractUI {
       String rowName = Console.readLine("Enter the name of the row " + i + ": ");
       rows.put(rowName, i);
       i++;
-    } while (i <= maxRows && Console.readLine("Do you want to add other a Row? (Y/N)").toUpperCase().equals("Y"));
+    } while (i <= maxRows
+        && !Console.readLine("Do you want to add other a Row? (Y/n)").equalsIgnoreCase("n"));
 
     Map<String, Integer> columns = new HashMap<>();
 
@@ -45,14 +46,16 @@ public class CreateBoardUI extends AbstractUI {
       String columnName = Console.readLine("Enter the name of the column " + i + ": ");
       columns.put(columnName, i);
       i++;
-    } while (i <= maxColumns && Console.readLine("Do you want to add other a Column? (Y/N)").toUpperCase().equals("Y"));
+    } while (i <= maxColumns
+        && !Console.readLine("Do you want to add other a Column? (Y/n)").equalsIgnoreCase("n"));
 
     final Iterable<SystemUser> users = this.ctrl.listAllUsers();
 
     Map<SystemUser, PermissionType> permissions = new HashMap<>();
-    while (Console.readLine("Do you want to add a User Permission? (Y/N)").toUpperCase().equals("Y")) {
+    while (!Console.readLine("Do you want to add a User Permission? (Y/n)").equalsIgnoreCase("n")) {
 
-      final SelectWidget<SystemUser> selector = new SelectWidget<>("\nUsers:", users, new SystemUserPrinter());
+      final SelectWidget<SystemUser> selector =
+          new SelectWidget<>("\nUsers:", users, new SystemUserPrinter());
       selector.show();
       SystemUser selected = selector.selectedElement();
 
@@ -70,7 +73,8 @@ public class CreateBoardUI extends AbstractUI {
         return false;
       }
 
-      PermissionType permissionType = (permission == 1) ? PermissionType.read() : PermissionType.write();
+      PermissionType permissionType =
+          (permission == 1) ? PermissionType.read() : PermissionType.write();
 
       permissions.put(selected, permissionType);
 
