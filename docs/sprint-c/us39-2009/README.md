@@ -82,8 +82,9 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 
 ### 4.3. Applied Patterns
 
-- **Strategy**: This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them. Using the service `GenerateStructureFormativeExamService`, it returns a string with the structure of the exam, and the parser can parse it, without having to know the details of each type of question.
+- **Strategy:** This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them. Using the service `GenerateStructureFormativeExamService`, it returns a string with the structure of the exam, and the parser can parse it, without having to know the details of each type of question.
 - **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Adapter:** This is used to adapt the `GrammarParser` to the `FormativeExamParser`. This way, the `FormativeExamParser` can use the `GrammarParser` to parse the structure of the exam, without having to know the details of the `GrammarParser`.
 
 ### 4.4. Tests
 

@@ -17,6 +17,11 @@ class TakeFormativeExamController {
 + getFormativeExamSelected(formativeExamDTO)
 }
 
+interface GrammarParser {
+  + parseFromFile(string)
+  + parseFromString(string)
+}
+
 class ANTLR4TakeExamParser {
 
   + parseFromFile(string)
@@ -69,12 +74,14 @@ RepositoryFactory --> CourseRepository
 RepositoryFactory --> FormativeExamRepository
 RepositoryFactory --> StudentRepository
 
-TakeFormativeExamController --> ANTLR4TakeExamParser
+TakeFormativeExamController ..> GrammarParser
 TakeFormativeExamController --> ListCourseService
 TakeFormativeExamController --> FormativeExamListService
 TakeFormativeExamController --> FormativeExamRepository
 TakeFormativeExamController --> CourseRepository
 TakeFormativeExamController --> StudentRepository
+
+GrammarParser <|.. ANTLR4TakeExamParser
 
 ListCourseService --> CourseRepository
 
