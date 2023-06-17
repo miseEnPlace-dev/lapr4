@@ -5,6 +5,7 @@ const MAX_TIMEOUT = 10000;
 
 const boardSelector = document.querySelector("#board-selector");
 let t;
+let authenticated;
 
 function showError(message) {
   const error = document.querySelector("#error");
@@ -23,8 +24,41 @@ function clearError() {
   error.innerHTML = "";
 }
 
+/** @type {(data:{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title: string}[], authenticatedUser: {username: string, name: string, email: string, roles: string[]})=>{boardId:string, title: string, permission: "READ" | "WRITE"}[]} */
+function getUserPermissions(data, authenticatedUser) {
+  const result = [];
+
+  for (const board of data) {
+    if (board.owner.username === authenticatedUser.username) {
+      result.push({
+        title: board.title,
+        permission: "OWNER",
+        boardId: board.id,
+      });
+      continue;
+    }
+    for (const permission of board.permissions) {
+      if (permission.user.username === authenticatedUser.username) {
+        result.push({
+          title: board.title,
+          permission: permission.type,
+          boardId: board.id,
+        });
+      }
+    }
+  }
+
+  return result;
+}
+
 function getData() {
-  console.log("> Getting data");
+  getUserBoards();
+  getAuthenticatedUser();
+  getOnlineUsers();
+}
+
+function getUserBoards() {
+  console.log("> Getting user boards");
   /** @type XMLHttpRequest */
   let request;
   clearTimeout(t);
@@ -41,25 +75,40 @@ function getData() {
     /** @type {{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
     const data = JSON.parse(request.responseText);
 
-    for (const board of data)
-      boardSelector.innerHTML += `<option value=${board.id} class="dark:bg-slate-600 bg-slate-200 h-12 text-md">${board.title}</option>`;
+    // as the request is asynchronous, authenticated might not be set yet
+    if (!authenticated) {
+      t = setTimeout(getUserBoards, 200);
+      return;
+    }
+
+    const userPerms = getUserPermissions(data, authenticated);
+
+    for (const permission of userPerms)
+      boardSelector.innerHTML += `<option value=${
+        permission.boardId
+      } class="dark:bg-slate-600 bg-slate-200 py-2 text-md">${
+        permission.title
+      } ${
+        permission.permission === "OWNER"
+          ? "👑"
+          : permission.permission === "READ"
+          ? "👁"
+          : "✏️"
+      }</option>`;
   };
 
   request.ontimeout = () => {
     showError("Server timeout, still trying...");
-    t = setTimeout(getData, ERROR_TIMEOUT);
+    t = setTimeout(getUserBoards, ERROR_TIMEOUT);
   };
   request.onerror = () => {
     showError("No server reply, still trying...");
-    t = setTimeout(getData, RETRY_TIMEOUT);
+    t = setTimeout(getUserBoards, RETRY_TIMEOUT);
   };
 
   request.open("GET", "/api/board", true);
   request.timeout = MAX_TIMEOUT;
   request.send(null);
-
-  getAuthenticatedUser();
-  getOnlineUsers();
 }
 
 function getAuthenticatedUser() {
@@ -84,6 +133,7 @@ function getAuthenticatedUser() {
     const data = JSON.parse(authRequest.responseText);
 
     username.innerHTML = `Welcome, ${data.username}!`;
+    authenticated = data;
   };
 
   authRequest.ontimeout = () => {
