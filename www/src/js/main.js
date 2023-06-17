@@ -24,7 +24,7 @@ function clearError() {
   error.innerHTML = "";
 }
 
-/** @type {(data:{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title: string}[], authenticatedUser: {username: string, name: string, email: string, roles: string[]})=>{boardId:string, title: string, permission: "READ" | "WRITE"}[]} */
+/** @type {(data:{archived: string | null, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title: string}[], authenticatedUser: {username: string, name: string, email: string, roles: string[]})=>{boardId:string, title: string, permission: "READ" | "WRITE", archived: string | null}[]} */
 function getUserPermissions(data, authenticatedUser) {
   const result = [];
 
@@ -34,6 +34,7 @@ function getUserPermissions(data, authenticatedUser) {
         title: board.title,
         permission: "OWNER",
         boardId: board.id,
+        archived: board.archived,
       });
       continue;
     }
@@ -43,6 +44,7 @@ function getUserPermissions(data, authenticatedUser) {
           title: board.title,
           permission: permission.type,
           boardId: board.id,
+          archived: board.archived,
         });
       }
     }
@@ -72,7 +74,7 @@ function getUserBoards() {
   request.onload = () => {
     clearError();
 
-    /** @type {{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
+    /** @type {{archived: string | null, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
     const data = JSON.parse(request.responseText);
 
     // as the request is asynchronous, authenticated might not be set yet
@@ -94,7 +96,7 @@ function getUserBoards() {
           : permission.permission === "READ"
           ? "👁"
           : "✏️"
-      }</option>`;
+      } ${permission.archived ? "(Archived)" : ""}</option>`;
   };
 
   request.ontimeout = () => {
