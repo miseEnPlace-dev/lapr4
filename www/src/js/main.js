@@ -1,14 +1,33 @@
-const RETRY_TIMEOUT = 5000;
-const ERROR_TIMEOUT = 2000;
+const RETRY_TIMEOUT = 3000;
+const ERROR_TIMEOUT = 1000;
 const REFRESH_TIMEOUT = 2000;
-const MAX_TIMEOUT = 15000;
+const MAX_TIMEOUT = 10000;
 
-const error = document.querySelector("#error");
 const boardSelector = document.querySelector("#board-selector");
+let t;
+
+function showError(message) {
+  const error = document.querySelector("#error");
+
+  error.innerHTML = `
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-y relative w-1/2 mx-auto rounded" role="alert">
+      <strong class="font-bold">Error!</strong>
+      <span class="block sm:inline">${message}</span>
+      <div class="animate-spin duration-150 transition-all">↻</div>
+    </div>
+  `;
+}
+
+function clearError() {
+  const error = document.querySelector("#error");
+  error.innerHTML = "";
+}
 
 function getData() {
+  console.log("> Getting data");
   /** @type XMLHttpRequest */
   let request;
+  clearTimeout(t);
 
   try {
     request = new XMLHttpRequest();
@@ -17,7 +36,7 @@ function getData() {
   }
 
   request.onload = () => {
-    error.innerHTML = "";
+    clearError();
 
     /** @type {{archived: boolean, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}}[], title}[]} */
     const data = JSON.parse(request.responseText);
@@ -27,12 +46,12 @@ function getData() {
   };
 
   request.ontimeout = () => {
-    error.innerHTML = "Server timeout, still trying...";
-    setTimeout(getData, ERROR_TIMEOUT);
+    showError("Server timeout, still trying...");
+    t = setTimeout(getData, ERROR_TIMEOUT);
   };
   request.onerror = () => {
-    error.innerHTML = "No server reply, still trying...";
-    setTimeout(getData, RETRY_TIMEOUT);
+    showError("No server reply, still trying...");
+    t = setTimeout(getData, RETRY_TIMEOUT);
   };
 
   request.open("GET", "/api/board", true);
@@ -44,8 +63,11 @@ function getData() {
 }
 
 function getAuthenticatedUser() {
+  console.log("> Getting authenticated user");
+
   /** @type XMLHttpRequest */
   let authRequest;
+  clearTimeout(t);
 
   try {
     authRequest = new XMLHttpRequest();
@@ -56,6 +78,8 @@ function getAuthenticatedUser() {
   const username = document.querySelector("#user");
 
   authRequest.onload = () => {
+    clearError();
+
     /** @type {{username: string, name: string, email: string, roles: string[]}} */
     const data = JSON.parse(authRequest.responseText);
 
@@ -63,12 +87,12 @@ function getAuthenticatedUser() {
   };
 
   authRequest.ontimeout = () => {
-    error.innerHTML = "Server timeout, still trying...";
-    setTimeout(getData, ERROR_TIMEOUT);
+    showError("Server timeout, still trying...");
+    t = setTimeout(getAuthenticatedUser, ERROR_TIMEOUT);
   };
   authRequest.onerror = () => {
-    error.innerHTML = "No server reply, still trying...";
-    setTimeout(getData, RETRY_TIMEOUT);
+    showError("No server reply, still trying...");
+    t = setTimeout(getAuthenticatedUser, RETRY_TIMEOUT);
   };
 
   authRequest.open("GET", "/api/session", true);
@@ -77,8 +101,11 @@ function getAuthenticatedUser() {
 }
 
 function getOnlineUsers() {
+  console.log("> Getting online users");
+
   /** @type XMLHttpRequest */
   let onlineUsersRequest;
+  clearTimeout(t);
 
   try {
     onlineUsersRequest = new XMLHttpRequest();
@@ -89,6 +116,8 @@ function getOnlineUsers() {
   const online = document.querySelector("#online");
 
   onlineUsersRequest.onload = () => {
+    clearError();
+
     /** @type {{online: number}} */
     const data = JSON.parse(onlineUsersRequest.responseText);
 
@@ -97,12 +126,12 @@ function getOnlineUsers() {
   };
 
   onlineUsersRequest.ontimeout = () => {
-    error.innerHTML = "Server timeout, still trying...";
-    setTimeout(getData, ERROR_TIMEOUT);
+    showError("Server timeout, still trying...");
+    setTimeout(getOnlineUsers, ERROR_TIMEOUT);
   };
   onlineUsersRequest.onerror = () => {
-    error.innerHTML = "No server reply, still trying...";
-    setTimeout(getData, RETRY_TIMEOUT);
+    showError("No server reply, still trying...");
+    setTimeout(getOnlineUsers, RETRY_TIMEOUT);
   };
 
   onlineUsersRequest.open("GET", "/api/online", true);

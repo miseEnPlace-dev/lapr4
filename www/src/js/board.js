@@ -1,14 +1,32 @@
-const RETRY_TIMEOUT = 5000;
-const ERROR_TIMEOUT = 2000;
+const RETRY_TIMEOUT = 3000;
+const ERROR_TIMEOUT = 1000;
 const REFRESH_TIMEOUT = 2000;
-const MAX_TIMEOUT = 15000;
+const MAX_TIMEOUT = 10000;
 
 const id = window.location.search.split("=")[1];
 const error = document.querySelector("#error");
 const boardName = document.querySelector("#board-name");
 const boardTable = document.querySelector("#board");
+let t;
 
 const N_OF_USER_IMAGES = 7;
+
+function showError(message) {
+  const error = document.querySelector("#error");
+
+  error.innerHTML = `
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-y relative w-1/2 mx-auto rounded" role="alert">
+      <strong class="font-bold">Error!</strong>
+      <span class="block sm:inline">${message}</span>
+      <div class="animate-spin duration-150 transition-all">↻</div>
+    </div>
+  `;
+}
+
+function clearError() {
+  const error = document.querySelector("#error");
+  error.innerHTML = "";
+}
 
 function getData() {
   updateBoard();
@@ -87,8 +105,10 @@ function openModal(i, j) {
 }
 
 function updateBoard() {
+  console.log("> Getting board details");
   /** @type XMLHttpRequest */
   let request;
+  clearTimeout(t);
 
   try {
     request = new XMLHttpRequest();
@@ -97,7 +117,7 @@ function updateBoard() {
   }
 
   request.onload = () => {
-    error.innerHTML = "";
+    clearError();
     /** @type {{archived: boolean, title: string, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}, postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null}[] }}[]} */
     const data = JSON.parse(request.responseText);
     boardName.innerHTML = data.title;
@@ -196,19 +216,16 @@ function updateBoard() {
       boardTable.appendChild(tr);
     }
 
-    clearTimeout(updateBoard);
-    setTimeout(updateBoard, REFRESH_TIMEOUT);
+    t = setTimeout(updateBoard, REFRESH_TIMEOUT);
   };
 
   request.ontimeout = () => {
-    error.innerHTML = "Server timeout, still trying...";
-    clearTimeout(updateBoard);
-    setTimeout(updateBoard, ERROR_TIMEOUT);
+    showError("Server timeout, still trying...");
+    t = setTimeout(updateBoard, ERROR_TIMEOUT);
   };
   request.onerror = () => {
-    error.innerHTML = "No server reply, still trying...";
-    clearTimeout(updateBoard);
-    setTimeout(updateBoard, RETRY_TIMEOUT);
+    showError("No server reply, still trying...");
+    t = setTimeout(updateBoard, RETRY_TIMEOUT);
   };
 
   request.open("GET", `/api/board/${id}`, true);
@@ -217,6 +234,8 @@ function updateBoard() {
 }
 
 function getAuthenticatedUser() {
+  console.log("> Getting authenticated user");
+
   /** @type XMLHttpRequest */
   let authRequest;
 
@@ -236,15 +255,15 @@ function getAuthenticatedUser() {
   };
 
   authRequest.ontimeout = () => {
-    error.innerHTML = "Server timeout, still trying...";
-    clearTimeout(updateBoard);
-    setTimeout(getData, ERROR_TIMEOUT);
+    showError("Server timeout, still trying...");
+    clearTimeout(t);
+    t = setTimeout(getAuthenticatedUser, ERROR_TIMEOUT);
   };
 
   authRequest.onerror = () => {
-    error.innerHTML = "No server reply, still trying...";
-    clearTimeout(updateBoard);
-    setTimeout(getData, RETRY_TIMEOUT);
+    showError("No server reply, still trying...");
+    clearTimeout(t);
+    t = setTimeout(getAuthenticatedUser, RETRY_TIMEOUT);
   };
 
   authRequest.open("GET", "/api/session", true);
@@ -253,8 +272,11 @@ function getAuthenticatedUser() {
 }
 
 function getOnlineUsers() {
+  console.log("> Getting online users");
   /** @type XMLHttpRequest */
   let onlineUsersRequest;
+  let timeout;
+  clearTimeout(timeout);
 
   try {
     onlineUsersRequest = new XMLHttpRequest();
@@ -270,19 +292,16 @@ function getOnlineUsers() {
 
     online.innerHTML = `Currently active: ${data.online}`;
 
-    clearTimeout(updateBoard);
-    setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
+    timeout = setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
   };
 
   onlineUsersRequest.ontimeout = () => {
-    error.innerHTML = "Server timeout, still trying...";
-    clearTimeout(updateBoard);
-    setTimeout(getData, ERROR_TIMEOUT);
+    showError("Server timeout, still trying...");
+    timeout = setTimeout(getOnlineUsers, ERROR_TIMEOUT);
   };
   onlineUsersRequest.onerror = () => {
-    error.innerHTML = "No server reply, still trying...";
-    clearTimeout(updateBoard);
-    setTimeout(getData, RETRY_TIMEOUT);
+    showError("No server reply, still trying...");
+    timeout = setTimeout(getOnlineUsers, RETRY_TIMEOUT);
   };
 
   onlineUsersRequest.open("GET", "/api/online", true);
