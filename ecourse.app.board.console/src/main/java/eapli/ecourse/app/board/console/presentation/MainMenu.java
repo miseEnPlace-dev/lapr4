@@ -18,7 +18,6 @@ import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
