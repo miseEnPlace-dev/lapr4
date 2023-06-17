@@ -56,7 +56,7 @@ public class ListExamAnswerService {
     for (Student student : studentsInCourse) {
       if (!studentWhoAnswered.contains(student)) {
         result.add(new AnswerDTO(student.identity().toString(), student.user().name().toString(),
-            exam.title().toString(), exam.course().title().toString(), null, null));
+            exam.title().toString(), exam.course().title().toString(), null, exam.score().toString(), null));
       }
     }
 
@@ -68,7 +68,7 @@ public class ListExamAnswerService {
 
     for (Exam exam : exams) {
       AnswerDTO dto = new AnswerDTO(student.identity().toString(), student.user().name().toString(),
-          exam.title().toString(), exam.course().title().toString(), null, null);
+          exam.title().toString(), exam.course().title().toString(), null, exam.score().toString(), null);
       examAnswers.add(dto);
     }
 
