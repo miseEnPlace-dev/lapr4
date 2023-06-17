@@ -11,9 +11,8 @@ public class ClientState {
     return this.credentialStore;
   }
 
-  // singleton thread-local instance
-  // each thread will create its own instance of ClientState
-  // therefore the clientState it thread safe
+  // singleton thread-local instance: each thread will create its own instance of ClientState
+  // therefore the clientState is thread safe
   private static final ThreadLocal<ClientState> _localStorage = new ThreadLocal<ClientState>() {
     protected ClientState initialValue() {
       return new ClientState();
