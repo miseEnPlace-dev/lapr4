@@ -185,7 +185,7 @@ function updateBoard() {
           td.innerHTML = `
             <button
               id=${postIt.id}
-              ${hasContent ? `onClick="openModal(${i},${j})"` : ""}
+              ${hasContent ? `onClick="openModal(${j},${i})"` : ""}
               class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-slate-200 ${
                 hasContent
                   ? "hover:brightness-90 transition-all duration-150 cursor-pointer"

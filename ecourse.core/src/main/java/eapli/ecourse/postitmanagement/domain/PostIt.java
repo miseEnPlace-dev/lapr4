@@ -25,7 +25,6 @@ import eapli.framework.validations.Preconditions;
 
 @Entity
 public class PostIt implements AggregateRoot<PostItID> {
-
   private static final long serialVersionUID = 1L;
 
   @Version
@@ -52,10 +51,6 @@ public class PostIt implements AggregateRoot<PostItID> {
   @Column(nullable = true)
   private PostItDescription description;
 
-  @Lob
-  @Column(nullable = true)
-  private PostItImage image;
-
   /**
    * cascade = CascadeType.NONE as the board is part of another aggregate
    */
@@ -79,6 +74,10 @@ public class PostIt implements AggregateRoot<PostItID> {
   @JsonProperty
   @OneToOne(optional = true, cascade = CascadeType.ALL)
   private PostIt previous;
+
+  @Lob
+  @Column(nullable = true)
+  private PostItImage image;
 
   protected PostIt() {
     // for ORM
