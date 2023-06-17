@@ -97,7 +97,7 @@ The system notifies the user that the recipient user already has permissions to 
 
 ### 4.4. Tests
 
-> ️️💡 These tests are simplified versions for readability purposes.
+> ️️💡 This section only shows the test signatures for readability purposes.
 >
 > [Click here](/ecourse.core/src/test/java/eapli/ecourse/postitmanagement/application/UndoPostItControllerTest.java) to see the full code.
 
@@ -201,18 +201,19 @@ public void testPassingUnknownEntitiesThrowsError() { ... }
 
 ## 5. Implementation
 
-### 5.1. Controller
+> ️️💡 This section only shows the method signatures for readability purposes.
+
+### 5.1. Use Case Controller
 
 ```java
-public ShareBoardController(BoardRepository boardRepository, UserManagementService userSvc) {
-  this.boardRepository = boardRepository;
-  this.userSvc = userSvc;
-}
+public ShareBoardController(BoardRepository boardRepository, UserManagementService userSvc) { ... }
 ```
+
+[Click here](/ecourse.core/src/main/java/eapli/ecourse/boardmanagement/application/ShareBoardController.java) to see the full code.
 
 ## 6. Integration & Demonstration
 
-- Success cenario
+- Success scenario
 
 ![US3004_DEMO](US3004_DEMO.png)
 
@@ -221,7 +222,8 @@ public ShareBoardController(BoardRepository boardRepository, UserManagementServi
 ![US3004_DEMO2](US3004_DEMO2.png)
 
 - Authenticated user does not own any board:
-- ![US3004_DEMO3](US3004_DEMO3.png)
+
+![US3004_DEMO3](US3004_DEMO3.png)
 
 ## 7. Observations
 
