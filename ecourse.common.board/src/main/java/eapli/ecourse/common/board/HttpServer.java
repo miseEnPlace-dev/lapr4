@@ -30,7 +30,8 @@ public class HttpServer implements Runnable {
     do {
       try {
         if (secure)
-          tcpSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
+          tcpSocket =
+              (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
         else
           tcpSocket = new ServerSocket(port);
       } catch (BindException e) {

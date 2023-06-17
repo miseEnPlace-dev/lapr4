@@ -33,5 +33,6 @@ public class BoardHttpServer {
     Thread httpServerThread = new Thread(httpServer);
 
     httpServerThread.start();
+    httpServerThread.setName("HTTP Server Thread");
   }
 }
