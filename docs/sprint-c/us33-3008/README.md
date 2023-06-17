@@ -91,7 +91,7 @@ A user will be unable to undo the last change in a post-it if the post-it does n
 
 ### 4.4. Tests
 
-> ️️💡 These tests are simplified versions for readability purposes.
+> ️️💡 This section only shows the test signatures for readability purposes.
 >
 > [Click here](/ecourse.core/src/test/java/eapli/ecourse/boardmanagement/application/ShareBoardControllerTest.java) to see the full code.
 
@@ -146,7 +146,9 @@ public void testPreviousPostItDoesNotExistWhenUndoing() { ... }
 
 ## 5. Implementation
 
-### 5.1. Controller
+> ️️💡 This section only shows the method signatures for readability purposes.
+
+### 5.1. Use Case Controller
 
 ```java
 public UndoPostItController(TransactionalContext ctx, PostItRepository postItRepository) {
@@ -155,9 +157,11 @@ public UndoPostItController(TransactionalContext ctx, PostItRepository postItRep
 }
 ```
 
+[Click here](/ecourse.core/src/main/java/eapli/ecourse/postitmanagement/application/UndoPostItController.java) to see the full code.
+
 ## 6. Integration & Demonstration
 
-- Success cenario:
+- Success scenario:
 
 ![US3008_DEMO](US3008_DEMO.png)
 
