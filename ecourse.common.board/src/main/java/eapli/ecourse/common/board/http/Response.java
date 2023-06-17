@@ -30,6 +30,15 @@ public class Response {
     return this;
   }
 
+  public void send() {
+    try {
+      sendHttpResponse();
+    } catch (IOException e) {
+      Logger logger = LogManager.getLogger(Response.class);
+      logger.error("Error sending response", e);
+    }
+  }
+
   public void send(byte[] body) {
     try {
       sendHttpResponse(body, body.length);
@@ -79,6 +88,11 @@ public class Response {
 
   public void setContentType(String contentType) {
     this.contentType = contentType;
+  }
+
+  private void sendHttpResponse() throws IOException {
+    sendHttpResponseHeaders(0);
+    output.write(new byte[0], 0, 0);
   }
 
   private void sendHttpResponse(byte[] content, int contentLength) throws IOException {

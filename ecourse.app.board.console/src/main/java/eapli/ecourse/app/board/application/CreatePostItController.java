@@ -46,7 +46,7 @@ public class CreatePostItController {
     json.add("y", y);
 
     ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -68,7 +68,7 @@ public class CreatePostItController {
       json.add("imagePath", imagePath);
 
     ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.CREATE_POSTIT, json.build().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.CREATE_POSTIT, json.build()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

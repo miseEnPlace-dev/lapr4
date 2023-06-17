@@ -63,7 +63,7 @@ public class ChangePostItController {
     json.add("y", y);
 
     ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -89,7 +89,7 @@ public class ChangePostItController {
       json.add("imagePath", imagePath);
 
     ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.CHANGE_POSTIT, json.build().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.CHANGE_POSTIT, json.build()));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

@@ -41,7 +41,7 @@ public class ShareBoardController {
         .add("username", username).build();
 
     ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.GET_USER_PERMISSIONS, payload.toString()));
+        server.sendRecv(new ProtocolMessage(MessageCode.GET_USER_PERMISSIONS, payload));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -60,7 +60,7 @@ public class ShareBoardController {
         .add("username", username).add("permission", newPermission).build();
 
     ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.SHARE_BOARD, payload.toString()));
+        server.sendRecv(new ProtocolMessage(MessageCode.SHARE_BOARD, payload));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

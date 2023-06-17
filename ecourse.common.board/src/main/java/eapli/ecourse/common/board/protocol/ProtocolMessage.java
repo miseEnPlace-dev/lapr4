@@ -10,6 +10,7 @@ import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.json.JsonStructure;
 
 public class ProtocolMessage {
   private static final byte PROTOCOL_VERSION = 1;
@@ -35,6 +36,14 @@ public class ProtocolMessage {
     this.code = code;
     this.payloadLength = payload.length();
     this.payload = payload.getBytes();
+  }
+
+  public ProtocolMessage(MessageCode code, JsonStructure payload) {
+    this.protocolVersion = PROTOCOL_VERSION;
+    this.code = code;
+    String payloadString = payload.toString();
+    this.payloadLength = payloadString.length();
+    this.payload = payloadString.getBytes();
   }
 
   public ProtocolMessage(MessageCode code, byte[] payload) {

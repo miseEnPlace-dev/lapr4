@@ -3,6 +3,7 @@ package eapli.ecourse.common.board.http;
 import java.io.DataInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Request {
   private String method;
@@ -40,8 +41,8 @@ public class Request {
     return path.getParam(name);
   }
 
-  public String getQuery(String name) {
-    return path.getQuery(name);
+  public Optional<String> getQuery(String name) {
+    return Optional.of(path.getQuery(name));
   }
 
   public List<String> getArrayQuery(String name) {
