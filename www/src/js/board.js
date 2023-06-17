@@ -64,9 +64,9 @@ function assignUserImage(postIts) {
   return userImages;
 }
 
-function openModal(i, j) {
+function openModal(x, y) {
   /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }} */
-  const postIt = postIts.get(`${j}-${i}`);
+  const postIt = postIts.get(`${x}-${y}`);
   const body = document.querySelector("body");
 
   body.className += " overflow-hidden";
@@ -84,19 +84,23 @@ function openModal(i, j) {
   modalContainer.onclick = closeModal;
 
   modal.innerHTML = `
-    <div class="z-50 flex flex-col gap-y-6 items-center justify-between w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-16">
-      <h1 class="text-3xl font-bold text-center">${postIt.title}</h1>
+    <div class="z-50 flex flex-col gap-y-6 items-center justify-between w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-8">
+      <h1 class="text-3xl font-bold text-center capitalize">${postIt.title}</h1>
+      <div class="w-3/4 h-1 border-b-2 border-slate-300 dark:border-slate-600"></div>
       ${
-        postIt.description === "null"
-          ? `<p class="text-xl">${postIt.description}</p>`
+        postIt.description
+          ? `<p class="text-xl text-left self-start px-8">${postIt.description}</p>`
           : ""
       }
 
+      ${
+        postIt.image
+          ? `
       <div class="flex flex-col items-center justify-center h-1/2">
-        <img src="data:image/png;base64,${
-          postIt.image
-        }" alt="Post-it image" class="w-full h-full">
-      </div>
+        <img src="data:image/png;base64,${postIt.image}" alt="Post-it image" class="w-full h-full">
+      </div>`
+          : ""
+      }
     </div>
 `;
 
