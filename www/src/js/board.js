@@ -12,6 +12,7 @@ const userFilter = document.querySelector("#user-filter");
 
 let authenticatedUser;
 let t;
+let userImages;
 
 const N_OF_USER_IMAGES = 7;
 
@@ -51,7 +52,7 @@ function closeModal() {
   modal.remove();
 }
 
-/** @type {(postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }[])=>Map<string,string>} */
+/** @type {(postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null }[])=>Map<string,string>} */
 function assignUserImage(postIts) {
   /** @type {Map<string, string>} */
   const userImages = new Map();
@@ -69,7 +70,7 @@ function assignUserImage(postIts) {
 }
 
 function openModal(x, y) {
-  /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }} */
+  /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null }} */
   const postIt = postIts.get(`${x}-${y}`);
   const body = document.querySelector("body");
 
@@ -88,9 +89,22 @@ function openModal(x, y) {
   modalContainer.onclick = closeModal;
 
   modal.innerHTML = `
-    <div class="z-50 flex flex-col gap-y-6 items-center justify-between w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-8">
+    <div class="z-50 flex flex-col gap-y-6 items-center justify-between w-full h-full rounded-lg bg-slate-200 dark:bg-slate-700 py-12 px-6">
       <h1 class="text-3xl font-bold text-center capitalize">${postIt.title}</h1>
       <div class="w-3/4 h-1 border-b-2 border-slate-300 dark:border-slate-600"></div>
+      <div class="flex items-center justify-between px-8 w-full">
+        <div class="flex items-center gap-x-4">
+          <img src=${userImages.get(
+            postIt.owner.username
+          )} alt="User image" class="w-10 h-10 rounded-full">
+          <span class="font-bold">
+            ${postIt.owner.name}
+          </span>
+        </div>
+        <span>
+          Last update: ${postIt.createdAt}
+        </span>
+      </div>
       ${
         postIt.description
           ? `<p class="text-xl text-left self-start px-8">${postIt.description}</p>`
@@ -126,17 +140,28 @@ function updateBoard() {
 
   request.onload = () => {
     clearError();
-    /** @type {{archived: boolean, title: string, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}, postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null}[] }}[]} */
+    /** @type {{archived: string | null, title: string, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}, postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null}[] }}[]} */
     const data = JSON.parse(request.responseText);
-    boardName.innerHTML = data.title;
+    boardName.innerHTML = `${data.title} <span class="text-sm text-gray-500 dark:text-gray-400">by ${data.owner.name}</span>`;
+
+    const { postIts: p, columns, rows, archived } = data;
+
+    if (archived) {
+      const archivedContainer = document.getElementById("archived")
+        ? document.getElementById("archived")
+        : document.createElement("div");
+      archivedContainer.id = "archived";
+      archivedContainer.className =
+        "absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-1/2 p-8 text-center bg-opacity-90 dark:bg-slate-700 dark:text-slate-200";
+      archivedContainer.innerHTML = `<h1 class="text-3xl font-bold text-center capitalize">Archived at ${archived}</h1>`;
+      document.querySelector("body").appendChild(archivedContainer);
+    }
 
     boardTable.innerHTML = "";
 
-    const { postIts: p, columns, rows } = data;
-
     const postItsMap = new Map();
     postIts = postItsMap;
-    const userImages = assignUserImage(p);
+    userImages = assignUserImage(p);
 
     for (const postIt of p)
       postItsMap.set(
@@ -186,7 +211,7 @@ function updateBoard() {
         else td.className += " border-b-2 border-x-2";
 
         if (postItsMap.has(`${j}-${i}`)) {
-          /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }} */
+          /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null }} */
           const postIt = postItsMap.get(`${j}-${i}`);
           if (
             (userFilter.checked &&
@@ -199,7 +224,7 @@ function updateBoard() {
             <button
               id=${postIt.id}
               ${hasContent ? `onClick="openModal(${j},${i})"` : ""}
-              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-slate-200 ${
+              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-gray-200 ${
                 hasContent
                   ? "hover:brightness-90 transition-all duration-150 cursor-pointer"
                   : "hover:brightness-100 cursor-default"

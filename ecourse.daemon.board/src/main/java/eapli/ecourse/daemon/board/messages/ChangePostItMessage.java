@@ -9,6 +9,7 @@ import javax.json.JsonStructure;
 import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -33,8 +34,8 @@ public class ChangePostItMessage extends Message {
   private PostItRepository postItRepository;
 
   public ChangePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
 
@@ -119,6 +120,8 @@ public class ChangePostItMessage extends Message {
       send(new ProtocolMessage(MessageCode.ERR, "Post-it could not be created"));
       return;
     }
+
+    this.boardUpdatesCounter.increment();
 
     send(new ProtocolMessage(MessageCode.CHANGE_POSTIT));
 

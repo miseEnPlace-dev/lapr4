@@ -6,6 +6,7 @@ import java.net.Socket;
 import eapli.ecourse.boardmanagement.application.ArchiveBoardController;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -22,8 +23,8 @@ public class ArchiveBoardMessage extends Message {
   private final ArchiveBoardController ctrl;
 
   public ArchiveBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.ctrl = new ArchiveBoardController(boardRepository);
@@ -60,6 +61,8 @@ public class ArchiveBoardMessage extends Message {
     }
 
     ctrl.archiveBoard(boardId);
+
+    this.boardUpdatesCounter.increment();
 
     send(new ProtocolMessage(MessageCode.ARCHIVE_BOARD));
   }

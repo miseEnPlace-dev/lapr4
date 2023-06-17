@@ -11,6 +11,7 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.dto.BoardWithPostItsDTO;
 import eapli.ecourse.common.board.protocol.MessageCode;
@@ -27,9 +28,8 @@ public class GetBoardMessage extends Message {
   private ListPostItService listPostItsSvc;
 
   public GetBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
-
+      SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
     this.boardRepo = PersistenceContext.repositories().boards();
     this.listPostItsSvc = new ListPostItService(PersistenceContext.repositories().postIts());
   }

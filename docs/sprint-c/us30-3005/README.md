@@ -53,7 +53,9 @@
 
 ### 3.1. Conditions
 
-- XXX
+- The board server must be running
+- The user must be logged in
+- The board server and app must be able to communicate with each other
 
 ### 3.2. System Sequence Diagram
 
@@ -62,6 +64,8 @@
 ### 3.4. Partial Domain Model
 
 ![US3005_DM](out/US3005_DM.svg)
+
+---
 
 ## 4. Design
 
@@ -97,9 +101,23 @@ _Note: This are some simplified versions of the tests for readability purposes._
 
 ```
 
+---
+
 ## 6. Integration & Demonstration
 
-![US3005_DEMO](out/US3005_DEMO.svg)
+### 6.1. Select Board
+
+![US3005_DEMO-1](US3005_DEMO-1.png)
+
+### 6.2. View Board
+
+![US3005_DEMO-2](US3005_DEMO-2.png)
+![US3005_DEMO-3](US3005_DEMO-3.png)
+
+### 6.3. View Post It
+
+![US3005_DEMO-4](US3005_DEMO-4.png)
+![US3005_DEMO-5](US3005_DEMO-5.png)
 
 ## 7. Observations
 

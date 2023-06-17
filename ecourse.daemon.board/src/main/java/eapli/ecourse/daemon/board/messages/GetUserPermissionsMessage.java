@@ -11,6 +11,7 @@ import eapli.ecourse.boardmanagement.application.ShareBoardController;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -30,8 +31,8 @@ public class GetUserPermissionsMessage extends Message {
   private final ShareBoardController ctrl;
 
   public GetUserPermissionsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.userSvc = AuthzRegistry.userService();
@@ -63,8 +64,7 @@ public class GetUserPermissionsMessage extends Message {
     }
 
     BoardID boardId = BoardID.valueOf(boardIdStr);
-    Username authUsername =
-        Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
+    Username authUsername = Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
 
     // verify if the board with the given id exists
     if (!ctrl.boardExists(boardId)) {
