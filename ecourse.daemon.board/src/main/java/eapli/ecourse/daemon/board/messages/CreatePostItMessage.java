@@ -106,6 +106,5 @@ public class CreatePostItMessage extends Message {
     }
 
     send(new ProtocolMessage(MessageCode.CREATE_POSTIT));
-
   }
 }

@@ -41,10 +41,14 @@ public class BoardService {
 
   private boolean checkCellExists(BoardID id, int x, int y) {
     Board b = boardRepository.ofIdentity(id).orElseThrow();
+    boolean exists = false;
 
     for (BoardRow r : b.rows())
       if (r.rowNumber().equals(y))
-        return true;
+        exists = true;
+
+    if (!exists)
+      return false;
 
     for (BoardColumn c : b.columns())
       if (c.columnNumber().equals(x))
