@@ -102,7 +102,7 @@ function openModal(x, y) {
           </span>
         </div>
         <span>
-          ${postIt.createdAt}
+          Last update: ${postIt.createdAt}
         </span>
       </div>
       ${
@@ -147,10 +147,12 @@ function updateBoard() {
     const { postIts: p, columns, rows, archived } = data;
 
     if (archived) {
-      // create a element to show the archived date in the center of the screen
-      const archivedContainer = document.createElement("div");
+      const archivedContainer = document.getElementById("archived")
+        ? document.getElementById("archived")
+        : document.createElement("div");
+      archivedContainer.id = "archived";
       archivedContainer.className =
-        "absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-md w-1/2 p-8 text-center bg-opacity-90 dark:bg-slate-700 dark:text-slate-200";
+        "absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-1/2 p-8 text-center bg-opacity-90 dark:bg-slate-700 dark:text-slate-200";
       archivedContainer.innerHTML = `<h1 class="text-3xl font-bold text-center capitalize">Archived at ${archived}</h1>`;
       document.querySelector("body").appendChild(archivedContainer);
     }
@@ -222,7 +224,7 @@ function updateBoard() {
             <button
               id=${postIt.id}
               ${hasContent ? `onClick="openModal(${j},${i})"` : ""}
-              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-slate-200 ${
+              class="w-11/12 mx-auto flex flex-col items-center py-4 px-8 rounded-lg relative dark:bg-slate-600 bg-gray-200 ${
                 hasContent
                   ? "hover:brightness-90 transition-all duration-150 cursor-pointer"
                   : "hover:brightness-100 cursor-default"
