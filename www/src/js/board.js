@@ -1,12 +1,16 @@
 const RETRY_TIMEOUT = 3000;
 const ERROR_TIMEOUT = 1000;
-const REFRESH_TIMEOUT = 2000;
+const REFRESH_TIMEOUT = 1000;
+const REFRESH_ONLINE_TIMEOUT = 3000;
 const MAX_TIMEOUT = 10000;
 
 const id = window.location.search.split("=")[1];
 const error = document.querySelector("#error");
 const boardName = document.querySelector("#board-name");
 const boardTable = document.querySelector("#board");
+const userFilter = document.querySelector("#user-filter");
+
+let authenticatedUser;
 let t;
 
 const N_OF_USER_IMAGES = 7;
@@ -184,9 +188,14 @@ function updateBoard() {
         if (postItsMap.has(`${j}-${i}`)) {
           /** @type {{ id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: Date, description: string | null, image: string | null }} */
           const postIt = postItsMap.get(`${j}-${i}`);
-          const hasContent = postIt.description || postIt.image;
+          if (
+            (userFilter.checked &&
+              postIt.owner.username === authenticatedUser.username) ||
+            !userFilter.checked
+          ) {
+            const hasContent = postIt.description || postIt.image;
 
-          td.innerHTML = `
+            td.innerHTML = `
             <button
               id=${postIt.id}
               ${hasContent ? `onClick="openModal(${j},${i})"` : ""}
@@ -202,16 +211,17 @@ function updateBoard() {
                     ? "<div class='text-xl brightness-75 dark:brightness-100'>🗒️</div>"
                     : ""
                 }
-                <div class="flex gap-x-2 items-center w-full justify-end">
+                  <div class="flex gap-x-2 items-center w-full justify-end">
                   <h3 class="text-lg font-thin">${postIt.owner.name}</h3>
                   <img src=${userImages.get(
                     postIt.owner.username
                   )} alt="User Avatar" class="h-8 w-8 bg-gray-400 rounded-full" />
-                </div>
-              </div>
-            </button>
-          `;
-        } else td.innerHTML = "";
+                    </div>
+                    </div>
+                    </button>
+                    `;
+          } else td.innerHTML = "";
+        }
 
         tr.className = "h-52 w-72";
         tr.appendChild(td);
@@ -255,6 +265,7 @@ function getAuthenticatedUser() {
     /** @type {{username: string, name: string, email: string, roles: string[]}} */
     const data = JSON.parse(authRequest.responseText);
 
+    authenticatedUser = data;
     username.innerHTML = `Welcome, ${data.username}!`;
   };
 
@@ -296,7 +307,7 @@ function getOnlineUsers() {
 
     online.innerHTML = `Currently active: ${data.online}`;
 
-    timeout = setTimeout(getOnlineUsers, REFRESH_TIMEOUT);
+    timeout = setTimeout(getOnlineUsers, REFRESH_ONLINE_TIMEOUT);
   };
 
   onlineUsersRequest.ontimeout = () => {
