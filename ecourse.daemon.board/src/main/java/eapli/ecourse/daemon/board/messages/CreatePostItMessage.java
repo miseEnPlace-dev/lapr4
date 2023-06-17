@@ -44,8 +44,7 @@ public class CreatePostItMessage extends Message {
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl =
-        new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
+    this.ctrl = new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
     this.userService = AuthzRegistry.userService();
   }
 
@@ -113,7 +112,7 @@ public class CreatePostItMessage extends Message {
       return;
     }
 
-    this.boardUpdatesCounter.increment();
+    this.boardUpdatesCounter.incrementNumberPostIts();
 
     send(new ProtocolMessage(MessageCode.CREATE_POSTIT));
   }

@@ -1,7 +1,6 @@
 package eapli.ecourse.common.board;
 
 public class SafeBoardUpdatesShared {
-  private long number = 0;
   private boolean signaled = false;
   private String updateMessage;
 
@@ -17,12 +16,11 @@ public class SafeBoardUpdatesShared {
     }
   }
 
-  public synchronized void write(long number) {
-    this.number = number;
+  public synchronized void write(long number, long totalUpdates, String type) {
     this.signaled = true;
-    updateMessage = String.format("[Thread: %s] Board was just updated! Total updates: %d !",
+    updateMessage = String.format("\n[%s] Just made an update!\n%s %d \nTotal number of updates: %d",
         Thread.currentThread().getName(),
-        this.number);
+        type, number, totalUpdates);
     notifyAll();
   }
 

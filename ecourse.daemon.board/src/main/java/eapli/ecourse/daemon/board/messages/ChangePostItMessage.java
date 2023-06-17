@@ -93,10 +93,8 @@ public class ChangePostItMessage extends Message {
     String imagePath = payload.asJsonObject().keySet().contains("imagePath")
         ? payload.asJsonObject().getString("imagePath")
         : null;
-    Integer x =
-        payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
-    Integer y =
-        payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
+    Integer x = payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
+    Integer y = payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
 
     if (title == null && x == null && y == null && description == null && imagePath == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
@@ -121,7 +119,7 @@ public class ChangePostItMessage extends Message {
       return;
     }
 
-    this.boardUpdatesCounter.increment();
+    this.boardUpdatesCounter.incrementNumberUpdatesPostIts();
 
     send(new ProtocolMessage(MessageCode.CHANGE_POSTIT));
 
