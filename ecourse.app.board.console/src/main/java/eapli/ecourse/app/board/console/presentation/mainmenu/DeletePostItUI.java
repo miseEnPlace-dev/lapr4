@@ -73,6 +73,6 @@ public class DeletePostItUI extends AbstractUI {
 
   @Override
   public String headline() {
-    return "Create Post-It";
+    return "Delete Post-It";
   }
 }

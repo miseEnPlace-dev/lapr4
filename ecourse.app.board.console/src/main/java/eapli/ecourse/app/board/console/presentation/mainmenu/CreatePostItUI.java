@@ -48,9 +48,9 @@ public class CreatePostItUI extends AbstractUI {
         y = Console.readInteger("Y: ");
 
         success = ctrl.validateCoordinates(selected.getId(), x, y);
-        if (!success) {
+
+        if (!success)
           System.out.println("Cell not available. Make sure the cell exists and is free! Try again.");
-        }
       } while (!success);
 
       String title = Console.readLine("Write the post-it title: ");
@@ -60,7 +60,6 @@ public class CreatePostItUI extends AbstractUI {
       ctrl.createPostIt(selected.getId(), x, y, title, description, imagePath);
 
       System.out.println("\nPost-it created successfully.");
-
     } catch (ClassNotFoundException | IOException | UnsupportedVersionException | UnsuccessfulRequestException e) {
       logger.error("Error trying to view a board", e);
     }

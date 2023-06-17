@@ -59,11 +59,6 @@ public class ViewBoardHistoryUI extends AbstractUI {
     return false;
   }
 
-  @Override
-  public String headline() {
-    return "View Board History";
-  }
-
   private void printPostIts(Iterable<PostItDTO> postIt) {
     PostItPrinter printer = new PostItPrinter();
     System.out.println();
@@ -75,5 +70,10 @@ public class ViewBoardHistoryUI extends AbstractUI {
     }
 
     System.out.println();
+  }
+
+  @Override
+  public String headline() {
+    return "View Board History";
   }
 }
