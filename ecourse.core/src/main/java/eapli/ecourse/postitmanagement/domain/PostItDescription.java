@@ -34,4 +34,8 @@ public class PostItDescription implements ValueObject {
   public String toString() {
     return this.description;
   }
+
+  public int getHash() {
+    return this.description.hashCode();
+  }
 }

@@ -1,11 +1,7 @@
 package eapli.ecourse.app.board.controllers;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,17 +10,14 @@ import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.common.board.dto.BoardWithPostItsDTO;
 import eapli.ecourse.common.board.http.Request;
 import eapli.ecourse.common.board.http.Response;
 import eapli.ecourse.common.board.http.RouteController;
-import eapli.ecourse.common.board.mapper.BoardMapper;
-import eapli.ecourse.common.board.mapper.PostItMapper;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
-import eapli.ecourse.postitmanagement.dto.PostItDTO;
 
 public class ViewBoardController implements RouteController {
   private final static Logger LOGGER = LogManager.getLogger(ViewBoardController.class);
@@ -42,30 +35,33 @@ public class ViewBoardController implements RouteController {
     String boardId = req.getParam("id");
 
     if (auth.getUser().isEmpty()) {
-      JsonObjectBuilder json = Json.createObjectBuilder().add("message", "Unauthorized");
-      res.status(401).json(json.build());
+      JsonObjectBuilder response = Json.createObjectBuilder().add("message", "Unauthorized");
+      res.status(401).json(response.build());
       return;
     }
 
     try {
+      JsonObjectBuilder request = Json.createObjectBuilder().add("boardId", boardId);
+
+      req.getQuery("hash").ifPresent(hash -> request.add("hash", hash));
+
       ProtocolMessage response =
-          client.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD, boardId));
+          client.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD, request.build()));
+
+      // response has not been modified
+      if (response.getCode().equals(MessageCode.NOT_MODIFIED)) {
+        res.status(304).send();
+        return;
+      }
 
       if (response.getCode().equals(MessageCode.ERR))
         throw new UnsuccessfulRequestException(response);
 
-      BoardDTO board = (BoardDTO) response.getPayloadAsObject();
+      BoardWithPostItsDTO board = (BoardWithPostItsDTO) response.getPayloadAsObject();
 
-      Iterable<PostItDTO> postIts = listLatestBoardPostIts(board);
+      JsonObjectBuilder builder = board.toJsonBuilder().add("hash", board.hashCode());
 
-      JsonObjectBuilder json = Json.createObjectBuilder(BoardMapper.toJson(board));
-      JsonArrayBuilder postItsJson = Json.createArrayBuilder();
-
-      postIts.forEach(postIt -> postItsJson.add(PostItMapper.toJson(postIt)));
-
-      json.add("postIts", postItsJson);
-
-      res.json(json.build());
+      res.json(builder.build());
     } catch (UnsuccessfulRequestException e) {
       JsonObjectBuilder json = Json.createObjectBuilder().add("message", e.getMessage());
       res.status(400).json(json.build());
@@ -73,20 +69,5 @@ public class ViewBoardController implements RouteController {
       LOGGER.error("Error fetching boards", e);
       res.status(500).send("error");
     }
-  }
-
-  private Iterable<PostItDTO> listLatestBoardPostIts(BoardDTO board) throws IOException,
-      UnsupportedVersionException, UnsuccessfulRequestException, ClassNotFoundException {
-    ProtocolMessage response = client
-        .sendRecv(new ProtocolMessage(MessageCode.GET_POSTITS_BOARD, board.getId().toString()));
-
-    if (response.getCode().equals(MessageCode.ERR))
-      throw new UnsuccessfulRequestException(response);
-    Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
-
-    List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true)
-        .map(PostItDTO.class::cast).collect(Collectors.toUnmodifiableList());
-
-    return result;
   }
 }

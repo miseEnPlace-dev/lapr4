@@ -59,4 +59,8 @@ public class PermissionType implements ValueObject {
   public String toString() {
     return type.toString();
   }
+
+  public int getHash() {
+    return toString().hashCode();
+  }
 }

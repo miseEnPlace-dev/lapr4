@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
-
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -130,6 +130,14 @@ public class UserPermission implements DomainEntity<UserPermissionID> {
   }
 
   public boolean canWrite(Username username) {
-    return this.user.username().equals(username) || this.permissionType.equals(PermissionType.read());
+    return this.user.username().equals(username)
+        || this.permissionType.equals(PermissionType.read());
+  }
+
+  public int getHash() {
+    HashCodeBuilder hashBuilder = new HashCodeBuilder().append(createdAt).append(updatedAt)
+        .append(user).appendSuper(permissionType.getHash());
+
+    return hashBuilder.toHashCode();
   }
 }

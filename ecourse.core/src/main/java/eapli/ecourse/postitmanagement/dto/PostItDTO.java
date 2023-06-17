@@ -2,6 +2,7 @@ package eapli.ecourse.postitmanagement.dto;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostItDescription;
@@ -33,4 +34,31 @@ public class PostItDTO implements Serializable {
   private boolean isLatest;
   private PostItDescription description;
   private PostItImage image;
+
+  @Override
+  public int hashCode() {
+    HashCodeBuilder hashBuilder = new HashCodeBuilder().append(id).append(title).append(coordinates)
+        .appendSuper(state.getHashCode()).append(owner).append(createdAt).append(isLatest)
+        .append(description).append(image);
+
+    if (previous != null)
+      hashBuilder.appendSuper(previous.hashCode());
+
+    return hashBuilder.toHashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+
+    if (this == obj)
+      return true;
+
+    if (!(obj instanceof PostItDTO))
+      return false;
+
+    PostItDTO other = (PostItDTO) obj;
+    return other.hashCode() == this.hashCode();
+  }
 }

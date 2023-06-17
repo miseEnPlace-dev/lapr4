@@ -7,11 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.validations.Preconditions;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "board_id", "columnNumber" }) })
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"board_id", "columnNumber"})})
 public class BoardColumn implements DomainEntity<Integer> {
 
   private static final long serialVersionUID = 1L;
@@ -71,4 +72,11 @@ public class BoardColumn implements DomainEntity<Integer> {
         && title().equals(otherBoardColumn.title());
   }
 
+
+  public int getHash() {
+    HashCodeBuilder hashBuilder =
+        new HashCodeBuilder().append(title).append(columnNumber).append(boardID);
+
+    return hashBuilder.toHashCode();
+  }
 }

@@ -42,7 +42,7 @@ public class Request {
   }
 
   public Optional<String> getQuery(String name) {
-    return Optional.of(path.getQuery(name));
+    return Optional.ofNullable(path.getQuery(name));
   }
 
   public List<String> getArrayQuery(String name) {

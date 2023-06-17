@@ -3,6 +3,7 @@ package eapli.ecourse.usermanagement.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
@@ -53,5 +54,28 @@ public class UserDTO implements Serializable {
   public String toString() {
     return "UserDTO [email=" + email + ", fullName=" + fullName + ", roles=" + roles + ", username="
         + username + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    HashCodeBuilder hashBuilder =
+        new HashCodeBuilder().append(username).append(email).append(fullName).append(roles);
+
+    return hashBuilder.toHashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+
+    if (this == obj)
+      return true;
+
+    if (!(obj instanceof UserDTO))
+      return false;
+
+    UserDTO other = (UserDTO) obj;
+    return other.hashCode() == this.hashCode();
   }
 }

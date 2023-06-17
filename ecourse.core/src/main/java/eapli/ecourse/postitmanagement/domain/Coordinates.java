@@ -1,10 +1,13 @@
 package eapli.ecourse.postitmanagement.domain;
 
+import java.util.Objects;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
+import lombok.EqualsAndHashCode;
 
 @Embeddable
+@EqualsAndHashCode
 public class Coordinates implements ValueObject {
 
   Integer x, y;
@@ -44,5 +47,10 @@ public class Coordinates implements ValueObject {
     }
     Coordinates coordinates = (Coordinates) o;
     return x == coordinates.x && y == coordinates.y;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(x, y);
   }
 }

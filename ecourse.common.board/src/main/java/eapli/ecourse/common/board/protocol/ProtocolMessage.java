@@ -237,7 +237,7 @@ public class ProtocolMessage {
 
   public JsonStructure getPayloadAsJson() {
     JsonReader reader = Json.createReader(new StringReader(getStringifiedPayload()));
-    JsonStructure jsonObject = reader.readObject();
+    JsonStructure jsonObject = reader.read();
     reader.close();
     return jsonObject;
   }

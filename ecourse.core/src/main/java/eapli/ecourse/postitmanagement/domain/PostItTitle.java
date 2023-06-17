@@ -35,5 +35,4 @@ public class PostItTitle implements ValueObject, Comparable<PostItTitle> {
   public int compareTo(PostItTitle o) {
     return title.compareTo(o.title);
   }
-
 }

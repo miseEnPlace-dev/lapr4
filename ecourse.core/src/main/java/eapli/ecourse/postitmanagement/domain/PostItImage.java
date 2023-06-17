@@ -34,4 +34,8 @@ public class PostItImage implements ValueObject {
   public String toString() {
     return this.encodedImage;
   }
+
+  public int getHash() {
+    return this.encodedImage.hashCode();
+  }
 }

@@ -1,11 +1,19 @@
 package eapli.ecourse.common.board.dto;
 
+import java.io.Serializable;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.json.JsonStructure;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.common.board.mapper.BoardMapper;
+import eapli.ecourse.common.board.mapper.PostItMapper;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 
-public class BoardWithPostItsDTO {
+public class BoardWithPostItsDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private BoardDTO board;
   private Iterable<PostItDTO> postIts;
 
@@ -22,8 +30,14 @@ public class BoardWithPostItsDTO {
     return postIts;
   }
 
-  public JsonStructure toJson() {
-    return null;
+  public JsonObjectBuilder toJsonBuilder() {
+    JsonObjectBuilder json = Json.createObjectBuilder(BoardMapper.toJson(board));
+    JsonArrayBuilder postItsJson = Json.createArrayBuilder();
+
+    postIts.forEach(postIt -> postItsJson.add(PostItMapper.toJson(postIt)));
+    json.add("postIts", postItsJson);
+
+    return json;
   }
 
   public int hashCode() {

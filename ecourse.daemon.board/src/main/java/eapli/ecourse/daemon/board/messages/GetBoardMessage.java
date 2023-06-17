@@ -51,11 +51,8 @@ public class GetBoardMessage extends Message {
     }
 
     String boardIdStr = json.asJsonObject().getString("boardId");
-    String usernameStr = json.asJsonObject().getString("username");
-    String newPermissionStr = json.asJsonObject().getString("permission");
-    int hash = json.asJsonObject().getInt("hash");
 
-    if (boardIdStr == null || usernameStr == null || newPermissionStr == null) {
+    if (boardIdStr == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }
@@ -63,7 +60,7 @@ public class GetBoardMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    Optional<Board> b = boardRepo.ofIdentity(BoardID.valueOf(request.getStringifiedPayload()));
+    Optional<Board> b = boardRepo.ofIdentity(BoardID.valueOf(boardIdStr));
 
     if (b.isEmpty()) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));
@@ -80,8 +77,22 @@ public class GetBoardMessage extends Message {
     ListBoardsService.eagerLoad(boardDto);
 
     Iterable<PostItDTO> list = listPostItsSvc.latestOfBoard(b.get().identity());
-
     BoardWithPostItsDTO boardWithPostItsDto = new BoardWithPostItsDTO(boardDto, list);
+
+    if (json.asJsonObject().containsKey("hash")) {
+      try {
+        String hashStr = json.asJsonObject().getString("hash");
+        int userHash = Integer.parseInt(hashStr);
+
+        int currentHash = boardWithPostItsDto.hashCode();
+
+        if (userHash == currentHash) {
+          send(new ProtocolMessage(MessageCode.NOT_MODIFIED));
+          return;
+        }
+      } catch (NumberFormatException e) {
+      }
+    }
 
     send(new ProtocolMessage(MessageCode.GET_BOARD, boardWithPostItsDto));
   }

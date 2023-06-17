@@ -39,4 +39,8 @@ public class PostItState implements ValueObject {
   public String toString() {
     return state.toString();
   }
+
+  public int getHashCode() {
+    return state.toString().hashCode();
+  }
 }
