@@ -27,8 +27,9 @@ public class ImageEncoderService {
     if (StringPredicates.isNullOrEmpty(imagePath))
       throw new IllegalArgumentException("Image Path should neither be null nor empty");
 
-    if (!imagePath.endsWith(".png") && !imagePath.endsWith(".jpg") && !imagePath.endsWith(".jpeg"))
-      throw new IllegalArgumentException("Image Path should end with .png or .jpg or .jpeg");
+    if (!imagePath.endsWith(".png") && !imagePath.endsWith(".jpg") && !imagePath.endsWith(".jpeg")
+        && !imagePath.endsWith(".gif"))
+      throw new IllegalArgumentException("Image Path should end with .png, .jpg, .jpeg or .gif");
   }
 
 }

@@ -1,7 +1,15 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.compile.nullAnalysis.mode": "disabled",
-  "cSpell.words": ["datagram", "ecourse", "enroll", "mecanographic", "visitee"],
+  "cSpell.words": [
+    "datagram",
+    "ecourse",
+    "enroll",
+    "mecanographic",
+    "RCOMP",
+    "SCOMP",
+    "visitee"
+  ],
   "java.debug.settings.onBuildFailureProceed": true,
   "antlr4.generation": {
     "mode": "external",

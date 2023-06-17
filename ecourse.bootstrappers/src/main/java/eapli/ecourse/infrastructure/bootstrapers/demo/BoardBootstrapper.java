@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +19,7 @@ import eapli.ecourse.postitmanagement.application.CreatePostItController;
 import eapli.ecourse.postitmanagement.application.ImageEncoderService;
 import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.framework.actions.Action;
+import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -30,12 +30,15 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
 
   private final String IMAGE_PATH = "_p1.png";
 
-  private CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
-      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
+  private CreateBoardController ctrl =
+      new CreateBoardController(PersistenceContext.repositories().boards(),
+          AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
-  private CreatePostItController ctrlPostIt = new CreatePostItController(
-      PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts(),
-      new ImageEncoderService());
+  private CreatePostItController ctrlPostIt =
+      new CreatePostItController(PersistenceContext.repositories().boards(),
+          PersistenceContext.repositories().postIts(), new ImageEncoderService());
+
+  private TransactionalContext ctx = PersistenceContext.repositories().newTransactionalContext();
 
   private Map<SystemUser, PermissionType> getPermissions() {
     SystemUser u1 = registerTeacher("user3", "Password1", "firstName", "lastName", "email@ddd.com",
@@ -105,8 +108,8 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
     try {
       PostIt p2 = ctrlPostIt.createPostIt(b.identity(), 2, 2, "PostIt2", "Description", image, u);
 
-      ChangePostItController c = new ChangePostItController(PersistenceContext.repositories().boards(),
-          PersistenceContext.repositories().postIts());
+      ChangePostItController c = new ChangePostItController(ctx,
+          PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts());
 
       c.changePostIt(p2.identity(), "PostIt2.1", 2, 2, "Description updated", null);
     } catch (IOException e) {

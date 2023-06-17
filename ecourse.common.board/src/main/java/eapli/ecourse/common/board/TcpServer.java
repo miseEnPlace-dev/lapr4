@@ -12,13 +12,16 @@ public class TcpServer {
   private Class<? extends Runnable> handlerClass;
   private boolean secure;
   private SafeOnlineCounter onlineCounter;
+  private SafeBoardUpdatesCounter boardUpdatesCounter;
   private OnlineSafeShared onlineShared = new OnlineSafeShared();
+  private SafeBoardUpdatesShared boardShared = new SafeBoardUpdatesShared();
 
   public TcpServer(int port, Class<? extends Runnable> handler, boolean secure) {
     this.port = port;
     this.handlerClass = handler;
     this.secure = secure;
     this.onlineCounter = new SafeOnlineCounter(onlineShared);
+    this.boardUpdatesCounter = new SafeBoardUpdatesCounter(boardShared);
   }
 
   public void run() {
@@ -44,6 +47,9 @@ public class TcpServer {
     Thread onlineCounterThread = new Thread(new OnlineCheckerHandler(onlineShared));
     onlineCounterThread.start();
 
+    Thread boardUpdatesCounterThread = new Thread(new BoardUpdatesHandler(boardShared));
+    boardUpdatesCounterThread.start();
+
     while (!tcpSocket.isClosed()) {
       try {
         // establish the tcp connection by accepting it
@@ -51,8 +57,9 @@ public class TcpServer {
 
         // create a new client handler
         // ? we are sharing the counter with the handler so that he can increment it
-        Runnable handler = handlerClass.getConstructor(Socket.class, SafeOnlineCounter.class)
-            .newInstance(socket, this.onlineCounter);
+        Runnable handler = handlerClass
+            .getConstructor(Socket.class, SafeOnlineCounter.class, SafeBoardUpdatesCounter.class)
+            .newInstance(socket, this.onlineCounter, this.boardUpdatesCounter);
 
         // create a new thread to handle the client
         Thread clientHandler = new Thread(handler);

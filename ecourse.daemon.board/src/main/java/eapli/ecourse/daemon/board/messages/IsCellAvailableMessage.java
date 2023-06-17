@@ -8,6 +8,7 @@ import javax.json.JsonObject;
 
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -28,13 +29,12 @@ public class IsCellAvailableMessage extends Message {
   private CredentialStore credentialStore;
 
   public IsCellAvailableMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl =
-        new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
+    this.ctrl = new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
     this.credentialStore = ClientState.getInstance().getCredentialStore();
   }
 

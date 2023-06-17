@@ -7,7 +7,7 @@
     <title>🔴 View Live Board</title>
   </head>
   <body
-    class="font-poppins max-h-screen dark:bg-slate-800 dark:text-white bg-white text-black transition-all duration-300 ease-in-out"
+    class="font-poppins max-h-screen dark:bg-slate-800 dark:text-white bg-white text-black transition-all duration-300 ease-in-out scrollbar-hide"
     onload="getData()">
     <nav class="flex items-center justify-between mx-8 my-4">
       <div>
@@ -18,51 +18,49 @@
         <button id="dark-mode-btn"
           class="h-12 w-12 border dark:border-slate-600 border-slate-200 rounded-lg"></button>
         <h3 id="user" class="text-xl font-bold"></h3>
-        <div class="h-10 w-10 bg-gray-400 rounded-full"></div>
+        <img src="assets/users/user-1.png" alt="User Avatar"
+          class="h-10 w-10 bg-gray-400 rounded-full" />
       </div>
     </nav>
     <h4 id="online" class="fixed right-8 bottom-8 text-xl font-thin"></h4>
 
-    <div id="error" class="text-red-500 text-8xl text-center"></div>
+    <div id="error" class="text-4xl text-center"></div>
 
     <main class="flex items-center justify-center my-8">
       <table id="board" class="mb-24">
-        <!-- <article
-              id="post-it-1"
-              class=" mx-4 flex flex-col p-4 rounded-lg relative bg-slate-600">
-              <h3 class="text-xl font-bold">Post it</h3>
-              <div class="flex items-center justify-between">
-                <button
-                  id="colorpicker-button"
-                  class="items-center text-center w-6 h-6 rounded-full rotate-90 bg-slate-500"
-                  onclick="toggleColorPicker()">&gt;</button>
-                <div class="flex gap-x-4 items-center justify-center">
-                  <h3>User1</h3>
-                  <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
-                </div>
-              </div>
-              <div id="colorpicker"
-                class="items-center flex justify-around absolute -bottom-8 bg-slate-700 px-4 py-2 gap-x-2 rounded-lg transition-opacity duration-100"
-                style="opacity: 0;">
-                <button onclick="changeColor('bg-red-600', 'post-it-1')"
-                  class="bg-red-500 h-5 w-5 rounded-full"></button>
-                <button onclick="changeColor('bg-green-600', 'post-it-1')"
-                  class="bg-green-500 h-5 w-5 rounded-full"></button>
-                <button onclick="changeColor('bg-blue-600', 'post-it-1')"
-                  class="bg-blue-500 h-5 w-5 rounded-full"></button>
-                <button onclick="changeColor('bg-purple-600', 'post-it-1')"
-                  class="bg-purple-500 h-5 w-5 rounded-full"></button>
-                <button onclick="changeColor('bg-yellow-600', 'post-it-1')"
-                  class="bg-yellow-500 h-5 w-5 rounded-full"></button>
-                <button onclick="changeColor('bg-slate-600', 'post-it-1')"
-                  class="bg-slate-600 h-5 w-5 rounded-full"></button>
-              </div>
-            </article> -->
       </table>
     </main>
 
+    <div class="inline-flex items-center fixed bottom-16 text-lg right-8">
+      <label
+        class="relative flex cursor-pointer items-center rounded-full p-3"
+        for="checkbox"
+        data-ripple-dark="true">
+
+        <input
+          type="checkbox"
+          class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-black dark:border-gray-400 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-700 checked:bg-slate-800 checked:before:bg-slate-500 hover:before:opacity-10"
+          id="user-filter" />
+        <div
+          class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-3.5 w-3.5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            stroke="currentColor"
+            stroke-width="1">
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </div>
+      </label>
+      View only user Post Its
+    </div>
+
     <script src="js/board.js"></script>
-    <script src="js/colorpicker.js"></script>
     <script src="js/dark-mode.js"></script>
   </body>
 </html>

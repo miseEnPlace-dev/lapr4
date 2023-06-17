@@ -3,6 +3,8 @@ package eapli.ecourse.daemon.board.messages;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -24,8 +26,8 @@ public class UndoPostItMessage extends Message {
   private final UndoPostItController ctrl;
 
   public UndoPostItMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.ctx = PersistenceContext.repositories().newTransactionalContext();
     this.postItRepository = PersistenceContext.repositories().postIts(this.ctx);
@@ -57,7 +59,7 @@ public class UndoPostItMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    // check if is owner of the post-it and has write permission to the board or is board's owner
+    // check if is owner of the post-it and has write permission to the board
     if (!ctrl.canEditPostIt(postItId, username)) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
       return;
@@ -70,6 +72,8 @@ public class UndoPostItMessage extends Message {
     }
 
     ctrl.undoPostIt(postItId);
+
+    this.boardUpdatesCounter.increment();
 
     send(new ProtocolMessage(MessageCode.UNDO_POSTIT));
   }

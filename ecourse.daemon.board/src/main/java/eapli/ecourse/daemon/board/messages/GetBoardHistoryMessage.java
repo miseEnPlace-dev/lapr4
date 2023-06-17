@@ -9,6 +9,7 @@ import eapli.ecourse.boardmanagement.application.ViewBoardHistoryController;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -29,8 +30,8 @@ public class GetBoardHistoryMessage extends Message {
   private PostItRepository postItRepository;
 
   public GetBoardHistoryMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
     this.boardRepository = PersistenceContext.repositories().boards();

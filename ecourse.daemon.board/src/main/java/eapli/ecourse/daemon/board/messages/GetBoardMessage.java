@@ -10,6 +10,7 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -22,8 +23,8 @@ public class GetBoardMessage extends Message {
   private BoardRepository boardRepo;
 
   public GetBoardMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
     this.boardRepo = PersistenceContext.repositories().boards();
   }
 
@@ -38,8 +39,7 @@ public class GetBoardMessage extends Message {
     UserDTO user = clientState.getCredentialStore().getUser();
     Username username = Username.valueOf(user.getUsername());
 
-    Optional<Board> b =
-        boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
+    Optional<Board> b = boardRepo.ofIdentity(BoardID.valueOf(protocolMessage.getStringifiedPayload()));
 
     if (b.isEmpty()) {
       send(new ProtocolMessage(MessageCode.ERR, "Board not found"));

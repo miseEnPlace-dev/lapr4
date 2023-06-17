@@ -9,6 +9,7 @@ import javax.json.JsonObject;
 
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -20,25 +21,29 @@ import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.usermanagement.dto.UserDTO;
+import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
 public class ChangePostItMessage extends Message {
   private CredentialStore credentialStore;
 
+  private TransactionalContext ctx;
   private ChangePostItController ctrl;
 
   private BoardRepository boardRepository;
   private PostItRepository postItRepository;
 
   public ChangePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter) {
-    super(protocolMessage, output, socket, onlineCounter);
+      SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
 
+    this.ctx = PersistenceContext.repositories().newTransactionalContext();
+
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl = new ChangePostItController(boardRepository, postItRepository);
+    this.ctrl = new ChangePostItController(ctx, boardRepository, postItRepository);
   }
 
   @Override
@@ -89,12 +94,20 @@ public class ChangePostItMessage extends Message {
       return;
     }
 
+    // ? we should also check if the board is archived
+    if (ctrl.isPostItBoardArchived(p.get().identity())) {
+      send(new ProtocolMessage(MessageCode.ERR, "Board is archived"));
+      return;
+    }
+
     PostIt postIt = ctrl.changePostIt(p.get().identity(), title, x, y, description, imagePath);
 
     if (postIt == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Post-it could not be created"));
       return;
     }
+
+    this.boardUpdatesCounter.increment();
 
     send(new ProtocolMessage(MessageCode.CHANGE_POSTIT));
 
