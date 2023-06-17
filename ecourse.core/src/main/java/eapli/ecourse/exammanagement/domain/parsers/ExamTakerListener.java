@@ -73,8 +73,6 @@ public class ExamTakerListener extends ExamBaseListener {
     StringBuilder feedback = new StringBuilder();
     if (ctx.feedback() != null)
       feedback.append(extractString(ctx.feedback().STRING().getText()));
-    else
-      feedback = null;
 
     // Get correct answer
     Double correctAnswer = Double.parseDouble(ctx.numericalCorrectAnswer().NUMBER().getText());
@@ -89,9 +87,9 @@ public class ExamTakerListener extends ExamBaseListener {
 
     // Check if student's answer is correct
     if (Math.abs(correctAnswer - studentAnswer) - acceptedError <= DOUBLE_ACCEPTABLE_ERROR)
-      showFeedback(true, questionScore);
+      showFeedback(questionScore);
     else
-      showFeedback(false, feedback.toString());
+      showFeedback(feedback.toString());
   }
 
   @Override
@@ -104,8 +102,6 @@ public class ExamTakerListener extends ExamBaseListener {
     StringBuilder feedback = new StringBuilder();
     if (ctx.feedback() != null)
       feedback.append(extractString(ctx.feedback().STRING().getText()));
-    else
-      feedback = null;
 
     // Map correct answers
     List<String> correctAnswers = new ArrayList<>();
@@ -132,11 +128,11 @@ public class ExamTakerListener extends ExamBaseListener {
     // Check if student's answer is correct
     for (int i = 0; i < correctAnswers.size(); i++) {
       if (!correctAnswers.get(i).toLowerCase().equals(studentAnswers.get(i).toLowerCase())) {
-        showFeedback(false, feedback.toString());
+        showFeedback(feedback.toString());
         return;
       }
     }
-    showFeedback(true, questionScore);
+    showFeedback(questionScore);
   }
 
   @Override
@@ -149,8 +145,6 @@ public class ExamTakerListener extends ExamBaseListener {
     StringBuilder feedback = new StringBuilder();
     if (ctx.feedback() != null)
       feedback.append(extractString(ctx.feedback().STRING().getText()));
-    else
-      feedback = null;
 
     // Get correct answer
     boolean correctAnswer;
@@ -167,9 +161,9 @@ public class ExamTakerListener extends ExamBaseListener {
 
     // Check if student's answer is correct
     if (correctAnswer == studentAnswer)
-      showFeedback(true, questionScore);
+      showFeedback(questionScore);
     else
-      showFeedback(false, feedback.toString());
+      showFeedback(feedback.toString());
   }
 
   @Override
@@ -182,8 +176,6 @@ public class ExamTakerListener extends ExamBaseListener {
     StringBuilder feedback = new StringBuilder();
     if (ctx.feedback() != null)
       feedback.append(extractString(ctx.feedback().STRING().getText()));
-    else
-      feedback = null;
 
     // Map possible options
     Map<String, String> options = new HashMap<>();
@@ -205,9 +197,9 @@ public class ExamTakerListener extends ExamBaseListener {
 
       // Check if student's answer is correct
       if (correctAnswer.equals(studentAnswer))
-        showFeedback(true, questionScore);
+        showFeedback(questionScore);
       else
-        showFeedback(false, feedback.toString());
+        showFeedback(feedback.toString());
     } else {
       // Get correct answer's indexes
       Set<String> correctAnswers = new HashSet<>();
@@ -228,9 +220,9 @@ public class ExamTakerListener extends ExamBaseListener {
 
       // Check if student's answer is correct
       if (studentAnswers.containsAll(correctAnswers))
-        showFeedback(true, questionScore);
+        showFeedback(questionScore);
       else
-        showFeedback(false, feedback.toString());
+        showFeedback(feedback.toString());
     }
   }
 
@@ -244,8 +236,6 @@ public class ExamTakerListener extends ExamBaseListener {
     StringBuilder feedback = new StringBuilder();
     if (ctx.feedback() != null)
       feedback.append(extractString(ctx.feedback().STRING().getText()));
-    else
-      feedback = null;
 
     // Map correct answers
     Map<String, Double> correctAnswers = new HashMap<>();
@@ -270,10 +260,10 @@ public class ExamTakerListener extends ExamBaseListener {
     // Check if student's answer is in the correct answer's map
     Double studentScore = correctAnswers.get(studentAnswer);
     if (studentScore == null)
-      showFeedback(false, feedback.toString());
+      showFeedback(feedback.toString());
     else {
       Double score = studentScore * questionScore;
-      showFeedback(true, score);
+      showFeedback(score);
     }
   }
 
@@ -287,8 +277,6 @@ public class ExamTakerListener extends ExamBaseListener {
     StringBuilder feedback = new StringBuilder();
     if (ctx.feedback() != null)
       feedback.append(extractString(ctx.feedback().STRING().getText()));
-    else
-      feedback = null;
 
     // Map correct matches
     Map<String, String> correctMatches = new HashMap<>();
@@ -323,9 +311,9 @@ public class ExamTakerListener extends ExamBaseListener {
 
     // Check if student's answer is correct
     if (correctMatches.equals(studentMatches))
-      showFeedback(true, questionScore);
+      showFeedback(questionScore);
     else
-      showFeedback(false, feedback.toString());
+      showFeedback(feedback.toString());
   }
 
   @Override
@@ -354,17 +342,15 @@ public class ExamTakerListener extends ExamBaseListener {
     examScore += score;
   }
 
-  private void showFeedback(boolean isCorrect, Object arg) {
-    if (isCorrect) {
-      // arg acts as student's score
-      incrementStudentScore((Double) arg);
-      printer.printCorrectAnswer();
-    } else {
-      // arg acts as feedback
-      if ((String) arg != null && feedbackOn)
-        printer.printIncorrectAnswer((String) arg);
-      else
-        printer.printIncorrectAnswer();
-    }
+  private void showFeedback(Double score) {
+    incrementStudentScore(score);
+    printer.printCorrectAnswer();
+  }
+
+  private void showFeedback(String feedback) {
+    if (feedbackOn)
+      printer.printIncorrectAnswer(feedback);
+    else
+      printer.printIncorrectAnswer();
   }
 }
