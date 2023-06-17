@@ -44,7 +44,8 @@ public class CreatePostItMessage extends Message {
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl = new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
+    this.ctrl =
+        new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
     this.userService = AuthzRegistry.userService();
   }
 
@@ -88,11 +89,11 @@ public class CreatePostItMessage extends Message {
 
     String title = payload.asJsonObject().getString("title");
     String description = payload.asJsonObject().getString("description");
-    String imagePath = payload.asJsonObject().getString("imagePath");
+    String image = payload.asJsonObject().getString("image");
     Integer x = payload.asJsonObject().getInt("x");
     Integer y = payload.asJsonObject().getInt("y");
 
-    if (title == null || x == null || y == null || description == null || imagePath == null) {
+    if (title == null || x == null || y == null || description == null || image == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }
@@ -100,12 +101,12 @@ public class CreatePostItMessage extends Message {
     if (description.isEmpty())
       description = null;
 
-    if (imagePath.isEmpty())
-      imagePath = null;
+    if (image.isEmpty())
+      image = null;
 
     SystemUser owner = userService.userOfIdentity(username).orElseThrow();
 
-    PostIt postIt = ctrl.createPostIt(board.identity(), x, y, title, description, imagePath, owner);
+    PostIt postIt = ctrl.createPostIt(board.identity(), x, y, title, description, image, owner);
 
     if (postIt == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Post-it could not be created"));

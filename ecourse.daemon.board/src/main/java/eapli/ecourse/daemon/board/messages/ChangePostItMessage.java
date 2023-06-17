@@ -90,13 +90,15 @@ public class ChangePostItMessage extends Message {
     String description = payload.asJsonObject().keySet().contains("description")
         ? payload.asJsonObject().getString("description")
         : null;
-    String imagePath = payload.asJsonObject().keySet().contains("imagePath")
-        ? payload.asJsonObject().getString("imagePath")
+    String encodedImage = payload.asJsonObject().keySet().contains("image")
+        ? payload.asJsonObject().getString("image")
         : null;
-    Integer x = payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
-    Integer y = payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
+    Integer x =
+        payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
+    Integer y =
+        payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
 
-    if (title == null && x == null && y == null && description == null && imagePath == null) {
+    if (title == null && x == null && y == null && description == null && encodedImage == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
       return;
     }
@@ -112,7 +114,7 @@ public class ChangePostItMessage extends Message {
       return;
     }
 
-    PostIt postIt = ctrl.changePostIt(p.get().identity(), title, x, y, description, imagePath);
+    PostIt postIt = ctrl.changePostIt(p.get().identity(), title, x, y, description, encodedImage);
 
     if (postIt == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Post-it could not be created"));

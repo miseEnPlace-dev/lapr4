@@ -7,7 +7,8 @@ import java.util.stream.StreamSupport;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
@@ -15,10 +16,13 @@ import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
+import eapli.ecourse.postitmanagement.application.ImageEncoderService;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 
 public class ChangePostItController {
+  private static Logger logger = LogManager.getLogger(ChangePostItController.class);
+
   private TcpClient server;
 
   public ChangePostItController() {
@@ -77,6 +81,7 @@ public class ChangePostItController {
       UnsuccessfulRequestException, ClassNotFoundException {
 
     JsonObjectBuilder json = Json.createObjectBuilder();
+
     json.add("postItId", postItID.toString());
 
     if (x != null)
@@ -87,8 +92,18 @@ public class ChangePostItController {
       json.add("title", title);
     if (description != null)
       json.add("description", description);
-    if (imagePath != null)
-      json.add("imagePath", imagePath);
+
+    if (imagePath != null) {
+      ImageEncoderService encoder = new ImageEncoderService();
+
+      try {
+        // using strings to handle a binary may not be the best idea
+        String encodedImage = encoder.encodeImage(imagePath);
+        json.add("image", encodedImage);
+      } catch (IllegalArgumentException | IOException e) {
+        logger.warn("Failed to encode image", e);
+      }
+    }
 
     ProtocolMessage response =
         server.sendRecv(new ProtocolMessage(MessageCode.CHANGE_POSTIT, json.build()));

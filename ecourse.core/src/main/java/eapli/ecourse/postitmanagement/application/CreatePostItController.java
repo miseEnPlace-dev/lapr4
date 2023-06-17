@@ -52,7 +52,7 @@ public class CreatePostItController {
   }
 
   public PostIt createPostIt(BoardID boardID, int x, int y, String title, String description,
-      String imagePath, SystemUser user) throws IOException {
+      String encodedImage, SystemUser user) throws IOException {
 
     if (!validateCoordinates(boardID, x, y))
       throw new IllegalArgumentException("Invalid coordinates");
@@ -62,15 +62,11 @@ public class CreatePostItController {
     PostItBuilder builder =
         new PostItBuilder().withBoard(board).withCoordinates(x, y).withTitle(title).withUser(user);
 
-    if (description != null) {
+    if (description != null)
       builder.withDescription(description);
-    }
 
-    if (imagePath != null) {
-      String encodedImage = imageEncoderService.encodeImage(imagePath);
-
+    if (encodedImage != null)
       builder.withImage(encodedImage);
-    }
 
     PostIt postIt = builder.build();
 

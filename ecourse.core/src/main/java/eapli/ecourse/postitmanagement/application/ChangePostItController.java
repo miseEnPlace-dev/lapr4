@@ -73,10 +73,10 @@ public class ChangePostItController {
   }
 
   public PostIt changePostIt(PostItID postItID, String title, Integer x, Integer y,
-      String description, String image) throws IOException {
+      String description, String encodedImage) throws IOException {
 
     // nothing to update
-    if (title == null && description == null && image == null && x == 0 && y == 0)
+    if (title == null && description == null && encodedImage == null && x == 0 && y == 0)
       return null;
 
     PostIt p = postItRepository.ofIdentity(postItID).orElseThrow();
@@ -109,12 +109,12 @@ public class ChangePostItController {
 
     // if null, keep the same
     // if empty, delete
-    if (image == null)
+    if (encodedImage == null)
       postItImage = p.image();
-    else if (image.equals(""))
+    else if (encodedImage.equals(""))
       postItImage = null;
     else
-      postItImage = PostItImage.valueOf(imageEncoderService.encodeImage(image));
+      postItImage = PostItImage.valueOf(encodedImage);
 
     PostIt newPostIt = p.update(postItTitle, coordinates, postItDescription, postItImage);
 
