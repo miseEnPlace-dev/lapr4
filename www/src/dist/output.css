@@ -752,6 +752,10 @@ video {
   width: 75%;
 }
 
+.w-40 {
+  width: 10rem;
+}
+
 .w-5 {
   width: 1.25rem;
 }
@@ -770,18 +774,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-40 {
-  width: 10rem;
-}
-
-.min-w-\[280px\] {
-  min-width: 280px;
-}
-
-.min-w-\[320px\] {
-  min-width: 320px;
 }
 
 .min-w-\[380px\] {

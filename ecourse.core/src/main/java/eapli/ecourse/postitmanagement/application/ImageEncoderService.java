@@ -23,7 +23,7 @@ public class ImageEncoderService {
     return encodedString;
   }
 
-  private void validatePath(String imagePath) {
+  private void validatePath(String imagePath) throws IllegalArgumentException {
     if (StringPredicates.isNullOrEmpty(imagePath))
       throw new IllegalArgumentException("Image Path should neither be null nor empty");
 
@@ -31,5 +31,4 @@ public class ImageEncoderService {
         && !imagePath.endsWith(".gif"))
       throw new IllegalArgumentException("Image Path should end with .png, .jpg, .jpeg or .gif");
   }
-
 }

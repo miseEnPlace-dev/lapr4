@@ -102,7 +102,7 @@ public class ChangePostItUI extends AbstractUI {
           .equalsIgnoreCase("n"))
         imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
 
-      if (!Console.readLine("Review the changes. Are you sure you want to edit the post-it \""
+      if (!Console.readLine("\nReview the changes. Are you sure you want to edit the post-it \""
           + selectedPostIt.getTitle() + "\"? (y/N)").equalsIgnoreCase("y")) {
         System.out.println("\nOperation cancelled by the user.");
         return false;
@@ -114,7 +114,7 @@ public class ChangePostItUI extends AbstractUI {
 
     } catch (ClassNotFoundException | IOException | UnsupportedVersionException
         | UnsuccessfulRequestException e) {
-      logger.error("Error trying to view a board", e);
+      logger.error("Error trying to edit a post-it", e);
     }
 
     Console.readLine("\nPress Enter to continue...");

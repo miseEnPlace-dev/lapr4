@@ -13,7 +13,12 @@ public class BoardHttpServer {
   private static final int HTTP_SERVER_PORT = 8080;
   private static final String WWW_PATH = "www/src";
 
+  private static boolean isRunning = false;
+
   public static void run(boolean secure) {
+    if (isRunning)
+      return;
+
     // create the router
     Router router = new Router();
 
@@ -34,5 +39,7 @@ public class BoardHttpServer {
 
     httpServerThread.start();
     httpServerThread.setName("HTTP Server Thread");
+
+    isRunning = true;
   }
 }
