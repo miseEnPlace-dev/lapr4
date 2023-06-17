@@ -31,12 +31,14 @@ public class CreatePostItUI extends AbstractUI {
       }
 
       BoardPrinter printer = new BoardPrinter();
-      printer.printHeader();
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+      SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
       selector.show();
 
       final BoardDTO selected = selector.selectedElement();
+
+      if (selected == null)
+        return false;
 
       Integer x, y;
       boolean success = true;
