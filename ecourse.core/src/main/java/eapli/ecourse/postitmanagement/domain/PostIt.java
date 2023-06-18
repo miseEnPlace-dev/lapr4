@@ -2,7 +2,6 @@ package eapli.ecourse.postitmanagement.domain;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -57,7 +56,7 @@ public class PostIt implements AggregateRoot<PostItID> {
    */
   @XmlElement
   @JsonProperty
-  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  @ManyToOne(optional = false)
   private Board board;
 
   /**
@@ -65,15 +64,12 @@ public class PostIt implements AggregateRoot<PostItID> {
    */
   @XmlElement
   @JsonProperty
-  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  @ManyToOne(optional = false)
   private SystemUser owner;
 
-  /**
-   * cascade = CascadeType.NONE as the user is part of another aggregate
-   */
   @XmlElement
   @JsonProperty
-  @OneToOne(optional = true, cascade = CascadeType.ALL)
+  @OneToOne(optional = true)
   private PostIt previous;
 
   @Lob

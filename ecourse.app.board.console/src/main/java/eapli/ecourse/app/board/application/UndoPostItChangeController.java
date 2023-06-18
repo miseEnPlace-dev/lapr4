@@ -53,9 +53,9 @@ public class UndoPostItChangeController {
 
   public void undoPostItChange(PostItDTO postIt) throws IOException, UnsupportedVersionException,
       UnsuccessfulRequestException, ClassNotFoundException {
-    ProtocolMessage response =
-        listener.sendRecv(new ProtocolMessage(MessageCode.UNDO_POSTIT, postIt.getId().toString()),
-            MessageCode.UNDO_POSTIT);
+    ProtocolMessage response = listener.sendRecv(
+        new ProtocolMessage(MessageCode.UNDO_POSTIT, postIt.getId().toString()),
+        MessageCode.UNDO_POSTIT);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

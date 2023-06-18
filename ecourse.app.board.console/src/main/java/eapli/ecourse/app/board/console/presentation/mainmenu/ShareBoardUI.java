@@ -39,9 +39,8 @@ public class ShareBoardUI extends AbstractUI {
         System.out.println("Boards you own:\n");
 
         BoardPrinter printer = new BoardPrinter();
-        printer.printHeader();
 
-        SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+        SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
         selector.show();
 
         selected = selector.selectedElement();
@@ -60,7 +59,6 @@ public class ShareBoardUI extends AbstractUI {
             return false;
         }
       } while (selected.getArchived() != null);
-
 
       UserPermissionDTO permission = null;
       String username = "";
@@ -104,8 +102,7 @@ public class ShareBoardUI extends AbstractUI {
         }
       };
 
-      UserPermissionDTO updated =
-          ctrl.updateUserPermissions(selected, username, options.get(option - 1));
+      UserPermissionDTO updated = ctrl.updateUserPermissions(selected, username, options.get(option - 1));
 
       System.out.printf("\nUser permissions updated to %s!\n",
           (updated == null) ? "none" : updated.getPermissionType());

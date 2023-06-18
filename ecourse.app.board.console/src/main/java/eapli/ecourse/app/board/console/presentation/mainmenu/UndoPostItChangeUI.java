@@ -58,15 +58,16 @@ public class UndoPostItChangeUI extends AbstractUI {
         System.out.println("\nYour Post-Its:\n");
 
         PostItPrinter postItPrinter = new PostItPrinter();
-        postItPrinter.printHeader();
 
-        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
+        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>(postItPrinter.header(), postIts, postItPrinter);
         postItSelector.show();
 
         selectedPostIt = postItSelector.selectedElement();
 
-        if (selectedPostIt == null)
+        if (selectedPostIt == null) {
+          System.out.println("\nOperation cancelled by the user.");
           return false;
+        }
 
         if (selectedPostIt.getPrevious() == null) {
           System.out.println("\nThis post-it does not have any previous version.");
