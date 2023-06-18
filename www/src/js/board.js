@@ -12,7 +12,7 @@ const boardTable = document.querySelector("#board");
 const userFilter = document.querySelector("#user-filter");
 
 let authenticatedUser;
-let t;
+let t, boardT;
 let userImages;
 let postIts = new Map();
 let hash;
@@ -43,14 +43,14 @@ function getData() {
   getOnlineUsers();
 }
 
-function refreshPostIts(p, columns, rows) {
+function refreshPostIts(po, columns, rows) {
   boardTable.innerHTML = "";
 
   const postItsMap = new Map();
   postIts = postItsMap;
-  userImages = assignUserImage(p);
+  userImages = assignUserImage(po);
 
-  for (const postIt of p)
+  for (const postIt of po)
     postItsMap.set(
       `${postIt.coordinates.x - 1}-${postIt.coordinates.y - 1}`,
       postIt
@@ -129,9 +129,9 @@ function refreshPostIts(p, columns, rows) {
                   <img src=${userImages.get(
                     postIt.owner.username
                   )} alt="User Avatar" class="h-8 w-8 bg-gray-400 rounded-full" />
-                    </div>
-                    </div>
-                    </button>
+                </div>
+              </div>
+            </button>
                     `;
         } else td.innerHTML = "";
       }
@@ -233,7 +233,7 @@ function updateBoard() {
   console.log("> Getting board details");
   /** @type XMLHttpRequest */
   let request;
-  clearTimeout(t);
+  clearTimeout(boardT);
 
   try {
     request = new XMLHttpRequest();
@@ -243,10 +243,10 @@ function updateBoard() {
 
   request.onload = () => {
     clearError();
-    if (request.status === 304) {
-      setTimeout(updateBoard, NO_CHANGE_TIMEOUT);
-      return; // Not modified
-    }
+    boardT = setTimeout(updateBoard, REFRESH_TIMEOUT);
+
+    if (request.status === 304) return; // Not modified
+    if (request.status === 401) return; // Unauthenticated
 
     /** @type {{archived: string | null, title: string, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}, postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null}[] }}[]} */
     const data = JSON.parse(request.responseText);
@@ -269,17 +269,16 @@ function updateBoard() {
       document.querySelector("body").appendChild(archivedContainer);
     }
 
-    refreshPostIts(p, columns, rows);
-    t = setTimeout(updateBoard, REFRESH_TIMEOUT);
+    refreshPostIts(po, columns, rows);
   };
 
   request.ontimeout = () => {
     showError("Server timeout, still trying...");
-    t = setTimeout(updateBoard, ERROR_TIMEOUT);
+    boardT = setTimeout(updateBoard, ERROR_TIMEOUT);
   };
   request.onerror = () => {
     showError("No server reply, still trying...");
-    t = setTimeout(updateBoard, RETRY_TIMEOUT);
+    boardT = setTimeout(updateBoard, RETRY_TIMEOUT);
   };
 
   request.open("GET", `/api/board/${id}${hash ? `?hash=${hash}` : ""}`, true);
@@ -289,6 +288,7 @@ function updateBoard() {
 
 function getAuthenticatedUser() {
   console.log("> Getting authenticated user");
+  clearTimeout(t);
 
   /** @type XMLHttpRequest */
   let authRequest;
@@ -302,10 +302,12 @@ function getAuthenticatedUser() {
   const username = document.querySelector("#user");
 
   authRequest.onload = () => {
+    t = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
     if (authRequest.status === 401) {
       username.innerHTML = `Unauthenticated`;
       return;
     }
+
     /** @type {{username: string, name: string, email: string, roles: string[]}} */
     const data = JSON.parse(authRequest.responseText);
 
