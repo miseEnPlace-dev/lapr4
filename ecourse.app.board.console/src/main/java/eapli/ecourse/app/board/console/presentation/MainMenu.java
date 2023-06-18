@@ -5,14 +5,15 @@ import java.util.Optional;
 import eapli.ecourse.Application;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ArchiveBoardUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ChangePostItUI;
-import eapli.ecourse.app.board.console.presentation.mainmenu.DeletePostItUI;
-import eapli.ecourse.app.board.console.presentation.mainmenu.LogoutUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.CommTestUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.CreatePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.DeletePostItUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.LogoutUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.SessionInfoUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ShareBoardUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.UndoPostItChangeUI;
 import eapli.ecourse.app.board.console.presentation.mainmenu.ViewBoardHistoryUI;
+import eapli.ecourse.app.board.console.presentation.mainmenu.ViewPostItHistoryUI;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.actions.menu.Menu;
@@ -88,8 +89,7 @@ public class MainMenu extends AbstractUI {
     mainMenu.addItem(DELETE_POSTITOPTION, "Delete Post-It", new DeletePostItUI()::show);
     mainMenu.addItem(UNDO_POST_IT_CHANGE_OPTION, "Undo Last Post-It Change",
         new UndoPostItChangeUI()::show);
-    mainMenu.addItem(VIEW_BOARD_HISTORY_OPTION, "View Board History",
-        new ViewBoardHistoryUI()::show);
+    mainMenu.addSubMenu(VIEW_BOARD_HISTORY_OPTION, buildBoardHistoryMenu());
     mainMenu.addItem(ARCHIVE_BOARD_OPTION, "Archive Board", new ArchiveBoardUI()::show);
 
     mainMenu.addItem(COMMTEST_OPTION, "Send COMMTEST", new CommTestUI()::show);
@@ -102,5 +102,14 @@ public class MainMenu extends AbstractUI {
     mainMenu.addItem(EXIT_OPTION, "Logout", new LogoutUI()::show);
 
     return mainMenu;
+  }
+
+  private Menu buildBoardHistoryMenu() {
+    final Menu boardHistoryMenu = new Menu();
+
+    boardHistoryMenu.addItem(1, "View Board History", new ViewBoardHistoryUI()::show);
+    boardHistoryMenu.addItem(2, "View Post-It History", new ViewPostItHistoryUI()::show);
+
+    return boardHistoryMenu;
   }
 }

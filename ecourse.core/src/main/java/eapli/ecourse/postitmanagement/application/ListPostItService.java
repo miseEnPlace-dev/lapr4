@@ -1,8 +1,15 @@
 package eapli.ecourse.postitmanagement.application;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
 import eapli.ecourse.boardmanagement.domain.BoardID;
+import eapli.ecourse.boardmanagement.dto.BoardHistoryDTO;
 import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
@@ -40,6 +47,58 @@ public class ListPostItService {
   public Iterable<PostItDTO> boardHistory(BoardID boardId) {
     Iterable<PostIt> list = postItRepository.findAllPostItsOrderedByDate(boardId);
     return toDto(list);
+  }
+
+  public Iterable<BoardHistoryDTO> boardPostItHistory(BoardID boardId) {
+    Iterable<PostIt> list = postItRepository.findLatestByBoardId(boardId);
+    List<BoardHistoryDTO> history = new ArrayList<>();
+
+    for (PostIt postIt : list) {
+      Queue<PostIt> postItHistory = getPostItHistory(postIt);
+      PostIt p = postItHistory.poll();
+      while (!postItHistory.isEmpty()) {
+        PostIt previousPostIt = postItHistory.poll();
+        history.add(toDto(p, previousPostIt));
+        p = previousPostIt;
+      }
+    }
+
+    return history;
+  }
+
+  private BoardHistoryDTO toDto(PostIt postIt, PostIt previousPostIt) {
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+    String currentDescription = postIt.description() == null ? "N/a" : postIt.description().toString();
+    String currentImage = postIt.image() == null ? "No" : "Yes";
+
+    if (previousPostIt == null) {
+      return new BoardHistoryDTO("", postIt.title().toString(),
+          "", currentDescription, "",
+          postIt.state().toString(), "", postIt.coordinates().toString(),
+          "", currentImage, postIt.owner().name().toString(),
+          formatter.format(postIt.createdAt().getTime()));
+    }
+
+    String previousImage = previousPostIt.image() == null ? "No" : "Yes";
+
+    String previousDescription = previousPostIt.description() == null ? "N/a" : previousPostIt.description().toString();
+
+    return new BoardHistoryDTO(previousPostIt.title().toString(), postIt.title().toString(),
+        previousDescription, currentDescription, previousPostIt.state().toString(),
+        postIt.state().toString(), previousPostIt.coordinates().toString(), postIt.coordinates().toString(),
+        previousImage, currentImage, postIt.owner().name().toString(), formatter.format(postIt.createdAt().getTime()));
+  }
+
+  private Queue<PostIt> getPostItHistory(PostIt postIt) {
+    Queue<PostIt> postItHistory = new LinkedList<>();
+    postItHistory.add(postIt);
+    while (postIt != null) {
+      postItHistory.add(postIt.previous());
+      postIt = postIt.previous();
+    }
+
+    return postItHistory;
   }
 
   public Iterable<PostItDTO> userUpdatablePostIts(BoardID boardId, Username username) {

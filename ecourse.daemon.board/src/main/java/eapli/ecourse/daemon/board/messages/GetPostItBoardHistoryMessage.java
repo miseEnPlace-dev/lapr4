@@ -8,6 +8,7 @@ import java.util.Optional;
 import eapli.ecourse.boardmanagement.application.ViewBoardHistoryController;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardID;
+import eapli.ecourse.boardmanagement.dto.BoardHistoryDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
@@ -16,20 +17,18 @@ import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.daemon.board.clientstate.ClientState;
 import eapli.ecourse.daemon.board.clientstate.CredentialStore;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
-import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.ecourse.usermanagement.dto.UserDTO;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
-public class GetBoardHistoryMessage extends Message {
-
+public class GetPostItBoardHistoryMessage extends Message {
   private ViewBoardHistoryController ctrl;
   private CredentialStore credentialStore;
 
   private BoardRepository boardRepository;
   private PostItRepository postItRepository;
 
-  public GetBoardHistoryMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+  public GetPostItBoardHistoryMessage(ProtocolMessage protocolMessage, DataOutputStream output,
       Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
     super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
 
@@ -69,7 +68,7 @@ public class GetBoardHistoryMessage extends Message {
       return;
     }
 
-    Iterable<PostItDTO> postIts = ctrl.listBoardHistory(board.identity());
-    send(new ProtocolMessage(MessageCode.GET_BOARD_HISTORY, postIts));
+    Iterable<BoardHistoryDTO> history = ctrl.listBoardPostItHistory(board.identity());
+    send(new ProtocolMessage(MessageCode.GET_BOARD_POST_IT_HISTORY, history));
   }
 }
