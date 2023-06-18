@@ -53,14 +53,19 @@ public class CreatePostItUI extends AbstractUI {
 
         success = ctrl.validateCoordinates(selected.getId(), x, y);
 
-        if (!success)
+        if (!success) {
           System.out
-              .println("Cell not available. Make sure the cell exists and is free! Try again.");
+              .println("Cell not available. Make sure the cell exists and is free!");
+          String option = Console.readLine(
+              "\nDo you want to try with a different cell? (Y/n) ");
+
+          if (option.equalsIgnoreCase("n"))
+            return false;
+        }
       } while (!success);
 
       String title = Console.readLine("Write the post-it title: ");
-      String description =
-          Console.readLine("Write the post-it description (Press Enter to skip): ");
+      String description = Console.readLine("Write the post-it description (Press Enter to skip): ");
 
       // ! the image must be uploaded to the server, you can't just write the path
       String imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");

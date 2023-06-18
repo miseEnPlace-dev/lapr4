@@ -52,14 +52,13 @@ public class UserDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "UserDTO [email=" + email + ", fullName=" + fullName + ", roles=" + roles + ", username="
-        + username + "]";
+    return "Email=" + email + ", Full Name=" + fullName + ", Role=" + roles + ", Username="
+        + username;
   }
 
   @Override
   public int hashCode() {
-    HashCodeBuilder hashBuilder =
-        new HashCodeBuilder().append(username).append(email).append(fullName).append(roles);
+    HashCodeBuilder hashBuilder = new HashCodeBuilder().append(username).append(email).append(fullName).append(roles);
 
     return hashBuilder.toHashCode();
   }

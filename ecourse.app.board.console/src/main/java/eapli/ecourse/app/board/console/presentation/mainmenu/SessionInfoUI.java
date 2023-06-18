@@ -17,4 +17,3 @@ public class SessionInfoUI extends AbstractUI {
     return "Session Info";
   }
 }
-
