@@ -60,8 +60,8 @@ public class CreatePostItUI extends AbstractUI {
         }
       } while (!success);
 
-      String title = Console.readLine("Write the post-it title: ");
-      String description = Console.readLine("Write the post-it description (Press Enter to skip): ");
+      String title = Console.readLine("\nWrite the post-it title: ");
+      String description = Console.readLine("\nWrite the post-it description (Press Enter to skip): ");
 
       String imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
       while (!ctrl.validateImagePath(imagePath)) {
