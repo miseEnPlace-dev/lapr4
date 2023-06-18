@@ -14,12 +14,12 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateBoardUI extends AbstractUI {
-
-  CreateBoardController ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
-      AuthzRegistry.userService(), AuthzRegistry.authorizationService());
+  private CreateBoardController ctrl;
 
   @Override
   protected boolean doShow() {
+    ctrl = new CreateBoardController(PersistenceContext.repositories().boards(),
+        AuthzRegistry.userService(), AuthzRegistry.authorizationService());
 
     String title = Console.readLine("Enter the title of the board: ");
 
@@ -54,8 +54,7 @@ public class CreateBoardUI extends AbstractUI {
     Map<SystemUser, PermissionType> permissions = new HashMap<>();
     while (!Console.readLine("Do you want to add a User Permission? (Y/n)").equalsIgnoreCase("n")) {
 
-      final SelectWidget<SystemUser> selector =
-          new SelectWidget<>("\nUsers:", users, new SystemUserPrinter());
+      final SelectWidget<SystemUser> selector = new SelectWidget<>("\nUsers:", users, new SystemUserPrinter());
       selector.show();
       SystemUser selected = selector.selectedElement();
 
@@ -73,8 +72,7 @@ public class CreateBoardUI extends AbstractUI {
         return false;
       }
 
-      PermissionType permissionType =
-          (permission == 1) ? PermissionType.read() : PermissionType.write();
+      PermissionType permissionType = (permission == 1) ? PermissionType.read() : PermissionType.write();
 
       permissions.put(selected, permissionType);
 
