@@ -71,6 +71,7 @@ public class ViewPostItHistoryUI extends AbstractUI {
         System.out.println("Description: " + h.getCurrentDescription());
         System.out.println("State: " + h.getCurrentState());
         System.out.println("Image: " + h.getCurrentImage());
+        System.out.println("Coordinates: " + h.getCurrentCoordinates());
         continue;
       }
 
@@ -88,6 +89,9 @@ public class ViewPostItHistoryUI extends AbstractUI {
 
       if (!h.getPreviousImage().equals(h.getCurrentImage()))
         System.out.println("Image: " + h.getPreviousImage() + " -> " + h.getCurrentImage());
+
+      if (!h.getPreviousCoordinates().equals(h.getCurrentCoordinates()))
+        System.out.println("Image: " + h.getPreviousCoordinates() + " -> " + h.getCurrentCoordinates());
     }
   }
 
