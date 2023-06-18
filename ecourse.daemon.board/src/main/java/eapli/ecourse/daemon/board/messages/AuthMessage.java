@@ -67,5 +67,8 @@ public class AuthMessage extends Message {
     clientState.getCredentialStore().store(user);
 
     send(new ProtocolMessage(MessageCode.ACK, user));
+
+    // subscribe to all
+    eventListener.subscribe("all", socket);
   }
 }
