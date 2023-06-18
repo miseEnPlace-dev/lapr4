@@ -8,7 +8,7 @@ public class OnlineSafeShared {
     while (!signaled) {
       try {
         wait();
-        System.out.println("There are " + this.number + " clients online!");
+        System.out.println("\nThere are " + this.number + " clients online!");
       } catch (InterruptedException e) {
         // unused
       }

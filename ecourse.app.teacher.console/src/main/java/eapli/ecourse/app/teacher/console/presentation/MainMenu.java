@@ -72,10 +72,10 @@ public class MainMenu extends AbstractUI {
     final Menu myUserMenu = new MyUserMenu(ClientRoles.TEACHER);
     mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
     mainMenu.addSubMenu(EXAMS_OPTION, new ExamMenu().buildMenu());
+    mainMenu.addSubMenu(MEETINGS, new MeetingsMenu().buildMenu());
     mainMenu.addSubMenu(CLASSES_OPTION, new ClassesMenu().buildMenu());
     mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-    mainMenu.addSubMenu(MEETINGS, new MeetingsMenu().buildMenu());
 
     if (!Application.settings().isMenuLayoutHorizontal())
       mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
