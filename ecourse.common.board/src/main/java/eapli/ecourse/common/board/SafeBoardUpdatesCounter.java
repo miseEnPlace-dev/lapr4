@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class SafeBoardUpdatesCounter {
   private long totalUpdates;
-  private SafeBoardUpdatesShared shared;
+  private BoardUpdatesShared shared;
 
   /**
    * Map of updates by thread. Each thread has a map of updates by type.
@@ -19,7 +19,7 @@ public class SafeBoardUpdatesCounter {
   private final String POST_IT_DELETION = "Post-It deletions:";
   private final String BOARD_ARCHIVATION = "Board archivations:";
 
-  public SafeBoardUpdatesCounter(SafeBoardUpdatesShared shared) {
+  public SafeBoardUpdatesCounter(BoardUpdatesShared shared) {
     this.totalUpdates = 0;
     this.shared = shared;
   }

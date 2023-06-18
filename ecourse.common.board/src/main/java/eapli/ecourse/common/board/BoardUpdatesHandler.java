@@ -1,9 +1,9 @@
 package eapli.ecourse.common.board;
 
 public class BoardUpdatesHandler implements Runnable {
-  private SafeBoardUpdatesShared shared;
+  private BoardUpdatesShared shared;
 
-  public BoardUpdatesHandler(SafeBoardUpdatesShared shared) {
+  public BoardUpdatesHandler(BoardUpdatesShared shared) {
     this.shared = shared;
   }
 

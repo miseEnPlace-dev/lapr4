@@ -65,10 +65,15 @@ We implemented an online client counter to count the number of clients connected
 
 ### Thread Signaling
 
-We also implemented an online client count checker which works by implementing another thread alongside the TCP server. This thread is responsible for printing a message in the server's console if the number of clients connected to the server is a multiple of 3. The `notifyAll()` method is called whenever this condition is true. The `wait()` method causes the thread to wait until another thread calls the `notifyAll()` method on the same instance. When this happens, the thread is awakened and continues to execute. To guard against spontaneous wakeups, the `wait()` method is called inside a loop that checks if the condition is true. If the condition is not true, the thread goes back to sleep.
+It was implemented an online client count checker which works by implementing another thread alongside the TCP server. This thread is responsible for printing a message in the server's console if the number of clients connected to the server is a multiple of 3. The `notifyAll()` method is called whenever this condition is true. The `wait()` method causes the thread to wait until another thread calls the `notifyAll()` method on the same instance. When this happens, the thread is awakened and continues to execute. To guard against spontaneous wakeups, the `wait()` method is called inside a loop that checks if the condition is true. If the condition is not true, the thread goes back to sleep.
 
 > [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/OnlineSafeShared.java) to see the full code.
+
+We also implemented an board update count checker which works by implementing another tread alongside the TCP server. This thread is responsible for printing every type of update that is made to the board by thread. It is also responsible to print the statistics made by thread each time a user exits the `Shared Board App`. Similar to the previous thread, this thread will also use the `notifyAll()` whenever a update was made and the `wait()` method will print message received by the server and then will go back to sleep again. To guard against spontaneous wakeups, the `wait()` method is called inside a loop that checks if the condition is true. If the condition is not true, the thread goes back to sleep.
+
+> [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/BoardUpdatesShared.java) to see the full code.
 
 ## References
 
 [TP 11 - Java Concurrency](https://moodle.isep.ipp.pt/pluginfile.php/280091/mod_resource/content/3/Java%20Concurrency.pdf)
+[TP 3_4 - Concurrent-access](https://moodle.isep.ipp.pt/pluginfile.php/273742/mod_resource/content/0/EAPLI_ORM_TP_3_4_concurrent-access.pdf)

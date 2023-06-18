@@ -1,6 +1,6 @@
 package eapli.ecourse.common.board;
 
-public class SafeBoardUpdatesShared {
+public class BoardUpdatesShared {
   private boolean signaled = false;
   private String updateMessage;
 

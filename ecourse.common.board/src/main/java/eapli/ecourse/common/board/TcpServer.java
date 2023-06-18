@@ -14,7 +14,7 @@ public class TcpServer {
   private SafeOnlineCounter onlineCounter;
   private SafeBoardUpdatesCounter boardUpdatesCounter;
   private OnlineSafeShared onlineShared = new OnlineSafeShared();
-  private SafeBoardUpdatesShared boardShared = new SafeBoardUpdatesShared();
+  private BoardUpdatesShared boardShared = new BoardUpdatesShared();
 
   public TcpServer(int port, Class<? extends Runnable> handler, boolean secure) {
     this.port = port;
