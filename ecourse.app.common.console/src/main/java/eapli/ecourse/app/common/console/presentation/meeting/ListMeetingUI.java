@@ -10,12 +10,14 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ListMeetingUI extends AbstractUI {
-  private final ListMeetingController ctrl = new ListMeetingController(PersistenceContext.repositories().meetings(),
-      PersistenceContext.repositories().invites(), AuthzRegistry.authorizationService());
+  private ListMeetingController ctrl;
 
   @Override
   protected boolean doShow() {
-    Iterable<MeetingDTO> meetings = this.ctrl.getMeetingList();
+    ctrl = new ListMeetingController(PersistenceContext.repositories().meetings(),
+        PersistenceContext.repositories().invites(), AuthzRegistry.authorizationService());
+
+    Iterable<MeetingDTO> meetings = ctrl.getMeetingList();
 
     if (!meetings.iterator().hasNext()) {
       System.out.println("There are no registered meetings.");
@@ -31,7 +33,7 @@ public class ListMeetingUI extends AbstractUI {
       return false;
     }
 
-    Iterable<InviteDTO> invites = this.ctrl.getMeetingDetails(selected);
+    Iterable<InviteDTO> invites = ctrl.getMeetingDetails(selected);
 
     if (!invites.iterator().hasNext()) {
       System.out.println("There are no registered invites.");

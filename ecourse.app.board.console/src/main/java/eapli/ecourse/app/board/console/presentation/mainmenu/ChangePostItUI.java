@@ -55,10 +55,11 @@ public class ChangePostItUI extends AbstractUI {
         Iterable<PostItDTO> postIts = ctrl.listUserUpdatablePostIts(selectedBoard.getId());
 
         if (!postIts.iterator().hasNext()) {
-          System.out.println("You don't have permission to update any post-it in that board.");
+          System.out.println("\nYou don't have permission to update any post-it in that board.");
           return false;
         }
 
+        System.out.println("\nPost-its you can update:");
         PostItPrinter postItPrinter = new PostItPrinter();
 
         SelectWidget<PostItDTO> postItSelector = new SelectWidget<>(postItPrinter.header(), postIts, postItPrinter);
@@ -71,7 +72,7 @@ public class ChangePostItUI extends AbstractUI {
       Integer x = null, y = null;
       boolean success = true;
 
-      if (!Console.readLine("Do you want to change the post-it coordinates? (Y/n): ")
+      if (!Console.readLine("\nDo you want to change the post-it coordinates? (Y/n): ")
           .equalsIgnoreCase("n"))
         do {
           System.out.println("\nWrite the new post-it coordinates:");
@@ -86,21 +87,26 @@ public class ChangePostItUI extends AbstractUI {
         } while (!success);
 
       String title = null;
-      if (!Console.readLine("Do you want to change the post-it title? (Y/n): ")
+      if (!Console.readLine("\nDo you want to change the post-it title? (Y/n): ")
           .equalsIgnoreCase("n"))
         title = Console.readLine("Write the post-it title: ");
 
       String description = null;
-      if (!Console.readLine("Do you want to change the post-it description? (Y/n): ")
+      if (!Console.readLine("\nDo you want to change the post-it description? (Y/n): ")
           .equalsIgnoreCase("n"))
         description = Console.readLine("Write the post-it description (Press Enter to delete): ");
 
       String imagePath = null;
-      if (!Console.readLine("Do you want to change the post-it image? (Y/n): ")
+      if (!Console.readLine("\nDo you want to change the post-it image? (Y/n): ")
           .equalsIgnoreCase("n"))
         imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
+      while (!imagePath.isEmpty() && !ctrl.validateImagePath(imagePath)) {
+        System.out.println("\nInvalid image path. Try again.");
+        imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
+      }
 
-      if (!Console.readLine("\nReview the changes. Are you sure you want to edit the post-it \""
+      printChanges(selectedPostIt, x, y, title, description, imagePath);
+      if (!Console.readLine("\nAre you sure you want to edit the post-it \""
           + selectedPostIt.getTitle() + "\"? (y/N)").equalsIgnoreCase("y")) {
         System.out.println("\nOperation cancelled by the user.");
         return false;
@@ -122,5 +128,31 @@ public class ChangePostItUI extends AbstractUI {
   @Override
   public String headline() {
     return "Change Post-It";
+  }
+
+  private void printChanges(PostItDTO postIt, Integer x, Integer y, String title,
+      String description, String imagePath) {
+    if (x == null && y == null && title == null && description == null && imagePath == null) {
+      System.out.println("\nNo changes were made.");
+      return;
+    }
+
+    System.out.println("\nChanges made: ");
+
+    if (x != null && y != null)
+      System.out.println("Coordinates: (" + postIt.getCoordinates().getX() + ", " + postIt.getCoordinates().getY()
+          + ") --> (" + x + ", " + y + ")");
+
+    if (title != null)
+      System.out.println("Title: " + postIt.getTitle() + " --> " + title);
+
+    if (description != null)
+      System.out.println("Description: " + postIt.getDescription() + " --> " + description);
+
+    if (imagePath != null)
+      if (imagePath.isEmpty())
+        System.out.println("Image: removed");
+      else
+        System.out.println("Image: changed");
   }
 }

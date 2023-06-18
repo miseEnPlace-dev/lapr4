@@ -10,8 +10,8 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.BoardUpdatesShared;
+import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
@@ -32,6 +32,7 @@ import eapli.ecourse.daemon.board.messages.GetBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOnlineCountMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnBoardsMessage;
 import eapli.ecourse.daemon.board.messages.GetOwnPostItsBoardMessage;
+import eapli.ecourse.daemon.board.messages.GetPostItBoardHistoryMessage;
 import eapli.ecourse.daemon.board.messages.GetPostItsBoardMessage;
 import eapli.ecourse.daemon.board.messages.GetUserPermissionsMessage;
 import eapli.ecourse.daemon.board.messages.GetWritableBoardsMessage;
@@ -66,6 +67,7 @@ public class ClientHandler implements Runnable {
       put(MessageCode.GET_POSTITS_BOARD, GetPostItsBoardMessage.class);
       put(MessageCode.GET_OWN_POSTITS_BOARD, GetOwnPostItsBoardMessage.class);
       put(MessageCode.GET_BOARD_HISTORY, GetBoardHistoryMessage.class);
+      put(MessageCode.GET_BOARD_POST_IT_HISTORY, GetPostItBoardHistoryMessage.class);
       put(MessageCode.CREATE_POSTIT, CreatePostItMessage.class);
       put(MessageCode.CHANGE_POSTIT, ChangePostItMessage.class);
       put(MessageCode.UNDO_POSTIT, UndoPostItMessage.class);

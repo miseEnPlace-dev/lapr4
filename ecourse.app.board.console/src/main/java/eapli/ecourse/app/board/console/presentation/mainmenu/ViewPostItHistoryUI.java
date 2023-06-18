@@ -8,17 +8,15 @@ import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.board.application.ViewBoardHistoryController;
 import eapli.ecourse.app.common.console.presentation.board.BoardPrinter;
-import eapli.ecourse.app.common.console.presentation.postit.PostItPrinter;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.boardmanagement.dto.BoardHistoryDTO;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
-import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.presentation.console.SelectWidget;
 
-public class ViewBoardHistoryUI extends AbstractUI {
-  private static Logger logger = LogManager.getLogger(ViewBoardHistoryUI.class);
+public class ViewPostItHistoryUI extends AbstractUI {
+  private static Logger logger = LogManager.getLogger(ViewPostItHistoryUI.class);
 
   private ViewBoardHistoryController ctrl = new ViewBoardHistoryController();
 
@@ -47,11 +45,8 @@ public class ViewBoardHistoryUI extends AbstractUI {
         return false;
       }
 
-      Iterable<PostItDTO> postIts = ctrl.listBoardHistory(selected);
-
-      ListWidget<PostItDTO> lister = new ListWidget<>(new PostItPrinter().header(),
-          postIts, new PostItPrinter());
-      lister.show();
+      Iterable<BoardHistoryDTO> history = ctrl.getBoardPostItHistory(selected);
+      printHistory(history);
 
       Console.readLine("\nPress Enter to continue...");
 
@@ -61,6 +56,39 @@ public class ViewBoardHistoryUI extends AbstractUI {
     }
 
     return false;
+  }
+
+  private void printHistory(Iterable<BoardHistoryDTO> history) {
+    System.out.println("> Board History:");
+    for (BoardHistoryDTO h : history) {
+
+      if (h.getPreviousTitle().equals("")) {
+        System.out.println("\n----------------------------------------\n");
+        System.out.println("> New!");
+        System.out.println("Owner: " + h.getOwner());
+        System.out.println("Date: " + h.getDate());
+        System.out.println("Title: " + h.getCurrentTitle());
+        System.out.println("Description: " + h.getCurrentDescription());
+        System.out.println("State: " + h.getCurrentState());
+        System.out.println("Image: " + h.getCurrentImage());
+        continue;
+      }
+
+      System.out.println("\n> Update");
+      System.out.println("Date: " + h.getDate());
+
+      if (!h.getPreviousTitle().equals(h.getCurrentTitle()))
+        System.out.println("Title: " + h.getPreviousTitle() + " -> " + h.getCurrentTitle());
+
+      if (!h.getPreviousDescription().equals(h.getCurrentDescription()))
+        System.out.println("Description: " + h.getPreviousDescription() + " -> " + h.getCurrentDescription());
+
+      if (!h.getPreviousState().equals(h.getCurrentState()))
+        System.out.println("State: " + h.getPreviousState() + " -> " + h.getCurrentState());
+
+      if (!h.getPreviousImage().equals(h.getCurrentImage()))
+        System.out.println("Image: " + h.getPreviousImage() + " -> " + h.getCurrentImage());
+    }
   }
 
   @Override

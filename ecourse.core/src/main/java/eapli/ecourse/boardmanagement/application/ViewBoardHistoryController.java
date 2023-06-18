@@ -2,6 +2,7 @@ package eapli.ecourse.boardmanagement.application;
 
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.boardmanagement.dto.BoardHistoryDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.application.ListPostItService;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
@@ -34,4 +35,7 @@ public class ViewBoardHistoryController {
     return listPostItService.boardHistory(boardID);
   }
 
+  public Iterable<BoardHistoryDTO> listBoardPostItHistory(BoardID boardID) {
+    return listPostItService.boardPostItHistory(boardID);
+  }
 }

@@ -11,11 +11,13 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class CancelMeetingUI extends AbstractUI {
-  private final CancelMeetingController ctrl = new CancelMeetingController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().meetings(), PersistenceContext.repositories().invites());
+  private CancelMeetingController ctrl;
 
   @Override
   protected boolean doShow() {
+    ctrl = new CancelMeetingController(AuthzRegistry.authorizationService(),
+        PersistenceContext.repositories().meetings(), PersistenceContext.repositories().invites());
+
     Iterable<MeetingDTO> userMeetings = ctrl.listNotCanceledScheduledMeetings();
     if (!userMeetings.iterator().hasNext()) {
       System.out.println("You have no scheduled meetings");

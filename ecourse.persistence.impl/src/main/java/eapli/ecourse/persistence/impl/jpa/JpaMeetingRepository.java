@@ -35,7 +35,7 @@ public class JpaMeetingRepository extends JpaAutoTxRepository<Meeting, MeetingID
   @Override
   public Iterable<Meeting> findMeetingsForUsername(Username username) {
     final TypedQuery<Meeting> query = entityManager().createQuery(
-        "SELECT m FROM Meeting m JOIN Invite i ON i.meeting=m WHERE i.user.username = :username",
+        "SELECT m FROM Meeting m JOIN Invite i ON i.meeting = m WHERE i.user.username = :username",
         Meeting.class);
     query.setParameter("username", username);
     return query.getResultList();

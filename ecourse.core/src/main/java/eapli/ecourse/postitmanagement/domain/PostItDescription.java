@@ -5,6 +5,7 @@ import javax.persistence.Lob;
 
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.strings.util.StringPredicates;
+import eapli.framework.validations.Preconditions;
 import lombok.EqualsAndHashCode;
 
 @Embeddable
@@ -27,6 +28,7 @@ public class PostItDescription implements ValueObject {
   }
 
   public static PostItDescription valueOf(final String courseDescription) {
+    Preconditions.noneNull(courseDescription);
     return new PostItDescription(courseDescription);
   }
 
