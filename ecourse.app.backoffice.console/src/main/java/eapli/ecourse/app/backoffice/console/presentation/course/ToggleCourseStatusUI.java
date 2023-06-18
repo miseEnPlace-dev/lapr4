@@ -11,12 +11,12 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ToggleCourseStatusUI extends AbstractUI {
-  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
-  private final ToggleCourseStatusController ctrl = new ToggleCourseStatusController(courseRepository,
-      AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {
+    CourseRepository courseRepository = PersistenceContext.repositories().courses();
+    ToggleCourseStatusController ctrl = new ToggleCourseStatusController(courseRepository,
+        AuthzRegistry.authorizationService());
 
     System.out.println("[1] - Open Course");
     System.out.println("[2] - Close Course");

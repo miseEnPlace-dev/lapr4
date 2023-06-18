@@ -15,14 +15,13 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class ListCourseExamGradesUI extends AbstractUI {
 
-  private final ListCourseExamGradesController ctrl = new ListCourseExamGradesController(
-      AuthzRegistry.authorizationService(), PersistenceContext.repositories().evaluationExams(),
-      PersistenceContext.repositories().courses(), PersistenceContext.repositories().teachers(),
-      PersistenceContext.repositories().answers(), PersistenceContext.repositories().enrollments(),
-      PersistenceContext.repositories().students());
-
   @Override
   protected boolean doShow() {
+    ListCourseExamGradesController ctrl = new ListCourseExamGradesController(
+        AuthzRegistry.authorizationService(), PersistenceContext.repositories().evaluationExams(),
+        PersistenceContext.repositories().courses(), PersistenceContext.repositories().teachers(),
+        PersistenceContext.repositories().answers(), PersistenceContext.repositories().enrollments(),
+        PersistenceContext.repositories().students());
 
     Iterable<CourseDTO> courses = ctrl.teacherCourses();
     if (!courses.iterator().hasNext()) {

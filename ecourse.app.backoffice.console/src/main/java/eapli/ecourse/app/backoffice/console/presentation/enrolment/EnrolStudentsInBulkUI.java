@@ -12,13 +12,14 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class EnrolStudentsInBulkUI extends AbstractUI {
-  private StudentsBulkEnrolmentController ctrl = new StudentsBulkEnrolmentController(
-      PersistenceContext.repositories().courses(), PersistenceContext.repositories().enrollments(),
-      PersistenceContext.repositories().students(), AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = this.ctrl.listOpenForEnrolmentCourses();
+    StudentsBulkEnrolmentController ctrl = new StudentsBulkEnrolmentController(
+        PersistenceContext.repositories().courses(), PersistenceContext.repositories().enrollments(),
+        PersistenceContext.repositories().students(), AuthzRegistry.authorizationService());
+
+    final Iterable<CourseDTO> courses = ctrl.listOpenForEnrolmentCourses();
 
     System.out.println("Select the course where the students will be enrolled:");
     final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courses,
@@ -32,7 +33,7 @@ public class EnrolStudentsInBulkUI extends AbstractUI {
     String filePath = Console.readLine("Enter the file path where the students are defined: ");
 
     try {
-      this.ctrl.enrolStudents(selectedCourse, filePath);
+      ctrl.enrolStudents(selectedCourse, filePath);
     } catch (IOException ex) {
       System.out.println("The specified file does not exist.");
       return false;

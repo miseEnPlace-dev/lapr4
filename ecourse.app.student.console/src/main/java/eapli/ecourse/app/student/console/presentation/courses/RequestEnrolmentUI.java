@@ -13,16 +13,18 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class RequestEnrolmentUI extends AbstractUI {
-  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
-  private final EnrolmentRepository enrolmentRepository = PersistenceContext.repositories().enrollments();
-  private final StudentRepository studentRepository = PersistenceContext.repositories().students();
-  private final AuthorizationService authz = AuthzRegistry.authorizationService();
-
-  private final RequestEnrolmentController controller = new RequestEnrolmentController(courseRepository,
-      enrolmentRepository, studentRepository, authz);
+  private RequestEnrolmentController controller;
 
   @Override
   protected boolean doShow() {
+    CourseRepository courseRepository = PersistenceContext.repositories().courses();
+    EnrolmentRepository enrolmentRepository = PersistenceContext.repositories().enrollments();
+    StudentRepository studentRepository = PersistenceContext.repositories().students();
+    AuthorizationService authz = AuthzRegistry.authorizationService();
+
+    controller = new RequestEnrolmentController(courseRepository,
+        enrolmentRepository, studentRepository, authz);
+
     Iterable<CourseDTO> courses = controller.listOpenForEnrolmentCourses();
 
     if (courses.spliterator().getExactSizeIfKnown() == 0) {

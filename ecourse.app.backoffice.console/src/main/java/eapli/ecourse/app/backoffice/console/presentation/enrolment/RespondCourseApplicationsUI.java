@@ -13,15 +13,14 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class RespondCourseApplicationsUI extends AbstractUI {
 
-  private final RespondCourseApplicationController theController = new RespondCourseApplicationController(
-      PersistenceContext.repositories().courses(),
-      PersistenceContext.repositories().enrollments(),
-      AuthzRegistry.authorizationService());
-
   @Override
   protected boolean doShow() {
+    RespondCourseApplicationController ctrl = new RespondCourseApplicationController(
+        PersistenceContext.repositories().courses(),
+        PersistenceContext.repositories().enrollments(),
+        AuthzRegistry.authorizationService());
 
-    final Iterable<CourseDTO> courses = this.theController.listOpenForEnrolmentCourses();
+    final Iterable<CourseDTO> courses = ctrl.listOpenForEnrolmentCourses();
     if (!courses.iterator().hasNext()) {
       System.out.println("There are no courses open for enrolment");
       return false;
@@ -32,7 +31,7 @@ public class RespondCourseApplicationsUI extends AbstractUI {
     courseSelector.show();
     final CourseDTO selectedCourse = courseSelector.selectedElement();
 
-    final Iterable<EnrolmentDTO> enrolments = this.theController.listPendingCourseApplications(selectedCourse);
+    final Iterable<EnrolmentDTO> enrolments = ctrl.listPendingCourseApplications(selectedCourse);
     if (!enrolments.iterator().hasNext()) {
       System.out.println("There are no pending applications for this course");
       Console.readLine("Press Enter to continue...");
@@ -57,10 +56,10 @@ public class RespondCourseApplicationsUI extends AbstractUI {
     }
 
     if (permission == 1) {
-      this.theController.accept(selectedEnrolment);
+      ctrl.accept(selectedEnrolment);
       System.out.println("\nCourse application accepted.");
     } else {
-      this.theController.reject(selectedEnrolment);
+      ctrl.reject(selectedEnrolment);
       System.out.println("\nCourse application rejected.");
     }
 

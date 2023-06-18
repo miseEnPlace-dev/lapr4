@@ -9,10 +9,6 @@ import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
 
 public class ListCoursesUI extends AbstractListUI<CourseDTO> {
-  private final ListCoursesController controller = new ListCoursesController(
-      AuthzRegistry.authorizationService(), PersistenceContext.repositories().courses(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().students(),
-      PersistenceContext.repositories().enrollments());
 
   @Override
   public String headline() {
@@ -26,6 +22,11 @@ public class ListCoursesUI extends AbstractListUI<CourseDTO> {
 
   @Override
   protected Iterable<CourseDTO> elements() {
+    ListCoursesController controller = new ListCoursesController(
+        AuthzRegistry.authorizationService(), PersistenceContext.repositories().courses(),
+        PersistenceContext.repositories().teachers(), PersistenceContext.repositories().students(),
+        PersistenceContext.repositories().enrollments());
+
     return controller.getCoursesForLoggedUser();
   }
 
