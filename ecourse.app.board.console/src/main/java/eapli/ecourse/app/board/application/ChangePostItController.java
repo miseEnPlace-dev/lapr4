@@ -68,9 +68,8 @@ public class ChangePostItController {
     json.add("x", x);
     json.add("y", y);
 
-    ProtocolMessage response =
-        listener.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()),
-            MessageCode.IS_CELL_AVAILABLE);
+    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()),
+        MessageCode.IS_CELL_AVAILABLE);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -118,11 +117,22 @@ public class ChangePostItController {
   public void deletePostIt(PostItID postItID) throws IOException, UnsupportedVersionException,
       UnsuccessfulRequestException, ClassNotFoundException {
 
-    ProtocolMessage response =
-        listener.sendRecv(new ProtocolMessage(MessageCode.DELETE_POSTIT, postItID.toString()),
-            MessageCode.DELETE_POSTIT);
+    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.DELETE_POSTIT, postItID.toString()),
+        MessageCode.DELETE_POSTIT);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
+  }
+
+  public boolean validateImagePath(String imagePath) {
+    ImageEncoderService encoder = new ImageEncoderService();
+
+    try {
+      encoder.encodeImage(imagePath);
+    } catch (Exception e) {
+      return false;
+    }
+
+    return true;
   }
 }
