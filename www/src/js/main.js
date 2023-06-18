@@ -4,7 +4,7 @@ const REFRESH_TIMEOUT = 2000;
 const MAX_TIMEOUT = 10000;
 
 const boardSelector = document.querySelector("#board-selector");
-let t;
+let t, authT, boardT;
 let authenticated;
 
 function showError(message) {
@@ -63,7 +63,7 @@ function getUserBoards() {
   console.log("> Getting user boards");
   /** @type XMLHttpRequest */
   let request;
-  clearTimeout(t);
+  clearTimeout(boardT);
 
   try {
     request = new XMLHttpRequest();
@@ -73,13 +73,13 @@ function getUserBoards() {
 
   request.onload = () => {
     clearError();
+    boardT = setTimeout(getUserBoards, REFRESH_TIMEOUT);
 
     if (request.status === 401) {
       boardSelector.innerHTML = `<option selected="selected" value disabled
       class="dark:bg-slate-600 bg-slate-200">Please login!</option>`;
       boardSelector.disabled = true;
 
-      t = setTimeout(getUserBoards, REFRESH_TIMEOUT);
       return;
     }
     boardSelector.innerHTML =
@@ -91,7 +91,7 @@ function getUserBoards() {
 
     // as the request is asynchronous, authenticated might not be set yet
     if (!authenticated) {
-      t = setTimeout(getUserBoards, 200);
+      boardT = setTimeout(getUserBoards, 200);
       return;
     }
 
@@ -113,11 +113,11 @@ function getUserBoards() {
 
   request.ontimeout = () => {
     showError("Server timeout, still trying...");
-    t = setTimeout(getUserBoards, ERROR_TIMEOUT);
+    boardT = setTimeout(getUserBoards, ERROR_TIMEOUT);
   };
   request.onerror = () => {
     showError("No server reply, still trying...");
-    t = setTimeout(getUserBoards, RETRY_TIMEOUT);
+    boardT = setTimeout(getUserBoards, RETRY_TIMEOUT);
   };
 
   request.open("GET", "/api/board", true);
@@ -130,7 +130,7 @@ function getAuthenticatedUser() {
 
   /** @type XMLHttpRequest */
   let authRequest;
-  clearTimeout(t);
+  clearTimeout(authT);
 
   try {
     authRequest = new XMLHttpRequest();
@@ -142,6 +142,7 @@ function getAuthenticatedUser() {
 
   authRequest.onload = () => {
     clearError();
+    authT = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
 
     if (authRequest.status === 401) {
       username.innerHTML = "Unauthenticated";
@@ -151,19 +152,17 @@ function getAuthenticatedUser() {
       username.innerHTML = `Welcome, ${data.username}!`;
       authenticated = data;
     }
-    t = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
   };
 
   authRequest.ontimeout = () => {
     showError("Server timeout, still trying...");
-    t = setTimeout(getAuthenticatedUser, ERROR_TIMEOUT);
+    authT = setTimeout(getAuthenticatedUser, ERROR_TIMEOUT);
   };
   authRequest.onerror = () => {
     showError("No server reply, still trying...");
-    t = setTimeout(getAuthenticatedUser, RETRY_TIMEOUT);
+    authT = setTimeout(getAuthenticatedUser, RETRY_TIMEOUT);
   };
 
-  t = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
   authRequest.open("GET", "/api/session", true);
   authRequest.timeout = MAX_TIMEOUT;
   authRequest.send(null);

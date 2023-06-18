@@ -246,7 +246,10 @@ function updateBoard() {
     boardT = setTimeout(updateBoard, REFRESH_TIMEOUT);
 
     if (request.status === 304) return; // Not modified
-    if (request.status === 401) return; // Unauthenticated
+    if (request.status === 401) {
+      window.location.href = "/";
+      return; // Unauthenticated
+    }
 
     /** @type {{archived: string | null, title: string, columns: {number: number, title: string}[], rows: {number: number, title: string}[], id: string, owner: {username: string, name: string, email: string}, permissions: {createdAt: string, type: string, updatedAt: string, user: {username: string, name: string, email: string}, postIts: { id: string, title: string, coordinates: { x: number, y: number }, state: string, boardId: string, owner: {username: string, name: string, email: string, roles: string[] }, createdAt: string, description: string | null, image: string | null}[] }}[]} */
     const data = JSON.parse(request.responseText);
@@ -305,6 +308,7 @@ function getAuthenticatedUser() {
     t = setTimeout(getAuthenticatedUser, REFRESH_TIMEOUT);
     if (authRequest.status === 401) {
       username.innerHTML = `Unauthenticated`;
+      window.location.href = "/";
       return;
     }
 
