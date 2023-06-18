@@ -4,6 +4,7 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.validations.Preconditions;
 
 @Embeddable
 public class Coordinates implements ValueObject {
@@ -20,6 +21,7 @@ public class Coordinates implements ValueObject {
   }
 
   public static Coordinates valueOf(Integer x, Integer y) {
+    Preconditions.noneNull(x, y);
     return new Coordinates(x, y);
   }
 
