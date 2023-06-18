@@ -16,7 +16,7 @@
         @title "Expressões regulares.";
         @description "Secção de escolha múltipla 2.";
         @number-of-questions 1;
-        @questions-type missing-words;
+        @questions-type true-false;
     @end-section;
 
 @end-exam;
