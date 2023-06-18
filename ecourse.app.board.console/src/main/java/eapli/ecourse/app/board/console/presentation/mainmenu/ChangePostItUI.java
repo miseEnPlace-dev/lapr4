@@ -63,8 +63,8 @@ public class ChangePostItUI extends AbstractUI {
 
         SelectWidget<PostItDTO> postItSelector = new SelectWidget<>(postItPrinter.header(), postIts, postItPrinter);
         postItSelector.show();
-
         selectedPostIt = postItSelector.selectedElement();
+
       } while (selectedPostIt == null);
 
       // CHANGE

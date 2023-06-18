@@ -31,15 +31,16 @@ public class ArchiveBoardUI extends AbstractUI {
       System.out.println("Boards you own:\n");
 
       BoardPrinter printer = new BoardPrinter();
-      printer.printHeader();
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+      SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
       selector.show();
 
       final BoardDTO selected = selector.selectedElement();
 
-      if (selected == null)
+      if (selected == null) {
+        System.out.println("\nOperation cancelled by the user.");
         return false;
+      }
 
       System.out.printf("\nThis board is currently %s.\n",
           selected.getArchived() == null ? "NOT archived" : "archived");

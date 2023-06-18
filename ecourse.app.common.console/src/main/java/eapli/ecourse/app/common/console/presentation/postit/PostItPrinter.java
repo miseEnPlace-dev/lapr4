@@ -8,7 +8,7 @@ import eapli.framework.visitor.Visitor;
 
 public class PostItPrinter implements Visitor<PostItDTO> {
   public String header() {
-    return String.format("#  %-38s%-15s%-15s%-15s%-8s%-9s%-9s%-11s%-18s%-15s%-7s", "ID", "Title", "Board",
+    return String.format("#  %-15s%-15s%-15s%-8s%-9s%-9s%-11s%-18s%-15s%-7s", "Title", "Board",
         "Owner", "State", "Pos.",
         "Latest?", "Has Prev?", "Created At", "Description", "Image");
   }
@@ -23,7 +23,6 @@ public class PostItPrinter implements Visitor<PostItDTO> {
 
     TableFormatPrinter printer = new TableFormatPrinter();
 
-    printer.addColumn(visitee.getId().toString(), 38);
     printer.addColumn(visitee.getTitle().toString(), 15);
     printer.addColumn(visitee.getBoard().getTitle().toString(), 15);
     printer.addColumn(visitee.getOwner().getUsername().toString(), 15);

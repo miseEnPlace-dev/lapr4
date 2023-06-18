@@ -18,7 +18,7 @@ public class CommTestUI extends AbstractUI {
 
     try {
       long start = System.nanoTime();
-      listener.sendRecv(new ProtocolMessage(MessageCode.COMMTEST), MessageCode.COMMTEST);
+      listener.sendRecv(new ProtocolMessage(MessageCode.COMMTEST), MessageCode.ACK);
       long end = System.nanoTime();
 
       long elapsed = end - start;
@@ -37,4 +37,3 @@ public class CommTestUI extends AbstractUI {
     return "CommTest";
   }
 }
-
