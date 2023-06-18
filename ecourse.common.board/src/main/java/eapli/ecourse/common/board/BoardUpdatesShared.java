@@ -35,7 +35,7 @@ public class BoardUpdatesShared {
     System.out.println("> Total number of post-its created: " + numberPostIts);
     System.out.println("> Total number of post-its updated: " + numberUpdatesPostIts);
     System.out.println("> Total number of post-its deleted: " + numberDeletesPostIts);
-    System.out.println("> Total number of boards archived: " + numberArchivedBoards);
+    System.out.println("> Total number of boards archived/unarchived: " + numberArchivedBoards);
     System.out.println("\nTotal number of updates made in the server until now: " + totalUpdates);
   }
 }

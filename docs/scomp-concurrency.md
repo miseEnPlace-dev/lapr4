@@ -71,6 +71,15 @@ It was implemented an online client count checker which works by implementing an
 
 We also implemented an board update count checker which works by implementing another tread alongside the TCP server. This thread is responsible for printing every type of update that is made to the board by thread. It is also responsible to print the statistics made by thread each time a user exits the `Shared Board App`. Similar to the previous thread, this thread will also use the `notifyAll()` whenever a update was made and the `wait()` method will print message received by the server and then will go back to sleep again. To guard against spontaneous wakeups, the `wait()` method is called inside a loop that checks if the condition is true. If the condition is not true, the thread goes back to sleep.
 
+For each client/thread, we keep track of the following statistics:
+
+- Number of post it creations
+- Number of post it updates
+- Number of post it deletes
+- Number of boards archived/unarchived
+
+To achieve this, we created a Map that stores, for each new Thread, the number of updates and the type of the update made in the server. Whenever the thread is awaken it will print the statistics of the change made by the thread and then goes back to sleep, waiting for another update. Whenever a user exits the `Shared Board App` the thread will print all the statistics of the updates made by the thread, as well as the global statistics of the server.
+
 > [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/BoardUpdatesShared.java) to see the full code.
 
 ### Notification
