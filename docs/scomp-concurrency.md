@@ -12,7 +12,31 @@ TODO
 
 ### Java Locking
 
-TODO
+JPA has already a mechanism of locking, known as the `@Version` annotation. This annotation enables the usage of `optimistic locking`. When an entity is updated, the version number is incremented. If the version number of the entity in the database differs from the version number of the entity in memory during an update, an exception, `OptimisticLockException`, is thrown. This mechanism verifies that the object has not been altered by another user between the read and write operations. The `PostIt` class includes the `@Version` annotation, ensuring that the version number increments during updates and that an exception is thrown if the database and in-memory versions differ.
+
+> [Click here](/ecourse.core/src/main/java/eapli/ecourse/postitmanagement/domain/PostIt.java) to see the full code.
+
+Despite this mechanism, it is also possible to implement a `pessimistic locking` mechanism. This approach involves locking the entity in the database when it is read, so that no other user can read or write the entity until the lock is released. This is typically implemented through using database row locks. The good side of this approach is that it is almost guaranteed that no other user can read or write the entity until the lock is released.
+
+Example:
+
+```java
+public PostIt readPostIt(Long id) {
+  EntityManager em = PersistenceContext.repositories().entityManager();
+  EntityTransaction tx = em.getTransaction();
+  tx.begin();
+  try {
+    PostIt postIt = em.find(PostIt.class, id, LockModeType.PESSIMISTIC_WRITE);
+    tx.commit();
+    return postIt;
+  } catch (Exception e) {
+    tx.rollback();
+    throw e;
+  }
+}
+```
+
+However, we decided not to implement this mechanism because this is generally not desirable when developing web applications. This approach consumes significant database resources and can lead to deadlocks.
 
 ### Threads
 
