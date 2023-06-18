@@ -13,8 +13,8 @@ public abstract class Message {
   protected SafeOnlineCounter onlineCounter;
   protected SafeBoardUpdatesCounter boardUpdatesCounter;
   protected EventListener eventListener;
+  protected Socket socket;
   private DataOutputStream output;
-  private Socket socket;
 
   public Message(ProtocolMessage message, DataOutputStream output, Socket socket,
       SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter,
