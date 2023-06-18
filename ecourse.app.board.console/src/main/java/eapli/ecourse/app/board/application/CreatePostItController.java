@@ -10,9 +10,9 @@ import javax.json.JsonObjectBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
@@ -21,16 +21,16 @@ import eapli.ecourse.postitmanagement.application.ImageEncoderService;
 public class CreatePostItController {
   private static Logger logger = LogManager.getLogger(CreatePostItController.class);
 
-  private TcpClient server;
+  private MessageListener listener;
 
   public CreatePostItController() {
-    this.server = BoardBackend.getInstance().getTcpClient();
+    this.listener = BoardBackend.getInstance().getListener();
   }
 
   public Iterable<BoardDTO> listUserWritableBoards() throws IOException,
       UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS));
+    ProtocolMessage response = listener.sendRecv(
+        new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS), MessageCode.GET_WRITABLE_BOARDS);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -51,7 +51,8 @@ public class CreatePostItController {
     json.add("y", y);
 
     ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()));
+        listener.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()),
+            MessageCode.IS_CELL_AVAILABLE);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -83,12 +84,10 @@ public class CreatePostItController {
       }
     }
 
-    ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.CREATE_POSTIT, json.build()));
+    ProtocolMessage response = listener.sendRecv(
+        new ProtocolMessage(MessageCode.CREATE_POSTIT, json.build()), MessageCode.CREATE_POSTIT);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
-
   }
-
 }

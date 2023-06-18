@@ -39,13 +39,6 @@
     },
     {
       "type": "java",
-      "name": "OtherApp",
-      "request": "launch",
-      "mainClass": "eapli.ecourse.app.other.console.OtherApp",
-      "projectName": "app.other.console"
-    },
-    {
-      "type": "java",
       "name": "Shared Board Server",
       "request": "launch",
       "mainClass": "eapli.ecourse.daemon.board.App",
@@ -71,12 +64,6 @@
       ]
     },
     {
-      "type": "java",
-      "name": "Current File",
-      "request": "launch",
-      "mainClass": "${file}"
-    },
-    {
       "name": "ANTLR4 grammar",
       "type": "antlr-debug",
       "request": "launch",
@@ -86,6 +73,12 @@
       "startRule": "start",
       "printParseTree": true,
       "visualParseTree": true
+    },
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
     }
   ]
 }

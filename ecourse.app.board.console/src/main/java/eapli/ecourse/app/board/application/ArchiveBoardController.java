@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import eapli.ecourse.app.board.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class ArchiveBoardController {
-  private TcpClient server;
+  private MessageListener listener;
 
   public ArchiveBoardController() {
-    this.server = BoardBackend.getInstance().getTcpClient();
+    this.listener = BoardBackend.getInstance().getListener();
   }
 
   public Iterable<BoardDTO> listUserBoards() throws IOException, UnsupportedVersionException,
       ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_BOARDS));
+    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_BOARDS));
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -34,7 +34,7 @@ public class ArchiveBoardController {
 
   public void archiveBoard(BoardDTO boardDto) throws IOException, UnsupportedVersionException,
       UnsuccessfulRequestException, ClassNotFoundException {
-    ProtocolMessage response = server
+    ProtocolMessage response = listener
         .sendRecv(new ProtocolMessage(MessageCode.ARCHIVE_BOARD, boardDto.getId().toString()));
 
     if (response.getCode().equals(MessageCode.ERR))

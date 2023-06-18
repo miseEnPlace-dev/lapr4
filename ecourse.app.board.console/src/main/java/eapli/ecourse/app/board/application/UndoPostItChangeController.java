@@ -5,24 +5,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import eapli.ecourse.app.board.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 
 public class UndoPostItChangeController {
-  private TcpClient server;
+  private MessageListener listener;
 
   public UndoPostItChangeController() {
-    this.server = BoardBackend.getInstance().getTcpClient();
+    this.listener = BoardBackend.getInstance().getListener();
   }
 
   public Iterable<BoardDTO> listUserWritableBoards() throws IOException,
       UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS));
+    ProtocolMessage response = listener.sendRecv(
+        new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS), MessageCode.GET_WRITABLE_BOARDS);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -36,8 +36,9 @@ public class UndoPostItChangeController {
 
   public Iterable<PostItDTO> listLatestBoardPostItsByUser(BoardDTO board) throws IOException,
       UnsupportedVersionException, UnsuccessfulRequestException, ClassNotFoundException {
-    ProtocolMessage response = server
-        .sendRecv(new ProtocolMessage(MessageCode.GET_POSTITS_BOARD, board.getId().toString()));
+    ProtocolMessage response = listener.sendRecv(
+        new ProtocolMessage(MessageCode.GET_POSTITS_BOARD, board.getId().toString()),
+        MessageCode.GET_POSTITS_BOARD);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -53,7 +54,8 @@ public class UndoPostItChangeController {
   public void undoPostItChange(PostItDTO postIt) throws IOException, UnsupportedVersionException,
       UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.UNDO_POSTIT, postIt.getId().toString()));
+        listener.sendRecv(new ProtocolMessage(MessageCode.UNDO_POSTIT, postIt.getId().toString()),
+            MessageCode.UNDO_POSTIT);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

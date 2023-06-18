@@ -4,10 +4,9 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class CommTestUI extends AbstractUI {
@@ -15,18 +14,18 @@ public class CommTestUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    TcpClient client = BoardBackend.getInstance().getTcpClient();
+    MessageListener listener = BoardBackend.getInstance().getListener();
 
     try {
       long start = System.nanoTime();
-      client.sendRecv(new ProtocolMessage(MessageCode.COMMTEST));
+      listener.sendRecv(new ProtocolMessage(MessageCode.COMMTEST), MessageCode.COMMTEST);
       long end = System.nanoTime();
 
       long elapsed = end - start;
       float ms = elapsed / 1000000f;
 
       System.out.printf("Communication test successful. Round-trip time: %f ms\n", ms);
-    } catch (IOException | UnsupportedVersionException | ClassNotFoundException e) {
+    } catch (IOException e) {
       logger.error("Error sending COMMTEST message", e);
     }
 

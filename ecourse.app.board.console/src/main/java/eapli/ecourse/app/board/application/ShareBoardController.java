@@ -7,23 +7,24 @@ import java.util.stream.StreamSupport;
 import javax.json.Json;
 import javax.json.JsonObject;
 import eapli.ecourse.app.board.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
-import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class ShareBoardController {
-  private TcpClient server;
+  private MessageListener listener;
 
   public ShareBoardController() {
-    server = BoardBackend.getInstance().getTcpClient();
+    listener = BoardBackend.getInstance().getListener();
   }
 
   public Iterable<BoardDTO> listUserBoards() throws IOException, UnsupportedVersionException,
       ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_BOARDS));
+    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_BOARDS),
+        MessageCode.GET_OWN_BOARDS);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -41,7 +42,8 @@ public class ShareBoardController {
         .add("username", username).build();
 
     ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.GET_USER_PERMISSIONS, payload));
+        listener.sendRecv(new ProtocolMessage(MessageCode.GET_USER_PERMISSIONS, payload),
+            MessageCode.GET_USER_PERMISSIONS);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -59,8 +61,8 @@ public class ShareBoardController {
     JsonObject payload = Json.createObjectBuilder().add("boardId", board.getId().toString())
         .add("username", username).add("permission", newPermission).build();
 
-    ProtocolMessage response =
-        server.sendRecv(new ProtocolMessage(MessageCode.SHARE_BOARD, payload));
+    ProtocolMessage response = listener
+        .sendRecv(new ProtocolMessage(MessageCode.SHARE_BOARD, payload), MessageCode.SHARE_BOARD);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);

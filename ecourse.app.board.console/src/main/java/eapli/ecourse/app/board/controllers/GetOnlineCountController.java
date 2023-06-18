@@ -10,27 +10,27 @@ import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.common.board.http.Request;
 import eapli.ecourse.common.board.http.Response;
 import eapli.ecourse.common.board.http.RouteController;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class GetOnlineCountController implements RouteController {
   private final static Logger LOGGER = LogManager.getLogger(GetOnlineCountController.class);
 
-  private TcpClient client;
+  private MessageListener listener;
 
   public GetOnlineCountController() {
-    this.client = BoardBackend.getInstance().getTcpClient();
+    this.listener = BoardBackend.getInstance().getListener();
   }
 
   @Override
   public void handle(Request req, Response res) {
     try {
-      ProtocolMessage response = client.sendRecv(new ProtocolMessage(MessageCode.GET_ONLINE_COUNT));
+      ProtocolMessage response = listener.sendRecv(
+          new ProtocolMessage(MessageCode.GET_ONLINE_COUNT), MessageCode.GET_ONLINE_COUNT);
 
       if (response.getCode().equals(MessageCode.ERR))
         throw new UnsuccessfulRequestException(response);
@@ -42,7 +42,7 @@ public class GetOnlineCountController implements RouteController {
     } catch (UnsuccessfulRequestException e) {
       JsonObjectBuilder json = Json.createObjectBuilder().add("message", e.getMessage());
       res.status(400).json(json.build());
-    } catch (IOException | UnsupportedVersionException | ClassNotFoundException e) {
+    } catch (IOException | ClassNotFoundException e) {
       LOGGER.error("Error fetching online count", e);
       res.status(500).send("error");
     }

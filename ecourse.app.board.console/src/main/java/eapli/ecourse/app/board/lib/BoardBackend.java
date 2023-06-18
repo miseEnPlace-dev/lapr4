@@ -2,30 +2,32 @@ package eapli.ecourse.app.board.lib;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.LinkedList;
-import java.util.List;
 import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.common.board.TcpClient;
-import eapli.ecourse.common.board.protocol.ProtocolMessage;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
+import eapli.ecourse.common.board.protocol.MessageCode;
 
 public class BoardBackend {
   private final TcpClient tcpClient;
   private final CredentialStore credentialStore;
-  private final List<ProtocolMessage> messageQueue;
+  private MessageListener listener;
 
   private BoardBackend() {
     this.tcpClient = new TcpClient();
     this.credentialStore = new CredentialStore();
-    this.messageQueue = new LinkedList<>();
+    this.listener = null;
   }
 
-  public TcpClient getTcpClient() {
-    return tcpClient;
-  }
+  // ? deprecated way of sending messages, use message listener instead
+  // public TcpClient getTcpClient() {
+  // return tcpClient;
+  // }
 
   public CredentialStore getCredentialStore() {
     return credentialStore;
+  }
+
+  public MessageListener getListener() {
+    return listener;
   }
 
   // connect to the backend
@@ -33,33 +35,17 @@ public class BoardBackend {
       throws UnknownHostException, IOException {
     tcpClient.connect(host, port, secure);
 
-    /**
-     * This thread will be responsible for receiving messages from the server and putting them in
-     * the queue.
-     */
-    Thread messageQueueThread = new Thread(new MessageQueueHandler(messageQueue, tcpClient));
-    messageQueueThread.start();
-  }
+    listener = new MessageListener(tcpClient);
 
-  public void send(ProtocolMessage message) throws IOException {
-    tcpClient.send(message);
-  }
-
-  public ProtocolMessage receive()
-      throws IOException, UnsupportedVersionException, ClassNotFoundException {
+    listener.on(MessageCode.NOTIFICATION, (message) -> {
+      System.out.printf(" -- NOTIFICATION --\n%s\n", message.getStringifiedPayload());
+    });
 
     /**
-     * When receiving from a socket, it works like a FIFO queue: the first message sent by the
-     * server will be the first to be received by the client. We can do the same with a thread that
-     * reads from the socket and puts the messages in a queue. Then, we can read from the queue
-     * instead of reading from the socket directly. This way, we can have a thread that is waiting
-     * for specific messages without blocking the entire socket or using two sockets, enabling us to
-     * implement the notifications about changes in a board.
+     * This thread will be responsible for receiving messages from the server.
      */
-
-    // TODO
-
-    return tcpClient.receive();
+    Thread listenerThread = new Thread(listener);
+    listenerThread.start();
   }
 
   // singleton

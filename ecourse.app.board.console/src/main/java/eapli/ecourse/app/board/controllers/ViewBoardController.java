@@ -10,24 +10,23 @@ import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.common.board.dto.BoardWithPostItsDTO;
 import eapli.ecourse.common.board.http.Request;
 import eapli.ecourse.common.board.http.Response;
 import eapli.ecourse.common.board.http.RouteController;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 
 public class ViewBoardController implements RouteController {
   private final static Logger LOGGER = LogManager.getLogger(ViewBoardController.class);
 
   private CredentialStore auth;
-  private TcpClient client;
+  private MessageListener listener;
 
   public ViewBoardController() {
     this.auth = BoardBackend.getInstance().getCredentialStore();
-    this.client = BoardBackend.getInstance().getTcpClient();
+    this.listener = BoardBackend.getInstance().getListener();
   }
 
   @Override
@@ -46,7 +45,8 @@ public class ViewBoardController implements RouteController {
       req.getQuery("hash").ifPresent(hash -> request.add("hash", hash));
 
       ProtocolMessage response =
-          client.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD, request.build()));
+          listener.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD, request.build()),
+              MessageCode.GET_BOARD, MessageCode.NOT_MODIFIED);
 
       // response has not been modified
       if (response.getCode().equals(MessageCode.NOT_MODIFIED)) {
@@ -65,7 +65,7 @@ public class ViewBoardController implements RouteController {
     } catch (UnsuccessfulRequestException e) {
       JsonObjectBuilder json = Json.createObjectBuilder().add("message", e.getMessage());
       res.status(400).json(json.build());
-    } catch (IOException | UnsupportedVersionException | ClassNotFoundException e) {
+    } catch (IOException | ClassNotFoundException e) {
       LOGGER.error("Error fetching boards", e);
       res.status(500).send("error");
     }

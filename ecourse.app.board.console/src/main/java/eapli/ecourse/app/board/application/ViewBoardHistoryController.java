@@ -5,23 +5,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import eapli.ecourse.app.board.lib.BoardBackend;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.TcpClient;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
 import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 
 public class ViewBoardHistoryController {
-  private TcpClient server;
+  private MessageListener listener;
 
   public ViewBoardHistoryController() {
-    this.server = BoardBackend.getInstance().getTcpClient();
+    this.listener = BoardBackend.getInstance().getListener();
   }
 
   public Iterable<BoardDTO> listUserAccessibleBoards() throws IOException,
       UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_BOARDS));
+    ProtocolMessage response =
+        listener.sendRecv(new ProtocolMessage(MessageCode.GET_BOARDS), MessageCode.GET_BOARDS);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -35,15 +36,16 @@ public class ViewBoardHistoryController {
 
   public Iterable<PostItDTO> listBoardHistory(BoardDTO board) throws IOException,
       UnsupportedVersionException, ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = server.sendRecv(new ProtocolMessage(MessageCode.GET_BOARD_HISTORY,
-        board.getId().toString()));
+    ProtocolMessage response = listener.sendRecv(
+        new ProtocolMessage(MessageCode.GET_BOARD_HISTORY, board.getId().toString()),
+        MessageCode.GET_BOARD_HISTORY);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
     Iterable<?> obj = (Iterable<?>) response.getPayloadAsObject();
 
-    List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true).map(PostItDTO.class::cast)
-        .collect(Collectors.toUnmodifiableList());
+    List<PostItDTO> result = StreamSupport.stream(obj.spliterator(), true)
+        .map(PostItDTO.class::cast).collect(Collectors.toUnmodifiableList());
 
     return result;
   }

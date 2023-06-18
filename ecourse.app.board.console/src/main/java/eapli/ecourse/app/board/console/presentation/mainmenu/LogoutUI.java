@@ -5,10 +5,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.app.board.lib.BoardBackend;
-import eapli.ecourse.common.board.TcpClient;
+import eapli.ecourse.app.board.lib.MessageListener;
 import eapli.ecourse.common.board.protocol.MessageCode;
 import eapli.ecourse.common.board.protocol.ProtocolMessage;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class LogoutUI extends AbstractUI {
@@ -16,18 +15,19 @@ public class LogoutUI extends AbstractUI {
 
   @Override
   protected boolean doShow() {
-    TcpClient client = BoardBackend.getInstance().getTcpClient();
+    MessageListener listener = BoardBackend.getInstance().getListener();
     CredentialStore credentialStore = BoardBackend.getInstance().getCredentialStore();
 
     try {
-      ProtocolMessage response = client.sendRecv(new ProtocolMessage(MessageCode.LOGOUT));
+      ProtocolMessage response =
+          listener.sendRecv(new ProtocolMessage(MessageCode.LOGOUT), MessageCode.ACK);
       if (response.getCode() == MessageCode.ACK) {
         credentialStore.clear();
         System.out.println("Bye!");
         return true;
       }
       System.out.println("Unable to log you out.");
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException e) {
+    } catch (IOException e) {
       logger.error("Error sending logout message", e);
     }
     return false;
