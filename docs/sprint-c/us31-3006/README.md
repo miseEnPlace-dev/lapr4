@@ -67,32 +67,44 @@
 
 ### 4.3. Applied Patterns
 
-- 3006
+- **Builder:** The builder pattern is used to provide a flexible way to create a board. This is done by using the `PostItBuilder` class. This allows the creation of a post-it with different ways to set some of its attributes and also allows the creation of a post-it without setting non mandatory attributes. This will also be useful to develop the tests.
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the post-its. This is done to allow the persistence of the post-its and to allow the use of the post-its in other parts of the application.
+- **Service:** This is used to provide a list of boards and to do some validations. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
-_Note: This are some simplified versions of the tests for readability purposes._
-
-**Test 1:** 3006
+**Test 1:** Ensure that post-it needs a title
 
 ```java
+@Test
+public void ensurePostItNeedsTitle{ ... }
+```
 
+**Test 2:** Ensure that post-it does not need a description
+
+```java
+@Test
+public  void ensurePostItDoesNotNeedDescription{ ... }
+```
+
+**Test 3:** Ensure that post-it needs a coordinates
+
+```java
+@Test
+public void ensurePostItNeedsCoordinates{ ... }
 ```
 
 ## 5. Implementation
 
 ### 5.1. Controller
 
-- Relevant implementation details
-
-```java
-
-```
+[Click here](/ecourse.core/src/main/java/eapli/ecourse/postitmanagement/application/CreatePostItController.java) to see the full code.
 
 ## 6. Integration & Demonstration
 
-![US3006_DEMO](out/US3006_DEMO.svg)
+![US3006_DEMO](US3006_DEMO.png)
 
 ## 7. Observations
 
-- N/a
+- The scomp implementation is documented in the [scomp report](/docs/scomp-concurrency.md).
