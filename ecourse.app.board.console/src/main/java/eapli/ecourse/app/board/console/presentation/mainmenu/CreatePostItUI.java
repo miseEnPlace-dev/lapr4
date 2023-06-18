@@ -64,7 +64,7 @@ public class CreatePostItUI extends AbstractUI {
       String description = Console.readLine("\nWrite the post-it description (Press Enter to skip): ");
 
       String imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
-      while (!ctrl.validateImagePath(imagePath)) {
+      while (!imagePath.isEmpty() && !ctrl.validateImagePath(imagePath)) {
         System.out.println("\nInvalid image path. Try again.");
         imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
       }
