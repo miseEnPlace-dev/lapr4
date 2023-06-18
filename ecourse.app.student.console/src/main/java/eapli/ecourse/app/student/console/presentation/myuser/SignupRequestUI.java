@@ -17,15 +17,14 @@ import eapli.framework.presentation.console.AbstractUI;
 public class SignupRequestUI extends AbstractUI {
   private static final Logger LOGGER = LogManager.getLogger(SignupRequestUI.class);
 
-  private final SignupController theController = new SignupController();
-
   @Override
   protected boolean doShow() {
+    final SignupController theController = new SignupController();
     final StudentDataWidget studentData = new StudentDataWidget();
     studentData.show();
 
     try {
-      this.theController.signup(studentData.username(), studentData.password(), studentData.firstName(),
+      theController.signup(studentData.username(), studentData.password(), studentData.firstName(),
           studentData.lastName(), studentData.email(), studentData.mecanographicNumber());
     } catch (final IllegalArgumentException e) {
       System.out.println("Error creating the account: " + e.getMessage() + ". Please try again.\n");

@@ -13,12 +13,13 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class TakeEvaluationExamUI extends AbstractUI {
-  private TakeEvaluationExamController ctrl = new TakeEvaluationExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().students(), PersistenceContext.repositories().evaluationExams(),
-      PersistenceContext.repositories().courses(), PersistenceContext.repositories().answers());
+  private TakeEvaluationExamController ctrl;
 
   @Override
   protected boolean doShow() {
+    ctrl = new TakeEvaluationExamController(AuthzRegistry.authorizationService(),
+        PersistenceContext.repositories().students(), PersistenceContext.repositories().evaluationExams(),
+        PersistenceContext.repositories().courses(), PersistenceContext.repositories().answers());
     CourseDTO course;
     if ((course = selectCourse()) == null)
       return false;
