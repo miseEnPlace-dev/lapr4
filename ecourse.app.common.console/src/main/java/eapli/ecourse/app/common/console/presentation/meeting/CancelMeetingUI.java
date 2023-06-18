@@ -11,11 +11,11 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class CancelMeetingUI extends AbstractUI {
-  private CancelMeetingController ctrl;
+
 
   @Override
   protected boolean doShow() {
-    ctrl = new CancelMeetingController(AuthzRegistry.authorizationService(),
+   CancelMeetingController ctrl = new CancelMeetingController(AuthzRegistry.authorizationService(),
         PersistenceContext.repositories().meetings(), PersistenceContext.repositories().invites());
 
     Iterable<MeetingDTO> userMeetings = ctrl.listNotCanceledScheduledMeetings();
@@ -24,7 +24,6 @@ public class CancelMeetingUI extends AbstractUI {
       return false;
     }
 
-    ;
     final SelectWidget<MeetingDTO> selector = new SelectWidget<>(new MeetingPrinter().header(), userMeetings,
         new MeetingPrinter());
 

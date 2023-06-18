@@ -33,8 +33,8 @@ public class ListCourseExamsController {
 
   public Iterable<CourseDTO> listOpenInProgressCourses() {
     Iterable<CourseDTO> openCourses = this.service.listOpenCourses();
-
     Iterable<CourseDTO> inProgressCourses = this.service.listInProgressCourses();
+
     Stream<CourseDTO> combinedStream = Stream.concat(StreamSupport.stream(openCourses.spliterator(), false),
         StreamSupport.stream(inProgressCourses.spliterator(), false));
 
@@ -44,11 +44,6 @@ public class ListCourseExamsController {
   public Iterable<EvaluationExamDTO> listCourseEvaluationExams(CourseDTO courseDTO) {
     authz.ensureAuthenticatedUserHasAnyOf(ClientRoles.POWER_USER, ClientRoles.TEACHER, ClientRoles.MANAGER);
 
-    Optional<Course> course = courseRepository.ofIdentity(courseDTO.getCode());
-
-    if (course.isEmpty())
-      throw new IllegalArgumentException("There is no Course with the given code");
-
-    return evaluationExamService.listAllCourseExams(course.get());
+    return evaluationExamService.listAllCourseExams(courseRepository.ofIdentity(courseDTO.getCode()).orElseThrow());
   }
 }

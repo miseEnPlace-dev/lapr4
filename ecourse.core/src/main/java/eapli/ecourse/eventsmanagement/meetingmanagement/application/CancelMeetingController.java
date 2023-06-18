@@ -20,7 +20,6 @@ public class CancelMeetingController {
 
   private final AuthorizationService authz;
 
-
   public CancelMeetingController(AuthorizationService authz, MeetingRepository meetingRepository,
       InviteRepository inviteRepository) {
     this.authz = authz;
@@ -43,7 +42,7 @@ public class CancelMeetingController {
     invites.forEach(inviteRepository::save);
   }
 
-  public SystemUser getAuthenticatedUser() {
+  private SystemUser getAuthenticatedUser() {
     return authz.loggedinUserWithPermissions(ClientRoles.TEACHER, ClientRoles.MANAGER, ClientRoles.STUDENT)
         .orElseThrow(IllegalStateException::new);
   }

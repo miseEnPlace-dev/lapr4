@@ -15,7 +15,7 @@ inviteRepository)
 
 + listNotCanceledScheduledMeetings()
 + cancelMeeting(meeting)
-+ getAuthenticatedUser()
+- getAuthenticatedUser()
 }
 
 
