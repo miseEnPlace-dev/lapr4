@@ -73,6 +73,16 @@ We also implemented an board update count checker which works by implementing an
 
 > [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/BoardUpdatesShared.java) to see the full code.
 
+### Notification
+
+It was implemented a new Thread `MessageListener` that has a queue of messages. This thread has a method `receive()` that receives the expected codes and returns the first occurrence of a message in the queue with the expected code. If there are no occurrences of the expected codes in the queue, the method blocks until a message with one of the expected codes is received. When checking the queue, the messages that do not correspond to the expected codes are discarded.
+
+When reading from a socket, it works like a FIFO queue (because we are using TCP!): the first message sent by the server will be the first to be received by the client. We can do the same with a thread that reads from the socket and puts the messages in a queue. Then, we can read from the queue instead of reading from the socket directly. This way, we can have a thread that is waiting for specific messages without blocking the entire socket or using two sockets, enabling us to implement, for example, notifications about changes in a board.
+
+> [Click here](/ecourse.app.board.console/src/main/java/eapli/ecourse/app/board/lib/MessageListener.java) to see the full code.
+
+### Improvements
+
 ## References
 
 [TP 11 - Java Concurrency](https://moodle.isep.ipp.pt/pluginfile.php/280091/mod_resource/content/3/Java%20Concurrency.pdf)
