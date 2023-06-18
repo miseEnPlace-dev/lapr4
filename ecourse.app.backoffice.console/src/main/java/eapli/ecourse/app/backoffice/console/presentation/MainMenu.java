@@ -8,21 +8,18 @@ import eapli.ecourse.app.common.console.presentation.authz.MyUserMenu;
 import eapli.ecourse.app.common.console.presentation.board.CreateBoardUI;
 import eapli.ecourse.app.common.console.presentation.meeting.MeetingsMenu;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
-import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
-import eapli.framework.presentation.console.ShowMessageAction;
 import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
 public class MainMenu extends AbstractUI {
-  private static final String RETURN_LABEL = "Return ";
 
   private static final int EXIT_OPTION = 0;
 
@@ -36,8 +33,6 @@ public class MainMenu extends AbstractUI {
   private static final int COURSES_OPTION = 4;
   private static final int ENROLLMENTS_OPTION = 5;
   private static final int MY_USER_OPTION = 6;
-  private static final int SETTINGS_OPTION = 7;
-  private static final int SOMETHING_OPTION = 8;
 
   private static final String SEPARATOR_LABEL = "--------------";
 
@@ -91,9 +86,6 @@ public class MainMenu extends AbstractUI {
 
       final Menu myUserMenu = new MyUserMenu();
       mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
-      final Menu settingsMenu = buildAdminSettingsMenu();
-      mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
 
     if (!Application.settings().isMenuLayoutHorizontal())
@@ -104,16 +96,4 @@ public class MainMenu extends AbstractUI {
     return mainMenu;
   }
 
-  private Menu buildAdminSettingsMenu() {
-    final Menu menu = new Menu("Settings >");
-
-    menu.addItem(SOMETHING_OPTION, "Test", new ShowMessageAction("Not implemented yet"));
-
-    if (!Application.settings().isMenuLayoutHorizontal())
-      menu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-
-    menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
-    return menu;
-  }
 }

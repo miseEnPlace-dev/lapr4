@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.common.board.BoardUpdatesShared;
+import eapli.ecourse.common.board.EventListener;
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
@@ -84,12 +85,14 @@ public class ClientHandler implements Runnable {
   private SafeOnlineCounter onlineCounter;
   private SafeBoardUpdatesCounter boardUpdatesCounter;
   private BoardUpdatesShared boardUpdatesShared = new BoardUpdatesShared();
+  private EventListener eventListener;
 
   public ClientHandler(Socket socket, SafeOnlineCounter onlineCounter,
-      SafeBoardUpdatesCounter boardUpdatesCounter) {
+      SafeBoardUpdatesCounter boardUpdatesCounter, EventListener eventListener) {
     this.client = socket;
     this.onlineCounter = onlineCounter;
     this.boardUpdatesCounter = boardUpdatesCounter;
+    this.eventListener = eventListener;
   }
 
   @Override
@@ -100,6 +103,8 @@ public class ClientHandler implements Runnable {
 
       // safely increment the online counter
       this.onlineCounter.increment();
+
+      eventListener.subscribe("all", client);
 
       // in udp applications, each send must match one receive in the
       // counterpart and the number of bytes transported by each datagram is
@@ -161,9 +166,11 @@ public class ClientHandler implements Runnable {
       handleMessage = new BadRequestMessage(output, client);
     } else {
       try {
-        handleMessage = clazz.getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class,
-            Socket.class, SafeOnlineCounter.class, SafeBoardUpdatesCounter.class).newInstance(
-                message, output, this.client, this.onlineCounter, this.boardUpdatesCounter);
+        handleMessage = clazz
+            .getDeclaredConstructor(ProtocolMessage.class, DataOutputStream.class, Socket.class,
+                SafeOnlineCounter.class, SafeBoardUpdatesCounter.class, EventListener.class)
+            .newInstance(message, output, this.client, this.onlineCounter, this.boardUpdatesCounter,
+                this.eventListener);
       } catch (Exception e) {
         logger.error("\n[Client Handler Thread] Error", e);
         return;

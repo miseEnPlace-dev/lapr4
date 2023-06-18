@@ -165,7 +165,7 @@ public class ConsoleExamPrinter extends AbstractUI implements ExamPrinter {
       Iterator<Entry<String, String>> mts = matchesEntries.iterator();
 
       // System.out.println("\nSelect the correct match:\n");
-      System.out.printf("\n%-28s%-28s%n", "Options", "Matches");
+      System.out.printf("\n%-35s%-35s%n", "Options", "Matches");
       for (int i = 0; i < maxSize; i++) {
         String optionString;
         String matchString;

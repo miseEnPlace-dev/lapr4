@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.EventListener;
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
@@ -29,9 +30,10 @@ public class DeletePostItMessage extends Message {
   private BoardRepository boardRepository;
   private PostItRepository postItRepository;
 
-  public DeletePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output, Socket socket,
-      SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
-    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
+  public DeletePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter,
+      EventListener eventListener) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter, eventListener);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
 

@@ -9,6 +9,7 @@ import javax.json.JsonStructure;
 import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.EventListener;
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
@@ -34,8 +35,9 @@ public class ChangePostItMessage extends Message {
   private PostItRepository postItRepository;
 
   public ChangePostItMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
-    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter,
+      EventListener eventListener) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter, eventListener);
 
     this.credentialStore = ClientState.getInstance().getCredentialStore();
 
@@ -93,8 +95,10 @@ public class ChangePostItMessage extends Message {
     String encodedImage = payload.asJsonObject().keySet().contains("image")
         ? payload.asJsonObject().getString("image")
         : null;
-    Integer x = payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
-    Integer y = payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
+    Integer x =
+        payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
+    Integer y =
+        payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
 
     if (title == null && x == null && y == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));

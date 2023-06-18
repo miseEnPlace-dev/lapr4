@@ -11,6 +11,7 @@ import eapli.ecourse.boardmanagement.application.ShareBoardController;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
+import eapli.ecourse.common.board.EventListener;
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
 import eapli.ecourse.common.board.SafeOnlineCounter;
 import eapli.ecourse.common.board.protocol.MessageCode;
@@ -32,8 +33,9 @@ public class GetUserPermissionsMessage extends Message {
   private final ShareBoardController ctrl;
 
   public GetUserPermissionsMessage(ProtocolMessage protocolMessage, DataOutputStream output,
-      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter) {
-    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter);
+      Socket socket, SafeOnlineCounter onlineCounter, SafeBoardUpdatesCounter boardUpdatesCounter,
+      EventListener eventListener) {
+    super(protocolMessage, output, socket, onlineCounter, boardUpdatesCounter, eventListener);
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.userSvc = AuthzRegistry.userService();

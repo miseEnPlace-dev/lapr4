@@ -8,99 +8,28 @@
 
 @start-question
   @type short-answer;
-  @question-body "Como descreve a forma de um círculo?";
+  @question-body "Como é que podemos fazer um comentário em SQL?";
   @start-correct-answers
-    @correct-answer "Assim" 0.5;
-    @correct-answer "Assado" 0.2;
-    @correct-answer "de Outra maneira" 0.1;
+    @correct-answer "--" 0.8;
+    @correct-answer "/* */" 0.2;
   @end-correct-answers;
 @end-question;
 
 @start-question
   @type true-false;
-  @question-body "O quadrado da hipotenusa é igual à soma dos quadrados dos catetos?";
+  @question-body "A keyword usada para aplicar condições a uma query é WHERE?";
   @correct-answer true;
 @end-question;
 
 @start-question
   @type multiple-choice;
-  @question-body "Quais das seguintes opções são números primos?";
+  @question-body "O que significa SQL?";
   @feedback "General feedback";
-
-  @start-correct-answers
-    @correct-answer 1 0.2;
-    @correct-answer 2 0.3;
-    @correct-answer 4 0.4;
-    @correct-answer 6 0.1;
-  @end-correct-answers;
-  @start-options
-    @option 1 "2" "Feedback";
-    @option 2 "3";
-    @option 3 "4";
-    @option 4 "5";
-    @option 5 "6" "More feedback";
-    @option 6 "7";
-    @option 7 "8";
-    @option 8 "9";
-  @end-options;
-@end-question;
-
-@start-question
-  @type multiple-choice;
-  @question-body "Quais das seguintes opções são números primos?";
-  @correct-answer 2;
+  @correct-answer 1;
 
   @start-options
-    @option 1 "2";
-    @option 2 "4";
-    @option 3 "6";
-    @option 4 "8";
-    @option 5 "9";
-  @end-options;
-@end-question;
-
-@start-question
-  @type matching;
-  @question-body "Associe cada figura à sua área";
-  @feedback "General feedback";
-
-  @start-correct-answers
-    @correct-answer 1 - 2;
-    @correct-answer 2 - 4;
-    @correct-answer 3 - 5;
-    @correct-answer 4 - 1;
-  @end-correct-answers;
-
-  @start-options
-    @option 1 "1";
-    @option 2 "2";
-    @option 3 "3";
-    @option 4 "4";
-  @end-options;
-
-  @start-matching
-    @match 1 "1";
-    @match 2 "2";
-    @match 3 "3";
-    @match 4 "4";
-    @match 5 "5";
-  @end-matching;
-@end-question;
-
-@start-question
-  @type missing-words;
-  @question-body "A melhor __ de todas é a __";
-  @feedback "General feedback";
-
-  @start-correct-answers
-    @correct-answer "coisa";
-    @correct-answer "pizza";
-  @end-correct-answers;
-
-  @start-options
-    @option "coisa";
-    @option "pizza";
-    @option "outra coisa";
-    @option "outra pizza";
+    @option 1 "Structured Query Language" "Muito bem!";
+    @option 2 "Super Quick Language" "Não, não é isso";
+    @option 3 "Silly Question Language" "Não, não é isso";
   @end-options;
 @end-question;
