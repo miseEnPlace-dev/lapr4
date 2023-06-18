@@ -60,7 +60,7 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 ### 3.2. Conditions
 
 - The Student must be authenticated in the system
-- The inserted file path must exist, and the defined exam structure must be valid, i.e., must be accepted by the defined grammar, described in [this](grammar.md) file.
+- The inserted file path must exist, and the defined exam structure must be valid, i.e., must be accepted by the defined grammar, described in [this](../../grammar-doc.md) file.
 
 ### 3.3. System Sequence Diagram
 
@@ -72,21 +72,21 @@ This is an enhance of last sprint's US 2001. The goal is to update the parser's 
 
 ## 4. Design
 
-### 4.1. Functionality Realization
+<!-- ### 4.1. Functionality Realization
 
-![US2009_SD](out/US2009_SD.svg)
+![US2009_SD](out/US2009_SD.svg) -->
 
-### 4.2. Class Diagram
+### 4.1. Class Diagram
 
 ![US2009_CD](out/US2009_CD.svg)
 
-### 4.3. Applied Patterns
+### 4.2. Applied Patterns
 
-- **Strategy:** This is used to isolate the different types of structure of questions. This way, the parser can be used to parse different types of questions, without having to know the details of each one of them. Using the service `GenerateStructureFormativeExamService`, it returns a string with the structure of the exam, and the parser can parse it, without having to know the details of each type of question.
-- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
-- **Adapter:** This is used to adapt the `GrammarParser` to the `FormativeExamParser`. This way, the `FormativeExamParser` can use the `GrammarParser` to parse the structure of the exam, without having to know the details of the `GrammarParser`.
+- **Strategy:** This is used in the parser, when printing the exam's questions. This is done to enable the use of different printers, depending on the type of the UI being used.
+- **Dependency Injection:** This is used in the controller and in the parser. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Adapter:** This is used to reduce coupling between the controller and the parser. This is done to enable the use of different parsers, from different libraries, without having to change the controller. To achieve this, the parser uses the interface `GrammarParser`, which is implemented by the ANTLR4 parser.
 
-### 4.4. Tests
+### 4.3. Tests
 
 _Note: This are some simplified versions of the tests for readability purposes._
 
@@ -140,17 +140,48 @@ public String generateStructureString() {
 
 ### 5.2. Take formative exam controller
 
+Take Exam controller, using the adapter pattern to reduce coupling between the controller and the parser.
+
 ```java
+public interface GrammarParser<B> {
+    public B parseFromFile(String path) throws IOException, ParseException;
+    public B parseFromString(String str) throws ParseException;
+}
+```
+
+```java
+
+public TakeFormativeExamController {
+  private final Grammar<ExamScore> parser;
+
 public TakeFormativeExamController(final AuthorizationService authz, final StudentRepository studentRepository,
       final CourseRepository courseRepository, final FormativeExamRepository formativeExamRepository) {
-    this.authz = authz;
-    this.studentRepository = studentRepository;
-    this.courseRepository = courseRepository;
-    this.listCourseService = new ListCourseService(courseRepository);
+
+    (...) // omitted for brevity
+
     this.parser = new ANTLR4TakeExamParser();
-    this.formativeExamRepository = formativeExamRepository;
-    this.service = new FormativeExamListService(formativeExamRepository);
   }
+}
+```
+
+Exam parser using ANTLR4 listeners. This class implements the `GrammarParser` interface.
+
+```java
+public ExamScore parseFromString(String str, ExamPrinter printer) throws ParseException {
+    ExamLexer lexer = new ExamLexer(CharStreams.fromString(str));
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    ExamParser parser = new ExamParser(tokens);
+    ParseTree tree = parser.start();
+
+    if (parser.getNumberOfSyntaxErrors() > 0)
+      throw new ParseException();
+
+    ParseTreeWalker walker = new ParseTreeWalker();
+    ExamTakerListener listener = new ExamTakerListener(printer);
+    walker.walk(listener, tree);
+
+    return listener.getStudentsScore();
+}
 ```
 
 ## 6. Integration & Demonstration
@@ -161,3 +192,7 @@ public TakeFormativeExamController(final AuthorizationService authz, final Stude
 ## 7. Observations
 
 - N/a
+
+```
+
+```

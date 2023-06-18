@@ -4,8 +4,10 @@ import eapli.ecourse.coursemanagement.application.ListCourseService;
 import eapli.ecourse.coursemanagement.dto.CourseDTO;
 import eapli.ecourse.coursemanagement.repositories.CourseRepository;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
+import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExam;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4TakeExamParser;
+import eapli.ecourse.exammanagement.domain.parsers.GrammarParser;
 import eapli.ecourse.exammanagement.dto.FormativeExamDTO;
 import eapli.ecourse.exammanagement.repositories.FormativeExamRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
@@ -22,7 +24,7 @@ public class TakeFormativeExamController {
   private final StudentRepository studentRepository;
   private final CourseRepository courseRepository;
   private final FormativeExamRepository formativeExamRepository;
-  private final ANTLR4TakeExamParser parser;
+  private final GrammarParser<ExamScore> parser;
   private final FormativeExamListService service;
 
   private Student student;
@@ -33,9 +35,9 @@ public class TakeFormativeExamController {
     this.studentRepository = studentRepository;
     this.courseRepository = courseRepository;
     this.listCourseService = new ListCourseService(courseRepository);
-    this.parser = new ANTLR4TakeExamParser();
     this.formativeExamRepository = formativeExamRepository;
     this.service = new FormativeExamListService(formativeExamRepository);
+    this.parser = new ANTLR4TakeExamParser();
   }
 
   public void setCurrentAuthenticatedStudent() {
