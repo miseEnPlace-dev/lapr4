@@ -74,13 +74,13 @@ class MainMenu extends StudentBaseUI {
   private Menu buildMainMenu() {
     final Menu mainMenu = new Menu();
 
+    mainMenu.addItem(CREATE_BOARD_OPTION, "Create board", new CreateBoardUI()::show);
+    mainMenu.addSubMenu(EXAMS_MENU_OPTION, new ExamsMenu().buildMenu());
+    mainMenu.addSubMenu(MEETINGS_MENU_OPTION, new MeetingsMenu().buildMenu());
+    mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
+
     final Menu myUserMenu = new MyUserMenu();
     mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
-    mainMenu.addSubMenu(COURSES_OPTION, new CoursesMenu().buildMenu());
-    mainMenu.addSubMenu(MEETINGS_MENU_OPTION, new MeetingsMenu().buildMenu());
-    mainMenu.addSubMenu(EXAMS_MENU_OPTION, new ExamsMenu().buildMenu());
-    mainMenu.addItem(CREATE_BOARD_OPTION, "Create board", new CreateBoardUI()::show);
 
     final Menu settingsMenu = buildAdminSettingsMenu();
     mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);

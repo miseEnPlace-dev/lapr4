@@ -74,19 +74,24 @@ public class MainMenu extends AbstractUI {
   private Menu buildMainMenu() {
     final Menu mainMenu = new Menu();
 
-    final Menu myUserMenu = new MyUserMenu();
-    mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
     if (authz.isAuthenticatedUserAuthorizedTo(ClientRoles.POWER_USER, ClientRoles.MANAGER)) {
+      mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
+
       final Menu usersMenu = new UsersMenu().buildUsersMenu();
       mainMenu.addSubMenu(USERS_OPTION, usersMenu);
-      final Menu coursesMenu = new CoursesMenu().buildCoursesMenu();
-      mainMenu.addSubMenu(COURSES_OPTION, coursesMenu);
-      final Menu enrollmentsMenu = new EnrollmentsMenu().buildEnrolmentsMenu();
-      mainMenu.addSubMenu(ENROLLMENTS_OPTION, enrollmentsMenu);
+
       final Menu meetingsMenu = new MeetingsMenu().buildMenu();
       mainMenu.addSubMenu(MEETINGS_OPTION, meetingsMenu);
-      mainMenu.addItem(CREATE_BOARD_OPTION, "Create Board", new CreateBoardUI()::show);
+
+      final Menu coursesMenu = new CoursesMenu().buildCoursesMenu();
+      mainMenu.addSubMenu(COURSES_OPTION, coursesMenu);
+
+      final Menu enrollmentsMenu = new EnrollmentsMenu().buildEnrolmentsMenu();
+      mainMenu.addSubMenu(ENROLLMENTS_OPTION, enrollmentsMenu);
+
+      final Menu myUserMenu = new MyUserMenu();
+      mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
+
       final Menu settingsMenu = buildAdminSettingsMenu();
       mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
     }
