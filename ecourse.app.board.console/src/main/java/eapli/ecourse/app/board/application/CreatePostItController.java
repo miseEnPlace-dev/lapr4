@@ -50,9 +50,8 @@ public class CreatePostItController {
     json.add("x", x);
     json.add("y", y);
 
-    ProtocolMessage response =
-        listener.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()),
-            MessageCode.IS_CELL_AVAILABLE);
+    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.IS_CELL_AVAILABLE, json.build()),
+        MessageCode.IS_CELL_AVAILABLE);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -90,4 +89,17 @@ public class CreatePostItController {
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
   }
+
+  public boolean validateImagePath(String imagePath) {
+    ImageEncoderService encoder = new ImageEncoderService();
+
+    try {
+      encoder.encodeImage(imagePath);
+    } catch (Exception e) {
+      return false;
+    }
+
+    return true;
+  }
+
 }
