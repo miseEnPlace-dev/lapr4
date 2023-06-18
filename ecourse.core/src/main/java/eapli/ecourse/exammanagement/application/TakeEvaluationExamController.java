@@ -9,6 +9,7 @@ import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.EvaluationExam;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 import eapli.ecourse.exammanagement.domain.parsers.ANTLR4TakeExamParser;
+import eapli.ecourse.exammanagement.domain.parsers.GrammarParser;
 import eapli.ecourse.exammanagement.dto.EvaluationExamDTO;
 import eapli.ecourse.exammanagement.repositories.EvaluationExamRepository;
 import eapli.ecourse.studentmanagement.domain.Student;
@@ -27,7 +28,7 @@ public class TakeEvaluationExamController {
   private final CourseRepository courseRepository;
   private final AnswerRepository answerRepository;
   private final EvaluationExamRepository examRepository;
-  private final ANTLR4TakeExamParser parser;
+  private final GrammarParser<ExamScore> parser;
 
   private Student student;
   private ExamScore studentsScore;

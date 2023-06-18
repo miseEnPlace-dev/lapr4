@@ -82,6 +82,12 @@ Regarding grades, each question will have points when the answer is correct. If 
 
 ![US2004_CD](out/US2004_CD.svg)
 
+### 4.2. Applied Patterns
+
+- **Strategy:** This is used in the parser, when printing the exam's questions. This is done to enable the use of different printers, depending on the type of the UI being used.
+- **Dependency Injection:** This is used in the controller and in the parser. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Adapter:** This is used to reduce coupling between the controller and the parser. This is done to enable the use of different parsers, from different libraries, without having to change the controller. To achieve this, the parser uses the interface `GrammarParser`, which is implemented by the ANTLR4 parser.
+
 ---
 
 ## 5. Design
@@ -118,7 +124,36 @@ public void ensureTotalScoreIsCorrect() {
 
 ### 6.1. Controller
 
-- Exam parser using ANTLR4 listeners.
+- Take Exam controller, using the adapter pattern to reduce coupling between the controller and the parser.
+
+```java
+public interface GrammarParser<B> {
+    public B parseFromFile(String path) throws IOException, ParseException;
+
+    public B parseFromString(String str) throws ParseException;
+}
+```
+
+```java
+
+public class TakeExamController {
+    ...
+    private final GrammarParser<ExamScore> parser;
+    private final ExamScore studentsScore;
+
+    public TakeExamController(GrammarParser parser, ...) {
+        ...
+        this.parser = parser;
+    }
+
+    public void parseExam(final String str, ExamPrinter printer) throws ParseException {
+        ...
+        studentsScore = parser.parseFromString(str, printer);
+    }
+}
+```
+
+- Exam parser using ANTLR4 listeners. This class implements the `GrammarParser` interface.
 
 ```java
 public ExamScore parseFromString(String str, ExamPrinter printer) throws ParseException {

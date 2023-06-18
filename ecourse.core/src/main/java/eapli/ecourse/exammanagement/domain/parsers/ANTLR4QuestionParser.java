@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.questionmanagement.domain.Question;
 
@@ -48,5 +49,13 @@ public class ANTLR4QuestionParser implements GrammarParser<List<Question>> {
 
     QuestionBuilderVisitor eval = new QuestionBuilderVisitor(true);
     return (List<Question>) eval.visit(tree);
+  }
+
+  public List<Question> parseFromFile(String path, ExamPrinter printer) throws IOException, ParseException {
+    throw new UnsupportedOperationException();
+  }
+
+  public List<Question> parseFromString(String str, ExamPrinter printer) throws ParseException {
+    throw new UnsupportedOperationException();
   }
 }

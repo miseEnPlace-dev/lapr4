@@ -1,13 +1,16 @@
 package eapli.ecourse.exammanagement.domain.parsers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import eapli.ecourse.exammanagement.application.ExamPrinter;
 import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.formative.FormativeExamRequestBuilder;
+import eapli.ecourse.questionmanagement.domain.Question;
 
 public class ANTLR4FormativeExamParser implements GrammarParser<FormativeExamRequestBuilder> {
   public FormativeExamRequestBuilder parseFromFile(String filePath) throws IOException, ParseException {
@@ -34,5 +37,14 @@ public class ANTLR4FormativeExamParser implements GrammarParser<FormativeExamReq
 
     FormativeExamBuilderVisitor eval = new FormativeExamBuilderVisitor();
     return (FormativeExamRequestBuilder) eval.visit(tree);
+  }
+
+  public FormativeExamRequestBuilder parseFromFile(String path, ExamPrinter printer)
+      throws IOException, ParseException {
+    throw new UnsupportedOperationException();
+  }
+
+  public FormativeExamRequestBuilder parseFromString(String str, ExamPrinter printer) throws ParseException {
+    throw new UnsupportedOperationException();
   }
 }

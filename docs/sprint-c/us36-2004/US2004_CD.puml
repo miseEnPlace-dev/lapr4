@@ -17,6 +17,11 @@ class TakeEvaluationExamController {
 + getEvaluationExamSelected(evaluationExamDTO)
 }
 
+interface GrammarParser {
+  + parseFromFile(string)
+  + parseFromString(string)
+}
+
 class ANTLR4TakeExamParser {
 
   + parseFromFile(string)
@@ -69,7 +74,7 @@ RepositoryFactory --> CourseRepository
 RepositoryFactory --> EvaluationExamRepository
 RepositoryFactory --> StudentRepository
 
-TakeEvaluationExamController --> ANTLR4TakeExamParser
+TakeEvaluationExamController --> GrammarParser
 TakeEvaluationExamController --> ListCourseService
 TakeEvaluationExamController --> EvaluationExamListService
 TakeEvaluationExamController --> EvaluationExamRepository
@@ -77,6 +82,8 @@ TakeEvaluationExamController --> CourseRepository
 TakeEvaluationExamController --> StudentRepository
 
 ListCourseService --> CourseRepository
+
+GrammarParser <|.. ANTLR4TakeExamParser
 
 EvaluationExamListService --> EvaluationExamRepository
 

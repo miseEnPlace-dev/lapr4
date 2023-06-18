@@ -12,22 +12,6 @@ import eapli.ecourse.exammanagement.application.exceptions.ParseException;
 import eapli.ecourse.exammanagement.domain.evaluation.ExamScore;
 
 public class ANTLR4TakeExamParser implements GrammarParser<ExamScore> {
-  public ExamScore parseFromFile(String path) throws IOException, ParseException {
-    ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(path));
-    CommonTokenStream tokens = new CommonTokenStream(lexer);
-    ExamParser parser = new ExamParser(tokens);
-    ParseTree tree = parser.start();
-
-    if (parser.getNumberOfSyntaxErrors() > 0)
-      throw new ParseException();
-
-    ParseTreeWalker walker = new ParseTreeWalker();
-    ExamTakerListener listener = new ExamTakerListener(null);
-    walker.walk(listener, tree);
-
-    return listener.getStudentsScore();
-  }
-
   public ExamScore parseFromFile(String path, ExamPrinter printer) throws IOException, ParseException {
     ExamLexer lexer = new ExamLexer(CharStreams.fromFileName(path));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -39,22 +23,6 @@ public class ANTLR4TakeExamParser implements GrammarParser<ExamScore> {
 
     ParseTreeWalker walker = new ParseTreeWalker();
     ExamTakerListener listener = new ExamTakerListener(printer);
-    walker.walk(listener, tree);
-
-    return listener.getStudentsScore();
-  }
-
-  public ExamScore parseFromString(String str) throws ParseException {
-    ExamLexer lexer = new ExamLexer(CharStreams.fromString(str));
-    CommonTokenStream tokens = new CommonTokenStream(lexer);
-    ExamParser parser = new ExamParser(tokens);
-    ParseTree tree = parser.start();
-
-    if (parser.getNumberOfSyntaxErrors() > 0)
-      throw new ParseException();
-
-    ParseTreeWalker walker = new ParseTreeWalker();
-    ExamTakerListener listener = new ExamTakerListener(null);
     walker.walk(listener, tree);
 
     return listener.getStudentsScore();
@@ -74,5 +42,13 @@ public class ANTLR4TakeExamParser implements GrammarParser<ExamScore> {
     walker.walk(listener, tree);
 
     return listener.getStudentsScore();
+  }
+
+  public ExamScore parseFromFile(String path) throws IOException, ParseException {
+    throw new UnsupportedOperationException();
+  }
+
+  public ExamScore parseFromString(String str) throws ParseException {
+    throw new UnsupportedOperationException();
   }
 }
