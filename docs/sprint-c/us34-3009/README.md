@@ -41,6 +41,11 @@
 
 ## 3. Analysis
 
+As the way to view the history of a board needs to be presented to the user, there will be implemented 2 ways to do it:
+
+- Board History - List the post-its versions ordered by date
+- Post-it History - List, for each post-it, the versions ordered by date
+
 ### 3.1. Conditions
 
 - User must have read/write permissions or be the owner to view the history of a board.
@@ -65,32 +70,42 @@
 
 ### 4.3. Applied Patterns
 
-- XXX
+- **Dependency Injection:** This is used in the controller and in the service. This is done to enable the use of a mock repository in the tests and to reduce coupling.
+- **Repository:** This is used to store the post-its. This is done to allow the persistence of the post-its and to allow the use of the post-its in other parts of the application.
+- **Service:** This is used to provide a list of boards/post-its to the controller. This is done to reduce coupling and to allow the use of the service in other parts of the application.
 
 ### 4.4. Tests
 
-_Note: This are some simplified versions of the tests for readability purposes._
-
-**Test 1:** XXX
+**Test 1:** Ensure user needs read/write permissions views the history of a board
 
 ```java
+@Test
+public void ensureUserNeedsPermissionToViewBoardHistory() { ... }
+```
 
+**Test 2:** Ensure board history is ordered by date
+
+```java
+@Test
+public void ensureBoardHistoryIsOrderedByDate() { ... }
 ```
 
 ## 5. Implementation
 
 ### 5.1. Controller
 
-- Relevant implementation details
-
-```java
-
-```
+[Click here](/ecourse.core/src/main/java/eapli/ecourse/boardmanagement/application/ViewBoardHistoryController.java) to see the full code.
 
 ## 6. Integration & Demonstration
 
-![US3009_DEMO](out/US3009_DEMO.svg)
+### 6.1. Board History
+
+![US3009_DEMO](US3009_DEMO1.png)
+
+### 6.2. Post-It History
+
+![US3009_DEMO](US3009_DEMO2.png)
 
 ## 7. Observations
 
-- N/a
+- The scomp implementation is documented in the [scomp report](/docs/scomp-concurrency.md).
