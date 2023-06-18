@@ -36,10 +36,6 @@ public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Acti
     EnrolmentDTO enrolmentDTO = respondCtrl.listPendingCourseApplications(course).iterator().next();
     respondCtrl.accept(enrolmentDTO);
 
-    CourseDTO other = PersistenceContext.repositories().courses()
-        .ofIdentity(CourseCode.valueOf("1234")).get().toDto();
-    requestCtrl.requestEnrolment(other, user);
-
     CourseDTO lprog = PersistenceContext.repositories().courses()
         .ofIdentity(CourseCode.valueOf("4444")).get().toDto();
     CourseDTO bddad = PersistenceContext.repositories().courses()
@@ -51,12 +47,19 @@ public class EnrolmentBootstrapper extends UsersBootstrapperBase implements Acti
     Username russo = Username.valueOf("tomas.russo");
     SystemUser userRusso = AuthzRegistry.userService().userOfIdentity(russo).orElseThrow(IllegalStateException::new);
 
+    Username barros = Username.valueOf("andre.barros");
+    SystemUser userBarros = AuthzRegistry.userService().userOfIdentity(barros).orElseThrow(IllegalStateException::new);
+
     Username user1 = Username.valueOf("user1");
     SystemUser userUser1 = AuthzRegistry.userService().userOfIdentity(user1).orElseThrow(IllegalStateException::new);
 
     requestCtrl.requestEnrolment(lprog, userRusso);
     requestCtrl.requestEnrolment(bddad, userRusso);
     requestCtrl.requestEnrolment(scomp, userUser1);
+
+    CourseDTO lapr4 = PersistenceContext.repositories().courses()
+        .ofIdentity(CourseCode.valueOf("1234")).get().toDto();
+    requestCtrl.requestEnrolment(lapr4, userBarros);
 
     EnrolmentDTO lprogEnr = respondCtrl.listPendingCourseApplications(lprog).iterator().next();
     respondCtrl.accept(lprogEnr);

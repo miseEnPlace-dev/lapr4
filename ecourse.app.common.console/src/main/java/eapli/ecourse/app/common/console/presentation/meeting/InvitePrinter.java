@@ -7,7 +7,7 @@ import eapli.framework.visitor.Visitor;
 @SuppressWarnings({ "squid:S106" })
 public class InvitePrinter implements Visitor<InviteDTO> {
   public String header() {
-    return String.format("#  %-10s%-10s%-10s%-5s", "Owner", "Status", "Time", "Day");
+    return String.format("#  %-25s%-10s%-10s%-15s", "Owner", "Status", "Time", "Day");
   }
 
   public void printHeader() {
@@ -20,10 +20,10 @@ public class InvitePrinter implements Visitor<InviteDTO> {
 
     TableFormatPrinter printer = new TableFormatPrinter();
 
-    printer.addColumn(visitee.getMeeting().scheduledBy().username().toString(), 10);
+    printer.addColumn(visitee.getMeeting().scheduledBy().username().toString(), 25);
     printer.addColumn(visitee.getStatus().toString(), 10);
     printer.addColumn(timeString, 10);
-    printer.addColumn(visitee.getTime().dayInWeek().toString(), 5);
+    printer.addColumn(visitee.getTime().dayInWeek().toString(), 15);
 
     System.out.print(printer.format());
   }
