@@ -86,3 +86,10 @@ To ensure code quality and that all team members are in sync every feature/US th
 `git checkout branch-name` - Change from current branch to branch-name
 
 `git diff branch1..branch2` - Compare two branches
+
+## Definition of Done (DoD)
+
+- The code is reviewed by at least one team member
+- The code is merged to the dev branch
+- The code is deployed to the staging environment
+- The code is tested in the staging environment
