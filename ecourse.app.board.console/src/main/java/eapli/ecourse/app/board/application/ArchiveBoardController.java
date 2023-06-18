@@ -20,7 +20,8 @@ public class ArchiveBoardController {
 
   public Iterable<BoardDTO> listUserBoards() throws IOException, UnsupportedVersionException,
       ClassNotFoundException, UnsuccessfulRequestException {
-    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_BOARDS));
+    ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.GET_OWN_BOARDS),
+        MessageCode.GET_OWN_BOARDS);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
@@ -35,7 +36,8 @@ public class ArchiveBoardController {
   public void archiveBoard(BoardDTO boardDto) throws IOException, UnsupportedVersionException,
       UnsuccessfulRequestException, ClassNotFoundException {
     ProtocolMessage response = listener
-        .sendRecv(new ProtocolMessage(MessageCode.ARCHIVE_BOARD, boardDto.getId().toString()));
+        .sendRecv(new ProtocolMessage(MessageCode.ARCHIVE_BOARD, boardDto.getId().toString()),
+            MessageCode.ARCHIVE_BOARD);
 
     if (response.getCode().equals(MessageCode.ERR))
       throw new UnsuccessfulRequestException(response);
