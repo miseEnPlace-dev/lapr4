@@ -1,6 +1,8 @@
 package eapli.ecourse.boardmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -11,6 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
@@ -113,6 +116,10 @@ public class BoardTest {
   @Test
   public void testArchived() {
     assertNull(board.archived());
+    board.toggleArchive();
+    assertNotNull(board.archived());
+    board.toggleArchive();
+    assertNull(board.archived());
   }
 
   @Test
@@ -140,5 +147,50 @@ public class BoardTest {
     Board other = new Board(new BoardTitle("Test Board"), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), id,
         owner);
     assertTrue(board.sameAs(other));
+  }
+
+  @Test
+  public void testSameAsIsFalseWithDifferentRowsSize() {
+    Board other = new Board(new BoardTitle("Test Board"), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), id,
+        owner);
+    other.rows().add(new BoardRow(new BoardTitle("row"), 1));
+    assertFalse(board.sameAs(other));
+  }
+
+  @Test
+  public void testSameAsIsFalseWithDifferentColumnsSize() {
+    Board other = new Board(new BoardTitle("Test Board"), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), id,
+        owner);
+    other.columns().add(new BoardColumn(new BoardTitle("column"), 1));
+    assertFalse(board.sameAs(other));
+  }
+
+  @Test
+  public void testSameAsIsFalseWithDifferentColumns() {
+    board.columns().add(new BoardColumn(new BoardTitle("column"), 1));
+    Board other = new Board(new BoardTitle("Test Board"), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), id,
+        owner);
+    other.columns().add(new BoardColumn(new BoardTitle("c"), 1));
+    assertFalse(board.sameAs(other));
+  }
+
+  @Test
+  public void testSameAsIsFalseWithDifferentRows() {
+    board.rows().add(new BoardRow(new BoardTitle("row"), 1));
+    Board other = new Board(new BoardTitle("Test Board"), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), id,
+        owner);
+    other.rows().add(new BoardRow(new BoardTitle("r"), 1));
+    assertFalse(board.sameAs(other));
+  }
+
+  @Test
+  public void testToDto() {
+    BoardDTO dto = board.toDto();
+    assertEquals(board.identity(), dto.getId());
+    assertEquals(board.title(), dto.getTitle());
+    assertEquals(board.permissions(), dto.getPermissions());
+    assertEquals(board.columns(), dto.getColumns());
+    assertEquals(board.rows(), dto.getRows());
+    assertEquals(board.owner(), dto.getOwner());
   }
 }
