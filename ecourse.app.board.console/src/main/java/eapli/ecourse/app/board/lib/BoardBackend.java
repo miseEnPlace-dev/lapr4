@@ -34,19 +34,31 @@ public class BoardBackend {
     tcpClient.connect(host, port, secure);
 
     /**
-     * This thread will be responsible for receiving messages from the server to the queue.
+     * This thread will be responsible for receiving messages from the server and putting them in
+     * the queue.
      */
     Thread messageQueueThread = new Thread(new MessageQueueHandler(messageQueue, tcpClient));
     messageQueueThread.start();
   }
 
   public void send(ProtocolMessage message) throws IOException {
-
     tcpClient.send(message);
   }
 
   public ProtocolMessage receive()
       throws IOException, UnsupportedVersionException, ClassNotFoundException {
+
+    /**
+     * When receiving from a socket, it works like a FIFO queue: the first message sent by the
+     * server will be the first to be received by the client. We can do the same with a thread that
+     * reads from the socket and puts the messages in a queue. Then, we can read from the queue
+     * instead of reading from the socket directly. This way, we can have a thread that is waiting
+     * for specific messages without blocking the entire socket or using two sockets, enabling us to
+     * implement the notifications about changes in a board.
+     */
+
+    // TODO
+
     return tcpClient.receive();
   }
 
