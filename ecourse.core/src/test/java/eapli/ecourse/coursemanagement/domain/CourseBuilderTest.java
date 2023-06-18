@@ -1,6 +1,7 @@
 package eapli.ecourse.coursemanagement.domain;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 
 import java.util.Calendar;
 
@@ -44,5 +45,58 @@ public class CourseBuilderTest {
     Course course = builder.build();
 
     assertNotNull(course);
+  }
+
+  @Test
+  public void ensureCodeIsMandatory() {
+    CourseBuilder builder = new CourseBuilder();
+    builder
+        .withTitle("Introduction to Programming")
+        .withDescription("Learn the basics of programming")
+        .withEnrolmentLimits(10, 20).withResponsibleTeacher(getDummyTeacher());
+
+    assertThrows(IllegalArgumentException.class, () -> builder.build());
+  }
+
+  @Test
+  public void ensureTitleIsMandatory() {
+    CourseBuilder builder = new CourseBuilder();
+    builder.withCode("C001")
+        .withDescription("Learn the basics of programming")
+        .withEnrolmentLimits(10, 20).withResponsibleTeacher(getDummyTeacher());
+
+    assertThrows(IllegalArgumentException.class, () -> builder.build());
+  }
+
+  @Test
+  public void ensureDescriptionIsMandatory() {
+    CourseBuilder builder = new CourseBuilder();
+    builder.withCode("C001")
+        .withTitle("Introduction to Programming")
+        .withEnrolmentLimits(10, 20).withResponsibleTeacher(getDummyTeacher());
+
+    assertThrows(IllegalArgumentException.class, () -> builder.build());
+  }
+
+  @Test
+  public void ensureEnrolmentLimitsAreMandatory() {
+    CourseBuilder builder = new CourseBuilder();
+    builder.withCode("C001")
+        .withTitle("Introduction to Programming")
+        .withDescription("Learn the basics of programming")
+        .withResponsibleTeacher(getDummyTeacher());
+
+    assertThrows(IllegalArgumentException.class, () -> builder.build());
+  }
+
+  @Test
+  public void ensureResponsibleTeacherIsMandatory() {
+    CourseBuilder builder = new CourseBuilder();
+    builder.withCode("C001")
+        .withTitle("Introduction to Programming")
+        .withDescription("Learn the basics of programming")
+        .withEnrolmentLimits(10, 20);
+
+    assertThrows(IllegalArgumentException.class, () -> builder.build());
   }
 }

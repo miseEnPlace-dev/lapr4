@@ -98,4 +98,12 @@ public class UserPermissionTest {
 
     assertTrue(up.canWrite(user.username()));
   }
+
+  @Test
+  public void testGetHash() {
+    UserPermission up = new UserPermission(new UserPermissionID(), Calendar.getInstance(), Calendar.getInstance(),
+        new PermissionType(), user);
+
+    assertTrue(up.hashCode() > 0);
+  }
 }
