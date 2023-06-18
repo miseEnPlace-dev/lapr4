@@ -105,7 +105,7 @@ public class MainMenu extends AbstractUI {
   }
 
   private Menu buildBoardHistoryMenu() {
-    final Menu boardHistoryMenu = new Menu();
+    final Menu boardHistoryMenu = new Menu("Board History >");
 
     boardHistoryMenu.addItem(1, "View Board History", new ViewBoardHistoryUI()::show);
     boardHistoryMenu.addItem(2, "View Post-It History", new ViewPostItHistoryUI()::show);
