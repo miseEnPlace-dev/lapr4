@@ -6,7 +6,12 @@ This document describes the SCOMP part of the project related to Java concurrenc
 
 ## The Problem
 
-TODO
+In our application there are two main concurrency problems:
+
+- The Shared Board Server must be able to handle multiple clients at the same time.
+- The post it state must be able to be updated by multiple users at the same time.
+
+To solve this issue we can use Java locking mechanisms and threads.
 
 ## The solution
 
