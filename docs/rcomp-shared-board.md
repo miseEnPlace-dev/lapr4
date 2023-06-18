@@ -9,7 +9,7 @@ This document describes the RCOMP part of the project related to the Shared Boar
 - A TCP connection is established between the client and the server;
 - The client sends a request to the server, with the server accepting incoming requests;
 - Every request has a mandatory response format described in the communication protocol document;
-- Once the connection is established, it is kept alive and is used for all required data exchanges while the client application is running.
+- Once the connection is established, it is **kept alive** and is used for all required data exchanges while the client application is running.
 
 ### Communication Protocol Message Format
 
@@ -64,6 +64,8 @@ Once the TCP connection between the Shared Board App application (client) and th
 - The username and the password values are incorporated in the `AUTH` request at the `DATA` field as two null terminated strings of ASCII codes, first the username, followed by the password.
 - The response to an `AUTH` request may be an `ACK`, meaning the authentication was successful, or an `ERR`, meaning it has failed. In the latter case, additional `AUTH` requests could be tried by the client.
 
+> [Click here](/ecourse.daemon.board/src/main/java/eapli/ecourse/daemon/board/messages/AuthMessage.java) to see the full code.
+
 ### Split Messages
 
 The protocol's maximum supported payload size is (2^8)^2 - 1 bytes. If the message exceeds this size, the message will be split into multiple messages.
@@ -72,6 +74,8 @@ The first message will have the code `SPLIT` and the payload will be the number 
 
 The following messages will carry the payload divided into chunks.
 
+> [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/protocol/ProtocolMessage.java) to see the full code.
+
 ## HTTP Server
 
 The Shared Board App also implements an HTTP server to render a view only page of a board.
@@ -79,6 +83,7 @@ The browser receives static files from the server and can also send AJAX request
 
 A Router was implemented to handle each HTTP request. The Router will check the request's method and path and call the appropriate controller.
 A Middleware was also implemented to serve static files. The middleware will check if the request's path matches a static file and serve it if it does.
+
 If the request's path does not match a static file, the Router will be called.
 All `/api` endpoints respond with JSON. These controllers make requests to the Shared Board Server and return the response to the browser.
 
@@ -93,6 +98,18 @@ The available endpoints are described in the following table:
 | `GET`  | `/api/online`    | Returns the number of connected to the Shared Board Server clients.                                                      |
 
 The "real-time" view of the board is done by pooling the server for updates.
+
+> [Click here](/ecourse.app.board.console/src/main/java/eapli/ecourse/app/board/lib/BoardHttpServer.java) to see the full code.
+
+### Message Listener
+
+The Shared Board App also implements a message listener that listens to messages sent by the Shared Board Server. The listener is implemented using a thread that reads from the socket and puts the messages into a queue.
+
+The great thing about this listener is because it is always listening for messages in a separate thread, we can define certain events that are triggered when a specific message is received, enabling for example notifications in real-time without blocking the entire socket or using two sockets connected to the same server.
+
+Other threads may then read from the queue instead of reading from the socket directly.
+
+> [Click here](/ecourse.app.board.console/src/main/java/eapli/ecourse/app/board/lib/MessageListener.java) to see the full code.
 
 ### Not Modified Responses
 
@@ -118,7 +135,7 @@ This way, the browser will only receive the payload when the board or its post-i
 }
 ```
 
-> Example of a board payload.
+_Example of a board payload._
 
 > [Click here](/ecourse.daemon.board/src/main/java/eapli/ecourse/daemon/board/messages/GetBoardMessage.java) to see the full code
 
