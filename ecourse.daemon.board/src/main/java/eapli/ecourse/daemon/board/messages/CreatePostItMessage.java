@@ -134,7 +134,7 @@ public class CreatePostItMessage extends Message {
       return;
     }
 
-    this.boardUpdatesCounter.incrementNumberPostIts();
+    this.boardUpdatesCounter.incrementNumberPostIts(Thread.currentThread().getName());
 
     send(new ProtocolMessage(MessageCode.CREATE_POSTIT));
   }

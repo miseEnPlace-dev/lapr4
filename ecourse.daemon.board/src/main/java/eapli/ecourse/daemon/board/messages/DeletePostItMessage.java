@@ -87,7 +87,7 @@ public class DeletePostItMessage extends Message {
       return;
     }
 
-    this.boardUpdatesCounter.incrementNumberDeletesPostIts();
+    this.boardUpdatesCounter.incrementNumberDeletesPostIts(Thread.currentThread().getName());
 
     send(new ProtocolMessage(MessageCode.DELETE_POSTIT));
 

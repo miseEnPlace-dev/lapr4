@@ -119,7 +119,7 @@ public class ChangePostItMessage extends Message {
       return;
     }
 
-    this.boardUpdatesCounter.incrementNumberUpdatesPostIts();
+    this.boardUpdatesCounter.incrementNumberUpdatesPostIts(Thread.currentThread().getName());
 
     send(new ProtocolMessage(MessageCode.CHANGE_POSTIT));
 

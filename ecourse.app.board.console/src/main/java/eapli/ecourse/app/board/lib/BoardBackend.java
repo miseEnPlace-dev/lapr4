@@ -38,7 +38,7 @@ public class BoardBackend {
     listener = new MessageListener(tcpClient);
 
     listener.on(MessageCode.NOTIFICATION, (message) -> {
-      System.out.printf(" -- NOTIFICATION --\n%s\n", message.getStringifiedPayload());
+      System.out.printf("\n -- NOTIFICATION --\n%s\n", message.getStringifiedPayload());
     });
 
     /**

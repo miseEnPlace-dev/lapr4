@@ -1,12 +1,18 @@
 package eapli.ecourse.common.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SafeBoardUpdatesCounter {
-  private long nPostIts;
-  private long nUpdatesPostIts;
-  private long nDeletesPostIts;
-  private long nArchivedBoards;
   private long totalUpdates;
   private SafeBoardUpdatesShared shared;
+
+  /**
+   * Map of updates by thread. Each thread has a map of updates by type.
+   * This way we can keep track of the number of updates made by each thread.
+   */
+  private Map<String, Map<String, Long>> updatesByThreads = new HashMap<>();
+  private Map<String, Long> updatesByType = new HashMap<>();
 
   private final String POST_IT_UPDATE = "Post-It updates:";
   private final String POST_IT_CREATION = "Post-It creations:";
@@ -16,53 +22,88 @@ public class SafeBoardUpdatesCounter {
   public SafeBoardUpdatesCounter(SafeBoardUpdatesShared shared) {
     this.totalUpdates = 0;
     this.shared = shared;
-    this.nPostIts = 0;
-    this.nUpdatesPostIts = 0;
-    this.nDeletesPostIts = 0;
-    this.nArchivedBoards = 0;
   }
 
-  public synchronized void incrementNumberPostIts() {
+  public synchronized void incrementNumberPostIts(String thread) {
+    incrementCount(updatesByThreads, thread, POST_IT_CREATION);
+    incrementCount(updatesByType, POST_IT_CREATION);
     this.totalUpdates++;
-    this.nPostIts++;
-    shared.write(getNumberPostIts(), getUpdates(), POST_IT_CREATION);
+    shared.write(getNumberPostIts(thread), getUpdates(), POST_IT_CREATION);
   }
 
-  public synchronized void incrementNumberUpdatesPostIts() {
+  public synchronized void incrementNumberUpdatesPostIts(String thread) {
+    incrementCount(updatesByThreads, thread, POST_IT_UPDATE);
+    incrementCount(updatesByType, POST_IT_UPDATE);
     this.totalUpdates++;
-    this.nUpdatesPostIts++;
-    shared.write(getNumberUpdatesPostIts(), getUpdates(), POST_IT_UPDATE);
+    shared.write(getNumberUpdatesPostIts(thread), getUpdates(), POST_IT_UPDATE);
   }
 
-  public synchronized void incrementNumberDeletesPostIts() {
+  public synchronized void incrementNumberDeletesPostIts(String thread) {
+    incrementCount(updatesByThreads, thread, POST_IT_DELETION);
+    incrementCount(updatesByType, POST_IT_DELETION);
     this.totalUpdates++;
-    this.nDeletesPostIts++;
-    shared.write(getNumberDeletesPostIts(), getUpdates(), POST_IT_DELETION);
+    shared.write(getNumberDeletesPostIts(thread), getUpdates(), POST_IT_DELETION);
   }
 
-  public synchronized void incrementNumberArchivedBoards() {
+  public synchronized void incrementNumberArchivedBoards(String thread) {
+    incrementCount(updatesByThreads, thread, BOARD_ARCHIVATION);
+    incrementCount(updatesByType, BOARD_ARCHIVATION);
     this.totalUpdates++;
-    this.nArchivedBoards++;
-    shared.write(getNumberArchivedBoards(), getUpdates(), BOARD_ARCHIVATION);
+    shared.write(getNumberArchivedBoards(thread), getUpdates(), BOARD_ARCHIVATION);
   }
 
   public synchronized long getUpdates() {
     return this.totalUpdates;
   }
 
-  public synchronized long getNumberPostIts() {
-    return this.nPostIts;
+  /**
+   * Since these methods are being called from a synchronized method, they don't
+   * need to be synchronized.
+   */
+
+  private void incrementCount(Map<String, Map<String, Long>> updatesByThreads, String threadName, String type) {
+    updatesByThreads.putIfAbsent(threadName, new HashMap<>());
+    Map<String, Long> map = updatesByThreads.get(threadName);
+    map.put(type, map.getOrDefault(type, 0L) + 1);
   }
 
-  public synchronized long getNumberUpdatesPostIts() {
-    return this.nUpdatesPostIts;
+  private void incrementCount(Map<String, Long> updatesByType, String type) {
+    updatesByType.put(type, updatesByType.getOrDefault(type, 0L) + 1);
   }
 
-  public synchronized long getNumberDeletesPostIts() {
-    return this.nDeletesPostIts;
+  private long getCount(Map<String, Map<String, Long>> updatesByThreads, String threadName, String type) {
+    Map<String, Long> map = updatesByThreads.get(threadName);
+    if (map != null) {
+      return map.getOrDefault(type, 0L);
+    }
+    return 0L;
   }
 
-  public synchronized long getNumberArchivedBoards() {
-    return this.nArchivedBoards;
+  private long getCount(Map<String, Long> updatesByType, String type) {
+    return updatesByType.getOrDefault(type, 0L);
+  }
+
+  /**
+   * Getters for the number of updates by type.
+   */
+
+  public synchronized long getNumberPostIts(String thread) {
+    return getCount(updatesByThreads, thread, POST_IT_CREATION);
+  }
+
+  public synchronized long getNumberUpdatesPostIts(String thread) {
+    return getCount(updatesByThreads, thread, POST_IT_UPDATE);
+  }
+
+  public synchronized long getNumberDeletesPostIts(String thread) {
+    return getCount(updatesByThreads, thread, POST_IT_DELETION);
+  }
+
+  public synchronized long getNumberArchivedBoards(String thread) {
+    return getCount(updatesByThreads, thread, BOARD_ARCHIVATION);
+  }
+
+  public synchronized long getTotalUpdatesByType(String updateType) {
+    return getCount(updatesByType, updateType);
   }
 }

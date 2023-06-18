@@ -62,7 +62,7 @@ public class ArchiveBoardMessage extends Message {
 
     ctrl.archiveBoard(boardId);
 
-    this.boardUpdatesCounter.incrementNumberArchivedBoards();
+    this.boardUpdatesCounter.incrementNumberArchivedBoards(Thread.currentThread().getName());
 
     send(new ProtocolMessage(MessageCode.ARCHIVE_BOARD));
   }
