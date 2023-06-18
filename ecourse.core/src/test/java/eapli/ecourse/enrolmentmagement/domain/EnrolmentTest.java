@@ -97,4 +97,26 @@ public class EnrolmentTest extends EnrolmentBaseTest {
     assertEquals(enrolment1, enrolment2);
     assertFalse(enrolment1.sameAs(enrolment2));
   }
+
+  @Test
+  public void testHashCode() {
+    final EnrolmentID id = EnrolmentID.newID();
+    final Enrolment enrolment1 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
+    final Enrolment enrolment2 = new Enrolment(id, getNewDummyStudent(), getNewDummyCourse());
+    assertEquals(enrolment1.hashCode(), enrolment2.hashCode());
+  }
+
+  @Test
+  public void testAccept() {
+    final Enrolment enrolment = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
+    enrolment.accept();
+    assertTrue(enrolment.isAccepted());
+  }
+
+  @Test
+  public void testReject() {
+    final Enrolment enrolment = new Enrolment(EnrolmentID.newID(), getNewDummyStudent(), getNewDummyCourse());
+    enrolment.reject();
+    assertTrue(enrolment.isRejected());
+  }
 }
