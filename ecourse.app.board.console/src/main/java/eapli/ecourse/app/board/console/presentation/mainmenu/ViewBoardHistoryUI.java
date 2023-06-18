@@ -14,6 +14,7 @@ import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
+import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ViewBoardHistoryUI extends AbstractUI {
@@ -35,9 +36,8 @@ public class ViewBoardHistoryUI extends AbstractUI {
       System.out.println("Boards you can access:\n");
 
       BoardPrinter printer = new BoardPrinter();
-      printer.printHeader();
 
-      SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+      SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
       selector.show();
 
       final BoardDTO selected = selector.selectedElement();
@@ -49,7 +49,8 @@ public class ViewBoardHistoryUI extends AbstractUI {
 
       Iterable<PostItDTO> postIts = ctrl.listBoardHistory(selected);
 
-      printPostIts(postIts);
+      ListWidget<PostItDTO> lister = new ListWidget<>(new PostItPrinter().header(), postIts, new PostItPrinter());
+      lister.show();
 
       Console.readLine("\nPress Enter to continue...");
 
@@ -59,19 +60,6 @@ public class ViewBoardHistoryUI extends AbstractUI {
     }
 
     return false;
-  }
-
-  private void printPostIts(Iterable<PostItDTO> postIt) {
-    PostItPrinter printer = new PostItPrinter();
-    System.out.println();
-    printer.printHeader();
-
-    for (PostItDTO postItDTO : postIt) {
-      System.out.printf("\n   ");
-      printer.visit(postItDTO);
-    }
-
-    System.out.println();
   }
 
   @Override

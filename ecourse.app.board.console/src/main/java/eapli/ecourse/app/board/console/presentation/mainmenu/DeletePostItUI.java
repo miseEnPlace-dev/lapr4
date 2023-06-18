@@ -40,12 +40,16 @@ public class DeletePostItUI extends AbstractUI {
         System.out.println("Boards you can edit:\n");
 
         BoardPrinter printer = new BoardPrinter();
-        printer.printHeader();
 
-        SelectWidget<BoardDTO> selector = new SelectWidget<>("", boards, printer);
+        SelectWidget<BoardDTO> selector = new SelectWidget<>(printer.header(), boards, printer);
         selector.show();
 
         selectedBoard = selector.selectedElement();
+
+        if (selectedBoard == null) {
+          System.out.println("\nOperation cancelled by the user.");
+          return false;
+        }
 
         // POST_ITS
         Iterable<PostItDTO> postIts = ctrl.listUserUpdatablePostIts(selectedBoard.getId());
@@ -56,12 +60,17 @@ public class DeletePostItUI extends AbstractUI {
         }
 
         PostItPrinter postItPrinter = new PostItPrinter();
-        postItPrinter.printHeader();
 
-        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>("", postIts, postItPrinter);
+        System.out.println();
+        SelectWidget<PostItDTO> postItSelector = new SelectWidget<>(postItPrinter.header(), postIts, postItPrinter);
         postItSelector.show();
-
         selectedPostIt = postItSelector.selectedElement();
+
+        if (selectedPostIt == null) {
+          System.out.println("\nOperation cancelled by the user.");
+          return false;
+        }
+
       } while (selectedPostIt == null);
 
       // confirmation
