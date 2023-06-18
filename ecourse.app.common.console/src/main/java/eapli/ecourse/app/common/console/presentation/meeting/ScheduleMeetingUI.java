@@ -17,16 +17,17 @@ import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 public class ScheduleMeetingUI extends AbstractUI {
-
-  private final ScheduleMeetingController ctrl = new ScheduleMeetingController(
-      PersistenceContext.repositories().meetings(),
-      AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
-      PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
-      PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
-      PersistenceContext.repositories().teachers(), AuthzRegistry.userService());
+  private ScheduleMeetingController ctrl;
 
   @Override
   protected boolean doShow() {
+    ctrl = new ScheduleMeetingController(
+        PersistenceContext.repositories().meetings(),
+        AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
+        PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
+        PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
+        PersistenceContext.repositories().teachers(), AuthzRegistry.userService());
+
     Calendar time;
 
     time = ConsoleConstrainedReader.readNonPastCalendar("\nMeeting Time (dd-mm-yyyy) HH:mm):", "dd-MM-yyyy HH:mm");

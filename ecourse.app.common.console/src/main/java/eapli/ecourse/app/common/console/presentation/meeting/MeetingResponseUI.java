@@ -12,13 +12,14 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class MeetingResponseUI extends AbstractUI {
-
-  private final MeetingResponseController ctrl = new MeetingResponseController(
-      PersistenceContext.repositories().invites(), PersistenceContext.repositories().meetings(),
-      AuthzRegistry.authorizationService());
+  private MeetingResponseController ctrl;
 
   @Override
   protected boolean doShow() {
+    ctrl = new MeetingResponseController(
+        PersistenceContext.repositories().invites(), PersistenceContext.repositories().meetings(),
+        AuthzRegistry.authorizationService());
+
     Set<InviteDTO> invites = this.ctrl.getInvites(this.ctrl.getAuthenticatedUser().username());
 
     if (!invites.iterator().hasNext()) {
