@@ -90,6 +90,10 @@ When reading from a socket, it works like a FIFO queue (because we are using TCP
 
 > [Click here](/ecourse.app.board.console/src/main/java/eapli/ecourse/app/board/lib/MessageListener.java) to see the full code.
 
+We also started a implementation `Event Listener` that will be responsible for receiving the notifications from the server and allow the clients to subscribe to specific notifications. This implementation is not being used in the project yet, but it is already fully implemented.
+
+> [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/EventListener.java) to see the full code.
+
 ### Improvements
 
 We could expand on the notification service to allow the client to subscribe to specific notifications. This would be a better solution than the one we implemented because it would allow the client to receive only the notifications that it is interested in.
