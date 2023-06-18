@@ -119,7 +119,7 @@ This response comes with a hash of the board and its post-its which, in a very b
 Subsequent requests send this hash and the server will check if the hash matches the current hash of the board and its post-its.
 If the hash matches, the Shared Board Server will respond with a `NOT_MODIFIED` response, and the HTTP server responds with a `304 Not Modified` status code and no payload.
 
-This way, the browser will only receive the payload when the board or its post-its have been updated, decreasing the amount of data received.
+This way, the browser will only receive the payload when the board or its post-its have been updated, decreasing the amount of data received and preventing unnecessary re-renders.
 
 ```json
 {
