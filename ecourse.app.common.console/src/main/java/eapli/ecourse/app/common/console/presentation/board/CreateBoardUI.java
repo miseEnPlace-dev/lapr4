@@ -25,7 +25,7 @@ public class CreateBoardUI extends AbstractUI {
 
     Map<String, Integer> rows = new HashMap<>();
 
-    System.out.println("Add rows: ");
+    System.out.println("\nAdd rows: ");
 
     int maxRows = this.ctrl.boardMaxRows();
     int i = 1;
@@ -38,7 +38,7 @@ public class CreateBoardUI extends AbstractUI {
 
     Map<String, Integer> columns = new HashMap<>();
 
-    System.out.println("Add columns: ");
+    System.out.println("\nAdd columns: ");
 
     int maxColumns = this.ctrl.boardMaxColumns();
     i = 1;

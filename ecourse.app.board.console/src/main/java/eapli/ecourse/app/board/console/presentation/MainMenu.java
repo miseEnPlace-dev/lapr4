@@ -109,6 +109,9 @@ public class MainMenu extends AbstractUI {
 
     boardHistoryMenu.addItem(1, "View Board History", new ViewBoardHistoryUI()::show);
     boardHistoryMenu.addItem(2, "View Post-It History", new ViewPostItHistoryUI()::show);
+    boardHistoryMenu.addItem(EXIT_OPTION, "Return", () -> {
+      return false;
+    });
 
     return boardHistoryMenu;
   }
