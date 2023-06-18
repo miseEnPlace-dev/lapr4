@@ -51,12 +51,12 @@ public class ScheduleExtraClassUI extends AbstractUI {
 
     Iterable<StudentDTO> selected2 = selector2.selectElements();
 
-    Calendar time = Console.readCalendar("\nEnter the date and time of the class (dd-MM-yyyy HH:mm): ",
-        "dd-MM-yyyy HH:mm");
+    Calendar time = Console.readCalendar("\nEnter the date and time of the class (dd/MM/yyyy HH:mm): ",
+        "dd/MM/yyyy HH:mm");
     while (!ctrl.validateTime(time)) {
       System.out.println("\nThe date and time must be in the future.");
-      time = Console.readCalendar("Enter the date and time of the class (dd-MM-yyyy HH:mm): ",
-          "dd-MM-yyyy HH:mm");
+      time = Console.readCalendar("Enter the date and time of the class (dd/MM/yyyy HH:mm): ",
+          "dd/MM/yyyy HH:mm");
     }
 
     int duration = Console.readInteger("\nEnter the duration of the class (in minutes): ");
