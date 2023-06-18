@@ -1,10 +1,10 @@
 package eapli.ecourse.boardmanagement.domain;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class TitleTest {
 
@@ -30,4 +30,8 @@ public class TitleTest {
     assertTrue(new BoardTitle("Sample title 2").compareTo(new BoardTitle("Sample title")) > 0);
   }
 
+  @Test
+  public void testHashCode() {
+    assertEquals(new BoardTitle("Sample title").hashCode(), new BoardTitle("Sample title").hashCode());
+  }
 }

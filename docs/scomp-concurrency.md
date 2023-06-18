@@ -71,7 +71,25 @@ It was implemented an online client count checker which works by implementing an
 
 We also implemented an board update count checker which works by implementing another tread alongside the TCP server. This thread is responsible for printing every type of update that is made to the board by thread. It is also responsible to print the statistics made by thread each time a user exits the `Shared Board App`. Similar to the previous thread, this thread will also use the `notifyAll()` whenever a update was made and the `wait()` method will print message received by the server and then will go back to sleep again. To guard against spontaneous wakeups, the `wait()` method is called inside a loop that checks if the condition is true. If the condition is not true, the thread goes back to sleep.
 
+To achieve this, we created a Map that stores for each new Thread the number of updates and by the type made in the server. Whenever the thread is awaken it will print the statistics of the update made by the thread and then goes back to sleep again waiting for another update. Whenever a user exits the `Shared Board App` the thread will print the statistics of the updates made by the thread, as well as the total updates made by all threads.
+
 > [Click here](/ecourse.common.board/src/main/java/eapli/ecourse/common/board/BoardUpdatesShared.java) to see the full code.
+
+### Notification
+
+It was implemented a new Thread `MessageListener` that has a queue of messages. This thread has a method `receive()` that receives the expected codes and returns the first occurrence of a message in the queue with the expected code. If there are no occurrences of the expected codes in the queue, the method blocks until a message with one of the expected codes is received. When checking the queue, the messages that do not correspond to the expected codes are discarded.
+
+When reading from a socket, it works like a FIFO queue (because we are using TCP!): the first message sent by the server will be the first to be received by the client. We can do the same with a thread that reads from the socket and puts the messages in a queue. Then, we can read from the queue instead of reading from the socket directly. This way, we can have a thread that is waiting for specific messages without blocking the entire socket or using two sockets, enabling us to implement, for example, notifications about changes in a board.
+
+> [Click here](/ecourse.app.board.console/src/main/java/eapli/ecourse/app/board/lib/MessageListener.java) to see the full code.
+
+### Improvements
+
+We could expand on the notification service to allow the client to subscribe to specific notifications. This would be a better solution than the one we implemented because it would allow the client to receive only the notifications that it is interested in.
+
+We could implement web sockets in the Shared Web Board App to enable real-time notifications about changes in the board. This would be a better solution than the one we implemented because it would not require the client to constantly send requests to the server to check if there are any changes in the board.
+
+We could implement a thread pool in the Shared Board Server to limit the number of threads that can be created. This would be a better solution than the one we implemented because it would prevent the server from crashing if too many clients connect to the server at the same time.
 
 ## References
 

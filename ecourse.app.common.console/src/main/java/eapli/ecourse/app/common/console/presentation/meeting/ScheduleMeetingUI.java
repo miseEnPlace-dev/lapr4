@@ -30,7 +30,7 @@ public class ScheduleMeetingUI extends AbstractUI {
 
     Calendar time;
 
-    time = ConsoleConstrainedReader.readNonPastCalendar("\nMeeting Time (dd-mm-yyyy) HH:mm):", "dd-MM-yyyy HH:mm");
+    time = ConsoleConstrainedReader.readNonPastCalendar("\nMeeting Time (dd/mm/yyyy) HH:mm):", "dd/MM/yyyy HH:mm");
 
     Time meetingTime = Time.valueOf(time);
 
