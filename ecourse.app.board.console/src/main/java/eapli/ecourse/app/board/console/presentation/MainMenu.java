@@ -90,7 +90,7 @@ public class MainMenu extends AbstractUI {
     mainMenu.addItem(UNDO_POST_IT_CHANGE_OPTION, "Undo Last Post-It Change",
         new UndoPostItChangeUI()::show);
     mainMenu.addSubMenu(VIEW_BOARD_HISTORY_OPTION, buildBoardHistoryMenu());
-    mainMenu.addItem(ARCHIVE_BOARD_OPTION, "Archive Board", new ArchiveBoardUI()::show);
+    mainMenu.addItem(ARCHIVE_BOARD_OPTION, "Toggle board archived state", new ArchiveBoardUI()::show);
 
     mainMenu.addItem(COMMTEST_OPTION, "Send COMMTEST", new CommTestUI()::show);
     mainMenu.addItem(SESSION_INFO_OPTION, "Session Info", new SessionInfoUI()::show);
