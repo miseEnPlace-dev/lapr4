@@ -116,4 +116,16 @@ public class ScheduleExtraClassController {
     return extraClassRepository.save(extraClass);
   }
 
+  public boolean validateTime(Calendar time) {
+    return time.after(Calendar.getInstance());
+  }
+
+  public boolean checkIfUsersAreAvailable(Calendar time, int duration, Iterable<StudentDTO> students) {
+    List<SystemUser> users = new ArrayList<>();
+    for (StudentDTO student : students)
+      users.add(studentRepository.ofIdentity(student.getMecanographicNumber()).orElseThrow().user());
+
+    return scheduleAvailabilityService.areAllAvailable(users, Time.valueOf(time), Duration.valueOf(duration));
+  }
+
 }

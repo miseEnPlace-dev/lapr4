@@ -40,20 +40,32 @@ public class ScheduleExtraClassUI extends AbstractUI {
       return false;
 
     Collection<StudentDTO> students = ctrl.listStudentsEnrolled(selected);
-    MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("\nStudents:", students,
-        new StudentPrinter());
 
     if (!students.iterator().hasNext()) {
       System.out.println("There are no students enrolled in this course.");
       Console.readLine("Press Enter to continue...");
       return false;
     }
+    MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("\nStudents:", students,
+        new StudentPrinter());
 
     Iterable<StudentDTO> selected2 = selector2.selectElements();
 
     Calendar time = Console.readCalendar("Enter the date and time of the class (dd-MM-yyyy HH:mm): ",
         "dd-MM-yyyy HH:mm");
-    int duration = Console.readInteger("Enter the duration of the class (in minutes): ");
+    while (!ctrl.validateTime(time)) {
+      System.out.println("\nThe date and time must be in the future.");
+      time = Console.readCalendar("Enter the date and time of the class (dd-MM-yyyy HH:mm): ",
+          "dd-MM-yyyy HH:mm");
+    }
+
+    int duration = Console.readInteger("\nEnter the duration of the class (in minutes): ");
+
+    if (!ctrl.checkIfUsersAreAvailable(time, duration, selected2)) {
+      System.out.println("Some of the selected students are not available at the given time.");
+      Console.readLine("Press Enter to continue...");
+      return false;
+    }
 
     try {
       ctrl.createExtraordinaryClass(selected.getCode(), duration, time, selected2);
