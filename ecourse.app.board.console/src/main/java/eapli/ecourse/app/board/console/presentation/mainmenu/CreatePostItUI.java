@@ -1,15 +1,11 @@
 package eapli.ecourse.app.board.console.presentation.mainmenu;
 
-import java.io.IOException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.app.board.application.CreatePostItController;
-import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.common.console.presentation.board.BoardPrinter;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
-import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
@@ -64,18 +60,21 @@ public class CreatePostItUI extends AbstractUI {
         }
       } while (!success);
 
-      String title = Console.readLine("Write the post-it title: ");
-      String description = Console.readLine("Write the post-it description (Press Enter to skip): ");
+      String title = Console.readLine("\nWrite the post-it title: ");
+      String description = Console.readLine("\nWrite the post-it description (Press Enter to skip): ");
 
-      // ! the image must be uploaded to the server, you can't just write the path
       String imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
+      while (!ctrl.validateImagePath(imagePath)) {
+        System.out.println("\nInvalid image path. Try again.");
+        imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
+      }
 
       ctrl.createPostIt(selected.getId(), x, y, title, description, imagePath);
 
       System.out.println("\nPost-it created successfully.");
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
-        | UnsuccessfulRequestException e) {
+    } catch (Exception e) {
       logger.error("Error trying to create a post-it", e);
+      return false;
     }
 
     Console.readLine("\nPress Enter to continue...");
