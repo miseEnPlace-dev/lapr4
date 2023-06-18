@@ -40,29 +40,41 @@ public class ScheduleExtraClassUI extends AbstractUI {
       return false;
 
     Collection<StudentDTO> students = ctrl.listStudentsEnrolled(selected);
-    MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("\nStudents:", students,
-        new StudentPrinter());
 
     if (!students.iterator().hasNext()) {
       System.out.println("There are no students enrolled in this course.");
       Console.readLine("Press Enter to continue...");
       return false;
     }
+    MultipleSelectorWidget<StudentDTO> selector2 = new MultipleSelectorWidget<>("\nStudents:", students,
+        new StudentPrinter());
 
     Iterable<StudentDTO> selected2 = selector2.selectElements();
 
-    Calendar time = Console.readCalendar("Enter the date and time of the class (dd-MM-yyyy HH:mm): ",
+    Calendar time = Console.readCalendar("\nEnter the date and time of the class (dd-MM-yyyy HH:mm): ",
         "dd-MM-yyyy HH:mm");
-    int duration = Console.readInteger("Enter the duration of the class (in minutes): ");
+    while (!ctrl.validateTime(time)) {
+      System.out.println("\nThe date and time must be in the future.");
+      time = Console.readCalendar("Enter the date and time of the class (dd-MM-yyyy HH:mm): ",
+          "dd-MM-yyyy HH:mm");
+    }
+
+    int duration = Console.readInteger("\nEnter the duration of the class (in minutes): ");
+
+    if (!ctrl.checkIfUsersAreAvailable(time, duration, selected2)) {
+      System.out.println("\nSome of the selected students are not available at the given time.");
+      Console.readLine("Press Enter to continue...");
+      return false;
+    }
 
     try {
       ctrl.createExtraordinaryClass(selected.getCode(), duration, time, selected2);
     } catch (Exception e) {
-      System.out.println("Error scheduling extraordinary class: " + e.getMessage());
+      System.out.println("\nError scheduling extraordinary class: " + e.getMessage());
       Console.readLine("Press Enter to continue...");
       return false;
     }
-    System.out.println("Extraordinary class scheduled with success!");
+    System.out.println("\nExtraordinary class scheduled with success!");
     Console.readLine("Press Enter to continue...");
 
     return false;

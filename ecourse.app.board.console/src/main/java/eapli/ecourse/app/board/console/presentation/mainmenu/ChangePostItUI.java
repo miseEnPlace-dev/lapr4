@@ -100,15 +100,24 @@ public class ChangePostItUI extends AbstractUI {
       if (!Console.readLine("\nDo you want to change the post-it image? (Y/n): ")
           .equalsIgnoreCase("n"))
         imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
-      while (!imagePath.isEmpty() && !ctrl.validateImagePath(imagePath)) {
-        System.out.println("\nInvalid image path. Try again.");
-        imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
+
+      if (imagePath != null)
+        while (!imagePath.isEmpty() && !ctrl.validateImagePath(imagePath)) {
+          System.out.println("\nInvalid image path. Try again.");
+          imagePath = Console.readLine("Write the post-it image path (Press Enter to delete): ");
+        }
+
+      if (x == null && y == null && title == null && description == null && imagePath == null) {
+        System.out.println("\nNo changes were made.");
+        Console.readLine("\nPress Enter to continue...");
+        return false;
       }
 
       printChanges(selectedPostIt, x, y, title, description, imagePath);
       if (!Console.readLine("\nAre you sure you want to edit the post-it \""
           + selectedPostIt.getTitle() + "\"? (y/N)").equalsIgnoreCase("y")) {
         System.out.println("\nOperation cancelled by the user.");
+        Console.readLine("\nPress Enter to continue...");
         return false;
       }
 
@@ -132,10 +141,6 @@ public class ChangePostItUI extends AbstractUI {
 
   private void printChanges(PostItDTO postIt, Integer x, Integer y, String title,
       String description, String imagePath) {
-    if (x == null && y == null && title == null && description == null && imagePath == null) {
-      System.out.println("\nNo changes were made.");
-      return;
-    }
 
     System.out.println("\nChanges made: ");
 

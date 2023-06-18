@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -66,7 +67,7 @@ public class ListPostItService {
     return history;
   }
 
-  private BoardHistoryDTO toDto(PostIt postIt, PostIt previousPostIt) {
+  private BoardHistoryDTO toDto(PostIt previousPostIt, PostIt postIt) {
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     String currentDescription = postIt.description() == null ? "N/a" : postIt.description().toString();
@@ -92,13 +93,22 @@ public class ListPostItService {
 
   private Queue<PostIt> getPostItHistory(PostIt postIt) {
     Queue<PostIt> postItHistory = new LinkedList<>();
-    postItHistory.add(postIt);
+    postItHistory.offer(postIt);
     while (postIt != null) {
-      postItHistory.add(postIt.previous());
+      postItHistory.offer(postIt.previous());
       postIt = postIt.previous();
     }
 
-    return postItHistory;
+    // reverse queue
+    Stack<PostIt> stack = new Stack<>();
+    while (!postItHistory.isEmpty())
+      stack.push(postItHistory.poll());
+
+    Queue<PostIt> reversedQueue = new LinkedList<>();
+    while (!stack.isEmpty())
+      reversedQueue.offer(stack.pop());
+
+    return reversedQueue;
   }
 
   public Iterable<PostItDTO> userUpdatablePostIts(BoardID boardId, Username username) {
