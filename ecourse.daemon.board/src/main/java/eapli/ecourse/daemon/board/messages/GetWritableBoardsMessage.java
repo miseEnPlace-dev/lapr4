@@ -42,6 +42,6 @@ public class GetWritableBoardsMessage extends Message {
     // make sure the boards are fully loaded before sending
     ListBoardsService.eagerLoad(boards);
 
-    send(new ProtocolMessage(MessageCode.GET_OWN_BOARDS, boards));
+    send(new ProtocolMessage(MessageCode.GET_WRITABLE_BOARDS, boards));
   }
 }
