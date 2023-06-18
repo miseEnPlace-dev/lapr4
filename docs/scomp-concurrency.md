@@ -85,6 +85,12 @@ When reading from a socket, it works like a FIFO queue (because we are using TCP
 
 ### Improvements
 
+We could expand on the notification service to allow the client to subscribe to specific notifications. This would be a better solution than the one we implemented because it would allow the client to receive only the notifications that it is interested in.
+
+We could implement web sockets in the Shared Web Board App to enable real-time notifications about changes in the board. This would be a better solution than the one we implemented because it would not require the client to constantly send requests to the server to check if there are any changes in the board.
+
+We could implement a thread pool in the Shared Board Server to limit the number of threads that can be created. This would be a better solution than the one we implemented because it would prevent the server from crashing if too many clients connect to the server at the same time.
+
 ## References
 
 [TP 11 - Java Concurrency](https://moodle.isep.ipp.pt/pluginfile.php/280091/mod_resource/content/3/Java%20Concurrency.pdf)
