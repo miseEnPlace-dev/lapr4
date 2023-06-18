@@ -69,6 +69,6 @@ public class AuthMessage extends Message {
     send(new ProtocolMessage(MessageCode.ACK, user));
 
     // subscribe to all
-    eventListener.subscribe("all", socket);
+    // eventListener.subscribe("all", socket);
   }
 }

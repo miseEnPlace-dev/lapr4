@@ -104,7 +104,7 @@ public class ClientHandler implements Runnable {
       // safely increment the online counter
       this.onlineCounter.increment();
 
-      eventListener.subscribe("all", client);
+      // eventListener.subscribe("all", client);
 
       // in udp applications, each send must match one receive in the
       // counterpart and the number of bytes transported by each datagram is
