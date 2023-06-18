@@ -1,12 +1,12 @@
 package eapli.ecourse.boardmanagement.domain;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
+
+import org.junit.Test;
 
 public class ArchivedTest {
 
@@ -55,4 +55,14 @@ public class ArchivedTest {
     assertTrue(!new Archived(date1).equals(new Object()));
   }
 
+  @Test
+  public void testHashCode() {
+    Calendar date1 = Calendar.getInstance();
+    Calendar date2 = Calendar.getInstance();
+
+    date2.add(Calendar.DAY_OF_MONTH, -1);
+
+    assertEquals(new Archived(date1).hashCode(), new Archived(date1).hashCode());
+    assertTrue(new Archived(date1).hashCode() != new Archived(date2).hashCode());
+  }
 }

@@ -31,4 +31,15 @@ public class QuestionBodyTest {
     assertNotEquals(questionBody1, questionBody2);
     assertEquals(questionBody1, questionBody3);
   }
+
+  @Test
+  public void testHashCode() {
+    String body1 = "What is the capital of France?";
+    String body2 = "What is the capital of Spain?";
+    QuestionBody questionBody1 = QuestionBody.valueOf(body1);
+    QuestionBody questionBody2 = QuestionBody.valueOf(body2);
+    QuestionBody questionBody3 = QuestionBody.valueOf(body1);
+    assertNotEquals(questionBody1.hashCode(), questionBody2.hashCode());
+    assertEquals(questionBody1.hashCode(), questionBody3.hashCode());
+  }
 }

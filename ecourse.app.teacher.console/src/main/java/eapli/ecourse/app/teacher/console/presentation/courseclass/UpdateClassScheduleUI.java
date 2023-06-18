@@ -14,16 +14,15 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class UpdateClassScheduleUI extends AbstractUI {
 
-  private UpdateClassScheduleController controller = new UpdateClassScheduleController(
-      PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
-      AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
-      PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
-      PersistenceContext.repositories().teachers());
-
   @Override
   protected boolean doShow() {
+    UpdateClassScheduleController controller = new UpdateClassScheduleController(
+        PersistenceContext.repositories().classes(), PersistenceContext.repositories().extraordinaryClasses(),
+        AuthzRegistry.authorizationService(), PersistenceContext.repositories().invites(),
+        PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().students(),
+        PersistenceContext.repositories().teachers());
 
-    final Iterable<ClassDTO> classes = this.controller.listAllClassesForAuthenticatedTeacher();
+    final Iterable<ClassDTO> classes = controller.listAllClassesForAuthenticatedTeacher();
     if (!classes.iterator().hasNext()) {
       System.out.println("There are no registered classes");
       return false;
@@ -38,7 +37,7 @@ public class UpdateClassScheduleUI extends AbstractUI {
       Calendar timeString = Console.readCalendar("\nTime (dd/MM/yyyy HH:MM):", "dd/MM/yyyy HH:mm");
       Time time = Time.valueOf(timeString);
 
-      if (!this.controller.checkIfUsersAreAvailable(selected.getCourse(), time, selected.getDuration())) {
+      if (!controller.checkIfUsersAreAvailable(selected.getCourse(), time, selected.getDuration())) {
         System.out.println("The class is not available at the given time.");
         return false;
       }
@@ -56,7 +55,7 @@ public class UpdateClassScheduleUI extends AbstractUI {
       }
 
       try {
-        this.controller.updateScheduleClass(time, selected);
+        controller.updateScheduleClass(time, selected);
       } catch (final Exception e) {
         System.out.println("It was not possible to update the class schedule.");
         return false;

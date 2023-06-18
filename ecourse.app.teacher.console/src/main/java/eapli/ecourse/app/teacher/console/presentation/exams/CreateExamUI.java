@@ -15,13 +15,15 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateExamUI extends AbstractUI {
-  private CreateEvaluationExamController ctrl = new CreateEvaluationExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
-      PersistenceContext.repositories().courses());
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = this.ctrl.listInProgressCoursesOfAuthenticatedTeacher();
+    CreateEvaluationExamController ctrl = new CreateEvaluationExamController(
+        AuthzRegistry.authorizationService(),
+        PersistenceContext.repositories().teachers(), PersistenceContext.repositories().evaluationExams(),
+        PersistenceContext.repositories().courses());
+
+    final Iterable<CourseDTO> courses = ctrl.listInProgressCoursesOfAuthenticatedTeacher();
 
     if (!courses.iterator().hasNext()) {
       System.out.println("There are no courses available to you. Please contact the administrator");
@@ -40,7 +42,7 @@ public class CreateExamUI extends AbstractUI {
     String filePath = Console.readLine("Enter the file path where the exam is defined: ");
 
     try {
-      this.ctrl.parseExam(filePath);
+      ctrl.parseExam(filePath);
     } catch (IOException ex) {
       System.out.println("The specified file does not exist.");
       return false;
@@ -58,7 +60,7 @@ public class CreateExamUI extends AbstractUI {
             "dd/MM/yyyy HH:mm"));
 
     try {
-      this.ctrl.createExam(selectedCourse, startTime, endTime);
+      ctrl.createExam(selectedCourse, startTime, endTime);
     } catch (Exception ex) {
       System.out.println("\n\nAn error occurred while creating the exam: " + ex.getMessage());
       return false;

@@ -1,5 +1,8 @@
 package eapli.ecourse.postitmanagement.domain;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -8,6 +11,7 @@ import org.junit.Test;
 import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardBuilder;
 import eapli.ecourse.postitmanagement.domain.PostItState.State;
+import eapli.ecourse.postitmanagement.dto.PostItDTO;
 import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
@@ -70,9 +74,9 @@ public class PostItTest {
 
     PostIt postIt = new PostIt(t, c, b, u);
 
-    assert (postIt.isLatest());
+    assertTrue(postIt.isLatest());
     postIt.update(t, c, PostItDescription.valueOf("newDescription"), null);
-    assert (!postIt.isLatest());
+    assertTrue(!postIt.isLatest());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -104,7 +108,7 @@ public class PostItTest {
 
     PostIt updatedPostIt = postIt.update(t, c, PostItDescription.valueOf("newDescription"), null);
 
-    assert (updatedPostIt.isLatest());
+    assertTrue(updatedPostIt.isLatest());
   }
 
   @Test
@@ -114,9 +118,9 @@ public class PostItTest {
 
     PostIt postIt = new PostIt(t, c, b, u);
 
-    assert (postIt.isLatest());
+    assertTrue(postIt.isLatest());
     postIt.delete();
-    assert (!postIt.isLatest());
+    assertTrue(!postIt.isLatest());
   }
 
   @Test
@@ -128,7 +132,7 @@ public class PostItTest {
 
     PostIt deletedPostIt = postIt.delete();
 
-    assert (deletedPostIt.isLatest());
+    assertTrue(deletedPostIt.isLatest());
   }
 
   @Test
@@ -152,7 +156,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u);
 
-    assert (p1.equals(p1));
+    assertTrue(p1.equals(p1));
   }
 
   @Test
@@ -163,7 +167,7 @@ public class PostItTest {
     PostIt p1 = new PostIt(t, c, b, u);
     PostIt p2 = new PostIt(t, c, b, u);
 
-    assert (p1.hashCode() != p2.hashCode());
+    assertTrue(p1.hashCode() != p2.hashCode());
   }
 
   @Test
@@ -173,7 +177,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u);
 
-    assert (p1.owner().equals(u));
+    assertTrue(p1.owner().equals(u));
   }
 
   @Test
@@ -183,7 +187,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u);
 
-    assert (p1.board().equals(b));
+    assertTrue(p1.board().equals(b));
   }
 
   @Test
@@ -193,7 +197,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u);
 
-    assert (p1.title().equals(t));
+    assertTrue(p1.title().equals(t));
   }
 
   @Test
@@ -204,7 +208,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, d);
 
-    assert (p1.description().equals(d));
+    assertTrue(p1.description().equals(d));
   }
 
   @Test
@@ -215,7 +219,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, i);
 
-    assert (p1.image().equals(i));
+    assertTrue(p1.image().equals(i));
   }
 
   @Test
@@ -226,7 +230,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, i);
 
-    assert (p1.coordinates().equals(c));
+    assertTrue(p1.coordinates().equals(c));
   }
 
   @Test
@@ -237,7 +241,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, i);
 
-    assert (p1.isLatest());
+    assertTrue(p1.isLatest());
   }
 
   @Test
@@ -248,7 +252,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, i);
 
-    assert (!p1.isDeleted());
+    assertTrue(!p1.isDeleted());
   }
 
   @Test
@@ -259,7 +263,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, i);
 
-    assert (p1.isActive());
+    assertTrue(p1.isActive());
   }
 
   @Test
@@ -270,7 +274,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, i);
 
-    assert (p1.state().equals(new PostItState(State.ACTIVE)));
+    assertTrue(p1.state().equals(new PostItState(State.ACTIVE)));
   }
 
   @Test
@@ -282,7 +286,7 @@ public class PostItTest {
 
     PostIt p1 = new PostIt(t, c, b, u, d, i);
 
-    assert (p1.sameAs(p1));
+    assertTrue(p1.sameAs(p1));
   }
 
   @Test
@@ -293,11 +297,41 @@ public class PostItTest {
     PostItImage i = PostItImage.valueOf("image");
 
     PostIt p1 = new PostIt(t, c, b, u, d, i);
-    assert (p1.isLatest());
+    assertTrue(p1.isLatest());
 
     p1.toggleIsLatest();
 
-    assert (!p1.isLatest());
+    assertFalse(p1.isLatest());
   }
 
+  @Test
+  public void testToDto() {
+    PostItTitle t = PostItTitle.valueOf("title");
+    Coordinates c = Coordinates.valueOf(1, 1);
+    PostItDescription d = PostItDescription.valueOf("description");
+    PostItImage i = PostItImage.valueOf("image");
+
+    PostIt p1 = new PostIt(t, c, b, u, d, i);
+
+    PostItDTO dto = p1.toDto();
+
+    assertTrue(dto.getTitle().equals(t));
+    assertTrue(dto.getCoordinates().equals(c));
+    assertTrue(dto.getDescription().equals(d));
+    assertTrue(dto.getImage().equals(i));
+    assertTrue(dto.getBoard().getId().equals(b.identity()));
+    assertTrue(dto.getOwner().getUsername().equals(u.identity().toString()));
+  }
+
+  @Test
+  public void ensureSameAsWorksWithSameInstance() {
+    PostItTitle t = PostItTitle.valueOf("title");
+    Coordinates c = Coordinates.valueOf(1, 1);
+    PostItDescription d = PostItDescription.valueOf("description");
+    PostItImage i = PostItImage.valueOf("image");
+
+    PostIt p1 = new PostIt(t, c, b, u, d, i);
+
+    assertTrue(p1.sameAs(p1));
+  }
 }

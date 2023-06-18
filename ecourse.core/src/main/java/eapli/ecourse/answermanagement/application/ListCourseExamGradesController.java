@@ -59,9 +59,8 @@ public class ListCourseExamGradesController {
   }
 
   public Iterable<AnswerDTO> evaluationExamGrades(EvaluationExamDTO examDTO) {
-    return answerService.listExamGrades(
-        evaluationService.findExamByCode(examDTO.getIdentifier()).orElseThrow(),
-        studentsInCourse(examDTO.getCourse()));
+    return answerService.listExamGrades(evaluationService.findExamByCode(
+      examDTO.getIdentifier()).orElseThrow(), studentsInCourse(examDTO.getCourse()));
   }
 
   private Collection<Student> studentsInCourse(Course course) {

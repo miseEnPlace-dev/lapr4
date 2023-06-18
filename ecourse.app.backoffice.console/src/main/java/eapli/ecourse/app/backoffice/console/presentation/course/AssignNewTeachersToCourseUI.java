@@ -15,14 +15,15 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class AssignNewTeachersToCourseUI extends AbstractUI {
-  private final TeacherRepository teacherRepository = PersistenceContext.repositories().teachers();
-  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
-
-  private final AssignTeacherToCourseController controller = new AssignTeacherToCourseController(teacherRepository,
-      courseRepository);
 
   @Override
   protected boolean doShow() {
+    TeacherRepository teacherRepository = PersistenceContext.repositories().teachers();
+    CourseRepository courseRepository = PersistenceContext.repositories().courses();
+
+    AssignTeacherToCourseController controller = new AssignTeacherToCourseController(teacherRepository,
+        courseRepository);
+
     final Iterable<CourseDTO> courses = controller.allNotFinishedCourses();
 
     if (!courses.iterator().hasNext()) {

@@ -144,20 +144,23 @@ public class Board implements AggregateRoot<BoardID> {
     if (this == otherBoard)
       return true;
 
-    for (BoardColumn column : columns) {
+    if (this.columns.size() != otherBoard.columns().size())
+      return false;
+
+    if (this.rows.size() != otherBoard.rows().size())
+      return false;
+
+    for (BoardColumn column : columns)
       if (!otherBoard.columns().contains(column))
         return false;
-    }
 
-    for (BoardRow row : rows) {
+    for (BoardRow row : rows)
       if (!otherBoard.rows().contains(row))
         return false;
-    }
 
-    for (UserPermission permission : permissions) {
+    for (UserPermission permission : permissions)
       if (!otherBoard.permissions().contains(permission))
         return false;
-    }
 
     return this.identity().equals(otherBoard.identity()) && this.title.equals(otherBoard.title())
         && this.archived != null ? this.archived.equals(otherBoard.archived())
@@ -186,7 +189,8 @@ public class Board implements AggregateRoot<BoardID> {
    * Checks if the user has at least read permission to the board.
    *
    * @param username
-   * @return true if the user has at least read permission to the board, false otherwise
+   * @return true if the user has at least read permission to the board, false
+   *         otherwise
    */
   public boolean participates(Username username) {
     if (this.owner().username().equals(username))

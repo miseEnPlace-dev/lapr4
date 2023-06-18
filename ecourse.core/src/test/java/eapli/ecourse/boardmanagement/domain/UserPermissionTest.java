@@ -1,5 +1,6 @@
 package eapli.ecourse.boardmanagement.domain;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
@@ -7,17 +8,15 @@ import java.time.Month;
 import java.util.Calendar;
 
 import org.junit.Before;
-
-import eapli.ecourse.usermanagement.domain.ClientRoles;
 import org.junit.Test;
 
+import eapli.ecourse.usermanagement.domain.ClientRoles;
 import eapli.framework.infrastructure.authz.domain.model.NilPasswordPolicy;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
 public class UserPermissionTest {
-
   private SystemUser user;
 
   @Before
@@ -59,7 +58,6 @@ public class UserPermissionTest {
   public void ensureIsNotPossibleToCreateWithFutureCreatedAtDate() {
     Calendar futureDate = Calendar.getInstance();
     futureDate.add(Calendar.YEAR, 1);
-    ;
 
     assertThrows(IllegalArgumentException.class,
         () -> new UserPermission(new UserPermissionID(), futureDate, Calendar.getInstance(),
@@ -90,8 +88,22 @@ public class UserPermissionTest {
         new PermissionType(), user);
 
     assertTrue(up1.sameAs(up1));
-    assertTrue(!up1.sameAs(up2));
-
+    assertFalse(up1.sameAs(up2));
   }
 
+  @Test
+  public void testCanWrite() {
+    UserPermission up = new UserPermission(new UserPermissionID(), Calendar.getInstance(), Calendar.getInstance(),
+        new PermissionType(), user);
+
+    assertTrue(up.canWrite(user.username()));
+  }
+
+  @Test
+  public void testGetHash() {
+    UserPermission up = new UserPermission(new UserPermissionID(), Calendar.getInstance(), Calendar.getInstance(),
+        new PermissionType(), user);
+
+    assertTrue(up.hashCode() > 0);
+  }
 }

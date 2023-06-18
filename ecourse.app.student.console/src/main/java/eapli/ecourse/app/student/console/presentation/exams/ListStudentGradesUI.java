@@ -12,13 +12,14 @@ import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class ListStudentGradesUI extends AbstractUI {
-  private ListStudentGradesController controller = new ListStudentGradesController(
-      PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().answers(),
-      PersistenceContext.repositories().students(),
-      PersistenceContext.repositories().evaluationExams(), AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {
+    final ListStudentGradesController controller = new ListStudentGradesController(
+        PersistenceContext.repositories().enrollments(), PersistenceContext.repositories().answers(),
+        PersistenceContext.repositories().students(),
+        PersistenceContext.repositories().evaluationExams(), AuthzRegistry.authorizationService());
+
     Iterable<CourseDTO> studentCourses = controller.listStudentCourses();
     if (!studentCourses.iterator().hasNext()) {
       System.out.println("Not enrolled in any course");

@@ -28,7 +28,6 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 
 public class CourseClassTest {
-
   private CourseClass getDummyCourseClass() {
     return new CourseClass(ClassID.valueOf("123"), DayInWeek.valueOf(WeekDay.MONDAY), Duration.valueOf(50),
         Hours.valueOf(Calendar.getInstance()), getDummyCourse(), getDummyTeacher());
@@ -128,5 +127,14 @@ public class CourseClassTest {
     assertTrue(courseClass.specialClasses().isEmpty());
     courseClass.addSpecialClass(Time.valueOf(Calendar.getInstance()));
     assertFalse(courseClass.specialClasses().isEmpty());
+  }
+
+  @Test
+  public void testHashCode() {
+    final CourseClass courseClass = getDummyCourseClass();
+    final CourseClass otherCourseClass = new CourseClass(ClassID.valueOf("123"), DayInWeek.valueOf(WeekDay.MONDAY),
+        Duration.valueOf(50), Hours.valueOf(Calendar.getInstance()), getDummyCourse(), getDummyTeacher());
+
+    assertEquals(courseClass.hashCode(), otherCourseClass.hashCode());
   }
 }

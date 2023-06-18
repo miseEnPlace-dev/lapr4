@@ -14,15 +14,16 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class TakeFormativeExamUI extends AbstractUI {
-
-  private TakeFormativeExamController ctrl = new TakeFormativeExamController(AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().students(), PersistenceContext.repositories().courses(),
-      PersistenceContext.repositories().formativeExams());
+  private TakeFormativeExamController ctrl;
 
   private GenerateStructureFormativeExamService service;
 
   @Override
   public boolean doShow() {
+    ctrl = new TakeFormativeExamController(AuthzRegistry.authorizationService(),
+        PersistenceContext.repositories().students(), PersistenceContext.repositories().courses(),
+        PersistenceContext.repositories().formativeExams());
+
     final Iterable<CourseDTO> courses = this.ctrl.listInProgressCoursesOfAuthenticatedStudent();
 
     if (!courses.iterator().hasNext()) {

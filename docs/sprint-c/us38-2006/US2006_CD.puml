@@ -16,6 +16,8 @@ class ListCourseExamGradesController {
 + ListCourseExamGradesController(authorizationService, evaluationRepository, courseRepository,
  teacherRepository, answerRepository, enrolmentRepository, studentRepository)
 
++ teacherCourses()
++ courseEvaluationExams(courseDTO)
 + evaluationExamGrades(examDTO)
 - studentsInCourse(course)
 }

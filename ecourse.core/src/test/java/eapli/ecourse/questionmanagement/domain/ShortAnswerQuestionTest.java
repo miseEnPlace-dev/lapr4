@@ -1,6 +1,7 @@
 package eapli.ecourse.questionmanagement.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -32,5 +33,19 @@ public class ShortAnswerQuestionTest {
     ShortAnswerQuestion other = new ShortAnswerQuestion(new QuestionBody("What is the capital of Portugal?"),
         QuestionType.FORMATIVE);
     assertTrue(question.sameAs(other));
+  }
+
+  @Test
+  public void ensureSameAsIsFalseWithDifferentQuestionBody() {
+    ShortAnswerQuestion other = new ShortAnswerQuestion(new QuestionBody("What is the capital of Spain?"),
+        QuestionType.FORMATIVE);
+    assertFalse(question.sameAs(other));
+  }
+
+  @Test
+  public void ensureSameAsIsFalseWithDifferentQuestionType() {
+    ShortAnswerQuestion other = new ShortAnswerQuestion(new QuestionBody("What is the capital of Portugal?"),
+        QuestionType.REGULAR);
+    assertFalse(question.sameAs(other));
   }
 }

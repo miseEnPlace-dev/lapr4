@@ -15,13 +15,14 @@ import eapli.framework.presentation.console.SelectWidget;
  * @author Tomás Lopes <1211289>
  */
 public class ToggleCourseEnrolmentStateUI extends AbstractUI {
-  private final CourseRepository courseRepository = PersistenceContext.repositories().courses();
-  private final ToggleCourseEnrolmentStateController ctrl = new ToggleCourseEnrolmentStateController(courseRepository,
-      AuthzRegistry.authorizationService());
 
   @Override
   protected boolean doShow() {
-    final Iterable<CourseDTO> courses = this.ctrl.listNotClosedCourses();
+    CourseRepository courseRepository = PersistenceContext.repositories().courses();
+    ToggleCourseEnrolmentStateController ctrl = new ToggleCourseEnrolmentStateController(courseRepository,
+        AuthzRegistry.authorizationService());
+
+    final Iterable<CourseDTO> courses = ctrl.listNotClosedCourses();
     if (!courses.iterator().hasNext()) {
       System.out.println("There are no registered courses");
       return false;
@@ -36,7 +37,7 @@ public class ToggleCourseEnrolmentStateUI extends AbstractUI {
       return false;
 
     try {
-      this.ctrl.toggleEnrolmentState(selected);
+      ctrl.toggleEnrolmentState(selected);
       System.out.println("\n\nCourse enrolment state toggled successfully\n");
     } catch (IllegalArgumentException e) {
       System.out.println("\n\nThere is no course with the given code\n");

@@ -19,11 +19,11 @@ import eapli.framework.presentation.console.SelectWidget;
 
 public class CreateCourseUI extends AbstractUI {
 
-  private CreateCourseController ctrl = new CreateCourseController(PersistenceContext.repositories().courses(),
-      AuthzRegistry.authorizationService(), PersistenceContext.repositories().teachers());
-
   @Override
   public boolean doShow() {
+    CreateCourseController ctrl = new CreateCourseController(PersistenceContext.repositories().courses(),
+        AuthzRegistry.authorizationService(), PersistenceContext.repositories().teachers());
+
     System.out.println("Insert the following information: ");
 
     String code = ConsoleConstrainedReader.readNonEmptyString("Code: ");
@@ -42,7 +42,7 @@ public class CreateCourseUI extends AbstractUI {
           "Maximum limit can not be lower than the minimum limit. Please enter a valid maximum limit:");
     }
 
-    final Iterable<TeacherDTO> teachers = this.ctrl.listAllTeachers();
+    final Iterable<TeacherDTO> teachers = ctrl.listAllTeachers();
     if (!teachers.iterator().hasNext()) {
       System.out.println("There are no registered teachers");
       return false;

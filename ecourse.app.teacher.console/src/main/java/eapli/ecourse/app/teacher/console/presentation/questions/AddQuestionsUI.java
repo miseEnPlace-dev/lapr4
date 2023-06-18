@@ -10,15 +10,16 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 
 public class AddQuestionsUI extends AbstractUI {
-  AddQuestionsController ctrl = new AddQuestionsController(PersistenceContext.repositories().questions(),
-      PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService(),
-      PersistenceContext.repositories().teachers());
 
   @Override
   protected boolean doShow() {
+    AddQuestionsController ctrl = new AddQuestionsController(PersistenceContext.repositories().questions(),
+        PersistenceContext.repositories().courses(), AuthzRegistry.authorizationService(),
+        PersistenceContext.repositories().teachers());
+
     String fileName = Console.readLine("Enter the path of the file with the questions:");
 
-    final Iterable<CourseDTO> courses = this.ctrl.listAvailableCourses();
+    final Iterable<CourseDTO> courses = ctrl.listAvailableCourses();
 
     final SelectWidget<CourseDTO> selector = new SelectWidget<>(new CoursePrinter().header(), courses,
         new CoursePrinter());

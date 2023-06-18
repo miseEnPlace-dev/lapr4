@@ -12,7 +12,6 @@ import eapli.framework.visitor.Visitor;
  */
 @SuppressWarnings({ "squid:S106" })
 public class ListUsersUI extends AbstractListUI<SystemUser> {
-  private final ListUsersController theController = new ListUsersController();
 
   @Override
   public String headline() {
@@ -26,6 +25,7 @@ public class ListUsersUI extends AbstractListUI<SystemUser> {
 
   @Override
   protected Iterable<SystemUser> elements() {
+    ListUsersController theController = new ListUsersController();
     return theController.allUsers();
   }
 
