@@ -6,7 +6,12 @@ This document describes the SCOMP part of the project related to Java concurrenc
 
 ## The Problem
 
-TODO
+In our application there are two main concurrency problems:
+
+- The Shared Board Server must be able to handle multiple clients at the same time.
+- The post it state must be able to be updated by multiple users at the same time.
+
+To solve this issue we can use Java locking mechanisms and threads.
 
 ## The solution
 
@@ -16,7 +21,7 @@ JPA has already a mechanism of locking, known as the `@Version` annotation. This
 
 > [Click here](/ecourse.core/src/main/java/eapli/ecourse/postitmanagement/domain/PostIt.java) to see the full code.
 
-Despite this mechanism, it is also possible to implement a `pessimistic locking` mechanism. This approach involves locking the entity in the database when it is read, so that no other user can read or write the entity until the lock is released. This is typically implemented through using database row locks. The good side of this approach is that it is almost guaranteed that no other user can read or write the entity until the lock is released.
+Despite this mechanism, it is also possible to implement a `pessimistic locking` mechanism. This approach involves locking the entity in the database when it is read, so that no other user can read or write the entity until the lock is released. This is typically implemented through using database row locks. The good side of this approach is that is guaranteed that no other user can read or write the entity until the lock is released.
 
 Example:
 

@@ -86,3 +86,45 @@ To ensure code quality and that all team members are in sync every feature/US th
 `git checkout branch-name` - Change from current branch to branch-name
 
 `git diff branch1..branch2` - Compare two branches
+
+## Definition of Done (DoD)
+
+- The code is reviewed by at least one team member
+- The code is merged to the dev branch
+- The code is deployed to the staging environment
+- The code is tested in the staging environment
+
+## Daily Meeting
+
+The daily meeting is a meeting that happens every day at the same time. The meeting should be short and the goal is to keep everyone in sync with the project. The meeting should be done in a stand-up format, where each member answers the following questions:
+
+- What did I do yesterday?
+- What will I do today?
+- What are the blockers?
+
+## Sprint Planning
+
+The sprint planning is a meeting that happens at the beginning of each sprint. The goal of this meeting is to define what will be done in the next sprint. The meeting should be done in a collaborative way, where each member can give their opinion about what should be done in the next sprint. The meeting should be done in the following steps:
+
+- Review the previous sprint
+- Define the sprint goal
+- Define the sprint backlog
+- Define the sprint tasks
+
+## Sprint Review
+
+The sprint review is a meeting that happens at the end of each sprint. The goal of this meeting is to review what was done in the sprint and to present the work to the stakeholders. The meeting should be done in the following steps:
+
+- Review the sprint goal
+- Review the sprint backlog
+- Review the sprint tasks
+- Present the work to the stakeholders
+
+## Sprint Retrospective
+
+The sprint retrospective is a meeting that happens at the end of each sprint. The goal of this meeting is to review what was done in the sprint and to identify what can be improved in the next sprint. The meeting should be done in the following steps:
+
+- Review the sprint goal
+- Review the sprint backlog
+- Review the sprint tasks
+- Identify what can be improved in the next sprint
