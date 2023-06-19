@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.EventListener;
 import eapli.ecourse.common.board.SafeBoardUpdatesCounter;
@@ -93,5 +94,8 @@ public class DeletePostItMessage extends Message {
 
     send(new ProtocolMessage(MessageCode.DELETE_POSTIT));
 
+    Board board = deletedPostIt.board();
+    String notification = String.format("%s deleted a post-it in board %s.", user.getUsername(), board.title());
+    eventListener.publish(board.identity().toString(), new ProtocolMessage(MessageCode.NOTIFICATION, notification));
   }
 }

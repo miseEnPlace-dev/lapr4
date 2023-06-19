@@ -1,11 +1,15 @@
 package eapli.ecourse.app.board.console.presentation.mainmenu;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eapli.ecourse.app.board.application.CreatePostItController;
+import eapli.ecourse.app.board.application.UnsuccessfulRequestException;
 import eapli.ecourse.app.common.console.presentation.board.BoardPrinter;
 import eapli.ecourse.boardmanagement.dto.BoardDTO;
+import eapli.ecourse.common.board.protocol.UnsupportedVersionException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
@@ -60,7 +64,11 @@ public class CreatePostItUI extends AbstractUI {
         }
       } while (!success);
 
-      String title = Console.readLine("\nWrite the post-it title: ");
+      String title = null;
+      do {
+        title = Console.readLine("\nWrite the post-it title: ");
+      } while (title.length() == 0);
+
       String description = Console.readLine("\nWrite the post-it description (Press Enter to skip): ");
 
       String imagePath = Console.readLine("Write the post-it image path (Press Enter to skip): ");
@@ -72,9 +80,10 @@ public class CreatePostItUI extends AbstractUI {
       ctrl.createPostIt(selected.getId(), x, y, title, description, imagePath);
 
       System.out.println("\nPost-it created successfully.");
-    } catch (Exception e) {
-      logger.error("Error trying to create a post-it", e);
-      return false;
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | IllegalArgumentException e) {
+      logger.error("Error: ", e);
+    } catch (UnsuccessfulRequestException e) {
+      System.out.println("Error: " + e.getMessage());
     }
 
     Console.readLine("\nPress Enter to continue...");

@@ -85,9 +85,10 @@ public class DeletePostItUI extends AbstractUI {
 
       System.out.println("\nPost-it deleted successfully.");
 
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
-        | UnsuccessfulRequestException e) {
-      logger.error("Error trying to view a board", e);
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | IllegalArgumentException e) {
+      logger.error("Error: ", e);
+    } catch (UnsuccessfulRequestException e) {
+      System.out.println("Error: " + e.getMessage());
     }
 
     Console.readLine("\nPress Enter to continue...");

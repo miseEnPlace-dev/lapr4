@@ -36,9 +36,8 @@ public class MeetingResponseController {
 
     if (status == InviteStatus.Status.ACCEPTED)
       invite.accept();
-    else {
+    else
       invite.reject();
-    }
 
     updateInvite(invite);
   }

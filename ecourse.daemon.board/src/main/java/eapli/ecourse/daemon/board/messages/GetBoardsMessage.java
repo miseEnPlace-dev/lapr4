@@ -33,10 +33,6 @@ public class GetBoardsMessage extends Message {
   public void handle() throws IOException {
     ClientState clientState = ClientState.getInstance();
 
-    // ? example to showcase the message listener, remove later
-    eventListener.publish("all",
-        new ProtocolMessage(MessageCode.NOTIFICATION, "User wants to get boards"));
-
     // ignore requests from unauthenticated clients
     if (!clientState.getCredentialStore().isAuthenticated())
       return;

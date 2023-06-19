@@ -10,6 +10,8 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
+
+import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.PostIt;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -17,15 +19,17 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 public class UndoPostItControllerTest extends PostItControllerBaseTest {
   private PostItRepository postItRepository;
+  private BoardRepository boardRepository;
   private UndoPostItController ctrl;
   private TransactionalContext tx;
 
   @Before
   public void setup() {
     this.postItRepository = mock(PostItRepository.class);
+    this.boardRepository = mock(BoardRepository.class);
     this.tx = mock(TransactionalContext.class);
 
-    this.ctrl = new UndoPostItController(tx, postItRepository);
+    this.ctrl = new UndoPostItController(tx, postItRepository, boardRepository);
   }
 
   /**

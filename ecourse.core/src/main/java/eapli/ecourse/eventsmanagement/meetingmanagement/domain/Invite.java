@@ -77,6 +77,10 @@ public class Invite implements AggregateRoot<InviteID> {
     this.status.reject();
   }
 
+  public void cancel() {
+    this.status.cancel();
+  }
+
   @Override
   public InviteID identity() {
     return this.id;

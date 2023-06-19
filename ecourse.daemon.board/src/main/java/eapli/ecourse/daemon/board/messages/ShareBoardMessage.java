@@ -12,6 +12,7 @@ import javax.json.JsonValue.ValueType;
 import eapli.ecourse.boardmanagement.application.ShareBoardController;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.PermissionType;
+import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.dto.UserPermissionDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.common.board.EventListener;
@@ -77,8 +78,7 @@ public class ShareBoardMessage extends Message {
     }
 
     BoardID boardId = BoardID.valueOf(boardIdStr);
-    Username authUsername =
-        Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
+    Username authUsername = Username.valueOf(clientState.getCredentialStore().getUser().getUsername());
 
     // verify if the board with the given id exists
     if (!ctrl.boardExists(boardId)) {
@@ -120,6 +120,7 @@ public class ShareBoardMessage extends Message {
       // remove the permission
       ctrl.removePermission(boardId, username);
       send(new ProtocolMessage(MessageCode.SHARE_BOARD, (Object) null));
+      eventListener.unsubscribe(socket, boardIdStr);
       return;
     }
 
@@ -133,10 +134,16 @@ public class ShareBoardMessage extends Message {
     // get current permission
     UserPermissionDTO userPermission = ctrl.getUserPermission(boardId, username);
 
-    if (userPermission == null)
+    if (userPermission == null) {
       userPermission = ctrl.addPermission(boardId, username, newPermission);
-    else
+      eventListener.subscribeUser(username.toString(), boardIdStr);
+
+      BoardDTO board = ctrl.ofIdentity(boardId);
+      String notification = String.format("%s shared board %s with you!", authUsername, board.getTitle());
+      eventListener.publish(usernameStr, new ProtocolMessage(MessageCode.NOTIFICATION, notification));
+    } else {
       userPermission = ctrl.updatePermission(boardId, username, newPermission);
+    }
 
     send(new ProtocolMessage(MessageCode.SHARE_BOARD, userPermission));
   }

@@ -138,6 +138,8 @@ public class ClientHandler implements Runnable {
         }
       }
 
+      eventListener.removeClient(client);
+
       boardUpdatesShared.printTotalStats(boardUpdatesCounter.getUpdates(),
           boardUpdatesCounter.getNumberPostIts(Thread.currentThread().getName()),
           boardUpdatesCounter.getNumberUpdatesPostIts(Thread.currentThread().getName()),

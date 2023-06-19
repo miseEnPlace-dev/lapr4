@@ -30,6 +30,10 @@ public class ShareBoardController {
     return boardRepository.ofIdentity(boardId).isPresent();
   }
 
+  public BoardDTO ofIdentity(BoardID boardId) {
+    return boardRepository.ofIdentity(boardId).orElseThrow(IllegalArgumentException::new).toDto();
+  }
+
   public boolean isBoardParticipant(BoardID boardId, Username username) {
     Board board = boardRepository.ofIdentity(boardId).orElseThrow();
     return board.participates(username);

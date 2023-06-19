@@ -3,6 +3,7 @@ package eapli.ecourse.app.board.console.presentation.mainmenu;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import eapli.ecourse.app.board.authz.CredentialStore;
 import eapli.ecourse.app.board.lib.BoardBackend;
 import eapli.ecourse.app.board.lib.MessageListener;
@@ -19,16 +20,15 @@ public class LogoutUI extends AbstractUI {
     CredentialStore credentialStore = BoardBackend.getInstance().getCredentialStore();
 
     try {
-      ProtocolMessage response =
-          listener.sendRecv(new ProtocolMessage(MessageCode.LOGOUT), MessageCode.ACK);
+      ProtocolMessage response = listener.sendRecv(new ProtocolMessage(MessageCode.LOGOUT), MessageCode.ACK);
       if (response.getCode() == MessageCode.ACK) {
         credentialStore.clear();
         System.out.println("Bye!");
         return true;
       }
       System.out.println("Unable to log you out.");
-    } catch (IOException e) {
-      logger.error("Error sending logout message", e);
+    } catch (IOException | IllegalArgumentException e) {
+      logger.error("Error: ", e);
     }
     return false;
   }
@@ -38,4 +38,3 @@ public class LogoutUI extends AbstractUI {
     return "Logout";
   }
 }
-

@@ -62,7 +62,9 @@ public class ChangePostItMessage extends Message {
       return;
     }
 
-    String postItId = payload.asJsonObject().getString("postItId");
+    String postItId = payload.asJsonObject().keySet().contains("postItId")
+        ? payload.asJsonObject().getString("postItId")
+        : null;
 
     if (postItId == null) {
       send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
@@ -73,6 +75,12 @@ public class ChangePostItMessage extends Message {
 
     if (!p.isPresent()) {
       send(new ProtocolMessage(MessageCode.ERR, "Post-it not found"));
+      return;
+    }
+
+    // check if the post-it has been changed meanwhile
+    if (!p.get().isLatest()) {
+      send(new ProtocolMessage(MessageCode.ERR, "Post-it has been changed meanwhile"));
       return;
     }
 
@@ -95,18 +103,17 @@ public class ChangePostItMessage extends Message {
     String encodedImage = payload.asJsonObject().keySet().contains("image")
         ? payload.asJsonObject().getString("image")
         : null;
-    Integer x =
-        payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
-    Integer y =
-        payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
-
-    if (title == null && x == null && y == null) {
-      send(new ProtocolMessage(MessageCode.ERR, "Bad Request"));
-      return;
-    }
+    Integer x = payload.asJsonObject().keySet().contains("x") ? payload.asJsonObject().getInt("x") : null;
+    Integer y = payload.asJsonObject().keySet().contains("y") ? payload.asJsonObject().getInt("y") : null;
 
     if (!username.equals(p.get().owner().identity())) {
       send(new ProtocolMessage(MessageCode.ERR, "Unauthorized"));
+      return;
+    }
+
+    // check if coordinates are available
+    if (x != null && y != null && !ctrl.validateCoordinates(p.get().board().identity(), x, y)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Invalid Coordinates"));
       return;
     }
 
@@ -127,5 +134,7 @@ public class ChangePostItMessage extends Message {
 
     send(new ProtocolMessage(MessageCode.CHANGE_POSTIT));
 
+    String notification = String.format("%s edited a post-it in board %s.", user.getUsername(), board.title());
+    eventListener.publish(board.identity().toString(), new ProtocolMessage(MessageCode.NOTIFICATION, notification));
   }
 }

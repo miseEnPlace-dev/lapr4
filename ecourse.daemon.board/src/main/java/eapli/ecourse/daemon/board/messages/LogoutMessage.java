@@ -31,5 +31,7 @@ public class LogoutMessage extends Message {
     clientState.getCredentialStore().clear();
 
     send(new ProtocolMessage(MessageCode.ACK));
+
+    eventListener.removeClient(socket);
   }
 }

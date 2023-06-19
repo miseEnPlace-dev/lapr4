@@ -2,10 +2,13 @@ package eapli.ecourse.app.common.console.presentation.meeting;
 
 import java.util.Set;
 
+import javax.persistence.PersistenceException;
+
 import eapli.ecourse.eventsmanagement.meetingmanagement.application.MeetingResponseController;
 import eapli.ecourse.eventsmanagement.meetingmanagement.domain.InviteStatus;
 import eapli.ecourse.eventsmanagement.meetingmanagement.dto.InviteDTO;
 import eapli.ecourse.infrastructure.persistence.PersistenceContext;
+import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
@@ -72,8 +75,10 @@ public class MeetingResponseUI extends AbstractUI {
         System.out.println("Invite rejected.");
         return false;
       }
+    } catch (ConcurrencyException e) {
+      System.out.println("Something went wrong in another session. Please try again.");
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      System.out.println("tdd" + e.getMessage());
     }
 
     return false;

@@ -58,9 +58,10 @@ public class ArchiveBoardUI extends AbstractUI {
       System.out.println("\nThe operation was successful!");
       Console.readLine("\nPress ENTER to continue...");
 
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
-        | UnsuccessfulRequestException | IllegalArgumentException e) {
-      logger.error("Error trying to archive a board", e);
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | IllegalArgumentException e) {
+      logger.error("Error: ", e);
+    } catch (UnsuccessfulRequestException e) {
+      System.out.println("Error: " + e.getMessage());
     }
 
     return false;

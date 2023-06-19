@@ -125,9 +125,10 @@ public class ChangePostItUI extends AbstractUI {
 
       System.out.println("\nPost-it changed successfully.");
 
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
-        | UnsuccessfulRequestException e) {
-      logger.error("Error trying to edit a post-it", e);
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | IllegalArgumentException e) {
+      logger.error("Error: ", e);
+    } catch (UnsuccessfulRequestException e) {
+      System.out.println("Error: " + e.getMessage());
     }
 
     Console.readLine("\nPress Enter to continue...");

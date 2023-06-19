@@ -4,9 +4,11 @@ import eapli.ecourse.boardmanagement.domain.Board;
 import eapli.ecourse.boardmanagement.domain.BoardColumn;
 import eapli.ecourse.boardmanagement.domain.BoardID;
 import eapli.ecourse.boardmanagement.domain.BoardRow;
+import eapli.ecourse.boardmanagement.dto.BoardDTO;
 import eapli.ecourse.boardmanagement.repositories.BoardRepository;
 import eapli.ecourse.postitmanagement.domain.Coordinates;
 import eapli.ecourse.postitmanagement.domain.PostIt;
+import eapli.ecourse.postitmanagement.domain.PostItID;
 import eapli.ecourse.postitmanagement.repositories.PostItRepository;
 
 public class BoardService {
@@ -26,6 +28,10 @@ public class BoardService {
     Iterable<PostIt> postIts = postItRepository.findLatestByBoardId(id);
 
     return !this.existsPostIt(postIts, x, y);
+  }
+
+  public PostIt ofIdentity(PostItID id) throws IllegalArgumentException {
+    return postItRepository.ofIdentity(id).orElseThrow(IllegalArgumentException::new);
   }
 
   private boolean existsPostIt(Iterable<PostIt> postIts, int x, int y) {

@@ -55,9 +55,10 @@ public class ViewBoardHistoryUI extends AbstractUI {
 
       Console.readLine("\nPress Enter to continue...");
 
-    } catch (ClassNotFoundException | IOException | UnsupportedVersionException
-        | UnsuccessfulRequestException e) {
-      logger.error("Error trying to view the board history", e);
+    } catch (ClassNotFoundException | IOException | UnsupportedVersionException | IllegalArgumentException e) {
+      logger.error("Error: ", e);
+    } catch (UnsuccessfulRequestException e) {
+      System.out.println("Error: " + e.getMessage());
     }
 
     return false;

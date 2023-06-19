@@ -46,8 +46,7 @@ public class CreatePostItMessage extends Message {
 
     this.boardRepository = PersistenceContext.repositories().boards();
     this.postItRepository = PersistenceContext.repositories().postIts();
-    this.ctrl =
-        new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
+    this.ctrl = new CreatePostItController(boardRepository, postItRepository, new ImageEncoderService());
     this.userService = AuthzRegistry.userService();
   }
 
@@ -124,6 +123,12 @@ public class CreatePostItMessage extends Message {
 
     SystemUser owner = userService.userOfIdentity(username).orElseThrow();
 
+    // check if coordinates are available
+    if (!ctrl.validateCoordinates(b.get().identity(), x, y)) {
+      send(new ProtocolMessage(MessageCode.ERR, "Invalid Coordinates"));
+      return;
+    }
+
     // ? we should also check if the board is archived
     if (ctrl.isBoardArchived(b.get().identity())) {
       send(new ProtocolMessage(MessageCode.ERR, "Board is archived"));
@@ -140,5 +145,8 @@ public class CreatePostItMessage extends Message {
     this.boardUpdatesCounter.incrementNumberPostIts(Thread.currentThread().getName());
 
     send(new ProtocolMessage(MessageCode.CREATE_POSTIT));
+
+    String notification = String.format("%s created a post-it in board %s.", user.getUsername(), board.title());
+    eventListener.publish(board.identity().toString(), new ProtocolMessage(MessageCode.NOTIFICATION, notification));
   }
 }
