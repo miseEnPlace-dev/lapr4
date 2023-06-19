@@ -92,7 +92,7 @@ function refreshPostIts(po, columns, rows) {
       const td = document.createElement("td");
       td.className = "text-center py-6 text-2xl font-bold";
 
-      if (j === columns.length - 1 && i === rows.length - 1) continue;
+      if (j === columns.length - 1 && i === rows.length - 1) {} // empt
       else if (j === columns.length - 1) td.className += " border-b-2";
       else if (i === rows.length - 1) td.className += " border-x-2";
       else td.className += " border-b-2 border-x-2";

@@ -20,7 +20,7 @@ public class TableFormatPrinter {
 
   public String getWord(Map.Entry<String, Integer> entry) {
     if (entry.getKey().length() > entry.getValue())
-      return entry.getKey().substring(0, entry.getValue() - 2) + "…";
+      return entry.getKey().substring(0, entry.getValue() - 3) + "…";
     return entry.getKey();
   }
 
