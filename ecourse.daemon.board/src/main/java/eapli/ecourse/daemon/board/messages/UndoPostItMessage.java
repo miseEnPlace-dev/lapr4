@@ -80,8 +80,9 @@ public class UndoPostItMessage extends Message {
 
     PostItDTO p = ctrl.ofIdentity(postItId);
 
-    if (!ctrl.validateCoordinates(p.getBoard().getId(), p.getPrevious().getCoordinates().getX(),
-        p.getPrevious().getCoordinates().getY())) {
+    if (!p.getCoordinates().equals(p.getPrevious().getCoordinates())
+        && !ctrl.validateCoordinates(p.getBoard().getId(), p.getPrevious().getCoordinates().getX(),
+            p.getPrevious().getCoordinates().getY())) {
       send(new ProtocolMessage(MessageCode.ERR,
           "Cannot undo post-it because the previous post-it cell is currently unavailable."));
       return;
@@ -94,8 +95,9 @@ public class UndoPostItMessage extends Message {
     send(new ProtocolMessage(MessageCode.UNDO_POSTIT));
 
     BoardDTO board = p.getBoard();
-    String notification = String.format("%s undid a change of a post-it in board %s.", user.getUsername(),
-        board.getTitle());
-    eventListener.publish(board.getId().toString(), new ProtocolMessage(MessageCode.NOTIFICATION, notification));
+    String notification = String.format("%s undid a change of a post-it in board %s.",
+        user.getUsername(), board.getTitle());
+    eventListener.publish(board.getId().toString(),
+        new ProtocolMessage(MessageCode.NOTIFICATION, notification));
   }
 }

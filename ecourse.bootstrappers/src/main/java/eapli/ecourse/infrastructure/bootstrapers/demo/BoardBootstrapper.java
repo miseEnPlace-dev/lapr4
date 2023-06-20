@@ -111,7 +111,7 @@ public class BoardBootstrapper extends UsersBootstrapperBase implements Action {
       ChangePostItController c = new ChangePostItController(ctx,
           PersistenceContext.repositories().boards(), PersistenceContext.repositories().postIts());
 
-      c.changePostIt(p2.identity(), "PostIt2.1", 2, 2, "Description updated", null);
+      c.changePostIt(p2.identity(), "PostIt2.1", null, null, "Description updated", null);
     } catch (IOException e) {
       e.printStackTrace();
     }
